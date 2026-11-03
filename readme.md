@@ -1,0 +1,222 @@
+# Smart Greenhouse
+
+Assignment môn **Data Engineering (DE)**: thiết kế hệ thống phân tích dữ liệu nhà kính, từ tiếp nhận và kiểm tra chất lượng đến data warehouse và dashboard hỗ trợ quyết định.
+
+Project hướng đến ba nhóm người dùng: người vận hành theo dõi điều kiện nhà kính, kỹ sư canh tác phân tích nước và dinh dưỡng, quản lý đánh giá sản lượng, năng lượng và chi phí. Toàn bộ hệ thống được thiết kế để chạy **local**, với **PostgreSQL** là database đầu tiên và khả năng chuyển sang ClickHouse sau khi có kết quả đối soát.
+
+**Bắt đầu:** [Chạy UI demo](#chạy-ui-demo) · [Yêu cầu nghiệp vụ](#yêu-cầu-nghiệp-vụ) · [Kiến trúc](#kiến-trúc-tổng-quan) · [Tài liệu và sơ đồ](#tài-liệu-và-sơ-đồ)
+
+## Trạng thái hiện tại
+
+| Hạng mục | Trạng thái |
+|---|---|
+| Sáu business requirements (BR) | Đã có đặc tả, công thức, điều kiện dữ liệu và tiêu chí nghiệm thu |
+| Kiến trúc và schema | Đã có ADR, sơ đồ Mermaid tổng quan và chi tiết |
+| UI demo Streamlit + Plotly | Chạy được với fixture tổng hợp; có bản HTML tương tác offline |
+| PostgreSQL, ingestion, Spark và MQTT | Đã thiết kế; chưa triển khai pipeline tích hợp |
+| Docker Compose và vận hành toàn hệ thống | Kế hoạch triển khai; chưa có bộ Compose chạy hoàn chỉnh |
+| ClickHouse | Phương án chuyển đổi sau MVP, chưa triển khai |
+
+Dashboard hiện tại là prototype để review giao diện. Các kết quả trong demo không phải số liệu AGC đã xử lý và không chứng minh sáu BR đã được nghiệm thu.
+
+## Chạy UI demo
+
+### Bản HTML — không cần cài Python
+
+Sau khi clone hoặc tải repository, mở `prototypes/dashboard/preview.html` bằng trình duyệt. File nhúng sẵn thư viện Plotly, biểu đồ và dữ liệu nên hoạt động offline. Khi xem repository trên GitHub, tải file về để mở; trang xem mã HTML không chạy dashboard trực tiếp.
+
+[File HTML demo](prototypes/dashboard/preview.html) · [Hướng dẫn và source của prototype](prototypes/dashboard/README.md)
+
+Các thao tác có thể thử:
+
+- Chọn một trong ba khoang và hai ngày minh họa.
+- Xem nhiệt độ, CO₂, EC hoặc pH; hover và zoom biểu đồ Plotly.
+- Mở chi tiết các đợt ngoài dải demo và kiểm tra khoảng thiếu dữ liệu.
+- Thay đổi giá điện để so sánh chi phí baseline với kịch bản.
+- Xuất CSV theo bộ lọc, kèm quality, đơn vị và phiên bản dữ liệu.
+
+### Ứng dụng Streamlit + Plotly
+
+Yêu cầu **Python 3.12**. Các lệnh dưới đây dành cho macOS/Linux, chạy từ root repository:
+
+```bash
+git clone https://github.com/arcanine525/smart-green-house.git
+cd smart-green-house
+python3 -m venv .venv-ui
+.venv-ui/bin/python -m pip install -r prototypes/dashboard/requirements.txt
+.venv-ui/bin/python -m streamlit run prototypes/dashboard/app.py --server.address 127.0.0.1 --server.port 8501 --browser.gatherUsageStats false
+```
+
+Mở **http://127.0.0.1:8501**. Nếu đã clone repository, bắt đầu từ bước tạo môi trường. Dừng server bằng `Ctrl+C`.
+
+Lần cài dependencies cần Internet; sau đó demo chạy local, không cần tài khoản cloud, database hoặc MQTT broker. Theme nằm trong [.streamlit/config.toml](.streamlit/config.toml); môi trường `.venv-ui` được loại khỏi Git.
+
+Để tạo lại bản HTML từ cùng fixture và biểu đồ Python:
+
+```bash
+.venv-ui/bin/python prototypes/dashboard/build_preview.py
+```
+
+Bản HTML là preview riêng dùng chung dữ liệu và Plotly figures với ứng dụng Streamlit, không phải bản export nguyên ứng dụng Python. Chi tiết giới hạn và các kiểm tra đã thực hiện nằm trong [README của prototype](prototypes/dashboard/README.md).
+
+## Dữ liệu và phạm vi
+
+Nguồn dữ liệu dự kiến là **Autonomous Greenhouse Challenge, 2nd edition (2019–2020)**: dữ liệu lịch sử trồng cà chua trong các khoang nhà kính, gồm điều kiện khí hậu, tưới và drain, tài nguyên tiêu thụ, thu hoạch và các nguồn đo bổ sung. Bối cảnh và phân tích nguồn được ghi trong [tài liệu phân tích dataset](docs/ref/SmartGreenhouse_Case_Analysis.md).
+
+Ba loại dữ liệu chính có grain khác nhau:
+
+| Nguồn | Grain sử dụng | Mục đích |
+|---|---|---|
+| `GreenhouseClimate.csv` | Khoang/vụ × slot 5 phút | Khí hậu, setpoint và EC/pH drain |
+| `Resources.csv` | Khoang/vụ × ngày | Tưới, drain, nhiệt và điện |
+| `Production.csv` | Bản ghi thu hoạch | Sản lượng A/B, tỷ lệ và lũy kế |
+
+Sensor simulator sẽ phát lại Climate qua MQTT với tốc độ điều chỉnh được, bổ sung tình huống trùng, trễ, thiếu và lỗi dữ liệu để kiểm chứng pipeline. Resources và Production vẫn giữ grain nguồn. Dữ liệu lịch sử, replay và fault injection có scope riêng để tránh cộng trùng vào KPI.
+
+Demo giao diện hiện dùng **fixture tổng hợp**, chưa đọc dataset này. Các ngưỡng và basis diện tích trong demo là giả định có nhãn; không được diễn giải thành tiêu chuẩn canh tác hoặc kết quả thực tế.
+
+## Yêu cầu nghiệp vụ
+
+| BR | Câu hỏi cần trả lời | Đặc tả |
+|---|---|---|
+| BR-01 | Khoang nào có đợt nhiệt độ/CO₂ lệch điều kiện, diễn ra khi nào và kéo dài bao lâu? | [Theo dõi khí hậu](docs/br/br_01_climate-condition-monitoring.md) |
+| BR-02 | Lượng tưới, drain và tỷ lệ drain thay đổi thế nào theo ngày/tuần/vụ? | [Tưới và drainage](docs/br/br_02_irrigation-drainage-monitoring.md) |
+| BR-03 | EC/pH drain có các đợt ngoài mục tiêu nào, và đâu là dữ liệu nghi lỗi? | [Dinh dưỡng qua EC/pH](docs/br/br_03_drain-nutrition-monitoring.md) |
+| BR-04 | Cần bao nhiêu kWh cho mỗi kg loại A khi đủ bằng chứng về diện tích và dữ liệu? | [Cường độ năng lượng](docs/br/br_04_energy-intensity-analysis.md) |
+| BR-05 | Sản lượng, cơ cấu A/B và lũy kế thu hoạch thay đổi ra sao? | [Thu hoạch và chất lượng](docs/br/br_05_harvest-quality-tracking.md) |
+| BR-06 | Chi phí năng lượng thay đổi bao nhiêu nếu đổi biểu giá và giữ nguyên tiêu thụ? | [Kịch bản chi phí](docs/br/br_06_energy-cost-scenarios.md) |
+
+Mỗi BR có quy tắc quality, missing data, đơn vị, mẫu số và tiêu chí đối soát. Giá trị `0`, `NULL`, kết quả partial và chưa đủ điều kiện tính được phân biệt rõ. Tính năng sensor replay mở rộng BR-01/03, không thay thế các yêu cầu phân tích lịch sử.
+
+## Tech stack
+
+| Thành phần | Công nghệ | Vai trò |
+|---|---|---|
+| Ngôn ngữ | Python, SQL | Tiếp nhận, xử lý, truy vấn và ứng dụng |
+| Raw storage | Filesystem local | Snapshot, CSV/JSONL, checksum và manifest |
+| Sensor giả lập | Python + MQTT Mosquitto | Replay, fault injection và collector lưu bền |
+| Xử lý | PySpark batch + Structured Streaming | Chuẩn hóa, quality, episode và xử lý micro-batch |
+| Data warehouse | PostgreSQL | Staging, core, marts, metadata và cấu hình có version |
+| Dashboard | Streamlit + Plotly | Bộ lọc, biểu đồ, drill-down, scenario và export |
+| Đóng gói dự kiến | Docker Compose | Dịch vụ và volumes trên một máy local |
+| Kiểm thử dự kiến | pytest, SQL assertions, contract/fault tests | Correctness, phục hồi và đối soát batch–streaming |
+
+Hiện chỉ UI prototype và các tiện ích tạo fixture/HTML đã chạy được. Quyết định chi tiết và giới hạn nằm trong [ADR-001](docs/adr/001-local-deployment-stack.md).
+
+## Kiến trúc tổng quan
+
+**Thiết kế đích**, chưa phải sơ đồ một hệ thống đã triển khai đầy đủ. Kiến trúc Hybrid giữ raw, chuẩn hóa dữ liệu trong core rồi tạo dimensional marts phục vụ các BR.
+
+```mermaid
+flowchart TB
+    SOURCE["AGC CSV snapshot local"]
+    SOURCE --> IMPORT["Batch importer"]
+    SOURCE --> SIM["Sensor simulator<br/>Climate replay"]
+    SIM --> MQTT["Mosquitto MQTT"]
+    MQTT --> COLLECTOR["Python collector<br/>durable spool"]
+    IMPORT --> RAW[("Raw filesystem<br/>snapshot + event files")]
+    COLLECTOR --> RAW
+    RAW --> BATCH["PySpark batch"]
+    RAW --> STREAM["Structured Streaming<br/>file source + checkpoint"]
+    BATCH --> TRANSFORM["Shared transforms<br/>time, units, quality, episodes"]
+    STREAM --> TRANSFORM
+    subgraph PG["PostgreSQL"]
+        STAGING[("Staging theo run / batch")]
+        CORE[("Core revisions")]
+        MART[("Dimensional marts")]
+        META[("Metadata + configuration<br/>lineage, rules, publications")]
+        STAGING --> CORE --> MART
+        META -.-> CORE
+        META -.-> MART
+    end
+    TRANSFORM --> STAGING
+    MART --> SERVICE["Query / command services<br/>publication đã công bố"]
+    CORE --> SERVICE
+    META --> SERVICE
+    SERVICE --> UI["Streamlit + Plotly<br/>6 BR + replay view + CSV"]
+    UI -->|"Scenario version mới"| SERVICE
+    SERVICE -->|"Ghi cấu hình"| META
+```
+
+Collector lưu raw trước khi xác nhận nhận message; pipeline kiểm tra và công bố dữ liệu theo version. Dashboard dùng cùng `publication_id` cho KPI, drill-down và export. Thời gian nguồn phục vụ phân tích nghiệp vụ được tách khỏi thời gian phát/nhận phục vụ đo độ trễ.
+
+## Data marts và luồng phân tích
+
+```mermaid
+flowchart LR
+    CLIMATE["Core ClimateObservation"] --> FC["FactClimate + ClimateEpisode"] --> BR1["BR-01<br/>Khí hậu"]
+    DRAIN["Core DrainObservation"] --> FD["FactDrainCondition + DrainEpisode"] --> BR3["BR-03<br/>EC / pH"]
+    RESOURCE["Core ResourceDay"] --> FI["FactIrrigationDay"] --> BR2["BR-02<br/>Tưới / drain"]
+    RESOURCE --> FE["FactEnergyDay"]
+    HARVEST["Core Harvest"] --> FH["FactHarvest"] --> BR5["BR-05<br/>Sản lượng A / B"]
+    FE --> EA["Energy cycle aggregate"]
+    FH --> HA["Harvest cycle aggregate"]
+    EA --> GATE["Ghép theo cycle<br/>kiểm tra basis và completeness"]
+    HA --> GATE
+    GATE --> BR4["BR-04<br/>kWh / kg A"]
+    FE --> COST["EnergyCostDay<br/>quantity x rate"]
+    RATE["Tariff / scenario versions"] --> COST
+    COST --> BR6["BR-06<br/>Baseline và scenario"]
+```
+
+Energy và Harvest được tổng hợp riêng trước khi ghép để tránh nhân dữ liệu. Các tỷ lệ dùng tử/mẫu trên cùng tập hợp lệ; không cộng các tỷ lệ ngày. Diện tích, completeness và các điều kiện công bố KPI được mô tả trong [thiết kế data marts](docs/architecture/07-data-marts.md).
+
+## Tài liệu và sơ đồ
+
+Toàn bộ sơ đồ được viết bằng **Mermaid** trong Markdown. Xem [mục lục kiến trúc](docs/architecture/README.md) hoặc mở từng thành phần:
+
+| Tài liệu | Nội dung |
+|---|---|
+| [Quyết định stack](docs/adr/001-local-deployment-stack.md) | PostgreSQL trước, chạy local, sensor replay và hướng chuyển ClickHouse |
+| [01 — Tổng quan](docs/architecture/01-overview.md) | Nguồn, ingestion, processing, warehouse và dashboard |
+| [02 — Deployment local](docs/architecture/02-local-deployment.md) | Services, network, volumes và các profile dự kiến |
+| [03 — Sensor ingestion](docs/architecture/03-sensor-ingestion.md) | Simulator, event envelope, collector, ACK và lưu bền |
+| [04 — Processing & publication](docs/architecture/04-processing-publication.md) | Transform dùng chung, late data, idempotency và phục hồi |
+| [05 — Core schema](docs/architecture/05-core-schema.md) | ERD nghiệp vụ, grain, revision và quality theo measure |
+| [06 — Metadata & configuration](docs/architecture/06-metadata-schema.md) | ERD lineage, publication, rule, tariff và scenario |
+| [07 — Data marts](docs/architecture/07-data-marts.md) | Conformed dimensions và luồng mart của sáu BR |
+| [08 — Application contracts](docs/architecture/08-application-contracts.md) | UI/service/adapter, query contracts và tạo scenario |
+| [09 — ClickHouse migration](docs/architecture/09-clickhouse-migration.md) | Backfill, parity checks, cutover và rollback sau MVP |
+| [UI prototype](prototypes/dashboard/README.md) | Cách chạy, fixture, giới hạn và kiểm tra giao diện |
+
+Tài liệu nền:
+
+- [Yêu cầu assignment môn DE — PDF](DE_Requirements.pdf) và [bản Markdown](DE_Requirements.md).
+- [Nghiên cứu các cách thiết kế data warehouse](docs/ref/DWH_Design_Approaches_Research.md).
+- [Phân tích kiến trúc Hybrid](docs/ref/DWH_Hybrid_Approach_Deep_Dive.md).
+- [Phân tích nguồn dữ liệu Smart Greenhouse](docs/ref/SmartGreenhouse_Case_Analysis.md).
+
+Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên cứu và có thể chứa đề xuất cũ. Khi có khác biệt, dùng bộ BR, ADR và thiết kế hiện tại làm cơ sở triển khai.
+
+## Cấu trúc repository
+
+```text
+.
+├── readme.md
+├── .streamlit/config.toml          # Theme và cấu hình UI local
+├── DE_Requirements.pdf
+├── DE_Requirements.md
+├── docs/
+│   ├── adr/                       # Quyết định kiến trúc
+│   ├── architecture/              # Mermaid diagrams và thiết kế chi tiết
+│   ├── br/                        # Sáu đặc tả nghiệp vụ
+│   └── ref/                       # Tài liệu nghiên cứu và tham khảo
+└── prototypes/dashboard/
+    ├── app.py                     # Ứng dụng Streamlit
+    ├── data.py                    # Fixture, KPI demo và Plotly figures
+    ├── build_preview.py           # Tạo HTML offline
+    ├── template.html              # Layout của HTML preview
+    ├── preview.html               # Artifact để mở review
+    ├── requirements.txt
+    └── README.md
+```
+
+## Hướng triển khai tiếp theo
+
+1. Dựng môi trường local, snapshot, schema PostgreSQL và query contracts.
+2. Hoàn thiện một luồng nguồn → mart → dashboard → đối soát, bắt đầu với BR-02.
+3. Mở rộng sáu BR và đường sensor replay, kiểm tra duplicate, late data và restart.
+4. Đánh giá correctness, performance và hiệu quả khai thác; so Hybrid/Kimball trên cùng engine.
+5. Sau MVP, cân nhắc ClickHouse bằng backfill và benchmark trên cùng workload; giữ đường quay lại đã kiểm chứng.
+
+Khả năng chuyển database dựa trên raw độc lập, định danh nguồn ổn định, transforms dùng chung và adapter truy vấn. Không triển khai hai database hoặc dual-write trong phạm vi đầu tiên.
