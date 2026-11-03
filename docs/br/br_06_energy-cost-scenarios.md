@@ -160,6 +160,6 @@ Fixture là đáp án tính toán, không phải số chi phí đã đo của m�
 
 - [Yêu cầu môn học](../../DE_Requirements.pdf), trang 1–2, 5–6.
 - `Economics.pdf`, trang 1–2: phạm vi chi phí và giá nhiệt/điện; `ReadMe.pdf`, mục Resources: đơn vị và khung giờ ElecHigh/ElecLow. Cả hai nằm trong [archive Kaggle AGC](https://www.kaggle.com/datasets/piantic/autonomous-greenhouse-challengeagc-2nd-2019/).
-- [Nguồn và giới hạn dataset](../../case-analysis/05-nguon-va-phuong-phap.md); [đơn vị Resources](../../case-analysis/01-case-va-dataset.md).
+- [Nguồn AGC trong phân tích tham khảo](../ref/SmartGreenhouse_Case_Analysis.md#21-nguồn-dữ-liệu) và [grain tài nguyên ngày](../ref/SmartGreenhouse_Case_Analysis.md#23-grain-ba-mức-cùng-tồn-tại). Tổng quan không phải dictionary đơn vị Resources hay báo cáo kiểm chứng chi tiết: dùng ReadMe/Economics trong archive Kaggle ở trên và mục 2–4 của BR này. Inventory/profiling sẽ được kiểm kê/đo ở T05; basis tài nguyên và phạm vi biểu giá được xác minh ở T03.
 - [BR-04](br_04_energy-intensity-analysis.md) chia sẻ lượng năng lượng và basis; [BR-05](br_05_harvest-quality-tracking.md) chỉ cần nếu mở rộng kinh tế sau này. V1 không lấy doanh thu trừ năng lượng để gọi là lợi nhuận.
 - Tài liệu này thay BR-06 rủi ro bệnh trong presentation; không cần nhãn bệnh hoặc xây mô hình dự đoán để nghiệm thu BR chi phí.

@@ -88,6 +88,8 @@ Demo giao diện hiện dùng **fixture tổng hợp**, chưa đọc dataset nà
 
 Mỗi BR có quy tắc quality, missing data, đơn vị, mẫu số và tiêu chí đối soát. Giá trị `0`, `NULL`, kết quả partial và chưa đủ điều kiện tính được phân biệt rõ. Tính năng sensor replay mở rộng BR-01/03, không thay thế các yêu cầu phân tích lịch sử.
 
+[Ma trận truy vết yêu cầu](docs/implementation/requirements-matrix.md) nối sáu BR với nguồn/cột, biến đổi, màn hình, AC và bằng chứng dự kiến; đồng thời phân biệt BR hiện hành với mã BR trong presentation cũ. Các BR hiện đều chưa nghiệm thu.
+
 ## Tech stack
 
 | Thành phần | Công nghệ | Vai trò |
@@ -200,6 +202,7 @@ Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên c�
 │   ├── adr/                       # Quyết định kiến trúc
 │   ├── architecture/              # Mermaid diagrams và thiết kế chi tiết
 │   ├── br/                        # Sáu đặc tả nghiệp vụ
+│   ├── implementation/            # Ma trận truy vết yêu cầu và bằng chứng dự kiến
 │   └── ref/                       # Tài liệu nghiên cứu và tham khảo
 └── prototypes/dashboard/
     ├── app.py                     # Ứng dụng Streamlit

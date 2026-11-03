@@ -135,6 +135,6 @@ Tất cả dữ liệu dưới đây là fixture tổng hợp để kiểm thử
 ## 9. Nguồn và quan hệ tài liệu
 
 - [Yêu cầu môn học](../../DE_Requirements.pdf), trang 1–2, 5–6: business requirements, correctness, performance và khai thác ứng dụng.
-- [Dataset và profiling](../../case-analysis/01-case-va-dataset.md), mục 1.2–1.5; [nguồn và giới hạn](../../case-analysis/05-nguon-va-phuong-phap.md).
+- [Nguồn AGC trong phân tích tham khảo](../ref/SmartGreenhouse_Case_Analysis.md#21-nguồn-dữ-liệu), [quy mô](../ref/SmartGreenhouse_Case_Analysis.md#22-quy-mô) và [grain](../ref/SmartGreenhouse_Case_Analysis.md#23-grain-ba-mức-cùng-tồn-tại). Đây là tổng quan lịch sử, không phải báo cáo profiling snapshot; các tỷ lệ thiếu nêu ở mục 3 sẽ được đo lại ở T05. Chưa có tài liệu phương pháp kiểm chứng chi tiết trong repo; timezone và ngữ nghĩa setpoint/off-mode sẽ được xác minh ở T03 từ tài liệu nguồn.
 - `ReadMe.pdf`, mục GreenhouseClimate và Climate and irrigation setpoints, trong [archive Kaggle AGC](https://www.kaggle.com/datasets/piantic/autonomous-greenhouse-challengeagc-2nd-2019/).
-- [Schema gợi ý](../../case-analysis/03-schema-dai-dien.md). Tài liệu cũ là tham chiếu; công thức/rule của BR-01 cuối kỳ được định nghĩa tại file này.
+- Schema gợi ý trong phân tích tham khảo: [Inmon](../ref/SmartGreenhouse_Case_Analysis.md#3-schema-đại-diện-inmon-lõi-3nf), [Kimball](../ref/SmartGreenhouse_Case_Analysis.md#4-schema-đại-diện-kimball-star-factclimate) và [Hybrid](../ref/SmartGreenhouse_Case_Analysis.md#5-schema-đại-diện-hybrid). Tài liệu cũ là tham chiếu; công thức/rule của BR-01 cuối kỳ được định nghĩa tại file này.

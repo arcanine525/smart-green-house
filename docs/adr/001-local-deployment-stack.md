@@ -2,7 +2,7 @@
 
 - Ngày: 2026-11-03
 - Trạng thái: thiết kế được cập nhật theo hướng PostgreSQL trước và bổ sung sensor giả lập; chưa được kiểm chứng bằng hệ thống chạy thật.
-- Phạm vi: sáu BR trong `docs/br/`, sensor extension của BR-01/03 và các task trong [TODO.MD](../../TODO.MD). [Bộ sơ đồ Mermaid chi tiết](../architecture/README.md).
+- Phạm vi: sáu BR trong `docs/br/` và sensor extension của BR-01/03; xem [ma trận truy vết triển khai](../implementation/requirements-matrix.md). [Bộ sơ đồ Mermaid chi tiết](../architecture/README.md).
 
 ## Bối cảnh
 

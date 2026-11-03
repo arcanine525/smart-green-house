@@ -136,6 +136,6 @@ Sai số số thực `1e-6` trước làm tròn; thời lượng và số sự k
 ## 9. Nguồn và quan hệ tài liệu
 
 - [Yêu cầu môn học](../../DE_Requirements.pdf), trang 1–2, 5–6.
-- [Đặc điểm dữ liệu](../../case-analysis/01-case-va-dataset.md), mục 1.3–1.5; [phân tích BR trước đó](../../case-analysis/04-business-requirements-va-lua-chon.md), phần EC/pH; [giới hạn bằng chứng](../../case-analysis/05-nguon-va-phuong-phap.md).
+- [Grain trong phân tích tham khảo](../ref/SmartGreenhouse_Case_Analysis.md#23-grain-ba-mức-cùng-tồn-tại) và [cột EC/pH drain](../ref/SmartGreenhouse_Case_Analysis.md#24-các-cột-quan-trọng); [BR-03 trong presentation tham khảo](../ref/GroupID_DE_Presentation.pdf#page=18) nêu câu hỏi EC/pH và dải minh họa. Đây không phải bằng chứng xác thực ngưỡng nông học. Chưa có báo cáo profiling/phương pháp kiểm chứng chi tiết trong repo; chất lượng EC/pH sẽ được kiểm kê/đo ở T05, còn ngữ nghĩa và giới hạn profile demo được ghi ở T03.
 - `ReadMe.pdf`, mục GreenhouseClimate, LabAnalysis và GrodanSens, trong [dataset Kaggle](https://www.kaggle.com/datasets/piantic/autonomous-greenhouse-challengeagc-2nd-2019/).
 - [BR-01](br_01_climate-condition-monitoring.md) chia sẻ kỹ thuật duration/episode; [BR-02](br_02_irrigation-drainage-monitoring.md) cung cấp bối cảnh nước. Các BR phục vụ quyết định khác nhau và được nghiệm thu riêng.

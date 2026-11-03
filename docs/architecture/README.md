@@ -27,4 +27,4 @@
 
 ## Thứ tự triển khai
 
-Nền tảng + contracts → BR-02 xuyên suốt → BR-05 → BR-01/03 → BR-04/06 → tích hợp sensor và nghiệm thu → bàn giao. Simulator/collector có thể làm song song với các mart khi contracts đã ổn định. Chi tiết và phụ thuộc nằm trong [TODO.MD](../../TODO.MD); quyết định stack nằm trong [ADR-001](../adr/001-local-deployment-stack.md).
+Nền tảng + contracts → BR-02 xuyên suốt → BR-05 → BR-01/03 → BR-04/06 → tích hợp sensor và nghiệm thu → bàn giao. Simulator/collector có thể làm song song với các mart khi contracts đã ổn định. Truy vết BR, task và bằng chứng dự kiến nằm trong [ma trận yêu cầu](../implementation/requirements-matrix.md); quyết định stack nằm trong [ADR-001](../adr/001-local-deployment-stack.md).
