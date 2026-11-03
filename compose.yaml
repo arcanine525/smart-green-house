@@ -160,6 +160,30 @@ services:
         condition: service_healthy
     command: [python, -m, greenhouse, test, -q, -s]
 
+  snapshot:
+    <<: *processing
+    profiles: [tools]
+    user: '0:0'
+    command: [python, -m, greenhouse, snapshot]
+    environment:
+      GREENHOUSE_RAW_DIR: /data/raw
+    volumes:
+      - ${GREENHOUSE_IMPORT_PATH:-./data/import}:/data/import:ro
+      - ${GREENHOUSE_RAW_PATH:-./data/raw}:/data/raw
+      - outputs:/data/output
+
+  dataset-download:
+    <<: *processing
+    profiles: [tools]
+    user: '0:0'
+    # Isolated setup-only egress. Job/test/stream retain backend internal.
+    networks: [download]
+    command: [python, -m, greenhouse, snapshot, --download]
+    environment:
+      GREENHOUSE_RAW_DIR: /data/raw
+    volumes:
+      - ${GREENHOUSE_RAW_PATH:-./data/raw}:/data/raw
+
   preview-build:
     image: smart-greenhouse-ui:local
     build:
@@ -180,6 +204,7 @@ networks:
   backend:
     internal: true
   frontend: {}
+  download: {}
 
 volumes:
   pg_data:

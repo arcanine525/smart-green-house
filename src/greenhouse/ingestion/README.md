@@ -1,3 +1,3 @@
 # Ingestion
 
-T05 tạo snapshot/import/checksum/manifest; T06 hiện thực parser AGC. Chưa có pipeline ở scaffold T04. CLI `ingest` hiện thoát mã 2.
+T05 hiện thực snapshot/checksum/manifest và inventory trong `snapshot.py`/`inventory.py`; fixture verifier không sinh dữ liệu mới. T06 sẽ hiện thực parser typed và DB ingestion. CLI `ingest` vẫn thoát mã 2; dùng `snapshot`, `inventory`, `verify-fixtures` cho phần nguồn đã hoàn thành. Không chuẩn hóa quality/KPI ở bước snapshot.

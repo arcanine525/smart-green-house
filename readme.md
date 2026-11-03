@@ -49,7 +49,7 @@ docker compose --profile batch up -d --wait db app
 
 Mở **http://127.0.0.1:8501**. Service app hiện chạy prototype Verdant với fixture tổng hợp; chưa đọc AGC hoặc database. Lệnh `job` mặc định chỉ chạy `python -m greenhouse setup`: kiểm tra env/mount/DB, không ingest hoặc tạo schema nghiệp vụ. Chạy lại setup không sửa import/raw.
 
-`.env` bị Git ignore; giá trị password trong `.env.example` chỉ là mẫu local. Compose báo lỗi nếu thiếu `GREENHOUSE_DB_PASSWORD`. Có thể đổi cổng app và đường dẫn archive trong `.env`; mặc định nguồn nhập là `data/import/` (read-only), raw `data/raw/` (read-only khi xử lý), output nằm trong named volume riêng. Chưa cần dataset để chạy setup/tests/prototype; T05 sẽ nhập ZIP local, khóa checksum và tạo manifest.
+`.env` bị Git ignore; giá trị password trong `.env.example` chỉ là mẫu local. Compose báo lỗi nếu thiếu `GREENHOUSE_DB_PASSWORD`. Có thể đổi cổng app và đường dẫn archive trong `.env`; mặc định nguồn nhập là `data/import/` (read-only), raw `data/raw/` (read-only khi xử lý), output nằm trong named volume riêng. Không cần dataset để chạy setup/tests/prototype; phần snapshot T05 có lệnh riêng ở dưới.
 
 Kiểm tra cấu hình sensor mà không khởi chạy các stub:
 
@@ -57,7 +57,7 @@ Kiểm tra cấu hình sensor mà không khởi chạy các stub:
 docker compose --profile sensor config --quiet
 ```
 
-`ingest`, `transform`, `simulate`, `collect`, `stream` hiện thoát **mã 2**, ghi rõ “chưa hiện thực” và task sở hữu. Profile sensor đã khai báo broker, simulator, collector, stream-worker và volumes; chưa có replay hoặc xử lý streaming thật. Không gọi `up` toàn bộ sensor để coi như đã chạy pipeline.
+`ingest` (T06), `transform`, `simulate`, `collect`, `stream` hiện thoát **mã 2**, ghi rõ “chưa hiện thực” và task sở hữu. Profile sensor đã khai báo broker, simulator, collector, stream-worker và volumes; chưa có replay hoặc xử lý streaming thật. Không gọi `up` toàn bộ sensor để coi như đã chạy pipeline.
 
 Tạo lại HTML bằng image UI, mặc định xuất vào `data/output/preview/preview.html` bị ignore:
 
@@ -81,7 +81,7 @@ Chi tiết [service/profile/port/volume, resource limits, lệnh kiểm tra và 
 
 ## Dữ liệu và phạm vi
 
-Nguồn dữ liệu dự kiến là **Autonomous Greenhouse Challenge, 2nd edition (2019–2020)**: dữ liệu lịch sử trồng cà chua trong các khoang nhà kính, gồm điều kiện khí hậu, tưới và drain, tài nguyên tiêu thụ, thu hoạch và các nguồn đo bổ sung. Bối cảnh và phân tích nguồn được ghi trong [tài liệu phân tích dataset](docs/ref/SmartGreenhouse_Case_Analysis.md).
+Nguồn dữ liệu đã khóa là **Autonomous Greenhouse Challenge, 2nd edition (2019–2020)**: dữ liệu lịch sử trồng cà chua trong các khoang nhà kính, gồm điều kiện khí hậu, tưới và drain, tài nguyên tiêu thụ, thu hoạch và các nguồn đo bổ sung. Bối cảnh và phân tích nguồn được ghi trong [tài liệu phân tích dataset](docs/ref/SmartGreenhouse_Case_Analysis.md).
 
 Ba loại dữ liệu chính có grain khác nhau:
 
@@ -94,6 +94,25 @@ Ba loại dữ liệu chính có grain khác nhau:
 Sensor simulator sẽ phát lại Climate qua MQTT với tốc độ điều chỉnh được, bổ sung tình huống trùng, trễ, thiếu và lỗi dữ liệu để kiểm chứng pipeline. Resources và Production vẫn giữ grain nguồn. Dữ liệu lịch sử, replay và fault injection có scope riêng để tránh cộng trùng vào KPI.
 
 Demo giao diện hiện dùng **fixture tổng hợp**, chưa đọc dataset này. Các ngưỡng và basis diện tích trong demo là giả định có nhãn; không được diễn giải thành tiêu chuẩn canh tác hoặc kết quả thực tế.
+
+## Chuẩn bị snapshot AGC
+
+Nguồn ZIP đã khóa SHA-256 `c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68` (12,793,984 byte). Đặt ZIP trong `data/import/`, hoặc cấu hình `GREENHOUSE_IMPORT_PATH` trỏ tới thư mục chứa bản copy ZIP local. Import luôn read-only; bản giải nén thủ công không phải snapshot.
+
+```bash
+docker compose -p smart-greenhouse --profile tools build snapshot
+docker compose -p smart-greenhouse --profile tools run --rm snapshot
+```
+
+Nhánh tải ẩn danh (GET, không token) có network setup riêng:
+
+```bash
+docker compose -p smart-greenhouse --profile tools run --rm dataset-download
+```
+
+Cả hai lệnh tự kiểm fixture synthetic và checksum trước khi công bố snapshot. Raw mặc định ở `data/raw/agc-2nd-2019/<sha256>/`; chỉ snapshot writer được ghi raw, job/stream vẫn read-only. Chạy lại xác minh rồi báo already-exists, không ghi đè. Checksum sai giữ bằng chứng và thoát khác 0.
+
+[Inventory đo từ snapshot](docs/implementation/data-inventory.md): 45 file (43 CSV + 2 PDF), 622,899 dòng CSV. [Lệnh inventory, fixture × AC và giới hạn](docs/implementation/dataset-snapshot.md). Chưa có typed DB ingestion, quality policy hoặc KPI nghiệm thu; `ingest` vẫn là stub T06. Không commit dataset.
 
 ## Yêu cầu nghiệp vụ
 

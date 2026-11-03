@@ -1,6 +1,6 @@
 # Môi trường local Docker-first
 
-Scaffold T04 mở rộng trực tiếp Compose/Dockerfile của [ADR-002](../adr/002-container-stack-compatibility.md). Host chỉ cần Docker Engine + Compose v2 trở lên. Không có Python/Java/Spark trên host trong các lệnh runtime. Pipeline AGC, migrations nghiệp vụ và sensor replay vẫn chưa hiện thực.
+Scaffold T04 và snapshot T05 mở rộng trực tiếp Compose/Dockerfile của [ADR-002](../adr/002-container-stack-compatibility.md). Host chỉ cần Docker Engine + Compose v2 trở lên. Không có Python/Java/Spark trên host trong các lệnh runtime. Snapshot/inventory AGC đã có lệnh riêng; typed DB pipeline, migrations nghiệp vụ và sensor replay vẫn chưa hiện thực.
 
 ## Clone mới → build → setup → test → prototype
 
@@ -32,6 +32,8 @@ Mở **http://127.0.0.1:8501**. Lệnh setup mặc định của `job` là `pyth
 | collector | sensor | Sensor / `greenhouse collect` (stub) | Không | `collector_spool` → `/data/spool`; `raw_ready` → `/data/ready` |
 | stream-worker | sensor | Processing / `greenhouse stream` (stub) | Không | `raw_ready` read-only; `spark_checkpoints`; raw host read-only; `outputs` |
 | test-runner | test | Processing / `greenhouse test -q -s` | Không | Không mount dữ liệu host; fixture synthetic đóng gói trong image |
+| snapshot | tools | Processing / `greenhouse snapshot` | Không | Import host RO; raw host RW; outputs |
+| dataset-download | tools | Processing / `greenhouse snapshot --download` | Không | Raw host RW; network download setup-only có Internet |
 | preview-build | tools | UI / `greenhouse preview --output /preview/preview.html` | Không | Output export host → `/preview` |
 
 `backend` là network `internal: true`: DB/broker/job/test/sensor không có route Internet ở runtime. Chỉ app tham gia thêm network `frontend` để publish port; không có dependency tải lúc app chạy. Healthcheck: `pg_isready`, MQTT publish QoS 1, HTTP `/_stcore/health`. Chờ `service_healthy` không thay thế retry/durable ACK/recovery ở các task sau. Tham khảo [Compose profiles](https://docs.docker.com/reference/compose-file/profiles/), [service/network/mount/healthcheck](https://docs.docker.com/reference/compose-file/services/) và [Streamlit Docker](https://docs.streamlit.io/deploy/tutorials/docker).
@@ -42,12 +44,18 @@ DB và broker không publish port debug mặc định. Đổi app port bằng `G
 
 [.env.example](../../.env.example) chỉ có giá trị mẫu local; copy thành `.env` bị Git ignore, thay password khi cần. Compose dùng `${GREENHOUSE_DB_PASSWORD:?...}` và dừng rõ nếu thiếu. CLI không in password/DSN khi lỗi; dataclass settings không đưa password vào repr. Khi thay password sau khi PostgreSQL đã khởi tạo volume, cần đổi password trong DB hoặc chủ đích dựng lại volume; env mới không tự sửa user đã tồn tại.
 
-- `GREENHOUSE_IMPORT_PATH` mặc định `./data/import`, có thể trỏ tới **thư mục** chứa ZIP AGC có sẵn trên host. Mount read-only; không cần archive để kiểm tra scaffold. Logic chọn ZIP/kiểm checksum/manifest thuộc T05.
-- `GREENHOUSE_RAW_PATH` mặc định `./data/raw`; xử lý và simulator đọc read-only. Scaffold không ghi nguồn. Writer tạo snapshot chính thức thuộc T05 và phải dùng mount phù hợp khi hiện thực.
+- `GREENHOUSE_IMPORT_PATH` mặc định `./data/import`, có thể trỏ tới **thư mục** chứa ZIP AGC có sẵn trên host. Mount read-only; không cần archive để kiểm tra scaffold. Logic ZIP/checksum/manifest đã có ở [snapshot T05](dataset-snapshot.md).
+- `GREENHOUSE_RAW_PATH` mặc định `./data/raw`; xử lý và simulator đọc read-only. Scaffold không ghi nguồn. Service snapshot/dataset-download T05 là writer được mount raw read-write; job/stream giữ read-only.
 - Output xử lý tách khỏi nguồn trong named volume `outputs`; image seed quyền ghi cho UID 10001. Setup chỉ tạo file tạm để kiểm quyền rồi đóng/xóa ngay, không sửa CSV/ZIP/raw. Docker tạo các thư mục bind mount còn thiếu trên host khi dựng container.
 - `GREENHOUSE_PREVIEW_PATH` mặc định `./data/output/preview`; output HTML nằm trong vùng bị ignore. Nếu muốn xuất ra nơi khác, đổi biến này; đường dẫn host cá nhân chỉ nằm trong `.env`, không hard-code trong source.
 
 Không đưa `data/`, `.env`, backlog, scratch hoặc venv vào build context. [.dockerignore](../../.dockerignore) dùng allowlist; [.gitignore](../../.gitignore) loại dataset/output/checkpoints/cache, vẫn giữ [fixtures synthetic](../../tests/fixtures/). Default commands không tạo thay đổi Git ngoài các đường dẫn bị ignore.
+
+## Snapshot dataset
+
+[Hướng dẫn snapshot T05](dataset-snapshot.md) có nhánh ZIP local/download, manifest bất biến, lệnh tái tạo [inventory](data-inventory.md) và fixture × AC. Service snapshot chỉ dùng backend nội bộ; service dataset-download dùng network egress riêng và chỉ mount raw, không mang DB credentials. Cả hai kiểm fixture synthetic trước khi công bố; không nạp DB hoặc xác minh ngữ nghĩa T03.
+
+Bộ test hiện hành sau T05 đạt 47 case; số 23 trong bảng bằng chứng scaffold T04 bên dưới là kết quả lịch sử trước phần snapshot.
 
 ## Images và phiên bản
 
@@ -77,7 +85,7 @@ docker compose --profile test run --rm test-runner
 | setup | Kiểm config, input mounts đọc được, output ghi được, DB reachable; exit 0 khi đạt | Migration thật T06–T08 sẽ gắn sau |
 | test | Gọi pytest trong image processing, trả đúng exit code | Bổ sung kiểm chứng nghiệp vụ theo từng BR |
 | preview | Gọi builder prototype trong image UI, output rõ đường dẫn | Chỉ export fixture demo, không phải app nghiệp vụ |
-| ingest | Exit 2, “chưa hiện thực” | T05 snapshot/import, T06 parser |
+| ingest | Exit 2, “chưa hiện thực” | T06 typed parser/DB ingestion |
 | transform | Exit 2, “chưa hiện thực” | T07–T09 core/publication/marts |
 | simulate | Exit 2, “chưa hiện thực” | T32 |
 | collect | Exit 2, “chưa hiện thực” | T33 |

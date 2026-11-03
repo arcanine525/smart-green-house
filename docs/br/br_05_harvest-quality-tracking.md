@@ -132,6 +132,6 @@ Sai số số thực `1e-6` trước làm tròn. Khi biểu diễn tổng khối
 ## 9. Nguồn và quan hệ tài liệu
 
 - [Yêu cầu môn học](../../DE_Requirements.pdf), trang 1–2, 5–6.
-- [Nguồn AGC trong phân tích tham khảo](../ref/SmartGreenhouse_Case_Analysis.md#21-nguồn-dữ-liệu) và [grain thu hoạch thưa](../ref/SmartGreenhouse_Case_Analysis.md#23-grain-ba-mức-cùng-tồn-tại). Chưa có inventory/profiling hoặc báo cáo phương pháp kiểm chứng chi tiết trong repo; số record và ngày bất thường sẽ được kiểm kê ở T05. Record Reference nêu ở mục 3 phải được xác minh/xử lý có bằng chứng ở T03, không suy ra correction từ tổng quan tham khảo.
+- [Nguồn AGC trong phân tích tham khảo](../ref/SmartGreenhouse_Case_Analysis.md#21-nguồn-dữ-liệu) và [grain thu hoạch thưa](../ref/SmartGreenhouse_Case_Analysis.md#23-grain-ba-mức-cùng-tồn-tại). Chưa có inventory/profiling hoặc báo cáo phương pháp kiểm chứng chi tiết trong repo; [inventory T05](../implementation/data-inventory.md) đã đo số record và time range thô. Record Reference nêu ở mục 3 phải được xác minh/xử lý có bằng chứng ở T03, không suy ra correction từ tổng quan tham khảo.
 - `ReadMe.pdf`, mục Production; `Economics.pdf`, phần phân loại A/B, trong [dataset Kaggle](https://www.kaggle.com/datasets/piantic/autonomous-greenhouse-challengeagc-2nd-2019/).
 - BR-05 trong tài liệu presentation cũ là câu hỏi năng suất–stress. File này chủ động thay bằng yêu cầu sản lượng/cơ cấu A/B cho project cuối kỳ; không diễn giải nội dung cũ thành yêu cầu triển khai bắt buộc.

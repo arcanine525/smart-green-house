@@ -24,7 +24,7 @@ def environment(tmp_path):
 
 
 @pytest.mark.parametrize("command,owner", [
-    ("ingest", "T05"), ("transform", "T07"), ("simulate", "T32"),
+    ("ingest", "T06"), ("transform", "T07"), ("simulate", "T32"),
     ("collect", "T33"), ("stream", "T34"),
 ])
 def test_pending_commands_fail_without_claiming_success(command, owner):

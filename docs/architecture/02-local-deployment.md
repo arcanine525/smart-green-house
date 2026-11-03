@@ -50,7 +50,7 @@ Mũi tên nét đứt của sensor là thiết kế cho task sau; commands hiệ
 | Base batch (luôn bật) | db, app, job | `docker compose build` build processing/UI; job mặc định setup một lần; app chạy prototype |
 | sensor | Base batch + broker, simulator, collector, stream-worker | Cấu hình/volumes hợp lệ; ba command sensor còn stub |
 | test | test-runner + dependencies db/broker khi `run test-runner` | Unit/config/CLI + MQTT/psycopg/Spark/JDBC synthetic tests |
-| tools | preview-build | Tạo lại HTML qua image UI, output mount riêng |
+| tools | preview-build, snapshot, dataset-download | Export HTML; snapshot local trên backend; download setup-only có network egress riêng |
 
 - Chỉ app publish `127.0.0.1:${GREENHOUSE_APP_PORT}:8501`. DB/MQTT không publish cổng. Job/test/sensor chỉ dùng network backend nội bộ; app nối thêm frontend để người dùng mở trình duyệt.
 - Healthcheck DB/broker/app và `depends_on: service_healthy` kiểm readiness, không chứng minh reconnect/durable ACK hoặc recovery.
@@ -60,3 +60,5 @@ Mũi tên nét đứt của sensor là thiết kế cho task sau; commands hiệ
 - Import/raw bind mounts chỉ đọc khi xử lý; output tách riêng. Setup không sửa nguồn. Prototype/fixtures nằm sẵn trong images, không cần venv/cache trên host.
 - Hạn mức cấu hình được bằng `GREENHOUSE_*_CPUS`/`GREENHOUSE_*_MEMORY`: job/test 2 GiB, stream 1.5 GiB, app 768 MiB, DB 512 MiB, broker/simulator/collector mỗi service 128 MiB. Không chạy tất cả profiles cùng test khi không cần; đây chưa phải sizing AGC.
 - `down` giữ named volumes; `down -v` xóa storage của project, không xóa archive/raw bind mount. Backup/drain/recovery pipeline thật còn thuộc T08/T28/T36; không xem việc khởi động scaffold là bằng chứng các cơ chế đó đã đạt.
+
+Snapshot T05 chỉ cấp raw read-write cho snapshot/download services; import luôn read-only, job/stream giữ raw read-only. [Workflow dataset](../implementation/dataset-snapshot.md) kiểm checksum, công bố manifest và tạo inventory, chưa parse DB/KPI. Network download không cấp Internet cho job/test/stream.

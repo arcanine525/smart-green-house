@@ -6,7 +6,7 @@ Ngày lập: 2026-11-04. **Cả sáu BR đều chưa nghiệm thu.** Tài liệu
 
 - Yêu cầu nghiệp vụ hiện hành là sáu đặc tả trong [docs/br](../br/). [Yêu cầu môn học](../../DE_Requirements.md#23-yêu-cầu-cụ-thể) yêu cầu đánh giá độ đúng, hiệu suất và hiệu quả khai thác qua ứng dụng; mỗi BR cần đủ cả ba trục.
 - Quyết định kiến trúc theo [ADR-001](../adr/001-local-deployment-stack.md) và [bộ sơ đồ hiện tại](../architecture/README.md). Stack dự kiến: filesystem raw → Python/PySpark batch hoặc Structured Streaming → PostgreSQL core/marts → Streamlit/Plotly; simulator/collector dùng MQTT Mosquitto. Toàn bộ runtime sẽ được đóng gói và kiểm chứng qua Docker Compose; hiện chưa có bằng chứng tích hợp.
-- Nguồn đã chọn: [AGC 2nd edition trên Kaggle](https://www.kaggle.com/datasets/piantic/autonomous-greenhouse-challengeagc-2nd-2019/), gồm CSV theo khoang, Weather cấp site và ReadMe/Economics trong archive. **Snapshot chính thức, manifest và profiling sẽ được tạo ở T05**; không dùng bản dữ liệu có sẵn trên máy làm bằng chứng snapshot đã khóa.
+- Nguồn đã chọn: [AGC 2nd edition trên Kaggle](https://www.kaggle.com/datasets/piantic/autonomous-greenhouse-challengeagc-2nd-2019/), gồm CSV theo khoang, Weather cấp site và ReadMe/Economics trong archive. **T05 đã có lệnh tạo snapshot bất biến và manifest theo SHA-256 đã khóa**; xem [hướng dẫn snapshot](dataset-snapshot.md) và [inventory đo được](data-inventory.md). ZIP/bản giải nén thủ công trong import không thay snapshot công bố.
 - Tên cột và grain dưới đây theo BR hiện hành; adapter T06 phải đối chiếu header thực từ snapshot T05. [Phân tích case cũ](../ref/SmartGreenhouse_Case_Analysis.md#2-dataset-quy-mô-grain-và-vấn-đề-dữ-liệu) chỉ là tổng quan lịch sử, có tên/đơn vị cột và đề xuất timezone khác BR; không dùng nó thay dictionary gốc hay quyết định ngữ nghĩa T03.
 - Áp dụng [quy ước chung](../br/br_01_climate-condition-monitoring.md#2-quy-ước-chung-cho-cả-sáu-br): giữ thời gian nguồn chưa xác minh timezone, quality theo measure, NULL khác 0, lineage và versions. T04–T08/T31 cung cấp nền tảng và contracts dùng chung. Các ID task là tham chiếu kế hoạch; không cần file kế hoạch local để đọc hoặc sử dụng ma trận này.
 - Đường dẫn artifact trong dấu backtick là **vị trí dự kiến, chưa có bằng chứng nghiệm thu**, nên không tạo liên kết tới file chưa tồn tại. AC được định danh đầy đủ bằng BR + AC vì mỗi BR bắt đầu lại từ AC-01.
@@ -48,7 +48,7 @@ Nguồn triển khai hiện hành là [BR-05 thu hoạch](../br/br_05_harvest-qu
 
 ## 5. Điều kiện cập nhật trạng thái nghiệm thu
 
-T05 cung cấp snapshot/manifest/profiling; T03 giải quyết basis, thời gian, Reference và giới hạn rule/biểu giá có nguồn. BR-04 vẫn có điều kiện xác minh basis trước công bố kWh/kg trên dữ liệu thật. Nếu phải đổi sang DLI, cần quyết định phạm vi và đặc tả/AC/ma trận được cập nhật trước triển khai; hiện chưa thay BR-04.
+[T05 đã cung cấp snapshot/manifest và inventory thô](dataset-snapshot.md); T03 giải quyết basis, thời gian, Reference và giới hạn rule/biểu giá có nguồn. BR-04 vẫn có điều kiện xác minh basis trước công bố kWh/kg trên dữ liệu thật. Nếu phải đổi sang DLI, cần quyết định phạm vi và đặc tả/AC/ma trận được cập nhật trước triển khai; hiện chưa thay BR-04.
 
 Mỗi artifact BR dự kiến cần ghi từng AC và expected/actual, lệnh tái lập, snapshot/run/publication, phiên bản metric/quality/rule/basis/correction/tariff/scenario phù hợp, đối soát độc lập và lineage; đính kèm kết quả đo trên cấu hình công bố và minh chứng luồng UI/export. Không đánh dấu đạt bằng mô tả thiết kế hoặc ảnh prototype dùng fixture.
 
