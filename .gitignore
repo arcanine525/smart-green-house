@@ -25,3 +25,8 @@
 *.mp4
 *.webm
 *.mov
+
+# Python UI demo environment and caches
+/.venv-ui/
+__pycache__/
+*.py[cod]
