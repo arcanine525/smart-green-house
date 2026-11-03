@@ -1,0 +1,69 @@
+name: smart-greenhouse
+
+# Minimal synthetic stack compatibility spike; extended in place by the scaffold.
+services:
+  db:
+    image: postgres:17.10-bookworm@sha256:9b18b78397054fce88a9552e9d5a3ad5bb7fd258c5b3cc1c5028e46373d6ea8f
+    environment:
+      POSTGRES_DB: greenhouse_spike
+      POSTGRES_USER: greenhouse
+      POSTGRES_PASSWORD: synthetic-spike-only
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+    cpus: ${SPIKE_DB_CPUS:-1.0}
+    mem_limit: ${SPIKE_DB_MEMORY:-768m}
+
+  broker:
+    image: eclipse-mosquitto:2.0.22@sha256:09b62ff32c2e7b64d4b431b9a89236073289b68db273de2b089edeb9b0d92b5c
+    volumes:
+      - ./docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - broker_state:/mosquitto/data
+    healthcheck:
+      test: [CMD, mosquitto_pub, -h, 127.0.0.1, -t, spike/health, -m, ready, -q, '1']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+      start_period: 3s
+    cpus: ${SPIKE_BROKER_CPUS:-0.25}
+    mem_limit: ${SPIKE_BROKER_MEMORY:-128m}
+
+  test-runner:
+    image: smart-greenhouse-processing:spike
+    build:
+      context: .
+      dockerfile: docker/processing/Dockerfile
+    profiles: [test]
+    depends_on:
+      db:
+        condition: service_healthy
+      broker:
+        condition: service_healthy
+    environment:
+      PGHOST: db
+      PGPORT: '5432'
+      PGDATABASE: greenhouse_spike
+      PGUSER: greenhouse
+      PGPASSWORD: synthetic-spike-only
+      MQTT_HOST: broker
+      MQTT_PORT: '1883'
+      SPARK_LOCAL_IP: 127.0.0.1
+      PYSPARK_SUBMIT_ARGS: '--driver-memory ${SPIKE_DRIVER_MEMORY:-1g} pyspark-shell'
+    cpus: ${SPIKE_JOB_CPUS:-2.0}
+    mem_limit: ${SPIKE_JOB_MEMORY:-3g}
+    init: true
+    command: [python, -m, pytest, -q, -s, -p, 'no:cacheprovider', spike/tests]
+
+networks:
+  default:
+    # Runtime has no Internet route; dependencies are installed at image build.
+    internal: true
+
+volumes:
+  pg_data:
+  broker_state:

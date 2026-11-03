@@ -1,0 +1,10 @@
+# Allowlist: no AGC, credentials, local plans or scratch files enter the image.
+**
+!docker/
+!docker/processing/
+!docker/processing/Dockerfile
+!requirements.lock
+!spike/
+!spike/**
+**/__pycache__/
+**/*.pyc

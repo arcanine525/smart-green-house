@@ -1,7 +1,7 @@
 # ADR-001 — PostgreSQL local trước, sensor replay và đường chuyển ClickHouse
 
 - Ngày: 2026-11-03
-- Trạng thái: thiết kế được cập nhật theo hướng PostgreSQL trước và bổ sung sensor giả lập; chưa được kiểm chứng bằng hệ thống chạy thật.
+- Trạng thái: thiết kế theo hướng PostgreSQL trước và bổ sung sensor giả lập. [ADR-002](002-container-stack-compatibility.md) khóa phiên bản và ghi bằng chứng spike container ở T02; chưa có pipeline AGC hoặc nghiệm thu BR.
 - Phạm vi: sáu BR trong `docs/br/` và sensor extension của BR-01/03; xem [ma trận truy vết triển khai](../implementation/requirements-matrix.md). [Bộ sơ đồ Mermaid chi tiết](../architecture/README.md).
 
 ## Bối cảnh
@@ -25,7 +25,7 @@ Project phân tích dữ liệu lịch sử Autonomous Greenhouse Challenge từ
 | Môi trường | Docker Compose | Database/app, batch job, broker/simulator/collector/stream-worker và persistent volumes |
 | Kiểm thử | pytest và SQL assertions | Fixture, đối soát độc lập, integration, rerun và phục hồi |
 
-Python/Java/Spark, PostgreSQL, Mosquitto, MQTT client, driver và image phải được chọn phiên bản tương thích, khóa trong cấu hình build và kiểm chứng ở T02–T04. ADR này chưa khẳng định một tổ hợp phiên bản đã chạy thành công. ClickHouse chưa thuộc runtime bắt buộc; T37–T39 là roadmap tùy chọn sau MVP.
+Python/Java/Spark, PostgreSQL, Mosquitto, MQTT client, driver và base image được khóa tại [ADR-002 — spike T02](002-container-stack-compatibility.md). T04 mở rộng cùng Compose/Dockerfile thành môi trường đầy đủ và đóng gói ứng dụng. ClickHouse chưa thuộc runtime bắt buộc; T37–T39 là roadmap tùy chọn sau MVP.
 
 ## Luồng dữ liệu và ranh giới xử lý
 
@@ -58,7 +58,7 @@ Compose profile batch có `db`, `batch-job`, `app`; profile sensor thêm `simula
 
 PostgreSQL lưu dữ liệu trong named volume. Raw và output nằm trong các thư mục riêng trên host; không đưa dataset hoặc output lớn vào Git. App truy cập database bằng hostname service trong Compose; người dùng mở app qua cổng được bind vào localhost. Streamlit hỗ trợ khởi động server local bằng `streamlit run`. [Tài liệu Streamlit](https://docs.streamlit.io/develop/concepts/architecture/run-your-app).
 
-Những đường dẫn/lệnh triển khai cụ thể sẽ được tạo tại T04. Chưa có Compose hoặc ứng dụng hoạt động được tạo bởi ADR này.
+Các lệnh build/test spike bằng Docker Compose nằm ở [ADR-002](002-container-stack-compatibility.md#tái-lập-từ-đầu-bằng-docker-compose). Host chỉ cần Docker Engine + Compose v2 trở lên; CLI/Makefile nếu có chỉ gọi Compose. T04 tiếp tục mở rộng Compose này cho batch/app/sensor; spike chưa phải ứng dụng hoạt động đầy đủ.
 
 ## Local và offline
 
@@ -89,4 +89,4 @@ Backfill từ raw cùng các configuration/correction versions, đối soát sá
 - Chạy được một luồng Resources → mart nước → BR-02 và kiểm thử đối soát.
 - Rerun không nhân dữ liệu; ngắt job không làm ứng dụng đọc bản chưa hoàn tất.
 - Chạy offline sau setup; dữ liệu còn nguyên khi restart dịch vụ.
-- Ghi lại cấu hình và lệnh tái lập trong README; giữ T02 chưa hoàn tất đến khi đủ bằng chứng.
+- Ghi lại cấu hình và lệnh tái lập trong README; bằng chứng spike T02 theo ADR-002 không thay cho các điều kiện pipeline/BR/offline đầy đủ ở trên.

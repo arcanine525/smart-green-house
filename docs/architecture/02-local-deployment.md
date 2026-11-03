@@ -1,11 +1,11 @@
 # 02 — Services và lưu trữ local
 
-Một máy chạy Docker Compose. Spark dùng local mode trong container; không dựng master/worker cluster cho bản đầu. Tên service/volume dưới đây là thiết kế để hiện thực ở T04.
+Host chỉ cần Docker Engine và Docker Compose v2 trở lên. Spark dùng local mode trong container; không dựng master/worker cluster cho bản đầu. [ADR-002](../adr/002-container-stack-compatibility.md) khóa phiên bản và các lệnh spike T02 với `db`, `broker`, `test-runner` trong [Compose hiện tại](../../compose.yaml). Sơ đồ đầy đủ bên dưới là thiết kế để mở rộng chính bộ Compose đó ở T04.
 
 ```mermaid
 flowchart TB
     BROWSER["Browser<br/>localhost:8501"]
-    CLI["Makefile / Python CLI<br/>setup, batch, replay, test, backup"]
+    CLI["docker compose<br/>setup, batch, replay, test, backup"]
     subgraph HOST["Máy local — Docker Compose network"]
         APP["app<br/>Streamlit + query services"]
         DB["db<br/>PostgreSQL :5432 nội bộ"]
@@ -51,6 +51,7 @@ flowchart TB
 - Chỉ app cần expose mặc định trên `127.0.0.1`; cổng DB/MQTT cho debug nếu bật cũng bind localhost. Giao tiếp container dùng service name, không dùng localhost của host.
 - Healthcheck và retry giới hạn xử lý thứ tự khởi động; `depends_on` đơn thuần không phải cơ chế phục hồi.
 - Image chứa sẵn Python/Java, JDBC và MQTT dependencies tương thích; không tải package lúc demo. Credentials qua cấu hình local không commit.
+- Python CLI chạy bên trong container; Makefile/script host nếu có chỉ là wrapper Compose. Không yêu cầu Python/Java/Spark cài trên host. Spike chỉ dùng credentials synthetic cố định, network nội bộ và không publish cổng.
 - Raw-ready và thư mục file tạm dùng cùng filesystem để atomic rename. File đã công bố không append/sửa tiếp.
 - Backup nhất quán dùng điểm dừng/drain; giữ raw + manifests + cấu hình để có thể dựng lại DB. Không phục hồi checkpoint tiến xa hơn DB nếu chưa replay/đối soát phần thiếu.
-- Hạn mức CPU/RAM, kích thước batch, disk budget và backpressure được cấu hình và đo tại T25/T36; chưa khẳng định cấu hình tối thiểu.
+- Spike T02 đã có CPU/memory limits cấu hình được; [ADR-002](../adr/002-container-stack-compatibility.md) ghi cấu hình/kết quả đo. Sizing cho dữ liệu thật, kích thước batch, disk budget và backpressure vẫn phải đo tại T25/T36; chưa khẳng định cấu hình tối thiểu toàn hệ thống.
