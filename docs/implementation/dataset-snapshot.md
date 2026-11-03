@@ -87,12 +87,12 @@ Mỗi lệnh snapshot/download tự chạy verify-fixtures trước: một lện
 
 CSV giữ CRLF; LabAnalysis có một biến thể UTF-8 BOM được ghi trong catalog. `.gitattributes` đặt fixture CSV `-text` để checksum không đổi theo `core.autocrlf`; verifier đọc `utf-8-sig`.
 
-CSV dùng header nguyên văn/Excel serial/thư mục khoang Synthetic. Nhãn synthetic nằm ở catalog và từng case, không thêm cột khác định dạng nguồn. Oracle là literal độc lập lấy từ AC, không gọi code KPI triển khai. Các tham số area/rule/tariff chỉ là giả định fixture đã nêu trong BR; ngữ nghĩa AGC vẫn **phụ thuộc T03**. Case UI/version/export/recovery cung cấp input/control/expected cho task sau, không chứng minh những chức năng đó đã chạy.
+CSV dùng header nguyên văn/Excel serial/thư mục khoang Synthetic. Nhãn synthetic nằm ở catalog và từng case, không thêm cột khác định dạng nguồn. Oracle là literal độc lập lấy từ AC, không gọi code KPI triển khai. Các tham số area/rule/tariff chỉ là giả định fixture đã nêu trong BR; [quyết định ngữ nghĩa AGC](data-decisions.md) tách bằng chứng nguồn, convention và phần chưa xác minh; basis fixture không thay bằng chứng diện tích thật. Case UI/version/export/recovery cung cấp input/control/expected cho task sau, không chứng minh những chức năng đó đã chạy.
 
 ## Bằng chứng và chuyển tiếp
 
 Đã chạy local import và GET thật qua Compose trên Linux arm64; cả hai khớp archive 12,793,984 byte và SHA-256 khóa. Rerun trả already-exists sau kiểm tra, inventory được sinh hai lần byte-identical. Các test tự động chỉ dùng ZIP tổng hợp nhỏ, không cần Internet hoặc dataset thật. Bộ pytest hiện đạt **47 tests** (trong container, không cần Internet/dataset thật); chi tiết lệnh/kết quả được bàn giao trong REVIEW_REQUEST.
 
-Inventory ghi nhận header rỗng dư IUACAAS Resources và header/row width khác biệt Reference TomQuality; đây là quan sát, không tự trim/bỏ cột. T03 phải giải quyết basis/timezone/ngày ngoài vụ/off-mode/giá; T06 phải parse có lineage, phát hiện lỗi/duplicate/conflict theo version. Chưa có accepted coverage, DB ingestion, KPI hoặc nghiệm thu BR.
+Inventory ghi nhận header rỗng dư IUACAAS Resources và header/row width khác biệt Reference TomQuality; đây là quan sát, không tự trim/bỏ cột. [Quyết định ngữ nghĩa](data-decisions.md) ghi basis/timezone/off-mode còn chưa xác minh, quarantine Reference và profile giá lịch sử; T06 phải parse có lineage, phát hiện lỗi/duplicate/conflict theo version. Chưa có accepted coverage, DB ingestion, KPI hoặc nghiệm thu BR.
 
 `down -v` không xóa raw/import bind mounts; snapshot/cache/evidence vẫn nằm trên host. Không dùng `docker system prune` hoặc xóa ZIP/bản giải nén gốc để chạy lại. Dữ liệu thật luôn bị Git ignore và không vào build context.
