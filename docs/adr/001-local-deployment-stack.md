@@ -25,7 +25,7 @@ Project phân tích dữ liệu lịch sử Autonomous Greenhouse Challenge từ
 | Môi trường | Docker Compose | Database/app, batch job, broker/simulator/collector/stream-worker và persistent volumes |
 | Kiểm thử | pytest và SQL assertions | Fixture, đối soát độc lập, integration, rerun và phục hồi |
 
-Python/Java/Spark, PostgreSQL, Mosquitto, MQTT client, driver và base image được khóa tại [ADR-002 — spike T02](002-container-stack-compatibility.md). T04 mở rộng cùng Compose/Dockerfile thành môi trường đầy đủ và đóng gói ứng dụng. ClickHouse chưa thuộc runtime bắt buộc; T37–T39 là roadmap tùy chọn sau MVP.
+Python/Java/Spark, PostgreSQL, Mosquitto, MQTT client, driver và base image được khóa tại [ADR-002 — spike T02](002-container-stack-compatibility.md). T04 đã mở rộng cùng Compose/Dockerfile thành scaffold và đóng gói prototype; [hướng dẫn hiện hành](../implementation/local-environment.md) phân biệt các commands chạy được với stub. ClickHouse chưa thuộc runtime bắt buộc; T37–T39 là roadmap tùy chọn sau MVP.
 
 ## Luồng dữ liệu và ranh giới xử lý
 
@@ -58,7 +58,7 @@ Compose profile batch có `db`, `batch-job`, `app`; profile sensor thêm `simula
 
 PostgreSQL lưu dữ liệu trong named volume. Raw và output nằm trong các thư mục riêng trên host; không đưa dataset hoặc output lớn vào Git. App truy cập database bằng hostname service trong Compose; người dùng mở app qua cổng được bind vào localhost. Streamlit hỗ trợ khởi động server local bằng `streamlit run`. [Tài liệu Streamlit](https://docs.streamlit.io/develop/concepts/architecture/run-your-app).
 
-Các lệnh build/test spike bằng Docker Compose nằm ở [ADR-002](002-container-stack-compatibility.md#tái-lập-từ-đầu-bằng-docker-compose). Host chỉ cần Docker Engine + Compose v2 trở lên; CLI/Makefile nếu có chỉ gọi Compose. T04 tiếp tục mở rộng Compose này cho batch/app/sensor; spike chưa phải ứng dụng hoạt động đầy đủ.
+Các lệnh build/test spike bằng Docker Compose nằm ở [ADR-002](002-container-stack-compatibility.md#tái-lập-từ-đầu-bằng-docker-compose). Host chỉ cần Docker Engine + Compose v2 trở lên; CLI/Makefile nếu có chỉ gọi Compose. Scaffold T04 đã có batch/app/sensor/test profiles và prototype container; parser/pipeline/BR thật vẫn chưa hiện thực.
 
 ## Local và offline
 

@@ -13,7 +13,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import DoubleType, StringType, StructField, StructType, TimestampNTZType
 import pytest
 
-from spike.runtime import ClimateSample, mqtt_round_trip, parse_synthetic_climate
+from greenhouse.diagnostics.stack_probe import ClimateSample, mqtt_round_trip, parse_synthetic_climate
 
 
 @pytest.fixture(scope="module")

@@ -1,4 +1,4 @@
-# Linux / CPython 3.12; complete spike runtime + test dependencies, exact pins.
+# Linux / CPython 3.12; processing + test dependencies, exact pins.
 # Build tooling is pinned in docker/processing/Dockerfile.
 pyspark==4.0.1
 py4j==0.10.9.9

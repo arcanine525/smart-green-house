@@ -24,7 +24,12 @@ RUN python -m pip install --no-cache-dir pip==25.2 setuptools==80.9.0 wheel==0.4
 # Fetch and verify at BUILD time. Spark never resolves Maven/Ivy at runtime.
 RUN python -c "import hashlib, pathlib, urllib.request; p = pathlib.Path('/opt/jdbc/postgresql-42.7.14.jar'); p.parent.mkdir(parents=True); data = urllib.request.urlopen('https://repo.maven.apache.org/maven2/org/postgresql/postgresql/42.7.14/postgresql-42.7.14.jar', timeout=60).read(); assert hashlib.sha256(data).hexdigest() == '73914527305a40cce504b0d3d90b23caf565136912d607ae8ae7c5895512332c', 'JDBC checksum mismatch'; p.write_bytes(data)"
 
-RUN useradd --create-home --uid 10001 greenhouse
-COPY --chown=greenhouse:greenhouse spike ./spike
+RUN useradd --create-home --uid 10001 greenhouse \
+    && mkdir -p /data/output /data/checkpoints /data/ready \
+    && chown -R greenhouse:greenhouse /data/output /data/checkpoints /data/ready
+COPY pyproject.toml ./pyproject.toml
+COPY src ./src
+RUN python -m pip install --no-cache-dir --no-deps --no-build-isolation .
+COPY --chown=greenhouse:greenhouse tests ./tests
 USER greenhouse
-CMD ["python", "-m", "pytest", "-q", "-s", "-p", "no:cacheprovider", "spike/tests"]
+CMD ["python", "-m", "greenhouse", "test", "-q", "-s"]

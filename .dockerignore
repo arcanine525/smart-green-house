@@ -1,10 +1,21 @@
 # Allowlist: no AGC, credentials, local plans or scratch files enter the image.
 **
 !docker/
-!docker/processing/
-!docker/processing/Dockerfile
-!requirements.lock
-!spike/
-!spike/**
+!docker/**
+!requirements*.lock
+!pyproject.toml
+!src/
+!src/**
+!tests/
+!tests/**
+!prototypes/
+prototypes/*
+!prototypes/dashboard/
+prototypes/dashboard/*
+!prototypes/dashboard/*.py
+!prototypes/dashboard/template.html
+!.streamlit/
+!.streamlit/config.toml
 **/__pycache__/
 **/*.pyc
+**/*.egg-info/

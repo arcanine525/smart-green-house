@@ -13,8 +13,8 @@ Project hướng đến ba nhóm người dùng: người vận hành theo dõi 
 | Sáu business requirements (BR) | Đã có đặc tả, công thức, điều kiện dữ liệu và tiêu chí nghiệm thu |
 | Kiến trúc và schema | Đã có ADR, sơ đồ Mermaid tổng quan và chi tiết |
 | UI demo Streamlit + Plotly | Chạy được với fixture tổng hợp; có bản HTML tương tác offline |
-| PostgreSQL, Spark và MQTT | Có spike container dùng dữ liệu synthetic; chưa có pipeline AGC tích hợp |
-| Docker Compose | Có spike db/broker/test-runner; môi trường batch/app/sensor đầy đủ sẽ mở rộng ở T04 |
+| PostgreSQL, Spark và MQTT | Có môi trường container và integration tests synthetic; chưa có pipeline AGC tích hợp |
+| Docker Compose | Scaffold batch/sensor/test/tools; prototype chạy qua container, pipeline/sensor thật còn là stub |
 | ClickHouse | Phương án chuyển đổi sau MVP, chưa triển khai |
 
 Dashboard hiện tại là prototype để review giao diện. Các kết quả trong demo không phải số liệu AGC đã xử lý và không chứng minh sáu BR đã được nghiệm thu.
@@ -35,25 +35,49 @@ Các thao tác có thể thử:
 - Thay đổi giá điện để so sánh chi phí baseline với kịch bản.
 - Xuất CSV theo bộ lọc, kèm quality, đơn vị và phiên bản dữ liệu.
 
-### Ứng dụng Streamlit + Plotly
+### Chạy bằng Docker — prototype và môi trường scaffold
 
-Source prototype ở [prototypes/dashboard](prototypes/dashboard/README.md); theme ở [.streamlit/config.toml](.streamlit/config.toml). Bản HTML dùng chung fixture và Plotly figures với prototype Python, không phải bản export nguyên ứng dụng Streamlit.
-
-Project dùng **Docker-first**: host chỉ cần Docker Engine + Compose v2 trở lên. Spike hiện chưa có service app; đóng gói prototype/ứng dụng và lệnh tái tạo HTML qua container thuộc T04. Trong lúc đó, dùng bản HTML offline ở trên để xem giao diện; không coi spike là dashboard hoặc pipeline đã chạy.
-
-## Chạy spike tương thích stack
-
-Từ root repository, chỉ cần Docker; không cần dataset AGC hoặc cài Python/Java trên host. Lần build đầu cần Internet để tải images/dependencies. Spike chạy MQTT JSON synthetic → typed record → psycopg và CSV synthetic → Spark `local[2]` → JDBC → PostgreSQL, rồi pytest đối soát giá trị.
+Host chỉ cần **Docker Engine + Compose v2 trở lên**; không cài Python/Java/Spark/PostgreSQL/Mosquitto trên host. Từ root clone mới:
 
 ```bash
-docker compose -p smart-greenhouse --profile test build test-runner
-docker compose -p smart-greenhouse down -v
-docker compose -p smart-greenhouse up -d --wait db broker
-docker compose -p smart-greenhouse --profile test run --rm test-runner
-docker compose -p smart-greenhouse down -v
+cp .env.example .env
+docker compose --profile '*' build
+docker compose --profile batch run --rm job
+docker compose --profile test run --rm test-runner
+docker compose --profile batch up -d --wait db app
 ```
 
-`down -v` xóa hai named volumes chứa dữ liệu synthetic của project `smart-greenhouse`. Không service nào publish cổng host; runtime dùng network nội bộ. Phiên bản đã khóa, giới hạn CPU/RAM, nguồn chính thức, kết quả và phạm vi kiểm chứng nằm trong [ADR-002](docs/adr/002-container-stack-compatibility.md). Đây là kiểm tra tổ hợp công nghệ, chưa nghiệm thu pipeline AGC hoặc sáu BR.
+Mở **http://127.0.0.1:8501**. Service app hiện chạy prototype Verdant với fixture tổng hợp; chưa đọc AGC hoặc database. Lệnh `job` mặc định chỉ chạy `python -m greenhouse setup`: kiểm tra env/mount/DB, không ingest hoặc tạo schema nghiệp vụ. Chạy lại setup không sửa import/raw.
+
+`.env` bị Git ignore; giá trị password trong `.env.example` chỉ là mẫu local. Compose báo lỗi nếu thiếu `GREENHOUSE_DB_PASSWORD`. Có thể đổi cổng app và đường dẫn archive trong `.env`; mặc định nguồn nhập là `data/import/` (read-only), raw `data/raw/` (read-only khi xử lý), output nằm trong named volume riêng. Chưa cần dataset để chạy setup/tests/prototype; T05 sẽ nhập ZIP local, khóa checksum và tạo manifest.
+
+Kiểm tra cấu hình sensor mà không khởi chạy các stub:
+
+```bash
+docker compose --profile sensor config --quiet
+```
+
+`ingest`, `transform`, `simulate`, `collect`, `stream` hiện thoát **mã 2**, ghi rõ “chưa hiện thực” và task sở hữu. Profile sensor đã khai báo broker, simulator, collector, stream-worker và volumes; chưa có replay hoặc xử lý streaming thật. Không gọi `up` toàn bộ sensor để coi như đã chạy pipeline.
+
+Tạo lại HTML bằng image UI, mặc định xuất vào `data/output/preview/preview.html` bị ignore:
+
+```bash
+docker compose --profile tools run --rm preview-build
+```
+
+Khi chủ đích cập nhật artifact tracked `prototypes/dashboard/preview.html`:
+
+```bash
+GREENHOUSE_PREVIEW_PATH=./prototypes/dashboard docker compose --profile tools run --rm preview-build
+```
+
+Dừng dịch vụ và giữ volumes bằng `docker compose --profile '*' down`. Chỉ dùng lệnh dưới khi muốn **xóa toàn bộ named volumes của project này**, gồm PostgreSQL, output và trạng thái sensor; bind mounts import/raw không bị xóa:
+
+```bash
+docker compose --profile '*' down -v
+```
+
+Chi tiết [service/profile/port/volume, resource limits, lệnh kiểm tra và giới hạn](docs/implementation/local-environment.md). Môi trường và tests chỉ chứng minh hạ tầng scaffold; chưa nghiệm thu sáu BR.
 
 ## Dữ liệu và phạm vi
 
@@ -96,7 +120,7 @@ Mỗi BR có quy tắc quality, missing data, đơn vị, mẫu số và tiêu c
 | Xử lý | PySpark batch + Structured Streaming | Chuẩn hóa, quality, episode và xử lý micro-batch |
 | Data warehouse | PostgreSQL | Staging, core, marts, metadata và cấu hình có version |
 | Dashboard | Streamlit + Plotly | Bộ lọc, biểu đồ, drill-down, scenario và export |
-| Đóng gói | Docker Compose | Spike trên một máy local; mở rộng batch/app/sensor ở T04 |
+| Đóng gói | Docker Compose | Processing, UI, sensor images; profiles và volumes local |
 | Kiểm thử | pytest; SQL assertions, contract/fault tests dự kiến | Spike integration hiện có; correctness BR, phục hồi và đối soát batch–streaming sẽ triển khai tiếp |
 
 UI prototype và spike synthetic có phạm vi riêng; chưa có pipeline AGC/BR hoàn chỉnh. Quyết định kiến trúc nằm trong [ADR-001](docs/adr/001-local-deployment-stack.md), phiên bản và bằng chứng spike trong [ADR-002](docs/adr/002-container-stack-compatibility.md).
@@ -193,10 +217,13 @@ Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên c�
 .
 ├── readme.md
 ├── .streamlit/config.toml          # Theme và cấu hình UI local
-├── compose.yaml                    # Spike hiện tại; T04 mở rộng thành môi trường đầy đủ
-├── docker/                         # Processing image và Mosquitto config
-├── requirements.lock               # Python dependencies của spike, pin chính xác
-├── spike/                          # Adapters, fixture synthetic và integration tests
+├── compose.yaml                    # Profiles batch / sensor / test / tools
+├── docker/                         # Processing / UI / sensor images và Mosquitto config
+├── requirements*.lock              # Dependency closure từng image, pin chính xác
+├── src/greenhouse/                 # Package, CLI, config và diagnostic probes
+├── tests/                          # Unit/integration tests và fixture synthetic
+├── config/                         # Quy ước cấu hình
+├── scripts/                        # Quy ước wrapper Compose
 ├── DE_Requirements.pdf
 ├── DE_Requirements.md
 ├── docs/

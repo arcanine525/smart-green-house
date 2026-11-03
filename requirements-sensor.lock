@@ -1,0 +1,5 @@
+# Linux / CPython 3.12, lightweight CLI + future simulator/collector runtime.
+psycopg[binary]==3.3.7
+psycopg-binary==3.3.7
+typing_extensions==4.15.0
+paho-mqtt==2.1.0
