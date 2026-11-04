@@ -114,3 +114,9 @@ docker compose -p smart-greenhouse run --rm job python -m greenhouse lineage --r
 ```
 
 Lệnh trả revision/correction/scope/snapshot/file/physical line range/raw_hash, đọc file raw đúng SHA-256 rồi parser xác minh lại hash và source identity ở record đó. Với publication, lấy revision từ membership đã pin rồi gọi lineage. Không ghi raw payload vào log. File/hash/line không khớp → fail; source timestamp vẫn truncate µs theo T06.
+
+## Adapter query cho ứng dụng
+
+[PostgresQueryAdapter](query_adapter.py) thực thi [query Protocol](../queries/README.md) và trả [DTO thuần Python](../contracts/README.md). Các SQL mới `query_*.sql` đọc publication theo ID đã pin, cycle mapping và Resources day rows; không tạo mart/view hoặc thay SQL/migration T07/T08. Chỉ `pin_publication` đọc current pointer; các lần đọc sau dùng ID đó, quality và basis pin, kể cả khi pointer hoặc basis toggle đã đổi. Connection do caller sở hữu.
+
+Adapter validate catalog water `L/m²/day`, trả lượng ngày BR `L/m²` cùng source_unit; không đổi quantity. Missing quality/unit, duplicate day/measure hoặc context sai scope/snapshot/cycle/compartment fail. Service giữ formula, calendar gaps, coverage, NULL path, assumption label và rule-not-configured. Lineage kiểm membership trước khi gọi raw-hash verifier T08; ambiguous logical key cần revision ID. Không có SQL trong service/DTO/UI. Không cần migration mới; AGC smoke có thể chỉ SELECT trên publication hiện có.

@@ -1,3 +1,57 @@
-# Queries
+# Query service và oracle BR-02
 
-T31 định nghĩa query/command contracts; T09–T21 bổ sung truy vấn nghiệp vụ. Scaffold chỉ dùng `SELECT 1` để kiểm tra kết nối setup.
+[IrrigationService](irrigation.py) chỉ phụ thuộc [contracts](../contracts/README.md) và `QueryAdapter` Protocol. Công thức là hàm thuần `summarize_irrigation(context, publication, cycle, days)`, không cần DB/Spark/CSV. PostgreSQL implementation ở [db/query_adapter.py](../db/query_adapter.py), SQL ở package DB; không có adapter giả hoặc ClickHouse.
+
+## Một tác vụ pin một publication
+
+```python
+from datetime import date
+import psycopg
+from greenhouse.contracts import QueryContext
+from greenhouse.db.query_adapter import PostgresQueryAdapter
+from greenhouse.queries import IrrigationService, result_cache_key
+from greenhouse.settings import Settings
+
+with psycopg.connect(**Settings.from_env().connection_kwargs(), autocommit=True) as conn:
+    service = IrrigationService(PostgresQueryAdapter(conn))
+    publication = service.pin_publication("<scope_id>")
+    context = QueryContext(
+        publication.scope_id, publication.publication_id, publication.snapshot_id,
+        "<cycle_id>", ("<compartment_id>",), date(2020, 1, 1), date(2020, 1, 8),
+    )
+    days = service.get_irrigation_days(context)
+    summary = service.get_irrigation_summary(context)
+    cache_key = result_cache_key(context, publication, scenario_version=None)
+```
+
+Đây là composition ở caller; service không tự mở connection/import adapter. Chạy caller qua service job Compose như [môi trường local](../../../docs/implementation/local-environment.md), không cần venv host. Không có CLI hoặc endpoint mới. Connection do caller sở hữu; read methods chỉ SELECT.
+
+`pin_publication(scope_id)` đọc current pointer đúng một lần, trả `PublicationRef`. Mọi query sau dùng ID trong context/ref, kể cả khi pointer đã đổi. Không dùng view `core.published_measure` cho tác vụ nhiều query vì view đó đọc pointer hiện hành mỗi lần. Adapter dùng chính membership/quality/basis pins của publication được yêu cầu, không chọn latest revision/basis và không đọc mutable basis toggles. Context/pub/snapshot sai, cycle không thuộc scope hoặc compartment sai → fail.
+
+**Main chốt cho contracts:** cycle trong schema thuộc đúng một khoang. Một context/summary chỉ chứa một cycle và một compartment; multi-compartment comparison dùng nhiều contexts với cycle tương ứng, cùng publication đã pin. Không cộng L/m² của các khoang thành tổng trang trại. Service chưa xếp hạng nhiều khoang; `comparison_eligible` chỉ là gate nội bộ cho một kết quả, so sánh còn phải cùng window/policy/basis.
+
+## Ngữ nghĩa oracle
+
+- Grain duy nhất `(cycle_id, resource_date)` và đúng publication/compartment; duplicate hoặc mixed grain bị từ chối, không chọn first/last. Request chỉ ngày trọn, half-open; cắt theo cycle. Kết quả giữ cả requested context và effective window, reason `window_clipped_to_cycle` khi có cắt. Không giao cycle → fail.
+- `D` gồm **mọi ngày** trong effective window, gồm ngày không có resource record. Adapter trả observed days; service tạo missing day DTO có NULL/reason `missing_resource_day`, không source/revision giả. Null/missing/invalid/suspect/applicability unknown không thành 0 hoặc accepted.
+- Observed Irr/Drain cộng **riêng** trên accepted + applicable, không phụ thuộc basis. Không có ngày accepted cho measure → tổng NULL. Một measure lỗi không xóa measure còn lại.
+- `P` là các ngày cả hai measure accepted/applicable và basis tương thích. Paired sums cùng P; ratio `100 × SUM paired Drain / SUM paired Irr`, không AVG daily ratios. P rỗng → NULL/reason `no_paired_days`; paired Irr=0 → NULL/reason `no_irrigation_quantity`. Observed zero vẫn có coverage.
+- Compatible basis: cùng physical basis kind và positive area; cả hai verified, hoặc cả hai assumed với cùng assumption ID/version. Khác/thiếu basis, hoặc mixed verified/assumed chưa có quy ước tương thích → không paired, reason `incompatible_or_unknown_basis`. Không ghép theo numeric area đơn thuần, không auto-convert sang absolute L. Nếu physical basis thay trong window, canonical ratio cũng NULL thay vì cộng các denominator khác nhau.
+- Coverage Irr/Drain/paired lần lượt là accepted day count hoặc |P| chia |D|. `unknown_days` là số ngày thiếu ít nhất một measure usable; `suspect_days` là số ngày có ít nhất một suspect measure. Basis failure riêng không bị gọi là mất quan sát. Partial paired coverage → `partial_coverage`; không ngoại suy toàn kỳ.
+- Drain>Irr trên compatible accepted pair giữ tỷ lệ thật (có thể >100%) và cờ; không clamp. Số ngày này tách khỏi rule outcome. Không có rule profile → `rule_status=not_configured`, `rule_version=NULL`, `outside_rule_days=NULL`, không có kết luận đạt/không đạt hoặc ngưỡng nông học mặc định.
+- Summary giữ publication/snapshot/scope, pipeline/quality/parser/code/config/metric versions, unit/time basis, basis IDs/assumption label/versions và correction IDs/versions. JSON/export dùng [codec](../contracts/README.md#json-version-1); UI không tính lại công thức hoặc biến NULL thành 0. Cache key chứa ref (cùng versions/config), context/window và scenario version khi liên quan.
+
+Core catalog ghi daily water `L/m²/day`; adapter chỉ chấp nhận chính xác catalog unit này và ánh xạ **nhãn lượng ngày** sang BR `L/m²`, giữ `source_unit`. Không đổi số, không chia/nhân duration. Unit lạ như m³ bị từ chối. Paired totals/observed totals vẫn là L/m², ratio/coverage là phần trăm. Không cộng counters Climate vào Resources.
+
+## Lineage
+
+Tạo adapter với mapping mount `raw_snapshots={snapshot_id: raw_path}` rồi gọi `service.get_lineage(publication, revision_id=...)` hoặc `record_key=...`. Kiểm tra revision thuộc **membership đã pin** trước khi bọc T08 lineage và đọc lại raw hash. Không truy được candidate/correction mới chưa xuất hiện trong publication đó. Logical key có thể chung climate/drain; nếu ambiguous phải dùng revision ID, không chọn ngầm. Metadata có source serial chính xác, naive source timestamp, physical line range, hashes, units, correction version; không ghi raw payload.
+
+## Phần tiếp nhận
+
+- T09 tạo mart nước day/week/vụ, cắm materialization vào transaction hook T08 và phải khớp cùng DTO/oracle; T31 chưa tạo mart hoặc cắm hook.
+- T10 dùng service/DTO cho chart/summary/export; không nhúng SQL trong UI, không repin giữa một tác vụ. T11 mới nghiệm thu BR-02 end-to-end và hiệu năng theo yêu cầu.
+- T12–T13 bổ sung harvest/completeness contracts; không dùng coverage ngày của nước cho harvest events.
+- T21 tiếp nhận `ScenarioCommand` validation và triển khai persistence/idempotency/baseline versioning. T33 tiếp nhận `SinkBatch` và xử lý ghi/dedup/conflict; source identity/clock không đổi theo database engine.
+
+Tests synthetic gồm pure oracle/serialization/architecture guards và PostgreSQL contract tests từ Resources fixture qua published core. DB `test_contracts_<hex>` tự drop cả khi test lỗi; chỉ giữ khi truyền `-e GREENHOUSE_KEEP_TEST_DB=1` tường minh vào test-runner. Đây là bằng chứng contract, chưa phải nghiệm thu mart/UI/BR-02.
