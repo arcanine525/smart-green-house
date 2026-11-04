@@ -82,11 +82,14 @@ docker compose --profile test run --rm test-runner
 
 | Command | Hành vi hiện tại | Task tiếp theo |
 |---|---|---|
-| setup | Kiểm config, input mounts đọc được, output ghi được, DB reachable; exit 0 khi đạt | Core/publication T07–T08 sẽ gắn sau |
+| setup | Kiểm config, input mounts đọc được, output ghi được, DB reachable; exit 0 khi đạt | Core qua migrate/load-core; publication thuộc T08 |
 | test | Gọi pytest trong image processing, trả đúng exit code | Bổ sung kiểm chứng nghiệp vụ theo từng BR |
 | preview | Gọi builder prototype trong image UI, output rõ đường dẫn | Chỉ export fixture demo, không phải app nghiệp vụ |
-| ingest | Parser/adapter Python, staging JSONL gzip và manifest theo run trong outputs; [contract và lệnh](../../src/greenhouse/ingestion/README.md) | T07 core/quality, T08 publication/recovery, T31 PostgreSQL adapter |
-| transform | Exit 2, “chưa hiện thực” | T07–T09 core/publication/marts |
+| ingest | Parser/adapter Python, staging JSONL gzip và manifest theo run trong outputs; [contract và lệnh](../../src/greenhouse/ingestion/README.md) | T08 publication/recovery, T31 PostgreSQL adapter |
+| migrate | SQL migrations có version/checksum; rerun skip, checksum thay đổi fail | [Core/metadata contract](../../src/greenhouse/db/README.md) |
+| load-core | Một run T06 → candidate core/meta/config; không publish | T08 publication/recovery |
+| explain-core | Diagnostic value/unit/quality/basis/lineage; không phải app API | T31 query contracts |
+| transform | Exit 2, “chưa hiện thực”; core có lệnh load-core riêng | T08–T09 publication/marts |
 | simulate | Exit 2, “chưa hiện thực” | T32 |
 | collect | Exit 2, “chưa hiện thực” | T33 |
 | stream | Exit 2, “chưa hiện thực” | T34 |
@@ -119,4 +122,17 @@ Kiểm chứng ngày 2026-11-04 trên Docker Linux arm64, VM 4 CPU/~7.62 GiB. Ru
 | Cấu hình | Profile sensor hợp lệ; backend internal, processing/test/sensor chỉ backend; chỉ app publish loopback; import/raw read-only; thiếu password bị Compose từ chối |
 | Test container RAM | `memory.peak` 495,677,440 byte (~472.71 MiB), limit 2 GiB; chỉ là số đo fixture, chưa phải sizing AGC |
 
-Không tạo báo cáo nghiệm thu BR bởi scaffold. Chưa kiểm chứng AGC parser/snapshot, migrations core/marts, pipeline recovery, sensor durability/streaming, app nghiệp vụ, backup/restore hoặc runtime amd64. Khả năng mở app/đạt synthetic tests không thay nghiệm thu sáu BR.
+Bảng trên là bằng chứng scaffold gốc, không phải trạng thái nghiệm thu BR. Trạng thái parser/snapshot và candidate core hiện hành xem các contract ingestion/core bên dưới. Pipeline publication/recovery, marts, sensor durability/streaming, app nghiệp vụ, backup/restore và runtime amd64 chưa được nghiệm thu. Khả năng mở prototype/đạt synthetic tests không thay nghiệm thu sáu BR.
+
+
+## Nạp candidate core và giải thích dữ liệu
+
+Sau snapshot và ingest, dùng run_id đã trả về. Schema/basis/quality và các giới hạn của loader được ghi trong [PostgreSQL core contract](../../src/greenhouse/db/README.md).
+
+```bash
+docker compose -p smart-greenhouse run --rm job python -m greenhouse migrate
+docker compose -p smart-greenhouse run --rm job python -m greenhouse load-core --run /data/output/ingestion/<run_id>
+docker compose -p smart-greenhouse run --rm job python -m greenhouse explain-core --compartment AICU --date 2020-01-01 --measure Irr --limit 5
+```
+
+`migrate` không tự xóa DB hoặc raw; `load-core` từ chối cùng run và rollback khi lỗi. Candidate core chưa được app đọc: publication pointer còn rỗng cho tới coordinator T08. LabAnalysis vẫn raw/staging, core deferred. Không dùng SQL load thành công thay nghiệm thu BR.

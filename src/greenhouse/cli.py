@@ -10,7 +10,7 @@ import tempfile
 from greenhouse.settings import Settings
 
 PENDING = {
-    "transform": "T07–T09 (core, publication và marts)",
+    "transform": "T08–T09 (publication và marts; core qua load-core)",
     "simulate": "T32 (sensor simulator)",
     "collect": "T33 (durable MQTT collector)",
     "stream": "T34 (Structured Streaming)",
@@ -41,11 +41,13 @@ def setup_environment(settings):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="python -m greenhouse")
-    parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", *PENDING])
+    parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", "migrate", "load-core", "explain-core", *PENDING])
     arguments, rest = parser.parse_known_args(argv)
     if arguments.command in PENDING:
         print(f"{arguments.command}: chưa hiện thực — thuộc task sau: {PENDING[arguments.command]}", file=sys.stderr)
         return 2
+    if arguments.command in ("migrate", "load-core", "explain-core"):
+        return core_command(arguments.command, rest)
     if arguments.command == "ingest":
         return ingestion_command(rest)
     if arguments.command == "test":
@@ -138,4 +140,39 @@ def ingestion_command(argv):
         return 1 if result["status"] == "failed" else 0
     except Exception as error:
         print(f"ingest failed: {type(error).__name__}: {error}", file=sys.stderr)
+        return 1
+
+
+def core_command(command, argv):
+    import json
+    import psycopg
+    from greenhouse.db.loader import AGC_SCOPE, AGC_SHA, explain, load_core
+    from greenhouse.db.migrate import migrate
+    parser = argparse.ArgumentParser(prog=f"python -m greenhouse {command}")
+    if command != "migrate":
+        parser.add_argument("--scope-id", default=AGC_SCOPE)
+    if command == "load-core":
+        parser.add_argument("--run", required=True, type=Path)
+        parser.add_argument("--snapshot", type=Path, default=Path(os.environ.get("GREENHOUSE_RAW_DIR", "/data/raw")) / "agc-2nd-2019" / AGC_SHA)
+        parser.add_argument("--quality-policy", default="AGC_QUALITY_V1")
+    if command == "explain-core":
+        parser.add_argument("--compartment", required=True)
+        parser.add_argument("--date", required=True)
+        parser.add_argument("--measure", required=True)
+        parser.add_argument("--limit", type=int, default=10)
+    options = parser.parse_args(argv)
+    try:
+        with psycopg.connect(**Settings.from_env().connection_kwargs()) as connection:
+            if command == "migrate":
+                result = migrate(connection)
+            elif command == "load-core":
+                result = load_core(connection, options.run, options.snapshot, options.scope_id, options.quality_policy)
+            else:
+                result = explain(connection, options.scope_id, options.compartment, options.date, options.measure, options.limit)
+        # DB commands never echo connection strings/credentials on failure.
+        print(json.dumps(result, ensure_ascii=False, default=str))
+        return 1 if result.get("status") == "blocked" else 0
+    except Exception as error:
+        message = str(error) if isinstance(error, ValueError) else type(error).__name__
+        print(f"{command} failed: {message}", file=sys.stderr)
         return 1

@@ -14,3 +14,6 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-p no:cacheprovider"
+
+[tool.setuptools.package-data]
+"greenhouse.db" = ["migrations/*.sql", "sql/*.sql"]
