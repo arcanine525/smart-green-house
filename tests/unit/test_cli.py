@@ -24,7 +24,7 @@ def environment(tmp_path):
 
 
 @pytest.mark.parametrize("command,owner", [
-    ("transform", "T09"), ("simulate", "T32"),
+    ("simulate", "T32"),
     ("collect", "T33"), ("stream", "T34"),
 ])
 def test_pending_commands_fail_without_claiming_success(command, owner):
@@ -89,3 +89,14 @@ def test_setup_is_idempotent_against_real_database(environment):
     after = {p: p.read_bytes() for folder in (settings.import_dir, settings.raw_dir) for p in folder.iterdir()}
     assert after == before
     assert not list(settings.output_dir.iterdir())
+
+
+def test_transform_alias_uses_the_pipeline_entrypoint(monkeypatch):
+    import greenhouse.cli as cli
+    called=[]
+    def pipeline(command,argv):
+        called.append((command,argv))
+        return 0
+    monkeypatch.setattr(cli,'pipeline_command',pipeline)
+    assert cli.main(['transform','--workflow-id','synthetic-water'])==0
+    assert called==[('run-pipeline',['--workflow-id','synthetic-water'])]

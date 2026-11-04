@@ -6,8 +6,8 @@ from typing import Protocol
 
 from greenhouse.contracts import (
     ASSUMPTION_LABEL, METRIC_VERSION, WATER_UNIT, Applicability, BasisStatus,
-    CorrectionRef, CycleWindow, IrrigationDay, IrrigationSummary, LineageResult, MeasureValue,
-    PublicationRef, QualityStatus, QueryContext, ResultStatus,
+    CorrectionRef, CycleWindow, IrrigationDay, IrrigationSummary, IrrigationRuleProfile, LineageResult, MeasureValue,
+    PublicationRef, QualityStatus, QueryContext, ResultStatus, RuleStatus,
 )
 
 
@@ -16,6 +16,7 @@ class QueryAdapter(Protocol):
     def publication(self, publication_id: str) -> PublicationRef: ...
     def cycle_window(self, context: QueryContext) -> CycleWindow: ...
     def read_irrigation_days(self, context: QueryContext, publication: PublicationRef) -> tuple[IrrigationDay, ...]: ...
+    def irrigation_rule(self, context: QueryContext) -> IrrigationRuleProfile | None: ...
     def read_lineage(self, publication: PublicationRef, *, revision_id: str | None = None,
                      record_key: str | None = None) -> LineageResult: ...
 
@@ -183,15 +184,39 @@ class IrrigationService:
         context.matches(publication)
         cycle = self.adapter.cycle_window(context)
         effective = replace(context, start=max(context.start, cycle.start), end=min(context.end, cycle.end))
-        return publication, cycle, self.adapter.read_irrigation_days(effective, publication)
+        rule = self.adapter.irrigation_rule(context)
+        return publication, cycle, self.adapter.read_irrigation_days(effective, publication), rule
 
     def get_irrigation_days(self, context):
-        publication, cycle, days = self._input(context)
-        return calendar_days(context, publication, cycle, days)
+        publication, cycle, days, rule = self._input(context)
+        result = calendar_days(context, publication, cycle, days)
+        return tuple(evaluate_irrigation_rule(d, rule) for d in result) if rule else result
 
     def get_irrigation_summary(self, context):
-        publication, cycle, days = self._input(context)
-        return summarize_irrigation(context, publication, cycle, days)
+        publication, cycle, days, rule = self._input(context)
+        result = summarize_irrigation(context, publication, cycle, days)
+        return attach_irrigation_rule(result, calendar_days(context, publication, cycle, days), rule)
+
+    def get_irrigation_weekly(self, context):
+        publication, cycle, days, rule = self._input(context)
+        rows = calendar_days(context, publication, cycle, days)
+        start, end = rows[0].resource_date, rows[-1].resource_date + timedelta(days=1)
+        result = []
+        while start < end:
+            right = min(end, start + timedelta(days=7-start.weekday()))
+            week_context = replace(context, start=start, end=right)
+            week_rows = tuple(d for d in rows if start <= d.resource_date < right)
+            summary = summarize_irrigation(week_context, publication, cycle, week_rows)
+            summary = attach_irrigation_rule(summary, week_rows, rule)
+            year, week, _ = start.isocalendar()
+            result.append(replace(summary, iso_year=year, iso_week=week))
+            start = right
+        return tuple(result)
+
+    def get_irrigation_cycle(self, context):
+        context.matches(self.adapter.publication(context.publication_id))
+        cycle = self.adapter.cycle_window(context)
+        return self.get_irrigation_summary(replace(context, start=cycle.start, end=cycle.end))
 
     def get_lineage(self, publication, *, revision_id=None, record_key=None):
         if (revision_id is None) == (record_key is None):
@@ -199,3 +224,35 @@ class IrrigationService:
         if self.adapter.publication(publication.publication_id) != publication:
             raise ValueError('Pinned publication metadata differs')
         return self.adapter.read_lineage(publication, revision_id=revision_id, record_key=record_key)
+
+
+def evaluate_irrigation_rule(day, profile):
+    """Explicit query-time rule; unknown input is never a pass/fail conclusion."""
+    reasons = set(day.reason_codes)
+    if not day.paired or day.drain_fraction_pct is None:
+        status = RuleStatus.UNKNOWN
+        reasons.add('irrigation_rule_unknown')
+    elif (profile.min_drain_pct <= day.drain_fraction_pct <= profile.max_drain_pct
+          and profile.min_irrigation_l_m2 <= day.irrigation.value <= profile.max_irrigation_l_m2):
+        status = RuleStatus.WITHIN_RANGE
+    else:
+        status = RuleStatus.OUTSIDE_RANGE
+        reasons.add('outside_irrigation_rule')
+    return replace(day, rule_status=status, rule_version=profile.rule_version,
+                   rule_profile=profile, reason_codes=tuple(sorted(reasons)))
+
+
+def attach_irrigation_rule(summary, days, profile):
+    if profile is None:
+        return summary
+    evaluated = tuple(evaluate_irrigation_rule(day, profile) for day in days)
+    reasons = set(summary.reason_codes)
+    outside = sum(d.rule_status == RuleStatus.OUTSIDE_RANGE for d in evaluated)
+    unknown = sum(d.rule_status == RuleStatus.UNKNOWN for d in evaluated)
+    if outside:
+        reasons.add('outside_irrigation_rule')
+    if unknown:
+        reasons.add('irrigation_rule_unknown')
+    return replace(summary, rule_status=RuleStatus.CONFIGURED, rule_version=profile.rule_version,
+                   rule_profile=profile, outside_rule_days=outside, rule_unknown_days=unknown,
+                   reason_codes=tuple(sorted(reasons)))

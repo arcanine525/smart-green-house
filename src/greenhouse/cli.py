@@ -10,7 +10,6 @@ import tempfile
 from greenhouse.settings import Settings
 
 PENDING = {
-    "transform": "T09 (marts; publication qua run-pipeline/publish)",
     "simulate": "T32 (sensor simulator)",
     "collect": "T33 (durable MQTT collector)",
     "stream": "T34 (Structured Streaming)",
@@ -41,11 +40,13 @@ def setup_environment(settings):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="python -m greenhouse")
-    parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", "migrate", "load-core", "explain-core", "run-pipeline", "publish", "correct-core", "lineage", *PENDING])
+    parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", "migrate", "load-core", "explain-core", "run-pipeline", "transform", "publish", "correct-core", "lineage", *PENDING])
     arguments, rest = parser.parse_known_args(argv)
     if arguments.command in PENDING:
         print(f"{arguments.command}: chưa hiện thực — thuộc task sau: {PENDING[arguments.command]}", file=sys.stderr)
         return 2
+    if arguments.command == "transform":
+        return pipeline_command("run-pipeline", rest)
     if arguments.command in ("run-pipeline", "publish", "correct-core", "lineage"):
         return pipeline_command(arguments.command, rest)
     if arguments.command in ("migrate", "load-core", "explain-core"):

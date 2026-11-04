@@ -91,7 +91,7 @@ docker compose --profile test run --rm test-runner
 | explain-core | Diagnostic value/unit/quality/basis/lineage; không phải app API | T31 query contracts |
 | run-pipeline / publish | Bốn step có trạng thái, resume, local Spark staging/profile, một transaction publish; [contract](../../src/greenhouse/db/README.md#workflow-chạy-lại-và-publication) | Marts/KPI T09+ |
 | lineage / correct-core | Kiểm hash từ revision về raw / correction có audit và revision mới | Không sửa raw/time hoặc tự mở rộng basis |
-| transform | Exit 2, “chưa hiện thực”; core có lệnh load-core riêng | T09 marts; publication đã có run-pipeline/publish |
+| transform | Alias run-pipeline: cả publish transaction và water mart hook mặc định | UI T10 / nghiệm thu BR-02 T11 |
 | simulate | Exit 2, “chưa hiện thực” | T32 |
 | collect | Exit 2, “chưa hiện thực” | T33 |
 | stream | Exit 2, “chưa hiện thực” | T34 |
@@ -149,3 +149,7 @@ docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipelin
 ```
 
 Outputs ở volume outputs: `pipeline/<workflow_id>/steps.jsonl`, mỗi attempt có artifact manifest/checksums, Spark Parquet và profile JSON/JSONL. Resume kiểm step completed rồi skip; failed step chạy lại với attempt mới. Không xóa pending/raw/staging. DB T07 đã load có thể adopt `--ingestion-run /data/output/ingestion/<run_id>`, không nạp lại core. Snapshot/policy/scope/output phải giữ nguyên khi resume; config drift cần run mới. Same-snapshot không đổi reuse publication, correction được audit và chọn trong publication tiếp theo. Khác snapshot không auto-merge/basis. Resource limits Compose giữ nguyên: job 2 GiB/1.5 CPU, db 512 MiB/0.5 CPU; Spark local[1], driver 768 MiB, shuffle 4. Không restart Docker tự động nếu engine mất; lỗi transaction rollback và resume sau khi engine trở lại. Giữ db/broker chạy cho review.
+
+## Water mart bundle
+
+Chạy migrate (005+) rồi workflow mới: `docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id water-first`. Bundle code `pipeline-v2-irrigation` bảo đảm publication mới có water mart. `transform` là alias cùng flags; rerun không đổi reuse publication và không nhân fact rows. Default adapter từ chối publication cũ chưa có mart, không tự backfill/sửa publication đã seal. Xem [mart/rule config](../../src/greenhouse/db/README.md#mart-nước-và-rule-profiles) và [queries ngày/tuần/vụ](../../src/greenhouse/queries/README.md#day-iso-week-cycle-và-review-rule). Rule profile cần version ID tường minh; không seed threshold AGC. Shared basis vẫn có nhãn giả định chưa xác minh. Đây chưa phải UI hoặc nghiệm thu BR-02.

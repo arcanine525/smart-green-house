@@ -1,6 +1,6 @@
 # Query service và oracle BR-02
 
-[IrrigationService](irrigation.py) chỉ phụ thuộc [contracts](../contracts/README.md) và `QueryAdapter` Protocol. Công thức là hàm thuần `summarize_irrigation(context, publication, cycle, days)`, không cần DB/Spark/CSV. PostgreSQL implementation ở [db/query_adapter.py](../db/query_adapter.py), SQL ở package DB; không có adapter giả hoặc ClickHouse.
+[IrrigationService](irrigation.py) chỉ phụ thuộc [contracts](../contracts/README.md) và `QueryAdapter` Protocol. Công thức là hàm thuần `summarize_irrigation(context, publication, cycle, days)`, không cần DB/Spark/CSV. PostgreSQL implementation ở [db/query_adapter.py](../db/query_adapter.py), SQL ở package DB; adapter mặc định đọc sealed water mart, core adapter chỉ dùng đối soát; không có adapter giả hoặc ClickHouse.
 
 ## Một tác vụ pin một publication
 
@@ -26,7 +26,7 @@ with psycopg.connect(**Settings.from_env().connection_kwargs(), autocommit=True)
 
 Đây là composition ở caller; service không tự mở connection/import adapter. Chạy caller qua service job Compose như [môi trường local](../../../docs/implementation/local-environment.md), không cần venv host. Không có CLI hoặc endpoint mới. Connection do caller sở hữu; read methods chỉ SELECT.
 
-`pin_publication(scope_id)` đọc current pointer đúng một lần, trả `PublicationRef`. Mọi query sau dùng ID trong context/ref, kể cả khi pointer đã đổi. Không dùng view `core.published_measure` cho tác vụ nhiều query vì view đó đọc pointer hiện hành mỗi lần. Adapter dùng chính membership/quality/basis pins của publication được yêu cầu, không chọn latest revision/basis và không đọc mutable basis toggles. Context/pub/snapshot sai, cycle không thuộc scope hoặc compartment sai → fail.
+`pin_publication(scope_id)` đọc current pointer đúng một lần, trả `PublicationRef`. Mọi query sau dùng ID trong context/ref, kể cả khi pointer đã đổi. Không dùng view `core.published_measure` cho tác vụ nhiều query vì view đó đọc pointer hiện hành mỗi lần. Mart đã materialize chính membership/quality/basis pins của publication được yêu cầu; adapter không chọn latest revision/basis hoặc đọc mutable basis toggles. Thiếu receipt/bundle mart → lỗi, không fallback core. `PostgresCoreQueryAdapter` giữ đường published core riêng cho oracle/audit. Context/pub/snapshot sai, cycle không thuộc scope hoặc compartment sai → fail.
 
 **Main chốt cho contracts:** cycle trong schema thuộc đúng một khoang. Một context/summary chỉ chứa một cycle và một compartment; multi-compartment comparison dùng nhiều contexts với cycle tương ứng, cùng publication đã pin. Không cộng L/m² của các khoang thành tổng trang trại. Service chưa xếp hạng nhiều khoang; `comparison_eligible` chỉ là gate nội bộ cho một kết quả, so sánh còn phải cùng window/policy/basis.
 
@@ -39,7 +39,7 @@ with psycopg.connect(**Settings.from_env().connection_kwargs(), autocommit=True)
 - Compatible basis: cùng physical basis kind và positive area; cả hai verified, hoặc cả hai assumed với cùng assumption ID/version. Khác/thiếu basis, hoặc mixed verified/assumed chưa có quy ước tương thích → không paired, reason `incompatible_or_unknown_basis`. Không ghép theo numeric area đơn thuần, không auto-convert sang absolute L. Nếu physical basis thay trong window, canonical ratio cũng NULL thay vì cộng các denominator khác nhau.
 - Coverage Irr/Drain/paired lần lượt là accepted day count hoặc |P| chia |D|. `unknown_days` là số ngày thiếu ít nhất một measure usable; `suspect_days` là số ngày có ít nhất một suspect measure. Basis failure riêng không bị gọi là mất quan sát. Partial paired coverage → `partial_coverage`; không ngoại suy toàn kỳ.
 - Drain>Irr trên compatible accepted pair giữ tỷ lệ thật (có thể >100%) và cờ; không clamp. Số ngày này tách khỏi rule outcome. Không có rule profile → `rule_status=not_configured`, `rule_version=NULL`, `outside_rule_days=NULL`, không có kết luận đạt/không đạt hoặc ngưỡng nông học mặc định.
-- Summary giữ publication/snapshot/scope, pipeline/quality/parser/code/config/metric versions, unit/time basis, basis IDs/assumption label/versions và correction IDs/versions. JSON/export dùng [codec](../contracts/README.md#json-version-1); UI không tính lại công thức hoặc biến NULL thành 0. Cache key chứa ref (cùng versions/config), context/window và scenario version khi liên quan.
+- Summary giữ publication/snapshot/scope, pipeline/quality/parser/code/config/metric versions, unit/time basis, basis IDs/assumption label/versions và correction IDs/versions. JSON/export dùng [codec](../contracts/README.md#json-version-2); UI không tính lại công thức hoặc biến NULL thành 0. Cache key chứa ref (cùng versions/config), context/window và scenario version khi liên quan.
 
 Core catalog ghi daily water `L/m²/day`; adapter chỉ chấp nhận chính xác catalog unit này và ánh xạ **nhãn lượng ngày** sang BR `L/m²`, giữ `source_unit`. Không đổi số, không chia/nhân duration. Unit lạ như m³ bị từ chối. Paired totals/observed totals vẫn là L/m², ratio/coverage là phần trăm. Không cộng counters Climate vào Resources.
 
@@ -49,9 +49,19 @@ Tạo adapter với mapping mount `raw_snapshots={snapshot_id: raw_path}` rồi 
 
 ## Phần tiếp nhận
 
-- T09 tạo mart nước day/week/vụ, cắm materialization vào transaction hook T08 và phải khớp cùng DTO/oracle; T31 chưa tạo mart hoặc cắm hook.
+- Water mart day và default transaction hook đã triển khai. Day/week/cycle queries khớp cùng DTO/oracle; không materialize mọi period/filter.
 - T10 dùng service/DTO cho chart/summary/export; không nhúng SQL trong UI, không repin giữa một tác vụ. T11 mới nghiệm thu BR-02 end-to-end và hiệu năng theo yêu cầu.
 - T12–T13 bổ sung harvest/completeness contracts; không dùng coverage ngày của nước cho harvest events.
 - T21 tiếp nhận `ScenarioCommand` validation và triển khai persistence/idempotency/baseline versioning. T33 tiếp nhận `SinkBatch` và xử lý ghi/dedup/conflict; source identity/clock không đổi theo database engine.
 
 Tests synthetic gồm pure oracle/serialization/architecture guards và PostgreSQL contract tests từ Resources fixture qua published core. DB `test_contracts_<hex>` tự drop cả khi test lỗi; chỉ giữ khi truyền `-e GREENHOUSE_KEEP_TEST_DB=1` tường minh vào test-runner. Đây là bằng chứng contract, chưa phải nghiệm thu mart/UI/BR-02.
+
+## Day, ISO week, cycle và review rule
+
+`get_irrigation_days(context)` đọc facts và calendar gaps; `get_irrigation_summary(context)` tổng hợp window; `get_irrigation_weekly(context)` đọc một tập day rows rồi trả tuple `IrrigationSummary`, mỗi tuần có `iso_year`/`iso_week`, window và expected days đã cắt theo query/cycle. `get_irrigation_cycle(context)` dùng toàn bộ cycle window tường minh. Mỗi summary là ratio of paired sums; không cộng hoặc AVG ratio của tuần/ngày. Với period tổng, `iso_year`/`iso_week` là NULL. Source quantities và 50-digit oracle T31 giữ nguyên.
+
+Chọn profile bằng `dataclasses.replace(context, rule_version="<registered_profile_version>")`. Adapter đọc đúng immutable version đó và kiểm scope/compartment; ID lạ hoặc ngoài scope fail. Không chọn profile → not_configured, rule_version/outside_rule_days/rule_unknown_days/profile đều NULL. Có profile → day status within_range/outside_range/unknown, summary status configured với hai counts outside/unknown và đầy đủ `IrrigationRuleProfile` (version, four bounds, evidence/demo label). Bằng biên là trong dải. Thiếu pair usable/basis hoặc ratio không xác định do Irr=0 → unknown; không tự gọi là đạt rule. Summary giữ quantities/coverage giống oracle bất kể profile, chỉ thêm review metadata/reasons.
+
+Rule cache identity nằm trong QueryContext, do đó chart/summary/weekly dùng cùng explicit version. Profile v2 không sửa kết quả request v1; source publication reference giữ source config versions, rule query-time nằm ở context/result/profile. Profile được khai báo riêng cho một scope/compartment; multi-compartment comparison dùng contexts/profiles riêng theo quyết định grain của main. AGC không có profile mặc định; rule status vẫn not_configured cho đến khi caller chọn một profile đã đăng ký.
+
+JSON envelope hiện version **2**, thêm context rule version, result rule/profile metadata và ISO week fields; Decimal/NULL/clock/enum conventions giữ nguyên. Client cần decode đúng v2; v1 không được lặng lẽ nhận như shape mới. SQL day fact flags/ratio/reasons được tests đối chiếu trực tiếp với core-oracle, không chỉ kiểm output service. UI/export thuộc T10; nghiệm thu BR-02 thuộc T11.

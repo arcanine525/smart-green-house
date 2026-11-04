@@ -1,6 +1,6 @@
 # PostgreSQL core, metadata và chất lượng
 
-SQL triển khai nằm trong [migrations](migrations/) và [sql](sql/); runner/loader nằm cùng package để T31 bọc adapter sau này. Không thêm dependency, ORM hoặc migration framework. Parser T06 vẫn độc lập DB. Core có revisions bất biến; coordinator publish membership và config pins. Chưa có marts/KPI nghiệp vụ.
+SQL triển khai nằm trong [migrations](migrations/) và [sql](sql/); runner/loader và query adapter nằm cùng package. Không thêm dependency, ORM hoặc migration framework. Parser T06 vẫn độc lập DB. Core có revisions bất biến; coordinator publish membership và config pins. Mart nước BR-02 đã có; các mart khác thuộc các task tiếp theo.
 
 ## Lệnh Compose
 
@@ -101,7 +101,7 @@ Spark local[1] đọc metadata của **candidate revisions đã freeze** bằng 
 
 Profiling: `profile-days.jsonl` theo khoang × measure × ngày (có cả ngày trống trong calendar vụ), `profile-summary.json` theo khoang × measure. Count/null, missing/invalid/suspect/accepted, applicability unknown và min/max dùng exact NUMERIC; biên đóng vụ bị loại. Expected 288 slot/ngày climate/drain, 1 resource/ngày; harvest là event-grain, không suy coverage từ số ngày có harvest. Min/max observed còn chứa suspect/invalid; quality phân bố riêng. Đây là profiling ban đầu, không có area conversion, interpolation hoặc KPI nghiệm thu.
 
-Coordinator kiểm upstream completed và hashes, candidate membership khớp Spark, subtype và quality đủ, config/basis pins tồn tại và không drift, candidate còn là latest revisions. Trong **một transaction, một psycopg connection**: scope lock → publication → membership → basis pins → `hook(conn, publication_id, workflow_id)` → immutable seal → current pointer + workflow/step completed. Hook dành cho marts T09, bắt buộc dùng connection nhận vào, không mở JDBC/connection khác hoặc commit; exception rollback cả mart/membership/pointer. Đổi semantic/code/hook bundle phải tăng `CODE_VERSION` để no-change không bỏ qua mart mới. Membership/config không đổi → reuse publication có lý do, không thêm membership. Finality hiện provisional; chưa tuyên bố completeness BR.
+Coordinator kiểm upstream completed và hashes, candidate membership khớp Spark, subtype và quality đủ, config/basis pins tồn tại và không drift, candidate còn là latest revisions. Trong **một transaction, một psycopg connection**: scope lock → publication → membership → basis pins → water mart hook → optional `hook(conn, publication_id, workflow_id)` → immutable seal → current pointer + workflow/step completed. Hook bắt buộc dùng connection nhận vào, không mở JDBC/connection khác hoặc commit; exception rollback cả mart/membership/pointer. Water hook bắt buộc chạy trước optional hook; đổi semantic/code/hook bundle phải tăng `CODE_VERSION` để no-change không bỏ qua mart mới. Membership/config không đổi → reuse publication có lý do, không thêm membership. Finality hiện provisional; chưa tuyên bố completeness BR.
 
 `pin_publication(conn, scope)` đọc ID một lần; mọi query trong tác vụ dùng ID đó (`pinned_values` là helper diagnostic hiện tại), không đọc lại current pointer giữa chart/export. `core.published_measure` tiện cho một query hiện hành; tác vụ nhiều query phải pin. Seal chặn sửa/thêm/xóa membership/basis của publication cũ; policy/typed values cũng append-only. Đây là invariants qua coordinator/constraints, chưa phải phân quyền hạn chế PostgreSQL superuser.
 
@@ -117,6 +117,21 @@ Lệnh trả revision/correction/scope/snapshot/file/physical line range/raw_has
 
 ## Adapter query cho ứng dụng
 
-[PostgresQueryAdapter](query_adapter.py) thực thi [query Protocol](../queries/README.md) và trả [DTO thuần Python](../contracts/README.md). Các SQL mới `query_*.sql` đọc publication theo ID đã pin, cycle mapping và Resources day rows; không tạo mart/view hoặc thay SQL/migration T07/T08. Chỉ `pin_publication` đọc current pointer; các lần đọc sau dùng ID đó, quality và basis pin, kể cả khi pointer hoặc basis toggle đã đổi. Connection do caller sở hữu.
+[PostgresQueryAdapter](query_adapter.py) thực thi [query Protocol](../queries/README.md) và trả [DTO thuần Python](../contracts/README.md). Adapter mặc định đọc sealed water mart; `PostgresCoreQueryAdapter` giữ đường core-oracle để đối soát. Các SQL `query_*.sql` tham số hóa theo publication ID, không đổi migration/SQL T07/T08 đã áp. Chỉ `pin_publication` đọc current pointer; các lần đọc sau dùng ID đó, quality và basis pin, kể cả khi pointer hoặc basis toggle đã đổi. Connection do caller sở hữu.
 
 Adapter validate catalog water `L/m²/day`, trả lượng ngày BR `L/m²` cùng source_unit; không đổi quantity. Missing quality/unit, duplicate day/measure hoặc context sai scope/snapshot/cycle/compartment fail. Service giữ formula, calendar gaps, coverage, NULL path, assumption label và rule-not-configured. Lineage kiểm membership trước khi gọi raw-hash verifier T08; ambiguous logical key cần revision ID. Không có SQL trong service/DTO/UI. Không cần migration mới; AGC smoke có thể chỉ SELECT trên publication hiện có.
+
+## Mart nước và rule profiles
+
+Migration 005 thêm water mart, immutable rule config và unique membership index `(publication_id,revision_id)` cho FK fact → selected revision. Không sửa 001–004. Sau migrate, chạy **workflow mới** để có mart; publication lịch sử thiếu bundle bị adapter báo lỗi rõ, không fallback core hoặc backfill vào publication đã seal.
+
+```bash
+docker compose -p smart-greenhouse run --rm job python -m greenhouse migrate
+docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id water-first
+# transform là alias thật của run-pipeline, nhận cùng flags/exit status.
+docker compose -p smart-greenhouse run --rm job python -m greenhouse transform --workflow-id water-repeat
+```
+
+`materialize_irrigation` là hook mặc định của cả `run-pipeline`/`publish` API và CLI, cùng transaction/connection. Một SQL statement đọc resource membership + quality policy + shared-analysis basis pins của publication, ghi immutable dimensions/facts/receipt. Receipt giữ bundle version, counts và hook start/finish. Source unit khác `L/m²/day` làm publish rollback; quantities không đổi số khi trả nhãn daily `L/m²`. Decimal SQL helper dùng exact div/remainder và half-even 50 significant digits khớp oracle. Sealed facts/receipts/cycle dimensions không được thêm/sửa/xóa; default adapter yêu cầu receipt `irrigation-mart-v1`.
+
+`register_irrigation_rule(conn, IrrigationRuleProfile(...))` chèn version tường minh vào config bằng parameterized SQL. Profile có version ID, logical rule ID/version, scope/compartment đã mapping, min/max drain %, min/max daily irrigation L/m², evidence, is_demo/label. DTO và CHECK/FK/trigger kiểm finite/nonnegative/ordered bounds, units, scope và immutable version. Demo phải có label `demo_rule`. Không có default AGC thresholds, không chọn latest profile ngầm. Muốn dùng profile phải truyền ID qua `QueryContext.rule_version`; source publication/facts không thay. Xem [query service](../queries/README.md) và [contracts v2](../contracts/README.md).

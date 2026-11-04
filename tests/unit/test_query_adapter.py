@@ -4,7 +4,7 @@ No business mart, UI, AGC payload or alternative/fake query adapter is involved.
 """
 import csv
 from dataclasses import replace
-from datetime import date
+from datetime import date, timedelta
 from decimal import Decimal
 import hashlib
 import json
@@ -23,7 +23,7 @@ from greenhouse.contracts import (ASSUMPTION_LABEL, BasisStatus, IrrigationSumma
 from greenhouse.db.corrections import correct
 from greenhouse.db.migrate import migrate
 from greenhouse.db.pipeline import encode, membership, run_pipeline, save_artifact
-from greenhouse.db.query_adapter import PostgresQueryAdapter
+from greenhouse.db.query_adapter import PostgresQueryAdapter, PostgresCoreQueryAdapter
 from greenhouse.ingestion.parser import HEADERS
 from greenhouse.queries import IrrigationService
 from greenhouse.settings import Settings
@@ -63,25 +63,26 @@ def fixture_stage(conn,workflow,target,*,fault=None):
 @pytest.fixture
 def published_scope(contracts_database,tmp_path):
     with psycopg.connect(**contracts_database,autocommit=True) as conn:
-        def create(rows=(('10','2'),('30','12')),*,basis='verified',suspect_zero=False):
+        def create(rows=(('10','2'),('30','12')),*,basis='verified',suspect_zero=False,
+                   start=date(2020,1,1),end=date(2020,1,5),times=None):
             tag=uuid4().hex
             site,comp,cycle,snapshot,scope,policy=(name+':'+tag for name in ('site','comp','cycle','snapshot','scope','quality'))
             conn.execute("INSERT INTO core.site VALUES (%s,'Fixture','source-naive','fixture')",(site,))
             conn.execute("INSERT INTO core.compartment VALUES (%s,%s,'Fixture','fixture')",(comp,site))
             conn.execute("INSERT INTO core.team VALUES (%s,'Fixture',false,'fixture')",(site,))
-            conn.execute("INSERT INTO core.growing_cycle VALUES (%s,%s,%s,'tomato','2020-01-01','2020-01-05','fixture')",(cycle,comp,site))
+            conn.execute("INSERT INTO core.growing_cycle VALUES (%s,%s,%s,'tomato',%s,%s,'fixture')",(cycle,comp,site,start,end))
             conn.execute("INSERT INTO meta.dataset_snapshot VALUES (%s,%s,'synthetic://fixture','fixture')",(snapshot,tag*2))
             conn.execute("INSERT INTO meta.data_scope VALUES (%s,%s,'historical',NULL,'fixture')",(scope,snapshot))
             conn.execute("INSERT INTO meta.source_folder_mapping VALUES (%s,'Synthetic',%s,%s,%s,'fixture')",(snapshot,comp,site,cycle))
             definition={'nonnegative':['Irr','Drain'],'suspect_zero':['Drain'] if suspect_zero else [],'off_mode_zero':[]}
-            conn.execute("INSERT INTO config.quality_policy_version VALUES (%s,1,'2020-01-01','2020-01-05',%s,%s,true,'synthetic quality fixture')",(policy,Jsonb(definition),hashlib.sha256(encode(definition).encode()).hexdigest()))
+            conn.execute("INSERT INTO config.quality_policy_version VALUES (%s,1,%s,%s,%s,%s,true,'synthetic quality fixture')",(policy,start,end,Jsonb(definition),hashlib.sha256(encode(definition).encode()).hexdigest()))
             if basis=='assumed_unverified':
                 # Explicit test-only application; adapter never extends an assumption.
                 conn.execute("INSERT INTO config.assumption_application VALUES (%s,'AGC_SHARED_BASIS_V1',1,true)",(scope,))
             if basis!='unknown':
                 for code in ('Irr','Drain'):
                     assumption=('AGC_SHARED_BASIS_V1',1) if basis=='assumed_unverified' else (None,None)
-                    conn.execute("INSERT INTO config.area_basis_version VALUES (%s,%s,%s,%s,1,100,'synthetic_water_area',%s,'2020-01-01','2020-01-05',%s,%s,'explicit synthetic basis')",(tag+code,scope,comp,code,basis,*assumption))
+                    conn.execute("INSERT INTO config.area_basis_version VALUES (%s,%s,%s,%s,1,100,'synthetic_water_area',%s,%s,%s,%s,%s,'explicit synthetic basis')",(tag+code,scope,comp,code,basis,start,end,*assumption))
                     conn.execute("INSERT INTO config.basis_application VALUES (%s,%s,%s,'shared_analysis',%s,true)",(scope,comp,code,tag+code))
             raw=tmp_path/tag/'raw';(raw/'Synthetic').mkdir(parents=True)
             path=raw/'Synthetic/Resources.csv'
@@ -89,14 +90,15 @@ def published_scope(contracts_database,tmp_path):
                 writer=csv.writer(stream,lineterminator='\r\n');writer.writerow(HEADERS['Resources'])
                 for i,(irr,drain) in enumerate(rows):
                     values={'Irr':irr,'Drain':drain}
-                    writer.writerow([str(43831+i)]+[values.get(h.strip(),'1') for h in HEADERS['Resources'][1:]])
+                    serial=times[i] if times is not None else str((start-date(1899,12,30)).days+i)
+                    writer.writerow([serial]+[values.get(h.strip(),'1') for h in HEADERS['Resources'][1:]])
             source={'snapshot_id':snapshot,'archive':{'sha256':tag*2},'files':[{'path':'Synthetic/Resources.csv','sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'csv':{'data_rows':len(rows)}}]}
             (raw/'manifest.json').write_text(json.dumps(source))
             output=tmp_path/tag/'output'
             run_pipeline(conn,raw,output,scope,policy,stage_function=fixture_stage)
             adapter=PostgresQueryAdapter(conn,raw_snapshots={snapshot:raw})
             service=IrrigationService(adapter);pub=service.pin_publication(scope)
-            context=QueryContext(scope,pub.publication_id,snapshot,cycle,(comp,),date(2020,1,1),date(2020,1,3))
+            context=QueryContext(scope,pub.publication_id,snapshot,cycle,(comp,),start,min(start+timedelta(days=2),end))
             return SimpleNamespace(conn=conn,scope=scope,comp=comp,cycle=cycle,snapshot=snapshot,
                                    policy=policy,raw=raw,output=output,adapter=adapter,service=service,
                                    publication=pub,context=context)
@@ -196,7 +198,11 @@ def test_adapter_rejects_unit_catalog_drift(published_scope):
     with e.conn.transaction(force_rollback=True):
         e.conn.execute('ALTER TABLE config.measure_definition DISABLE TRIGGER immutable_measure')
         e.conn.execute("UPDATE config.measure_definition SET unit='m³' WHERE measure_code='Irr'")
-        with pytest.raises(ValueError,match='unit'):e.service.get_irrigation_days(e.context)
+        # The mart keeps its pinned source unit. The independent core diagnostic
+        # still catches a corrupted live catalog, while historical mart reads stay stable.
+        assert e.service.get_irrigation_summary(e.context).drain_fraction_pct==35
+        core=IrrigationService(PostgresCoreQueryAdapter(e.conn))
+        with pytest.raises(ValueError,match='unit'):core.get_irrigation_days(e.context)
 
 
 def test_adapter_preserves_quality_and_rechecks_raw(published_scope):

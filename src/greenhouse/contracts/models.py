@@ -32,6 +32,10 @@ class BasisStatus(StrEnum):
 
 class RuleStatus(StrEnum):
     NOT_CONFIGURED = 'not_configured'
+    CONFIGURED = 'configured'
+    WITHIN_RANGE = 'within_range'
+    OUTSIDE_RANGE = 'outside_range'
+    UNKNOWN = 'unknown'
 
 
 class ResultStatus(StrEnum):
@@ -138,6 +142,41 @@ class PublicationRef:
 
 
 @dataclass(frozen=True)
+class IrrigationRuleProfile:
+    rule_version: str
+    rule_id: str
+    version: int
+    scope_id: str
+    compartment_id: str
+    min_drain_pct: Decimal
+    max_drain_pct: Decimal
+    min_irrigation_l_m2: Decimal
+    max_irrigation_l_m2: Decimal
+    evidence_reference: str
+    is_demo: bool
+    label: str
+    unit: str = WATER_UNIT
+    ratio_unit: str = '%'
+
+    def __post_init__(self):
+        for value in (self.rule_version, self.rule_id, self.scope_id, self.compartment_id,
+                      self.evidence_reference, self.label):
+            identifier(value)
+        if type(self.version) is not int or self.version < 1 or type(self.is_demo) is not bool:
+            raise ValueError('Invalid rule version/demo flag')
+        for value in (self.min_drain_pct, self.max_drain_pct, self.min_irrigation_l_m2, self.max_irrigation_l_m2):
+            finite(value, nonnegative=True)
+        if self.min_drain_pct > self.max_drain_pct or self.min_irrigation_l_m2 > self.max_irrigation_l_m2:
+            raise ValueError('Rule bounds must be ordered')
+        if self.unit != WATER_UNIT or self.ratio_unit != '%' or (self.is_demo and self.label != 'demo_rule'):
+            raise ValueError('Rule requires source quantity units and an explicit demo label')
+
+    def matches(self, context):
+        if (self.scope_id, self.compartment_id) != (context.scope_id, context.compartment_ids[0]):
+            raise ValueError('Rule profile is outside the requested scope/compartment')
+
+
+@dataclass(frozen=True)
 class QueryContext:
     scope_id: str
     publication_id: str
@@ -146,8 +185,11 @@ class QueryContext:
     compartment_ids: tuple[str, ...]
     start: date
     end: date
+    rule_version: str | None = None
 
     def __post_init__(self):
+        if self.rule_version is not None:
+            identifier(self.rule_version)
         for value in (self.scope_id, self.publication_id, self.snapshot_id, self.cycle_id):
             identifier(value)
         if not isinstance(self.compartment_ids, tuple) or len(self.compartment_ids) != 1:
@@ -241,6 +283,7 @@ class IrrigationDay:
     paired: bool = False
     drain_fraction_pct: Decimal | None = None
     drain_exceeds_irrigation: bool | None = None
+    rule_profile: IrrigationRuleProfile | None = None
 
     def __post_init__(self):
         if not isinstance(self.publication, PublicationRef) or not all(isinstance(m, MeasureValue) for m in (self.irrigation, self.drain)):
@@ -254,8 +297,16 @@ class IrrigationDay:
                 raise ValueError('BR-02 requires L/m² daily quantities (source L/m²/day)')
             if measure.accepted and measure.value < 0:
                 raise ValueError('Accepted water quantity cannot be negative')
-        if not isinstance(self.rule_status, RuleStatus) or self.rule_status != RuleStatus.NOT_CONFIGURED or self.rule_version is not None:
-            raise ValueError('No rule profile is implemented')
+        if not isinstance(self.rule_status, RuleStatus):
+            raise ValueError('Invalid day rule status')
+        if self.rule_status == RuleStatus.NOT_CONFIGURED:
+            if self.rule_version is not None or self.rule_profile is not None:
+                raise ValueError('Unconfigured day cannot claim a rule')
+        elif (self.rule_status not in (RuleStatus.WITHIN_RANGE, RuleStatus.OUTSIDE_RANGE, RuleStatus.UNKNOWN)
+              or not isinstance(self.rule_profile, IrrigationRuleProfile)
+              or self.rule_version != self.rule_profile.rule_version
+              or (self.publication.scope_id, self.compartment_id) != (self.rule_profile.scope_id, self.rule_profile.compartment_id)):
+            raise ValueError('Day rule metadata does not match its profile')
         if (self.revision_id is None) != (self.logical_record_key is None):
             raise ValueError('Revision identity/key must travel together')
         for value in (self.revision_id, self.logical_record_key, self.correction_id):
@@ -305,6 +356,10 @@ class IrrigationSummary:
     unit: str = WATER_UNIT
     ratio_unit: str = '%'
     reason_codes: tuple[str, ...] = ()
+    rule_profile: IrrigationRuleProfile | None = None
+    rule_unknown_days: int | None = None
+    iso_year: int | None = None
+    iso_week: int | None = None
 
     def __post_init__(self):
         self.context.matches(self.publication)
@@ -336,8 +391,22 @@ class IrrigationSummary:
                 raise ValueError('Coverage exceeds 100 percent')
         if self.unit != WATER_UNIT or self.ratio_unit != '%':
             raise ValueError('Incorrect summary units')
-        if not isinstance(self.rule_status, RuleStatus) or self.rule_status != RuleStatus.NOT_CONFIGURED or self.rule_version is not None or self.outside_rule_days is not None:
-            raise ValueError('Rule outcome unavailable without a configured profile')
+        if self.rule_status == RuleStatus.NOT_CONFIGURED and isinstance(self.rule_status, RuleStatus):
+            if any(v is not None for v in (self.rule_version, self.outside_rule_days, self.rule_profile, self.rule_unknown_days)):
+                raise ValueError('Rule outcome unavailable without a configured profile')
+        elif (self.rule_status != RuleStatus.CONFIGURED or not isinstance(self.rule_status, RuleStatus)
+              or not isinstance(self.rule_profile, IrrigationRuleProfile) or self.rule_version != self.rule_profile.rule_version
+              or self.rule_version != self.context.rule_version):
+            raise ValueError('Summary rule metadata does not match request/profile')
+        else:
+            self.rule_profile.matches(self.context)
+            for n in (self.outside_rule_days, self.rule_unknown_days):
+                if type(n) is not int or not 0 <= n <= self.expected_days:
+                    raise ValueError('Invalid rule day count')
+        if (self.iso_year is None) != (self.iso_week is None):
+            raise ValueError('ISO year/week must travel together')
+        if self.iso_year is not None and (self.iso_year, self.iso_week) != tuple(self.window_start.isocalendar())[:2]:
+            raise ValueError('ISO week does not match summary window')
 
     @property
     def correction_ids(self):

@@ -80,6 +80,18 @@ flowchart LR
 
 Drain ratio là tỷ số tổng trên cùng tập ngày; không AVG ratio ngày. Irr=0 không được chia; Drain>Irr được gắn cờ, không clamp. Cumulative counters trong Climate không cộng vào Resources. `Irr - Drain` không được gọi là lượng cây hấp thụ.
 
+### Mart nước đã triển khai
+
+Migration 005 tạo `mart.dim_date` (source date, ISO year/week), `mart.dim_irrigation_cycle` (cycle/compartment/window/name đóng băng theo publication), `mart.fact_irrigation_day` và receipt `mart.irrigation_publication`. Fact grain là **(publication_id, cycle_id, resource_date)**; FK buộc revision đúng membership đã chọn, cùng scope/cycle/compartment. Fact giữ raw quantities, source unit, quality/applicability/reasons riêng, accepted/paired flags, basis/assumption pins, correction identity/version, daily ratio và Drain>Irr flag. Chỉ observed member days thành fact; gap/conflict không sinh quantity 0. Calendar trong service giữ expected days của cửa sổ đã cắt theo cycle.
+
+Water hook mặc định chạy **một statement set-based** trên cùng psycopg connection/transaction với membership + basis pins + pointer T08. Nó chèn dimensions/facts/receipt trước seal; optional caller hook vẫn cùng transaction. Lỗi hook/FK làm rollback tất cả và giữ pointer cũ. Seal chặn insert/update/delete fact/dimension/receipt của publication đó; date dimension có generated ISO keys và bất biến. `pipeline-v2-irrigation` đổi config bundle hash, vì vậy workflow mới tạo publication có mart thay vì reuse publication cũ chưa có mart. Rerun không đổi reuse publication/mart; không nhân facts.
+
+Daily ratio dùng integer/remainder arithmetic với half-even 50 significant digits để khớp Decimal oracle, kể cả bước nhân 100 trước phép chia. Observed quantity và paired sums giữ NUMERIC/Decimal exact. Summary ngày/tuần/vụ đọc fact rồi dùng nguyên [oracle T31](../../src/greenhouse/queries/irrigation.py); không materialize filter combinations hoặc AVG daily ratios. ISO weekly summaries trả cả year/week và expected day denominator của phần tuần trong window/cycle; tổng paired quantities/ngày của các tuần khớp vụ.
+
+`config.irrigation_rule_profile` chứa immutable version ID, logical rule/version, **một data scope/compartment**, bốn bounds, units, evidence và demo label. Profile không có seed mặc định cho AGC. Request chọn `rule_version` tường minh; query-time đánh giá daily quantities/ratio, bằng biên là trong dải, thiếu usable pair hoặc Irr=0 là unknown. Kết quả/cache giữ profile/version/demo evidence. Đổi threshold tạo version mới, không sửa facts hoặc profile cũ. [Adapter và vận hành](../../src/greenhouse/db/README.md#mart-nước-và-rule-profiles) / [query contracts](../../src/greenhouse/queries/README.md).
+
+AGC basis vẫn là `assumed_unverified` theo `AGC_SHARED_BASIS_V1`, nhãn **“giả định chưa xác minh”**; không thăng thành verified. Phần này là nền mart/query, chưa phải UI T10 hoặc nghiệm thu BR-02 T11. Các marts còn lại trong tài liệu vẫn là thiết kế.
+
 ## BR-03 — EC/pH drain
 
 ```mermaid

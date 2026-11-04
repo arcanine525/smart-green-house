@@ -134,7 +134,7 @@ def test_serialization_exact_decimals_null_zero_and_clock_domains(publication):
     with pytest.raises(ValueError,match='JSON string'):from_json(IrrigationSummary,json.dumps(payload))
     payload=json.loads(to_json(day));payload['data']['drain']['quality']='unversioned-new-status'
     with pytest.raises(ValueError):from_json(IrrigationDay,json.dumps(payload))
-    for version in (2,True):
+    for version in (1,3,True):
         payload=json.loads(to_json(day));payload['contract_version']=version
         with pytest.raises(ValueError):from_json(IrrigationDay,json.dumps(payload))
     with pytest.raises(ValueError):replace(publication,committed_at=datetime(2026,11,4))

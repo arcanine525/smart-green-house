@@ -13,7 +13,7 @@ from typing import get_args, get_origin, get_type_hints
 
 from greenhouse.contracts import models
 
-CONTRACT_VERSION = 1
+CONTRACT_VERSION = 2
 
 
 def to_dict(value):

@@ -20,7 +20,7 @@ from greenhouse.db.migrate import sql
 from greenhouse.ingestion.parser import PARSER_VERSION
 from greenhouse.ingestion.run import ingest_snapshot
 
-CODE_VERSION = 'pipeline-v1'
+CODE_VERSION = 'pipeline-v2-irrigation'
 STEPS = ('ingest', 'load-core', 'spark', 'publish')
 
 
@@ -308,6 +308,8 @@ def publish(conn, workflow, hook=None, fault=None):
             conn.execute('INSERT INTO meta.publication_member SELECT %s,r.data_scope_id,r.record_type,r.logical_record_key,r.revision_id FROM meta.workflow_candidate w JOIN core.record_revision r USING(revision_id) WHERE w.workflow_id=%s', (publication, workflow))
             conn.execute('INSERT INTO meta.publication_basis SELECT %s,b.data_scope_id,b.compartment_id,b.measure_code,w.analysis_context,b.basis_version_id FROM meta.workflow_basis w JOIN config.area_basis_version b USING(basis_version_id) WHERE w.workflow_id=%s', (publication, workflow))
             fail('publish-members', fault)
+            from greenhouse.db.irrigation_mart import materialize_irrigation
+            materialize_irrigation(conn, publication, workflow)
             if hook:
                 hook(conn, publication, workflow)
             fail('publish-hook', fault)

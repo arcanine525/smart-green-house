@@ -10,7 +10,7 @@ from psycopg.rows import dict_row
 
 from greenhouse.contracts import (
     ASSUMPTION_LABEL, RESOURCE_WATER_UNIT, WATER_UNIT, Applicability, BasisStatus,
-    CycleWindow, IrrigationDay, LineageResult, MeasureUnit, MeasureValue,
+    CycleWindow, IrrigationDay, IrrigationRuleProfile, LineageResult, MeasureUnit, MeasureValue,
     PublicationRef, QualityStatus, Versions,
 )
 from greenhouse.db.lineage import lineage
@@ -18,7 +18,9 @@ from greenhouse.db.migrate import sql
 from greenhouse.db.pipeline import pin_publication
 
 
-class PostgresQueryAdapter:
+class PostgresCoreQueryAdapter:
+    DAY_QUERY = 'query_irrigation_days'
+
     def __init__(self, connection, *, raw_snapshots=None):
         self.connection = connection
         self.raw_snapshots = {k: Path(v) for k, v in (raw_snapshots or {}).items()}
@@ -52,7 +54,7 @@ class PostgresQueryAdapter:
 
     def read_irrigation_days(self, context, publication):
         context.matches(publication)
-        rows = self._rows('query_irrigation_days', (context.publication_id, context.scope_id,
+        rows = self._rows(self.DAY_QUERY, (context.publication_id, context.scope_id,
                           context.snapshot_id, context.cycle_id, context.compartment_ids[0], context.start, context.end))
         days = {}
         for row in rows:
@@ -70,14 +72,29 @@ class PostgresQueryAdapter:
             if day[0] != metadata or row['measure_code'] in day[1]:
                 raise ValueError('Duplicate day/measure grain or join fanout')
             day[1][row['measure_code']] = measure
+        states = {r['resource_date']: r for r in rows}
         result = []
         for when, (metadata, measures) in sorted(days.items()):
             if set(measures) != {'Irr', 'Drain'}:
                 raise ValueError('Published day is missing measure quality/unit metadata')
             revision, key, cycle, compartment, correction, version = metadata
+            state = states[when]
             result.append(IrrigationDay(publication, cycle, compartment, when, measures['Irr'], measures['Drain'],
-                                        revision, key, correction, version))
+                                        revision, key, correction, version,
+                                        reason_codes=tuple(state.get('reason_codes', ())), paired=state.get('paired', False),
+                                        drain_fraction_pct=state.get('drain_fraction_pct'),
+                                        drain_exceeds_irrigation=state.get('drain_exceeds_irrigation')))
         return tuple(result)
+
+    def irrigation_rule(self, context):
+        if context.rule_version is None:
+            return None
+        rows = self._rows('query_irrigation_rule', (context.rule_version,))
+        if len(rows) != 1:
+            raise ValueError('Unknown irrigation rule version')
+        rule = IrrigationRuleProfile(**rows[0])
+        rule.matches(context)
+        return rule
 
     def read_lineage(self, publication, *, revision_id=None, record_key=None):
         if (revision_id is None) == (record_key is None):
@@ -102,3 +119,32 @@ class PostgresQueryAdapter:
             raw_hash_verified=source['raw_hash_verified'], source_time_serial=member['source_time_serial'],
             source_timestamp=member['source_timestamp'], correction_id=source['correction_id'], correction_version=member['correction_version'],
         )
+
+
+class PostgresQueryAdapter(PostgresCoreQueryAdapter):
+    """Default application adapter: sealed water mart only; no core fallback."""
+    DAY_QUERY = 'query_mart_irrigation_days'
+
+    def publication(self, publication_id):
+        publication = super().publication(publication_id)
+        self._require_irrigation_mart(publication_id)
+        return publication
+
+    def _require_irrigation_mart(self, publication_id):
+        from greenhouse.db.irrigation_mart import BUNDLE_VERSION
+        receipt = self._rows('query_irrigation_receipt', (publication_id,))
+        if len(receipt) != 1 or receipt[0]['bundle_version'] != BUNDLE_VERSION:
+            raise ValueError('Publication lacks the irrigation mart bundle; run a new pipeline workflow')
+
+    def read_irrigation_days(self, context, publication):
+        self._require_irrigation_mart(context.publication_id)
+        return super().read_irrigation_days(context, publication)
+
+    def cycle_window(self, context):
+        rows = self._rows('query_mart_cycle', (context.publication_id, context.scope_id, context.snapshot_id,
+                                             context.cycle_id, context.compartment_ids[0]))
+        if len(rows) != 1:
+            raise ValueError('Cycle/compartment is absent from the pinned mart scope')
+        row = rows[0]
+        return CycleWindow(row['cycle_id'], row['compartment_id'], row['start_source_time'].date(),
+                           row['end_source_time_exclusive'].date())
