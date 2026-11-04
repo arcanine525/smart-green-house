@@ -76,6 +76,55 @@ toàn-vụ (whole-cycle accessor) cố ý thay request bằng context toàn vụ
 Publication thiếu harvest receipt → adapter fail actionably
 (không fallback core). Xem [harvest mart](../db/README.md#mart-thu-hoạch-và-completeness-br-05-slice).
 
+## Rule durations và episodes (BR-01/BR-03, engine pure T14)
+
+[rule_duration.py](rule_duration.py) là oracle thuần (không SQL, không adapter): đánh giá `ThresholdSlot`
+đã typed chống các `RuleScheduleRevision` được **chọn tường minh**, trong một `IntradayContext`
+source-naive. Nhóm khai báo `(measurement_context, basis)` là đầu vào bắt buộc, được chia sẻ bởi mọi
+metric của một lần đánh giá: climate phát biểu `climate/requested` hoặc `climate/realized` (dùng
+setpoint của chính slot — không backstop); drain phát biểu `drain/measured` (giá trị đo). Metric
+nằm ngoài nhóm khai báo bị từ chối kể cả khi không có data hay segment cho nó; các ngữ cảnh/basis
+khác là các lần đánh giá riêng — không tạo OR nhiệt+ec tổng hợp.
+
+- Durations gắn trên slot grid cadence (mặc định 5 phút, neo đầu cycle); slot là
+  `[start, start+cadence)`, cắt theo cycle và cửa sổ yêu cầu; mẫu tại đúng biên cuối cycle ở lại
+  upstream với zero duration. Slot trùng lặp/off-grid/metric không được yêu cầu/mismatch context
+  hoặc basis bị từ chối kèm lỗi validation có tài liệu; timestamp thiếu là unknown, không
+  carry-forward giá trị cũ.
+- `valid_minutes` là thời gian đủ dữ liệu để đánh giá (gồm slot out); out low/high tách riêng; unknown phân bổ
+  mỗi slot đúng một lần theo thứ tự ưu tiên `UNKNOWN_REASON_PRIORITY` (suspect giữ bucket riêng và
+  vẫn nằm unknown); `valid==0` → out-hours/percent NULL, không xanh 0. Coverage tính trên cửa sổ
+  effective.
+- Metric được yêu cầu nhưng không có segment nào áp dụng vẫn có row kết quả: expected duration giữ
+  nguyên, `rule_not_configured`, KPI out NULL. Request hai metric hợp lệ tạo đúng MỘT OR trên giao
+  slot jointly known (union các violation trong giao đó); request một metric không có OR; khi một
+  metric được yêu cầu thiếu hoàn toàn vẫn giữ OR với jointly valid 0. Chọn `revisions=()` tường
+  minh cũng hợp lệ: mọi metric yêu cầu ở lại `rule_not_configured` với expected duration — không
+  cần profile dummy, không bịa revision mặc định/demo. Replay cùng revision tái lập kết quả giống
+  hệt; caller chọn TỐI ĐA MỘT revision cho mỗi `(metric, context, basis)` — nạp hai revision cùng
+  metric (kể cả khi segment không chồng lấn) bị từ chối TRƯỚC khi đánh giá, vì sự thay đổi theo
+  thời gian thuộc về segment BÊN TRONG một revision bất biến. Metric khác nhau có thể chọn revision
+  riêng; không tự chọn first/latest.
+- Episodes dựng trên toàn bộ cycle trước khi cắt (break khi về dải/unknown/thiếu slot/đổi segment),
+  trả chỉ những episode có chồng cửa sổ dương — giữ nguyên start/end/duration gốc cộng clipped
+  facts; low/high liên tục trong một out run vẫn một episode; peak deviation/thời gian xác định;
+  min duration filter chỉ lọc danh sách (theo duration gốc), không đụng tổng kết summary.
+- Provenance tùy chọn `PublicationRef`/`Versions` phải tương thích với ngữ cảnh đã pin: scope và
+  time-basis trùng nhau, `Versions` tường minh phải bằng publication.versions; thiếu versions tường
+  minh thì suy ra từ publication. Không tra pointer hiện hành và không tự bịa metadata; pure fixture
+  có thể bỏ trống provenance.
+
+DB ở [db/rule_schedule.py](../db/rule_schedule.py): một `rule_version` bất biến, idempotent khi nội
+dung giống hệt, từ chối drift bằng lỗi thay vì ghi đè. Đăng ký chạy trong MỘT
+transaction/savepoint thuộc repository (autocommit hoặc bên trong giao dịch của caller): append
+thất bại để lại không phần dư và retry thành công. Sau khi commit, revision được SEAL luôn như một
+khối ở schema: header giữ `registration_xid` (trigger đóng `pg_current_xact_id()`), guard segment
+so sánh với xid hiện hành và từ chối mọi append muộn — kể cả segment không chồng lấn. EXCLUDE(gist)
+cấm chồng lấn cùng key trong một revision kể cả khi bypass repository (exact adjacency hợp lệ);
+hai revision khác nhau có thể phủ cùng khoảng lịch sử, nhưng mỗi lựa chọn đánh giá chỉ chứa MỘT
+revision cho mỗi metric. Demo profile là opt-in tường minh với provenance tổng hợp, không khoán
+kết quả nông học.
+
 ## Phần tiếp nhận
 
 - Water mart day, default transaction hook và day/week/cycle queries khớp cùng DTO/oracle; không materialize mọi period/filter.

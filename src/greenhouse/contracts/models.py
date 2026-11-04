@@ -1,6 +1,6 @@
 """Engine-independent value contracts. Decimal and clock semantics are explicit."""
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from decimal import Decimal, localcontext
 from enum import StrEnum
 from pathlib import PurePosixPath
@@ -1127,6 +1127,460 @@ class SinkRecord:
             clock(self.published_at, aware=True)
         if not self.values or len({v.measure_code for v in self.values}) != len(self.values):
             raise ValueError('Sink record requires distinct measure codes')
+
+
+"""Shared immutable rule schedules and the pure threshold duration engine
+(BR-01 climate and BR-03 drain nutrition; T14). Design points:
+
+* One immutable revision MAY carry segments for several metrics; inside one
+  revision the same (metric, measurement_context, basis) key may not overlap
+  in time, but a different explicitly selected revision may cover the same
+  historical interval (update rule version => new content key).
+* Segments distinguish tolerance DELTA modes (temperature/CO2 bounds that
+  derive per slot from setpoints) from fixed lower/upper bounds (EC/pH);
+  `delta` and `lower/upper` never mix.
+* Durations evaluate on the 5-minute slot grid (context cadence), with
+  caller-declared requested metrics kept explicit: a metric without any
+  applicable segment stays `rule_not_configured` with its expected duration
+  and NULL public out KPI — never silently omitted.
+* Episodes build on the full cycle before query clipping, break on
+  in-range/unknown/gap/segment change, and keep original plus clipped facts.
+"""
+RULE_SCHEDULE_METRICS = ('temperature', 'co2', 'ec', 'ph')
+RULE_METRIC_UNITS = {'temperature': '°C', 'co2': 'ppm', 'ec': 'dS/m', 'ph': 'pH'}
+UNKNOWN_REASON_PRIORITY = (
+    'rule_not_configured', 'missing_input', 'quality_invalid', 'quality_suspect',
+    'sp0_off_mode', 'inverted_bounds')
+
+
+class RuleBasis(StrEnum):
+    """Which side of the metric a segment rules: climate thresholds apply to
+    a setpoint basis (requested/realized); nutrition thresholds measure the
+    drain measure itself."""
+    REQUESTED = 'requested'
+    REALIZED = 'realized'
+    MEASURED = 'measured'
+
+
+class RuleDeviationDirection(StrEnum):
+    LOW = 'low'
+    HIGH = 'high'
+
+
+def _naive(dt):
+    if not isinstance(dt, datetime) or dt.tzinfo is not None:
+        raise ValueError('Rule schedule time must be a naive source timestamp')
+    return dt
+
+
+@dataclass(frozen=True)
+class RuleScheduleSegment:
+    """[start, end) source-naive interval for ONE metric within a revision.
+
+    Temperature/CO2 segments carry `delta` (bounds are computed per slot
+    from the slot's own setpoints, so stored deltas never overload fixed
+    bounds); EC/pH segments carry fixed `lower/upper`. Context+basis stay
+    explicit; equality on segment boundaries sits inside a segment."""
+    metric: str
+    measurement_context: str
+    basis: RuleBasis
+    start: datetime
+    end: datetime
+    delta: Decimal | None = None
+    lower: Decimal | None = None
+    upper: Decimal | None = None
+
+    def __post_init__(self):
+        if self.metric not in RULE_SCHEDULE_METRICS:
+            raise ValueError('Rule metric must be one of ' + str(RULE_SCHEDULE_METRICS))
+        identifier(self.measurement_context)
+        _naive(self.start); _naive(self.end)
+        if self.start >= self.end:
+            raise ValueError('Segment interval must stay half-open and nonempty')
+        if self.unit != RULE_METRIC_UNITS[self.metric]:
+            raise ValueError('Rule segment unit must match the metric unit')
+        if self.basis is None or not isinstance(self.basis, RuleBasis):
+            raise ValueError('Rule segment basis must be an explicit RuleBasis')
+        if self.metric in ('temperature', 'co2'):
+            if self.basis == RuleBasis.MEASURED:
+                raise ValueError('Climate thresholds rule a requested/realized basis, not measured')
+            if self.delta is None or self.lower is not None or self.upper is not None:
+                raise ValueError('Temperature/CO2 segments carry delta and no fixed bounds')
+            finite(self.delta, nonnegative=True)
+        else:
+            if self.basis != RuleBasis.MEASURED:
+                raise ValueError('EC/pH thresholds rule the measured basis')
+            if self.lower is None or self.upper is None or self.delta is not None:
+                raise ValueError('EC/pH segments carry fixed bounds and no delta')
+            finite(self.lower, nonnegative=self.metric == 'ec')
+            finite(self.upper, nonnegative=True)
+            if self.lower > self.upper:
+                raise ValueError('Fixed bounds must be ordered (parity check; equality inside)')
+
+    @property
+    def unit(self):
+        return RULE_METRIC_UNITS[self.metric]
+
+    @property
+    def content_id(self):
+        return (self.metric, self.measurement_context, self.basis.value, self.start,
+                self.end, self.delta, self.lower, self.upper)
+
+
+def rule_segment_sort_key(segment: RuleScheduleSegment):
+    return (segment.start, segment.metric, segment.measurement_context,
+            segment.basis.value, segment.end, segment.delta, segment.lower, segment.upper)
+
+
+@dataclass(frozen=True)
+class RuleScheduleRevision:
+    """One immutable user-visible schedule version. Content checks happen in
+    the contract (ordering, one-key non-overlap) AND at the database level
+    (overlap rejection), so repository bypasses stay impossible."""
+    rule_version: str
+    rule_id: str
+    version: int
+    scope_id: str
+    compartment_id: str
+    evidence_reference: str
+    is_demo: bool
+    label: str
+    segments: tuple[RuleScheduleSegment, ...]
+
+    def __post_init__(self):
+        for value in (self.rule_version, self.rule_id, self.scope_id, self.compartment_id,
+                      self.evidence_reference, self.label):
+            identifier(value)
+        if type(self.version) is not int or self.version < 1 or type(self.is_demo) is not bool:
+            raise ValueError('Invalid schedule revision version/demo flag')
+        if not self.segments or not isinstance(self.segments, tuple):
+            raise ValueError('A schedule revision needs at least one segment')
+        tuple_of(self.segments, RuleScheduleSegment)
+        order = [rule_segment_sort_key(segment) for segment in self.segments]
+        if order != sorted(order):
+            raise ValueError('Revision segments must be canonically sorted')
+        # Same (metric, context, basis) key must never overlap — validated
+        # against the LAST end seen for that key, not merely the globally
+        # adjacent segment: temperature/co2/temperature interleavings would
+        # otherwise hide the temperature overlap.
+        last_end = {}
+        for segment in self.segments:
+            key = (segment.metric, segment.measurement_context, segment.basis.value)
+            previous_end = last_end.get(key)
+            if previous_end is not None and segment.start < previous_end:
+                raise ValueError('Schedule segments overlap for the same metric/context/basis')
+            last_end[key] = segment.end if previous_end is None else max(previous_end, segment.end)
+        if self.is_demo and self.label != 'demo_rule':
+            raise ValueError('Demo schedule revision must carry the demo_label')
+
+    def matches(self, scope_id, compartment_ids):
+        if (self.scope_id,) != (scope_id,) or self.compartment_id != compartment_ids[0]:
+            raise ValueError('Schedule revision is outside the requested scope/compartment')
+
+
+@dataclass(frozen=True)
+class IntradayContext:
+    """Source-naive intraday evaluation context for threshold durations.
+
+    The DECLARED evaluation group (measurement_context + basis) is shared by
+    every requested metric of one evaluation: BR-01 climate runs declare
+    climate/requested or climate/realized; BR-03 drains declare drain/
+    measured. Slots and selected segments must match this group; other
+    contexts/bases are separate evaluations — a mixed-context OR (say
+    temperature+EC) is not constructed.KEPT separate from the day-grain
+    QueryContext: T15/T16 wrap it with the pinned publication/versions."""
+    scope_id: str
+    cycle: CycleWindow
+    compartment_ids: tuple[str, ...]
+    start: datetime
+    end: datetime
+    measurement_context: str
+    basis: RuleBasis
+    cadence_minutes: int = 5
+    time_basis: TimeBasis = TimeBasis.SOURCE_NAIVE
+
+    def __post_init__(self):
+        identifier(self.scope_id)
+        identifier(self.measurement_context)
+        if not isinstance(self.basis, RuleBasis):
+            raise ValueError('Declared evaluation basis must be an explicit RuleBasis')
+        if not isinstance(self.cycle, CycleWindow):
+            raise ValueError('Intraday context pins a CycleWindow contract')
+        if not isinstance(self.compartment_ids, tuple) or len(self.compartment_ids) != 1:
+            raise ValueError('One cycle/compartment per intraday context')
+        if self.compartment_ids[0] != self.cycle.compartment_id:
+            raise ValueError('Intraday compartment must match the pinned cycle')
+        if self.time_basis != TimeBasis.SOURCE_NAIVE:
+            raise ValueError('Threshold durations require the source_naive time basis')
+        if type(self.cadence_minutes) is not int or self.cadence_minutes <= 0:
+            raise ValueError('Intraday cadence must be a positive minute count')
+        _naive(self.start); _naive(self.end)
+        cycle_start = datetime.combine(self.cycle.start, midnight())
+        cycle_end = datetime.combine(self.cycle.end, midnight())
+        if not (cycle_start <= self.start < self.end <= cycle_end):
+            raise ValueError('Requested intraday window must sit inside the cycle window')
+
+    @property
+    def effective_start(self):
+        return self.start
+
+    @property
+    def cadence(self):
+        return timedelta(minutes=self.cadence_minutes)
+
+
+def midnight():
+    return datetime.min.time()
+
+
+@dataclass(frozen=True)
+class ThresholdSlot:
+    """One cadence slot of typed metric inputs ([start, start+cadence)).
+
+    `quality` states THIS metric's own verdict — a suspect measure never
+    takes another metric out of the jointly valid set. Climate metrics may
+    carry setpoints (CO2 uses `setpoint`; temperature needs BOTH the
+    heating `lower_setpoint` and ventilation `upper_setpoint`); nutrition
+    metrics only carry the measured `actual`."""
+    start: datetime
+    metric: str
+    measurement_context: str
+    basis: RuleBasis
+    actual: Decimal | None = None
+    setpoint: Decimal | None = None
+    lower_setpoint: Decimal | None = None
+    upper_setpoint: Decimal | None = None
+    quality: QualityStatus = QualityStatus.ACCEPTED
+
+    def __post_init__(self):
+        if self.metric not in RULE_SCHEDULE_METRICS:
+            raise ValueError('Slot metric must be one of ' + str(RULE_SCHEDULE_METRICS))
+        identifier(self.measurement_context)
+        if not isinstance(self.basis, RuleBasis):
+            raise ValueError('Slot basis must be an explicit RuleBasis')
+        _naive(self.start)
+        if self.quality == QualityStatus.MISSING:
+            if self.actual is not None:
+                raise ValueError('A missing measure cannot claim an actual value')
+        elif self.metric in ('ec', 'ph'):
+            finite(self.actual, nullable=True, nonnegative=self.metric == 'ec')
+            if (self.setpoint is not None or self.lower_setpoint is not None
+                    or self.upper_setpoint is not None):
+                raise ValueError('Nutrition slots carry no setpoints')
+        else:
+            finite(self.setpoint, nullable=True)
+            finite(self.actual, nullable=True)
+            finite(self.lower_setpoint, nullable=True)
+            finite(self.upper_setpoint, nullable=True)
+            finite(self.setpoint, nullable=True)
+
+
+@dataclass(frozen=True)
+class UnknownReasonShare:
+    """One unknown-duration reason with its total minutes (sums are exact)."""
+    reason_code: str
+    minutes: Decimal
+
+    def __post_init__(self):
+        identifier(self.reason_code)
+        finite(self.minutes, nonnegative=True)
+
+
+@dataclass(frozen=True)
+class RuleMetricDuration:
+    """Per-metric exact durations over the effective window. Public out
+    KPIs turn NULL exactly when no slot was valid (kept also as Decimal
+    zero only internally); unknown minutes partition by one reason."""
+    metric: str
+    measurement_context: str
+    basis: RuleBasis
+    rule_version: str | None
+    expected_minutes: Decimal
+    valid_minutes: Decimal
+    out_minutes: Decimal
+    out_low_minutes: Decimal
+    out_high_minutes: Decimal
+    suspect_minutes: Decimal
+    unknown_minutes: Decimal
+    unknown_reasons: tuple[UnknownReasonShare, ...]
+    out_hours: Decimal | None
+    out_percent: Decimal | None
+    coverage_pct: Decimal
+
+    def __post_init__(self):
+        finite(self.out_hours, nullable=True, nonnegative=True)
+        finite(self.out_percent, nullable=True, nonnegative=True)
+        finite(self.coverage_pct, nonnegative=True)
+        if self.coverage_pct > 100:
+            raise ValueError('Coverage percentage must stay within 100')
+
+    @property
+    def unit(self):
+        return RULE_METRIC_UNITS[self.metric]
+
+
+@dataclass(frozen=True)
+class RuleMetricApplied:
+    """Contributing rule identity for one requested metric (None entries
+    mark requested-but-not-applied metrics; never silently dropped)."""
+    metric: str
+    measurement_context: str
+    basis: RuleBasis
+    rule_version: str | None
+    unit: str
+
+    def __post_init__(self):
+        if self.metric not in RULE_SCHEDULE_METRICS:
+            raise ValueError('Metric must be one of ' + str(RULE_SCHEDULE_METRICS))
+        identifier(self.measurement_context)
+        if not isinstance(self.basis, RuleBasis):
+            raise ValueError('Applied basis must be an explicit RuleBasis')
+        if self.rule_version is not None:
+            identifier(self.rule_version)
+        if self.unit != RULE_METRIC_UNITS[self.metric]:
+            raise ValueError('Applied unit must match the metric unit')
+
+
+@dataclass(frozen=True)
+class RuleJointDuration:
+    """'Metric A or B out' over jointly valid slots ONLY: the union of
+    violations inside that intersection is summed; separate per-metric
+    hours are never added."""
+    metrics: tuple[str, ...]
+    measurement_context: str
+    basis: RuleBasis
+    contributions: tuple[RuleMetricApplied, ...]
+    jointly_valid_minutes: Decimal
+    joint_out_minutes: Decimal
+    joint_out_percent: Decimal | None
+    joint_coverage_pct: Decimal
+
+    def __post_init__(self):
+        if len(set(self.metrics)) != len(self.metrics) or len(self.metrics) < 2:
+            raise ValueError('Joint report needs at least two distinct metrics')
+        identifier(self.measurement_context)
+        if not isinstance(self.basis, RuleBasis):
+            raise ValueError('Joint basis must be an explicit RuleBasis')
+        for contribution in self.contributions:
+            if contribution.metric not in self.metrics:
+                raise ValueError('Joint contribution references an unrequested metric')
+            if contribution.basis != self.basis:
+                raise ValueError('Joint contributions must share the pinned basis')
+            if contribution.measurement_context != self.measurement_context:
+                raise ValueError('Joint contributions must share the measurement context')
+
+
+@dataclass(frozen=True)
+class RuleSlotDeviation:
+    """Per-slot deviation inside an episode: direction, exact value distance
+    to the violated bound, and the slot time (deterministic peak source)."""
+    start: datetime
+    direction: RuleDeviationDirection
+    deviation: Decimal
+
+    def __post_init__(self):
+        if not isinstance(self.direction, RuleDeviationDirection):
+            raise ValueError('Slot deviation needs an explicit direction')
+        if self.deviation is not None:
+            finite(self.deviation, nonnegative=True)
+
+
+@dataclass(frozen=True)
+class RuleEpisode:
+    """Continuous out run built on the FULL cycle (never clipped frames
+    first), then intersected with the requested window. Original start/end
+    and duration stay immutable; the clipped overlap reports exactly the
+    requested view; both directions inside one run belong to this run."""
+    metric: str
+    measurement_context: str
+    basis: RuleBasis
+    rule_version: str
+    slots: tuple[RuleSlotDeviation, ...]
+    original_start: datetime
+    original_end: datetime
+    original_minutes: Decimal
+    clipped_start: datetime | None
+    clipped_end: datetime | None
+    clipped_minutes: Decimal | None
+    directions: tuple[RuleDeviationDirection, ...]
+    peak_deviation: Decimal
+    peak_time: datetime
+
+    def __post_init__(self):
+        if self.metric not in RULE_SCHEDULE_METRICS:
+            raise ValueError('Episode metric must be one of ' + str(RULE_SCHEDULE_METRICS))
+        identifier(self.measurement_context)
+        if not isinstance(self.basis, RuleBasis):
+            raise ValueError('Episode basis must be an explicit RuleBasis')
+        identifier(self.rule_version)
+        if not isinstance(self.slots, tuple) or not self.slots:
+            raise ValueError('An episode carries at least one violating slot')
+        tuple_of(self.slots, RuleSlotDeviation)
+        for value in (self.original_start, self.original_end, self.peak_time):
+            _naive(value)
+        if self.original_start < self.original_end:
+            finite(self.original_minutes, nonnegative=True)
+        # Clipped facts may be absent (zero overlap) exactly when flagged so.
+        clipped_states = (self.clipped_start is None, self.clipped_end is None,
+                          self.clipped_minutes is None)
+        if len(set(clipped_states)) > 1:
+            raise ValueError('Clipped facts must be set together or not at all')
+        if self.clipped_start is not None:
+            _naive(self.clipped_start); _naive(self.clipped_end)
+            finite(self.clipped_minutes, nonnegative=True)
+        tuple_of(self.directions, RuleDeviationDirection)
+        if len(set(self.directions)) != len(self.directions):
+            raise ValueError('Episode directions are a deterministic set')
+        finite(self.peak_deviation, nonnegative=True)
+        if self.peak_deviation != max(slot.deviation for slot in self.slots):
+            raise ValueError('Episode peak deviation must match the slot values')
+
+
+@dataclass(frozen=True)
+class RuleDurationResult:
+    """Aggregated threshold evaluation. Identity metadata (publication,
+    versions) is pinned by the caller when available; the engine never
+    invents it."""
+    scope_id: str
+    cycle_id: str
+    compartment_id: str
+    requested_start: datetime
+    requested_end: datetime
+    effective_start: datetime
+    effective_end: datetime
+    requested_metrics: tuple[str, ...]
+    applications: tuple[RuleMetricApplied, ...]
+    metric_results: tuple[RuleMetricDuration, ...]
+    joint_results: tuple[RuleJointDuration, ...]
+    episodes: tuple[RuleEpisode, ...]
+    publication: PublicationRef | None = None
+    versions: Versions | None = None
+    time_basis: TimeBasis = TimeBasis.SOURCE_NAIVE
+
+    def __post_init__(self):
+        for value in (self.scope_id, self.cycle_id, self.compartment_id):
+            identifier(value)
+        for value in (self.requested_start, self.requested_end,
+                      self.effective_start, self.effective_end):
+            _naive(value)
+        if not self.requested_metrics or len(set(self.requested_metrics)) != len(self.requested_metrics):
+            raise ValueError('Requested metrics must be explicit, nonempty and distinct')
+        if self.publication is not None and not isinstance(self.publication, PublicationRef):
+            raise ValueError('Result publication must be a PublicationRef contract when set')
+        if self.versions is not None and not isinstance(self.versions, Versions):
+            raise ValueError('Result versions must be a Versions contract when set')
+        tuple_of(self.applications, RuleMetricApplied)
+        tuple_of(self.metric_results, RuleMetricDuration)
+        tuple_of(self.joint_results, RuleJointDuration)
+        tuple_of(self.episodes, RuleEpisode)
+        if len(self.applications) != len(self.requested_metrics):
+            raise ValueError('Every requested metric needs an explicit application entry')
+        if tuple((applied.metric for applied in self.applications)) != tuple(self.requested_metrics):
+            raise ValueError('Application list must follow the requested metrics')
+        if any(applied.metric not in self.requested_metrics for applied in self.applications):
+            raise ValueError('Application list must follow the requested metrics')
+        if self.time_basis != TimeBasis.SOURCE_NAIVE:
+            raise ValueError('Threshold result requires the source_naive basis')
 
 
 @dataclass(frozen=True)
