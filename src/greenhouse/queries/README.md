@@ -56,6 +56,26 @@ publication đã pin, và rule profiles hợp lệ theo scope/khoang. UI không 
 catalog không đọc lại pointer cho publication đã chọn — app pin theo publication ID một lần
 mỗi tác vụ. Xem [ứng dụng nước](../app/README.md).
 
+## Harvest service (BR-05, typed slice)
+
+[HarvestService](harvest.py) + [PostgresHarvestQueryAdapter](../db/harvest_adapter.py) giữ record
+grain thật: một record thu hoạch là một sự kiện (nhiều record cùng ngày không bị collapse), tổng
+observed từng measure tính riêng, share = 100×ΣA paired/(ΣA+ΣB) trên CÙNG tập paired (không trung
+bình share từng record), zero-denominator → NULL, không usable → NULL trừ cửa sổ trống hoàn toàn
+trong snapshot hoàn chỉnh (known 0 với reason `known_zero_event_window`). Calendar day không có
+event: complete → known 0 (`record_present=false`); incomplete → unknown/NULL, không bao giờ tự đặt
+source/revision giả; không có metric "coverage theo ngày có harvest". Navigation cumulative chạy từ
+`cumulative_origin` (đầu vụ, luôn đúng):
+`HarvestSummary.cumulative_a` (accepted A, canonical cho BR-04) và `cumulative_total`
+(A+B trên CHỈ records PAIRED) là HAI tập measure ĐỘC LẬP — record chỉ góp khi
+`cycle.start <= harvest_date < effective_end`, record SAU cửa sổ không góp amount lẫn basis;
+tập không có usable → NULL, snapshot complete không góp → known 0; `cumulative_basis_label` chỉ
+tính từ records góp. Zoom trong vụ không mang reason clipping: biểu thị bằng `cumulative_origin`/
+`cumulative_from_cycle_start`; cắt biên thật (cả MỘT biên) → `window_clipped_to_cycle`;
+toàn-vụ (whole-cycle accessor) cố ý thay request bằng context toàn vụ và không coi là clipping.
+Publication thiếu harvest receipt → adapter fail actionably
+(không fallback core). Xem [harvest mart](../db/README.md#mart-thu-hoạch-và-completeness-br-05-slice).
+
 ## Phần tiếp nhận
 
 - Water mart day, default transaction hook và day/week/cycle queries khớp cùng DTO/oracle; không materialize mọi period/filter.

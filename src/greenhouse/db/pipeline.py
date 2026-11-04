@@ -20,7 +20,7 @@ from greenhouse.db.migrate import sql
 from greenhouse.ingestion.parser import PARSER_VERSION
 from greenhouse.ingestion.run import ingest_snapshot
 
-CODE_VERSION = 'pipeline-v2-irrigation'
+CODE_VERSION = 'pipeline-v3-harvest'
 STEPS = ('ingest', 'load-core', 'spark', 'publish')
 
 
@@ -48,12 +48,18 @@ def fail(point, selected):
 
 
 def config(conn, scope, policy):
+    """Frozen workflow identity: parser/policy/basis + bundle versions, so a
+    corrected bundle cannot be silently reused through a no-change checksum."""
     quality = conn.execute('SELECT definition_hash FROM config.quality_policy_version WHERE policy_version_id=%s', (policy,)).fetchone()
     if not quality:
         raise ValueError('Unknown quality policy')
     bases = conn.execute('SELECT basis_version_id,analysis_context FROM config.selected_basis WHERE data_scope_id=%s AND applied ORDER BY basis_version_id,analysis_context', (scope,)).fetchall()
+    # Lifecycle note: on THIS release the export identity adds bundle versions.
+    from greenhouse.db.harvest_mart import BUNDLE_VERSION as HARVEST_BUNDLE
+    from greenhouse.db.irrigation_mart import BUNDLE_VERSION as IRRIGATION_BUNDLE
     return {'parser': PARSER_VERSION, 'quality_policy': policy, 'quality_hash': quality[0],
-            'basis': [list(b) for b in bases], 'code': CODE_VERSION}
+            'basis': [list(b) for b in bases], 'code': CODE_VERSION,
+            'marts': [IRRIGATION_BUNDLE, HARVEST_BUNDLE]}
 
 
 def artifact_files(folder):
@@ -309,7 +315,9 @@ def publish(conn, workflow, hook=None, fault=None):
             conn.execute('INSERT INTO meta.publication_basis SELECT %s,b.data_scope_id,b.compartment_id,b.measure_code,w.analysis_context,b.basis_version_id FROM meta.workflow_basis w JOIN config.area_basis_version b USING(basis_version_id) WHERE w.workflow_id=%s', (publication, workflow))
             fail('publish-members', fault)
             from greenhouse.db.irrigation_mart import materialize_irrigation
+            from greenhouse.db.harvest_mart import materialize_harvest
             materialize_irrigation(conn, publication, workflow)
+            materialize_harvest(conn, publication, workflow)
             if hook:
                 hook(conn, publication, workflow)
             fail('publish-hook', fault)

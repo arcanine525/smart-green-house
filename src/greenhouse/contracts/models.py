@@ -1,13 +1,16 @@
 """Engine-independent value contracts. Decimal and clock semantics are explicit."""
 from dataclasses import dataclass
 from datetime import date, datetime
-from decimal import Decimal
+from decimal import Decimal, localcontext
 from enum import StrEnum
 from pathlib import PurePosixPath
 
 WATER_UNIT = 'L/m²'
 RESOURCE_WATER_UNIT = 'L/m²/day'
 METRIC_VERSION = 'br02-summary-v1'
+HARVEST_UNIT = 'kg/m²'
+HARVEST_SOURCE_UNIT = 'kg/m²/harvest'
+HARVEST_METRIC_VERSION = 'br05-summary-v1'
 ASSUMPTION_LABEL = 'giả định chưa xác minh'
 
 
@@ -78,6 +81,18 @@ def checksum(value):
 def tuple_of(value, kind):
     if not isinstance(value, tuple) or any(not isinstance(item, kind) for item in value):
         raise ValueError('Expected immutable tuple of contract values')
+
+
+def exact_add(left, right):
+    """Decimal addition in a context whose precision always covers both
+    boundaries, so invariants compare against the EXACT sum and never the
+    ambient (28-digit) rounding decision."""
+    integer_digits = max(max(value.adjusted() + 1, 1) for value in (left, right))
+    fractional_digits = max(max(-value.as_tuple().exponent, 0)
+                            for value in (left, right))
+    with localcontext() as ctx:
+        ctx.prec = max(50, integer_digits + fractional_digits + 2)
+        return left + right
 
 
 @dataclass(frozen=True)
@@ -460,6 +475,298 @@ class IrrigationSummary:
     @property
     def correction_ids(self):
         return tuple(c.correction_id for c in self.corrections)
+
+
+@dataclass(frozen=True)
+class HarvestRecord:
+    """One published harvest record: grain is the source record, never a day.
+
+    Several accepted records may share a harvest date and none may be collapsed.
+    paired follows the two MeasureValues (both accepted); reason codes keep the
+    per-measure states traceable.
+    """
+    publication: PublicationRef
+    cycle_id: str
+    compartment_id: str
+    harvest_date: date
+    prod_a: MeasureValue
+    prod_b: MeasureValue
+    revision_id: str
+    logical_record_key: str
+    correction_id: str | None = None
+    correction_version: int | None = None
+    paired: bool = False
+    reason_codes: tuple[str, ...] = ()
+
+    def __post_init__(self):
+        if not isinstance(self.publication, PublicationRef) or not all(
+                isinstance(m, MeasureValue) for m in (self.prod_a, self.prod_b)):
+            raise ValueError('Invalid harvest record publication/measure contracts')
+        identifier(self.cycle_id); identifier(self.compartment_id)
+        identifier(self.revision_id); identifier(self.logical_record_key)
+        tuple_of(self.reason_codes, str)
+        if type(self.harvest_date) is not date:
+            raise ValueError('Harvest records use whole source dates')
+        for measure in (self.prod_a, self.prod_b):
+            if measure.unit != HARVEST_UNIT or measure.source_unit != HARVEST_SOURCE_UNIT:
+                raise ValueError('Harvest measures require kg/m² with source kg/m²/harvest')
+        if type(self.paired) is not bool or self.paired != (self.prod_a.accepted and self.prod_b.accepted):
+            raise ValueError('Paired flag must follow both measure acceptance states')
+        if (self.correction_id is None) != (self.correction_version is None):
+            raise ValueError('Correction identity/version must travel together')
+        if self.correction_version is not None and (type(self.correction_version) is not int or self.correction_version < 1):
+            raise ValueError('Invalid correction version')
+
+
+@dataclass(frozen=True)
+class HarvestUnresolvedIssue:
+    """Frozen provenance of ONE unresolved quarantine/conflict issue of a
+    source row, for future drilldown. Keyed by SOURCE identity + issue
+    (parsed issue code/column); raw quarantined numbers are never copied
+    here, so an unresolved row stays NULL, not an invented amount.
+    """
+    source_record_id: str
+    disposition: str
+    reason_code: str
+    issue_column: str | None = None
+    relative_path: str | None = None
+    line_number: int | None = None
+    source_time_serial: Decimal | None = None
+
+    def __post_init__(self):
+        identifier(self.source_record_id)
+        identifier(self.reason_code)
+        if self.disposition not in ('quarantine', 'conflict'):
+            raise ValueError('Unresolved issue disposition must be quarantine or conflict')
+        if self.issue_column is not None:
+            identifier(self.issue_column)
+        if self.relative_path is not None:
+            identifier(self.relative_path)
+        if self.line_number is not None and (type(self.line_number) is not int or self.line_number < 2):
+            raise ValueError('Unresolved issue line number starts at the first data line')
+        finite(self.source_time_serial, nullable=True)
+
+
+@dataclass(frozen=True)
+class HarvestCompleteness:
+    """Frozen verification inputs of one cycle in the pinned publication.
+
+    snapshot_complete is canonical (source resolution AND accepted records all
+    paired on both measures); source_resolved is the structural part only.
+    Record counts are never a time-coverage claim (BR-05 §3.8).
+    """
+    snapshot_complete: bool
+    source_resolved: bool
+    expected_files: int
+    files_present: int
+    files_loaded: int
+    files_failed: int
+    records_read: int | None
+    records_accepted: int | None
+    records_quarantine: int | None
+    records_duplicate: int | None
+    records_conflict: int | None
+    unresolved_records: int
+    conflicted_records: int
+    accepted_records: int
+    paired_records: int
+    prod_a_usable_records: int
+    prod_b_usable_records: int
+    event_a_dates: int
+    event_b_dates: int
+    reasons: tuple[str, ...]
+    expected_relative_path: str | None = None
+    unresolved_items: tuple[HarvestUnresolvedIssue, ...] = ()
+
+    def __post_init__(self):
+        if type(self.snapshot_complete) is not bool or type(self.source_resolved) is not bool:
+            raise ValueError('Completeness states must be booleans')
+        if self.snapshot_complete and not self.source_resolved:
+            raise ValueError('Snapshot completeness requires resolved sources')
+        if self.source_resolved and not self.snapshot_complete:
+            if self.accepted_records == self.paired_records:
+                raise ValueError('Resolved sources with all records paired cannot stay incomplete')
+        if self.snapshot_complete:
+            if self.unresolved_records or self.conflicted_records:
+                raise ValueError('Complete snapshot cannot keep unresolved records')
+            if self.accepted_records != self.paired_records:
+                raise ValueError('Complete snapshot requires all accepted records paired')
+        for value in (self.expected_files, self.files_present, self.files_loaded, self.files_failed,
+                      self.unresolved_records, self.conflicted_records, self.accepted_records,
+                      self.paired_records, self.prod_a_usable_records, self.prod_b_usable_records,
+                      self.event_a_dates, self.event_b_dates):
+            if type(value) is not int or value < 0:
+                raise ValueError('Completeness counters must be nonnegative integers')
+        for value in (self.records_read, self.records_accepted, self.records_quarantine,
+                      self.records_duplicate, self.records_conflict):
+            if value is not None and (type(value) is not int or value < 0):
+                raise ValueError('File counters must be nonnegative integers or NULL')
+        for value in (self.prod_a_usable_records, self.prod_b_usable_records, self.paired_records):
+            if value > self.accepted_records:
+                raise ValueError('Record subsets cannot exceed accepted records')
+        tuple_of(self.reasons, str)
+        if self.expected_relative_path is not None:
+            identifier(self.expected_relative_path)
+        tuple_of(self.unresolved_items, HarvestUnresolvedIssue)
+        if self.snapshot_complete and 'ingestion_outputs_not_consumable' not in self.reasons and (
+                self.files_present < self.expected_files):
+            raise ValueError('Complete snapshot needs its expected files present')
+
+
+@dataclass(frozen=True)
+class HarvestSummary:
+    """Period harvest summary: observed totals per measure, paired totals and
+    weighted shares on the SAME paired records. Navigation cumulatives run
+    from `cumulative_origin` (the cycle start, always present) and are
+    computed only from records with cycle.start <= harvest_date <
+    effective_end: records after the window never contribute an amount or a
+    basis label. `cumulative_a` sums accepted ProdA values (canonical BR-04);
+    `cumulative_total` sums A+B over PAIRED records ONLY — two INDEPENDENT
+    measure sets, each following the no-usable vs verified-empty rules: a
+    measure set with no usable contribution is a known 0 under a complete
+    snapshot, else NULL (never fabricated). The basis label is drawn solely
+    from contributing records. Zero vs unknown follows completeness: an empty
+    window in a complete snapshot is a known 0.
+    """
+    publication: PublicationRef
+    context: QueryContext
+    window_start: date
+    window_end: date
+    prod_a_observed: Decimal | None
+    prod_b_observed: Decimal | None
+    paired_prod_a: Decimal | None
+    paired_prod_b: Decimal | None
+    paired_total: Decimal | None
+    class_a_share_pct: Decimal | None
+    class_b_share_pct: Decimal | None
+    accepted_records: int
+    paired_records: int
+    completeness: HarvestCompleteness
+    cumulative_a: Decimal | None
+    cumulative_total: Decimal | None
+    cumulative_origin: date | None
+    cumulative_basis_label: str | None
+    status: ResultStatus
+    unit: str = HARVEST_UNIT
+    metric_version: str = HARVEST_METRIC_VERSION
+    iso_year: int | None = None
+    iso_week: int | None = None
+    reason_codes: tuple[str, ...] = ()
+
+    def __post_init__(self):
+        self.context.matches(self.publication)
+        calendar_window(self.window_start, self.window_end)
+        if not self.context.start <= self.window_start < self.window_end <= self.context.end:
+            raise ValueError('Effective window must be inside the requested window')
+        for value in (self.accepted_records, self.paired_records):
+            if type(value) is not int or value < 0:
+                raise ValueError('Record counts must be nonnegative integers')
+        if self.paired_records > self.accepted_records:
+            raise ValueError('Paired records cannot exceed accepted records')
+        for value in (self.prod_a_observed, self.prod_b_observed, self.paired_prod_a,
+                      self.paired_prod_b, self.paired_total, self.cumulative_a,
+                      self.cumulative_total):
+            finite(value, nullable=True, nonnegative=True)
+        if self.accepted_records == 0:
+            for value in (self.prod_a_observed, self.prod_b_observed):
+                if value is not None and value != 0:
+                    raise ValueError('An empty window only reports NULL or known zero totals')
+        if self.paired_records == 0:
+            if self.paired_prod_a is not None or self.paired_prod_b is not None or self.paired_total is not None:
+                raise ValueError('No paired records may not claim paired totals')
+            if self.class_a_share_pct is not None or self.class_b_share_pct is not None:
+                raise ValueError('Shares require a nonzero paired denominator')
+        else:
+            if self.paired_prod_a is None or self.paired_prod_b is None or self.paired_total is None:
+                raise ValueError('Paired records imply paired totals')
+            if self.paired_total != exact_add(self.paired_prod_a, self.paired_prod_b):
+                raise ValueError('Paired total must equal the paired measure sums')
+            if self.paired_total == 0:
+                if self.class_a_share_pct is not None or self.class_b_share_pct is not None:
+                    raise ValueError('Zero paired mass keeps shares NULL')
+            else:
+                if self.class_a_share_pct is None or self.class_b_share_pct is None:
+                    raise ValueError('A positive paired denominator yields both shares')
+                for value in (self.class_a_share_pct, self.class_b_share_pct):
+                    finite(value, nonnegative=True)
+                    if value > 100:
+                        raise ValueError('Share exceeds 100 percent')
+        if self.cumulative_basis_label is not None and self.cumulative_a is None:
+            raise ValueError('Cumulative basis label requires an amount')
+        if self.cumulative_origin is not None and self.window_start < self.cumulative_origin:
+            raise ValueError('Cumulative origin must not come after the window')
+        if not isinstance(self.status, ResultStatus) or not isinstance(self.completeness, HarvestCompleteness):
+            raise ValueError('Invalid summary status/completeness contracts')
+        tuple_of(self.reason_codes, str)
+        if self.unit != HARVEST_UNIT:
+            raise ValueError('Harvest period requires kg/m²')
+        if (self.iso_year is None) != (self.iso_week is None):
+            raise ValueError('ISO year/week must travel together')
+
+
+@dataclass(frozen=True)
+class HarvestDay:
+    """Calendar row for display: day sums of accepted records, or an explicit
+    known-zero fill (complete snapshot) / unknown-NULL row (incomplete). A day
+    never claims a source row that does not exist."""
+    publication: PublicationRef
+    cycle_id: str
+    compartment_id: str
+    harvest_date: date
+    prod_a: Decimal | None
+    prod_b: Decimal | None
+    record_count: int
+    record_present: bool
+    paired_records: int
+    paired_prod_a: Decimal | None
+    paired_prod_b: Decimal | None
+    class_a_share_pct: Decimal | None
+    class_b_share_pct: Decimal | None
+    basis_status: BasisStatus
+    basis_label: str | None
+    reason_codes: tuple[str, ...] = ()
+    cumulative_a: Decimal | None = None
+    cumulative_total: Decimal | None = None
+    cumulative_origin: date | None = None
+
+    def __post_init__(self):
+        if not isinstance(self.publication, PublicationRef):
+            raise ValueError('Harvest day requires the pinned publication')
+        identifier(self.cycle_id); identifier(self.compartment_id)
+        if type(self.harvest_date) is not date:
+            raise ValueError('Harvest day uses whole source dates')
+        for value in (self.prod_a, self.prod_b, self.paired_prod_a, self.paired_prod_b,
+                      self.cumulative_a, self.cumulative_total):
+            finite(value, nullable=True, nonnegative=True)
+        if self.cumulative_origin is not None and self.harvest_date < self.cumulative_origin:
+            raise ValueError('Cumulative origin must not come after the day')
+        if type(self.record_count) is not int or self.record_count < 0:
+            raise ValueError('Day record count must be nonnegative')
+        if type(self.record_present) is not bool or self.record_present != (self.record_count > 0):
+            raise ValueError('record_present must follow the accepted record count')
+        if type(self.paired_records) is not int or not 0 <= self.paired_records <= self.record_count:
+            raise ValueError('Paired day records must fit the accepted count')
+        if self.paired_records == 0:
+            if self.paired_prod_a is not None or self.paired_prod_b is not None:
+                raise ValueError('No paired records may not claim paired sums')
+            if self.class_a_share_pct is not None or self.class_b_share_pct is not None:
+                raise ValueError('Day shares require a positive paired denominator')
+        else:
+            if self.paired_prod_a is None or self.paired_prod_b is None:
+                raise ValueError('Paired records imply paired sums')
+            total = exact_add(self.paired_prod_a, self.paired_prod_b)
+            if total == 0:
+                if self.class_a_share_pct is not None or self.class_b_share_pct is not None:
+                    raise ValueError('Zero day mass keeps shares NULL')
+            elif self.class_a_share_pct is None or self.class_b_share_pct is None:
+                raise ValueError('Positive day mass yields both shares')
+        if not isinstance(self.basis_status, BasisStatus):
+            raise ValueError('Day basis status must be a contract enum')
+        if self.basis_status in (BasisStatus.VERIFIED, BasisStatus.ASSUMED) and self.basis_label is None:
+            raise ValueError('A known basis needs its visible label')
+        if self.basis_status not in (BasisStatus.VERIFIED, BasisStatus.ASSUMED) and self.basis_label is not None:
+            raise ValueError('Unknown basis cannot carry a label')
+        tuple_of(self.reason_codes, str)
 
 
 @dataclass(frozen=True)
