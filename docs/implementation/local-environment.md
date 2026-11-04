@@ -75,17 +75,17 @@ Một entrypoint: `python -m greenhouse <command>` bên trong container. Ví d�
 
 ```bash
 docker compose --profile batch run --rm job python -m greenhouse setup
-docker compose --profile batch run --rm job python -m greenhouse ingest
+docker compose -p smart-greenhouse run --rm job python -m greenhouse ingest
 docker compose --profile batch run --rm job python -m greenhouse transform
 docker compose --profile test run --rm test-runner
 ```
 
 | Command | Hành vi hiện tại | Task tiếp theo |
 |---|---|---|
-| setup | Kiểm config, input mounts đọc được, output ghi được, DB reachable; exit 0 khi đạt | Migration thật T06–T08 sẽ gắn sau |
+| setup | Kiểm config, input mounts đọc được, output ghi được, DB reachable; exit 0 khi đạt | Core/publication T07–T08 sẽ gắn sau |
 | test | Gọi pytest trong image processing, trả đúng exit code | Bổ sung kiểm chứng nghiệp vụ theo từng BR |
 | preview | Gọi builder prototype trong image UI, output rõ đường dẫn | Chỉ export fixture demo, không phải app nghiệp vụ |
-| ingest | Exit 2, “chưa hiện thực” | T06 typed parser/DB ingestion |
+| ingest | Parser/adapter Python, staging JSONL gzip và manifest theo run trong outputs; [contract và lệnh](../../src/greenhouse/ingestion/README.md) | T07 core/quality, T08 publication/recovery, T31 PostgreSQL adapter |
 | transform | Exit 2, “chưa hiện thực” | T07–T09 core/publication/marts |
 | simulate | Exit 2, “chưa hiện thực” | T32 |
 | collect | Exit 2, “chưa hiện thực” | T33 |

@@ -57,7 +57,7 @@ Kiểm tra cấu hình sensor mà không khởi chạy các stub:
 docker compose --profile sensor config --quiet
 ```
 
-`ingest` (T06), `transform`, `simulate`, `collect`, `stream` hiện thoát **mã 2**, ghi rõ “chưa hiện thực” và task sở hữu. Profile sensor đã khai báo broker, simulator, collector, stream-worker và volumes; chưa có replay hoặc xử lý streaming thật. Không gọi `up` toàn bộ sensor để coi như đã chạy pipeline.
+`ingest` đã có [parser/staging và manifest theo run](src/greenhouse/ingestion/README.md), chưa ghi core/DB/KPI. `transform`, `simulate`, `collect`, `stream` hiện thoát **mã 2**, ghi rõ “chưa hiện thực” và task sở hữu. Profile sensor đã khai báo broker, simulator, collector, stream-worker và volumes; chưa có replay hoặc xử lý streaming thật. Không gọi `up` toàn bộ sensor để coi như đã chạy pipeline.
 
 Tạo lại HTML bằng image UI, mặc định xuất vào `data/output/preview/preview.html` bị ignore:
 
@@ -112,7 +112,7 @@ docker compose -p smart-greenhouse --profile tools run --rm dataset-download
 
 Cả hai lệnh tự kiểm fixture synthetic và checksum trước khi công bố snapshot. Raw mặc định ở `data/raw/agc-2nd-2019/<sha256>/`; chỉ snapshot writer được ghi raw, job/stream vẫn read-only. Chạy lại xác minh rồi báo already-exists, không ghi đè. Checksum sai giữ bằng chứng và thoát khác 0.
 
-[Inventory đo từ snapshot](docs/implementation/data-inventory.md): 45 file (43 CSV + 2 PDF), 622,899 dòng CSV. [Lệnh inventory, fixture × AC và giới hạn](docs/implementation/dataset-snapshot.md). Chưa có typed DB ingestion, quality policy hoặc KPI nghiệm thu; `ingest` vẫn là stub T06. Không commit dataset.
+[Inventory đo từ snapshot](docs/implementation/data-inventory.md): 45 file (43 CSV + 2 PDF), 622,899 dòng CSV. [Lệnh inventory, fixture × AC và giới hạn](docs/implementation/dataset-snapshot.md). [Ingest](src/greenhouse/ingestion/README.md) đọc nguồn vào staging JSONL gzip có lineage và manifest; chưa có typed DB ingestion, quality policy hoặc KPI nghiệm thu. Không commit dataset.
 
 ## Yêu cầu nghiệp vụ
 

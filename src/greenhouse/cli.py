@@ -10,7 +10,6 @@ import tempfile
 from greenhouse.settings import Settings
 
 PENDING = {
-    "ingest": "T06 (parser; dùng snapshot để chuẩn bị archive ở T05)",
     "transform": "T07–T09 (core, publication và marts)",
     "simulate": "T32 (sensor simulator)",
     "collect": "T33 (durable MQTT collector)",
@@ -42,11 +41,13 @@ def setup_environment(settings):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="python -m greenhouse")
-    parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", *PENDING])
+    parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", *PENDING])
     arguments, rest = parser.parse_known_args(argv)
     if arguments.command in PENDING:
         print(f"{arguments.command}: chưa hiện thực — thuộc task sau: {PENDING[arguments.command]}", file=sys.stderr)
         return 2
+    if arguments.command == "ingest":
+        return ingestion_command(rest)
     if arguments.command == "test":
         return subprocess.call([sys.executable, "-m", "pytest", *rest])
     if arguments.command in ("snapshot", "inventory", "verify-fixtures"):
@@ -112,4 +113,29 @@ def dataset_command(command, argv):
         return 0
     except Exception as error:
         print(f"{command} failed: {type(error).__name__}: {error}", file=sys.stderr)
+        return 1
+
+
+def ingestion_command(argv):
+    import json
+    import zipfile
+    from greenhouse.ingestion.run import aggregate_summary, ingest_snapshot
+    from greenhouse.ingestion.snapshot import AGC, archive_members, validate_snapshot, verify_archive
+    parser = argparse.ArgumentParser(prog="python -m greenhouse ingest")
+    parser.add_argument("--snapshot", type=Path)
+    parser.add_argument("--archive", type=Path, default=Path("/data/import") / AGC.filename)
+    parser.add_argument("--output-root", type=Path, default=Path(os.environ.get("GREENHOUSE_OUTPUT_DIR", "/data/output")))
+    parser.add_argument("--run-id")
+    options = parser.parse_args(argv)
+    snapshot = options.snapshot or Path(os.environ.get("GREENHOUSE_RAW_DIR", "/data/raw")) / AGC.dataset / AGC.sha256
+    try:
+        # Read-only verification against ZIP bytes; no publisher lock/raw writes.
+        verify_archive(options.archive)
+        with zipfile.ZipFile(options.archive) as archive:
+            manifest = validate_snapshot(snapshot, archive, archive_members(archive))
+        folder, result = ingest_snapshot(snapshot, manifest, options.output_root, options.run_id)
+        print(json.dumps(aggregate_summary(folder, result), ensure_ascii=False))
+        return 1 if result["status"] == "failed" else 0
+    except Exception as error:
+        print(f"ingest failed: {type(error).__name__}: {error}", file=sys.stderr)
         return 1
