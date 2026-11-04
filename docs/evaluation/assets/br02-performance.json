@@ -1,0 +1,58 @@
+{
+  "tool": "greenhouse.evaluation.br02",
+  "generated_at": "2026-11-04T08:31:15.845564+00:00",
+  "database": "greenhouse_t07_195889f1a3b1",
+  "performance": {
+    "mode": "performance",
+    "target_p95_seconds": "2",
+    "runs": 30,
+    "warmups": 5,
+    "workloads": {
+      "summary_week_7d": {
+        "first_request_seconds": 0.001486,
+        "first_request_note": "first timed call of this workload on the shared connection; earlier workloads/warmups may already have warmed caches — not a verified cold-cache run",
+        "p50_seconds": 0.000672,
+        "p95_seconds": 0.000762,
+        "min_seconds": 0.000612,
+        "max_seconds": 0.000779,
+        "target_met": true
+      },
+      "days_week_7d": {
+        "first_request_seconds": 0.000581,
+        "first_request_note": "first timed call of this workload on the shared connection; earlier workloads/warmups may already have warmed caches — not a verified cold-cache run",
+        "p50_seconds": 0.000588,
+        "p95_seconds": 0.000642,
+        "min_seconds": 0.000542,
+        "max_seconds": 0.000644,
+        "target_met": true
+      },
+      "weekly_full_cycle_166d": {
+        "first_request_seconds": 0.006092,
+        "first_request_note": "first timed call of this workload on the shared connection; earlier workloads/warmups may already have warmed caches — not a verified cold-cache run",
+        "p50_seconds": 0.006126,
+        "p95_seconds": 0.006377,
+        "min_seconds": 0.005956,
+        "max_seconds": 0.006658,
+        "target_met": true
+      }
+    },
+    "environment": {
+      "python": "3.12.12",
+      "platform": "Linux-7.0.14-linuxkit-aarch64-with-glibc2.36",
+      "limits": {
+        "memory_max": "2147483648",
+        "memory_peak": "26054656",
+        "cpu_max": "150000 100000"
+      }
+    },
+    "workload": {
+      "publication_id": "3459db897ead45a28177c60000bd0561",
+      "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+      "compartment": "AICU",
+      "cycle": "agc-cycle-AICU",
+      "week_window": "[2020-03-02,2020-03-09)",
+      "cycle_window": "[2019-12-16,2020-05-30)",
+      "connection_state": "one persistent connection; per call the service re-resolves the pinned publication by ID (app action path, no pointer read)"
+    }
+  }
+}

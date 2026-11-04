@@ -12,7 +12,7 @@ Project hướng đến ba nhóm người dùng: người vận hành theo dõi 
 |---|---|
 | Sáu business requirements (BR) | Đã có đặc tả, công thức, điều kiện dữ liệu và tiêu chí nghiệm thu |
 | Kiến trúc và schema | Đã có ADR, sơ đồ Mermaid tổng quan và chi tiết |
-| Ứng dụng nước (BR-02) | Chạy được trên publication có water mart: bộ lọc từ catalog, KPI, chart, bảng tuần, lineage, export; nghiệm thu BR-02 còn ở task sau |
+| Ứng dụng nước (BR-02) | Chạy được trên publication có water mart; [bằng chứng chức năng](docs/evaluation/br_02.md): 10/10 AC, đối soát raw↔publication AGC, p95 ≪ 2s — basis nước vẫn giả định chưa xác minh |
 | UI demo Streamlit + Plotly | Prototype fixture-only để review giao diện; có bản HTML tương tác offline |
 | PostgreSQL, Spark và MQTT | Có môi trường container và integration tests synthetic; pipeline AGC + water mart đã chạy |
 | Docker Compose | Scaffold batch/sensor/test/tools; app production và pipeline nước chạy qua container, sensor còn là stub |
