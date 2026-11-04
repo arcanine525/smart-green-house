@@ -47,10 +47,19 @@ Core catalog ghi daily water `L/m²/day`; adapter chỉ chấp nhận chính xá
 
 Tạo adapter với mapping mount `raw_snapshots={snapshot_id: raw_path}` rồi gọi `service.get_lineage(publication, revision_id=...)` hoặc `record_key=...`. Kiểm tra revision thuộc **membership đã pin** trước khi bọc T08 lineage và đọc lại raw hash. Không truy được candidate/correction mới chưa xuất hiện trong publication đó. Logical key có thể chung climate/drain; nếu ambiguous phải dùng revision ID, không chọn ngầm. Metadata có source serial chính xác, naive source timestamp, physical line range, hashes, units, correction version; không ghi raw payload.
 
+## Catalog bộ lọc cho ứng dụng
+
+[CatalogService](catalog.py) (Protocol + service thuần) và [PostgresCatalogAdapter](../db/catalog.py)
+trả các option bộ lọc từ published data: publication hiện hành mỗi scope kèm receipt water mart
+(`usable = bundle irrigation-mart-v1`, thiếu mart vẫn hiện kèm lý do), cycle/khoang của
+publication đã pin, và rule profiles hợp lệ theo scope/khoang. UI không dán ID thủ công;
+catalog không đọc lại pointer cho publication đã chọn — app pin theo publication ID một lần
+mỗi tác vụ. Xem [ứng dụng nước](../app/README.md).
+
 ## Phần tiếp nhận
 
-- Water mart day và default transaction hook đã triển khai. Day/week/cycle queries khớp cùng DTO/oracle; không materialize mọi period/filter.
-- T10 dùng service/DTO cho chart/summary/export; không nhúng SQL trong UI, không repin giữa một tác vụ. T11 mới nghiệm thu BR-02 end-to-end và hiệu năng theo yêu cầu.
+- Water mart day, default transaction hook và day/week/cycle queries khớp cùng DTO/oracle; không materialize mọi period/filter.
+- Ứng dụng nước dùng service/DTO cho chart/summary/export; không nhúng SQL trong UI, không repin giữa một tác vụ. Nghiệm thu BR-02 end-to-end và hiệu năng thuộc task sau.
 - T12–T13 bổ sung harvest/completeness contracts; không dùng coverage ngày của nước cho harvest events.
 - T21 tiếp nhận `ScenarioCommand` validation và triển khai persistence/idempotency/baseline versioning. T33 tiếp nhận `SinkBatch` và xử lý ghi/dedup/conflict; source identity/clock không đổi theo database engine.
 

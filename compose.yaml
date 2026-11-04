@@ -105,6 +105,10 @@ services:
     networks: [backend, frontend]
     ports:
       - '127.0.0.1:${GREENHOUSE_APP_PORT:-8501}:8501'
+    # Read-only raw mount backs lineage verification from the day detail view;
+    # snapshot IDs are mapped from the mount, missing mounts report unverified.
+    volumes:
+      - ${GREENHOUSE_RAW_PATH:-./data/raw}:/data/raw:ro
     depends_on:
       db:
         condition: service_healthy
@@ -159,6 +163,23 @@ services:
       broker:
         condition: service_healthy
     command: [python, -m, greenhouse, test, -q, -s]
+
+  ui-test:
+    # Water app tests in the UI image (Streamlit AppTest + psycopg fixture DBs).
+    image: smart-greenhouse-ui:local
+    build:
+      context: .
+      dockerfile: docker/ui/Dockerfile
+    profiles: [test]
+    init: true
+    environment: *database-env
+    networks: [backend]
+    depends_on:
+      db:
+        condition: service_healthy
+    command: [python, -m, pytest, tests/ui, -q, -s]
+    cpus: ${GREENHOUSE_UI_CPUS:-0.5}
+    mem_limit: ${GREENHOUSE_UI_MEMORY:-768m}
 
   snapshot:
     <<: *processing

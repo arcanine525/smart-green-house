@@ -216,6 +216,55 @@ class CycleWindow:
 
 
 @dataclass(frozen=True)
+class CatalogPublication:
+    """One filter option: the current sealed publication of a data scope.
+
+    usable reports only that the sealed irrigation mart bundle exists; it is a
+    catalog fact about the publication, never a quality or BR statement.
+    """
+    scope_id: str
+    snapshot_id: str
+    publication_id: str
+    committed_at: datetime
+    finality_status: str
+    code_version: str
+    bundle_version: str | None = None
+    day_count: int | None = None
+    cycle_count: int | None = None
+
+    def __post_init__(self):
+        for value in (self.scope_id, self.snapshot_id, self.publication_id, self.code_version):
+            identifier(value)
+        clock(self.committed_at, aware=True)
+        if self.finality_status not in ('provisional', 'complete'):
+            raise ValueError('Unknown publication finality')
+        if (self.bundle_version is None) != (self.day_count is None) or (self.bundle_version is None) != (self.cycle_count is None):
+            raise ValueError('Mart bundle receipt fields must travel together')
+        for value in (self.day_count, self.cycle_count):
+            if value is not None and (type(value) is not int or value < 0):
+                raise ValueError('Invalid mart bundle count')
+
+    @property
+    def usable(self):
+        return self.bundle_version is not None
+
+
+@dataclass(frozen=True)
+class CatalogCycle:
+    """Published water-mart cycle window offered to application filters."""
+    cycle_id: str
+    compartment_id: str
+    compartment_name: str
+    start: date
+    end: date
+
+    def __post_init__(self):
+        for value in (self.cycle_id, self.compartment_id, self.compartment_name):
+            identifier(value)
+        calendar_window(self.start, self.end)
+
+
+@dataclass(frozen=True)
 class MeasureValue:
     value: Decimal | None
     unit: str

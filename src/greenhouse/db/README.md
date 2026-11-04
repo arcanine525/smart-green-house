@@ -121,6 +121,11 @@ Lệnh trả revision/correction/scope/snapshot/file/physical line range/raw_has
 
 Adapter validate catalog water `L/m²/day`, trả lượng ngày BR `L/m²` cùng source_unit; không đổi quantity. Missing quality/unit, duplicate day/measure hoặc context sai scope/snapshot/cycle/compartment fail. Service giữ formula, calendar gaps, coverage, NULL path, assumption label và rule-not-configured. Lineage kiểm membership trước khi gọi raw-hash verifier T08; ambiguous logical key cần revision ID. Không có SQL trong service/DTO/UI. Không cần migration mới; AGC smoke có thể chỉ SELECT trên publication hiện có.
 
+[Catalog adapter](catalog.py) bổ sung đường SELECT chỉ-đọc cho bộ lọc UI (publication hiện hành
+kèm receipt mart, cycle/khoang của một publication đã pin, rule profiles theo scope/khoang);
+SQL nằm trong `sql/query_catalog_*.sql`, không ghi và không đọc pointer cho publication đã chọn.
+Chi tiết app/xuất file xem [ứng dụng nước](../app/README.md).
+
 ## Mart nước và rule profiles
 
 Migration 005 thêm water mart, immutable rule config và unique membership index `(publication_id,revision_id)` cho FK fact → selected revision. Không sửa 001–004. Sau migrate, chạy **workflow mới** để có mart; publication lịch sử thiếu bundle bị adapter báo lỗi rõ, không fallback core hoặc backfill vào publication đã seal.

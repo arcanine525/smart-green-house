@@ -10,6 +10,10 @@ COPY src ./src
 RUN python -m pip install --no-cache-dir --no-deps --no-build-isolation . \
     && useradd --create-home --uid 10001 greenhouse
 COPY --chown=greenhouse:greenhouse prototypes/dashboard ./prototypes/dashboard
+# UI tests run in this same image (pytest/psycopg in the lock); no host venv.
+COPY --chown=greenhouse:greenhouse tests/ui ./tests/ui
 COPY .streamlit/config.toml ./.streamlit/config.toml
 USER greenhouse
-CMD ["python", "-m", "streamlit", "run", "prototypes/dashboard/app.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.fileWatcherType=none", "--browser.gatherUsageStats=false"]
+# Production water screen (BR-02); the fixture-only prototype is served by the
+# separate preview-build tooling and stays offline HTML.
+CMD ["python", "-m", "streamlit", "run", "src/greenhouse/app/home.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.fileWatcherType=none", "--browser.gatherUsageStats=false"]

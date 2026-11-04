@@ -12,12 +12,13 @@ Project hướng đến ba nhóm người dùng: người vận hành theo dõi 
 |---|---|
 | Sáu business requirements (BR) | Đã có đặc tả, công thức, điều kiện dữ liệu và tiêu chí nghiệm thu |
 | Kiến trúc và schema | Đã có ADR, sơ đồ Mermaid tổng quan và chi tiết |
-| UI demo Streamlit + Plotly | Chạy được với fixture tổng hợp; có bản HTML tương tác offline |
-| PostgreSQL, Spark và MQTT | Có môi trường container và integration tests synthetic; chưa có pipeline AGC tích hợp |
-| Docker Compose | Scaffold batch/sensor/test/tools; prototype chạy qua container, pipeline/sensor thật còn là stub |
+| Ứng dụng nước (BR-02) | Chạy được trên publication có water mart: bộ lọc từ catalog, KPI, chart, bảng tuần, lineage, export; nghiệm thu BR-02 còn ở task sau |
+| UI demo Streamlit + Plotly | Prototype fixture-only để review giao diện; có bản HTML tương tác offline |
+| PostgreSQL, Spark và MQTT | Có môi trường container và integration tests synthetic; pipeline AGC + water mart đã chạy |
+| Docker Compose | Scaffold batch/sensor/test/tools; app production và pipeline nước chạy qua container, sensor còn là stub |
 | ClickHouse | Phương án chuyển đổi sau MVP, chưa triển khai |
 
-Dashboard hiện tại là prototype để review giao diện. Các kết quả trong demo không phải số liệu AGC đã xử lý và không chứng minh sáu BR đã được nghiệm thu.
+Prototype dashboard chỉ để review giao diện với fixture tổng hợp. Ứng dụng nước đọc publication đã publish; các kết quả chưa trải qua nghiệm thu BR-02 hoàn chỉnh.
 
 ## Chạy UI demo
 
@@ -35,7 +36,7 @@ Các thao tác có thể thử:
 - Thay đổi giá điện để so sánh chi phí baseline với kịch bản.
 - Xuất CSV theo bộ lọc, kèm quality, đơn vị và phiên bản dữ liệu.
 
-### Chạy bằng Docker — prototype và môi trường scaffold
+### Chạy bằng Docker — ứng dụng nước và môi trường scaffold
 
 Host chỉ cần **Docker Engine + Compose v2 trở lên**; không cài Python/Java/Spark/PostgreSQL/Mosquitto trên host. Từ root clone mới:
 
@@ -47,7 +48,7 @@ docker compose --profile test run --rm test-runner
 docker compose --profile batch up -d --wait db app
 ```
 
-Mở **http://127.0.0.1:8501**. Service app hiện chạy prototype Verdant với fixture tổng hợp; chưa đọc AGC hoặc database. Lệnh `job` mặc định chỉ chạy `python -m greenhouse setup`: kiểm tra env/mount/DB, không ingest hoặc tạo schema nghiệp vụ. Chạy lại setup không sửa import/raw.
+Mở **http://127.0.0.1:8501**. Service app là **[ứng dụng nước](src/greenhouse/app/README.md)**: bộ lọc publication/khoang/ngày từ published catalog, KPI tưới/drain, biểu đồ ngày, bảng tuần, chi tiết ngày + lineage, xuất CSV/JSON. DB chưa có publication → ứng dụng báo trạng thái trống kèm lệnh; publication thiếu water mart → báo lỗi rõ, không fallback fixture. Lệnh `job` mặc định chỉ chạy `python -m greenhouse setup`: kiểm tra env/mount/DB, không ingest hoặc tạo schema nghiệp vụ. Chạy lại setup không sửa import/raw.
 
 `.env` bị Git ignore; giá trị password trong `.env.example` chỉ là mẫu local. Compose báo lỗi nếu thiếu `GREENHOUSE_DB_PASSWORD`. Có thể đổi cổng app và đường dẫn archive trong `.env`; mặc định nguồn nhập là `data/import/` (read-only), raw `data/raw/` (read-only khi xử lý), output nằm trong named volume riêng. Không cần dataset để chạy setup/tests/prototype; phần snapshot T05 có lệnh riêng ở dưới.
 
@@ -57,7 +58,7 @@ Kiểm tra cấu hình sensor mà không khởi chạy các stub:
 docker compose --profile sensor config --quiet
 ```
 
-`ingest` có [parser/staging và manifest theo run](src/greenhouse/ingestion/README.md). Các lệnh [migrate, load-core, explain-core, run-pipeline, publish, lineage](src/greenhouse/db/README.md) dựng core PostgreSQL, chạy lại có recovery và publish membership/quality/basis cùng water mart. [Query contracts và service BR-02](src/greenhouse/queries/README.md) đọc published Resources qua PostgreSQL adapter, có sealed water mart, query ngày/ISO week/vụ, pure summary oracle và DTO dùng chung; UI nước thuộc task tiếp theo. `transform` là alias của `run-pipeline`, chạy water mart hook trong publish transaction. `simulate`, `collect`, `stream` hiện thoát **mã 2**, ghi rõ “chưa hiện thực” và task sở hữu. Profile sensor đã khai báo broker, simulator, collector, stream-worker và volumes; chưa có replay hoặc xử lý streaming thật. Không gọi `up` toàn bộ sensor để coi như đã chạy pipeline.
+`ingest` có [parser/staging và manifest theo run](src/greenhouse/ingestion/README.md). Các lệnh [migrate, load-core, explain-core, run-pipeline, publish, lineage](src/greenhouse/db/README.md) dựng core PostgreSQL, chạy lại có recovery và publish membership/quality/basis cùng water mart. [Query contracts và service BR-02](src/greenhouse/queries/README.md) đọc published Resources qua PostgreSQL adapter, có sealed water mart, query ngày/ISO week/vụ, pure summary oracle và DTO dùng chung; [ứng dụng nước](src/greenhouse/app/README.md) và [catalog](src/greenhouse/app/README.md#chạy) tái dùng đúng service/DTO đó, không nhúng SQL vào UI. `transform` là alias của `run-pipeline`, chạy water mart hook trong publish transaction. `simulate`, `collect`, `stream` hiện thoát **mã 2**, ghi rõ “chưa hiện thực” và task sở hữu. Profile sensor đã khai báo broker, simulator, collector, stream-worker và volumes; chưa có replay hoặc xử lý streaming thật. Không gọi `up` toàn bộ sensor để coi như đã chạy pipeline.
 
 Tạo lại HTML bằng image UI, mặc định xuất vào `data/output/preview/preview.html` bị ignore:
 
@@ -240,7 +241,8 @@ Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên c�
 ├── docker/                         # Processing / UI / sensor images và Mosquitto config
 ├── requirements*.lock              # Dependency closure từng image, pin chính xác
 ├── src/greenhouse/                 # Package, CLI, config và diagnostic probes
-├── tests/                          # Unit/integration tests và fixture synthetic
+│   └── app/                        # Ứng dụng nước production (Streamlit) + catalog + export
+├── tests/                          # Unit/integration tests, tests/ui (AppTest) và fixture synthetic
 ├── config/                         # Quy ước cấu hình
 ├── scripts/                        # Quy ước wrapper Compose
 ├── DE_Requirements.pdf
@@ -264,7 +266,7 @@ Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên c�
 ## Hướng triển khai tiếp theo
 
 1. Dựng môi trường local, snapshot, schema PostgreSQL và query contracts.
-2. Hoàn thiện một luồng nguồn → mart → dashboard → đối soát, bắt đầu với BR-02.
+2. Hoàn thiện một luồng nguồn → mart → dashboard → đối soát, bắt đầu với BR-02: ứng dụng nước đã chạy; còn nghiệm thu BR-02 và bằng chứng hiệu năng.
 3. Mở rộng sáu BR và đường sensor replay, kiểm tra duplicate, late data và restart.
 4. Đánh giá correctness, performance và hiệu quả khai thác; so Hybrid/Kimball trên cùng engine.
 5. Sau MVP, cân nhắc ClickHouse bằng backfill và benchmark trên cùng workload; giữ đường quay lại đã kiểm chứng.

@@ -25,13 +25,14 @@ Mở **http://127.0.0.1:8501**. Lệnh setup mặc định của `job` là `pyth
 | Service | Profile | Image / command | Port host | Volumes / mount |
 |---|---|---|---|---|
 | db | Luôn bật khi cần | PostgreSQL 17.10 | Không | `pg_data` → `/var/lib/postgresql/data` |
-| app | Base: batch, sensor | UI / prototype Streamlit | `127.0.0.1:8501` mặc định | Không mount source/dataset; theme và prototype nằm trong image |
+| app | Base: batch, sensor | UI / [ứng dụng nước](../../src/greenhouse/app/README.md) (Streamlit) | `127.0.0.1:8501` mặc định | Raw host → `/data/raw:ro` chỉ để xác minh lineage; theme nằm trong image |
 | job | Base: batch, sensor | Processing / `greenhouse setup` mặc định | Không | Import host → `/data/import:ro`; raw host → `/data/raw:ro`; `outputs` → `/data/output` |
 | broker | sensor, test | Mosquitto 2.0.22 | Không | Config read-only; `broker_state` → `/mosquitto/data` |
 | simulator | sensor | Sensor / `greenhouse simulate` (stub) | Không | Raw host read-only; `simulator_outbox` → `/data/outbox` |
 | collector | sensor | Sensor / `greenhouse collect` (stub) | Không | `collector_spool` → `/data/spool`; `raw_ready` → `/data/ready` |
 | stream-worker | sensor | Processing / `greenhouse stream` (stub) | Không | `raw_ready` read-only; `spark_checkpoints`; raw host read-only; `outputs` |
 | test-runner | test | Processing / `greenhouse test -q -s` | Không | Không mount dữ liệu host; fixture synthetic đóng gói trong image |
+| ui-test | test | UI / `pytest tests/ui` (AppTest + service/export) | Không | Không mount dữ liệu host; database fixture `test_ui_*` tự drop; dùng budget `GREENHOUSE_UI_CPUS`/`GREENHOUSE_UI_MEMORY` (mặc định như app) |
 | snapshot | tools | Processing / `greenhouse snapshot` | Không | Import host RO; raw host RW; outputs |
 | dataset-download | tools | Processing / `greenhouse snapshot --download` | Không | Raw host RW; network download setup-only có Internet |
 | preview-build | tools | UI / `greenhouse preview --output /preview/preview.html` | Không | Output export host → `/preview` |
@@ -153,3 +154,7 @@ Outputs ở volume outputs: `pipeline/<workflow_id>/steps.jsonl`, mỗi attempt 
 ## Water mart bundle
 
 Chạy migrate (005+) rồi workflow mới: `docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id water-first`. Bundle code `pipeline-v2-irrigation` bảo đảm publication mới có water mart. `transform` là alias cùng flags; rerun không đổi reuse publication và không nhân fact rows. Default adapter từ chối publication cũ chưa có mart, không tự backfill/sửa publication đã seal. Xem [mart/rule config](../../src/greenhouse/db/README.md#mart-nước-và-rule-profiles) và [queries ngày/tuần/vụ](../../src/greenhouse/queries/README.md#day-iso-week-cycle-và-review-rule). Rule profile cần version ID tường minh; không seed threshold AGC. Shared basis vẫn có nhãn giả định chưa xác minh. Đây chưa phải UI hoặc nghiệm thu BR-02.
+
+## Ứng dụng nước
+
+`docker compose -p smart-greenhouse up -d --wait db app` rồi mở `http://127.0.0.1:8501` — [ứng dụng nước production](../../src/greenhouse/app/README.md) đọc publication hiện hành theo scope qua catalog; chọn khoang/cửa sổ, xem KPI/chart/tuần, drill-down ngày + lineage và xuất CSV/JSON. App mount raw read-only để xác minh lineage; thiếu mount chỉ làm lineage "chưa xác minh được", không chặn KPI. DB trống → trạng thái hướng dẫn; publication thiếu mart → lỗi rõ, không fallback. Kiểm thử UI: `docker compose --profile test run --rm ui-test` (AppTest chạy `home.py` thật với database fixture `test_ui_*` tự drop). Nghiệm thu BR-02 end-to-end thuộc task sau; UI không tự publish/migrate.

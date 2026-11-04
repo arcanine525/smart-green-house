@@ -1,0 +1,3 @@
+SELECT cycle_id,compartment_id,compartment_name,start_source_time,end_source_time_exclusive
+FROM mart.dim_irrigation_cycle WHERE publication_id=%s
+ORDER BY compartment_name,start_source_time,cycle_id
