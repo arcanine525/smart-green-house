@@ -174,7 +174,10 @@ def render(connection, settings, publications):
                                                 if b == RuleBasis.REQUESTED
                                                 else 'Realized (VIP: t_heat_vip/t_ventlee_vip/co2_vip)'),
                          key='clim_basis')
-        options = catalog.schedule_rules(selected, cycle.compartment_id)
+        options = catalog.schedule_rules(selected, cycle.compartment_id,
+                                         measurement_context='climate',
+                                         metrics=('temperature', 'co2'),
+                                         bases=(RuleBasis.REQUESTED, RuleBasis.REALIZED))
         labels = {None: '(không chọn — rule_not_configured)'}
         for option in options:
             labels[option.rule_version] = _rule_option_label(option)

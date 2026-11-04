@@ -91,9 +91,20 @@ class PostgresCatalogAdapter:
         return tuple(HarvestRuleProfile(**row)
                      for row in self._rows('query_harvest_rule_catalog', (scope_id, compartment_id)))
 
-    def catalog_schedule_rules(self, scope_id, compartment_id):
-        """Selectable immutable schedule revisions for one scope/compartment:
-        identity/keys only, no fallback and no latest auto-pick."""
+    def catalog_schedule_rules(self, scope_id, compartment_id, *, measurement_context,
+                               metrics, bases):
+        """Selectable immutable schedule revisions for one scope/compartment,
+        FILTERED to the declared evaluation group (metric/context/basis) so
+        future drain revisions can never appear in the climate UI list or
+        the other way around. EVERY segment of the revision must match the
+        declared group: mixed or foreign-group revisions would be refused
+        by the declared service boundary, so they are never offered. Partial
+        profiles (a subset of the declared metrics) stay legal. Identity/
+        keys only, no fallback and no latest auto-pick."""
+        declared_metrics = list(metrics)
+        declared_bases = [basis.value if isinstance(basis, RuleBasis) else str(basis)
+                          for basis in bases]
+        group = (measurement_context, declared_metrics, declared_bases)
         return tuple(
             ScheduleRevisionOption(
                 rule_version=row['rule_version'], rule_id=row['rule_id'],
@@ -102,4 +113,5 @@ class PostgresCatalogAdapter:
                 keys=tuple((entry['metric'], entry['measurement_context'],
                             RuleBasis(entry['basis'])) for entry in row['keys']),
                 segment_count=row['segment_count'])
-            for row in self._rows('query_catalog_schedule_rules', (scope_id, compartment_id)))
+            for row in self._rows('query_catalog_schedule_rules',
+                                  (scope_id, compartment_id) + group + group))

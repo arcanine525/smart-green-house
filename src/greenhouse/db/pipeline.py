@@ -20,7 +20,7 @@ from greenhouse.db.migrate import sql
 from greenhouse.ingestion.parser import PARSER_VERSION
 from greenhouse.ingestion.run import ingest_snapshot
 
-CODE_VERSION = 'pipeline-v4-climate'
+CODE_VERSION = 'pipeline-v5-drain'
 STEPS = ('ingest', 'load-core', 'spark', 'publish')
 
 
@@ -59,9 +59,10 @@ def config(conn, scope, policy):
     from greenhouse.db.harvest_mart import BUNDLE_VERSION as HARVEST_BUNDLE
     from greenhouse.db.irrigation_mart import BUNDLE_VERSION as IRRIGATION_BUNDLE
     from greenhouse.db.climate_mart import BUNDLE_VERSION as CLIMATE_BUNDLE
+    from greenhouse.db.drain_mart import BUNDLE_VERSION as DRAIN_BUNDLE
     return {'parser': PARSER_VERSION, 'quality_policy': policy, 'quality_hash': quality[0],
             'basis': [list(b) for b in bases], 'code': CODE_VERSION,
-            'marts': [IRRIGATION_BUNDLE, HARVEST_BUNDLE, CLIMATE_BUNDLE]}
+            'marts': [IRRIGATION_BUNDLE, HARVEST_BUNDLE, CLIMATE_BUNDLE, DRAIN_BUNDLE]}
 
 
 def artifact_files(folder):
@@ -319,9 +320,11 @@ def publish(conn, workflow, hook=None, fault=None):
             from greenhouse.db.irrigation_mart import materialize_irrigation
             from greenhouse.db.harvest_mart import materialize_harvest
             from greenhouse.db.climate_mart import materialize_climate
+            from greenhouse.db.drain_mart import materialize_drain
             materialize_irrigation(conn, publication, workflow)
             materialize_harvest(conn, publication, workflow)
             materialize_climate(conn, publication, workflow)
+            materialize_drain(conn, publication, workflow)
             if hook:
                 hook(conn, publication, workflow)
             fail('publish-hook', fault)

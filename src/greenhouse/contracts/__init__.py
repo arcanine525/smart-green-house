@@ -4,7 +4,7 @@ from greenhouse.contracts.models import (
     RESOURCE_WATER_UNIT, RULE_METRIC_UNITS, RULE_SCHEDULE_METRICS, RULE_SLOT_CLASSES,
     UNKNOWN_REASON_PRIORITY,
     WATER_UNIT, Applicability, BasisStatus, CatalogCycle, CatalogPublication,
-    ClimateEvaluation, CorrectionRef,
+    ClimateEvaluation, CorrectionRef, DrainEvaluation,
     CycleWindow, EnergyComponent, HarvestCompleteness, HarvestDay, HarvestQualityCounts,
     HarvestRecord, HarvestRuleProfile, HarvestSummary, HarvestUnresolvedIssue, IntradayContext,
     IrrigationDay, IrrigationSummary, IrrigationRuleProfile, LineageResult, MeasureUnit,

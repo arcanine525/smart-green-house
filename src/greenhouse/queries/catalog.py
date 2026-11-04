@@ -13,7 +13,8 @@ class CatalogAdapter(Protocol):
     def catalog_cycles(self, publication_id: str) -> tuple[CatalogCycle, ...]: ...
     def catalog_rules(self, scope_id: str, compartment_id: str) -> tuple[IrrigationRuleProfile, ...]: ...
     def catalog_harvest_rules(self, scope_id: str, compartment_id: str) -> tuple[HarvestRuleProfile, ...]: ...
-    def catalog_schedule_rules(self, scope_id: str, compartment_id: str): ...
+    def catalog_schedule_rules(self, scope_id: str, compartment_id: str, *,
+                               measurement_context, metrics, bases): ...
 
 
 class CatalogService:
@@ -51,5 +52,13 @@ class CatalogService:
     def harvest_rules(self, publication: CatalogPublication, compartment_id: str):
         return self.adapter.catalog_harvest_rules(publication.scope_id, compartment_id)
 
-    def schedule_rules(self, publication: CatalogPublication, compartment_id: str):
-        return self.adapter.catalog_schedule_rules(publication.scope_id, compartment_id)
+    def schedule_rules(self, publication: CatalogPublication, compartment_id: str, *,
+                       measurement_context: str, metrics, bases):
+        """Declared-group selector: the caller must pass its declared
+        evaluation group explicitly; there is no unfiltered call. Offered
+        options are compatible with the declared group — every segment of
+        an offered revision matches it (mixed/foreign-group revisions are
+        excluded rather than offered as a failing choice)."""
+        return self.adapter.catalog_schedule_rules(
+            publication.scope_id, compartment_id,
+            measurement_context=measurement_context, metrics=metrics, bases=bases)

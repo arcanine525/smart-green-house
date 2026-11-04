@@ -1748,3 +1748,52 @@ class SinkBatch:
         tuple_of(self.records, SinkRecord)
         if any(r.source.snapshot_id != self.snapshot_id for r in self.records):
             raise ValueError('Sink batch cannot mix raw snapshots')
+
+
+@dataclass(frozen=True)
+class DrainEvaluation:
+    """One BR-03 evaluation over the pinned publication/mart: typed EC/pH
+    inputs (fixed-bounds measured basis) and the T14 oracle result plus
+    bounded per-slot traces. measurement_context stays the exact core
+    identity 'drain_process_computer'; the declared basis is ALWAYS
+    RuleBasis.MEASURED (EC/pH have no requested/realized duality)."""
+    publication: PublicationRef
+    context: QueryContext
+    basis: RuleBasis
+    requested_rule_version: str | None
+    result: RuleDurationResult
+    slot_reviews: tuple[RuleSlotReview, ...]
+    # Optional provenance of the SELECTED revision, verbatim from the
+    # registered rule (never inferred from the rule_version string).
+    rule_id: str | None = None
+    rule_label: str | None = None
+    rule_is_demo: bool | None = None
+    rule_evidence_reference: str | None = None
+
+    def __post_init__(self):
+        if not isinstance(self.publication, PublicationRef):
+            raise ValueError('Drain evaluation pins a PublicationRef')
+        if not isinstance(self.context, QueryContext):
+            raise ValueError('Drain evaluation pins a QueryContext')
+        if self.publication.publication_id != self.context.publication_id:
+            raise ValueError('Evaluation publication and context must share the pinned ID')
+        if self.basis is not RuleBasis.MEASURED:
+            raise ValueError('BR-03 evaluates the measured basis only')
+        if not isinstance(self.result, RuleDurationResult):
+            raise ValueError('Drain evaluation carries the typed engine result')
+        if any(result.measurement_context != 'drain_process_computer'
+               for result in self.result.metric_results):
+            raise ValueError('Drain evaluation keeps the exact drain_process_computer context')
+        if self.rule_id is not None:
+            identifier(self.rule_id)
+        if self.rule_label is not None:
+            identifier(self.rule_label)
+        if self.rule_is_demo is not None and not isinstance(self.rule_is_demo, bool):
+            raise ValueError('Drain evaluation rule_is_demo must be bool or None')
+        if self.rule_evidence_reference is not None \
+                and not isinstance(self.rule_evidence_reference, str):
+            raise ValueError('Drain evaluation rule evidence must be str or None')
+        if self.requested_rule_version is None \
+                and any(applied.rule_version is not None for applied in self.result.applications):
+            raise ValueError('No-rule selection may not carry applied rule versions')
+        tuple_of(self.slot_reviews, RuleSlotReview)

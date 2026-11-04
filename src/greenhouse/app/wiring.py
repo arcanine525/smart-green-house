@@ -14,7 +14,7 @@ from greenhouse.contracts import (
     CatalogPublication, CycleWindow, HarvestDay, HarvestRecord, HarvestSummary, IrrigationDay,
     IrrigationSummary, PublicationRef, QueryContext,
 )
-from greenhouse.queries import ClimateService, IrrigationService
+from greenhouse.queries import ClimateService, DrainService, IrrigationService
 from greenhouse.queries.catalog import CatalogService
 from greenhouse.queries.harvest import HarvestService
 
@@ -38,6 +38,13 @@ def climate_service(connection, raw_snapshots=None) -> ClimateService:
     """BR-01 evaluation service over the sealed climate bundle."""
     from greenhouse.db.climate_adapter import PostgresClimateQueryAdapter
     return ClimateService(PostgresClimateQueryAdapter(connection, raw_snapshots=raw_snapshots))
+
+
+def drain_service(connection, raw_snapshots=None) -> DrainService:
+    """BR-03 evaluation service over the sealed drain bundle (exact
+    'drain_process_computer' context, measured basis, fixed bounds)."""
+    from greenhouse.db.drain_adapter import PostgresDrainQueryAdapter
+    return DrainService(PostgresDrainQueryAdapter(connection, raw_snapshots=raw_snapshots))
 
 
 def climate_publication_label(row):
