@@ -10,7 +10,7 @@ import tempfile
 from greenhouse.settings import Settings
 
 PENDING = {
-    "transform": "T08–T09 (publication và marts; core qua load-core)",
+    "transform": "T09 (marts; publication qua run-pipeline/publish)",
     "simulate": "T32 (sensor simulator)",
     "collect": "T33 (durable MQTT collector)",
     "stream": "T34 (Structured Streaming)",
@@ -41,11 +41,13 @@ def setup_environment(settings):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="python -m greenhouse")
-    parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", "migrate", "load-core", "explain-core", *PENDING])
+    parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", "migrate", "load-core", "explain-core", "run-pipeline", "publish", "correct-core", "lineage", *PENDING])
     arguments, rest = parser.parse_known_args(argv)
     if arguments.command in PENDING:
         print(f"{arguments.command}: chưa hiện thực — thuộc task sau: {PENDING[arguments.command]}", file=sys.stderr)
         return 2
+    if arguments.command in ("run-pipeline", "publish", "correct-core", "lineage"):
+        return pipeline_command(arguments.command, rest)
     if arguments.command in ("migrate", "load-core", "explain-core"):
         return core_command(arguments.command, rest)
     if arguments.command == "ingest":
@@ -174,5 +176,74 @@ def core_command(command, argv):
         return 1 if result.get("status") == "blocked" else 0
     except Exception as error:
         message = str(error) if isinstance(error, ValueError) else type(error).__name__
+        print(f"{command} failed: {message}", file=sys.stderr)
+        return 1
+
+
+def pipeline_command(command, argv):
+    import json
+    import psycopg
+    from greenhouse.db.loader import AGC_SCOPE, AGC_SHA
+    from greenhouse.db.pipeline import run_pipeline
+    from greenhouse.db.corrections import correct
+    from greenhouse.db.lineage import lineage
+    parser = argparse.ArgumentParser(prog=f"python -m greenhouse {command}")
+    parser.add_argument("--scope-id", default=AGC_SCOPE)
+    parser.add_argument("--snapshot", type=Path, default=Path(os.environ.get("GREENHOUSE_RAW_DIR", "/data/raw")) / "agc-2nd-2019" / AGC_SHA)
+    if command == "run-pipeline":
+        parser.add_argument("--output-root", type=Path, default=Path(os.environ.get("GREENHOUSE_OUTPUT_DIR", "/data/output")))
+        parser.add_argument("--archive", type=Path, default=Path("/data/import/autonomous-greenhouse-challengeagc-2nd-2019.zip"))
+        parser.add_argument("--workflow-id")
+        parser.add_argument("--resume", metavar="WORKFLOW_ID")
+        parser.add_argument("--ingestion-run", type=Path, help="Adopt a verified existing ingestion run")
+        parser.add_argument("--quality-policy", default="AGC_QUALITY_V1")
+        parser.add_argument("--fault", help="Controlled validation only: before/after-step or publish-members/hook/pointer")
+    elif command == "publish":
+        parser.add_argument("--workflow-id", required=True)
+    elif command == "lineage":
+        parser.add_argument("--revision-id", required=True)
+    else:
+        parser.add_argument("--source-record-id", required=True)
+        parser.add_argument("--record-type", required=True, choices=["climate", "drain", "resource", "harvest"])
+        parser.add_argument("--old-value", required=True, type=Path, help="Full measure map JSON; exact decimal strings/null")
+        parser.add_argument("--new-value", required=True, type=Path)
+        parser.add_argument("--actor", required=True)
+        parser.add_argument("--evidence", required=True)
+        parser.add_argument("--correction-id", required=True, help="Caller-generated idempotency key")
+    options = parser.parse_args(argv)
+    try:
+        with psycopg.connect(**Settings.from_env().connection_kwargs(), autocommit=True) as conn:
+            if command == "run-pipeline":
+                if options.resume and options.workflow_id:
+                    raise ValueError("Use --resume or --workflow-id")
+                # Same locked ZIP verification as ingest; a self-consistent but
+                # modified raw manifest is not proof of archive identity.
+                if options.scope_id == AGC_SCOPE:
+                    import zipfile
+                    from greenhouse.ingestion.snapshot import verify_archive, validate_snapshot, archive_members
+                    verify_archive(options.archive)
+                    with zipfile.ZipFile(options.archive) as archive:
+                        validate_snapshot(options.snapshot, archive, archive_members(archive))
+                result = run_pipeline(conn, options.snapshot, options.output_root, options.scope_id, options.quality_policy,
+                                      workflow=options.resume or options.workflow_id, resume=bool(options.resume),
+                                      ingestion_run=options.ingestion_run, fault=options.fault)
+            elif command == "publish":
+                from greenhouse.db.pipeline import read_workflow
+                run = read_workflow(conn, options.workflow_id)
+                spec = run['input_spec']
+                # Reuse the state/log recovery path, including failed publish.
+                result = run_pipeline(conn, Path(spec['snapshot']), Path(spec['output']),
+                                      run['data_scope_id'], run['versions']['quality_policy'],
+                                      workflow=options.workflow_id, resume=True)
+            elif command == "lineage":
+                result = lineage(conn, options.revision_id, options.snapshot)
+            else:
+                result = correct(conn, options.scope_id, options.source_record_id, options.record_type,
+                                 json.loads(options.old_value.read_text()), json.loads(options.new_value.read_text()),
+                                 options.actor, options.evidence, correction_id=options.correction_id)
+        print(json.dumps(result, ensure_ascii=False, default=str))
+        return 0
+    except Exception as error:
+        message = str(error) if isinstance(error, (ValueError, RuntimeError)) else type(error).__name__
         print(f"{command} failed: {message}", file=sys.stderr)
         return 1

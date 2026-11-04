@@ -60,3 +60,11 @@ sequenceDiagram
 - Độ trễ vận hành dùng lần publish thực đến khi dữ liệu queryable; duration nghiệp vụ dùng slot 5 phút nguồn. Thay replay speed không làm đổi duration.
 
 Các kiểm thử quan trọng: crash giữa staging/publication, sau commit trước checkpoint; cùng batch phát lại; late event qua biên episode; conflict; hai thao tác query pin cùng publication khi bản mới được công bố.
+
+## Batch coordinator đã triển khai
+
+[Workflow contract và lệnh](../../src/greenhouse/db/README.md#workflow-chạy-lại-và-publication) triển khai bốn step có trạng thái, SHA-256 artifacts, local Spark Parquet/profiling và publication psycopg. `workflow_candidate` freeze revision IDs; config hash pin parser/quality/basis/code. Lock theo workflow chống resume đồng thời; lock scope dùng chung cho load/correction/publish. Candidate cũ hơn latest hoặc config drift không được đẩy lùi current pointer.
+
+Publication transaction có hook cho T09 materialize marts trên **cùng connection**; synthetic test chứng minh hook rollback cùng membership và pointer. `publication_seal` chốt membership checksum/count và artifact checksum; publication cũ bất biến. Rerun không đổi chọn lại publication cũ và không gọi hook. Step completed được kiểm checksum trước skip, attempt lỗi có batch path mới và giữ mọi pending/source để chẩn đoán. Spark chỉ staging, không coi JDBC nhiều connection là atomic publication.
+
+Raw snapshot khác là data scope khác, không merge/matching hoặc tự mở rộng basis. Correction tường minh trong locked snapshot có old/new/evidence/actor/version, chỉ append revision và giữ raw identity. Các cơ chế processed_batch, episodes, late sensor và streaming trong thiết kế trên thuộc các task sau; batch hiện chưa materialize KPI.

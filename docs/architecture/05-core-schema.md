@@ -174,7 +174,7 @@ Với payload chưa parse được, `source_record_id` có thể chưa xác đ�
 
 ## Triển khai core hiện tại
 
-[SQL migrations và loader](../../src/greenhouse/db/README.md) là nguồn DDL thực; ERD phía trên diễn tả các entity logic. Migration 001–003 tạo `core`, `meta`, `config`; chưa tạo marts hoặc chạy coordinator publication.
+[SQL migrations và loader](../../src/greenhouse/db/README.md) là nguồn DDL thực; ERD phía trên diễn tả các entity logic. Migration 001–003 tạo `core`, `meta`, `config`; migration 004 thêm workflow/publication seal và giữ typed values/quality bất biến. Chưa tạo marts nghiệp vụ.
 
 | Entity logic | Bảng/view triển khai và khác biệt chi tiết |
 |---|---|
@@ -190,4 +190,4 @@ Source serial NUMERIC/token nguyên văn là nguồn thời gian có thẩm quy�
 
 Quality áp theo measure: missing/invalid/suspect không xóa measure khác của cùng row. Quarantine chỉ do invalid_numeric với time/header/width hợp lệ có thể tạo core partial, giữ quarantine nguồn; lỗi time/header, conflict và ngoài vụ không tạo revision. Không phân loại out-of-target, không tính KPI ở core.
 
-`core.explain_measure` là diagnostic candidate có value/unit/quality/applicability/basis/reason/raw reference. App chỉ dùng `core.published_measure`: current pointer → publication membership → selected revisions và quality/basis pin của cùng publication; view rỗng khi chưa publish. T07 loader không thay pointer. T08 phải kiểm đủ subtype/quality/membership, materialize marts và công bố transaction; T31 sẽ bọc SQL bằng contracts. Không dùng khả năng đọc candidate như bằng chứng app/BR đã nghiệm thu.
+`core.explain_measure` là diagnostic candidate có value/unit/quality/applicability/basis/reason/raw reference. App chỉ dùng `core.published_measure`: current pointer → publication membership → selected revisions và quality/basis pin của cùng publication; view rỗng khi chưa publish. Loader thấp cấp không thay pointer; run-pipeline/publish thực hiện coordinator. Coordinator kiểm đủ subtype/quality/membership, có hook marts cùng transaction và công bố pointer; T31 sẽ bọc SQL bằng contracts. Không dùng khả năng đọc candidate như bằng chứng app/BR đã nghiệm thu.

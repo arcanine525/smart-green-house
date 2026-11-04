@@ -82,14 +82,16 @@ docker compose --profile test run --rm test-runner
 
 | Command | Hành vi hiện tại | Task tiếp theo |
 |---|---|---|
-| setup | Kiểm config, input mounts đọc được, output ghi được, DB reachable; exit 0 khi đạt | Core qua migrate/load-core; publication thuộc T08 |
+| setup | Kiểm config, input mounts đọc được, output ghi được, DB reachable; exit 0 khi đạt | Core qua migrate/load-core; workflow qua run-pipeline |
 | test | Gọi pytest trong image processing, trả đúng exit code | Bổ sung kiểm chứng nghiệp vụ theo từng BR |
 | preview | Gọi builder prototype trong image UI, output rõ đường dẫn | Chỉ export fixture demo, không phải app nghiệp vụ |
-| ingest | Parser/adapter Python, staging JSONL gzip và manifest theo run trong outputs; [contract và lệnh](../../src/greenhouse/ingestion/README.md) | T08 publication/recovery, T31 PostgreSQL adapter |
+| ingest | Parser/adapter Python, staging JSONL gzip và manifest theo run trong outputs; [contract và lệnh](../../src/greenhouse/ingestion/README.md) | run-pipeline publication/recovery; T31 PostgreSQL adapter |
 | migrate | SQL migrations có version/checksum; rerun skip, checksum thay đổi fail | [Core/metadata contract](../../src/greenhouse/db/README.md) |
-| load-core | Một run T06 → candidate core/meta/config; không publish | T08 publication/recovery |
+| load-core | Một run T06 → candidate core/meta/config; không publish | Dùng run-pipeline cho publication/recovery |
 | explain-core | Diagnostic value/unit/quality/basis/lineage; không phải app API | T31 query contracts |
-| transform | Exit 2, “chưa hiện thực”; core có lệnh load-core riêng | T08–T09 publication/marts |
+| run-pipeline / publish | Bốn step có trạng thái, resume, local Spark staging/profile, một transaction publish; [contract](../../src/greenhouse/db/README.md#workflow-chạy-lại-và-publication) | Marts/KPI T09+ |
+| lineage / correct-core | Kiểm hash từ revision về raw / correction có audit và revision mới | Không sửa raw/time hoặc tự mở rộng basis |
+| transform | Exit 2, “chưa hiện thực”; core có lệnh load-core riêng | T09 marts; publication đã có run-pipeline/publish |
 | simulate | Exit 2, “chưa hiện thực” | T32 |
 | collect | Exit 2, “chưa hiện thực” | T33 |
 | stream | Exit 2, “chưa hiện thực” | T34 |
@@ -135,4 +137,15 @@ docker compose -p smart-greenhouse run --rm job python -m greenhouse load-core -
 docker compose -p smart-greenhouse run --rm job python -m greenhouse explain-core --compartment AICU --date 2020-01-01 --measure Irr --limit 5
 ```
 
-`migrate` không tự xóa DB hoặc raw; `load-core` từ chối cùng run và rollback khi lỗi. Candidate core chưa được app đọc: publication pointer còn rỗng cho tới coordinator T08. LabAnalysis vẫn raw/staging, core deferred. Không dùng SQL load thành công thay nghiệm thu BR.
+`migrate` không tự xóa DB hoặc raw; `load-core` từ chối cùng run và rollback khi lỗi. Candidate core chỉ trở thành public khi coordinator run-pipeline/publish commit pointer. LabAnalysis vẫn raw/staging, core deferred. Không dùng SQL load thành công thay nghiệm thu BR.
+
+## Chạy batch và phục hồi
+
+```bash
+docker compose -p smart-greenhouse run --rm job python -m greenhouse migrate
+docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id historical-first
+docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --resume historical-first
+docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id historical-repeat
+```
+
+Outputs ở volume outputs: `pipeline/<workflow_id>/steps.jsonl`, mỗi attempt có artifact manifest/checksums, Spark Parquet và profile JSON/JSONL. Resume kiểm step completed rồi skip; failed step chạy lại với attempt mới. Không xóa pending/raw/staging. DB T07 đã load có thể adopt `--ingestion-run /data/output/ingestion/<run_id>`, không nạp lại core. Snapshot/policy/scope/output phải giữ nguyên khi resume; config drift cần run mới. Same-snapshot không đổi reuse publication, correction được audit và chọn trong publication tiếp theo. Khác snapshot không auto-merge/basis. Resource limits Compose giữ nguyên: job 2 GiB/1.5 CPU, db 512 MiB/0.5 CPU; Spark local[1], driver 768 MiB, shuffle 4. Không restart Docker tự động nếu engine mất; lỗi transaction rollback và resume sau khi engine trở lại. Giữ db/broker chạy cho review.

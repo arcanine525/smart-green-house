@@ -179,3 +179,9 @@ T18/T20 và đánh giá BR-04/06 phải báo phương án 96/62.5 cùng kết qu
 | Giá ngoài cửa sổ, tính bao biên sample chính xác | Chỉ profile lịch sử trong phạm vi khai báo, giữ các daily buckets nguồn; không đổi giờ peak. | T20 version/rate join, T21 scenario validation. |
 
 Handoff trọng tâm: **T06** adapter + raw/line/time; **T07** measure-specific basis và assumption status/version, naive time, quality/correction policies; **T12/T13** Reference completeness và accepted A; **T18/T19** lượng riêng, conversion, kWh/kg có nhãn và sensitivity; **T20/T21** đúng đơn vị giá, temporal join, tổng chi phí có nhãn/sensitivity và NULL path. Quyết định assumption không sửa AC hiện hành và không chứng minh các task triển khai đã chạy.
+
+## 9. Revision trong snapshot khóa và ranh giới snapshot
+
+**User quyết định ngày 2026-11-04, main chuyển tiếp khi triển khai recovery.** “Changed content → new revision” là correction tường minh trong `meta.correction`: source_record_id, full old/new values, actor (`recorded_by`), evidence và version. Correction append revision n+1, giữ raw/source identity bất biến. Rerun cùng input reuse unchanged revisions; publication chọn đúng latest revision và khớp membership của clean run. Duplicate cùng content và conflict khác content trong file vẫn xử lý theo T06; không chọn first winner cho conflict.
+
+Snapshot raw khác là data_scope riêng; không merge hoặc matching identity xuyên snapshot trong batch recovery. Basis/assumption không tự mở rộng theo snapshot mới, phải có quyết định có nguồn như BR-04 ở mục 7. Correction hiện chỉ thay value map của một subtype; không tự sửa time, cycle, basis hoặc Reference out-of-cycle. [Coordinator và correction contract](../../src/greenhouse/db/README.md#workflow-chạy-lại-và-publication) triển khai và kiểm tra các ranh giới này; marts/nghiệm thu BR thuộc các task sau.

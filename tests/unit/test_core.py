@@ -30,7 +30,7 @@ def core_database():
     print("Synthetic test database created:", name)
     target = kwargs | {"dbname": name}
     with psycopg.connect(**target) as connection:
-        assert len(migrate(connection)["applied"]) == 3
+        assert len(migrate(connection)["applied"]) == 4
     try:
         yield target
     finally:
@@ -237,6 +237,7 @@ def test_publication_membership_pointer_and_pinned_basis_schema_only(db,tmp_path
         db.execute("INSERT INTO meta.publication_member VALUES ('synthetic-pub','synthetic:scope','resource','wrong-key',%s)",(revision,))
     db.execute("INSERT INTO meta.publication_member VALUES ('synthetic-pub','synthetic:scope','resource',%s,%s)",(key,revision))
     db.execute("INSERT INTO meta.publication_basis VALUES ('synthetic-pub','synthetic:scope','Synthetic','Irr','shared_analysis','synthetic:Irr')")
+    db.execute("INSERT INTO meta.publication_seal(publication_id,membership_checksum,member_count,artifact_checksum) VALUES ('synthetic-pub','fixture',1,'fixture')")
     db.execute("INSERT INTO meta.current_publication VALUES ('synthetic:scope','synthetic-pub')")
     db.execute("UPDATE config.basis_application SET enabled=false WHERE data_scope_id='synthetic:scope'")
     assert db.execute("SELECT area_m2 FROM core.published_measure WHERE measure_code='Irr'").fetchone()==(100,)
