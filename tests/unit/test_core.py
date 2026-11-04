@@ -30,7 +30,7 @@ def core_database():
     print("Synthetic test database created:", name)
     target = kwargs | {"dbname": name}
     with psycopg.connect(**target) as connection:
-        assert len(migrate(connection)["applied"]) == 6
+        assert len(migrate(connection)["applied"]) == 7
     try:
         yield target
     finally:

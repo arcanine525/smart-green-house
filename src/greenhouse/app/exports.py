@@ -8,10 +8,15 @@ src/greenhouse/app/README.md.
 """
 import csv
 import io
+import json
 
-from greenhouse.contracts import IrrigationDay, IrrigationSummary, to_json
+from greenhouse.contracts import (
+    HarvestDay, HarvestRecord, HarvestSummary, IrrigationDay, IrrigationSummary,
+    UnresolvedSourceAudit, to_json,
+)
 
 EXPORT_VERSION = 'greenhouse-water-csv-v1'
+HARVEST_EXPORT_VERSION = 'greenhouse-harvest-csv-v1'
 
 DAY_COLUMNS = (
     'resource_date',
@@ -167,3 +172,302 @@ def weekly_csv(action):
 def summary_json(action):
     """JSON contract v2 envelope; codec semantics untouched."""
     return to_json(action.summary).encode('utf-8')
+
+
+HARVEST_RECORD_COLUMNS = (
+    'harvest_date',
+    'prod_a_kg_m2', 'prod_b_kg_m2',
+    'prod_a_quality', 'prod_a_applicability', 'prod_a_reason_code', 'source_unit',
+    'prod_b_quality', 'prod_b_applicability', 'prod_b_reason_code',
+    'prod_a_basis_status', 'prod_a_basis_version_id', 'prod_a_area_m2', 'prod_a_basis_kind',
+    'prod_a_assumption_id', 'prod_a_assumption_version', 'prod_a_basis_label',
+    'prod_b_basis_status', 'prod_b_basis_version_id', 'prod_b_area_m2', 'prod_b_basis_kind',
+    'prod_b_assumption_id', 'prod_b_assumption_version', 'prod_b_basis_label',
+    'paired', 'class_b_share_pct', 'rule_status', 'rule_version',
+    'revision_id', 'logical_record_key', 'correction_id', 'correction_version',
+    'reason_codes',
+)
+
+HARVEST_DAY_COLUMNS = (
+    'harvest_date',
+    'prod_a_kg_m2', 'prod_b_kg_m2', 'paired_prod_a_kg_m2', 'paired_prod_b_kg_m2',
+    'class_a_share_pct', 'class_b_share_pct',
+    'record_count', 'record_present', 'paired_records',
+    'cumulative_a_kg_m2', 'cumulative_total_kg_m2', 'cumulative_origin',
+    'basis_status', 'basis_label',
+    'rule_status', 'rule_version',
+    'reason_codes',
+)
+
+HARVEST_SUMMARY_COLUMNS = (
+    'iso_year', 'iso_week', 'window_start', 'window_end',
+    'prod_a_observed_kg_m2', 'prod_b_observed_kg_m2',
+    'paired_prod_a_kg_m2', 'paired_prod_b_kg_m2', 'paired_total_kg_m2',
+    'class_a_share_pct', 'class_b_share_pct',
+    'accepted_records', 'paired_records',
+    'cumulative_a_kg_m2', 'cumulative_total_kg_m2', 'cumulative_origin', 'cumulative_basis_label',
+    'rule_status', 'rule_version',
+    'rule_profile_version', 'rule_profile_label', 'rule_profile_is_demo', 'rule_profile_evidence',
+    'rule_threshold_pct', 'outside_rule_records', 'rule_unknown_records',
+    'status',
+    'state_snapshot_complete', 'state_source_resolved', 'state_expected_files', 'state_files_present',
+    'state_files_loaded', 'state_files_failed', 'state_expected_relative_path',
+    'state_records_read', 'state_records_accepted', 'state_records_quarantine',
+    'state_records_duplicate', 'state_records_conflict', 'state_unresolved_records',
+    'state_conflicted_records', 'state_accepted_records', 'state_paired_records',
+    'state_prod_a_usable_records', 'state_prod_b_usable_records', 'state_event_a_dates',
+    'state_event_b_dates', 'state_reasons',
+    'unit', 'metric_version',
+    'publication_id', 'scope_id', 'snapshot_id',
+    'pipeline_run_id', 'quality_policy_version', 'parser_version', 'code_version',
+    'config_bundle_hash',
+    'reason_codes',
+)
+
+HARVEST_VERSION_FIELDS = {'pipeline_run_id', 'quality_policy_version', 'parser_version',
+                          'code_version', 'config_bundle_hash'}
+
+PROFILE_FIELDS = {'rule_profile_version': 'version', 'rule_profile_label': 'label',
+                  'rule_profile_is_demo': 'is_demo', 'rule_profile_evidence': 'evidence_reference'}
+
+
+def harvest_record_rows(records):
+    def read(record: HarvestRecord, name):
+        if name.startswith('prod_a_'):
+            measure, field = record.prod_a, name[len('prod_a_'):]
+        elif name.startswith('prod_b_'):
+            measure, field = record.prod_b, name[len('prod_b_'):]
+        elif name == 'source_unit':
+            return record.prod_a.source_unit
+        else:
+            return getattr(record, name)
+        if field == 'kg_m2':
+            return measure.value
+        return getattr(measure, field)
+    return [_row(HARVEST_RECORD_COLUMNS, lambda name, record=record: read(record, name))
+            for record in records]
+
+
+def harvest_day_rows(days):
+    name_map = {'prod_a_kg_m2': 'prod_a', 'prod_b_kg_m2': 'prod_b',
+                'paired_prod_a_kg_m2': 'paired_prod_a', 'paired_prod_b_kg_m2': 'paired_prod_b',
+                'cumulative_a_kg_m2': 'cumulative_a', 'cumulative_total_kg_m2': 'cumulative_total'}
+
+    def read(day: HarvestDay, name):
+        if name in name_map:
+            return getattr(day, name_map[name])
+        return getattr(day, name)
+    return [_row(HARVEST_DAY_COLUMNS, lambda name, day=day: read(day, name)) for day in days]
+
+
+STATE_FIELD = {    'state_snapshot_complete': 'snapshot_complete', 'state_source_resolved': 'source_resolved',
+    'state_expected_files': 'expected_files', 'state_files_present': 'files_present',
+    'state_files_loaded': 'files_loaded', 'state_files_failed': 'files_failed',
+    'state_expected_relative_path': 'expected_relative_path',
+    'state_records_read': 'records_read', 'state_records_accepted': 'records_accepted',
+    'state_records_quarantine': 'records_quarantine', 'state_records_duplicate': 'records_duplicate',
+    'state_records_conflict': 'records_conflict',
+    'state_unresolved_records': 'unresolved_records', 'state_conflicted_records': 'conflicted_records',
+    'state_accepted_records': 'accepted_records', 'state_paired_records': 'paired_records',
+    'state_prod_a_usable_records': 'prod_a_usable_records',
+    'state_prod_b_usable_records': 'prod_b_usable_records',
+    'state_event_a_dates': 'event_a_dates', 'state_event_b_dates': 'event_b_dates',
+    'state_reasons': 'reasons',
+}
+
+
+def harvest_summary_rows(summaries):
+    field_map = {'prod_a_observed_kg_m2': 'prod_a_observed', 'prod_b_observed_kg_m2': 'prod_b_observed',
+                 'paired_prod_a_kg_m2': 'paired_prod_a', 'paired_prod_b_kg_m2': 'paired_prod_b',
+                 'paired_total_kg_m2': 'paired_total', 'cumulative_a_kg_m2': 'cumulative_a',
+                 'cumulative_total_kg_m2': 'cumulative_total'}
+
+    def read(summary: HarvestSummary, name):
+        state = summary.completeness
+        if name in field_map:
+            return getattr(summary, field_map[name])
+        if name in PROFILE_FIELDS:
+            profile = summary.rule_profile
+            return getattr(profile, PROFILE_FIELDS[name]) if profile else None
+        if name == 'rule_threshold_pct':
+            return summary.rule_profile.max_class_b_share_pct if summary.rule_profile else None
+        if name in STATE_FIELD:
+            return getattr(state, STATE_FIELD[name])
+        if name in HARVEST_VERSION_FIELDS:
+            return getattr(summary.publication.versions, name)
+        if name in ('publication_id', 'scope_id', 'snapshot_id'):
+            return getattr(summary.publication, name)
+        return getattr(summary, name)
+    return [_row(HARVEST_SUMMARY_COLUMNS, lambda name, summary=summary: read(summary, name))
+            for summary in summaries]
+
+
+def harvest_export_metadata(action, evaluation_grain):
+    """Header lines for one pinned harvest action (no credentials).
+
+    `evaluation_grain` names the row grain of THIS export ('record', 'day',
+    'week', 'unresolved_issue_identity') and the constant verdict-semantics
+    note keeps rule_status cells self-explaining: a row verdict is that
+    row's own share, never a summary/weekly mix-up."""
+    publication, context, versions = action.publication, action.context, action.publication.versions
+    summary, state = action.summary, action.summary.completeness
+    lines = [
+        f'export={HARVEST_EXPORT_VERSION}',
+        f'evaluation_grain={evaluation_grain}',
+        "verdict_semantics=every row verdict is that row's OWN share compared to the "
+        'selected rule threshold (equal is inside); record counters stay separate '
+        'grain facts; a requested-window summary verdict is NOT any week row',
+        'quantity_unit=kg/m²', 'share_unit=%', 'source_quantity_unit=kg/m²/harvest',
+        'decimal=exact source scale (no rounding)', 'null=empty field', 'bool=true/false',
+        f'scope={publication.scope_id}', f'snapshot={publication.snapshot_id}',
+        f'publication={publication.publication_id}',
+        f'finality={publication.finality_status}', f'committed_at={publication.committed_at.isoformat()}',
+        f'cycle={context.cycle_id}', f'compartment={context.compartment_ids[0]}',
+        f'requested_window=[{context.start.isoformat()},{context.end.isoformat()})',
+        f'effective_window=[{summary.window_start.isoformat()},{summary.window_end.isoformat()})',
+        'time_basis=source_naive (source timezone unresolved)',
+        (
+            f'observed_kg_m2: prod_a={summary.prod_a_observed},prod_b={summary.prod_b_observed}; '
+            f'paired_kg_m2: prod_a={summary.paired_prod_a},prod_b={summary.paired_prod_b},'
+            f'pair_set_only_total={summary.paired_total}'
+        ),
+        f'share_pct: a={summary.class_a_share_pct},b={summary.class_b_share_pct} '
+        f'(weighted paired masses; per-week subsets state their own records)',
+        f'counts: accepted_records={summary.accepted_records},paired_records={summary.paired_records}',
+        (
+            f'cumulative: origin={summary.cumulative_origin or ""}, '
+            f'a={summary.cumulative_a},total={summary.cumulative_total},'
+            f'label={summary.cumulative_basis_label or ""} '
+            f'(a = accepted ProdA; total = paired A+B; contributors stop at effective end)'
+        ),
+        (
+            f'completeness: snapshot_complete={state.snapshot_complete},'
+            f'source_resolved={state.source_resolved},expected_files={state.expected_files},'
+            f'files_present={state.files_present},files_loaded={state.files_loaded},'
+            f'files_failed={state.files_failed},'
+            f'unresolved={state.unresolved_records},conflicts={state.conflicted_records},'
+            f'state_accepted={state.accepted_records},state_paired={state.paired_records},'
+            f'usable: prod_a={state.prod_a_usable_records},prod_b={state.prod_b_usable_records},'
+            f'event_dates: a={state.event_a_dates},b={state.event_b_dates}'
+        ),
+        f'expected_relative_path={state.expected_relative_path or ""}',
+        f'pipeline_run={versions.pipeline_run_id}', f'quality_policy={versions.quality_policy_version}',
+        f'parser_version={versions.parser_version}', f'code_version={versions.code_version}',
+        f'config_bundle_hash={versions.config_bundle_hash}', f'metric_version={summary.metric_version}',
+        f'status={summary.status.value}',
+        f'rule_status={summary.rule_status.value}', f'rule_version={summary.rule_version or ""}',
+    ]
+    if summary.record_quality is not None:
+        q = summary.record_quality
+        lines.append(
+            'record_quality_population: window_records=' + str(q.population_records) +
+            ' prod_a: accepted=' + str(q.prod_a_accepted) + ',missing=' + str(q.prod_a_missing) +
+            ',invalid=' + str(q.prod_a_invalid) + ',suspect=' + str(q.prod_a_suspect) +
+            '; prod_b: accepted=' + str(q.prod_b_accepted) + ',missing=' + str(q.prod_b_missing) +
+            ',invalid=' + str(q.prod_b_invalid) + ',suspect=' + str(q.prod_b_suspect) +
+            '; scope: only the effective window records (separate from whole-cycle '
+            'state_* completeness and from frozen unresolved sources; no-event days '
+            'are never claimed as coverage)')
+    profile = summary.rule_profile
+    if profile is not None:
+        lines.append(
+            f'rule_profile={profile.rule_version} profile_version={profile.version} '
+            f'max_class_b_share={profile.max_class_b_share_pct} % '
+            f'demo={str(profile.is_demo).lower()} evidence={profile.evidence_reference}')
+    return [f'# {line}' for line in lines]
+
+
+def harvest_record_csv(action):
+    return _document(HARVEST_RECORD_COLUMNS, harvest_record_rows(action.records),
+                     harvest_export_metadata(action, 'record'))
+
+
+def harvest_day_csv(action):
+    return _document(HARVEST_DAY_COLUMNS, harvest_day_rows(action.days),
+                     harvest_export_metadata(action, 'day'))
+
+
+def harvest_week_csv(action):
+    return _document(HARVEST_SUMMARY_COLUMNS, harvest_summary_rows(action.weekly),
+                     harvest_export_metadata(action, 'week'))
+
+
+def harvest_summary_json(action):
+    """Harvest export wrapper over the canonical summary envelope. The wrapper
+    keys are export metadata only; `summary` stays the UNCHANGED canonical
+    {contract_version: 2, data: …} JSON v2 envelope decodable by
+    from_json(HarvestSummary, …). Water exports stay untouched."""
+    return json.dumps({'harvest_export_version': 1,
+                       'export_kind': 'window_summary',
+                       'grain_note': 'the summary is the verdict of the effective '
+                                     'window; per-week/per-day/per-record verdicts and '
+                                     'counters are in the weekly/days/records CSVs of '
+                                     'the same action; the UI rule/grain choice stays '
+                                     'UI context (the audit CSV records it when an '
+                                     'audit runs)',
+                       'summary': json.loads(to_json(action.summary))},
+                      ensure_ascii=False, indent=2).encode('utf-8')
+
+
+EXCLUDED_COLUMNS = (
+    'source_record_id', 'disposition', 'reason_code', 'issue_column',
+    'relative_path', 'line_number', 'source_time_serial',
+)
+
+
+def excluded_source_rows(summary):
+    """Frozen unresolved-issue provenance; quarantined values stay excluded."""
+    return [_row(EXCLUDED_COLUMNS, lambda name, item=item: getattr(item, name))
+            for item in summary.completeness.unresolved_items]
+
+
+def excluded_source_csv(action):
+    """Frozen unresolved-issue provenance export (no raw amounts)."""
+    return _document(EXCLUDED_COLUMNS, excluded_source_rows(action.summary),
+                     harvest_export_metadata(action, 'unresolved_issue_identity'))
+
+
+def unresolved_source_audit_csv(audit):
+    """One audit as CSV with its pinned context; only VERIFIED audits carry raw rows."""
+    publication = audit.publication
+    context_lines = []
+    if publication is not None:
+        versions = publication.versions
+        context_lines = [
+            f'# publication={publication.publication_id}',
+            f'# scope={publication.scope_id}',
+            f'# snapshot={audit.snapshot_id}',
+            f'# cycle={audit.cycle_id or ""}',
+            f'# compartment={audit.compartment_id or ""}',
+            f'# requested_window=[{audit.requested_start.isoformat() if audit.requested_start else ""},'
+            f'{audit.requested_end.isoformat() if audit.requested_end else ""})',
+            f'# pipeline_run={versions.pipeline_run_id}',
+            f'# quality_policy={versions.quality_policy_version}',
+            f'# parser_version={versions.parser_version}',
+            f'# code_version={versions.code_version}',
+            f'# config_bundle_hash={versions.config_bundle_hash}',
+            f'# committed_at={publication.committed_at.isoformat()}',
+        ]
+    lines = [
+        '# export=greenhouse-harvest-unresolved-audit-v2',
+        f'# source={audit.source_record_id}',
+        f'# disposition={audit.disposition or ""}',
+        f'# reason_code={audit.reason_code}',
+        f'# issue_column={audit.issue_column or ""}',
+        f'# rule_version={audit.rule_version or ""}',
+        f'# rule_grain={audit.rule_grain or ""}',
+        f'# relative_path={audit.relative_path or ""}',
+        f'# line_number={audit.line_number if audit.line_number is not None else ""}',
+        f'# source_time_serial={audit.source_time_serial if audit.source_time_serial is not None else ""}',
+        f'# file_verified={str(audit.file_verified).lower()}',
+        f'# record_verified={str(audit.record_verified).lower()}',
+        f'# note={audit.note or ""}',
+        ('# verified raw explanation only; rule/grain context is traceability, '
+         'these values never recompute a KPI'
+         if audit.record_verified else
+         '# UNVERIFIED audit: no raw values are exposed (missing/drifted/forbidden)'),
+    ]
+    columns = ('column', 'raw_token')
+    rows = [{'column': audit.headers[i], 'raw_token': audit.tokens[i]}
+            for i in range(len(audit.tokens))]
+    return _document(columns, rows, context_lines + lines)

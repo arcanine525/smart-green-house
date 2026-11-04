@@ -192,6 +192,40 @@ class IrrigationRuleProfile:
 
 
 @dataclass(frozen=True)
+class HarvestRuleProfile:
+    """Immutable optional class-B threshold: one explicit version per
+    scope/compartment. There is NO default; a profile is used only when a
+    caller passes its rule_version (demo 10% must carry the demo label)."""
+    rule_version: str
+    rule_id: str
+    version: int
+    scope_id: str
+    compartment_id: str
+    max_class_b_share_pct: Decimal
+    evidence_reference: str
+    is_demo: bool
+    label: str
+    unit: str = HARVEST_UNIT
+    ratio_unit: str = '%'
+
+    def __post_init__(self):
+        for value in (self.rule_version, self.rule_id, self.scope_id, self.compartment_id,
+                      self.evidence_reference, self.label):
+            identifier(value)
+        if type(self.version) is not int or self.version < 1 or type(self.is_demo) is not bool:
+            raise ValueError('Invalid rule version/demo flag')
+        finite(self.max_class_b_share_pct, nonnegative=True)
+        if self.max_class_b_share_pct > 100:
+            raise ValueError('Class-B threshold must stay within percent range')
+        if self.unit != HARVEST_UNIT or self.ratio_unit != '%' or (self.is_demo and self.label != 'demo_rule'):
+            raise ValueError('Rule requires kg/m² units and an explicit demo label')
+
+    def matches(self, context):
+        if (self.scope_id, self.compartment_id) != (context.scope_id, context.compartment_ids[0]):
+            raise ValueError('Rule profile is outside the requested scope/compartment')
+
+
+@dataclass(frozen=True)
 class QueryContext:
     scope_id: str
     publication_id: str
@@ -234,8 +268,9 @@ class CycleWindow:
 class CatalogPublication:
     """One filter option: the current sealed publication of a data scope.
 
-    usable reports only that the sealed irrigation mart bundle exists; it is a
-    catalog fact about the publication, never a quality or BR statement.
+    usable reports only that the sealed irrigation mart bundle exists, and
+    harvest_usable only that the frozen harvest mart bundle expected by this
+    release exists; both are catalog facts, never quality or BR statements.
     """
     scope_id: str
     snapshot_id: str
@@ -246,6 +281,8 @@ class CatalogPublication:
     bundle_version: str | None = None
     day_count: int | None = None
     cycle_count: int | None = None
+    harvest_bundle_version: str | None = None
+    harvest_reason_codes: tuple[str, ...] = ()
 
     def __post_init__(self):
         for value in (self.scope_id, self.snapshot_id, self.publication_id, self.code_version):
@@ -258,10 +295,17 @@ class CatalogPublication:
         for value in (self.day_count, self.cycle_count):
             if value is not None and (type(value) is not int or value < 0):
                 raise ValueError('Invalid mart bundle count')
+        tuple_of(self.harvest_reason_codes, str)
+        if self.harvest_bundle_version is not None and self.harvest_reason_codes:
+            raise ValueError('A present harvest bundle carries no absence reasons')
 
     @property
     def usable(self):
         return self.bundle_version is not None
+
+    @property
+    def harvest_usable(self):
+        return self.harvest_bundle_version is not None
 
 
 @dataclass(frozen=True)
@@ -497,6 +541,10 @@ class HarvestRecord:
     correction_version: int | None = None
     paired: bool = False
     reason_codes: tuple[str, ...] = ()
+    rule_status: RuleStatus = RuleStatus.NOT_CONFIGURED
+    rule_version: str | None = None
+    rule_profile: HarvestRuleProfile | None = None
+    class_b_share_pct: Decimal | None = None
 
     def __post_init__(self):
         if not isinstance(self.publication, PublicationRef) or not all(
@@ -510,6 +558,23 @@ class HarvestRecord:
         for measure in (self.prod_a, self.prod_b):
             if measure.unit != HARVEST_UNIT or measure.source_unit != HARVEST_SOURCE_UNIT:
                 raise ValueError('Harvest measures require kg/m² with source kg/m²/harvest')
+        if not isinstance(self.rule_status, RuleStatus):
+            raise ValueError('Invalid harvest record rule status')
+        if self.rule_status == RuleStatus.NOT_CONFIGURED:
+            if self.rule_version is not None or self.rule_profile is not None:
+                raise ValueError('Unconfigured record cannot claim a rule')
+        elif (self.rule_status not in (RuleStatus.WITHIN_RANGE, RuleStatus.OUTSIDE_RANGE, RuleStatus.UNKNOWN)
+              or not isinstance(self.rule_profile, HarvestRuleProfile)
+              or self.rule_version != self.rule_profile.rule_version
+              or (self.publication.scope_id, self.compartment_id) != (
+                  self.rule_profile.scope_id, self.rule_profile.compartment_id)):
+            raise ValueError('Record rule metadata does not match its profile')
+        finite(self.class_b_share_pct, nullable=True, nonnegative=True)
+        a, b = self.prod_a.value, self.prod_b.value
+        if self.class_b_share_pct is not None:
+            paired_sum = a + b if (a is not None and b is not None) else None
+            if not (self.paired and paired_sum not in (None, 0)):
+                raise ValueError('A record share requires its own paired nonzero measures')
         if type(self.paired) is not bool or self.paired != (self.prod_a.accepted and self.prod_b.accepted):
             raise ValueError('Paired flag must follow both measure acceptance states')
         if (self.correction_id is None) != (self.correction_version is None):
@@ -545,6 +610,80 @@ class HarvestUnresolvedIssue:
         if self.line_number is not None and (type(self.line_number) is not int or self.line_number < 2):
             raise ValueError('Unresolved issue line number starts at the first data line')
         finite(self.source_time_serial, nullable=True)
+
+
+@dataclass(frozen=True)
+class UnresolvedSourceAudit:
+    """Authorized read-only audit of ONE frozen unresolved source row.
+
+    A caller may only request an identity that is a member of the pinned
+    publication's frozen unresolved issue set for the same snapshot. Raw
+    values appear ONLY after file+record verification against immutable
+    metadata; a missing/drifted raw stays UNVERIFIED with empty tokens —
+    never a fabricated value. These audit values are explanation only; they
+    never recompute a KPI.
+    """
+    source_record_id: str
+    snapshot_id: str
+    reason_code: str
+    disposition: str | None = None
+    issue_column: str | None = None
+    relative_path: str | None = None
+    line_number: int | None = None
+    source_time_serial: Decimal | None = None
+    headers: tuple[str, ...] = ()
+    tokens: tuple[str, ...] = ()
+    file_verified: bool = False
+    record_verified: bool = False
+    note: str | None = None
+    publication: PublicationRef | None = None
+    cycle_id: str | None = None
+    compartment_id: str | None = None
+    requested_start: date | None = None
+    requested_end: date | None = None
+    rule_version: str | None = None
+    rule_grain: str | None = None
+
+    def __post_init__(self):
+        identifier(self.source_record_id); identifier(self.snapshot_id)
+        identifier(self.reason_code)
+        if self.disposition not in (None, 'quarantine', 'conflict'):
+            raise ValueError('Audit disposition must be quarantine or conflict when set')
+        if self.rule_grain not in (None, 'record', 'day', 'week'):
+            raise ValueError('Audit rule grain must be record, day or week when set')
+        if self.rule_version is not None:
+            identifier(self.rule_version)
+        if (type(self.file_verified) is not bool or type(self.record_verified) is not bool):
+            raise ValueError('Audit verification flags must be booleans')
+        if not self.file_verified and self.record_verified:
+            raise ValueError('Record cannot verify when the file does not')
+        if self.file_verified:
+            identifier(self.relative_path)
+            if type(self.line_number) is not int or self.line_number < 2:
+                raise ValueError('A verified audit needs its physical line')
+        if self.record_verified:
+            if not self.headers or not self.tokens or len(self.headers) != len(self.tokens):
+                raise ValueError('A verified audit exposes exactly the raw header/token row')
+            if self.note is not None:
+                raise ValueError('Verified audit carries no unavailability note')
+        elif self.tokens:
+            raise ValueError('Unverified audit exposes no raw values (no fabrications)')
+        if not self.record_verified and not self.file_verified and self.note is None:
+            raise ValueError('An unverified audit must state why')
+        if self.source_time_serial is not None:
+            finite(self.source_time_serial)
+        if self.publication is not None:
+            if not isinstance(self.publication, PublicationRef):
+                raise ValueError('Audit publication must be a PublicationRef contract')
+        for id_name in (self.cycle_id, self.compartment_id):
+            if id_name is not None:
+                identifier(id_name)
+        for boundary in (self.requested_start, self.requested_end):
+            if boundary is not None and type(boundary) is not date:
+                raise ValueError('Audit requested window uses whole source dates')
+        if self.requested_start is not None and self.requested_end is not None \
+                and self.requested_start >= self.requested_end:
+            raise ValueError('Audit requested window must be a half-open range')
 
 
 @dataclass(frozen=True)
@@ -614,6 +753,36 @@ class HarvestCompleteness:
 
 
 @dataclass(frozen=True)
+class HarvestQualityCounts:
+    """Quality partition of the SELECTED window's real record population per
+    measure (service-computed from exactly these records). Deliberately NOT
+    the whole-cycle completeness and NOT the frozen unresolved issues: this
+    window subset states nothing about other populations and a no-event day
+    is never claimed as coverage."""
+    population_records: int
+    prod_a_accepted: int
+    prod_a_missing: int
+    prod_a_invalid: int
+    prod_a_suspect: int
+    prod_b_accepted: int
+    prod_b_missing: int
+    prod_b_invalid: int
+    prod_b_suspect: int
+
+    def __post_init__(self):
+        counts = (self.population_records, self.prod_a_accepted, self.prod_a_missing,
+                  self.prod_a_invalid, self.prod_a_suspect, self.prod_b_accepted,
+                  self.prod_b_missing, self.prod_b_invalid, self.prod_b_suspect)
+        if any(type(value) is not int or value < 0 for value in counts):
+            raise ValueError('Quality counts are nonnegative integers')
+        for name in ('a', 'b'):
+            parts = (getattr(self, f'prod_{name}_accepted'), getattr(self, f'prod_{name}_missing'),
+                     getattr(self, f'prod_{name}_invalid'), getattr(self, f'prod_{name}_suspect'))
+            if sum(parts) != self.population_records:
+                raise ValueError('Quality counts must partition the record population')
+
+
+@dataclass(frozen=True)
 class HarvestSummary:
     """Period harvest summary: observed totals per measure, paired totals and
     weighted shares on the SAME paired records. Navigation cumulatives run
@@ -652,6 +821,20 @@ class HarvestSummary:
     iso_year: int | None = None
     iso_week: int | None = None
     reason_codes: tuple[str, ...] = ()
+    rule_status: RuleStatus = RuleStatus.NOT_CONFIGURED
+    rule_version: str | None = None
+    rule_profile: HarvestRuleProfile | None = None
+    outside_rule_records: int | None = None
+    rule_unknown_records: int | None = None
+    record_quality: HarvestQualityCounts | None = None
+
+    @property
+    def time_basis(self):
+        return self.publication.time_basis
+
+    @property
+    def versions(self):
+        return self.publication.versions
 
     def __post_init__(self):
         self.context.matches(self.publication)
@@ -697,6 +880,32 @@ class HarvestSummary:
             raise ValueError('Cumulative origin must not come after the window')
         if not isinstance(self.status, ResultStatus) or not isinstance(self.completeness, HarvestCompleteness):
             raise ValueError('Invalid summary status/completeness contracts')
+        if not isinstance(self.rule_status, RuleStatus):
+            raise ValueError('Invalid summary rule status')
+        if self.rule_status == RuleStatus.NOT_CONFIGURED:
+            if any(value is not None for value in (self.rule_version, self.rule_profile,
+                                                   self.outside_rule_records, self.rule_unknown_records)):
+                raise ValueError('Rule outcome unavailable without a configured profile')
+        elif (self.rule_status not in (RuleStatus.WITHIN_RANGE, RuleStatus.OUTSIDE_RANGE, RuleStatus.UNKNOWN)
+              or not isinstance(self.rule_profile, HarvestRuleProfile)
+              or self.rule_version != self.rule_profile.rule_version
+              or self.rule_version != self.context.rule_version
+              or (self.publication.scope_id, self.context.compartment_ids[0]) != (
+                  self.rule_profile.scope_id, self.rule_profile.compartment_id)):
+            raise ValueError('Summary rule metadata does not match request/profile')
+        else:
+            self.rule_profile.matches(self.context)
+            for count in (self.outside_rule_records, self.rule_unknown_records):
+                if type(count) is not int or count < 0:
+                    raise ValueError('Invalid rule record count')
+            if self.outside_rule_records + self.rule_unknown_records > self.accepted_records:
+                raise ValueError('Rule record counters cannot exceed the accepted records')
+        if self.record_quality is not None:
+            if not isinstance(self.record_quality, HarvestQualityCounts):
+                raise ValueError('Record quality counts must be the typed counts')
+            if self.record_quality.population_records != self.accepted_records:
+                raise ValueError(
+                    'Quality counts must match the effective window record population')
         tuple_of(self.reason_codes, str)
         if self.unit != HARVEST_UNIT:
             raise ValueError('Harvest period requires kg/m²')
@@ -728,6 +937,9 @@ class HarvestDay:
     cumulative_a: Decimal | None = None
     cumulative_total: Decimal | None = None
     cumulative_origin: date | None = None
+    rule_status: RuleStatus = RuleStatus.NOT_CONFIGURED
+    rule_version: str | None = None
+    rule_profile: HarvestRuleProfile | None = None
 
     def __post_init__(self):
         if not isinstance(self.publication, PublicationRef):
@@ -762,6 +974,17 @@ class HarvestDay:
                 raise ValueError('Positive day mass yields both shares')
         if not isinstance(self.basis_status, BasisStatus):
             raise ValueError('Day basis status must be a contract enum')
+        if not isinstance(self.rule_status, RuleStatus):
+            raise ValueError('Invalid harvest day rule status')
+        if self.rule_status == RuleStatus.NOT_CONFIGURED:
+            if self.rule_version is not None or self.rule_profile is not None:
+                raise ValueError('Unconfigured day cannot claim a rule')
+        elif (self.rule_status not in (RuleStatus.WITHIN_RANGE, RuleStatus.OUTSIDE_RANGE, RuleStatus.UNKNOWN)
+              or not isinstance(self.rule_profile, HarvestRuleProfile)
+              or self.rule_version != self.rule_profile.rule_version
+              or (self.publication.scope_id, self.compartment_id) != (
+                  self.rule_profile.scope_id, self.rule_profile.compartment_id)):
+            raise ValueError('Day rule metadata does not match its profile')
         if self.basis_status in (BasisStatus.VERIFIED, BasisStatus.ASSUMED) and self.basis_label is None:
             raise ValueError('A known basis needs its visible label')
         if self.basis_status not in (BasisStatus.VERIFIED, BasisStatus.ASSUMED) and self.basis_label is not None:

@@ -144,3 +144,15 @@ docker compose -p smart-greenhouse run --rm job python -m greenhouse transform -
 ## Mart thu hoạch và completeness (BR-05 slice)
 
 Migration 006 thêm `mart.dim_harvest_cycle`, `fact_harvest_record` (record grain, không collapse same-date, per-measure quality/basis/unit) và `harvest_cycle_state` (completeness theo publication/cycle) cùng receipt `harvest_publication`. Materialize dùng chung transaction/connection với membership/config/water mart/pointer; seal v3 yêu cầu CẢ HAI bundle water+harvest (trigger version-aware, code cũ hơn vẫn hành vi cũ). `harvest-mart-v3` là bundle identity hiện hành và **nằm trong identity/config digest của workflow** (`config()` trả `marts`: [water, harvest] cùng parser/policy/basis/code) — corrected bundle hay code mới đều tạo publication mới thay vì silent reuse; later identical v3 run reuse publication nhờ config hash. Unresolved provenance key theo (source record, issue) + snapshot (dedupe qua runs, giữ nguyên các reason khác nhau); một issue chỉ thoát unresolved khi publication hiện hành pin revision/quality thực sự đã sửa đúng issue đó (chỉ invalid-numeric ProdA/ProdB); conflicts, out-of-cycle và mọi issue khác vẫn chặn, correction chưa publish không được tham chiếu, audit gốc được giữ nguyên cho từng publication cũ. Bộ đếm tính theo record identity thật: file thiếu/trống cho 0 record (không còn phantom), file trống đã parse vẫn là snapshot complete/0 đã verify. Reference 43510 (2019-02-14, 0.32 chỉ ở raw) tiếp tục `out_of_cycle_unresolved`: state false kèm items (identity/issue/path/line/serial) cho drilldown; số 0.32 KHÔNG được sao chép vào mart (chỉ raw evidence). Harvest adapter trả DTO provenance đầy đủ: correction identity (id/version) của từng record, expected path và unresolved items; records trả về theo thứ tự (date, key) ổn định. Receipt v1/stale vẫn fail actionably. Xem [harvest service](../queries/README.md) và contracts.
+
+## Rule thu hoạch (BR-05 versioned threshold)
+
+Migration `007_harvest_rule.sql` (append-only) thêm `config.harvest_rule_profile`: một
+profile là một version immutable của ngưỡng `max_class_b_share_pct` cho đúng
+scope/compartment, CHECK 0..100 finite, unit `kg/m²`, label `demo_rule` bắt buộc cho
+demo; không có ngầm ngưỡng mặc định. `register_harvest_rule` chèn bằng parameterized
+SQL; catalog trả profile cho scope/khoang. Rule được áp dụng tại query time trên
+record/day/week grain: `class_b_share_pct > ngưỡng` → ngoài dải, bằng ngưỡng là trong
+dải, không có denominator (thiếu cặp usable hoặc khối lượng 0) → `unknown` (không bao
+giờ kết luận 0%/100%). T14 sẽ dựng kho rule đầy đủ; profile này chỉ phục vụ BR-05
+slice. Xem [harvest service](../queries/README.md).

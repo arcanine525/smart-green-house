@@ -57,8 +57,6 @@ def stop_with(kind, title, detail=None, tips=None):
 def render(connection):
     settings = Settings.from_env()
     catalog = wiring.catalog_service(connection)
-    raw_snapshots = wiring.raw_snapshot_mapping(settings.raw_dir)
-    service = wiring.irrigation_service(connection, raw_snapshots)
 
     try:
         publications = catalog.publications()
@@ -68,9 +66,27 @@ def render(connection):
 
     if not publications:
         stop_with('info', 'Chưa có publication nào được publish — ứng dụng không có dữ liệu fixture thay thế.',
-                  'Chạy pipeline để tạo publication có water mart (lệnh đầy đủ trong docs/implementation/local-environment.md):',
+                  'Chạy pipeline để tạo publication có mart bundle (lệnh đầy đủ trong '
+                  'docs/implementation/local-environment.md):',
                   'docker compose -p smart-greenhouse run --rm job python -m greenhouse migrate\n'
-                  'docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id water-first')
+                  'docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline '
+                  '--workflow-id water-first')
+
+    with st.sidebar:
+        screen = st.radio('Màn hình', ['💧 Nước (BR-02)', '🍅 Thu hoạch (BR-05)'],
+                          key='screen_choice',
+                          help='Mỗi màn hình dùng bundle riêng (nước = irrigation-mart-v1, '
+                          'thu hoạch = harvest-mart-v3); session filter tách theo màn hình.')
+
+    if screen == '🍅 Thu hoạch (BR-05)':
+        from greenhouse.app import harvest as harvest_screen
+        return harvest_screen.render(connection, settings, publications)
+    return render_water(connection, settings, publications)
+
+
+def render_water(connection, settings, publications):
+    catalog = wiring.catalog_service(connection)
+    service = wiring.irrigation_service(connection, wiring.raw_snapshot_mapping(settings.raw_dir))
 
     usable_rows = [row for row in publications if row.usable]
     if not usable_rows:

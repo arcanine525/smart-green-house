@@ -2,27 +2,31 @@
 
 Same pinning rules as the water adapter: pin the chosen publication once per
 action and reuse its IDs; a publication without the sealed harvest bundle
-fails actionably, with no fallback to core or the current pointer. The caller
-owns the connection.
+fails actionably, with no fallback to core or the current pointer. The
+optional raw-snapshot mount feeds the read-only unresolved-source audit; it
+never rewrites or recomputes published values. The caller owns the connection.
 """
 from datetime import date, time
 from decimal import Decimal
+from pathlib import Path
 
 from psycopg.rows import dict_row
 
 from greenhouse.contracts import (
     ASSUMPTION_LABEL, HARVEST_SOURCE_UNIT, HARVEST_UNIT, Applicability, BasisStatus, CycleWindow,
-    HarvestCompleteness, HarvestRecord, HarvestUnresolvedIssue, MeasureValue, PublicationRef,
-    QualityStatus, Versions,
+    HarvestCompleteness, HarvestRecord, HarvestRuleProfile, HarvestUnresolvedIssue, LineageResult,
+    MeasureUnit, MeasureValue, PublicationRef, QualityStatus, UnresolvedSourceAudit, Versions,
 )
 from greenhouse.db.harvest_mart import BUNDLE_VERSION
+from greenhouse.db.lineage import lineage as resolve_lineage, verify_source_row
 from greenhouse.db.migrate import sql
 from greenhouse.db.pipeline import pin_publication
 
 
 class PostgresHarvestQueryAdapter:
-    def __init__(self, connection):
+    def __init__(self, connection, raw_snapshots=None):
         self.connection = connection
+        self.raw_snapshots = {k: Path(v) for k, v in (raw_snapshots or {}).items()}
 
     def _rows(self, name, parameters):
         with self.connection.cursor(row_factory=dict_row) as cursor:
@@ -97,6 +101,35 @@ class PostgresHarvestQueryAdapter:
             result.append(record)
         return tuple(result)
 
+    def read_lineage(self, publication, *, revision_id=None, record_key=None):
+        """Accepted-record provenance pinned inside this harvest adapter."""
+        if (revision_id is None) == (record_key is None):
+            raise ValueError('Select exactly one revision_id or logical record key')
+        rows = self._rows('query_lineage_member', (publication.publication_id, publication.scope_id,
+                          publication.snapshot_id, revision_id, revision_id, record_key, record_key))
+        if len(rows) != 1:
+            raise ValueError('Revision/key absent or ambiguous in the pinned publication')
+        member = rows[0]
+        raw = self.raw_snapshots.get(publication.snapshot_id)
+        if raw is None:
+            raise ValueError('Raw snapshot mount not configured')
+        source = resolve_lineage(self.connection, member['revision_id'], raw)
+        units = self._rows('query_lineage_units', (member['record_type'],))
+        return LineageResult(
+            publication=publication, revision_id=member['revision_id'], record_type=member['record_type'],
+            units=tuple(MeasureUnit(r['measure_code'], r['unit']) for r in units),
+            logical_record_key=member['logical_record_key'], cycle_id=member['cycle_id'],
+            compartment_id=member['compartment_id'],
+            revision_number=source['revision_number'], source_record_id=source['source_record_id'],
+            first_run_id=source['first_run_id'],
+            relative_path=source['relative_path'], file_checksum=source['file_checksum'],
+            archive_sha256=source['archive_sha256'],
+            line_number=source['line_number'], line_end=source['line_end'],
+            raw_reference=source['raw_reference'], raw_hash=source['raw_hash'],
+            raw_hash_verified=source['raw_hash_verified'], source_time_serial=member['source_time_serial'],
+            source_timestamp=member['source_timestamp'], correction_id=source['correction_id'],
+            correction_version=member['correction_version'])
+
     def harvest_state(self, context):
         rows = self._rows('query_harvest_state', (context.publication_id, context.snapshot_id,
                                                   context.cycle_id, context.compartment_ids[0]))
@@ -124,3 +157,86 @@ class PostgresHarvestQueryAdapter:
             event_b_dates=row['event_b_dates'], reasons=tuple(row['reasons']),
             expected_relative_path=details.get('expected_relative_path'),
             unresolved_items=items)
+
+    def harvest_rule(self, context):
+        """The optional explicit rule version; None stays not_configured."""
+        if context.rule_version is None:
+            return None
+        rows = self._rows('query_harvest_rule', (context.rule_version,))
+        if len(rows) != 1:
+            raise ValueError('Unknown harvest rule version')
+        profile = HarvestRuleProfile(**rows[0])
+        profile.matches(context)
+        return profile
+
+    def read_unresolved_source(self, context, publication, unresolved_item, *, rule_grain=None):
+        """Authorized read-only raw audit of ONE frozen unresolved issue.
+
+        Authorization matches the complete frozen issue identity
+        (source record + disposition + reason + issue column) inside this
+        pinned publication/cycle's unresolved set; a forged or foreign
+        identity fails loudly. Metadata comes from the frozen entry, the
+        database rows and the verified raw — never from unchecked caller
+        fields. The raw value appears only after file+record verification;
+        missing/drifted/unreadable raw becomes an explicit unverified state
+        with NO tokens (no fabrication). The audit never feeds a KPI.
+        """
+        if not isinstance(unresolved_item, HarvestUnresolvedIssue):
+            raise ValueError('Expected a frozen unresolved issue item')
+        context.matches(publication)
+        states = self._rows('query_harvest_state', (context.publication_id, context.snapshot_id,
+                                                    context.cycle_id, context.compartment_ids[0]))
+        if len(states) != 1:
+            raise ValueError('Harvest completeness state is absent from the pinned publication')
+        frozen = {(entry['source_record_id'], entry['disposition'], entry['reason_code'],
+                   entry.get('issue_column')): entry
+                  for entry in (states[0]['unresolved'] or [])}
+        entry = frozen.get((unresolved_item.source_record_id, unresolved_item.disposition,
+                            unresolved_item.reason_code, unresolved_item.issue_column))
+        if entry is None:
+            raise ValueError('Issue identity is not frozen in this publication/cycle unresolved set')
+        base = dict(source_record_id=entry['source_record_id'],
+                    snapshot_id=publication.snapshot_id,
+                    publication=publication, cycle_id=context.cycle_id,
+                    compartment_id=context.compartment_ids[0],
+                    requested_start=context.start, requested_end=context.end,
+                    reason_code=entry['reason_code'], disposition=entry['disposition'],
+                    issue_column=entry.get('issue_column'),
+                    rule_version=context.rule_version, rule_grain=rule_grain,
+                    relative_path=None, line_number=None, source_time_serial=None,
+                    headers=(), tokens=(), file_verified=False, record_verified=False,
+                    note=None)
+        rows = self._rows('query_harvest_source_audit',
+                          (unresolved_item.source_record_id, publication.snapshot_id))
+        if len(rows) != 1:
+            raise ValueError('Source metadata is absent for this snapshot')
+        row = rows[0]
+        context_lines = dict(relative_path=row['relative_path'], line_number=row['line_number'],
+                             source_time_serial=row['source_time_serial'])
+        raw = self.raw_snapshots.get(publication.snapshot_id)
+        if raw is None:
+            # Known row metadata stays visible even without a mount; no raw value.
+            return UnresolvedSourceAudit(**base | context_lines | dict(note='raw-mount-missing'))
+        try:
+            headers, record = verify_source_row(
+                raw, row['relative_path'], publication.snapshot_id, row['archive_sha256'],
+                row['file_checksum'], row['first_run_id'], row['line_number'],
+                row['source_record_id'], row['raw_hash'], row['line_end'])
+        except FileNotFoundError:
+            return UnresolvedSourceAudit(**base | context_lines | dict(note='raw-file-missing'))
+        except OSError:
+            return UnresolvedSourceAudit(**base | context_lines |
+                                         dict(note='raw-file-unreadable'))
+        except ValueError:
+            return UnresolvedSourceAudit(**base | context_lines |
+                                         dict(note='raw-identity-mismatch'))
+        else:
+            tokens = tuple(str(token) for token in record['raw_tokens'])
+            if record['line_number'] != row['line_number'] or len(tokens) != len(headers):
+                return UnresolvedSourceAudit(**base | dict(
+                    relative_path=row['relative_path'], line_number=row['line_number'],
+                    source_time_serial=row['source_time_serial'], note='raw-token-shape-mismatch'))
+            return UnresolvedSourceAudit(**base | dict(
+                relative_path=row['relative_path'], line_number=row['line_number'],
+                source_time_serial=row['source_time_serial'], headers=headers, tokens=tokens,
+                file_verified=True, record_verified=True))

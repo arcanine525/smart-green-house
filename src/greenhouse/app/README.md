@@ -1,9 +1,13 @@
-# Ứng dụng nước (BR-02) — màn hình tối thiểu
+# Ứng dụng nước (BR-02) + thu hoạch (BR-05) — màn hình tối thiểu
 
 Ứng dụng production chạy Streamlit + Plotly trong image UI. Mọi phép tính nằm ở
-[IrrigationService](../queries/README.md) + [PostgresQueryAdapter](../db/README.md#adapter-query-cho-ứng-dụng);
-UI không nhúng SQL và không tính lại công thức. Bộ lọc lấy từ
-[catalog adapter](../db/catalog.py) qua [CatalogService](../queries/catalog.py) — không dán ID thủ công.
+[IrrigationService](../queries/README.md) / [HarvestService](../queries/README.md) +
+[PostgresQueryAdapter](../db/README.md#adapter-query-cho-ứng-dụng) /
+[PostgresHarvestQueryAdapter](../db/harvest_adapter.py); UI không nhúng SQL và không
+tính lại công thức. Bộ lọc lấy từ [catalog adapter](../db/catalog.py) qua
+[CatalogService](../queries/catalog.py) — không dán ID thủ công. Entry:
+[home.py](home.py) có radio chọn màn hình: nước (irrigation-mart-v1) và thu hoạch
+(harvest-mart-v3; [harvest.py](harvest.py)).
 
 ## Chạy
 
@@ -45,8 +49,10 @@ manifest lỗi/không đọc được/trùng snapshot_id bị bỏ qua — các 
 - CSV ngày (`*-days.csv`) và CSV tuần (`*-weekly.csv`): tái sử dụng đúng DTO đang hiển thị.
 - Decimal giữ **exact string** (không làm tròn), NULL → ô rỗng, `0` giữ `'0'`,
   bool → `true`/`false`, tuple → `a;b`. Làm tròn chỉ xảy ra trên màn hình.
-- JSON summary: envelope contract **v2** (`contract_version` + `data`) từ codec
-  contracts, không đổi schema.
+- JSON summary (nước): envelope contract **v2** (`contract_version` + `data`) từ codec
+  contracts, không đổi schema. JSON summary của harvest dùng wrapper
+  `harvest_export_version: 1` (`export_kind: window_summary`; body `summary` giữ
+  nguyên envelope v2 ở trên) — không nới lỏng codec.
 - Metadata dưới dạng dòng `# key=value` trước header: đơn vị (`quantity_unit=L/m²`,
   `ratio_unit=%`), scope/snapshot/publication/finality/committed_at, cycle/compartment,
   `requested_window`/`effective_window` (nửa mở), time basis, **status/expected days/
@@ -85,5 +91,47 @@ AppTest chạy `home.py` thật với DB fixture (không Spark — stage thay b�
 - Không caching kết quả (mỗi rerun truy vấn lại; cache phải mang đủ identity publication/
   context/version — chưa cần cho quy mô hiện tại).
 - Connection mở mỗi rerun, không cache resource (an toàn đa session).
-- Xếp hạng/nhiều khoang, harvest, scenario chưa thuộc màn hình này; prototype
+- Xếp hạng/nhiều khoang, scenario chưa thuộc màn này; prototype
   `prototypes/dashboard` là demo fixture-only, tách biệt.
+
+## Màn hình thu hoạch (BR-05, T13)
+
+[harvest.py](harvest.py) mở rộng cùng luồng tác vụ cho BR-05:
+
+1. Publication cần **harvest-mart-v3**: publication chỉ có water vẫn xem được ở màn
+   nước nhưng không hiện ở màn harvest; thiếu bundle → trạng thái lỗi tường minh
+   (không tự publish/backfill).
+2. KPI: `A observed`/`B observed` (Σ theo measure) vs `Tổng paired A+B`
+   (chỉ record đủ cặp) vs `Share B` (100×ΣB/Σ(A+B) trên CÙNG tập paired; NULL khi
+   mẫu số 0/không usable — không trung bình share từng record). Counts: read/
+   accepted/quarantine/duplicate/conflict, usable per measure, event dates, chưa
+   phân giải.
+3. Snapshot chưa hoàn chỉnh: cảnh báo + không xếp hạng; không cộng per-m² giữa các
+   khoang; ngày không event: complete → known 0 (record_present=false), incomplete →
+   NULL/unknown.
+4. Navigation cumulative: `cumulative_origin` (đầu vụ) hiển thị riêng trên chart;
+   record sau cửa sổ không góp; zoom không mang reason clipping
+   (`cumulative_from_cycle_start`), cắt biên thật → `window_clipped_to_cycle`.
+5. Rule (tùy chọn, version tường minh): `not_configured` mặc định; chọn profile demo
+   `harvest-demo-b10:*` có nhãn demo/evidence; share B > ngưỡng được flag ở record/
+   day/week, bằng ngưỡng nằm trong dải, không denominator → unknown.
+6. Chi tiết record: correction identity, lineage về raw (hash xác minh qua mount
+   read-only; lựa chọn record re-resolve theo identity bền vững trên mỗi render nên
+   kết luận dòng luôn theo DTO hiện hành); excluded provenance + audit raw có xác minh
+   (hiển thị token raw sau khi file+record khớp; thiếu/drift → unverified tường minh,
+   không giá trị bịa).
+7. Xuất: CSV records/days/weekly (khai báo `evaluation_grain` và ngữ nghĩa verdict
+   trong metadata) + JSON summary là wrapper `harvest_export_version: 1` với
+   `export_kind: window_summary` và body `summary` giữ nguyên envelope canonical
+   `{contract_version: 2, data: …}` (water JSON vẫn là direct v2) + CSV excluded
+   provenance + CSV audit theo từng item; cột/metadata chung theo mục xuất dưới đây.
+
+Xuất CSV harvest (v1): `harvest_date`, A/B, chất lượng/basis từng measure, `paired`,
+`class_b_share_pct`, `rule_status`/`rule_version`, correction id/version,
+revision/key, `reason_codes`. Summary/tuần: ISO week, observed/paired/total từng
+measure, shares, accepted/paired records, cumulative a/total + origin + label, rule
+metadata + counts, trạng thái completeness + counters, reasons, unit/metric/versions.
+CSV excluded: identity/disposition/reason/issue_column/relative_path/line/serial
+(không giá trị quarantined); CSV audit: chỉ verified mới có token raw, metadata mang
+đầy đủ publication/cycle/khoang/cửa sổ yêu cầu và pipeline/quality/parser/code/config
+versions của publication đã pin.

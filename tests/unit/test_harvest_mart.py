@@ -29,8 +29,8 @@ from greenhouse.ingestion.parser import HEADERS
 from greenhouse.queries.harvest import HarvestService, share
 from test_query_adapter import contracts_database, fixture_stage
 
-D1 = 43864             # 2020-02-02 (inside cycle 2020-02-01..09)
-D2 = 43865             # 2020-02-03
+D1 = 43864             # 2020-02-03 (inside default cycle 2020-02-01..09)
+D2 = 43865             # 2020-02-04
 D3 = 43866             # 2020-02-04
 OUT_OF_CYCLE = 43510   # the Reference-like 2019-02-14 serial
 

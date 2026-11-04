@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "downloads": [
+    "harvest-Digilog-2019-12-16_2020-05-29-days.csv",
+    "harvest-Digilog-2019-12-16_2020-05-29-records.csv",
+    "harvest-Digilog-2019-12-16_2020-05-29-summary.json",
+    "harvest-Digilog-2019-12-16_2020-05-29-weekly.csv"
+  ],
+  "weekly_data_rows": 24,
+  "summary_rule_status": "within_range"
+}

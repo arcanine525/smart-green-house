@@ -1,0 +1,203 @@
+﻿# export=greenhouse-harvest-csv-v1
+# evaluation_grain=day
+# verdict_semantics=every row verdict is that row's OWN share compared to the selected rule threshold (equal is inside); record counters stay separate grain facts; a requested-window summary verdict is NOT any week row
+# quantity_unit=kg/m²
+# share_unit=%
+# source_quantity_unit=kg/m²/harvest
+# decimal=exact source scale (no rounding)
+# null=empty field
+# bool=true/false
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# publication=adf2a02900864da2bf0e41b86516f6ef
+# finality=provisional
+# committed_at=2026-11-04T11:40:53.756005+00:00
+# cycle=agc-cycle-Digilog
+# compartment=Digilog
+# requested_window=[2019-12-16,2020-05-30)
+# effective_window=[2019-12-16,2020-05-30)
+# time_basis=source_naive (source timezone unresolved)
+# observed_kg_m2: prod_a=13.51,prod_b=0.70322; paired_kg_m2: prod_a=13.51,prod_b=0.70322,pair_set_only_total=14.21322
+# share_pct: a=95.052352668853363277286920205273681825793170020586,b=4.9476473311466367227130797947263181742068299794135 (weighted paired masses; per-week subsets state their own records)
+# counts: accepted_records=23,paired_records=23
+# cumulative: origin=2019-12-16, a=13.51,total=14.21322,label=giả định chưa xác minh (a = accepted ProdA; total = paired A+B; contributors stop at effective end)
+# completeness: snapshot_complete=True,source_resolved=True,expected_files=1,files_present=1,files_loaded=1,files_failed=0,unresolved=0,conflicts=0,state_accepted=23,state_paired=23,usable: prod_a=23,prod_b=23,event_dates: a=23,b=23
+# expected_relative_path=Digilog/Production.csv
+# pipeline_run=2a24bf110e8e490c857a54595812a4db
+# quality_policy=AGC_QUALITY_V1
+# parser_version=agc-parser-v1
+# code_version=pipeline-v3-harvest
+# config_bundle_hash=0e59b30767915583370c4d9fc896120a321188bf41cf837f09f32c075b436c96
+# metric_version=br05-summary-v1
+# status=complete
+# rule_status=within_range
+# rule_version=harvest-demo-b10:Digilog:v2
+# record_quality_population: window_records=23 prod_a: accepted=23,missing=0,invalid=0,suspect=0; prod_b: accepted=23,missing=0,invalid=0,suspect=0; scope: only the effective window records (separate from whole-cycle state_* completeness and from frozen unresolved sources; no-event days are never claimed as coverage)
+# rule_profile=harvest-demo-b10:Digilog:v2 profile_version=2 max_class_b_share=10 % demo=true evidence=Synthetic demo per docs/br/br_05_harvest-quality-tracking.md §4.2/AC-08: 10% class-B share boundary example; explicitly NOT an AGC standard threshold. Supersedes the earlier unsupported demo wording (v1).
+harvest_date,prod_a_kg_m2,prod_b_kg_m2,paired_prod_a_kg_m2,paired_prod_b_kg_m2,class_a_share_pct,class_b_share_pct,record_count,record_present,paired_records,cumulative_a_kg_m2,cumulative_total_kg_m2,cumulative_origin,basis_status,basis_label,rule_status,rule_version,reason_codes
+2019-12-16,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-17,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-18,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-19,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-20,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-21,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-22,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-23,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-24,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-25,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-26,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-27,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-28,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-29,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-30,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2019-12-31,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-01,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-02,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-03,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-04,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-05,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-06,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-07,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-08,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-09,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-10,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-11,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-12,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-13,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-14,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-15,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-16,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-17,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-18,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-19,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-20,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-21,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-22,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-23,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-24,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-25,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-26,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-27,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-28,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-29,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-30,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-01-31,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-01,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-02,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-03,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-04,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-05,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-06,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-07,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-08,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-09,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-10,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-11,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-12,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-13,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-14,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-15,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-16,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-17,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-18,0,0,,,,,0,false,0,0,0,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-19,0.05,0.1,0.05,0.1,33.333333333333333333333333333333333333333333333333,66.666666666666666666666666666666666666666666666667,1,true,1,0.05,0.15,2019-12-16,assumed_unverified,giả định chưa xác minh,outside_range,harvest-demo-b10:Digilog:v2,outside_harvest_rule
+2020-02-20,0,0,,,,,0,false,0,0.05,0.15,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-21,0,0,,,,,0,false,0,0.05,0.15,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-22,0,0,,,,,0,false,0,0.05,0.15,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-23,0,0,,,,,0,false,0,0.05,0.15,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-24,0.31,0.0000,0.31,0.0000,1E+2,0,1,true,1,0.36,0.4600,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-02-25,0,0,,,,,0,false,0,0.36,0.4600,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-26,0,0,,,,,0,false,0,0.36,0.4600,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-27,0,0,,,,,0,false,0,0.36,0.4600,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-02-28,0.31,0.0000,0.31,0.0000,1E+2,0,1,true,1,0.67,0.7700,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-02-29,0,0,,,,,0,false,0,0.67,0.7700,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-01,0,0,,,,,0,false,0,0.67,0.7700,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-02,0,0,,,,,0,false,0,0.67,0.7700,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-03,0,0,,,,,0,false,0,0.67,0.7700,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-04,0.79,0.0000,0.79,0.0000,1E+2,0,1,true,1,1.46,1.5600,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-03-05,0,0,,,,,0,false,0,1.46,1.5600,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-06,0,0,,,,,0,false,0,1.46,1.5600,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-07,0,0,,,,,0,false,0,1.46,1.5600,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-08,0,0,,,,,0,false,0,1.46,1.5600,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-09,0.42,0.0000,0.42,0.0000,1E+2,0,1,true,1,1.88,1.9800,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-03-10,0,0,,,,,0,false,0,1.88,1.9800,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-11,0,0,,,,,0,false,0,1.88,1.9800,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-12,0,0,,,,,0,false,0,1.88,1.9800,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-13,0.27,0.0000,0.27,0.0000,1E+2,0,1,true,1,2.15,2.2500,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-03-14,0,0,,,,,0,false,0,2.15,2.2500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-15,0,0,,,,,0,false,0,2.15,2.2500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-16,0,0,,,,,0,false,0,2.15,2.2500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-17,0,0,,,,,0,false,0,2.15,2.2500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-18,0.68,0.0000,0.68,0.0000,1E+2,0,1,true,1,2.83,2.9300,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-03-19,0,0,,,,,0,false,0,2.83,2.9300,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-20,0,0,,,,,0,false,0,2.83,2.9300,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-21,0,0,,,,,0,false,0,2.83,2.9300,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-22,0,0,,,,,0,false,0,2.83,2.9300,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-23,0.62,0.0000,0.62,0.0000,1E+2,0,1,true,1,3.45,3.5500,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-03-24,0,0,,,,,0,false,0,3.45,3.5500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-25,0,0,,,,,0,false,0,3.45,3.5500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-26,0,0,,,,,0,false,0,3.45,3.5500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-27,0.35,0.0000,0.35,0.0000,1E+2,0,1,true,1,3.80,3.9000,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-03-28,0,0,,,,,0,false,0,3.80,3.9000,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-29,0,0,,,,,0,false,0,3.80,3.9000,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-30,0,0,,,,,0,false,0,3.80,3.9000,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-03-31,0,0,,,,,0,false,0,3.80,3.9000,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-01,0.44,0.0000,0.44,0.0000,1E+2,0,1,true,1,4.24,4.3400,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-04-02,0,0,,,,,0,false,0,4.24,4.3400,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-03,0,0,,,,,0,false,0,4.24,4.3400,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-04,0,0,,,,,0,false,0,4.24,4.3400,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-05,0,0,,,,,0,false,0,4.24,4.3400,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-06,0.44,0.0000,0.44,0.0000,1E+2,0,1,true,1,4.68,4.7800,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-04-07,0,0,,,,,0,false,0,4.68,4.7800,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-08,0,0,,,,,0,false,0,4.68,4.7800,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-09,0,0,,,,,0,false,0,4.68,4.7800,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-10,0.51,0.0000,0.51,0.0000,1E+2,0,1,true,1,5.19,5.2900,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-04-11,0,0,,,,,0,false,0,5.19,5.2900,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-12,0,0,,,,,0,false,0,5.19,5.2900,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-13,0,0,,,,,0,false,0,5.19,5.2900,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-14,0,0,,,,,0,false,0,5.19,5.2900,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-15,0.93,0.0000,0.93,0.0000,1E+2,0,1,true,1,6.12,6.2200,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-04-16,0,0,,,,,0,false,0,6.12,6.2200,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-17,0,0,,,,,0,false,0,6.12,6.2200,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-18,0,0,,,,,0,false,0,6.12,6.2200,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-19,0,0,,,,,0,false,0,6.12,6.2200,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-20,0.73,0.0000,0.73,0.0000,1E+2,0,1,true,1,6.85,6.9500,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-04-21,0,0,,,,,0,false,0,6.85,6.9500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-22,0,0,,,,,0,false,0,6.85,6.9500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-23,0,0,,,,,0,false,0,6.85,6.9500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-24,0.47,0.0000,0.47,0.0000,1E+2,0,1,true,1,7.32,7.4200,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-04-25,0,0,,,,,0,false,0,7.32,7.4200,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-26,0,0,,,,,0,false,0,7.32,7.4200,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-27,0,0,,,,,0,false,0,7.32,7.4200,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-28,0,0,,,,,0,false,0,7.32,7.4200,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-04-29,1.02,0.0000,1.02,0.0000,1E+2,0,1,true,1,8.34,8.4400,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-04-30,0,0,,,,,0,false,0,8.34,8.4400,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-01,0,0,,,,,0,false,0,8.34,8.4400,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-02,0,0,,,,,0,false,0,8.34,8.4400,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-03,0,0,,,,,0,false,0,8.34,8.4400,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-04,0.70,0.0000,0.70,0.0000,1E+2,0,1,true,1,9.04,9.1400,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-05-05,0,0,,,,,0,false,0,9.04,9.1400,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-06,0,0,,,,,0,false,0,9.04,9.1400,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-07,0,0,,,,,0,false,0,9.04,9.1400,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-08,0.61,0.0000,0.61,0.0000,1E+2,0,1,true,1,9.65,9.7500,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-05-09,0,0,,,,,0,false,0,9.65,9.7500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-10,0,0,,,,,0,false,0,9.65,9.7500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-11,0,0,,,,,0,false,0,9.65,9.7500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-12,0,0,,,,,0,false,0,9.65,9.7500,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-13,0.74,0.0000,0.74,0.0000,1E+2,0,1,true,1,10.39,10.4900,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-05-14,0,0,,,,,0,false,0,10.39,10.4900,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-15,0,0,,,,,0,false,0,10.39,10.4900,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-16,0,0,,,,,0,false,0,10.39,10.4900,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-17,0,0,,,,,0,false,0,10.39,10.4900,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-18,1.05,0.00322,1.05,0.00322,99.694270902565465904559351322610660640701847667154,0.30572909743453409544064867738933935929815233284594,1,true,1,11.44,11.54322,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-05-19,0,0,,,,,0,false,0,11.44,11.54322,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-20,0,0,,,,,0,false,0,11.44,11.54322,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-21,0,0,,,,,0,false,0,11.44,11.54322,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-22,0.34,0.0000,0.34,0.0000,1E+2,0,1,true,1,11.78,11.88322,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-05-23,0,0,,,,,0,false,0,11.78,11.88322,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-24,0,0,,,,,0,false,0,11.78,11.88322,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-25,0,0,,,,,0,false,0,11.78,11.88322,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-26,0.80,0.0000,0.80,0.0000,1E+2,0,1,true,1,12.58,12.68322,2019-12-16,assumed_unverified,giả định chưa xác minh,within_range,harvest-demo-b10:Digilog:v2,
+2020-05-27,0,0,,,,,0,false,0,12.58,12.68322,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-28,0,0,,,,,0,false,0,12.58,12.68322,2019-12-16,unknown,,unknown,harvest-demo-b10:Digilog:v2,harvest_rule_unknown;known_zero_harvest_day
+2020-05-29,0.93,0.6,0.93,0.6,60.784313725490196078431372549019607843137254901961,39.215686274509803921568627450980392156862745098039,1,true,1,13.51,14.21322,2019-12-16,assumed_unverified,giả định chưa xác minh,outside_range,harvest-demo-b10:Digilog:v2,outside_harvest_rule

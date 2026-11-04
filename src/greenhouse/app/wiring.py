@@ -10,9 +10,13 @@ from datetime import date, timedelta
 import json
 from pathlib import Path
 
-from greenhouse.contracts import CatalogPublication, CycleWindow, IrrigationDay, IrrigationSummary, PublicationRef, QueryContext
+from greenhouse.contracts import (
+    CatalogPublication, CycleWindow, HarvestDay, HarvestRecord, HarvestSummary, IrrigationDay,
+    IrrigationSummary, PublicationRef, QueryContext,
+)
 from greenhouse.queries import IrrigationService
 from greenhouse.queries.catalog import CatalogService
+from greenhouse.queries.harvest import HarvestService
 
 
 def catalog_service(connection) -> CatalogService:
@@ -23,6 +27,11 @@ def catalog_service(connection) -> CatalogService:
 def irrigation_service(connection, raw_snapshots=None) -> IrrigationService:
     from greenhouse.db.query_adapter import PostgresQueryAdapter
     return IrrigationService(PostgresQueryAdapter(connection, raw_snapshots=raw_snapshots))
+
+
+def harvest_service(connection, raw_snapshots=None) -> HarvestService:
+    from greenhouse.db.harvest_adapter import PostgresHarvestQueryAdapter
+    return HarvestService(PostgresHarvestQueryAdapter(connection, raw_snapshots=raw_snapshots))
 
 
 def manifest_snapshot_id(directory: Path):
@@ -135,3 +144,32 @@ def publication_label(row: CatalogPublication):
     stamp = row.committed_at.astimezone().strftime('%d/%m/%Y %H:%M')
     counts = f"{row.cycle_count} vụ · {row.day_count} ngày" if row.usable else 'chưa có water mart'
     return f"{row.scope_id} · {stamp} · {row.finality_status} · {counts}"
+
+
+def harvest_publication_label(row: CatalogPublication):
+    stamp = row.committed_at.astimezone().strftime('%d/%m/%Y %H:%M')
+    if not row.harvest_usable:
+        return f"{row.scope_id} · {stamp} · thiếu harvest mart ({' · '.join(row.harvest_reason_codes)})"
+    return f"{row.scope_id} · {stamp} · {row.finality_status} · {row.cycle_count} vụ · harvest mart v3"
+
+
+@dataclass(frozen=True)
+class HarvestAction:
+    """Everything one pinned harvest action produced; exports reuse these DTOs."""
+    publication: PublicationRef
+    context: QueryContext
+    summary: HarvestSummary
+    days: tuple[HarvestDay, ...]
+    weekly: tuple[HarvestSummary, ...]
+    records: tuple[HarvestRecord, ...]
+
+
+def harvest_action(service: HarvestService, publication: PublicationRef,
+                   context: QueryContext) -> HarvestAction:
+    """Read record/day/weekly/summary outcomes against one pinned action."""
+    records = service.get_harvest_records(context)
+    days = service.get_harvest_days(context)
+    summary = service.get_harvest_summary(context)
+    weekly = service.get_harvest_weekly(context)
+    return HarvestAction(publication=publication, context=context, summary=summary,
+                         days=days, weekly=weekly, records=records)

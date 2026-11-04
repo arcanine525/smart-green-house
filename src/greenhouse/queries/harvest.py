@@ -14,14 +14,16 @@ ingestion staging, so same-date records with different content are withheld
 as conflicts upstream; the mart keeps record grain from whatever membership
 contains without collapsing keys (BR-05 §2).
 """
+from collections import Counter
 from dataclasses import replace
 from decimal import Decimal, localcontext
 from datetime import timedelta
 from typing import Protocol
 
 from greenhouse.contracts import (
-    ASSUMPTION_LABEL, BasisStatus, HarvestCompleteness, HarvestDay, HarvestRecord,
-    HarvestSummary, PublicationRef, QueryContext, ResultStatus,
+    ASSUMPTION_LABEL, BasisStatus, HarvestCompleteness, HarvestDay, HarvestQualityCounts,
+    HarvestRecord, HarvestRuleProfile, HarvestSummary, HarvestUnresolvedIssue, LineageResult,
+    PublicationRef, QueryContext, ResultStatus, RuleStatus, UnresolvedSourceAudit,
 )
 
 
@@ -31,6 +33,11 @@ class HarvestAdapter(Protocol):
     def cycle_window(self, context: QueryContext): ...
     def read_harvest_records(self, context: QueryContext, publication: PublicationRef) -> tuple[HarvestRecord, ...]: ...
     def harvest_state(self, context: QueryContext) -> HarvestCompleteness: ...
+    def harvest_rule(self, context: QueryContext) -> HarvestRuleProfile | None: ...
+    def read_lineage(self, publication: PublicationRef, *, revision_id: str | None = None,
+                     record_key: str | None = None) -> LineageResult: ...
+    def read_unresolved_source(self, context: QueryContext, publication: PublicationRef,
+                               unresolved_item: HarvestUnresolvedIssue) -> UnresolvedSourceAudit: ...
 
 
 def share(numerator, denominator):
@@ -97,6 +104,21 @@ def cumulative(contributors, end, completeness, origin):
     return a, total, origin, label
 
 
+def harvest_quality_counts(records):
+    """Typed quality partition of THIS window's real records, per measure.
+
+    Service-owned so UI and exports show the same contract value; distinct
+    from whole-cycle completeness and from frozen unresolved sources."""
+    a = Counter(record.prod_a.quality.value for record in records)
+    b = Counter(record.prod_b.quality.value for record in records)
+    return HarvestQualityCounts(
+        population_records=len(records),
+        prod_a_accepted=a.get('accepted', 0), prod_a_missing=a.get('missing', 0),
+        prod_a_invalid=a.get('invalid', 0), prod_a_suspect=a.get('suspect', 0),
+        prod_b_accepted=b.get('accepted', 0), prod_b_missing=b.get('missing', 0),
+        prod_b_invalid=b.get('invalid', 0), prod_b_suspect=b.get('suspect', 0))
+
+
 def summarize_harvest(context, publication, cycle, cycle_records, completeness):
     """Period summary on the clipped window plus cycle-scope cumulative A."""
     verify_grain(context, publication, cycle, cycle_records)
@@ -151,7 +173,8 @@ def summarize_harvest(context, publication, cycle, cycle_records, completeness):
         accepted_records=len(window), paired_records=len(pairs), completeness=completeness,
         cumulative_a=cumulative_a, cumulative_total=cumulative_total,
         cumulative_origin=cumulative_origin, cumulative_basis_label=cumulative_label,
-        status=window_status(window, completeness), reason_codes=tuple(sorted(reasons)))
+        status=window_status(window, completeness), reason_codes=tuple(sorted(reasons)),
+        record_quality=harvest_quality_counts(window))
 
 
 def window_status(window, completeness):
@@ -161,6 +184,95 @@ def window_status(window, completeness):
     if not completeness.snapshot_complete:
         return ResultStatus.PARTIAL
     return ResultStatus.COMPLETE if all(record.paired for record in window) else ResultStatus.PARTIAL
+
+
+def record_share(record):
+    """Per-record class-B share at 50 digits: only when BOTH measures are
+    usable; zero paired mass is an unknown INPUT, never a 0% or 100% verdict."""
+    if not record.paired:
+        return None
+    a, b = record.prod_a.value, record.prod_b.value
+    if a + b == 0:
+        return None
+    with localcontext() as ctx:
+        ctx.prec = 50
+        return Decimal(b) * 100 / (Decimal(a) + Decimal(b))
+
+
+def evaluate_harvest_rule_record(record, profile):
+    """Explicit query-time rule per record; equality sits inside the bound."""
+    share = record_share(record)
+    if share is None:
+        status = RuleStatus.UNKNOWN
+        reasons = {'harvest_rule_unknown'}
+    elif share > profile.max_class_b_share_pct:
+        status = RuleStatus.OUTSIDE_RANGE
+        reasons = {'outside_harvest_rule'}
+    else:
+        status = RuleStatus.WITHIN_RANGE
+        reasons = set()
+    return replace(record, rule_status=status, rule_version=profile.rule_version,
+                   rule_profile=profile, reason_codes=tuple(sorted(set(record.reason_codes) | reasons)))
+
+
+def evaluate_harvest_rule_row(row, profile, kind):
+    """Day/week rows: the row's own class-B share is the rule input."""
+    share = row.class_b_share_pct
+    if share is None:
+        status = RuleStatus.UNKNOWN
+        reasons = {'harvest_rule_unknown'}
+    elif share > profile.max_class_b_share_pct:
+        status = RuleStatus.OUTSIDE_RANGE
+        reasons = {'outside_harvest_rule'}
+    else:
+        status = RuleStatus.WITHIN_RANGE
+        reasons = set()
+    return replace(row, rule_status=status, rule_version=profile.rule_version,
+                   rule_profile=profile,
+                   reason_codes=tuple(sorted(set(row.reason_codes) | reasons)))
+
+
+def attach_harvest_rule_records(records, profile):
+    """Decorate the query-side share on every record, then the optional rule."""
+    decorated = tuple(replace(record, class_b_share_pct=record_share(record))
+                      for record in records)
+    if profile is None:
+        return decorated
+    return tuple(evaluate_harvest_rule_record(record, profile) for record in decorated)
+
+
+def attach_harvest_rule_days(days, profile):
+    if profile is None:
+        return tuple(days)
+    return tuple(evaluate_harvest_rule_row(day, profile, 'day') for day in days)
+
+
+def attach_harvest_rule_summary(summary, records, profile):
+    """WINDOW-grain verdict + record-grain counters, kept separate.
+
+    The rule verdict of a period/week row comes from THAT window's own B
+    share (no denominator → unknown, equality inside) — never inferred from
+    a violating record inside it. Counters count records of exactly THIS
+    window (callers pass the window subset; earlier records never leak in)."""
+    if profile is None:
+        return summary
+    share = summary.class_b_share_pct
+    if share is None:
+        status = RuleStatus.UNKNOWN
+        reasons = {'harvest_rule_unknown'}
+    elif share > profile.max_class_b_share_pct:
+        status = RuleStatus.OUTSIDE_RANGE
+        reasons = {'outside_harvest_rule'}
+    else:
+        status = RuleStatus.WITHIN_RANGE
+        reasons = set()
+    evaluated = tuple(evaluate_harvest_rule_record(record, profile) for record in records)
+    outside = sum(item.rule_status == RuleStatus.OUTSIDE_RANGE for item in evaluated)
+    unknown = sum(item.rule_status == RuleStatus.UNKNOWN for item in evaluated)
+    reasons.update(summary.reason_codes)
+    return replace(summary, rule_status=status, rule_version=profile.rule_version,
+                   rule_profile=profile, outside_rule_records=outside,
+                   rule_unknown_records=unknown, reason_codes=tuple(sorted(reasons)))
 
 
 def day_rows(context, publication, cycle, cycle_records, completeness):
@@ -240,27 +352,33 @@ class HarvestService:
         records = self.adapter.read_harvest_records(
             replace(context, start=cycle.start, end=cycle.end), publication)
         state = self.adapter.harvest_state(context)
-        return publication, cycle, records, state
+        rule = self.adapter.harvest_rule(context)
+        return publication, cycle, records, state, rule
 
     def get_harvest_records(self, context):
         """Accepted records inside the effective window, real grain only."""
-        publication, cycle, records, _ = self._input(context)
+        publication, cycle, records, _, rule = self._input(context)
         start, end = max(context.start, cycle.start), min(context.end, cycle.end)
         verify_grain(context, publication, cycle, records)
         if start >= end:
             raise ValueError('Query does not overlap the cycle')
-        return tuple(record for record in records if start <= record.harvest_date < end)
+        window = (record for record in records if start <= record.harvest_date < end)
+        return attach_harvest_rule_records(window, rule)
 
     def get_harvest_summary(self, context):
-        publication, cycle, records, state = self._input(context)
-        return summarize_harvest(context, publication, cycle, records, state)
+        publication, cycle, records, state, rule = self._input(context)
+        summary = summarize_harvest(context, publication, cycle, records, state)
+        start, end = max(context.start, cycle.start), min(context.end, cycle.end)
+        window = tuple(record for record in records if start <= record.harvest_date < end)
+        return attach_harvest_rule_summary(summary, window, rule)
 
     def get_harvest_days(self, context):
-        publication, cycle, records, state = self._input(context)
-        return day_rows(context, publication, cycle, records, state)
+        publication, cycle, records, state, rule = self._input(context)
+        days = day_rows(context, publication, cycle, records, state)
+        return attach_harvest_rule_days(days, rule)
 
     def get_harvest_weekly(self, context):
-        publication, cycle, records, state = self._input(context)
+        publication, cycle, records, state, rule = self._input(context)
         days = day_rows(context, publication, cycle, records, state)
         start, end = days[0].harvest_date, days[-1].harvest_date + timedelta(days=1)
         result = []
@@ -276,6 +394,10 @@ class HarvestService:
             summary = week_summary(week_context, publication, cycle, week_rows, state,
                                    cumulative_a, cumulative_total, cumulative_origin,
                                    cumulative_label)
+            summary = attach_harvest_rule_summary(
+                summary,
+                tuple(record for record in records if start <= record.harvest_date < right),
+                rule)
             year, week, _ = start.isocalendar()
             result.append(replace(summary, iso_year=year, iso_week=week))
             start = right
@@ -285,9 +407,29 @@ class HarvestService:
         """Whole-cycle summary: the cumulative BR-04 canonical input. The
         request is deliberately replaced by the full-cycle context — that
         replacement is NOT clipping and carries no clip reason."""
-        publication, cycle, records, state = self._input(context)
+        publication, cycle, records, state, rule = self._input(context)
         full = replace(context, start=cycle.start, end=cycle.end)
-        return summarize_harvest(full, publication, cycle, records, state)
+        summary = summarize_harvest(full, publication, cycle, records, state)
+        return attach_harvest_rule_summary(summary, records, rule)
+
+    def get_lineage(self, publication, *, revision_id=None, record_key=None):
+        """Accepted-record provenance; the pinned publication must match."""
+        if (revision_id is None) == (record_key is None):
+            raise ValueError('Select exactly one revision_id or logical record key')
+        if self.adapter.publication(publication.publication_id) != publication:
+            raise ValueError('Pinned publication metadata differs')
+        return self.adapter.read_lineage(publication, revision_id=revision_id,
+                                         record_key=record_key)
+
+    def get_unresolved_source(self, context, unresolved_item, *, rule_grain=None):
+        """Authorized read-only audit of one frozen unresolved source row.
+
+        The selected rule comes from the pinned context and the grain is an
+        explicit caller choice; both travel with the audit for traceability
+        only (the audit never feeds a KPI)."""
+        publication, _, _, _, _ = self._input(context)
+        return self.adapter.read_unresolved_source(context, publication, unresolved_item,
+                                                   rule_grain=rule_grain)
 
 
 def week_summary(week_context, publication, cycle, week_days, state,
@@ -325,6 +467,8 @@ def week_summary(week_context, publication, cycle, week_days, state,
         completeness=state, cumulative_a=cumulative_a, cumulative_total=cumulative_total,
         cumulative_origin=cumulative_origin, cumulative_basis_label=cumulative_label,
         status=week_status(state, week_days), reason_codes=tuple(sorted(reasons)))
+        # record_quality stays None: day rows are aggregates; a per-record
+        # quality partition is only stated on the real-record population.
 
 
 def week_status(state, week_days):

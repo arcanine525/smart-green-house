@@ -21,6 +21,9 @@ import pytest
 
 from greenhouse.contracts import QueryContext
 from greenhouse.db.catalog import PostgresCatalogAdapter
+from greenhouse.db.harvest_adapter import PostgresHarvestQueryAdapter
+from greenhouse.queries.catalog import CatalogService
+from greenhouse.queries.harvest import HarvestService
 
 
 def pytest_ignore_collect(collection_path, config):
@@ -122,6 +125,70 @@ def legacy_database(admin_kwargs):
         yield target
     finally:
         _drop_database(admin_kwargs, name, keep, 'test_ui_legacy_')
+
+
+@pytest.fixture
+def published_harvest_scope(contracts_database, tmp_path):
+    """Publish Production fixtures through the real pipeline into the harvest
+    mart (and water receipt): the harvest screen runs against the real app."""
+    with psycopg.connect(**contracts_database, autocommit=True) as connection:
+        def create(rows, *, start=date(2020, 2, 1), end=date(2020, 2, 9)):
+            tag = uuid4().hex
+            site, comp, cycle, snapshot, scope, policy = (
+                name + ':' + tag for name in ('site', 'comp', 'cycle', 'snapshot', 'scope', 'quality'))
+            connection.execute("INSERT INTO core.site VALUES (%s,'Fixture','source-naive','fixture')", (site,))
+            connection.execute("INSERT INTO core.compartment VALUES (%s,%s,'Fixture','fixture')", (comp, site))
+            connection.execute("INSERT INTO core.team VALUES (%s,'Fixture',false,'fixture')", (site,))
+            connection.execute("INSERT INTO core.growing_cycle VALUES (%s,%s,%s,'tomato',%s,%s,'fixture')",
+                               (cycle, comp, site, start, end))
+            connection.execute("INSERT INTO meta.dataset_snapshot VALUES (%s,%s,'synthetic://fixture','fixture')",
+                               (snapshot, tag * 2))
+            connection.execute("INSERT INTO meta.data_scope VALUES (%s,%s,'historical',NULL,'fixture')",
+                               (scope, snapshot))
+            connection.execute("INSERT INTO meta.source_folder_mapping VALUES (%s,'Synthetic',%s,%s,%s,'fixture')",
+                               (snapshot, comp, site, cycle))
+            definition = {'nonnegative': ['ProdA', 'ProdB'], 'suspect_zero': [], 'off_mode_zero': []}
+            connection.execute(
+                "INSERT INTO config.quality_policy_version VALUES (%s,1,%s,%s,%s,%s,true,'synthetic quality fixture')",
+                (policy, start, end, Jsonb(definition),
+                 hashlib.sha256(json.dumps(definition, sort_keys=True, separators=(',', ':')).encode()).hexdigest()))
+            for code in ('ProdA', 'ProdB'):
+                connection.execute(
+                    "INSERT INTO config.area_basis_version VALUES "
+                    "(%s,%s,%s,%s,1,100,'synthetic_harvest_area','verified',%s,%s,NULL,NULL,'explicit synthetic basis')",
+                    (tag + code, scope, comp, code, start, end))
+                connection.execute(
+                    "INSERT INTO config.basis_application VALUES (%s,%s,%s,'shared_analysis',%s,true)",
+                    (scope, comp, code, tag + code))
+            raw = tmp_path / tag / 'raw'
+            (raw / 'Synthetic').mkdir(parents=True)
+            path = raw / 'Synthetic/Production.csv'
+            with path.open('w', newline='') as stream:
+                writer = csv.writer(stream, lineterminator='\r\n')
+                writer.writerow(HEADERS['Production'])
+                for offset, prod_a, prod_b in rows:
+                    values = {'ProdA': prod_a, 'ProdB': prod_b}
+                    serial = str((start - date(1899, 12, 30)).days + offset)
+                    writer.writerow([serial] + [values.get(header.strip(), '0')
+                                                for header in HEADERS['Production'][1:]])
+            source = {'snapshot_id': snapshot, 'archive': {'sha256': tag * 2},
+                      'files': [{'path': 'Synthetic/Production.csv',
+                                 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                                 'csv': {'data_rows': len(rows)}}]}
+            (raw / 'manifest.json').write_text(json.dumps(source))
+            run_pipeline(connection, raw, tmp_path / tag / 'output', scope, policy,
+                         stage_function=fixture_stage)
+            adapter = PostgresHarvestQueryAdapter(connection, raw_snapshots={snapshot: raw})
+            service = HarvestService(adapter)
+            publication = service.pin_publication(scope)
+            context = QueryContext(scope, publication.publication_id, snapshot, cycle, (comp,),
+                                   start, end)
+            catalog = CatalogService(PostgresCatalogAdapter(connection))
+            return SimpleNamespace(connection=connection, scope=scope, comp=comp, cycle=cycle,
+                                   snapshot=snapshot, raw=raw, adapter=adapter, service=service,
+                                   catalog=catalog, publication=publication, context=context,
+                                   start=start, end=end)
+        yield create
 
 
 @pytest.fixture(scope='session')
