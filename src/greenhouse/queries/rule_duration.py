@@ -69,8 +69,9 @@ from decimal import Decimal, localcontext
 from greenhouse.contracts import (
     RULE_METRIC_UNITS, UNKNOWN_REASON_PRIORITY, IntradayContext, PublicationRef, QualityStatus,
     RuleBasis, RuleDeviationDirection, RuleDurationResult, RuleEpisode, RuleJointDuration,
-    RuleMetricApplied, RuleMetricDuration, RuleScheduleRevision, RuleSlotDeviation, ThresholdSlot,
-    TimeBasis, UnknownReasonShare, Versions, rule_segment_sort_key,
+    RuleMetricApplied, RuleMetricDuration, RuleScheduleRevision, RuleSlotDeviation,
+    RuleSlotReview, ThresholdSlot, TimeBasis, UnknownReasonShare, Versions,
+    rule_segment_sort_key,
 )
 
 ZERO = Decimal(0)
@@ -203,49 +204,55 @@ def _applied_bounds(metric, state: ThresholdSlot, segment):
 
 
 def _classify_slot(metric: str, state: ThresholdSlot | None, segment):
-    """Exact slot classification: (class_code, deviation, direction).
-    Boundary equality sits inside; missing content yields unknown classes in
-    the documented priority order; deviation is the value distance to the
-    violated bound (out slots), zero otherwise."""
+    """Exact slot classification: (class_code, deviation, direction, lower,
+    upper). Boundary equality sits inside; missing content yields unknown
+    classes in the documented priority order. Applied bounds come from the
+    same decision path (never re-derived elsewhere): present for valid/out
+    classes and for the inverted pair (the cause of that unknown), absent
+    for semantic unknowns (rule/not/missing/quality/sp0) where no bounds
+    were applied."""
     if segment is None:
-        return 'rule_not_configured', ZERO, None
+        return 'rule_not_configured', ZERO, None, None, None
     if state is None:
-        return 'missing_input', ZERO, None
+        return 'missing_input', ZERO, None, None, None
     if state.quality == QualityStatus.INVALID:
-        return 'quality_invalid', ZERO, None
+        return 'quality_invalid', ZERO, None, None, None
     if state.quality == QualityStatus.SUSPECT:
-        return 'quality_suspect', ZERO, None
+        return 'quality_suspect', ZERO, None, None, None
     if metric == 'co2':
         if state.actual is None or state.setpoint is None:
-            return 'missing_input', ZERO, None
+            return 'missing_input', ZERO, None, None, None
         if state.setpoint == 0:
-            return 'sp0_off_mode', ZERO, None
+            return 'sp0_off_mode', ZERO, None, None, None
         lower, upper = _applied_bounds(metric, state, segment)
     elif metric == 'temperature':
         if state.actual is None or state.lower_setpoint is None or state.upper_setpoint is None:
-            return 'missing_input', ZERO, None
+            return 'missing_input', ZERO, None, None, None
         lower, upper = _applied_bounds(metric, state, segment)
         if lower > upper:
-            return 'inverted_bounds', ZERO, None
+            return 'inverted_bounds', ZERO, None, lower, upper
     else:
         if state.actual is None:
-            return 'missing_input', ZERO, None
+            return 'missing_input', ZERO, None, None, None
         lower, upper = segment.lower, segment.upper
     if state.actual < lower:
         with localcontext() as ctx:
             ctx.prec = 50
-            return 'out_low', Decimal(lower) - Decimal(state.actual), RuleDeviationDirection.LOW
+            return ('out_low', Decimal(lower) - Decimal(state.actual),
+                    RuleDeviationDirection.LOW, lower, upper)
     if state.actual > upper:
         with localcontext() as ctx:
             ctx.prec = 50
-            return 'out_high', Decimal(state.actual) - Decimal(upper), RuleDeviationDirection.HIGH
-    return 'valid', ZERO, None
+            return ('out_high', Decimal(state.actual) - Decimal(upper),
+                    RuleDeviationDirection.HIGH, lower, upper)
+    return 'valid', ZERO, None, lower, upper
 
 
 @dataclass(frozen=True)
 class _SlotRecord:
     """Engine-local evaluation record for one declared-group slot (never
-    exported)."""
+    exported); carries the applied bounds captured at classification time
+    so the detail views reuse the EXACT same decision."""
     start: datetime
     slot_end: datetime
     class_code: str
@@ -254,6 +261,8 @@ class _SlotRecord:
     minutes_inside_cycle: Decimal
     minutes_in_effective: Decimal
     membership: tuple | None
+    applied_lower: Decimal | None
+    applied_upper: Decimal | None
 
 
 def _grid_view(context, revisions, slots, requested_metrics):
@@ -308,6 +317,31 @@ def evaluate_rule_schedule(context, revisions, slots, metrics,
     keeps every requested metric unknown; publication/versions must agree
     with the pinned context when supplied.
     """
+    core = _evaluate_core(context, revisions, slots, metrics, publication, versions)
+    episodes = _build_episodes(
+        context, metrics, core.group_records, core.segment_registry, core.cycle_end,
+        core.effective_start, core.effective_end, episode_min_minutes)
+    return _public_result(context, metrics, core, episodes, publication, core.versions)
+
+
+def evaluate_rule_schedule_detail(context, revisions, slots, metrics,
+                                  episode_min_minutes=None, publication=None,
+                                  versions=None):
+    """SAME evaluation call path as evaluate_rule_schedule, plus one typed
+    `RuleSlotReview` per requested metric slot inside the effective window.
+    The review rows reuse the records' classification/bounds captured at
+    decision time, so timings/episodes and detail traces can never drift.
+    """
+    core = _evaluate_core(context, revisions, slots, metrics, publication, versions)
+    episodes = _build_episodes(
+        context, metrics, core.group_records, core.segment_registry, core.cycle_end,
+        core.effective_start, core.effective_end, episode_min_minutes)
+    result = _public_result(context, metrics, core, episodes, publication, core.versions)
+    return result, tuple(_build_slot_reviews(context, metrics, core))
+
+
+def _evaluate_core(context, revisions, slots, metrics, publication, versions):
+    """Shared validation + slot classification for both public entrypoints."""
     if not isinstance(context, IntradayContext):
         raise ValueError('Evaluation pins an IntradayContext')
     if not isinstance(revisions, tuple) \
@@ -324,9 +358,6 @@ def evaluate_rule_schedule(context, revisions, slots, metrics,
             or any(metric not in RULE_METRIC_UNITS for metric in metrics):
         raise ValueError('Requested metrics must be explicit, nonempty, distinct and known')
     _validate_metrics(context, metrics)
-    if episode_min_minutes is not None and (
-            not isinstance(episode_min_minutes, Decimal) or episode_min_minutes <= 0):
-        raise ValueError('Episode minimum filter takes positive Decimal minutes or none')
     if publication is not None:
         if not isinstance(publication, PublicationRef):
             raise ValueError('Result publication must be a PublicationRef contract when set')
@@ -374,7 +405,8 @@ def evaluate_rule_schedule(context, revisions, slots, metrics,
             if slot_end <= when:
                 break  # exact end-of-cycle sample: stored upstream, zero duration
             segment = _candidate_segment(segment_list, when)
-            class_code, deviation, direction = _classify_slot(metric, states.get(step), segment)
+            class_code, deviation, direction, applied_lower, applied_upper = _classify_slot(
+                metric, states.get(step), segment)
             start_clipped = max(when, effective_start)
             end_clipped = min(slot_end, effective_end)
             minutes_effective = _minutes(end_clipped - start_clipped) \
@@ -383,7 +415,8 @@ def evaluate_rule_schedule(context, revisions, slots, metrics,
                 start=when, slot_end=slot_end, class_code=class_code, deviation=deviation,
                 direction=direction, minutes_inside_cycle=_minutes(slot_end - when),
                 minutes_in_effective=minutes_effective,
-                membership=None if segment is None else _segment_identity(segment)))
+                membership=None if segment is None else _segment_identity(segment),
+                applied_lower=applied_lower, applied_upper=applied_upper))
         # `valid_minutes` is the evaluated/eligible population: strict in-range
         # PLUS out-of-range slots (out hours are a subset of this population,
         # mirroring the BR-01/BR-03 fixtures valid25/out15/unknown5). Suspect /
@@ -427,18 +460,62 @@ def evaluate_rule_schedule(context, revisions, slots, metrics,
         group_records[metric] = records
 
     joint_results = _joint_summaries(metric_results, group_records, expected, metrics)
-    episodes = _build_episodes(
-        context, metrics, group_records, segment_registry, cycle_end,
-        effective_start, effective_end, episode_min_minutes)
+    return _CoreEvaluation(
+        applications=tuple(applications), metric_results=tuple(metric_results),
+        joint_results=tuple(joint_results), group_records=group_records,
+        segment_registry=segment_registry, slot_states=slot_states,
+        cycle_end=cycle_end, effective_start=effective_start,
+        effective_end=effective_end, versions=versions)
+
+
+def _public_result(context, metrics, core, episodes, publication, versions):
     return RuleDurationResult(
         scope_id=context.scope_id, cycle_id=context.cycle.cycle_id,
         compartment_id=context.compartment_ids[0],
         requested_start=context.start, requested_end=context.end,
-        effective_start=effective_start, effective_end=effective_end,
-        requested_metrics=tuple(metrics), applications=tuple(applications),
-        metric_results=tuple(metric_results), joint_results=tuple(joint_results),
+        effective_start=core.effective_start, effective_end=core.effective_end,
+        requested_metrics=tuple(metrics), applications=core.applications,
+        metric_results=core.metric_results, joint_results=core.joint_results,
         episodes=tuple(episodes), publication=publication, versions=versions,
         time_basis=TimeBasis.SOURCE_NAIVE)
+
+
+def _build_slot_reviews(context, metrics, core):
+    """Type the per-slot trace from the SAME evaluation records (bounded to
+    the effective window); ordering follows requested metrics then time."""
+    reviews = []
+    for metric in metrics:
+        segment_pairs = core.segment_registry.get(metric, [])
+        rule_version = segment_pairs[0][1] if segment_pairs else None
+        states = core.slot_states.get(metric, {})
+        for step, record in enumerate(core.group_records[metric]):
+            if record.minutes_in_effective <= ZERO:
+                continue  # outside the requested window: not part of the report
+            state = states.get(step)
+            reviews.append(RuleSlotReview(
+                start=record.start, metric=metric,
+                measurement_context=context.measurement_context, basis=context.basis,
+                rule_version=rule_version,
+                actual=None if state is None else state.actual,
+                lower=record.applied_lower, upper=record.applied_upper,
+                quality=None if state is None else state.quality,
+                class_code=record.class_code, deviation=record.deviation,
+                direction=record.direction, minutes=record.minutes_in_effective))
+    return reviews
+
+
+@dataclass(frozen=True)
+class _CoreEvaluation:
+    applications: tuple
+    metric_results: tuple
+    joint_results: tuple
+    group_records: dict
+    segment_registry: dict
+    slot_states: dict
+    cycle_end: datetime
+    effective_start: datetime
+    effective_end: datetime
+    versions: Versions | None
 
 
 def _joint_summaries(metric_results, group_records, expected, metrics):

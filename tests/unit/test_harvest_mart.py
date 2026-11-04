@@ -388,9 +388,10 @@ def test_bundle_identity_frozen_in_config_and_adapter_rejects_v1(published_harve
     from greenhouse.db.irrigation_mart import BUNDLE_VERSION as WATER_BUNDLE
 
     e = published_harvest([(D1, '1', '0.2')])
+    from greenhouse.db.climate_mart import BUNDLE_VERSION as CLIMATE_BUNDLE
     versions = pipeline_config(e['connection'], e['scope'], e['policy'])
-    assert versions['code'] == CODE_VERSION == 'pipeline-v3-harvest'
-    assert versions['marts'] == [WATER_BUNDLE, BUNDLE_VERSION]
+    assert versions['code'] == CODE_VERSION
+    assert versions['marts'] == [WATER_BUNDLE, BUNDLE_VERSION, CLIMATE_BUNDLE]
     assert BUNDLE_VERSION == 'harvest-mart-v3'
     # Stale v1 receipt is rejected actionably; nothing relabels or recomputes.
     tag = uuid4().hex

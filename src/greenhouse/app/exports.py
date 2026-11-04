@@ -11,8 +11,8 @@ import io
 import json
 
 from greenhouse.contracts import (
-    HarvestDay, HarvestRecord, HarvestSummary, IrrigationDay, IrrigationSummary,
-    UnresolvedSourceAudit, to_json,
+    ClimateEvaluation, HarvestDay, HarvestRecord, HarvestSummary, IrrigationDay,
+    IrrigationSummary, UnresolvedSourceAudit, to_json,
 )
 
 EXPORT_VERSION = 'greenhouse-water-csv-v1'
@@ -471,3 +471,177 @@ def unresolved_source_audit_csv(audit):
     rows = [{'column': audit.headers[i], 'raw_token': audit.tokens[i]}
             for i in range(len(audit.tokens))]
     return _document(columns, rows, context_lines + lines)
+
+
+# --------------------------------------------------------- climate (BR-01)
+
+CLIMATE_SUMMARY_COLUMNS = (
+    'metric', 'measurement_context', 'basis', 'rule_version', 'unit',
+    'expected_minutes', 'valid_minutes', 'out_minutes',
+    'out_low_minutes', 'out_high_minutes', 'suspect_minutes', 'unknown_minutes',
+    'out_hours', 'out_percent', 'coverage_pct', 'unknown_reasons',
+)
+CLIMATE_JOINT_COLUMNS = (
+    'metrics', 'measurement_context', 'basis', 'contributions',
+    'jointly_valid_minutes', 'joint_out_minutes', 'joint_out_percent', 'joint_coverage_pct',
+)
+CLIMATE_EPISODE_COLUMNS = (
+    'metric', 'basis', 'rule_version', 'unit',
+    'original_start', 'original_end', 'original_minutes',
+    'clipped_start', 'clipped_end', 'clipped_minutes',
+    'directions', 'peak_deviation', 'peak_deviation_time', 'slot_count',
+)
+CLIMATE_DETAIL_COLUMNS = (
+    'slot_start', 'metric', 'basis', 'rule_version', 'unit',
+    'actual', 'applied_lower', 'applied_upper', 'quality', 'class_code',
+    'deviation', 'direction', 'minutes', 'unknown_reason',
+    'source_lower', 'source_upper', 'source_setpoint', 'source_quality',
+)
+
+
+def pad(note, width=400):
+    """Bounded provenance text: kept verbatim up to `width` characters."""
+    return (note or '')[:width]
+
+
+def climate_export_metadata(action):
+    """Header lines for one pinned climate action (no credentials, no rounding)."""
+    publication, context, versions, result = (
+        action.publication, action.context, action.publication.versions, action.result)
+    lines = [
+        f'export={EXPORT_VERSION}', "quantity units: temperature=°C, co2=ppm", 'percent_unit=%',
+        'decimal=exact source scale (no rounding)', 'null=empty field', 'bool=true/false',
+        f'scope={publication.scope_id}', f'snapshot={publication.snapshot_id}',
+        f'publication={publication.publication_id}',
+        f'finality={publication.finality_status}', f'committed_at={publication.committed_at.isoformat()}',
+        f'cycle={context.cycle_id}', f'compartment={context.compartment_ids[0]}',
+        f'requested_window=[{context.start.isoformat()},{context.end.isoformat()})',
+        f'effective_window=[{result.effective_start.isoformat()},{result.effective_end.isoformat()})',
+        'time_basis=source_naive (source timezone unresolved)',
+        f'declared_context={result.metric_results[0].measurement_context if result.metric_results else ""}',
+        f'declared_basis={result.metric_results[0].basis.value if result.metric_results else ""}',
+        f'quality_policy={versions.quality_policy_version}',
+        f'pipeline_run={versions.pipeline_run_id}', f'parser_version={versions.parser_version}',
+        f'code_version={versions.code_version}', f'config_bundle_hash={versions.config_bundle_hash}',
+        f'requested_rule_version={getattr(action, "requested_rule_version", None) or ""}',
+        f'rule_identities=' + join(f'{item.metric}:{item.rule_version}' for item in result.applications),
+        # Selected-revision provenance, verbatim from the registered rule.
+        f'rule_id={action.rule_id or ""}',
+        f'rule_label={action.rule_label or ""}',
+        f'rule_is_demo={str(action.rule_is_demo).lower() if action.rule_is_demo is not None else ""}',
+        f'rule_evidence={pad(action.rule_evidence_reference or "", 400)}',
+        'episode_filter=list-only (summary totals never filtered); '
+        'episode windows carry ORIGINAL and CLIPPED facts',
+    ]
+    return [f'# {line}' for line in lines]
+
+
+def climate_summary_rows(action):
+    rows = []
+    for report in action.result.metric_results:
+        rows.append({
+            'metric': report.metric, 'measurement_context': report.measurement_context,
+            'basis': report.basis.value, 'rule_version': report.rule_version, 'unit': report.unit,
+            'expected_minutes': report.expected_minutes, 'valid_minutes': report.valid_minutes,
+            'out_minutes': report.out_minutes, 'out_low_minutes': report.out_low_minutes,
+            'out_high_minutes': report.out_high_minutes, 'suspect_minutes': report.suspect_minutes,
+            'unknown_minutes': report.unknown_minutes, 'out_hours': report.out_hours,
+            'out_percent': report.out_percent, 'coverage_pct': report.coverage_pct,
+            'unknown_reasons': ';'.join(f'{share.reason_code}:{share.minutes}'
+                                        for share in report.unknown_reasons)})
+    return rows
+
+
+def climate_joint_rows(action):
+    return [{
+        'metrics': ';'.join(row.metrics), 'measurement_context': row.measurement_context,
+        'basis': row.basis.value,
+        'contributions': ';'.join(f'{item.metric}:{item.rule_version}' for item in row.contributions),
+        'jointly_valid_minutes': row.jointly_valid_minutes, 'joint_out_minutes': row.joint_out_minutes,
+        'joint_out_percent': row.joint_out_percent, 'joint_coverage_pct': row.joint_coverage_pct,
+    } for row in action.result.joint_results]
+
+
+def climate_episode_rows(action, episodes):
+    return [{
+        'metric': episode.metric, 'basis': episode.basis.value,
+        'rule_version': episode.rule_version,
+        'unit': {'temperature': '°C', 'co2': 'ppm'}.get(episode.metric, ''),
+        'original_start': episode.original_start.isoformat(),
+        'original_end': episode.original_end.isoformat(),
+        'original_minutes': episode.original_minutes,
+        'clipped_start': episode.clipped_start.isoformat() if episode.clipped_start else '',
+        'clipped_end': episode.clipped_end.isoformat() if episode.clipped_end else '',
+        'clipped_minutes': episode.clipped_minutes,
+        'directions': ';'.join(direction.value for direction in episode.directions),
+        'peak_deviation': episode.peak_deviation,
+        'peak_deviation_time': episode.peak_time.isoformat(),
+        'slot_count': len(episode.slots),
+    } for episode in episodes]
+
+
+def climate_detail_rows(action, limit=None):
+    rows = []
+    for review in action.slot_reviews:
+        if limit is not None and len(rows) >= limit:
+            break
+        rows.append({
+            'slot_start': review.start.isoformat(), 'metric': review.metric,
+            'basis': review.basis.value, 'rule_version': review.rule_version,
+            'unit': review.unit, 'actual': review.actual,
+            'applied_lower': review.lower, 'applied_upper': review.upper,
+            'quality': review.quality.value if review.quality else '',
+            'class_code': review.class_code, 'deviation': review.deviation,
+            'direction': review.direction.value if review.direction else '',
+            'minutes': review.minutes, 'unknown_reason': review.unknown_reason,
+            'source_lower': getattr(review, 'source_lower', None),
+            'source_upper': getattr(review, 'source_upper', None),
+            'source_setpoint': getattr(review, 'source_setpoint', None),
+            'source_quality': getattr(review, 'source_quality', None)})
+    return rows
+
+
+def climate_summary_csv(action):
+    return _document(CLIMATE_SUMMARY_COLUMNS, climate_summary_rows(action),
+                     climate_export_metadata(action))
+
+
+def climate_joint_csv(action):
+    return _document(CLIMATE_JOINT_COLUMNS, climate_joint_rows(action),
+                     climate_export_metadata(action))
+
+
+def climate_episodes_csv(action, episodes, *, total_after_filter=None, filter_note=None):
+    metadata = climate_export_metadata(action)
+    if filter_note:
+        metadata += [f'# episode_list_filter={filter_note}']
+    if total_after_filter is not None:
+        truncated = len(episodes) < total_after_filter
+        metadata += [
+            f'# total_after_filter={total_after_filter}',
+            f'# exported_rows={len(episodes)}',
+            f'# truncated={str(truncated).lower()}'
+            + (' (paged export cap; raise the cap or page on screen for more)'
+               if truncated else ''),
+        ]
+    return _document(CLIMATE_EPISODE_COLUMNS, climate_episode_rows(action, episodes), metadata)
+
+
+def climate_detail_csv(action, limit=None, scope_note=None):
+    metadata = climate_export_metadata(action)
+    if scope_note:
+        metadata += [f'# detail_scope={scope_note}']
+    if limit is not None:
+        available = len(action.slot_reviews)
+        metadata += [f'# detail_rows_exported={min(limit, available or 0)}',
+                     f'# detail_rows_available={available}']
+    return _document(CLIMATE_DETAIL_COLUMNS, climate_detail_rows(action, limit), metadata)
+
+
+def climate_result_json(action):
+    """Typed ClimateEvaluation envelope (T15): the unchanged engine
+    RuleDurationResult plus the pinned publication/context and the
+    selected-rule provenance (rule_id/label/is_demo/evidence — verbatim
+    from the registered revision, never inferred from version strings).
+    Decode with from_json(ClimateEvaluation, ...)."""
+    return to_json(action).encode('utf-8')

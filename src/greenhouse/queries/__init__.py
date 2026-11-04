@@ -1,5 +1,8 @@
 """Pure summary oracle and services accepting structural query adapters."""
 from greenhouse.queries.catalog import CatalogAdapter, CatalogService
+from greenhouse.queries.climate import (
+    ClimateService, build_slots, combined_quality, episode_key, page_episodes,
+)
 from greenhouse.queries.irrigation import (
     IrrigationService, QueryAdapter, basis_compatible, calendar_days,
     evaluate_day, result_cache_key, summarize_irrigation,

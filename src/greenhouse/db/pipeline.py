@@ -20,8 +20,9 @@ from greenhouse.db.migrate import sql
 from greenhouse.ingestion.parser import PARSER_VERSION
 from greenhouse.ingestion.run import ingest_snapshot
 
-CODE_VERSION = 'pipeline-v3-harvest'
+CODE_VERSION = 'pipeline-v4-climate'
 STEPS = ('ingest', 'load-core', 'spark', 'publish')
+
 
 
 def encode(value):
@@ -57,9 +58,10 @@ def config(conn, scope, policy):
     # Lifecycle note: on THIS release the export identity adds bundle versions.
     from greenhouse.db.harvest_mart import BUNDLE_VERSION as HARVEST_BUNDLE
     from greenhouse.db.irrigation_mart import BUNDLE_VERSION as IRRIGATION_BUNDLE
+    from greenhouse.db.climate_mart import BUNDLE_VERSION as CLIMATE_BUNDLE
     return {'parser': PARSER_VERSION, 'quality_policy': policy, 'quality_hash': quality[0],
             'basis': [list(b) for b in bases], 'code': CODE_VERSION,
-            'marts': [IRRIGATION_BUNDLE, HARVEST_BUNDLE]}
+            'marts': [IRRIGATION_BUNDLE, HARVEST_BUNDLE, CLIMATE_BUNDLE]}
 
 
 def artifact_files(folder):
@@ -316,8 +318,10 @@ def publish(conn, workflow, hook=None, fault=None):
             fail('publish-members', fault)
             from greenhouse.db.irrigation_mart import materialize_irrigation
             from greenhouse.db.harvest_mart import materialize_harvest
+            from greenhouse.db.climate_mart import materialize_climate
             materialize_irrigation(conn, publication, workflow)
             materialize_harvest(conn, publication, workflow)
+            materialize_climate(conn, publication, workflow)
             if hook:
                 hook(conn, publication, workflow)
             fail('publish-hook', fault)

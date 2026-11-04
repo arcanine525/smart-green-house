@@ -140,3 +140,62 @@ def harvest_week_figure(weekly):
         yaxis3={'title': {'text': 'Share B tuần (%)'}, 'overlaying': 'y', 'side': 'right',
                 'position': 0.92, 'rangemode': 'tozero', 'showgrid': False})
     return figure
+
+
+CLIMATE_TEMP = '#c7825c'
+CLIMATE_CO2 = '#4f7ea8'
+CLIMATE_BOUNDS = '#8a99a8'
+CLIMATE_OUT = '#b14743'
+CLIMATE_UNKNOWN = '#99a18d'
+
+
+def climate_figure(review_rows, metric, unit):
+    """Actual vs applied bounds per slot; unknown classes break the line and
+    the out-of-range points carry the exact engine deviation."""
+    rows = [row for row in review_rows if row.metric == metric]
+    stamps = [row.start for row in rows]
+
+    def actual_or_gap(row):
+        if row.actual is not None and row.class_code in ('valid', 'out_low', 'out_high'):
+            return float(row.actual)
+        return None
+
+    def bounds(read):
+        return [float(read(row)) if row.class_code in ('valid', 'out_low', 'out_high') else None
+                for row in rows]
+
+    color = CLIMATE_TEMP if metric == 'temperature' else CLIMATE_CO2
+    figure = go.Figure()
+    figure.add_trace(go.Scatter(
+        x=stamps, y=[actual_or_gap(row) for row in rows], name=f'actual ({unit})',
+        mode='lines', connectgaps=False, line={'color': color, 'width': 1.6},
+        hovertemplate='%{x|%H:%M}<br>%{y} ' + unit + '<extra></extra>'))
+    figure.add_trace(go.Scatter(
+        x=stamps, y=bounds(lambda row: row.lower), name='cận dưới được áp dụng',
+        mode='lines', connectgaps=False, line={'color': CLIMATE_BOUNDS, 'width': 1, 'dash': 'dash'}))
+    figure.add_trace(go.Scatter(
+        x=stamps, y=bounds(lambda row: row.upper), name='cận trên được áp dụng',
+        mode='lines', connectgaps=False, line={'color': CLIMATE_BOUNDS, 'width': 1, 'dash': 'dash'}))
+    out_rows = [row for row in rows if row.class_code in ('out_low', 'out_high')]
+    if out_rows:
+        figure.add_trace(go.Scatter(
+            x=[row.start for row in out_rows],
+            y=[float(row.actual) if row.actual is not None else None for row in out_rows],
+            name='ngoài dải', mode='markers', marker={'color': CLIMATE_OUT, 'size': 5},
+            customdata=[[float(row.deviation) if row.deviation is not None else None,
+                         row.direction.value if row.direction else ''] for row in out_rows],
+            hovertemplate='%{x|%H:%M}<br>độ lệch: %{customdata[0]} ' + unit
+                          + '<br>hướng: %{customdata[1]}<extra>out</extra>'))
+    unknown_rows = [row for row in rows if row.unknown_reason]
+    if unknown_rows:
+        figure.add_trace(go.Scatter(
+            x=[row.start for row in unknown_rows], y=[None] * len(unknown_rows),
+            name='unknown (' + ', '.join(sorted({row.unknown_reason for row in unknown_rows})) + ')',
+            mode='markers', marker={'color': CLIMATE_UNKNOWN, 'size': 4, 'symbol': 'square'},
+            hovertemplate='%{x|%H:%M}<extra>unknown</extra>'))
+    figure.update_layout(
+        legend={'orientation': 'h', 'y': 1.14}, margin={'l': 10, 'r': 10, 't': 30, 'b': 10},
+        paper_bgcolor='white', plot_bgcolor='white', hovermode='x unified',
+        xaxis={'title': {'text': 'Thời điểm nguồn (naive)'}, 'showgrid': True},
+        yaxis={'title': {'text': unit}, 'zeroline': False})
+    return figure

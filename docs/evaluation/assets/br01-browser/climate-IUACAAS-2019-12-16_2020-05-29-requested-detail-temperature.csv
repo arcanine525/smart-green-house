@@ -1,0 +1,506 @@
+﻿# export=greenhouse-water-csv-v1
+# quantity units: temperature=°C, co2=ppm
+# percent_unit=%
+# decimal=exact source scale (no rounding)
+# null=empty field
+# bool=true/false
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# publication=804770b6ac534b308ad4e449487db50a
+# finality=provisional
+# committed_at=2026-11-04T20:43:08.255736+00:00
+# cycle=agc-cycle-IUACAAS
+# compartment=IUACAAS
+# requested_window=[2019-12-16,2020-05-30)
+# effective_window=[2019-12-16T00:00:00,2020-05-30T00:00:00)
+# time_basis=source_naive (source timezone unresolved)
+# declared_context=climate
+# declared_basis=requested
+# quality_policy=AGC_QUALITY_V1
+# pipeline_run=fb0e4d21d90f4125a3889f5b82f8ea65
+# parser_version=agc-parser-v1
+# code_version=pipeline-v4-climate
+# config_bundle_hash=0bb342e61a0f2de9998b0a67a1a6f3133365e249f3d2a37cd7980350801e5b06
+# requested_rule_version=climate-demo-b01:IUACAAS:v1
+# rule_identities=temperature:climate-demo-b01:IUACAAS:v1;co2:climate-demo-b01:IUACAAS:v1
+# rule_id=climate-demo-b01:IUACAAS
+# rule_label=demo_rule
+# rule_is_demo=true
+# rule_evidence=Synthetic demo per docs/br/br_01_climate-condition-monitoring.md §4.1/§7: delta_temp 0.5 °C and delta_co2 50 ppm applied to BOTH the requested and realized bases; explicitly NOT an agronomic-standard AGC threshold and not derived from the setpoint dictionary. Registration boundary follows the approved T14 schedule semantics (one segment mode, at most one revision per requested metric key; historic
+# episode_filter=list-only (summary totals never filtered); episode windows carry ORIGINAL and CLIPPED facts
+# detail_scope=episode 2020-05-21T11:45:00 → 2020-05-22T07:25:00 (temperature); read [2020-05-21T11:45:00, 2020-05-22T07:25:00); cap 2000 hàng
+# detail_rows_exported=472
+# detail_rows_available=472
+slot_start,metric,basis,rule_version,unit,actual,applied_lower,applied_upper,quality,class_code,deviation,direction,minutes,unknown_reason,source_lower,source_upper,source_setpoint,source_quality
+2020-05-21T11:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.3,21.6,26.6,accepted,out_high,0.7,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T11:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.9,21.6,26.6,accepted,out_high,1.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T11:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,26.9,21.6,26.6,accepted,out_high,0.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T12:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.3,21.6,26.6,accepted,out_high,0.7,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T12:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.1,21.6,26.6,accepted,out_high,0.5,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T12:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.5,21.6,26.6,accepted,out_high,0.9,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T12:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.5,21.6,26.6,accepted,out_high,0.9,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T12:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.8,21.6,26.6,accepted,out_high,1.2,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T12:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.7,21.6,26.6,accepted,out_high,1.1,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T12:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.4,21.6,26.6,accepted,out_high,0.8,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T12:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.5,21.6,26.6,accepted,out_high,0.9,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T12:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.1,21.6,26.6,accepted,out_high,1.5,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T12:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.6,21.6,26.6,accepted,out_high,2.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T12:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.3,21.6,26.6,accepted,out_high,0.7,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T12:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.5,21.6,26.6,accepted,out_high,0.9,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T13:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.9,21.6,26.6,accepted,out_high,2.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T13:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.7,21.6,26.6,accepted,out_high,2.1,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T13:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.3,21.6,26.6,accepted,out_high,1.7,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T13:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.9,21.6,26.6,accepted,out_high,1.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T13:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.6,21.6,26.6,accepted,out_high,1.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T13:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.4,21.6,26.6,accepted,out_high,1.8,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T13:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.6,21.6,26.6,accepted,out_high,2.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T13:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.8,21.6,26.6,accepted,out_high,2.2,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T13:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.3,21.6,26.6,accepted,out_high,2.7,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T13:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.2,21.6,26.6,accepted,out_high,2.6,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T13:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.9,21.6,26.6,accepted,out_high,2.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T13:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.5,21.6,26.6,accepted,out_high,1.9,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T14:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.0,21.6,26.6,accepted,out_high,2.4,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T14:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.8,21.6,26.6,accepted,out_high,2.2,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T14:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.9,21.6,26.6,accepted,out_high,2.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T14:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.7,21.6,26.6,accepted,out_high,3.1,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T14:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.9,21.6,26.6,accepted,out_high,3.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T14:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.0,21.6,26.6,accepted,out_high,3.4,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T14:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.2,21.6,26.6,accepted,out_high,3.6,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T14:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.2,21.6,26.6,accepted,out_high,3.6,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T14:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.5,21.6,26.6,accepted,out_high,3.9,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T14:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.7,21.6,26.6,accepted,out_high,4.1,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T14:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.7,21.6,26.6,accepted,out_high,4.1,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T14:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.9,21.6,26.6,accepted,out_high,4.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T15:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.9,21.6,26.6,accepted,out_high,3.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T15:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.3,21.6,26.6,accepted,out_high,3.7,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T15:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.4,21.6,26.6,accepted,out_high,3.8,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T15:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.7,21.6,26.6,accepted,out_high,4.1,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T15:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.7,21.6,26.6,accepted,out_high,4.1,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T15:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.1,21.6,26.6,accepted,out_high,3.5,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T15:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.3,21.6,26.6,accepted,out_high,3.7,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T15:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.3,21.6,26.6,accepted,out_high,3.7,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T15:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.1,21.6,26.6,accepted,out_high,3.5,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T15:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.8,21.6,26.6,accepted,out_high,4.2,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T15:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.9,21.6,26.6,accepted,out_high,3.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T15:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.8,21.6,26.6,accepted,out_high,3.2,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T16:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.4,21.6,26.6,accepted,out_high,3.8,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T16:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.4,21.6,26.6,accepted,out_high,3.8,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T16:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.0,21.6,26.6,accepted,out_high,3.4,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T16:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.6,21.6,26.6,accepted,out_high,3.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T16:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.2,21.6,26.6,accepted,out_high,3.6,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T16:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.6,21.6,26.6,accepted,out_high,4.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T16:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.5,21.6,26.6,accepted,out_high,3.9,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T16:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.4,21.6,26.6,accepted,out_high,3.8,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T16:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.1,21.6,26.6,accepted,out_high,3.5,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T16:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.4,21.6,26.6,accepted,out_high,3.8,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T16:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.0,21.6,26.6,accepted,out_high,3.4,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T16:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.8,21.6,26.6,accepted,out_high,3.2,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T17:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.6,21.6,26.6,accepted,out_high,3.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T17:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.0,21.6,26.6,accepted,out_high,3.4,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T17:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.8,21.6,26.6,accepted,out_high,3.2,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T17:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.1,21.6,26.6,accepted,out_high,3.5,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T17:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.9,21.6,26.6,accepted,out_high,3.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T17:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.5,21.6,26.6,accepted,out_high,2.9,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T17:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.6,21.6,26.6,accepted,out_high,3.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T17:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.4,21.6,26.6,accepted,out_high,2.8,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T17:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.1,21.6,26.6,accepted,out_high,2.5,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T17:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.2,21.6,26.6,accepted,out_high,2.6,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T17:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.1,21.6,26.6,accepted,out_high,2.5,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T17:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.4,21.6,26.6,accepted,out_high,2.8,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T18:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.7,21.6,26.6,accepted,out_high,2.1,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T18:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.2,21.6,26.6,accepted,out_high,2.6,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T18:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.6,21.6,26.6,accepted,out_high,3.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T18:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.2,21.6,26.6,accepted,out_high,3.6,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T18:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.8,21.6,26.6,accepted,out_high,3.2,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T18:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.9,21.6,26.6,accepted,out_high,4.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T18:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.6,21.6,26.6,accepted,out_high,4.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T18:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.5,21.6,26.6,accepted,out_high,3.9,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T18:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.9,21.6,26.6,accepted,out_high,4.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T18:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.4,21.6,26.6,accepted,out_high,3.8,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T18:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.7,21.6,26.6,accepted,out_high,4.1,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T18:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.9,21.6,26.6,accepted,out_high,4.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T19:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.7,21.6,26.6,accepted,out_high,3.1,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T19:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.3,21.6,26.6,accepted,out_high,2.7,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T19:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.9,21.6,26.6,accepted,out_high,3.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T19:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.9,21.6,26.6,accepted,out_high,3.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T19:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.4,21.6,26.6,accepted,out_high,3.8,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T19:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.6,21.6,26.6,accepted,out_high,4.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T19:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.6,21.6,26.6,accepted,out_high,4.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T19:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,30.6,21.6,26.6,accepted,out_high,4.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T19:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.6,21.6,26.6,accepted,out_high,3.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T19:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.6,21.6,26.6,accepted,out_high,3.0,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T19:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.8,21.6,26.6,accepted,out_high,3.2,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T19:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.8,21.6,26.6,accepted,out_high,3.2,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T20:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.0,21.6,26.6,accepted,out_high,2.4,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T20:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.8,21.6,26.6,accepted,out_high,2.2,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T20:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.7,21.6,26.6,accepted,out_high,2.1,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T20:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,29.1,21.6,26.6,accepted,out_high,2.5,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T20:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.9,21.6,26.6,accepted,out_high,2.3,high,5,,22.1,26.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T20:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.6,21.2,26.1,accepted,out_high,2.5,high,5,,21.7,25.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T20:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,28.5,20.9,25.7,accepted,out_high,2.8,high,5,,21.4,25.2,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T20:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,27.3,20.3,25.1,accepted,out_high,2.2,high,5,,20.8,24.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T20:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,26.9,19.8,24.4,accepted,out_high,2.5,high,5,,20.3,23.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T20:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,26.7,19.3,23.8,accepted,out_high,2.9,high,5,,19.8,23.3,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T20:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,26.3,18.7,23.1,accepted,out_high,3.2,high,5,,19.2,22.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T20:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,26.4,18.2,22.5,accepted,out_high,3.9,high,5,,18.7,22.0,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T21:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,26.1,17.7,21.9,accepted,out_high,4.2,high,5,,18.2,21.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T21:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,25.9,17.1,21.2,accepted,out_high,4.7,high,5,,17.6,20.7,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T21:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,25.8,16.6,20.6,accepted,out_high,5.2,high,5,,17.1,20.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T21:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,25.6,16.1,19.9,accepted,out_high,5.7,high,5,,16.6,19.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T21:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,25.5,15.5,19.3,accepted,out_high,6.2,high,5,,16.0,18.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T21:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,25.4,15.0,18.6,accepted,out_high,6.8,high,5,,15.5,18.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T21:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,25.4,14.5,18.0,accepted,out_high,7.4,high,5,,15.0,17.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T21:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,24.9,13.9,17.3,accepted,out_high,7.6,high,5,,14.4,16.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T21:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,24.9,13.4,16.7,accepted,out_high,8.2,high,5,,13.9,16.2,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T21:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,24.8,12.9,16.1,accepted,out_high,8.7,high,5,,13.4,15.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T21:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,24.5,12.3,15.4,accepted,out_high,9.1,high,5,,12.8,14.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T21:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,24.4,12.1,15.2,accepted,out_high,9.2,high,5,,12.6,14.7,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T22:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.8,11.9,14.9,accepted,out_high,8.9,high,5,,12.4,14.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T22:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.7,11.9,15.0,accepted,out_high,8.7,high,5,,12.4,14.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T22:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.5,11.9,15.0,accepted,out_high,8.5,high,5,,12.4,14.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T22:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.5,11.9,15.1,accepted,out_high,8.4,high,5,,12.4,14.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T22:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.2,11.9,15.1,accepted,out_high,8.1,high,5,,12.4,14.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T22:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.2,11.9,15.2,accepted,out_high,8.0,high,5,,12.4,14.7,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T22:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.3,11.9,15.2,accepted,out_high,8.1,high,5,,12.4,14.7,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T22:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.1,11.9,15.3,accepted,out_high,7.8,high,5,,12.4,14.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T22:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.9,11.9,15.3,accepted,out_high,7.6,high,5,,12.4,14.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T22:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.0,11.9,15.3,accepted,out_high,7.7,high,5,,12.4,14.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T22:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.0,11.9,15.4,accepted,out_high,7.6,high,5,,12.4,14.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T22:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.9,11.9,15.4,accepted,out_high,7.5,high,5,,12.4,14.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T23:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.0,11.9,15.5,accepted,out_high,7.5,high,5,,12.4,15.0,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T23:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.2,12.0,15.5,accepted,out_high,7.7,high,5,,12.5,15.0,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T23:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.1,12.0,15.6,accepted,out_high,7.5,high,5,,12.5,15.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T23:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,23.0,12.0,15.6,accepted,out_high,7.4,high,5,,12.5,15.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T23:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.9,12.0,15.6,accepted,out_high,7.3,high,5,,12.5,15.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T23:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.8,12.0,15.7,accepted,out_high,7.1,high,5,,12.5,15.2,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T23:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.7,12.0,15.7,accepted,out_high,7.0,high,5,,12.5,15.2,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T23:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.7,12.0,15.8,accepted,out_high,6.9,high,5,,12.5,15.3,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T23:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.6,12.0,15.8,accepted,out_high,6.8,high,5,,12.5,15.3,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T23:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.6,12.0,15.9,accepted,out_high,6.7,high,5,,12.5,15.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T23:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.4,12.0,15.9,accepted,out_high,6.5,high,5,,12.5,15.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T23:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.4,12.0,15.9,accepted,out_high,6.5,high,5,,12.5,15.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T00:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.4,12.0,16.0,accepted,out_high,6.4,high,5,,12.5,15.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T00:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.4,12.1,16.1,accepted,out_high,6.3,high,5,,12.6,15.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T00:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.4,12.2,16.2,accepted,out_high,6.2,high,5,,12.7,15.7,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T00:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.4,12.3,16.3,accepted,out_high,6.1,high,5,,12.8,15.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T00:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.3,12.4,16.4,accepted,out_high,5.9,high,5,,12.9,15.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T00:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.2,12.5,16.5,accepted,out_high,5.7,high,5,,13.0,16.0,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T00:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.2,12.6,16.6,accepted,out_high,5.6,high,5,,13.1,16.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T00:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.1,12.8,16.8,accepted,out_high,5.3,high,5,,13.3,16.3,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T00:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.3,12.9,16.9,accepted,out_high,5.4,high,5,,13.4,16.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T00:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.1,13.0,17.0,accepted,out_high,5.1,high,5,,13.5,16.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T00:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.1,13.1,17.1,accepted,out_high,5.0,high,5,,13.6,16.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T00:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.9,13.2,17.2,accepted,out_high,4.7,high,5,,13.7,16.7,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T01:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.1,13.3,17.3,accepted,out_high,4.8,high,5,,13.8,16.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T01:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,22.0,13.4,17.4,accepted,out_high,4.6,high,5,,13.9,16.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T01:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.9,13.5,17.5,accepted,out_high,4.4,high,5,,14.0,17.0,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T01:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.9,13.6,17.6,accepted,out_high,4.3,high,5,,14.1,17.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T01:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.9,13.8,17.8,accepted,out_high,4.1,high,5,,14.3,17.3,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T01:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.9,13.9,17.9,accepted,out_high,4.0,high,5,,14.4,17.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T01:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.7,14.0,18.0,accepted,out_high,3.7,high,5,,14.5,17.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T01:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.8,14.1,18.1,accepted,out_high,3.7,high,5,,14.6,17.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T01:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.9,14.2,18.2,accepted,out_high,3.7,high,5,,14.7,17.7,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T01:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.7,14.3,18.3,accepted,out_high,3.4,high,5,,14.8,17.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T01:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.7,14.4,18.4,accepted,out_high,3.3,high,5,,14.9,17.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T01:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.7,14.5,18.5,accepted,out_high,3.2,high,5,,15.0,18.0,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T02:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.7,14.7,18.7,accepted,out_high,3.0,high,5,,15.2,18.2,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T02:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.6,14.8,18.8,accepted,out_high,2.8,high,5,,15.3,18.3,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T02:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.6,14.9,18.9,accepted,out_high,2.7,high,5,,15.4,18.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T02:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.4,15.0,19.0,accepted,out_high,2.4,high,5,,15.5,18.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T02:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.7,15.1,19.1,accepted,out_high,2.6,high,5,,15.6,18.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T02:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.6,15.2,19.2,accepted,out_high,2.4,high,5,,15.7,18.7,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T02:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.6,15.3,19.3,accepted,out_high,2.3,high,5,,15.8,18.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T02:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.4,15.4,19.4,accepted,out_high,2.0,high,5,,15.9,18.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T02:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.5,15.6,19.6,accepted,out_high,1.9,high,5,,16.1,19.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T02:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.5,15.7,19.7,accepted,out_high,1.8,high,5,,16.2,19.2,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T02:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.5,15.8,19.8,accepted,out_high,1.7,high,5,,16.3,19.3,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T02:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.4,15.9,19.9,accepted,out_high,1.5,high,5,,16.4,19.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T03:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.0,20.0,accepted,out_high,1.3,high,5,,16.5,19.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T03:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.5,16.1,20.1,accepted,out_high,1.4,high,5,,16.6,19.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T03:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,16.2,20.2,accepted,out_high,1.0,high,5,,16.7,19.7,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T03:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.4,16.3,20.3,accepted,out_high,1.1,high,5,,16.8,19.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T03:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.4,16.4,20.4,accepted,out_high,1.0,high,5,,16.9,19.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T03:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.6,20.6,accepted,out_high,0.7,high,5,,17.1,20.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T03:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.7,20.7,accepted,out_high,0.6,high,5,,17.2,20.2,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T03:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.8,20.8,accepted,out_high,0.5,high,5,,17.3,20.3,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T03:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.9,20.9,accepted,out_high,0.4,high,5,,17.4,20.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T03:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.9,20.8,accepted,out_high,0.5,high,5,,17.4,20.3,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T03:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.9,20.8,accepted,out_high,0.5,high,5,,17.4,20.3,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T03:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.4,16.9,20.7,accepted,out_high,0.7,high,5,,17.4,20.2,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T04:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.9,20.6,accepted,out_high,0.7,high,5,,17.4,20.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T04:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,16.9,20.6,accepted,out_high,0.6,high,5,,17.4,20.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T04:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,16.9,20.5,accepted,out_high,0.7,high,5,,17.4,20.0,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T04:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.9,20.5,accepted,out_high,0.8,high,5,,17.4,20.0,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T04:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,16.9,20.4,accepted,out_high,0.8,high,5,,17.4,19.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T04:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.9,20.4,accepted,out_high,0.9,high,5,,17.4,19.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T04:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.9,20.3,accepted,out_high,1.0,high,5,,17.4,19.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T04:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.4,16.9,20.3,accepted,out_high,1.1,high,5,,17.4,19.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T04:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.9,20.2,accepted,out_high,1.1,high,5,,17.4,19.7,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T04:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,16.9,20.1,accepted,out_high,1.1,high,5,,17.4,19.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T04:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,16.9,20.1,accepted,out_high,1.1,high,5,,17.4,19.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T04:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,16.9,20.0,accepted,out_high,1.2,high,5,,17.4,19.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T05:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.9,20.0,accepted,out_high,1.3,high,5,,17.4,19.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T05:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,16.9,19.9,accepted,out_high,1.3,high,5,,17.4,19.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T05:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,16.9,19.9,accepted,out_high,1.4,high,5,,17.4,19.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T05:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.1,17.0,20.0,accepted,out_high,1.1,high,5,,17.5,19.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T05:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.1,17.1,20.1,accepted,out_high,1.0,high,5,,17.6,19.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T05:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.0,17.2,20.2,accepted,out_high,0.8,high,5,,17.7,19.7,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T05:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,17.3,20.3,accepted,out_high,0.9,high,5,,17.8,19.8,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T05:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,17.4,20.4,accepted,out_high,0.8,high,5,,17.9,19.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T05:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,17.5,20.5,accepted,out_high,0.7,high,5,,18.0,20.0,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T05:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,17.6,20.6,accepted,out_high,0.6,high,5,,18.1,20.1,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T05:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.0,17.7,20.7,accepted,out_high,0.3,high,5,,18.2,20.2,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T05:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.1,17.8,20.8,accepted,out_high,0.3,high,5,,18.3,20.3,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T06:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.1,17.9,20.9,accepted,out_high,0.2,high,5,,18.4,20.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T06:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,17.9,20.9,accepted,out_high,0.4,high,5,,18.4,20.4,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T06:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,18.0,21.0,accepted,out_high,0.3,high,5,,18.5,20.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T06:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.3,18.0,21.0,accepted,out_high,0.3,high,5,,18.5,20.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T06:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,18.0,21.0,accepted,out_high,0.2,high,5,,18.5,20.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T06:25:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.1,18.0,21.0,accepted,out_high,0.1,high,5,,18.5,20.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T06:30:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.2,18.0,21.0,accepted,out_high,0.2,high,5,,18.5,20.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T06:35:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.4,18.0,21.0,accepted,out_high,0.4,high,5,,18.5,20.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T06:40:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.4,18.0,21.0,accepted,out_high,0.4,high,5,,18.5,20.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T06:45:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.6,18.0,21.0,accepted,out_high,0.6,high,5,,18.5,20.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T06:50:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.6,18.0,21.0,accepted,out_high,0.6,high,5,,18.5,20.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T06:55:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.5,18.0,21.0,accepted,out_high,0.5,high,5,,18.5,20.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T07:00:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.5,18.0,21.0,accepted,out_high,0.5,high,5,,18.5,20.5,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T07:05:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.5,18.1,21.1,accepted,out_high,0.4,high,5,,18.6,20.6,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T07:10:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.6,18.1,21.2,accepted,out_high,0.4,high,5,,18.6,20.7,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T07:15:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.5,18.2,21.4,accepted,out_high,0.1,high,5,,18.7,20.9,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-22T07:20:00,temperature,requested,climate-demo-b01:IUACAAS:v1,°C,21.7,18.3,21.5,accepted,out_high,0.2,high,5,,18.8,21.0,,Tair accepted/applicable | t_heat_sp accepted/applicable | t_vent_sp accepted/applicable
+2020-05-21T11:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,402,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T11:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,416,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T11:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,405,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T12:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,416,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T12:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,405,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T12:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,413,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T12:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,408,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T12:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,424,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T12:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,419,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T12:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,413,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T12:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,407,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T12:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,403,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T12:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,401,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T12:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,449,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T12:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,432,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T13:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,420,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T13:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,409,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T13:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,430,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T13:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,448,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T13:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,423,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T13:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,399,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T13:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,441,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T13:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,446,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T13:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,426,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T13:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,415,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T13:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,411,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T13:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,399,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T14:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,410,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T14:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,440,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T14:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,418,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T14:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,404,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T14:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,443,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T14:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,435,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T14:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,411,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T14:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,415,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T14:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,396,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T14:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,426,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T14:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,438,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T14:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,423,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T15:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,420,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T15:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,398,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T15:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,435,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T15:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,457,350,450,accepted,out_high,7,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T15:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,421,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T15:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,418,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T15:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,404,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T15:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,435,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T15:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,434,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T15:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,416,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T15:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,407,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T15:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,448,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T16:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,441,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T16:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,409,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T16:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,409,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T16:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,420,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T16:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,407,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T16:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,403,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T16:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,442,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T16:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,431,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T16:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,426,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T16:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,402,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T16:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,447,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T16:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,421,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T17:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,419,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T17:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,416,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T17:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,396,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T17:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,423,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T17:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,445,350,450,accepted,valid,0,,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T17:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,429,150,250,accepted,out_high,179,high,5,,,,200,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-21T17:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,405,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T17:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,418,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T17:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,412,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T17:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,409,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T17:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,409,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T17:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,421,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T18:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,425,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T18:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,414,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T18:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,421,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T18:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,421,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T18:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,409,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T18:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,416,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T18:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,411,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T18:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,408,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T18:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,416,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T18:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,415,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T18:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,420,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T18:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,409,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T19:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,414,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T19:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,409,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T19:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,420,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T19:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,426,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T19:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,424,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T19:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,413,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T19:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,411,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T19:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,413,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T19:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,418,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T19:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,410,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T19:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,420,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T19:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,410,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T20:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,413,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T20:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,415,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T20:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,413,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T20:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,424,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T20:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,427,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T20:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,414,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T20:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,432,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T20:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,426,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T20:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,432,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T20:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,426,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T20:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,442,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T20:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,435,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T21:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,430,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T21:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,439,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T21:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,442,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T21:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,440,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T21:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,449,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T21:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,443,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T21:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,454,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T21:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,459,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T21:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,458,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T21:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,456,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T21:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,460,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T21:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,480,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T22:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,465,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T22:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,473,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T22:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,460,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T22:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,465,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T22:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,470,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T22:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,470,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T22:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,479,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T22:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,468,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T22:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,478,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T22:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,465,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T22:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,471,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T22:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,478,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T23:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,481,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T23:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,483,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T23:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,480,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T23:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,482,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T23:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,484,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T23:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,490,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T23:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,499,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T23:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,493,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T23:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,498,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T23:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,488,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T23:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,499,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-21T23:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,513,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T00:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,505,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T00:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,501,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T00:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,505,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T00:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,511,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T00:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,520,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T00:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,518,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T00:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,522,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T00:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,524,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T00:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,520,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T00:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,527,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T00:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,522,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T00:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,524,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T01:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,529,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T01:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,534,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T01:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,532,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T01:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,533,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T01:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,532,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T01:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,534,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T01:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,539,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T01:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,543,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T01:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,529,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T01:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,537,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T01:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,541,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T01:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,555,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T02:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,546,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T02:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,549,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T02:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,540,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T02:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,548,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T02:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,539,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T02:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,554,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T02:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,554,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T02:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,551,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T02:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,559,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T02:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,550,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T02:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,560,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T02:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,573,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T03:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,564,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T03:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,553,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T03:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,556,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T03:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,556,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T03:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,556,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T03:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,561,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T03:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,563,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T03:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,553,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T03:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,559,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T03:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,564,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T03:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,563,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T03:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,545,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T04:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,552,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T04:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,544,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T04:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,547,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T04:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,556,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T04:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,549,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T04:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,552,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T04:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,545,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T04:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,563,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T04:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,559,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T04:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,561,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T04:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,553,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T04:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,564,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T05:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,559,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T05:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,566,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T05:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,555,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T05:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,559,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T05:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,548,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T05:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,554,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T05:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,553,,,accepted,sp0_off_mode,0,,5,sp0_off_mode,,,0,CO2air accepted/applicable | co2_sp accepted/unknown (off_mode_unverified)
+2020-05-22T05:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,553,150,250,accepted,out_high,303,high,5,,,,200,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T05:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,558,350,450,accepted,out_high,108,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T05:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,559,350,450,accepted,out_high,109,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T05:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,554,350,450,accepted,out_high,104,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T05:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,543,350,450,accepted,out_high,93,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T06:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,538,350,450,accepted,out_high,88,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T06:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,546,350,450,accepted,out_high,96,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T06:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,543,350,450,accepted,out_high,93,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T06:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,554,350,450,accepted,out_high,104,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T06:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,539,350,450,accepted,out_high,89,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T06:25:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,531,350,450,accepted,out_high,81,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T06:30:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,513,350,450,accepted,out_high,63,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T06:35:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,521,350,450,accepted,out_high,71,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T06:40:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,526,350,450,accepted,out_high,76,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T06:45:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,525,350,450,accepted,out_high,75,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T06:50:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,511,350,450,accepted,out_high,61,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T06:55:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,504,350,450,accepted,out_high,54,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T07:00:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,486,350,450,accepted,out_high,36,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T07:05:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,487,350,450,accepted,out_high,37,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T07:10:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,492,350,450,accepted,out_high,42,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T07:15:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,498,350,450,accepted,out_high,48,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable
+2020-05-22T07:20:00,co2,requested,climate-demo-b01:IUACAAS:v1,ppm,485,350,450,accepted,out_high,35,high,5,,,,400,CO2air accepted/applicable | co2_sp accepted/applicable

@@ -14,7 +14,7 @@ from greenhouse.contracts import (
     CatalogPublication, CycleWindow, HarvestDay, HarvestRecord, HarvestSummary, IrrigationDay,
     IrrigationSummary, PublicationRef, QueryContext,
 )
-from greenhouse.queries import IrrigationService
+from greenhouse.queries import ClimateService, IrrigationService
 from greenhouse.queries.catalog import CatalogService
 from greenhouse.queries.harvest import HarvestService
 
@@ -32,6 +32,20 @@ def irrigation_service(connection, raw_snapshots=None) -> IrrigationService:
 def harvest_service(connection, raw_snapshots=None) -> HarvestService:
     from greenhouse.db.harvest_adapter import PostgresHarvestQueryAdapter
     return HarvestService(PostgresHarvestQueryAdapter(connection, raw_snapshots=raw_snapshots))
+
+
+def climate_service(connection, raw_snapshots=None) -> ClimateService:
+    """BR-01 evaluation service over the sealed climate bundle."""
+    from greenhouse.db.climate_adapter import PostgresClimateQueryAdapter
+    return ClimateService(PostgresClimateQueryAdapter(connection, raw_snapshots=raw_snapshots))
+
+
+def climate_publication_label(row):
+    stamp = row.committed_at.astimezone().strftime('%d/%m/%Y %H:%M')
+    if not row.climate_usable:
+        return (f"{row.scope_id} · {stamp} · thiếu climate mart "
+                f"({' · '.join(row.climate_reason_codes)})")
+    return f"{row.scope_id} · {stamp} · {row.finality_status} · {row.cycle_count} vụ · climate-mart-v1"
 
 
 def manifest_snapshot_id(directory: Path):

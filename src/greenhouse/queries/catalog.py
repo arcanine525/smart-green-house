@@ -13,6 +13,7 @@ class CatalogAdapter(Protocol):
     def catalog_cycles(self, publication_id: str) -> tuple[CatalogCycle, ...]: ...
     def catalog_rules(self, scope_id: str, compartment_id: str) -> tuple[IrrigationRuleProfile, ...]: ...
     def catalog_harvest_rules(self, scope_id: str, compartment_id: str) -> tuple[HarvestRuleProfile, ...]: ...
+    def catalog_schedule_rules(self, scope_id: str, compartment_id: str): ...
 
 
 class CatalogService:
@@ -31,6 +32,10 @@ class CatalogService:
         rows = self.publications() if publications is None else tuple(publications)
         return tuple(row for row in rows if row.harvest_usable)
 
+    def climate_usable(self, publications=None):
+        rows = self.publications() if publications is None else tuple(publications)
+        return tuple(row for row in rows if row.climate_usable)
+
     def cycles(self, publication: CatalogPublication):
         return self.adapter.catalog_cycles(publication.publication_id)
 
@@ -45,3 +50,6 @@ class CatalogService:
 
     def harvest_rules(self, publication: CatalogPublication, compartment_id: str):
         return self.adapter.catalog_harvest_rules(publication.scope_id, compartment_id)
+
+    def schedule_rules(self, publication: CatalogPublication, compartment_id: str):
+        return self.adapter.catalog_schedule_rules(publication.scope_id, compartment_id)

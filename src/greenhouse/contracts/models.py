@@ -283,6 +283,8 @@ class CatalogPublication:
     cycle_count: int | None = None
     harvest_bundle_version: str | None = None
     harvest_reason_codes: tuple[str, ...] = ()
+    climate_bundle_version: str | None = None
+    climate_reason_codes: tuple[str, ...] = ()
 
     def __post_init__(self):
         for value in (self.scope_id, self.snapshot_id, self.publication_id, self.code_version):
@@ -298,6 +300,9 @@ class CatalogPublication:
         tuple_of(self.harvest_reason_codes, str)
         if self.harvest_bundle_version is not None and self.harvest_reason_codes:
             raise ValueError('A present harvest bundle carries no absence reasons')
+        tuple_of(self.climate_reason_codes, str)
+        if self.climate_bundle_version is not None and self.climate_reason_codes:
+            raise ValueError('A present climate bundle carries no absence reasons')
 
     @property
     def usable(self):
@@ -306,6 +311,10 @@ class CatalogPublication:
     @property
     def harvest_usable(self):
         return self.harvest_bundle_version is not None
+
+    @property
+    def climate_usable(self):
+        return self.climate_bundle_version is not None
 
 
 @dataclass(frozen=True)
@@ -1581,6 +1590,144 @@ class RuleDurationResult:
             raise ValueError('Application list must follow the requested metrics')
         if self.time_basis != TimeBasis.SOURCE_NAIVE:
             raise ValueError('Threshold result requires the source_naive basis')
+
+
+RULE_SLOT_CLASSES = (
+    'valid', 'out_low', 'out_high', 'rule_not_configured', 'missing_input',
+    'quality_invalid', 'quality_suspect', 'sp0_off_mode', 'inverted_bounds')
+
+
+@dataclass(frozen=True)
+class RuleSlotReview:
+    """Per-slot trace for one declared-group evaluation: actual, applied
+    bounds, quality verdict and exact classification from the SAME engine
+    call path (no duplicated formulas in UI/SQL). Climate metrics expose the
+    setpoint they were judged against via `lower/upper` (requested basis:
+    heating−delta/ventilation+delta or derived CO2 setpoints; nutrition:
+    fixed segment bounds); unknown classes carry None bounds by semantics,
+    not a fabricated threshold."""
+    start: datetime
+    metric: str
+    measurement_context: str
+    basis: RuleBasis
+    rule_version: str | None
+    actual: Decimal | None
+    lower: Decimal | None
+    upper: Decimal | None
+    quality: QualityStatus | None
+    class_code: str
+    deviation: Decimal
+    direction: RuleDeviationDirection | None
+    minutes: Decimal
+    # Optional source facts (T15 export preflight): the ORIGINAL frozen
+    # selected setpoint values and the frozen per-measure quality note of
+    # THIS slot/metric, independent of evaluation-input masking; None when
+    # the provider cannot supply them (defaults keep old callers intact).
+    source_lower: Decimal | None = None
+    source_upper: Decimal | None = None
+    source_setpoint: Decimal | None = None
+    source_quality: str | None = None
+
+    def __post_init__(self):
+        if self.metric not in RULE_SCHEDULE_METRICS:
+            raise ValueError('Review metric must be one of ' + str(RULE_SCHEDULE_METRICS))
+        identifier(self.measurement_context)
+        if not isinstance(self.basis, RuleBasis):
+            raise ValueError('Review basis must be an explicit RuleBasis')
+        if self.rule_version is not None:
+            identifier(self.rule_version)
+        # Actual/bounds may be signed finite (cold setpoints/temps, negative
+        # raw EC later stay truthful); only deviation/minutes are counts.
+        for value in (self.actual, self.lower, self.upper, self.source_lower,
+                      self.source_upper, self.source_setpoint):
+            finite(value, nullable=True)
+        if self.source_quality is not None and not isinstance(self.source_quality, str):
+            raise ValueError('Review source_quality must be a str note')
+        if self.class_code not in RULE_SLOT_CLASSES:
+            raise ValueError('Review class must be one of ' + str(RULE_SLOT_CLASSES))
+        if (self.direction is None) != (self.class_code not in ('out_low', 'out_high')):
+            raise ValueError('Review direction must be present exactly for out classes')
+        if self.class_code in ('out_low', 'out_high') and not self.deviation:
+            raise ValueError('Out-of-range review rows carry the exact deviation')
+        if self.quality is not None and not isinstance(self.quality, QualityStatus):
+            raise ValueError('Review quality must be a QualityStatus contract')
+
+    @property
+    def unit(self):
+        return RULE_METRIC_UNITS[self.metric]
+
+    @property
+    def unknown_reason(self):
+        return self.class_code if self.class_code not in ('valid', 'out_low', 'out_high') else None
+
+
+@dataclass(frozen=True)
+class ClimateEvaluation:
+    """One BR-01 evaluation over the pinned publication/mart: typed inputs
+    and the T14 oracle result plus per-slot traces. The declared basis stays
+    requested/realized (climate); draining is handled separately (T16/T17).
+
+    An explicitly selected schedule revision may cover only PART of the
+    request: uncovered metrics stay `rule_not_configured` with joint valid 0
+    (approved T14 contract) — a partial selection is not an error, but a
+    selection that applies NO revision to any metric never carries versions."""
+    publication: PublicationRef
+    context: QueryContext
+    basis: RuleBasis
+    requested_rule_version: str | None
+    result: RuleDurationResult
+    slot_reviews: tuple[RuleSlotReview, ...]
+    # Optional provenance of the SELECTED revision, verbatim from the
+    # registered rule (never inferred from the rule_version string; None with
+    # defaults keeps no-rule selections and old construction sites intact).
+    rule_id: str | None = None
+    rule_label: str | None = None
+    rule_is_demo: bool | None = None
+    rule_evidence_reference: str | None = None
+
+    def __post_init__(self):
+        if not isinstance(self.publication, PublicationRef):
+            raise ValueError('Climate evaluation pins a PublicationRef')
+        if not isinstance(self.context, QueryContext):
+            raise ValueError('Climate evaluation pins a QueryContext')
+        if self.publication.publication_id != self.context.publication_id:
+            raise ValueError('Evaluation publication and context must share the pinned ID')
+        if self.basis not in (RuleBasis.REQUESTED, RuleBasis.REALIZED):
+            raise ValueError('BR-01 evaluates the requested or the realized basis')
+        if not isinstance(self.result, RuleDurationResult):
+            raise ValueError('Climate evaluation carries the typed engine result')
+        if self.rule_id is not None:
+            identifier(self.rule_id)
+        if self.rule_label is not None:
+            identifier(self.rule_label)
+        if self.rule_is_demo is not None and not isinstance(self.rule_is_demo, bool):
+            raise ValueError('Climate evaluation rule_is_demo must be bool or None')
+        if self.rule_evidence_reference is not None \
+                and not isinstance(self.rule_evidence_reference, str):
+            raise ValueError('Climate evaluation rule evidence must be str or None')
+        if self.requested_rule_version is None \
+                and any(applied.rule_version is not None for applied in self.result.applications):
+            raise ValueError('No-rule selection may not carry applied rule versions')
+        tuple_of(self.slot_reviews, RuleSlotReview)
+        if self.slot_reviews:
+            # Bounded detail: whichever reviews a caller decides to carry
+            # (none for the summary step) must agree with THIS evaluation's
+            # declared identity — never a foreign window trace.
+            unknown = any(review.metric not in self.result.requested_metrics
+                          or review.basis != self.basis
+                          or review.measurement_context
+                          != self.result.metric_results[0].measurement_context
+                          for review in self.slot_reviews)
+            if unknown:
+                raise ValueError('Slot reviews must carry this evaluation metrics/basis')
+
+    @property
+    def requested_context(self):
+        return self.context
+
+    @property
+    def compartment_id(self):
+        return self.context.compartment_ids[0]
 
 
 @dataclass(frozen=True)

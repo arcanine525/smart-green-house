@@ -73,7 +73,8 @@ def render(connection):
                   '--workflow-id water-first')
 
     with st.sidebar:
-        screen = st.radio('Màn hình', ['💧 Nước (BR-02)', '🍅 Thu hoạch (BR-05)'],
+        screen = st.radio('Màn hình', ['💧 Nước (BR-02)', '🍅 Thu hoạch (BR-05)',
+                                       '🌡️ Khí hậu (BR-01)'],
                           key='screen_choice',
                           help='Mỗi màn hình dùng bundle riêng (nước = irrigation-mart-v1, '
                           'thu hoạch = harvest-mart-v3); session filter tách theo màn hình.')
@@ -81,6 +82,9 @@ def render(connection):
     if screen == '🍅 Thu hoạch (BR-05)':
         from greenhouse.app import harvest as harvest_screen
         return harvest_screen.render(connection, settings, publications)
+    if screen == '🌡️ Khí hậu (BR-01)':
+        from greenhouse.app import climate as climate_screen
+        return climate_screen.render(connection, settings, publications)
     return render_water(connection, settings, publications)
 
 
