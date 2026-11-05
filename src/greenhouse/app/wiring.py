@@ -207,3 +207,12 @@ def intensity_service(connection, raw_snapshots=None):
     from greenhouse.queries.intensity import EnergyIntensityService
     return EnergyIntensityService(energy_service(connection, raw_snapshots),
         PostgresHarvestQueryAdapter(connection, raw_snapshots=raw_snapshots))
+
+
+def cost_service(connection, raw_snapshots=None):
+    from greenhouse.db.cost_adapter import PostgresCostAdapter
+    from greenhouse.queries.cost import EnergyCostService
+    return EnergyCostService(
+        energy_service(connection, raw_snapshots),
+        PostgresCostAdapter(connection, raw_snapshots=raw_snapshots),
+    )

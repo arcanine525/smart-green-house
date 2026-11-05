@@ -95,6 +95,28 @@ def exact_add(left, right):
         return left + right
 
 
+def exact_sub(left, right):
+    """Exact decimal subtraction without ambient 28-digit rounding."""
+    integer_digits = max(max(value.adjusted() + 1, 1) for value in (left, right))
+    fractional_digits = max(max(-value.as_tuple().exponent, 0)
+                            for value in (left, right))
+    with localcontext() as ctx:
+        ctx.prec = max(50, integer_digits + fractional_digits + 2)
+        return left - right
+
+
+def exact_sum(iterable, start=Decimal('0')):
+    """Exact decimal accumulation without ambient 28-digit rounding."""
+    items = tuple(iterable)
+    if not items:
+        return start
+    integer_digits = max(max(v.adjusted() + 1, 1) for v in items)
+    fractional_digits = max(max(-v.as_tuple().exponent, 0) for v in items)
+    with localcontext() as ctx:
+        ctx.prec = max(50, integer_digits + fractional_digits + len(str(len(items))) + 2)
+        return sum(items, start)
+
+
 @dataclass(frozen=True)
 class CorrectionRef:
     correction_id: str
@@ -1356,10 +1378,13 @@ class ScenarioCommand:
     name: str
     publication: PublicationRef
     changes: tuple[ScenarioChange, ...]
+    scenario_id: str | None = None
 
     def __post_init__(self):
         for value in (self.request_id, self.baseline_version_id, self.name):
             identifier(value)
+        if self.scenario_id is not None:
+            identifier(self.scenario_id)
         if not isinstance(self.publication, PublicationRef):
             raise ValueError('Scenario requires a pinned publication')
         tuple_of(self.changes, ScenarioChange)
@@ -2230,3 +2255,240 @@ class EnergyPortfolio:
         if (self.energy_kwh, self.production_a_kg, self.intensity_kwh_kg_a) != (
                 energy, production, quantity_ratio(energy, production)):
             raise ValueError('Portfolio must divide the sums of its disclosed eligible population')
+
+
+ENERGY_COST_VERSION = 'energy-cost-v1'
+
+
+@dataclass(frozen=True)
+class TariffRate:
+    rate_id: str
+    tariff_version: str
+    component: EnergyComponent
+    currency: str
+    price_unit: str
+    rate: Decimal
+    valid_from: date
+    valid_to_exclusive: date
+    source_reference: str
+
+    def __post_init__(self):
+        for val in (self.rate_id, self.tariff_version, self.currency, self.price_unit, self.source_reference):
+            identifier(val)
+        if not isinstance(self.component, EnergyComponent):
+            raise ValueError('Invalid energy component')
+        if self.currency != 'EUR':
+            raise ValueError('Tariff rate currency must be EUR')
+        expected_unit = 'EUR/MJ' if self.component == EnergyComponent.HEAT else 'EUR/kWh'
+        if self.price_unit not in (expected_unit, 'EUR/kWh'):
+            raise ValueError('Unexpected price unit for component')
+        finite(self.rate, nonnegative=True)
+        calendar_window(self.valid_from, self.valid_to_exclusive)
+
+
+@dataclass(frozen=True)
+class TariffProfile:
+    tariff_version: str
+    tariff_id: str
+    version: int
+    data_scope_id: str
+    currency: str
+    source_reference: str
+    label: str
+    rates: tuple[TariffRate, ...]
+    is_baseline: bool = True
+    compartment_id: str | None = None
+
+    def __post_init__(self):
+        for val in (self.tariff_version, self.tariff_id, self.data_scope_id, self.currency, self.source_reference, self.label):
+            identifier(val)
+        if type(self.version) is not int or self.version < 1:
+            raise ValueError('Tariff version must be a positive integer')
+        if self.currency != 'EUR':
+            raise ValueError('Tariff profile currency must be EUR')
+        if self.compartment_id is not None:
+            identifier(self.compartment_id)
+        tuple_of(self.rates, TariffRate)
+        object.__setattr__(self, 'rates', tuple(sorted(self.rates, key=lambda r: (r.component.value, r.valid_from))))
+        by_comp = {}
+        for r in self.rates:
+            by_comp.setdefault(r.component, []).append(r)
+        for comp, rates in by_comp.items():
+            sorted_rates = sorted(rates, key=lambda x: x.valid_from)
+            for i in range(len(sorted_rates) - 1):
+                if sorted_rates[i].valid_to_exclusive > sorted_rates[i + 1].valid_from:
+                    raise ValueError(f'Overlapping rate intervals for {comp}')
+
+
+@dataclass(frozen=True)
+class CostScenario:
+    scenario_version: str
+    scenario_id: str
+    version: int
+    request_id: str
+    baseline_tariff_version: str
+    publication: PublicationRef
+    name: str
+    rates: tuple[TariffRate, ...]
+    changes: tuple[ScenarioChange, ...]
+    author: str = 'user'
+    created_at: datetime | None = None
+
+    def __post_init__(self):
+        for val in (self.scenario_version, self.scenario_id, self.request_id, self.baseline_tariff_version, self.name, self.author):
+            identifier(val)
+        if type(self.version) is not int or self.version < 1:
+            raise ValueError('Scenario version must be a positive integer')
+        if not isinstance(self.publication, PublicationRef):
+            raise ValueError('Scenario requires a pinned publication')
+        tuple_of(self.rates, TariffRate)
+        object.__setattr__(self, 'rates', tuple(sorted(self.rates, key=lambda r: (r.component.value, r.valid_from))))
+        tuple_of(self.changes, ScenarioChange)
+        if self.created_at is not None:
+            clock(self.created_at, aware=True)
+
+
+@dataclass(frozen=True)
+class DayCost:
+    resource_date: date
+    component: EnergyComponent
+    quantity: EnergyQuantity
+    rate: TariffRate | None
+    cost_per_m2: Decimal | None
+    cost_eur: Decimal | None
+    reason_code: str | None = None
+
+    def __post_init__(self):
+        if type(self.resource_date) is not date or not isinstance(self.component, EnergyComponent):
+            raise ValueError('Invalid day cost date/component')
+        if not isinstance(self.quantity, EnergyQuantity):
+            raise ValueError('Day cost requires exact EnergyQuantity')
+        if self.rate is not None and not isinstance(self.rate, TariffRate):
+            raise ValueError('Invalid tariff rate')
+        finite(self.cost_per_m2, nullable=True, nonnegative=True)
+        finite(self.cost_eur, nullable=True, nonnegative=True)
+        if self.reason_code is not None:
+            identifier(self.reason_code)
+
+
+@dataclass(frozen=True)
+class ComponentCost:
+    component: EnergyComponent
+    price_unit: str
+    expected_days: int
+    priced_days: int
+    pricing_coverage_pct: Decimal
+    observed_cost_per_m2: Decimal | None
+    observed_cost_eur: Decimal | None
+    official_cost_per_m2: Decimal | None
+    official_cost_eur: Decimal | None
+    day_costs: tuple[DayCost, ...]
+    reason_codes: tuple[str, ...]
+    quantity_accepted_days: int = 0
+    quantity_coverage_pct: Decimal = Decimal('100')
+
+    def __post_init__(self):
+        if not isinstance(self.component, EnergyComponent):
+            raise ValueError('Invalid component')
+        identifier(self.price_unit)
+        if any(type(n) is not int or n < 0 for n in (self.expected_days, self.priced_days, self.quantity_accepted_days)):
+            raise ValueError('Invalid day counts')
+        finite(self.pricing_coverage_pct, nonnegative=True)
+        finite(self.quantity_coverage_pct, nonnegative=True)
+        finite(self.observed_cost_per_m2, nullable=True, nonnegative=True)
+        finite(self.observed_cost_eur, nullable=True, nonnegative=True)
+        finite(self.official_cost_per_m2, nullable=True, nonnegative=True)
+        finite(self.official_cost_eur, nullable=True, nonnegative=True)
+        tuple_of(self.day_costs, DayCost)
+        tuple_of(self.reason_codes, str)
+
+
+@dataclass(frozen=True)
+class EnergyCostSummary:
+    context: QueryContext
+    tariff_version: str
+    scenario_version: str | None
+    currency: str
+    components: tuple[ComponentCost, ComponentCost, ComponentCost]
+    expected_days: int
+    priced_days: int
+    pricing_coverage_pct: Decimal
+    observed_total_cost_per_m2: Decimal | None
+    observed_total_cost_eur: Decimal | None
+    official_total_cost_per_m2: Decimal | None
+    official_total_cost_eur: Decimal | None
+    basis_status: BasisStatus | None
+    basis_label: str | None
+    sensitivity_factor: Decimal | None
+    sensitivity_total_cost_eur: Decimal | None
+    reason_codes: tuple[str, ...]
+    quantity_complete_days: int = 0
+    quantity_coverage_pct: Decimal = Decimal('100')
+    metric_version: str = ENERGY_COST_VERSION
+
+    def __post_init__(self):
+        if not isinstance(self.context, QueryContext):
+            raise ValueError('Invalid context')
+        identifier(self.tariff_version); identifier(self.currency)
+        if self.scenario_version is not None:
+            identifier(self.scenario_version)
+        tuple_of(self.components, ComponentCost)
+        if len(self.components) != 3 or {c.component for c in self.components} != {EnergyComponent.HEAT, EnergyComponent.ELEC_HIGH, EnergyComponent.ELEC_LOW}:
+            raise ValueError('Cost summary requires all three energy components')
+        if any(type(n) is not int or n < 0 for n in (self.expected_days, self.priced_days, self.quantity_complete_days)):
+            raise ValueError('Invalid day counts')
+        finite(self.pricing_coverage_pct, nonnegative=True)
+        finite(self.quantity_coverage_pct, nonnegative=True)
+        for val in (self.observed_total_cost_per_m2, self.observed_total_cost_eur,
+                    self.official_total_cost_per_m2, self.official_total_cost_eur,
+                    self.sensitivity_factor, self.sensitivity_total_cost_eur):
+            finite(val, nullable=True, nonnegative=True)
+        tuple_of(self.reason_codes, str)
+        if self.metric_version != ENERGY_COST_VERSION:
+            raise ValueError('Invalid energy cost metric version')
+
+
+@dataclass(frozen=True)
+class ComponentCostDelta:
+    component: EnergyComponent
+    baseline_cost_per_m2: Decimal | None
+    scenario_cost_per_m2: Decimal | None
+    delta_cost_per_m2: Decimal | None
+    delta_cost_pct: Decimal | None
+    baseline_cost_eur: Decimal | None
+    scenario_cost_eur: Decimal | None
+    delta_cost_eur: Decimal | None
+    baseline_share_pct: Decimal | None
+    scenario_share_pct: Decimal | None
+
+    def __post_init__(self):
+        if not isinstance(self.component, EnergyComponent):
+            raise ValueError('Invalid component')
+        for val in (self.baseline_cost_per_m2, self.scenario_cost_per_m2, self.delta_cost_per_m2,
+                    self.baseline_cost_eur, self.scenario_cost_eur, self.delta_cost_eur,
+                    self.delta_cost_pct, self.baseline_share_pct, self.scenario_share_pct):
+            finite(val, nullable=True)
+
+
+@dataclass(frozen=True)
+class ScenarioComparison:
+    baseline: EnergyCostSummary
+    scenario: EnergyCostSummary
+    component_deltas: tuple[ComponentCostDelta, ComponentCostDelta, ComponentCostDelta]
+    delta_total_cost_per_m2: Decimal | None
+    delta_total_pct: Decimal | None
+    delta_total_cost_eur: Decimal | None
+
+    def __post_init__(self):
+        if not isinstance(self.baseline, EnergyCostSummary) or not isinstance(self.scenario, EnergyCostSummary):
+            raise ValueError('Comparison requires baseline and scenario summaries')
+        if (self.baseline.context.publication_id, self.baseline.context.snapshot_id,
+            self.baseline.context.scope_id, self.baseline.context.cycle_id, self.baseline.context.compartment_ids,
+            self.baseline.context.start, self.baseline.context.end) != (
+                self.scenario.context.publication_id, self.scenario.context.snapshot_id,
+                self.scenario.context.scope_id, self.scenario.context.cycle_id, self.scenario.context.compartment_ids,
+                self.scenario.context.start, self.scenario.context.end):
+            raise ValueError('Comparison contexts must match')
+        tuple_of(self.component_deltas, ComponentCostDelta)
+        for val in (self.delta_total_cost_per_m2, self.delta_total_pct, self.delta_total_cost_eur):
+            finite(val, nullable=True)
