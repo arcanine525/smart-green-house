@@ -297,18 +297,15 @@ def seed_drain(connection, apply=False, scope_id=None):
     Choosing the revision stays an explicit query-time decision."""
     from greenhouse.db.drain_adapter import PostgresDrainQueryAdapter
     catalog = CatalogService(PostgresCatalogAdapter(connection))
-    usable = catalog.climate_usable()
-    # The drain bundle's receipt is checked by the adapter; the catalog
-    # climate_usable row is the licensed entry since the drain publication
-    # carries all four bundles by the seal contract.
+    usable = catalog.drain_usable()
     if scope_id is None:
         if len(usable) != 1:
-            raise ValueError('Expected exactly one climate-usable publication; '
+            raise ValueError('Expected exactly one drain-usable publication; '
                              'refusing to guess a scope')
     else:
         usable = [row for row in usable if row.scope_id == scope_id]
         if len(usable) != 1:
-            raise ValueError(f'Expected exactly one climate-usable publication for '
+            raise ValueError(f'Expected exactly one drain-usable publication for '
                              f'scope {scope_id}, found {len(usable)}')
     publication = PostgresDrainQueryAdapter(connection).publication(usable[0].publication_id)
     planned = [_drain_plan_entry(connection, publication, cycle)

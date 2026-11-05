@@ -1,0 +1,36 @@
+ Container smart-greenhouse-job-run-0fb4180d856c Creating
+ Container smart-greenhouse-job-run-0fb4180d856c Created
+................Synthetic contract test database created: test_contracts_c535710e9400
+.................Synthetic contract test database dropped: test_contracts_c535710e9400
+....................Synthetic test database created: test_core_d4f1fb68f5464b39b5d8bc17df1561a7
+...................Synthetic test database dropped: test_core_d4f1fb68f5464b39b5d8bc17df1561a7
+Synthetic contract test database created: test_contracts_4a44f98627b8
+......Synthetic contract test database dropped: test_contracts_4a44f98627b8
+...Synthetic contract test database created: test_contracts_41d9364741f6
+.............Synthetic contract test database dropped: test_contracts_41d9364741f6
+Synthetic contract test database created: test_contracts_d4af7045d74e
+..Synthetic contract test database dropped: test_contracts_d4af7045d74e
+Synthetic contract test database created: test_contracts_c052f8bb7829
+.........................Synthetic contract test database dropped: test_contracts_c052f8bb7829
+Synthetic contract test database created: test_contracts_d6e892ce6839
+.............Synthetic contract test database dropped: test_contracts_d6e892ce6839
+.....................................Synthetic contract test database created: test_contracts_ba1bfbfdb061
+....................Synthetic contract test database dropped: test_contracts_ba1bfbfdb061
+Synthetic pipeline test database created: test_pipeline_c49f0627db14
+.............WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/05 07:20:55 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                ....Synthetic pipeline test database dropped: test_pipeline_c49f0627db14
+Synthetic contract test database created: test_contracts_a74350b418cd
+..........Synthetic contract test database dropped: test_contracts_a74350b418cd
+.....Synthetic contract test database created: test_contracts_57905949b054
+..............................Synthetic contract test database dropped: test_contracts_57905949b054
+........................Runtime: Python 3.12.12 / Linux aarch64
+openjdk version "17.0.17" 2025-10-21
+Packages: pyspark=4.0.1, psycopg=3.3.7, paho-mqtt=2.1.0, pytest=8.4.2
+Container memory.peak: 529813504 bytes
+Container memory.max: 2147483648 bytes
+
+277 passed in 65.64s (0:01:05)

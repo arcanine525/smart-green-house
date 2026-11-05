@@ -285,6 +285,8 @@ class CatalogPublication:
     harvest_reason_codes: tuple[str, ...] = ()
     climate_bundle_version: str | None = None
     climate_reason_codes: tuple[str, ...] = ()
+    drain_bundle_version: str | None = None
+    drain_reason_codes: tuple[str, ...] = ()
 
     def __post_init__(self):
         for value in (self.scope_id, self.snapshot_id, self.publication_id, self.code_version):
@@ -303,6 +305,9 @@ class CatalogPublication:
         tuple_of(self.climate_reason_codes, str)
         if self.climate_bundle_version is not None and self.climate_reason_codes:
             raise ValueError('A present climate bundle carries no absence reasons')
+        tuple_of(self.drain_reason_codes, str)
+        if self.drain_bundle_version is not None and self.drain_reason_codes:
+            raise ValueError('A present drain bundle carries no absence reasons')
 
     @property
     def usable(self):
@@ -315,6 +320,10 @@ class CatalogPublication:
     @property
     def climate_usable(self):
         return self.climate_bundle_version is not None
+
+    @property
+    def drain_usable(self):
+        return self.drain_bundle_version is not None
 
 
 @dataclass(frozen=True)

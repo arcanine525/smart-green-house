@@ -1,0 +1,919 @@
+{
+  "mode": "agc",
+  "oracle": "independent raw CSV + documented demo policy/bounds",
+  "source_naive": true,
+  "cycles": [
+    {
+      "compartment": "AICU",
+      "cycle": "agc-cycle-AICU",
+      "window": [
+        "2019-12-16 00:00:00",
+        "2020-05-30 00:00:00"
+      ],
+      "rule_version": "drain-demo-b03:AICU:v1",
+      "file_sha256": "9642c7561c7e4e2f03240f8ec3c48da7b0aab6c5433460ab0529dc2b1f9cceb3",
+      "raw_and_frozen_slots": 47809,
+      "endpoint_rows": 1,
+      "metrics": {
+        "ec": {
+          "expected_minutes": 239040,
+          "valid_minutes": 238690,
+          "out_minutes": 234960,
+          "out_low_minutes": 16575,
+          "out_high_minutes": 218385,
+          "unknown_minutes": 350,
+          "suspect_minutes": 0,
+          "out_percent": "98.437303615568310360718924127529431480162553940257",
+          "coverage_pct": "99.853580990629183400267737617135207496653279785810",
+          "minutes_by_class": {
+            "high": 218385,
+            "inside": 3730,
+            "low": 16575,
+            "missing": 350
+          },
+          "episode_count": 79,
+          "longest": [
+            {
+              "start": "2020-04-26T18:00:00",
+              "minutes": 47880,
+              "peak": "3.6",
+              "peak_at": "2020-05-11T00:00:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-05-30T00:00:00"
+            },
+            {
+              "start": "2019-12-27T13:10:00",
+              "minutes": 46320,
+              "peak": "1.2",
+              "peak_at": "2020-01-07T08:20:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-01-28T17:10:00"
+            },
+            {
+              "start": "2020-03-30T07:50:00",
+              "minutes": 29220,
+              "peak": "1.7",
+              "peak_at": "2020-03-31T22:05:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-04-19T14:50:00"
+            }
+          ]
+        },
+        "ph": {
+          "expected_minutes": 239040,
+          "valid_minutes": 238385,
+          "out_minutes": 184985,
+          "out_low_minutes": 120435,
+          "out_high_minutes": 64550,
+          "unknown_minutes": 655,
+          "suspect_minutes": 305,
+          "out_percent": "77.599261698512909788787046164817417203263628164524",
+          "coverage_pct": "99.725987282463186077643908969210174029451137884873",
+          "minutes_by_class": {
+            "high": 64550,
+            "inside": 53400,
+            "low": 120435,
+            "missing": 350,
+            "suspect": 305
+          },
+          "episode_count": 150,
+          "longest": [
+            {
+              "start": "2020-03-30T07:50:00",
+              "minutes": 87370,
+              "peak": "2.5",
+              "peak_at": "2020-05-28T21:20:00",
+              "directions": [
+                "low"
+              ],
+              "end": "2020-05-30T00:00:00"
+            },
+            {
+              "start": "2020-01-04T07:20:00",
+              "minutes": 43730,
+              "peak": "1.1",
+              "peak_at": "2020-01-10T10:45:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-02-03T16:10:00"
+            },
+            {
+              "start": "2020-02-26T03:05:00",
+              "minutes": 14430,
+              "peak": "5.4",
+              "peak_at": "2020-03-07T03:30:00",
+              "directions": [
+                "high",
+                "low"
+              ],
+              "end": "2020-03-07T03:35:00"
+            }
+          ]
+        }
+      },
+      "joint": {
+        "jointly_valid_minutes": 238385,
+        "joint_out_minutes": 237925,
+        "joint_out_percent": "99.807034838601422069341611259097678125720997545987",
+        "joint_coverage_pct": "99.725987282463186077643908969210174029451137884873"
+      },
+      "lineage": [
+        {
+          "metric": "ec",
+          "slot": "2020-05-11 00:00:00",
+          "line": 42338,
+          "source_timestamp": "2020-05-11 00:00:00",
+          "source_time_serial": "43962.00000",
+          "serial_maps_to_peak_slot": true,
+          "raw_hash_verified": true,
+          "file": "AICU/GreenhouseClimate.csv"
+        },
+        {
+          "metric": "ph",
+          "slot": "2020-05-28 21:20:00",
+          "line": 47490,
+          "source_timestamp": "2020-05-28 21:20:00.096000",
+          "source_time_serial": "43979.88889",
+          "serial_maps_to_peak_slot": true,
+          "raw_hash_verified": true,
+          "file": "AICU/GreenhouseClimate.csv"
+        }
+      ],
+      "mismatches": [],
+      "mismatch_count": 0,
+      "match": true
+    },
+    {
+      "compartment": "Automatoes",
+      "cycle": "agc-cycle-Automatoes",
+      "window": [
+        "2019-12-16 00:00:00",
+        "2020-05-30 00:00:00"
+      ],
+      "rule_version": "drain-demo-b03:Automatoes:v1",
+      "file_sha256": "3415b31b7958c735f836c7fa8f890a93020786be5c86dc2e7c42771fb0a02cd3",
+      "raw_and_frozen_slots": 47809,
+      "endpoint_rows": 1,
+      "metrics": {
+        "ec": {
+          "expected_minutes": 239040,
+          "valid_minutes": 238690,
+          "out_minutes": 139905,
+          "out_low_minutes": 16575,
+          "out_high_minutes": 123330,
+          "unknown_minutes": 350,
+          "suspect_minutes": 0,
+          "out_percent": "58.613683019816498387029201055762704763500775063890",
+          "coverage_pct": "99.853580990629183400267737617135207496653279785810",
+          "minutes_by_class": {
+            "high": 123330,
+            "inside": 98785,
+            "low": 16575,
+            "missing": 350
+          },
+          "episode_count": 342,
+          "longest": [
+            {
+              "start": "2020-05-02T16:20:00",
+              "minutes": 39340,
+              "peak": "4.5",
+              "peak_at": "2020-05-23T09:20:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-05-30T00:00:00"
+            },
+            {
+              "start": "2020-03-12T11:20:00",
+              "minutes": 17415,
+              "peak": "2.6",
+              "peak_at": "2020-03-24T10:30:00",
+              "directions": [
+                "high",
+                "low"
+              ],
+              "end": "2020-03-24T13:35:00"
+            },
+            {
+              "start": "2019-12-16T00:00:00",
+              "minutes": 16555,
+              "peak": "0.4",
+              "peak_at": "2019-12-21T09:15:00",
+              "directions": [
+                "low"
+              ],
+              "end": "2019-12-27T11:55:00"
+            }
+          ]
+        },
+        "ph": {
+          "expected_minutes": 239040,
+          "valid_minutes": 238690,
+          "out_minutes": 88490,
+          "out_low_minutes": 36500,
+          "out_high_minutes": 51990,
+          "unknown_minutes": 350,
+          "suspect_minutes": 0,
+          "out_percent": "37.073191168461183962461770497297750219950563492396",
+          "coverage_pct": "99.853580990629183400267737617135207496653279785810",
+          "minutes_by_class": {
+            "high": 51990,
+            "inside": 150200,
+            "low": 36500,
+            "missing": 350
+          },
+          "episode_count": 105,
+          "longest": [
+            {
+              "start": "2020-01-04T06:25:00",
+              "minutes": 31935,
+              "peak": "1.1",
+              "peak_at": "2020-01-18T08:55:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-01-26T10:40:00"
+            },
+            {
+              "start": "2020-02-28T10:50:00",
+              "minutes": 20105,
+              "peak": "1.6",
+              "peak_at": "2020-03-12T11:25:00",
+              "directions": [
+                "high",
+                "low"
+              ],
+              "end": "2020-03-13T09:55:00"
+            },
+            {
+              "start": "2019-12-16T00:00:00",
+              "minutes": 16695,
+              "peak": "0.6",
+              "peak_at": "2019-12-24T21:15:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2019-12-27T14:15:00"
+            }
+          ]
+        }
+      },
+      "joint": {
+        "jointly_valid_minutes": 238690,
+        "joint_out_minutes": 181505,
+        "joint_out_percent": "76.042146717499685784909296577150278604047090368260",
+        "joint_coverage_pct": "99.853580990629183400267737617135207496653279785810"
+      },
+      "lineage": [
+        {
+          "metric": "ec",
+          "slot": "2020-05-23 09:20:00",
+          "line": 45906,
+          "source_timestamp": "2020-05-23 09:20:00.096000",
+          "source_time_serial": "43974.38889",
+          "serial_maps_to_peak_slot": true,
+          "raw_hash_verified": true,
+          "file": "Automatoes/GreenhouseClimate.csv"
+        },
+        {
+          "metric": "ph",
+          "slot": "2020-01-18 08:55:00",
+          "line": 9613,
+          "source_timestamp": "2020-01-18 08:55:00.192000",
+          "source_time_serial": "43848.37153",
+          "serial_maps_to_peak_slot": true,
+          "raw_hash_verified": true,
+          "file": "Automatoes/GreenhouseClimate.csv"
+        }
+      ],
+      "mismatches": [],
+      "mismatch_count": 0,
+      "match": true
+    },
+    {
+      "compartment": "Digilog",
+      "cycle": "agc-cycle-Digilog",
+      "window": [
+        "2019-12-16 00:00:00",
+        "2020-05-30 00:00:00"
+      ],
+      "rule_version": "drain-demo-b03:Digilog:v1",
+      "file_sha256": "5c6650ea8f7e68a455949f5db97e0f8dbb1a2f59cfdc2b9a9648eac99050fcea",
+      "raw_and_frozen_slots": 47809,
+      "endpoint_rows": 1,
+      "metrics": {
+        "ec": {
+          "expected_minutes": 239040,
+          "valid_minutes": 238735,
+          "out_minutes": 181265,
+          "out_low_minutes": 6455,
+          "out_high_minutes": 174810,
+          "unknown_minutes": 305,
+          "suspect_minutes": 0,
+          "out_percent": "75.927283389532326638322826565019791819381322386747",
+          "coverage_pct": "99.872406291834002677376171352074966532797858099063",
+          "minutes_by_class": {
+            "high": 174810,
+            "inside": 57470,
+            "low": 6455,
+            "missing": 305
+          },
+          "episode_count": 47,
+          "longest": [
+            {
+              "start": "2020-01-19T11:45:00",
+              "minutes": 53090,
+              "peak": "2.6",
+              "peak_at": "2020-02-25T07:55:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-02-25T08:35:00"
+            },
+            {
+              "start": "2020-02-25T15:10:00",
+              "minutes": 48440,
+              "peak": "6.5",
+              "peak_at": "2020-03-05T09:25:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-03-30T06:30:00"
+            },
+            {
+              "start": "2020-05-12T17:00:00",
+              "minutes": 24900,
+              "peak": "3.2",
+              "peak_at": "2020-05-29T21:55:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-05-30T00:00:00"
+            }
+          ]
+        },
+        "ph": {
+          "expected_minutes": 239040,
+          "valid_minutes": 238690,
+          "out_minutes": 137120,
+          "out_low_minutes": 85465,
+          "out_high_minutes": 51655,
+          "unknown_minutes": 350,
+          "suspect_minutes": 0,
+          "out_percent": "57.446897649671121538397084083958272235954585445557",
+          "coverage_pct": "99.853580990629183400267737617135207496653279785810",
+          "minutes_by_class": {
+            "high": 51655,
+            "inside": 101570,
+            "low": 85465,
+            "missing": 350
+          },
+          "episode_count": 73,
+          "longest": [
+            {
+              "start": "2020-01-02T05:05:00",
+              "minutes": 26150,
+              "peak": "1.3",
+              "peak_at": "2020-01-12T09:30:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-01-20T08:55:00"
+            },
+            {
+              "start": "2020-03-12T15:25:00",
+              "minutes": 23665,
+              "peak": "1.2",
+              "peak_at": "2020-03-12T15:25:00",
+              "directions": [
+                "high",
+                "low"
+              ],
+              "end": "2020-03-29T01:50:00"
+            },
+            {
+              "start": "2019-12-16T00:00:00",
+              "minutes": 19105,
+              "peak": "1.2",
+              "peak_at": "2019-12-25T18:25:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2019-12-29T06:25:00"
+            }
+          ]
+        }
+      },
+      "joint": {
+        "jointly_valid_minutes": 238665,
+        "joint_out_minutes": 220080,
+        "joint_out_percent": "92.212934447866256049274087109546854377474703035636",
+        "joint_coverage_pct": "99.843122489959839357429718875502008032128514056225"
+      },
+      "lineage": [
+        {
+          "metric": "ec",
+          "slot": "2020-02-25 07:55:00",
+          "line": 20545,
+          "source_timestamp": "2020-02-25 07:54:59.904000",
+          "source_time_serial": "43886.32986",
+          "serial_maps_to_peak_slot": true,
+          "raw_hash_verified": true,
+          "file": "Digilog/GreenhouseClimate.csv"
+        },
+        {
+          "metric": "ph",
+          "slot": "2020-01-12 09:30:00",
+          "line": 7892,
+          "source_timestamp": "2020-01-12 09:29:59.712000",
+          "source_time_serial": "43842.39583",
+          "serial_maps_to_peak_slot": true,
+          "raw_hash_verified": true,
+          "file": "Digilog/GreenhouseClimate.csv"
+        }
+      ],
+      "mismatches": [],
+      "mismatch_count": 0,
+      "match": true
+    },
+    {
+      "compartment": "IUACAAS",
+      "cycle": "agc-cycle-IUACAAS",
+      "window": [
+        "2019-12-16 00:00:00",
+        "2020-05-30 00:00:00"
+      ],
+      "rule_version": "drain-demo-b03:IUACAAS:v1",
+      "file_sha256": "8d246c014bdfa82747ffc8f2ab6a7d6658ed3b60402eebfc30db370e1da43863",
+      "raw_and_frozen_slots": 47809,
+      "endpoint_rows": 1,
+      "metrics": {
+        "ec": {
+          "expected_minutes": 239040,
+          "valid_minutes": 238690,
+          "out_minutes": 153130,
+          "out_low_minutes": 6605,
+          "out_high_minutes": 146525,
+          "unknown_minutes": 350,
+          "suspect_minutes": 0,
+          "out_percent": "64.154342452553521303783149692069211110645607273032",
+          "coverage_pct": "99.853580990629183400267737617135207496653279785810",
+          "minutes_by_class": {
+            "high": 146525,
+            "inside": 85560,
+            "low": 6605,
+            "missing": 350
+          },
+          "episode_count": 467,
+          "longest": [
+            {
+              "start": "2020-01-22T14:35:00",
+              "minutes": 41695,
+              "peak": "1.8",
+              "peak_at": "2020-01-31T04:30:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-02-20T13:30:00"
+            },
+            {
+              "start": "2020-03-30T07:50:00",
+              "minutes": 20515,
+              "peak": "3.0",
+              "peak_at": "2020-04-06T12:15:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-04-13T13:45:00"
+            },
+            {
+              "start": "2020-03-22T10:55:00",
+              "minutes": 9535,
+              "peak": "1.6",
+              "peak_at": "2020-03-24T10:35:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-03-29T01:50:00"
+            }
+          ]
+        },
+        "ph": {
+          "expected_minutes": 239040,
+          "valid_minutes": 238690,
+          "out_minutes": 148450,
+          "out_low_minutes": 105975,
+          "out_high_minutes": 42475,
+          "unknown_minutes": 350,
+          "suspect_minutes": 0,
+          "out_percent": "62.193640286564162721521638945913109053584146801290",
+          "coverage_pct": "99.853580990629183400267737617135207496653279785810",
+          "minutes_by_class": {
+            "high": 42475,
+            "inside": 90240,
+            "low": 105975,
+            "missing": 350
+          },
+          "episode_count": 42,
+          "longest": [
+            {
+              "start": "2020-02-25T15:10:00",
+              "minutes": 46720,
+              "peak": "1.4",
+              "peak_at": "2020-03-28T10:35:00",
+              "directions": [
+                "low"
+              ],
+              "end": "2020-03-29T01:50:00"
+            },
+            {
+              "start": "2020-03-30T07:50:00",
+              "minutes": 46405,
+              "peak": "1.6",
+              "peak_at": "2020-04-10T17:45:00",
+              "directions": [
+                "low"
+              ],
+              "end": "2020-05-01T13:15:00"
+            },
+            {
+              "start": "2020-01-07T06:50:00",
+              "minutes": 24415,
+              "peak": "0.8",
+              "peak_at": "2020-01-11T08:40:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-01-24T05:45:00"
+            }
+          ]
+        }
+      },
+      "joint": {
+        "jointly_valid_minutes": 238690,
+        "joint_out_minutes": 206120,
+        "joint_out_percent": "86.354685994386023712765511751644392308014579580209",
+        "joint_coverage_pct": "99.853580990629183400267737617135207496653279785810"
+      },
+      "lineage": [
+        {
+          "metric": "ec",
+          "slot": "2020-01-31 04:30:00",
+          "line": 13304,
+          "source_timestamp": "2020-01-31 04:30:00",
+          "source_time_serial": "43861.18750",
+          "serial_maps_to_peak_slot": true,
+          "raw_hash_verified": true,
+          "file": "IUACAAS/GreenhouseClimate.csv"
+        },
+        {
+          "metric": "ph",
+          "slot": "2020-03-28 10:35:00",
+          "line": 29793,
+          "source_timestamp": "2020-03-28 10:34:59.808000",
+          "source_time_serial": "43918.44097",
+          "serial_maps_to_peak_slot": true,
+          "raw_hash_verified": true,
+          "file": "IUACAAS/GreenhouseClimate.csv"
+        }
+      ],
+      "mismatches": [],
+      "mismatch_count": 0,
+      "match": true
+    },
+    {
+      "compartment": "Reference",
+      "cycle": "agc-cycle-Reference",
+      "window": [
+        "2019-12-16 00:00:00",
+        "2020-05-30 00:00:00"
+      ],
+      "rule_version": "drain-demo-b03:Reference:v1",
+      "file_sha256": "eb99daf5360315232d4fd7a58f64a7226188d10a650d873e13640606ce076ebc",
+      "raw_and_frozen_slots": 47809,
+      "endpoint_rows": 1,
+      "metrics": {
+        "ec": {
+          "expected_minutes": 239040,
+          "valid_minutes": 238690,
+          "out_minutes": 218465,
+          "out_low_minutes": 4455,
+          "out_high_minutes": 214010,
+          "unknown_minutes": 350,
+          "suspect_minutes": 0,
+          "out_percent": "91.526666387364363819179689136536930746994008965604",
+          "coverage_pct": "99.853580990629183400267737617135207496653279785810",
+          "minutes_by_class": {
+            "high": 214010,
+            "inside": 20225,
+            "low": 4455,
+            "missing": 350
+          },
+          "episode_count": 52,
+          "longest": [
+            {
+              "start": "2019-12-31T12:35:00",
+              "minutes": 80400,
+              "peak": "4.5",
+              "peak_at": "2020-01-19T19:10:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-02-25T08:35:00"
+            },
+            {
+              "start": "2020-04-15T17:25:00",
+              "minutes": 63755,
+              "peak": "6.3",
+              "peak_at": "2020-05-23T09:20:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-05-30T00:00:00"
+            },
+            {
+              "start": "2020-03-16T14:45:00",
+              "minutes": 17945,
+              "peak": "1.8",
+              "peak_at": "2020-03-26T06:25:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-03-29T01:50:00"
+            }
+          ]
+        },
+        "ph": {
+          "expected_minutes": 239040,
+          "valid_minutes": 238665,
+          "out_minutes": 132435,
+          "out_low_minutes": 112770,
+          "out_high_minutes": 19665,
+          "unknown_minutes": 375,
+          "suspect_minutes": 25,
+          "out_percent": "55.489912639054742002388284834391301615234743259380",
+          "coverage_pct": "99.843122489959839357429718875502008032128514056225",
+          "minutes_by_class": {
+            "high": 19665,
+            "inside": 106230,
+            "low": 112770,
+            "missing": 350,
+            "suspect": 25
+          },
+          "episode_count": 115,
+          "longest": [
+            {
+              "start": "2020-04-19T13:35:00",
+              "minutes": 58225,
+              "peak": "1.6",
+              "peak_at": "2020-05-15T21:10:00",
+              "directions": [
+                "low"
+              ],
+              "end": "2020-05-30T00:00:00"
+            },
+            {
+              "start": "2020-01-07T13:50:00",
+              "minutes": 15820,
+              "peak": "1.0",
+              "peak_at": "2020-01-09T08:15:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-01-18T13:30:00"
+            },
+            {
+              "start": "2020-03-11T15:10:00",
+              "minutes": 12310,
+              "peak": "0.4",
+              "peak_at": "2020-03-12T16:25:00",
+              "directions": [
+                "low"
+              ],
+              "end": "2020-03-20T04:20:00"
+            }
+          ]
+        }
+      },
+      "joint": {
+        "jointly_valid_minutes": 238665,
+        "joint_out_minutes": 221250,
+        "joint_out_percent": "92.703161334925523222927534410156495506253535290051",
+        "joint_coverage_pct": "99.843122489959839357429718875502008032128514056225"
+      },
+      "lineage": [
+        {
+          "metric": "ec",
+          "slot": "2020-01-19 19:10:00",
+          "line": 10024,
+          "source_timestamp": "2020-01-19 19:09:59.904000",
+          "source_time_serial": "43849.79861",
+          "serial_maps_to_peak_slot": true,
+          "raw_hash_verified": true,
+          "file": "Reference/GreenhouseClimate.csv"
+        },
+        {
+          "metric": "ph",
+          "slot": "2020-05-15 21:10:00",
+          "line": 43744,
+          "source_timestamp": "2020-05-15 21:09:59.616000",
+          "source_time_serial": "43966.88194",
+          "serial_maps_to_peak_slot": true,
+          "raw_hash_verified": true,
+          "file": "Reference/GreenhouseClimate.csv"
+        }
+      ],
+      "mismatches": [],
+      "mismatch_count": 0,
+      "match": true
+    },
+    {
+      "compartment": "TheAutomators",
+      "cycle": "agc-cycle-TheAutomators",
+      "window": [
+        "2019-12-16 00:00:00",
+        "2020-05-30 00:00:00"
+      ],
+      "rule_version": "drain-demo-b03:TheAutomators:v1",
+      "file_sha256": "c059e3510358e4f2d1d3ca07812a7b2043c9c9b43c3427a1822f6b1dca4b2263",
+      "raw_and_frozen_slots": 47809,
+      "endpoint_rows": 1,
+      "metrics": {
+        "ec": {
+          "expected_minutes": 239040,
+          "valid_minutes": 238690,
+          "out_minutes": 174170,
+          "out_low_minutes": 5,
+          "out_high_minutes": 174165,
+          "unknown_minutes": 350,
+          "suspect_minutes": 0,
+          "out_percent": "72.969123130420210314634044157694080187691147513511",
+          "coverage_pct": "99.853580990629183400267737617135207496653279785810",
+          "minutes_by_class": {
+            "high": 174165,
+            "inside": 64520,
+            "low": 5,
+            "missing": 350
+          },
+          "episode_count": 250,
+          "longest": [
+            {
+              "start": "2020-01-24T07:30:00",
+              "minutes": 46145,
+              "peak": "2.1",
+              "peak_at": "2020-02-08T21:25:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-02-25T08:35:00"
+            },
+            {
+              "start": "2019-12-24T04:55:00",
+              "minutes": 16065,
+              "peak": "2.5",
+              "peak_at": "2019-12-24T22:00:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-01-04T08:40:00"
+            },
+            {
+              "start": "2020-05-17T15:50:00",
+              "minutes": 12860,
+              "peak": "1.8",
+              "peak_at": "2020-05-24T11:10:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-05-26T14:10:00"
+            }
+          ]
+        },
+        "ph": {
+          "expected_minutes": 239040,
+          "valid_minutes": 238690,
+          "out_minutes": 112580,
+          "out_low_minutes": 77590,
+          "out_high_minutes": 34990,
+          "unknown_minutes": 350,
+          "suspect_minutes": 0,
+          "out_percent": "47.165779881855125895513008504755121705978465792450",
+          "coverage_pct": "99.853580990629183400267737617135207496653279785810",
+          "minutes_by_class": {
+            "high": 34990,
+            "inside": 126110,
+            "low": 77590,
+            "missing": 350
+          },
+          "episode_count": 121,
+          "longest": [
+            {
+              "start": "2020-04-09T16:35:00",
+              "minutes": 35720,
+              "peak": "2.8",
+              "peak_at": "2020-04-23T09:25:00",
+              "directions": [
+                "high",
+                "low"
+              ],
+              "end": "2020-05-04T11:55:00"
+            },
+            {
+              "start": "2020-01-07T05:10:00",
+              "minutes": 27680,
+              "peak": "1.4",
+              "peak_at": "2020-01-16T06:55:00",
+              "directions": [
+                "high"
+              ],
+              "end": "2020-01-26T10:30:00"
+            },
+            {
+              "start": "2020-03-12T11:10:00",
+              "minutes": 20120,
+              "peak": "0.4",
+              "peak_at": "2020-03-15T11:00:00",
+              "directions": [
+                "low"
+              ],
+              "end": "2020-03-26T10:30:00"
+            }
+          ]
+        }
+      },
+      "joint": {
+        "jointly_valid_minutes": 238690,
+        "joint_out_minutes": 229655,
+        "joint_out_percent": "96.214755540659432737022916753948636306506347144832",
+        "joint_coverage_pct": "99.853580990629183400267737617135207496653279785810"
+      },
+      "lineage": [
+        {
+          "metric": "ec",
+          "slot": "2020-02-08 21:25:00",
+          "line": 15811,
+          "source_timestamp": "2020-02-08 21:24:59.904000",
+          "source_time_serial": "43869.89236",
+          "serial_maps_to_peak_slot": true,
+          "raw_hash_verified": true,
+          "file": "TheAutomators/GreenhouseClimate.csv"
+        },
+        {
+          "metric": "ph",
+          "slot": "2020-04-23 09:25:00",
+          "line": 37267,
+          "source_timestamp": "2020-04-23 09:24:59.904000",
+          "source_time_serial": "43944.39236",
+          "serial_maps_to_peak_slot": true,
+          "raw_hash_verified": true,
+          "file": "TheAutomators/GreenhouseClimate.csv"
+        }
+      ],
+      "mismatches": [],
+      "mismatch_count": 0,
+      "match": true
+    }
+  ],
+  "all_match": true,
+  "publication": {
+    "id": "518aafbbff244e3f96b61a15252aa96a",
+    "snapshot": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+    "scope": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+    "versions": {
+      "pipeline_run_id": "8bb40faa886a4beeaf5fa08ad3e672aa",
+      "quality_policy_version": "AGC_QUALITY_V1",
+      "parser_version": "agc-parser-v1",
+      "code_version": "pipeline-v5-drain",
+      "config_bundle_hash": "17cd5654ca2395e3845097f39f77d3fedb44f1f27a2db175604ceddcd3eefaf8",
+      "metric_version": "br02-summary-v1",
+      "rule_version": null,
+      "tariff_version": null,
+      "scenario_version": null
+    }
+  },
+  "source_counts": {
+    "core.record_revision": 574843,
+    "core.climate_observation": 286854,
+    "core.drain_observation": 286854,
+    "core.measure_quality": 2874794,
+    "meta.correction": 0
+  },
+  "all_publications": [
+    "11d0e3523c024107936a2091e99ddec8",
+    "3459db897ead45a28177c60000bd0561",
+    "50c3485dd763453cb6c4395016d7554d",
+    "518aafbbff244e3f96b61a15252aa96a",
+    "804770b6ac534b308ad4e449487db50a",
+    "adf2a02900864da2bf0e41b86516f6ef",
+    "dbc3d6cbf9fa4914b37137455e85576e"
+  ],
+  "generated_at": "2026-11-05T07:19:23.770997+00:00",
+  "database": "greenhouse_t07_195889f1a3b1"
+}

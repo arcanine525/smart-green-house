@@ -165,6 +165,40 @@ def test_hook_atomic_and_pin_one_publication(env):
     assert publish(conn,wf)['publication_id']==second['publication_id']
 
 
+def test_candidate_statistics_refresh_on_load_and_skipped_load_resume(env):
+    """Bulk loads and old resumed candidates need planner stats before publish."""
+    conn, scope, raw, output = env
+    workflow = uuid4().hex
+    with pytest.raises(RuntimeError, match='before-publish'):
+        run(env, workflow=workflow, fault='before-publish')
+
+    def cardinality():
+        actual = conn.execute('SELECT count(*) FROM meta.workflow_candidate').fetchone()[0]
+        estimate = conn.execute(
+            "SELECT reltuples FROM pg_class WHERE oid='meta.workflow_candidate'::regclass").fetchone()[0]
+        return actual, estimate
+
+    actual, estimate = cardinality()
+    assert estimate == actual > 0  # load-core refreshed this small fixture table
+    # Reproduce stale statistics without changing the final candidate membership.
+    revisions = conn.execute(
+        'DELETE FROM meta.workflow_candidate WHERE workflow_id=%s RETURNING revision_id',
+        (workflow,)).fetchall()
+    conn.execute('ANALYZE meta.workflow_candidate')
+    for (revision,) in revisions:
+        conn.execute('INSERT INTO meta.workflow_candidate VALUES (%s,%s)', (workflow, revision))
+    actual, estimate = cardinality()
+    assert estimate < actual
+    result = run(env, workflow=workflow, resume=True)
+    assert cardinality() == (actual, float(actual))
+    assert dict(conn.execute(
+        'SELECT step,attempt FROM meta.workflow_step WHERE workflow_id=%s',
+        (workflow,))) == {'ingest': 1, 'load-core': 1, 'spark': 1, 'publish': 2}
+    assert conn.execute(
+        'SELECT count(*) FROM meta.publication_member WHERE publication_id=%s',
+        (result['publication_id'],)).fetchone()[0] == len(revisions)
+
+
 def test_completed_artifact_tamper_and_raw_tamper_rejected(env):
     conn,scope,raw,output=env;wf=uuid4().hex
     with pytest.raises(RuntimeError):run(env,workflow=wf,fault='before-spark')

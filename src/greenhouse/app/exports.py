@@ -504,12 +504,13 @@ def pad(note, width=400):
     return (note or '')[:width]
 
 
-def climate_export_metadata(action):
+def climate_export_metadata(action, *, export_version=EXPORT_VERSION,
+                            quantity_units='temperature=°C, co2=ppm'):
     """Header lines for one pinned climate action (no credentials, no rounding)."""
     publication, context, versions, result = (
         action.publication, action.context, action.publication.versions, action.result)
     lines = [
-        f'export={EXPORT_VERSION}', "quantity units: temperature=°C, co2=ppm", 'percent_unit=%',
+        f'export={export_version}', f'quantity units: {quantity_units}', 'percent_unit=%',
         'decimal=exact source scale (no rounding)', 'null=empty field', 'bool=true/false',
         f'scope={publication.scope_id}', f'snapshot={publication.snapshot_id}',
         f'publication={publication.publication_id}',

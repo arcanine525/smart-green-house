@@ -252,6 +252,9 @@ def load_or_reuse(conn, scope, policy, workflow, folder, raw, manifest, target):
         conn.execute('UPDATE meta.workflow_run SET ingestion_run_id=%s WHERE workflow_id=%s', (run, workflow))
         conn.execute('DELETE FROM meta.workflow_candidate WHERE workflow_id=%s', (workflow,))
         conn.execute(sql('pipeline_candidates'), (workflow, scope))
+        # A newly populated workflow ID can otherwise retain a one-row estimate
+        # until autovacuum catches up, producing pathological downstream joins.
+        conn.execute('ANALYZE meta.workflow_candidate')
         frozen = membership(conn, workflow)
         target.mkdir()
         (target / 'core.json').write_text(encode(frozen | {'reused': reused, 'baseline_fingerprint': expected[0]}) + '\n')
@@ -300,6 +303,9 @@ def publish(conn, workflow, hook=None, fault=None):
         verify_ingestion(steps['ingest'], Path(run['input_spec']['snapshot']))
         if config(conn, run['data_scope_id'], run['versions']['quality_policy']) != run['versions']:
             raise ValueError('Configuration changed; start a new workflow')
+        # Resume can skip load-core, including workflows loaded before the stats
+        # refresh above existed. Refresh before planning publication validation.
+        conn.execute('ANALYZE meta.workflow_candidate')
         if conn.execute(sql('candidate_stale'), (run['data_scope_id'], workflow)).fetchone()[0]:
             raise ValueError('Candidate is stale; start a new workflow')
         candidate = membership(conn, workflow)

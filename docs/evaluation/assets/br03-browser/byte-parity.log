@@ -1,0 +1,57 @@
+ Container smart-greenhouse-job-run-0edb3ce3ea16 Creating
+ Container smart-greenhouse-job-run-0edb3ce3ea16 Created
+{
+  "publication": "518aafbbff244e3f96b61a15252aa96a",
+  "rule": "drain-demo-b03:Reference:v1",
+  "checks": [
+    {
+      "file": "drain-Reference-2019-12-16-2020-05-30-summary.csv",
+      "bytes": 2563,
+      "sha256": "0e81694d2ca55a11d1ac5c68f2bf05e45a0d1c71311c47208fefb106e84cce3e",
+      "match": true
+    },
+    {
+      "file": "drain-Reference-2019-12-16-2020-05-30-joint.csv",
+      "bytes": 2159,
+      "sha256": "7cf227c6c79eab12d939f75599d5d077edf6ec4ea13d7a7237f9551d3a61578f",
+      "match": true
+    },
+    {
+      "file": "drain-Reference-2019-12-16-2020-05-30-episodes.csv",
+      "bytes": 29061,
+      "sha256": "8acefbf0619a36be81d785fee920abe05a1b79625148d9c543140df8b9504fc0",
+      "match": true
+    },
+    {
+      "file": "drain-Reference-2019-12-16-2020-05-30-result.json",
+      "bytes": 4893337,
+      "sha256": "af6f803d38000b34744f3926e3c20786b61cb7a1471115e087348f572ba663ee",
+      "match": true
+    },
+    {
+      "file": "drain-Reference-2019-12-16-2020-05-30-water.csv",
+      "bytes": 30490,
+      "sha256": "8607ade7cf51483d401d04b58548a0565fe038b7feccae6e10fc6ffdffe1ccd2",
+      "match": true
+    },
+    {
+      "file": "drain-Reference-2019-12-16-2020-05-30-source.csv",
+      "bytes": 4201,
+      "sha256": "ff264d9b9f5fcf0320eb64bea356cbadb457c787b2d2a05c4d5c12672f961375",
+      "match": true
+    },
+    {
+      "file": "drain-Reference-2019-12-16-2020-05-30-detail.csv",
+      "bytes": 44685,
+      "sha256": "7bcdf903640d458f16de2cad08ef13e20fe88de34edd7ebde10445faf3f8dffe",
+      "match": true
+    }
+  ],
+  "all_match": true,
+  "typed_json_roundtrip": true,
+  "trace_slots": 144,
+  "source_rows": 12,
+  "water_days": 57,
+  "irrigation_observed_l_m2": "212.4",
+  "drain_observed_l_m2": "85.6"
+}

@@ -1,0 +1,34 @@
+﻿# export=greenhouse-drain-csv-v1
+# quantity units: ec=dS/m, ph=pH
+# percent_unit=%
+# decimal=exact source scale (no rounding)
+# null=empty field
+# bool=true/false
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# publication=518aafbbff244e3f96b61a15252aa96a
+# finality=provisional
+# committed_at=2026-11-05T07:05:51.233515+00:00
+# cycle=agc-cycle-Reference
+# compartment=Reference
+# requested_window=[2019-12-16,2020-05-30)
+# effective_window=[2019-12-16T00:00:00,2020-05-30T00:00:00)
+# time_basis=source_naive (source timezone unresolved)
+# declared_context=drain_process_computer
+# declared_basis=measured
+# quality_policy=AGC_QUALITY_V1
+# pipeline_run=8bb40faa886a4beeaf5fa08ad3e672aa
+# parser_version=agc-parser-v1
+# code_version=pipeline-v5-drain
+# config_bundle_hash=17cd5654ca2395e3845097f39f77d3fedb44f1f27a2db175604ceddcd3eefaf8
+# requested_rule_version=drain-demo-b03:Reference:v1
+# rule_identities=ec:drain-demo-b03:Reference:v1;ph:drain-demo-b03:Reference:v1
+# rule_id=drain-demo-b03:Reference
+# rule_label=demo_rule
+# rule_is_demo=true
+# rule_evidence=Synthetic demo per docs/br/br_03_drain-nutrition-monitoring.md §3/§7: fixed target bands EC [2, 5] dS/m and pH [5.5, 6.5] on the measured drain_process_computer basis; explicitly NOT a verified agronomic standard for any variety/growth stage. Registration boundary follows the T14 schedule semantics (one revision per compartment; segment fixed bounds; historical revisions stay replayable).
+# episode_filter=list-only (summary totals never filtered); episode windows carry ORIGINAL and CLIPPED facts
+# profile_status=demo_unverified
+# demo bounds and engineer-entered bounds are not agronomically validated
+metrics,measurement_context,basis,contributions,jointly_valid_minutes,joint_out_minutes,joint_out_percent,joint_coverage_pct
+ec;ph,drain_process_computer,measured,ec:drain-demo-b03:Reference:v1;ph:drain-demo-b03:Reference:v1,238665,221250,92.703161334925523222927534410156495506253535290051,99.843122489959839357429718875502008032128514056225

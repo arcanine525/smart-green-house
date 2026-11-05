@@ -199,3 +199,25 @@ def climate_figure(review_rows, metric, unit):
         xaxis={'title': {'text': 'Thời điểm nguồn (naive)'}, 'showgrid': True},
         yaxis={'title': {'text': unit}, 'zeroline': False})
     return figure
+
+
+def drain_figure(review_rows, metric, source_rows):
+    """Applied band plus truthful raw markers for unknown/invalid/suspect slots."""
+    unit = 'dS/m' if metric == 'ec' else 'pH'
+    figure = climate_figure(review_rows, metric, unit)
+    figure.data[2].fill = 'tonexty'
+    figure.data[2].fillcolor = 'rgba(138,153,168,0.12)'
+    reviews = {row.start: row for row in review_rows if row.metric == metric}
+    column = 'ec_drain' if metric == 'ec' else 'ph_drain'
+    code = 'EC_drain_PC' if metric == 'ec' else 'pH_drain_PC'
+    unknown = [row for row in source_rows if getattr(row, column) is not None
+               and (row.slot_start not in reviews or reviews[row.slot_start].unknown_reason)]
+    if unknown:
+        figure.add_trace(go.Scatter(
+            x=[row.slot_start for row in unknown],
+            y=[float(getattr(row, column)) for row in unknown],
+            name='nguồn chưa đánh giá / suspect / invalid', mode='markers',
+            marker={'color': '#858a82', 'symbol': 'x', 'size': 7},
+            text=[str(row.measure_quality.get(code, {})) for row in unknown],
+            hovertemplate='%{x}<br>nguồn %{y} ' + unit + '<br>%{text}<extra>unknown</extra>'))
+    return figure

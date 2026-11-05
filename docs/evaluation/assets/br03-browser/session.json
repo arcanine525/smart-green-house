@@ -1,0 +1,397 @@
+{
+  "generated_at": "2026-11-05T08:03:20.377Z",
+  "runtime": "Docker Chromium + Puppeteer, 0.5CPU/768MiB",
+  "node": "v26.13.0",
+  "browser": "Chrome/156.0.8078.80",
+  "url": "http://172.25.0.2:8501/",
+  "steps": [
+    {
+      "name": "Reference no-rule raw browsing",
+      "text": "2 options available.\n1 option available.\n6 options available.\n6 options available.\nSkip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\nMÀN HÌNH EC/pH DRAIN · BR-03\n\nPublication drain\n\nKhoang · vụ drain\n\nKhoảng ngày drain (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nProfile EC/pH (version tường minh)\n\nkeyboard_arrow_right\n\nTạo version profile mới (kỹ sư, chưa xác minh nông học)\n\nMetric lọc đợt drain\n\nCả hai\n\nec\n\nph\n\nThời lượng tối thiểu (chỉ danh sách)\n\n0\n\n0\n\n1440\n\nEC/pH dung dịch drain\n\ndrain_process_computer · measured · thời gian nguồn chưa xác minh timezone. Ngưỡng kinh doanh tách khỏi quality policy; không suy ra chẩn đoán dinh dưỡng.\n\nPublication 518aafbbff244e3f96b61a15252aa96a · quality AGC_QUALITY_V1 · profile rule_not_configured\n\nrule_not_configured — chưa chọn profile; KPI ngoài dải là NULL. Vẫn có thể xem phép đo, quality và lineage bên dưới.\n\nEC ngoài dải (phút)\n\nNULL\n\nEC ngoài dải %\n\nNULL\n\nEC coverage %\n\n0,00\n\nEC suspect (phút)\n\n0,00\n\nec: valid 0 phút · unknown 239040 · low 0 · high 0 · rule_not_configured=239040\n\nPH ngoài dải (phút)\n\nNULL\n\nPH ngoài dải %\n\nNULL\n\nPH coverage %\n\n0,00\n\nPH suspect (phút)\n\n0,00\n\nph: valid 0 phút · unknown 239040 · low 0 · high 0 · rule_not_configured=239040\n\nOR ngoài dải (phút, hợp lệ chung)\n\nNULL\n\nOR ngoài dải %\n\nNULL\n\nCoverage giao chung %\n\n0,00\n\nOR trên giao EC/pH hợp lệ: 0 phút; không cộng hai thời lượng riêng. Bộ lọc đợt không đổi các tổng này.\n\nĐợt ngoài dải — dài nhất trước\n\nGiữ thời điểm/toàn bộ thời lượng GỐC và phần giao CLIPPED với kỳ báo cáo. Metric và thời lượng tối thiểu chỉ lọc danh sách, không thay tổng KPI.\n\n◀ Đợt trước\n\nĐợt sau ▶\n\nĐợt: 0/0 sau lọc · offset 0.\n\nKhông có đợt sau bộ lọc. Tra cứu nguồn và nước theo kỳ vẫn dùng được.\n\nTra cứu nguồn độc lập với danh sách đợt\n\nNgày nguồn\n\n2019\n/\n12\n/\n16\n\nGiờ nguồn (5 phút)\n\n⁦\n00\n:\n00\n⁩\n\nNguồn [2019-12-16T00:00:00,2019-12-16T01:00:00) · 12 hàng gốc; giữ EC âm/pH=0 và quality riêng; không dùng lab/giá thể.\n\n◀ Nguồn trước\n\nNguồn sau ▶\n\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n3\n3.5\n4\n4.5\n5\nnguồn chưa đánh giá / suspect / invalid\nunknown (rule_not_configured)\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n5.5\n6\n6.5\n7\nnguồn chưa đánh giá / suspect / invalid\nunknown (rule_not_configured)\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDòng nguồn để truy vết\n\nXác minh lineage về raw\n\nBối cảnh tưới/drain theo ngày — BR-02\n\nCùng publication/cycle; giao [2019-12-16T00:00:00,2020-05-30T00:00:00). Một hàng/ngày nguồn; ngày chỉ giao một phần vẫn hiển thị TOÀN lượng ngày, không prorate, không nhân theo slot/đợt. Đối chiếu để điều tra, chưa kết luận nguyên nhân.\n\nTưới nguồn (L/m², ngày tính một lần)\n\n788,60\n\nDrain nguồn (L/m², ngày tính một lần)\n\n350,30\n\nCoverage nước ghép ngày %\n\n100,00\n\nBasis nước: assumed_unverified · giả định chưa xác minh\n\nXuất kết quả đúng view đã pin\n\nCSV summary drain\n\nCSV joint OR drain\n\nCSV đợt drain (đã lọc)\n\nJSON result drain (typed)\n\nCSV nước theo ngày\n\nCSV nguồn drain (trang)",
+      "metrics": [
+        "EC ngoài dải (phút)\nNULL",
+        "EC ngoài dải %\nNULL",
+        "EC coverage %\n0,00",
+        "EC suspect (phút)\n0,00",
+        "PH ngoài dải (phút)\nNULL",
+        "PH ngoài dải %\nNULL",
+        "PH coverage %\n0,00",
+        "PH suspect (phút)\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\nNULL",
+        "OR ngoài dải %\nNULL",
+        "Coverage giao chung %\n0,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n788,60",
+        "Drain nguồn (L/m², ngày tính một lần)\n350,30",
+        "Coverage nước ghép ngày %\n100,00"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 518aafbbff24 · drain-mart-v1",
+        "Reference — agc-cycle-Reference",
+        "(không chọn — rule_not_configured)",
+        "2019-12-16T00:00:00"
+      ],
+      "sliders": [
+        {
+          "value": "0",
+          "max": "3",
+          "text": "0"
+        }
+      ],
+      "exceptions": [],
+      "charts": 2
+    },
+    {
+      "name": "Reference demo global longest EC",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\nMÀN HÌNH EC/pH DRAIN · BR-03\n\nPublication drain\n\nKhoang · vụ drain\n\nKhoảng ngày drain (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nProfile EC/pH (version tường minh)\n\nkeyboard_arrow_right\n\nTạo version profile mới (kỹ sư, chưa xác minh nông học)\n\nMetric lọc đợt drain\n\nCả hai\n\nec\n\nph\n\nThời lượng tối thiểu (chỉ danh sách)\n\n0\n\n0\n\n1440\n\nEC/pH dung dịch drain\n\ndrain_process_computer · measured · thời gian nguồn chưa xác minh timezone. Ngưỡng kinh doanh tách khỏi quality policy; không suy ra chẩn đoán dinh dưỡng.\n\nPublication 518aafbbff244e3f96b61a15252aa96a · quality AGC_QUALITY_V1 · profile drain-demo-b03:Reference:v1\n\nNgưỡng minh họa của đồ án — chưa xác minh/hiệu chuẩn nông học cho giống cây hoặc giai đoạn này.\n\nProvenance: Synthetic demo per docs/br/br_03_drain-nutrition-monitoring.md §3/§7: fixed target bands EC [2, 5] dS/m and pH [5.5, 6.5] on the measured drain_process_computer basis; explicitly NOT a verified agronomic standard for any variety/growth stage. Registration boundary follows the T14 schedule semantics (one revision per compartment; segment fixed bounds; historical revisions stay replayable).\n\nEC ngoài dải (phút)\n\n218465,00\n\nEC ngoài dải %\n\n91,53\n\nEC coverage %\n\n99,85\n\nEC suspect (phút)\n\n0,00\n\nec: valid 238690 phút · unknown 350 · low 4455 · high 214010 · missing_input=350\n\nPH ngoài dải (phút)\n\n132435,00\n\nPH ngoài dải %\n\n55,49\n\nPH coverage %\n\n99,84\n\nPH suspect (phút)\n\n25,00\n\nph: valid 238665 phút · unknown 375 · low 112770 · high 19665 · missing_input=350; quality_suspect=25\n\nOR ngoài dải (phút, hợp lệ chung)\n\n221250,00\n\nOR ngoài dải %\n\n92,70\n\nCoverage giao chung %\n\n99,84\n\nOR trên giao EC/pH hợp lệ: 238665 phút; không cộng hai thời lượng riêng. Bộ lọc đợt không đổi các tổng này.\n\nĐợt ngoài dải — dài nhất trước\n\nGiữ thời điểm/toàn bộ thời lượng GỐC và phần giao CLIPPED với kỳ báo cáo. Metric và thời lượng tối thiểu chỉ lọc danh sách, không thay tổng KPI.\n\n◀ Đợt trước\n\nĐợt sau ▶\n\nĐợt: 40/167 sau lọc · offset 0.\n\nChọn đợt để xem chi tiết\n\nChi tiết đợt — trang hữu hạn trước khi đọc dữ liệu\n\nGốc [2019-12-31T12:35:00,2020-02-25T08:35:00) = 80400 phút; trong kỳ 80400 phút. Trang [2019-12-31T12:35:00,2020-01-01T00:35:00) · 144 mốc / 16080 · offset 0; tối đa 144 mốc 5 phút mỗi lượt, không cắt tổng KPI.\n\n◀ Trace trước\n\nTrace sau ▶\n\n12:00Dec 31, 2019\n14:00\n16:00\n18:00\n20:00\n22:00\n00:00Jan 1, 2020\n2\n2.5\n3\n3.5\n4\n4.5\n5\n5.5\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n12:00Dec 31, 2019\n14:00\n16:00\n18:00\n20:00\n22:00\n00:00Jan 1, 2020\n5.6\n5.8\n6\n6.2\n6.4\n6.6\n6.8\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDải tô là cận được áp dụng; unknown tạo khoảng trống, dấu x xám giữ giá trị nguồn suspect/invalid/chưa có rule, không tô thành đạt.\n\nTra cứu nguồn độc lập với danh sách đợt\n\nNgày nguồn\n\n2019\n/\n12\n/\n16\n\nGiờ nguồn (5 phút)\n\n⁦\n00\n:\n00\n⁩\n\nNguồn [2019-12-16T00:00:00,2019-12-16T01:00:00) · 12 hàng gốc; giữ EC âm/pH=0 và quality riêng; không dùng lab/giá thể.\n\n◀ Nguồn trước\n\nNguồn sau ▶\n\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n2\n2.5\n3\n3.5\n4\n4.5\n5\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n5.6\n5.8\n6\n6.2\n6.4\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDòng nguồn để truy vết\n\nXác minh lineage về raw\n\nBối cảnh tưới/drain theo ngày — BR-02\n\nCùng publication/cycle; giao [2019-12-31T12:35:00,2020-02-25T08:35:00). Một hàng/ngày nguồn; ngày chỉ giao một phần vẫn hiển thị TOÀN lượng ngày, không prorate, không nhân theo slot/đợt. Đối chiếu để điều tra, chưa kết luận nguyên nhân.\n\nTưới nguồn (L/m², ngày tính một lần)\n\n212,40\n\nDrain nguồn (L/m², ngày tính một lần)\n\n85,60\n\nCoverage nước ghép ngày %\n\n100,00\n\nBasis nước: assumed_unverified · giả định chưa xác minh\n\nXuất kết quả đúng view đã pin\n\nCSV summary drain\n\nCSV joint OR drain\n\nCSV đợt drain (đã lọc)\n\nJSON result drain (typed)\n\nCSV nước theo ngày\n\nCSV nguồn drain (trang)\n\nCSV detail drain (trang)",
+      "metrics": [
+        "EC ngoài dải (phút)\n218465,00",
+        "EC ngoài dải %\n91,53",
+        "EC coverage %\n99,85",
+        "EC suspect (phút)\n0,00",
+        "PH ngoài dải (phút)\n132435,00",
+        "PH ngoài dải %\n55,49",
+        "PH coverage %\n99,84",
+        "PH suspect (phút)\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n221250,00",
+        "OR ngoài dải %\n92,70",
+        "Coverage giao chung %\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n212,40",
+        "Drain nguồn (L/m², ngày tính một lần)\n85,60",
+        "Coverage nước ghép ngày %\n100,00"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 518aafbbff24 · drain-mart-v1",
+        "Reference — agc-cycle-Reference",
+        "drain-demo-b03:Reference:v1 · demo_rule · v1",
+        "ec · 80400 phút gốc · 2019-12-31T12:35:00 → 2020-02-25T08:35:00 · trong kỳ 80400 phút · peak 4.5 @ 2020-01-19T19:10:00 · high",
+        "2019-12-16T00:00:00"
+      ],
+      "sliders": [
+        {
+          "value": "0",
+          "max": "3",
+          "text": "0"
+        }
+      ],
+      "exceptions": [],
+      "charts": 4
+    },
+    {
+      "name": "Long event bounded trace second page",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\nMÀN HÌNH EC/pH DRAIN · BR-03\n\nPublication drain\n\nKhoang · vụ drain\n\nKhoảng ngày drain (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nProfile EC/pH (version tường minh)\n\nkeyboard_arrow_right\n\nTạo version profile mới (kỹ sư, chưa xác minh nông học)\n\nMetric lọc đợt drain\n\nCả hai\n\nec\n\nph\n\nThời lượng tối thiểu (chỉ danh sách)\n\n0\n\n0\n\n1440\n\nEC/pH dung dịch drain\n\ndrain_process_computer · measured · thời gian nguồn chưa xác minh timezone. Ngưỡng kinh doanh tách khỏi quality policy; không suy ra chẩn đoán dinh dưỡng.\n\nPublication 518aafbbff244e3f96b61a15252aa96a · quality AGC_QUALITY_V1 · profile drain-demo-b03:Reference:v1\n\nNgưỡng minh họa của đồ án — chưa xác minh/hiệu chuẩn nông học cho giống cây hoặc giai đoạn này.\n\nProvenance: Synthetic demo per docs/br/br_03_drain-nutrition-monitoring.md §3/§7: fixed target bands EC [2, 5] dS/m and pH [5.5, 6.5] on the measured drain_process_computer basis; explicitly NOT a verified agronomic standard for any variety/growth stage. Registration boundary follows the T14 schedule semantics (one revision per compartment; segment fixed bounds; historical revisions stay replayable).\n\nEC ngoài dải (phút)\n\n218465,00\n\nEC ngoài dải %\n\n91,53\n\nEC coverage %\n\n99,85\n\nEC suspect (phút)\n\n0,00\n\nec: valid 238690 phút · unknown 350 · low 4455 · high 214010 · missing_input=350\n\nPH ngoài dải (phút)\n\n132435,00\n\nPH ngoài dải %\n\n55,49\n\nPH coverage %\n\n99,84\n\nPH suspect (phút)\n\n25,00\n\nph: valid 238665 phút · unknown 375 · low 112770 · high 19665 · missing_input=350; quality_suspect=25\n\nOR ngoài dải (phút, hợp lệ chung)\n\n221250,00\n\nOR ngoài dải %\n\n92,70\n\nCoverage giao chung %\n\n99,84\n\nOR trên giao EC/pH hợp lệ: 238665 phút; không cộng hai thời lượng riêng. Bộ lọc đợt không đổi các tổng này.\n\nĐợt ngoài dải — dài nhất trước\n\nGiữ thời điểm/toàn bộ thời lượng GỐC và phần giao CLIPPED với kỳ báo cáo. Metric và thời lượng tối thiểu chỉ lọc danh sách, không thay tổng KPI.\n\n◀ Đợt trước\n\nĐợt sau ▶\n\nĐợt: 40/167 sau lọc · offset 0.\n\nChọn đợt để xem chi tiết\n\nChi tiết đợt — trang hữu hạn trước khi đọc dữ liệu\n\nGốc [2019-12-31T12:35:00,2020-02-25T08:35:00) = 80400 phút; trong kỳ 80400 phút. Trang [2020-01-01T00:35:00,2020-01-01T12:35:00) · 144 mốc / 16080 · offset 144; tối đa 144 mốc 5 phút mỗi lượt, không cắt tổng KPI.\n\n◀ Trace trước\n\nTrace sau ▶\n\n00:00Jan 1, 2020\n02:00\n04:00\n06:00\n08:00\n10:00\n12:00\n2\n2.5\n3\n3.5\n4\n4.5\n5\n5.5\n6\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n02:00Jan 1, 2020\n04:00\n06:00\n08:00\n10:00\n12:00\n5.6\n5.8\n6\n6.2\n6.4\n6.6\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDải tô là cận được áp dụng; unknown tạo khoảng trống, dấu x xám giữ giá trị nguồn suspect/invalid/chưa có rule, không tô thành đạt.\n\nTra cứu nguồn độc lập với danh sách đợt\n\nNgày nguồn\n\n2019\n/\n12\n/\n16\n\nGiờ nguồn (5 phút)\n\n⁦\n00\n:\n00\n⁩\n\nNguồn [2019-12-16T00:00:00,2019-12-16T01:00:00) · 12 hàng gốc; giữ EC âm/pH=0 và quality riêng; không dùng lab/giá thể.\n\n◀ Nguồn trước\n\nNguồn sau ▶\n\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n2\n2.5\n3\n3.5\n4\n4.5\n5\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n5.6\n5.8\n6\n6.2\n6.4\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDòng nguồn để truy vết\n\nXác minh lineage về raw\n\nBối cảnh tưới/drain theo ngày — BR-02\n\nCùng publication/cycle; giao [2019-12-31T12:35:00,2020-02-25T08:35:00). Một hàng/ngày nguồn; ngày chỉ giao một phần vẫn hiển thị TOÀN lượng ngày, không prorate, không nhân theo slot/đợt. Đối chiếu để điều tra, chưa kết luận nguyên nhân.\n\nTưới nguồn (L/m², ngày tính một lần)\n\n212,40\n\nDrain nguồn (L/m², ngày tính một lần)\n\n85,60\n\nCoverage nước ghép ngày %\n\n100,00\n\nBasis nước: assumed_unverified · giả định chưa xác minh\n\nXuất kết quả đúng view đã pin\n\nCSV summary drain\n\nCSV joint OR drain\n\nCSV đợt drain (đã lọc)\n\nJSON result drain (typed)\n\nCSV nước theo ngày\n\nCSV nguồn drain (trang)\n\nCSV detail drain (trang)",
+      "metrics": [
+        "EC ngoài dải (phút)\n218465,00",
+        "EC ngoài dải %\n91,53",
+        "EC coverage %\n99,85",
+        "EC suspect (phút)\n0,00",
+        "PH ngoài dải (phút)\n132435,00",
+        "PH ngoài dải %\n55,49",
+        "PH coverage %\n99,84",
+        "PH suspect (phút)\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n221250,00",
+        "OR ngoài dải %\n92,70",
+        "Coverage giao chung %\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n212,40",
+        "Drain nguồn (L/m², ngày tính một lần)\n85,60",
+        "Coverage nước ghép ngày %\n100,00"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 518aafbbff24 · drain-mart-v1",
+        "Reference — agc-cycle-Reference",
+        "drain-demo-b03:Reference:v1 · demo_rule · v1",
+        "ec · 80400 phút gốc · 2019-12-31T12:35:00 → 2020-02-25T08:35:00 · trong kỳ 80400 phút · peak 4.5 @ 2020-01-19T19:10:00 · high",
+        "2019-12-16T00:00:00"
+      ],
+      "sliders": [
+        {
+          "value": "0",
+          "max": "3",
+          "text": "0"
+        }
+      ],
+      "exceptions": [],
+      "charts": 4
+    },
+    {
+      "name": "Reference pH-zero own quality and verified raw line 4201",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\nMÀN HÌNH EC/pH DRAIN · BR-03\n\nPublication drain\n\nKhoang · vụ drain\n\nKhoảng ngày drain (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nProfile EC/pH (version tường minh)\n\nkeyboard_arrow_right\n\nTạo version profile mới (kỹ sư, chưa xác minh nông học)\n\nMetric lọc đợt drain\n\nCả hai\n\nec\n\nph\n\nThời lượng tối thiểu (chỉ danh sách)\n\n0\n\n0\n\n1440\n\nEC/pH dung dịch drain\n\ndrain_process_computer · measured · thời gian nguồn chưa xác minh timezone. Ngưỡng kinh doanh tách khỏi quality policy; không suy ra chẩn đoán dinh dưỡng.\n\nPublication 518aafbbff244e3f96b61a15252aa96a · quality AGC_QUALITY_V1 · profile drain-demo-b03:Reference:v1\n\nNgưỡng minh họa của đồ án — chưa xác minh/hiệu chuẩn nông học cho giống cây hoặc giai đoạn này.\n\nProvenance: Synthetic demo per docs/br/br_03_drain-nutrition-monitoring.md §3/§7: fixed target bands EC [2, 5] dS/m and pH [5.5, 6.5] on the measured drain_process_computer basis; explicitly NOT a verified agronomic standard for any variety/growth stage. Registration boundary follows the T14 schedule semantics (one revision per compartment; segment fixed bounds; historical revisions stay replayable).\n\nEC ngoài dải (phút)\n\n218465,00\n\nEC ngoài dải %\n\n91,53\n\nEC coverage %\n\n99,85\n\nEC suspect (phút)\n\n0,00\n\nec: valid 238690 phút · unknown 350 · low 4455 · high 214010 · missing_input=350\n\nPH ngoài dải (phút)\n\n132435,00\n\nPH ngoài dải %\n\n55,49\n\nPH coverage %\n\n99,84\n\nPH suspect (phút)\n\n25,00\n\nph: valid 238665 phút · unknown 375 · low 112770 · high 19665 · missing_input=350; quality_suspect=25\n\nOR ngoài dải (phút, hợp lệ chung)\n\n221250,00\n\nOR ngoài dải %\n\n92,70\n\nCoverage giao chung %\n\n99,84\n\nOR trên giao EC/pH hợp lệ: 238665 phút; không cộng hai thời lượng riêng. Bộ lọc đợt không đổi các tổng này.\n\nĐợt ngoài dải — dài nhất trước\n\nGiữ thời điểm/toàn bộ thời lượng GỐC và phần giao CLIPPED với kỳ báo cáo. Metric và thời lượng tối thiểu chỉ lọc danh sách, không thay tổng KPI.\n\n◀ Đợt trước\n\nĐợt sau ▶\n\nĐợt: 40/167 sau lọc · offset 0.\n\nChọn đợt để xem chi tiết\n\nChi tiết đợt — trang hữu hạn trước khi đọc dữ liệu\n\nGốc [2019-12-31T12:35:00,2020-02-25T08:35:00) = 80400 phút; trong kỳ 80400 phút. Trang [2019-12-31T12:35:00,2020-01-01T00:35:00) · 144 mốc / 16080 · offset 0; tối đa 144 mốc 5 phút mỗi lượt, không cắt tổng KPI.\n\n◀ Trace trước\n\nTrace sau ▶\n\n12:00Dec 31, 2019\n14:00\n16:00\n18:00\n20:00\n22:00\n00:00Jan 1, 2020\n2\n2.5\n3\n3.5\n4\n4.5\n5\n5.5\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n12:00Dec 31, 2019\n14:00\n16:00\n18:00\n20:00\n22:00\n00:00Jan 1, 2020\n5.6\n5.8\n6\n6.2\n6.4\n6.6\n6.8\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDải tô là cận được áp dụng; unknown tạo khoảng trống, dấu x xám giữ giá trị nguồn suspect/invalid/chưa có rule, không tô thành đạt.\n\nTra cứu nguồn độc lập với danh sách đợt\n\nNgày nguồn\n\n2019\n/\n12\n/\n30\n\nGiờ nguồn (5 phút)\n\n⁦\n13\n:\n55\n⁩\n\nNguồn [2019-12-30T13:55:00,2019-12-30T14:55:00) · 12 hàng gốc; giữ EC âm/pH=0 và quality riêng; không dùng lab/giá thể.\n\n◀ Nguồn trước\n\nNguồn sau ▶\n\n14:00Dec 30, 2019\n14:10\n14:20\n14:30\n14:40\n14:50\n0\n1\n2\n3\n4\n5\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n14:00Dec 30, 2019\n14:10\n14:20\n14:30\n14:40\n0\n1\n2\n3\n4\n5\n6\nnguồn chưa đánh giá / suspect / invalid\nunknown (quality_suspect)\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDòng nguồn để truy vết\n\nXác minh lineage về raw\n\nFile: Reference/GreenhouseClimate.csv · dòng 4201–4201 · serial 43829.57986 · timestamp nguồn 2019-12-30 13:54:59.904000\n\nRevision ab0902bf6d2f2e77a63917874df62d32 · correction —\n\nRaw hash xác minh khớp; số đo gốc và quality được truy vết độc lập.\n\nBối cảnh tưới/drain theo ngày — BR-02\n\nCùng publication/cycle; giao [2019-12-31T12:35:00,2020-02-25T08:35:00). Một hàng/ngày nguồn; ngày chỉ giao một phần vẫn hiển thị TOÀN lượng ngày, không prorate, không nhân theo slot/đợt. Đối chiếu để điều tra, chưa kết luận nguyên nhân.\n\nTưới nguồn (L/m², ngày tính một lần)\n\n212,40\n\nDrain nguồn (L/m², ngày tính một lần)\n\n85,60\n\nCoverage nước ghép ngày %\n\n100,00\n\nBasis nước: assumed_unverified · giả định chưa xác minh\n\nXuất kết quả đúng view đã pin\n\nCSV summary drain\n\nCSV joint OR drain\n\nCSV đợt drain (đã lọc)\n\nJSON result drain (typed)\n\nCSV nước theo ngày\n\nCSV nguồn drain (trang)\n\nCSV detail drain (trang)",
+      "metrics": [
+        "EC ngoài dải (phút)\n218465,00",
+        "EC ngoài dải %\n91,53",
+        "EC coverage %\n99,85",
+        "EC suspect (phút)\n0,00",
+        "PH ngoài dải (phút)\n132435,00",
+        "PH ngoài dải %\n55,49",
+        "PH coverage %\n99,84",
+        "PH suspect (phút)\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n221250,00",
+        "OR ngoài dải %\n92,70",
+        "Coverage giao chung %\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n212,40",
+        "Drain nguồn (L/m², ngày tính một lần)\n85,60",
+        "Coverage nước ghép ngày %\n100,00"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 518aafbbff24 · drain-mart-v1",
+        "Reference — agc-cycle-Reference",
+        "drain-demo-b03:Reference:v1 · demo_rule · v1",
+        "ec · 80400 phút gốc · 2019-12-31T12:35:00 → 2020-02-25T08:35:00 · trong kỳ 80400 phút · peak 4.5 @ 2020-01-19T19:10:00 · high",
+        "2019-12-16T00:00:00"
+      ],
+      "sliders": [
+        {
+          "value": "0",
+          "max": "3",
+          "text": "0"
+        }
+      ],
+      "exceptions": [],
+      "charts": 4
+    },
+    {
+      "name": "pH-only list preserves summary totals",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\nMÀN HÌNH EC/pH DRAIN · BR-03\n\nPublication drain\n\nKhoang · vụ drain\n\nKhoảng ngày drain (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nProfile EC/pH (version tường minh)\n\nkeyboard_arrow_right\n\nTạo version profile mới (kỹ sư, chưa xác minh nông học)\n\nMetric lọc đợt drain\n\nCả hai\n\nec\n\nph\n\nThời lượng tối thiểu (chỉ danh sách)\n\n0\n\n0\n\n1440\n\nEC/pH dung dịch drain\n\ndrain_process_computer · measured · thời gian nguồn chưa xác minh timezone. Ngưỡng kinh doanh tách khỏi quality policy; không suy ra chẩn đoán dinh dưỡng.\n\nPublication 518aafbbff244e3f96b61a15252aa96a · quality AGC_QUALITY_V1 · profile drain-demo-b03:Reference:v1\n\nNgưỡng minh họa của đồ án — chưa xác minh/hiệu chuẩn nông học cho giống cây hoặc giai đoạn này.\n\nProvenance: Synthetic demo per docs/br/br_03_drain-nutrition-monitoring.md §3/§7: fixed target bands EC [2, 5] dS/m and pH [5.5, 6.5] on the measured drain_process_computer basis; explicitly NOT a verified agronomic standard for any variety/growth stage. Registration boundary follows the T14 schedule semantics (one revision per compartment; segment fixed bounds; historical revisions stay replayable).\n\nEC ngoài dải (phút)\n\n218465,00\n\nEC ngoài dải %\n\n91,53\n\nEC coverage %\n\n99,85\n\nEC suspect (phút)\n\n0,00\n\nec: valid 238690 phút · unknown 350 · low 4455 · high 214010 · missing_input=350\n\nPH ngoài dải (phút)\n\n132435,00\n\nPH ngoài dải %\n\n55,49\n\nPH coverage %\n\n99,84\n\nPH suspect (phút)\n\n25,00\n\nph: valid 238665 phút · unknown 375 · low 112770 · high 19665 · missing_input=350; quality_suspect=25\n\nOR ngoài dải (phút, hợp lệ chung)\n\n221250,00\n\nOR ngoài dải %\n\n92,70\n\nCoverage giao chung %\n\n99,84\n\nOR trên giao EC/pH hợp lệ: 238665 phút; không cộng hai thời lượng riêng. Bộ lọc đợt không đổi các tổng này.\n\nĐợt ngoài dải — dài nhất trước\n\nGiữ thời điểm/toàn bộ thời lượng GỐC và phần giao CLIPPED với kỳ báo cáo. Metric và thời lượng tối thiểu chỉ lọc danh sách, không thay tổng KPI.\n\n◀ Đợt trước\n\nĐợt sau ▶\n\nĐợt: 40/115 sau lọc · offset 0.\n\nChọn đợt để xem chi tiết\n\nChi tiết đợt — trang hữu hạn trước khi đọc dữ liệu\n\nGốc [2020-04-19T13:35:00,2020-05-30T00:00:00) = 58225 phút; trong kỳ 58225 phút. Trang [2020-04-19T13:35:00,2020-04-20T01:35:00) · 144 mốc / 11645 · offset 0; tối đa 144 mốc 5 phút mỗi lượt, không cắt tổng KPI.\n\n◀ Trace trước\n\nTrace sau ▶\n\n14:00Apr 19, 2020\n16:00\n18:00\n20:00\n22:00\n00:00Apr 20, 2020\n02:00\n2\n2.5\n3\n3.5\n4\n4.5\n5\n5.5\n6\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n14:00Apr 19, 2020\n16:00\n18:00\n20:00\n22:00\n00:00Apr 20, 2020\n02:00\n5.2\n5.4\n5.6\n5.8\n6\n6.2\n6.4\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDải tô là cận được áp dụng; unknown tạo khoảng trống, dấu x xám giữ giá trị nguồn suspect/invalid/chưa có rule, không tô thành đạt.\n\nTra cứu nguồn độc lập với danh sách đợt\n\nNgày nguồn\n\n2019\n/\n12\n/\n30\n\nGiờ nguồn (5 phút)\n\n⁦\n13\n:\n55\n⁩\n\nNguồn [2019-12-30T13:55:00,2019-12-30T14:55:00) · 12 hàng gốc; giữ EC âm/pH=0 và quality riêng; không dùng lab/giá thể.\n\n◀ Nguồn trước\n\nNguồn sau ▶\n\n14:00Dec 30, 2019\n14:10\n14:20\n14:30\n14:40\n14:50\n0\n1\n2\n3\n4\n5\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n14:00Dec 30, 2019\n14:10\n14:20\n14:30\n14:40\n0\n1\n2\n3\n4\n5\n6\nnguồn chưa đánh giá / suspect / invalid\nunknown (quality_suspect)\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDòng nguồn để truy vết\n\nXác minh lineage về raw\n\nFile: Reference/GreenhouseClimate.csv · dòng 4201–4201 · serial 43829.57986 · timestamp nguồn 2019-12-30 13:54:59.904000\n\nRevision ab0902bf6d2f2e77a63917874df62d32 · correction —\n\nRaw hash xác minh khớp; số đo gốc và quality được truy vết độc lập.\n\nBối cảnh tưới/drain theo ngày — BR-02\n\nCùng publication/cycle; giao [2020-04-19T13:35:00,2020-05-30T00:00:00). Một hàng/ngày nguồn; ngày chỉ giao một phần vẫn hiển thị TOÀN lượng ngày, không prorate, không nhân theo slot/đợt. Đối chiếu để điều tra, chưa kết luận nguyên nhân.\n\nTưới nguồn (L/m², ngày tính một lần)\n\n219,20\n\nDrain nguồn (L/m², ngày tính một lần)\n\n88,20\n\nCoverage nước ghép ngày %\n\n100,00\n\nBasis nước: assumed_unverified · giả định chưa xác minh\n\nXuất kết quả đúng view đã pin\n\nCSV summary drain\n\nCSV joint OR drain\n\nCSV đợt drain (đã lọc)\n\nJSON result drain (typed)\n\nCSV nước theo ngày\n\nCSV nguồn drain (trang)\n\nCSV detail drain (trang)",
+      "metrics": [
+        "EC ngoài dải (phút)\n218465,00",
+        "EC ngoài dải %\n91,53",
+        "EC coverage %\n99,85",
+        "EC suspect (phút)\n0,00",
+        "PH ngoài dải (phút)\n132435,00",
+        "PH ngoài dải %\n55,49",
+        "PH coverage %\n99,84",
+        "PH suspect (phút)\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n221250,00",
+        "OR ngoài dải %\n92,70",
+        "Coverage giao chung %\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n219,20",
+        "Drain nguồn (L/m², ngày tính một lần)\n88,20",
+        "Coverage nước ghép ngày %\n100,00"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 518aafbbff24 · drain-mart-v1",
+        "Reference — agc-cycle-Reference",
+        "drain-demo-b03:Reference:v1 · demo_rule · v1",
+        "ph · 58225 phút gốc · 2020-04-19T13:35:00 → 2020-05-30T00:00:00 · trong kỳ 58225 phút · peak 1.6 @ 2020-05-15T21:10:00 · low",
+        "2019-12-16T00:00:00"
+      ],
+      "sliders": [
+        {
+          "value": "0",
+          "max": "3",
+          "text": "0"
+        }
+      ],
+      "exceptions": [],
+      "charts": 4
+    },
+    {
+      "name": "Minimum-duration list filter preserves summary totals",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\nMÀN HÌNH EC/pH DRAIN · BR-03\n\nPublication drain\n\nKhoang · vụ drain\n\nKhoảng ngày drain (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nProfile EC/pH (version tường minh)\n\nkeyboard_arrow_right\n\nTạo version profile mới (kỹ sư, chưa xác minh nông học)\n\nMetric lọc đợt drain\n\nCả hai\n\nec\n\nph\n\nThời lượng tối thiểu (chỉ danh sách)\n\n1440\n\n0\n\n1440\n\nEC/pH dung dịch drain\n\ndrain_process_computer · measured · thời gian nguồn chưa xác minh timezone. Ngưỡng kinh doanh tách khỏi quality policy; không suy ra chẩn đoán dinh dưỡng.\n\nPublication 518aafbbff244e3f96b61a15252aa96a · quality AGC_QUALITY_V1 · profile drain-demo-b03:Reference:v1\n\nNgưỡng minh họa của đồ án — chưa xác minh/hiệu chuẩn nông học cho giống cây hoặc giai đoạn này.\n\nProvenance: Synthetic demo per docs/br/br_03_drain-nutrition-monitoring.md §3/§7: fixed target bands EC [2, 5] dS/m and pH [5.5, 6.5] on the measured drain_process_computer basis; explicitly NOT a verified agronomic standard for any variety/growth stage. Registration boundary follows the T14 schedule semantics (one revision per compartment; segment fixed bounds; historical revisions stay replayable).\n\nEC ngoài dải (phút)\n\n218465,00\n\nEC ngoài dải %\n\n91,53\n\nEC coverage %\n\n99,85\n\nEC suspect (phút)\n\n0,00\n\nec: valid 238690 phút · unknown 350 · low 4455 · high 214010 · missing_input=350\n\nPH ngoài dải (phút)\n\n132435,00\n\nPH ngoài dải %\n\n55,49\n\nPH coverage %\n\n99,84\n\nPH suspect (phút)\n\n25,00\n\nph: valid 238665 phút · unknown 375 · low 112770 · high 19665 · missing_input=350; quality_suspect=25\n\nOR ngoài dải (phút, hợp lệ chung)\n\n221250,00\n\nOR ngoài dải %\n\n92,70\n\nCoverage giao chung %\n\n99,84\n\nOR trên giao EC/pH hợp lệ: 238665 phút; không cộng hai thời lượng riêng. Bộ lọc đợt không đổi các tổng này.\n\nĐợt ngoài dải — dài nhất trước\n\nGiữ thời điểm/toàn bộ thời lượng GỐC và phần giao CLIPPED với kỳ báo cáo. Metric và thời lượng tối thiểu chỉ lọc danh sách, không thay tổng KPI.\n\n◀ Đợt trước\n\nĐợt sau ▶\n\nĐợt: 7/7 sau lọc · offset 0.\n\nChọn đợt để xem chi tiết\n\nChi tiết đợt — trang hữu hạn trước khi đọc dữ liệu\n\nGốc [2020-04-19T13:35:00,2020-05-30T00:00:00) = 58225 phút; trong kỳ 58225 phút. Trang [2020-04-19T13:35:00,2020-04-20T01:35:00) · 144 mốc / 11645 · offset 0; tối đa 144 mốc 5 phút mỗi lượt, không cắt tổng KPI.\n\n◀ Trace trước\n\nTrace sau ▶\n\n14:00Apr 19, 2020\n16:00\n18:00\n20:00\n22:00\n00:00Apr 20, 2020\n02:00\n2\n2.5\n3\n3.5\n4\n4.5\n5\n5.5\n6\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n14:00Apr 19, 2020\n16:00\n18:00\n20:00\n22:00\n00:00Apr 20, 2020\n02:00\n5.2\n5.4\n5.6\n5.8\n6\n6.2\n6.4\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDải tô là cận được áp dụng; unknown tạo khoảng trống, dấu x xám giữ giá trị nguồn suspect/invalid/chưa có rule, không tô thành đạt.\n\nTra cứu nguồn độc lập với danh sách đợt\n\nNgày nguồn\n\n2019\n/\n12\n/\n30\n\nGiờ nguồn (5 phút)\n\n⁦\n13\n:\n55\n⁩\n\nNguồn [2019-12-30T13:55:00,2019-12-30T14:55:00) · 12 hàng gốc; giữ EC âm/pH=0 và quality riêng; không dùng lab/giá thể.\n\n◀ Nguồn trước\n\nNguồn sau ▶\n\n14:00Dec 30, 2019\n14:10\n14:20\n14:30\n14:40\n14:50\n0\n1\n2\n3\n4\n5\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n14:00Dec 30, 2019\n14:10\n14:20\n14:30\n14:40\n0\n1\n2\n3\n4\n5\n6\nnguồn chưa đánh giá / suspect / invalid\nunknown (quality_suspect)\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDòng nguồn để truy vết\n\nXác minh lineage về raw\n\nFile: Reference/GreenhouseClimate.csv · dòng 4201–4201 · serial 43829.57986 · timestamp nguồn 2019-12-30 13:54:59.904000\n\nRevision ab0902bf6d2f2e77a63917874df62d32 · correction —\n\nRaw hash xác minh khớp; số đo gốc và quality được truy vết độc lập.\n\nBối cảnh tưới/drain theo ngày — BR-02\n\nCùng publication/cycle; giao [2020-04-19T13:35:00,2020-05-30T00:00:00). Một hàng/ngày nguồn; ngày chỉ giao một phần vẫn hiển thị TOÀN lượng ngày, không prorate, không nhân theo slot/đợt. Đối chiếu để điều tra, chưa kết luận nguyên nhân.\n\nTưới nguồn (L/m², ngày tính một lần)\n\n219,20\n\nDrain nguồn (L/m², ngày tính một lần)\n\n88,20\n\nCoverage nước ghép ngày %\n\n100,00\n\nBasis nước: assumed_unverified · giả định chưa xác minh\n\nXuất kết quả đúng view đã pin\n\nCSV summary drain\n\nCSV joint OR drain\n\nCSV đợt drain (đã lọc)\n\nJSON result drain (typed)\n\nCSV nước theo ngày\n\nCSV nguồn drain (trang)\n\nCSV detail drain (trang)",
+      "metrics": [
+        "EC ngoài dải (phút)\n218465,00",
+        "EC ngoài dải %\n91,53",
+        "EC coverage %\n99,85",
+        "EC suspect (phút)\n0,00",
+        "PH ngoài dải (phút)\n132435,00",
+        "PH ngoài dải %\n55,49",
+        "PH coverage %\n99,84",
+        "PH suspect (phút)\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n221250,00",
+        "OR ngoài dải %\n92,70",
+        "Coverage giao chung %\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n219,20",
+        "Drain nguồn (L/m², ngày tính một lần)\n88,20",
+        "Coverage nước ghép ngày %\n100,00"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 518aafbbff24 · drain-mart-v1",
+        "Reference — agc-cycle-Reference",
+        "drain-demo-b03:Reference:v1 · demo_rule · v1",
+        "ph · 58225 phút gốc · 2020-04-19T13:35:00 → 2020-05-30T00:00:00 · trong kỳ 58225 phút · peak 1.6 @ 2020-05-15T21:10:00 · low",
+        "2019-12-16T00:00:00"
+      ],
+      "sliders": [
+        {
+          "value": "3",
+          "max": "3",
+          "text": "1440"
+        }
+      ],
+      "exceptions": [],
+      "charts": 4
+    },
+    {
+      "name": "Cleared profile removes event detail, raw browsing remains",
+      "text": "2 options available.\n1 option available.\nSkip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\nMÀN HÌNH EC/pH DRAIN · BR-03\n\nPublication drain\n\nKhoang · vụ drain\n\nKhoảng ngày drain (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nProfile EC/pH (version tường minh)\n\nkeyboard_arrow_right\n\nTạo version profile mới (kỹ sư, chưa xác minh nông học)\n\nMetric lọc đợt drain\n\nCả hai\n\nec\n\nph\n\nThời lượng tối thiểu (chỉ danh sách)\n\n1440\n\n0\n\n1440\n\nEC/pH dung dịch drain\n\ndrain_process_computer · measured · thời gian nguồn chưa xác minh timezone. Ngưỡng kinh doanh tách khỏi quality policy; không suy ra chẩn đoán dinh dưỡng.\n\nPublication 518aafbbff244e3f96b61a15252aa96a · quality AGC_QUALITY_V1 · profile rule_not_configured\n\nrule_not_configured — chưa chọn profile; KPI ngoài dải là NULL. Vẫn có thể xem phép đo, quality và lineage bên dưới.\n\nEC ngoài dải (phút)\n\nNULL\n\nEC ngoài dải %\n\nNULL\n\nEC coverage %\n\n0,00\n\nEC suspect (phút)\n\n0,00\n\nec: valid 0 phút · unknown 239040 · low 0 · high 0 · rule_not_configured=239040\n\nPH ngoài dải (phút)\n\nNULL\n\nPH ngoài dải %\n\nNULL\n\nPH coverage %\n\n0,00\n\nPH suspect (phút)\n\n0,00\n\nph: valid 0 phút · unknown 239040 · low 0 · high 0 · rule_not_configured=239040\n\nOR ngoài dải (phút, hợp lệ chung)\n\nNULL\n\nOR ngoài dải %\n\nNULL\n\nCoverage giao chung %\n\n0,00\n\nOR trên giao EC/pH hợp lệ: 0 phút; không cộng hai thời lượng riêng. Bộ lọc đợt không đổi các tổng này.\n\nĐợt ngoài dải — dài nhất trước\n\nGiữ thời điểm/toàn bộ thời lượng GỐC và phần giao CLIPPED với kỳ báo cáo. Metric và thời lượng tối thiểu chỉ lọc danh sách, không thay tổng KPI.\n\n◀ Đợt trước\n\nĐợt sau ▶\n\nĐợt: 0/0 sau lọc · offset 0.\n\nKhông có đợt sau bộ lọc. Tra cứu nguồn và nước theo kỳ vẫn dùng được.\n\nTra cứu nguồn độc lập với danh sách đợt\n\nNgày nguồn\n\n2019\n/\n12\n/\n30\n\nGiờ nguồn (5 phút)\n\n⁦\n13\n:\n55\n⁩\n\nNguồn [2019-12-16T00:00:00,2019-12-16T01:00:00) · 12 hàng gốc; giữ EC âm/pH=0 và quality riêng; không dùng lab/giá thể.\n\n◀ Nguồn trước\n\nNguồn sau ▶\n\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n3\n3.5\n4\n4.5\n5\nnguồn chưa đánh giá / suspect / invalid\nunknown (rule_not_configured)\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n5.5\n6\n6.5\n7\nnguồn chưa đánh giá / suspect / invalid\nunknown (rule_not_configured)\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDòng nguồn để truy vết\n\nXác minh lineage về raw\n\nBối cảnh tưới/drain theo ngày — BR-02\n\nCùng publication/cycle; giao [2019-12-16T00:00:00,2020-05-30T00:00:00). Một hàng/ngày nguồn; ngày chỉ giao một phần vẫn hiển thị TOÀN lượng ngày, không prorate, không nhân theo slot/đợt. Đối chiếu để điều tra, chưa kết luận nguyên nhân.\n\nTưới nguồn (L/m², ngày tính một lần)\n\n788,60\n\nDrain nguồn (L/m², ngày tính một lần)\n\n350,30\n\nCoverage nước ghép ngày %\n\n100,00\n\nBasis nước: assumed_unverified · giả định chưa xác minh\n\nXuất kết quả đúng view đã pin\n\nCSV summary drain\n\nCSV joint OR drain\n\nCSV đợt drain (đã lọc)\n\nJSON result drain (typed)\n\nCSV nước theo ngày\n\nCSV nguồn drain (trang)",
+      "metrics": [
+        "EC ngoài dải (phút)\nNULL",
+        "EC ngoài dải %\nNULL",
+        "EC coverage %\n0,00",
+        "EC suspect (phút)\n0,00",
+        "PH ngoài dải (phút)\nNULL",
+        "PH ngoài dải %\nNULL",
+        "PH coverage %\n0,00",
+        "PH suspect (phút)\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\nNULL",
+        "OR ngoài dải %\nNULL",
+        "Coverage giao chung %\n0,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n788,60",
+        "Drain nguồn (L/m², ngày tính một lần)\n350,30",
+        "Coverage nước ghép ngày %\n100,00"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 518aafbbff24 · drain-mart-v1",
+        "Reference — agc-cycle-Reference",
+        "(không chọn — rule_not_configured)",
+        "2019-12-16T00:00:00"
+      ],
+      "sliders": [
+        {
+          "value": "3",
+          "max": "3",
+          "text": "1440"
+        }
+      ],
+      "exceptions": [],
+      "charts": 2
+    },
+    {
+      "name": "Engineer profile v1 saved",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\nMÀN HÌNH EC/pH DRAIN · BR-03\n\nPublication drain\n\nKhoang · vụ drain\n\nKhoảng ngày drain (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nProfile EC/pH (version tường minh)\n\nkeyboard_arrow_down\n\nTạo version profile mới (kỹ sư, chưa xác minh nông học)\n\nLưu bất biến cho cả vụ theo giờ nguồn; giữ nguyên version cũ. Các cận gợi ý là minh họa, chưa được hiệu chuẩn nông học. Đổi profile không tạo publication hay sửa phép đo.\n\nTên profile\n\nVersion mới\n\nEC cận dưới (dS/m)\n\nEC cận trên (dS/m)\n\npH cận dưới\n\npH cận trên\n\nNguồn / lý do cho version này\n\nLưu version bất biến\n\nMetric lọc đợt drain\n\nCả hai\n\nec\n\nph\n\nThời lượng tối thiểu (chỉ danh sách)\n\n1440\n\n0\n\n1440\n\nStop\nEC/pH dung dịch drain\n\ndrain_process_computer · measured · thời gian nguồn chưa xác minh timezone. Ngưỡng kinh doanh tách khỏi quality policy; không suy ra chẩn đoán dinh dưỡng.\n\nPublication 518aafbbff244e3f96b61a15252aa96a · quality AGC_QUALITY_V1 · profile drain-user:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:Reference:browser_br03:v1\n\nProfile do kỹ sư nhập — chưa xác minh/hiệu chuẩn nông học cho giống cây hoặc giai đoạn này.\n\nProvenance: Browser acceptance experiment; unverified bounds, no agricultural claim\n\nEC ngoài dải (phút)\n\n218465,00\n\nEC ngoài dải %\n\n91,53\n\nEC coverage %\n\n99,85\n\nEC suspect (phút)\n\n0,00\n\nec: valid 238690 phút · unknown 350 · low 4455 · high 214010 · missing_input=350\n\nPH ngoài dải (phút)\n\n132435,00\n\nPH ngoài dải %\n\n55,49\n\nPH coverage %\n\n99,84\n\nPH suspect (phút)\n\n25,00\n\nph: valid 238665 phút · unknown 375 · low 112770 · high 19665 · missing_input=350; quality_suspect=25\n\nOR ngoài dải (phút, hợp lệ chung)\n\n221250,00\n\nOR ngoài dải %\n\n92,70\n\nCoverage giao chung %\n\n99,84\n\nOR trên giao EC/pH hợp lệ: 238665 phút; không cộng hai thời lượng riêng. Bộ lọc đợt không đổi các tổng này.\n\nĐợt ngoài dải — dài nhất trước\n\nGiữ thời điểm/toàn bộ thời lượng GỐC và phần giao CLIPPED với kỳ báo cáo. Metric và thời lượng tối thiểu chỉ lọc danh sách, không thay tổng KPI.\n\n◀ Đợt trước\n\nĐợt sau ▶\n\nĐợt: 18/18 sau lọc · offset 0.\n\nChọn đợt để xem chi tiết\n\nChi tiết đợt — trang hữu hạn trước khi đọc dữ liệu\n\nGốc [2019-12-31T12:35:00,2020-02-25T08:35:00) = 80400 phút; trong kỳ 80400 phút. Trang [2019-12-31T12:35:00,2020-01-01T00:35:00) · 144 mốc / 16080 · offset 0; tối đa 144 mốc 5 phút mỗi lượt, không cắt tổng KPI.\n\n◀ Trace trước\n\nTrace sau ▶\n\n12:00Dec 31, 2019\n14:00\n16:00\n18:00\n20:00\n22:00\n00:00Jan 1, 2020\n2\n2.5\n3\n3.5\n4\n4.5\n5\n5.5\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n12:00Dec 31, 2019\n14:00\n16:00\n18:00\n20:00\n22:00\n00:00Jan 1, 2020\n5.6\n5.8\n6\n6.2\n6.4\n6.6\n6.8\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDải tô là cận được áp dụng; unknown tạo khoảng trống, dấu x xám giữ giá trị nguồn suspect/invalid/chưa có rule, không tô thành đạt.\n\nTra cứu nguồn độc lập với danh sách đợt\n\nNgày nguồn\n\n2019\n/\n12\n/\n30\n\nGiờ nguồn (5 phút)\n\n⁦\n13\n:\n55\n⁩\n\nNguồn [2019-12-16T00:00:00,2019-12-16T01:00:00) · 12 hàng gốc; giữ EC âm/pH=0 và quality riêng; không dùng lab/giá thể.\n\n◀ Nguồn trước\n\nNguồn sau ▶\n\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n2\n2.5\n3\n3.5\n4\n4.5\n5\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n\nDòng nguồn để truy vết\n\nXác minh lineage về raw\n\nBối cảnh tưới/drain theo ngày — BR-02\n\nCùng publication/cycle; giao [2019-12-31T12:35:00,2020-02-25T08:35:00). Một hàng/ngày nguồn; ngày chỉ giao một phần vẫn hiển thị TOÀN lượng ngày, không prorate, không nhân theo slot/đợt. Đối chiếu để điều tra, chưa kết luận nguyên nhân.\n\nTưới nguồn (L/m², ngày tính một lần)\n\n212,40\n\nDrain nguồn (L/m², ngày tính một lần)\n\n85,60\n\nCoverage nước ghép ngày %\n\n100,00\n\nBasis nước: assumed_unverified · giả định chưa xác minh\n\nXuất kết quả đúng view đã pin\n\nCSV summary drain\n\nCSV joint OR drain\n\nCSV đợt drain (đã lọc)\n\nJSON result drain (typed)\n\nCSV nước theo ngày\n\nCSV nguồn drain (trang)\n\nCSV detail drain (trang)",
+      "metrics": [
+        "EC ngoài dải (phút)\n218465,00",
+        "EC ngoài dải %\n91,53",
+        "EC coverage %\n99,85",
+        "EC suspect (phút)\n0,00",
+        "PH ngoài dải (phút)\n132435,00",
+        "PH ngoài dải %\n55,49",
+        "PH coverage %\n99,84",
+        "PH suspect (phút)\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n221250,00",
+        "OR ngoài dải %\n92,70",
+        "Coverage giao chung %\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n212,40",
+        "Drain nguồn (L/m², ngày tính một lần)\n85,60",
+        "Coverage nước ghép ngày %\n100,00"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 518aafbbff24 · drain-mart-v1",
+        "Reference — agc-cycle-Reference",
+        "drain-user:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:Reference:browser_br03:v1 · user_unverified · v1",
+        "ec · 80400 phút gốc · 2019-12-31T12:35:00 → 2020-02-25T08:35:00 · trong kỳ 80400 phút · peak 4.5 @ 2020-01-19T19:10:00 · high",
+        "2019-12-16T00:00:00"
+      ],
+      "sliders": [
+        {
+          "value": "3",
+          "max": "3",
+          "text": "1440"
+        }
+      ],
+      "exceptions": [],
+      "charts": 4
+    },
+    {
+      "name": "Engineer profile v2 changes EC out total",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\nMÀN HÌNH EC/pH DRAIN · BR-03\n\nPublication drain\n\nKhoang · vụ drain\n\nKhoảng ngày drain (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nProfile EC/pH (version tường minh)\n\nkeyboard_arrow_down\n\nTạo version profile mới (kỹ sư, chưa xác minh nông học)\n\nLưu bất biến cho cả vụ theo giờ nguồn; giữ nguyên version cũ. Các cận gợi ý là minh họa, chưa được hiệu chuẩn nông học. Đổi profile không tạo publication hay sửa phép đo.\n\nTên profile\n\nVersion mới\n\nEC cận dưới (dS/m)\n\nEC cận trên (dS/m)\n\npH cận dưới\n\npH cận trên\n\nNguồn / lý do cho version này\n\nLưu version bất biến\n\nMetric lọc đợt drain\n\nCả hai\n\nec\n\nph\n\nThời lượng tối thiểu (chỉ danh sách)\n\n1440\n\n0\n\n1440\n\nEC/pH dung dịch drain\n\ndrain_process_computer · measured · thời gian nguồn chưa xác minh timezone. Ngưỡng kinh doanh tách khỏi quality policy; không suy ra chẩn đoán dinh dưỡng.\n\nPublication 518aafbbff244e3f96b61a15252aa96a · quality AGC_QUALITY_V1 · profile drain-user:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:Reference:browser_br03:v2\n\nProfile do kỹ sư nhập — chưa xác minh/hiệu chuẩn nông học cho giống cây hoặc giai đoạn này.\n\nProvenance: Browser acceptance experiment; unverified bounds, no agricultural claim\n\nEC ngoài dải (phút)\n\n14505,00\n\nEC ngoài dải %\n\n6,08\n\nEC coverage %\n\n99,85\n\nEC suspect (phút)\n\n0,00\n\nec: valid 238690 phút · unknown 350 · low 4455 · high 10050 · missing_input=350\n\nPH ngoài dải (phút)\n\n132435,00\n\nPH ngoài dải %\n\n55,49\n\nPH coverage %\n\n99,84\n\nPH suspect (phút)\n\n25,00\n\nph: valid 238665 phút · unknown 375 · low 112770 · high 19665 · missing_input=350; quality_suspect=25\n\nOR ngoài dải (phút, hợp lệ chung)\n\n135430,00\n\nOR ngoài dải %\n\n56,74\n\nCoverage giao chung %\n\n99,84\n\nOR trên giao EC/pH hợp lệ: 238665 phút; không cộng hai thời lượng riêng. Bộ lọc đợt không đổi các tổng này.\n\nĐợt ngoài dải — dài nhất trước\n\nGiữ thời điểm/toàn bộ thời lượng GỐC và phần giao CLIPPED với kỳ báo cáo. Metric và thời lượng tối thiểu chỉ lọc danh sách, không thay tổng KPI.\n\n◀ Đợt trước\n\nĐợt sau ▶\n\nĐợt: 9/9 sau lọc · offset 0.\n\nChọn đợt để xem chi tiết\n\nChi tiết đợt — trang hữu hạn trước khi đọc dữ liệu\n\nGốc [2020-04-19T13:35:00,2020-05-30T00:00:00) = 58225 phút; trong kỳ 58225 phút. Trang [2020-04-19T13:35:00,2020-04-20T01:35:00) · 144 mốc / 11645 · offset 0; tối đa 144 mốc 5 phút mỗi lượt, không cắt tổng KPI.\n\n◀ Trace trước\n\nTrace sau ▶\n\n14:00Apr 19, 2020\n16:00\n18:00\n20:00\n22:00\n00:00Apr 20, 2020\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n14:00Apr 19, 2020\n16:00\n18:00\n20:00\n22:00\n00:00Apr 20, 2020\n02:00\n5.2\n5.4\n5.6\n5.8\n6\n6.2\n6.4\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDải tô là cận được áp dụng; unknown tạo khoảng trống, dấu x xám giữ giá trị nguồn suspect/invalid/chưa có rule, không tô thành đạt.\n\nTra cứu nguồn độc lập với danh sách đợt\n\nNgày nguồn\n\n2019\n/\n12\n/\n30\n\nGiờ nguồn (5 phút)\n\n⁦\n13\n:\n55\n⁩\n\nNguồn [2019-12-16T00:00:00,2019-12-16T01:00:00) · 12 hàng gốc; giữ EC âm/pH=0 và quality riêng; không dùng lab/giá thể.\n\n◀ Nguồn trước\n\nNguồn sau ▶\n\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n5.6\n5.8\n6\n6.2\n6.4\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDòng nguồn để truy vết\n\nXác minh lineage về raw\n\nBối cảnh tưới/drain theo ngày — BR-02\n\nCùng publication/cycle; giao [2020-04-19T13:35:00,2020-05-30T00:00:00). Một hàng/ngày nguồn; ngày chỉ giao một phần vẫn hiển thị TOÀN lượng ngày, không prorate, không nhân theo slot/đợt. Đối chiếu để điều tra, chưa kết luận nguyên nhân.\n\nTưới nguồn (L/m², ngày tính một lần)\n\n219,20\n\nDrain nguồn (L/m², ngày tính một lần)\n\n88,20\n\nCoverage nước ghép ngày %\n\n100,00\n\nBasis nước: assumed_unverified · giả định chưa xác minh\n\nXuất kết quả đúng view đã pin\n\nCSV summary drain\n\nCSV joint OR drain\n\nCSV đợt drain (đã lọc)\n\nJSON result drain (typed)\n\nCSV nước theo ngày\n\nCSV nguồn drain (trang)\n\nCSV detail drain (trang)",
+      "metrics": [
+        "EC ngoài dải (phút)\n14505,00",
+        "EC ngoài dải %\n6,08",
+        "EC coverage %\n99,85",
+        "EC suspect (phút)\n0,00",
+        "PH ngoài dải (phút)\n132435,00",
+        "PH ngoài dải %\n55,49",
+        "PH coverage %\n99,84",
+        "PH suspect (phút)\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n135430,00",
+        "OR ngoài dải %\n56,74",
+        "Coverage giao chung %\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n219,20",
+        "Drain nguồn (L/m², ngày tính một lần)\n88,20",
+        "Coverage nước ghép ngày %\n100,00"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 518aafbbff24 · drain-mart-v1",
+        "Reference — agc-cycle-Reference",
+        "drain-user:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:Reference:browser_br03:v2 · user_unverified · v2",
+        "ph · 58225 phút gốc · 2020-04-19T13:35:00 → 2020-05-30T00:00:00 · trong kỳ 58225 phút · peak 1.6 @ 2020-05-15T21:10:00 · low",
+        "2019-12-16T00:00:00"
+      ],
+      "sliders": [
+        {
+          "value": "3",
+          "max": "3",
+          "text": "1440"
+        }
+      ],
+      "exceptions": [],
+      "charts": 4
+    },
+    {
+      "name": "Engineer profile v1 reopened exactly",
+      "text": "4 options available.\n3 options available.\n2 options available.\n1 option available.\nSkip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\nMÀN HÌNH EC/pH DRAIN · BR-03\n\nPublication drain\n\nKhoang · vụ drain\n\nKhoảng ngày drain (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nProfile EC/pH (version tường minh)\n\nkeyboard_arrow_down\n\nTạo version profile mới (kỹ sư, chưa xác minh nông học)\n\nLưu bất biến cho cả vụ theo giờ nguồn; giữ nguyên version cũ. Các cận gợi ý là minh họa, chưa được hiệu chuẩn nông học. Đổi profile không tạo publication hay sửa phép đo.\n\nTên profile\n\nVersion mới\n\nEC cận dưới (dS/m)\n\nEC cận trên (dS/m)\n\npH cận dưới\n\npH cận trên\n\nNguồn / lý do cho version này\n\nLưu version bất biến\n\nMetric lọc đợt drain\n\nCả hai\n\nec\n\nph\n\nThời lượng tối thiểu (chỉ danh sách)\n\n1440\n\n0\n\n1440\n\nEC/pH dung dịch drain\n\ndrain_process_computer · measured · thời gian nguồn chưa xác minh timezone. Ngưỡng kinh doanh tách khỏi quality policy; không suy ra chẩn đoán dinh dưỡng.\n\nPublication 518aafbbff244e3f96b61a15252aa96a · quality AGC_QUALITY_V1 · profile drain-user:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:Reference:browser_br03:v1\n\nProfile do kỹ sư nhập — chưa xác minh/hiệu chuẩn nông học cho giống cây hoặc giai đoạn này.\n\nProvenance: Browser acceptance experiment; unverified bounds, no agricultural claim\n\nEC ngoài dải (phút)\n\n218465,00\n\nEC ngoài dải %\n\n91,53\n\nEC coverage %\n\n99,85\n\nEC suspect (phút)\n\n0,00\n\nec: valid 238690 phút · unknown 350 · low 4455 · high 214010 · missing_input=350\n\nPH ngoài dải (phút)\n\n132435,00\n\nPH ngoài dải %\n\n55,49\n\nPH coverage %\n\n99,84\n\nPH suspect (phút)\n\n25,00\n\nph: valid 238665 phút · unknown 375 · low 112770 · high 19665 · missing_input=350; quality_suspect=25\n\nOR ngoài dải (phút, hợp lệ chung)\n\n221250,00\n\nOR ngoài dải %\n\n92,70\n\nCoverage giao chung %\n\n99,84\n\nOR trên giao EC/pH hợp lệ: 238665 phút; không cộng hai thời lượng riêng. Bộ lọc đợt không đổi các tổng này.\n\nĐợt ngoài dải — dài nhất trước\n\nGiữ thời điểm/toàn bộ thời lượng GỐC và phần giao CLIPPED với kỳ báo cáo. Metric và thời lượng tối thiểu chỉ lọc danh sách, không thay tổng KPI.\n\n◀ Đợt trước\n\nĐợt sau ▶\n\nĐợt: 18/18 sau lọc · offset 0.\n\nChọn đợt để xem chi tiết\n\nChi tiết đợt — trang hữu hạn trước khi đọc dữ liệu\n\nGốc [2019-12-31T12:35:00,2020-02-25T08:35:00) = 80400 phút; trong kỳ 80400 phút. Trang [2019-12-31T12:35:00,2020-01-01T00:35:00) · 144 mốc / 16080 · offset 0; tối đa 144 mốc 5 phút mỗi lượt, không cắt tổng KPI.\n\n◀ Trace trước\n\nTrace sau ▶\n\n12:00Dec 31, 2019\n14:00\n16:00\n18:00\n20:00\n22:00\n00:00Jan 1, 2020\n2\n2.5\n3\n3.5\n4\n4.5\n5\n5.5\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n12:00Dec 31, 2019\n14:00\n16:00\n18:00\n20:00\n22:00\n00:00Jan 1, 2020\n5.6\n5.8\n6\n6.2\n6.4\n6.6\n6.8\nngoài dải\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDải tô là cận được áp dụng; unknown tạo khoảng trống, dấu x xám giữ giá trị nguồn suspect/invalid/chưa có rule, không tô thành đạt.\n\nTra cứu nguồn độc lập với danh sách đợt\n\nNgày nguồn\n\n2019\n/\n12\n/\n30\n\nGiờ nguồn (5 phút)\n\n⁦\n13\n:\n55\n⁩\n\nNguồn [2019-12-16T00:00:00,2019-12-16T01:00:00) · 12 hàng gốc; giữ EC âm/pH=0 và quality riêng; không dùng lab/giá thể.\n\n◀ Nguồn trước\n\nNguồn sau ▶\n\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n2\n2.5\n3\n3.5\n4\n4.5\n5\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (dS/m)\nThời điểm nguồn (naive)\ndS/m\n00:00Dec 16, 2019\n00:10\n00:20\n00:30\n00:40\n00:50\n5.6\n5.8\n6\n6.2\n6.4\ncận trên được áp dụng\ncận dưới được áp dụng\nactual (pH)\nThời điểm nguồn (naive)\npH\n\nDòng nguồn để truy vết\n\nXác minh lineage về raw\n\nBối cảnh tưới/drain theo ngày — BR-02\n\nCùng publication/cycle; giao [2019-12-31T12:35:00,2020-02-25T08:35:00). Một hàng/ngày nguồn; ngày chỉ giao một phần vẫn hiển thị TOÀN lượng ngày, không prorate, không nhân theo slot/đợt. Đối chiếu để điều tra, chưa kết luận nguyên nhân.\n\nTưới nguồn (L/m², ngày tính một lần)\n\n212,40\n\nDrain nguồn (L/m², ngày tính một lần)\n\n85,60\n\nCoverage nước ghép ngày %\n\n100,00\n\nBasis nước: assumed_unverified · giả định chưa xác minh\n\nXuất kết quả đúng view đã pin\n\nCSV summary drain\n\nCSV joint OR drain\n\nCSV đợt drain (đã lọc)\n\nJSON result drain (typed)\n\nCSV nước theo ngày\n\nCSV nguồn drain (trang)\n\nCSV detail drain (trang)",
+      "metrics": [
+        "EC ngoài dải (phút)\n218465,00",
+        "EC ngoài dải %\n91,53",
+        "EC coverage %\n99,85",
+        "EC suspect (phút)\n0,00",
+        "PH ngoài dải (phút)\n132435,00",
+        "PH ngoài dải %\n55,49",
+        "PH coverage %\n99,84",
+        "PH suspect (phút)\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n221250,00",
+        "OR ngoài dải %\n92,70",
+        "Coverage giao chung %\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n212,40",
+        "Drain nguồn (L/m², ngày tính một lần)\n85,60",
+        "Coverage nước ghép ngày %\n100,00"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 518aafbbff24 · drain-mart-v1",
+        "Reference — agc-cycle-Reference",
+        "drain-user:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:Reference:browser_br03:v1 · user_unverified · v1",
+        "ec · 80400 phút gốc · 2019-12-31T12:35:00 → 2020-02-25T08:35:00 · trong kỳ 80400 phút · peak 4.5 @ 2020-01-19T19:10:00 · high",
+        "2019-12-16T00:00:00"
+      ],
+      "sliders": [
+        {
+          "value": "3",
+          "max": "3",
+          "text": "1440"
+        }
+      ],
+      "exceptions": [],
+      "charts": 4
+    }
+  ],
+  "downloads": {
+    "drain-Reference-2019-12-16-2020-05-30-summary.csv": {
+      "bytes": 2563,
+      "sha256": "0e81694d2ca55a11d1ac5c68f2bf05e45a0d1c71311c47208fefb106e84cce3e"
+    },
+    "drain-Reference-2019-12-16-2020-05-30-joint.csv": {
+      "bytes": 2159,
+      "sha256": "7cf227c6c79eab12d939f75599d5d077edf6ec4ea13d7a7237f9551d3a61578f"
+    },
+    "drain-Reference-2019-12-16-2020-05-30-episodes.csv": {
+      "bytes": 29061,
+      "sha256": "8acefbf0619a36be81d785fee920abe05a1b79625148d9c543140df8b9504fc0"
+    },
+    "drain-Reference-2019-12-16-2020-05-30-result.json": {
+      "bytes": 4893337,
+      "sha256": "af6f803d38000b34744f3926e3c20786b61cb7a1471115e087348f572ba663ee"
+    },
+    "drain-Reference-2019-12-16-2020-05-30-water.csv": {
+      "bytes": 30490,
+      "sha256": "8607ade7cf51483d401d04b58548a0565fe038b7feccae6e10fc6ffdffe1ccd2"
+    },
+    "drain-Reference-2019-12-16-2020-05-30-source.csv": {
+      "bytes": 4201,
+      "sha256": "ff264d9b9f5fcf0320eb64bea356cbadb457c787b2d2a05c4d5c12672f961375"
+    },
+    "drain-Reference-2019-12-16-2020-05-30-detail.csv": {
+      "bytes": 44685,
+      "sha256": "7bcdf903640d458f16de2cad08ef13e20fe88de34edd7ebde10445faf3f8dffe"
+    }
+  }
+}

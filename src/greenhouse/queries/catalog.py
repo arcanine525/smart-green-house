@@ -62,3 +62,7 @@ class CatalogService:
         return self.adapter.catalog_schedule_rules(
             publication.scope_id, compartment_id,
             measurement_context=measurement_context, metrics=metrics, bases=bases)
+
+    def drain_usable(self, publications=None):
+        rows = self.publications() if publications is None else tuple(publications)
+        return tuple(row for row in rows if row.drain_usable)

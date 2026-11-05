@@ -1,0 +1,48 @@
+BEGIN
+SET
+                                                                                                            QUERY PLAN
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=670767.64..670767.65 rows=1 width=8)
+   CTE candidates
+     ->  Merge Join  (cost=12.70..206755.71 rows=578219 width=128)
+           Merge Cond: (w.revision_id = r.revision_id)
+           ->  Index Only Scan using workflow_candidate_pkey on workflow_candidate w  (cost=0.56..114078.08 rows=578219 width=33)
+                 Index Cond: (workflow_id = 'drain-br03-recovered-20261105'::text)
+           ->  Index Only Scan using record_revision_revision_id_data_scope_id_record_type_logic_key on record_revision r  (cost=0.55..84194.20 rows=572910 width=128)
+   ->  Hash Left Join  (cost=387970.04..462573.57 rows=575342 width=0)
+         Hash Cond: (c.revision_id = q.revision_id)
+         Filter: ((c.data_scope_id <> 'agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical'::text) OR (climate_observation.revision_id IS NULL) OR (q.measures IS DISTINCT FROM e.measures))
+         ->  Hash Left Join  (cost=28732.97..80846.66 rows=578219 width=105)
+               Hash Cond: (c.record_type = e.record_type)
+               ->  Hash Right Join  (cost=28708.67..79272.37 rows=578219 width=129)
+                     Hash Cond: ((climate_observation.revision_id = c.revision_id) AND (('climate'::text) = c.record_type))
+                     ->  Append  (cost=0.00..24278.65 rows=574843 width=65)
+                           ->  Seq Scan on climate_observation  (cost=0.00..11138.54 rows=286854 width=65)
+                           ->  Seq Scan on drain_observation  (cost=0.00..10221.54 rows=286854 width=65)
+                           ->  Seq Scan on resource_day  (cost=0.00..38.96 rows=996 width=65)
+                           ->  Seq Scan on harvest  (cost=0.00..5.39 rows=139 width=65)
+                     ->  Hash  (cost=11564.38..11564.38 rows=578219 width=96)
+                           ->  CTE Scan on candidates c  (cost=0.00..11564.38 rows=578219 width=96)
+               ->  Hash  (cost=21.80..21.80 rows=200 width=40)
+                     ->  Subquery Scan on e  (cost=17.80..21.80 rows=200 width=40)
+                           ->  HashAggregate  (cost=17.80..19.80 rows=200 width=40)
+                                 Group Key: measure_definition.record_type
+                                 ->  Seq Scan on measure_definition  (cost=0.00..15.20 rows=520 width=32)
+         ->  Hash  (cost=354945.30..354945.30 rows=201582 width=41)
+               ->  Subquery Scan on q  (cost=80740.50..354945.30 rows=201582 width=41)
+                     ->  GroupAggregate  (cost=80740.50..352929.48 rows=201582 width=41)
+                           Group Key: q_1.revision_id
+                           ->  Merge Join  (cost=80740.50..336446.04 rows=2893523 width=33)
+                                 Merge Cond: (q_1.revision_id = c_1.revision_id)
+                                 ->  Index Only Scan using measure_quality_pkey on measure_quality q_1  (cost=0.56..203625.21 rows=2893523 width=33)
+                                       Index Cond: (policy_version_id = 'AGC_QUALITY_V1'::text)
+                                 ->  Materialize  (cost=80739.07..83630.17 rows=578219 width=32)
+                                       ->  Sort  (cost=80739.07..82184.62 rows=578219 width=32)
+                                             Sort Key: c_1.revision_id
+                                             ->  CTE Scan on candidates c_1  (cost=0.00..11564.38 rows=578219 width=32)
+ JIT:
+   Functions: 52
+   Options: Inlining true, Optimization true, Expressions true, Deforming true
+(41 rows)
+
+ROLLBACK

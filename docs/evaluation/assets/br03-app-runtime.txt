@@ -1,0 +1,1 @@
+74afe3c88e4b4aa56c3c174a6a58f3c810020162a964927efbeb05eb91d585e3 image=sha256:c8a2a8d3ca2356d3c2f2385accb26610d0da9a067014bf69ece7c403e2675a11 memory=805306368 cpu=500000000 health=healthy actualDB=true /Users/hiep.le/Downloads/project/internal/data-eng/data/raw->/data/raw:RW=false

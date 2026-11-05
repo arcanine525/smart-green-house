@@ -82,7 +82,7 @@ def write_climate_csv(path, overrides_by_slot, *, days=1):
 
 
 def publish_climate(connection, raw_root, scope_name='Only', *,
-                    overrides_by_slot=None, days=1):
+                    overrides_by_slot=None, days=1, drain=False, resource_rows=None):
     """A climate scope through the REAL pipeline (Spark stage stubbed)."""
     tag = uuid4().hex
     site, snapshot, scope, policy = (name + ':' + tag for name in
@@ -97,7 +97,10 @@ def publish_climate(connection, raw_root, scope_name='Only', *,
     definition = {'missing': 'per_measure',
                   'nonnegative': sorted(['Tair', 'CO2air', 't_heat_sp', 't_vent_sp', 'co2_sp',
                                          't_heat_vip', 't_ventlee_vip', 'co2_vip', 'EC_drain_PC']),
-                  'suspect_zero': [], 'off_mode_zero': ['co2_sp', 'co2_vip']}
+                  'suspect_zero': ['pH_drain_PC'] if drain else [],
+                  'off_mode_zero': ['co2_sp', 'co2_vip']}
+    if resource_rows is not None:
+        definition['nonnegative'] += ['Irr', 'Drain']
     connection.execute(
         "INSERT INTO config.quality_policy_version VALUES (%s,1,%s,%s,%s,%s,true,'synthetic climate policy')",
         (policy, date(2020, 1, 1), date(2020, 1, 1) + timedelta(days=days),
@@ -109,7 +112,8 @@ def publish_climate(connection, raw_root, scope_name='Only', *,
             ('t_heat_sp', 'climate', '°C'), ('t_vent_sp', 'climate', '°C'),
             ('co2_sp', 'climate', 'ppm'), ('t_heat_vip', 'climate', '°C'),
             ('t_ventlee_vip', 'climate', '°C'), ('co2_vip', 'climate', 'ppm'),
-            ('EC_drain_PC', 'drain', 'dS/m')]:
+            ('EC_drain_PC', 'drain', 'dS/m'), ('pH_drain_PC', 'drain', 'pH'),
+            ('Irr', 'resource', 'L/m²/day'), ('Drain', 'resource', 'L/m²/day')]:
         connection.execute("INSERT INTO config.measure_definition VALUES (%s,%s,%s,'fixture') "
                            "ON CONFLICT (measure_code) DO NOTHING",
                            (measure, record_type, unit))
@@ -138,20 +142,43 @@ def publish_climate(connection, raw_root, scope_name='Only', *,
     folder = snapshot_root / scope_name
     folder.mkdir(parents=True, exist_ok=True)
     climate_csv = folder / 'GreenhouseClimate.csv'
-    grid = {slot: {} for slot in range(288 * days)}
+    grid = {slot: ({'EC_drain_PC': '3', 'pH_drain_PC': '6'} if drain else {})
+            for slot in range(288 * days)}
     for absolute_slot, values in (overrides_by_slot or {}).items():
-        grid[absolute_slot] = values
+        grid[absolute_slot].update(values)
     write_climate_csv(climate_csv, grid, days=days)
+    files = [{'path': f'{scope_name}/GreenhouseClimate.csv',
+              'sha256': hashlib.sha256(climate_csv.read_bytes()).hexdigest(),
+              'csv': {'data_rows': 288 * days}}]
+    if resource_rows is not None:
+        for code in ('Irr', 'Drain'):
+            identity = f'fixture-basis:{tag}:{code}'
+            connection.execute(
+                "INSERT INTO config.area_basis_version VALUES "
+                "(%s,%s,%s,%s,1,100,'fixture_area','verified',%s,%s,NULL,NULL,'synthetic verified basis')",
+                (identity, scope, comp, code, date(2020, 1, 1), date(2020, 1, 1) + timedelta(days=days)))
+            connection.execute("INSERT INTO config.basis_application VALUES (%s,%s,%s,'shared_analysis',%s,true)",
+                               (scope, comp, code, identity))
+        resource_csv = folder / 'Resources.csv'
+        headers = HEADERS['Resources']
+        with resource_csv.open('w', newline='') as stream:
+            writer = csv.writer(stream, lineterminator='\r\n')
+            writer.writerow(headers)
+            for index, (irr, drained) in enumerate(resource_rows):
+                values = {'Irr': irr, 'Drain': drained}
+                writer.writerow([str((date(2020, 1, 1) - EXCEL_EPOCH).days + index)]
+                                + [values.get(header.strip(), '') for header in headers[1:]])
+        files.append({'path': f'{scope_name}/Resources.csv',
+                      'sha256': hashlib.sha256(resource_csv.read_bytes()).hexdigest(),
+                      'csv': {'data_rows': len(resource_rows)}})
     (snapshot_root / 'manifest.json').write_text(json.dumps(
         {'snapshot_id': snapshot, 'archive': {'sha256': (tag * 2)},
-         'files': [{'path': f'{scope_name}/GreenhouseClimate.csv',
-                    'sha256': hashlib.sha256(climate_csv.read_bytes()).hexdigest(),
-                    'csv': {'data_rows': 288 * days}}]}))
+         'files': files}))
     result = run_pipeline(connection, snapshot_root, output_root,
                           scope, policy, stage_function=artifact_stage)
     adapter = PostgresClimateQueryAdapter(connection, raw_snapshots={snapshot: snapshot_root})
     return {'scope': scope, 'snapshot': snapshot, 'comp': comp, 'cycle': cycle,
-            'publication': result['publication_id'], 'adapter': adapter}
+            'publication': result['publication_id'], 'adapter': adapter, 'raw': snapshot_root}
 
 
 

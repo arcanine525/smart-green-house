@@ -1,0 +1,44 @@
+BEGIN
+SET
+                                                                                                            QUERY PLAN
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=57.33..57.34 rows=1 width=8)
+   CTE candidates
+     ->  Nested Loop  (cost=1.11..11.76 rows=1 width=128)
+           ->  Index Only Scan using workflow_candidate_pkey on workflow_candidate w  (cost=0.56..7.19 rows=1 width=33)
+                 Index Cond: (workflow_id = 'drain-br03-recovered-20261105'::text)
+           ->  Index Only Scan using record_revision_revision_id_data_scope_id_record_type_logic_key on record_revision r  (cost=0.55..4.57 rows=1 width=128)
+                 Index Cond: (revision_id = w.revision_id)
+   ->  Nested Loop Left Join  (cost=23.32..45.54 rows=14 width=0)
+         Filter: ((c.data_scope_id <> 'agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical'::text) OR (climate_observation.revision_id IS NULL) OR ((count(*)) IS DISTINCT FROM (count(*))))
+         ->  Nested Loop Left Join  (cost=22.90..28.11 rows=1 width=112)
+               Join Filter: (c.revision_id = q.revision_id)
+               ->  Hash Right Join  (cost=17.83..22.59 rows=1 width=104)
+                     Hash Cond: (measure_definition.record_type = c.record_type)
+                     ->  HashAggregate  (cost=17.80..19.80 rows=200 width=40)
+                           Group Key: measure_definition.record_type
+                           ->  Seq Scan on measure_definition  (cost=0.00..15.20 rows=520 width=32)
+                     ->  Hash  (cost=0.02..0.02 rows=1 width=96)
+                           ->  CTE Scan on candidates c  (cost=0.00..0.02 rows=1 width=96)
+               ->  HashAggregate  (cost=5.06..5.20 rows=14 width=41)
+                     Group Key: q.revision_id
+                     ->  Nested Loop  (cost=0.56..4.99 rows=14 width=33)
+                           ->  CTE Scan on candidates c_1  (cost=0.00..0.02 rows=1 width=32)
+                           ->  Index Only Scan using measure_quality_pkey on measure_quality q  (cost=0.56..4.83 rows=14 width=33)
+                                 Index Cond: ((revision_id = c_1.revision_id) AND (policy_version_id = 'AGC_QUALITY_V1'::text))
+         ->  Append  (cost=0.42..17.37 rows=4 width=65)
+               ->  Index Only Scan using climate_observation_pkey on climate_observation  (cost=0.42..4.44 rows=1 width=65)
+                     Index Cond: (revision_id = c.revision_id)
+                     Filter: ('climate'::text = c.record_type)
+               ->  Index Only Scan using drain_observation_pkey on drain_observation  (cost=0.42..4.44 rows=1 width=65)
+                     Index Cond: (revision_id = c.revision_id)
+                     Filter: ('drain'::text = c.record_type)
+               ->  Index Only Scan using resource_day_pkey on resource_day  (cost=0.28..4.30 rows=1 width=65)
+                     Index Cond: (revision_id = c.revision_id)
+                     Filter: ('resource'::text = c.record_type)
+               ->  Index Only Scan using harvest_pkey on harvest  (cost=0.14..4.17 rows=1 width=65)
+                     Index Cond: (revision_id = c.revision_id)
+                     Filter: ('harvest'::text = c.record_type)
+(37 rows)
+
+ROLLBACK

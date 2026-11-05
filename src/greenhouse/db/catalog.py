@@ -13,6 +13,7 @@ from greenhouse.contracts import (
     CatalogCycle, CatalogPublication, HarvestRuleProfile, IrrigationRuleProfile, RuleBasis,
 )
 from greenhouse.db.climate_mart import BUNDLE_VERSION as CLIMATE_BUNDLE_VERSION
+from greenhouse.db.drain_mart import BUNDLE_VERSION as DRAIN_BUNDLE_VERSION
 from greenhouse.db.harvest_mart import BUNDLE_VERSION as HARVEST_BUNDLE_VERSION
 from greenhouse.db.migrate import sql
 
@@ -64,11 +65,15 @@ class PostgresCatalogAdapter:
             if climate_version != CLIMATE_BUNDLE_VERSION:
                 climate_reasons = ('missing_expected_climate_bundle',)
                 climate_version = None
+            drain_version, drain_reasons = row['drain_bundle_version'], ()
+            if drain_version != DRAIN_BUNDLE_VERSION:
+                drain_reasons = ('missing_expected_drain_bundle',)
+                drain_version = None
             rows.append(CatalogPublication(
                 row['scope_id'], row['snapshot_id'], row['publication_id'], row['committed_at'],
                 row['finality_status'], row['code_version'], row['bundle_version'],
                 row['day_count'], row['cycle_count'], version, tuple(reasons),
-                climate_version, tuple(climate_reasons)))
+                climate_version, tuple(climate_reasons), drain_version, tuple(drain_reasons)))
         return tuple(rows)
 
     def climate_usable(self, publications=None):
