@@ -74,7 +74,8 @@ def render(connection):
 
     with st.sidebar:
         screen = st.radio('Màn hình', ['💧 Nước (BR-02)', '🍅 Thu hoạch (BR-05)',
-                                       '🌡️ Khí hậu (BR-01)', '🧪 EC/pH drain (BR-03)'],
+                                       '🌡️ Khí hậu (BR-01)', '🧪 EC/pH drain (BR-03)',
+                                       '⚡ Năng lượng (BR-04)'],
                           key='screen_choice',
                           help='Mỗi màn hình dùng bundle riêng (nước = irrigation-mart-v1, '
                           'thu hoạch = harvest-mart-v3); session filter tách theo màn hình.')
@@ -88,6 +89,9 @@ def render(connection):
     if screen == '🧪 EC/pH drain (BR-03)':
         from greenhouse.app import drain as drain_screen
         return drain_screen.render(connection, settings, publications)
+    if screen == '⚡ Năng lượng (BR-04)':
+        from greenhouse.app import energy as energy_screen
+        return energy_screen.render(connection, settings, publications)
     return render_water(connection, settings, publications)
 
 

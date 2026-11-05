@@ -13,6 +13,7 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["tests"]
 addopts = "-p no:cacheprovider"
 
 [tool.setuptools.package-data]

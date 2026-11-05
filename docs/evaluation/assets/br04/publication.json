@@ -1,0 +1,25 @@
+{
+  "current_publication": "892b4cd58cdf4d099510974d91fa64ab",
+  "workflow_id": "energy-br04-20261105",
+  "all_publications": [
+    "11d0e3523c024107936a2091e99ddec8",
+    "3459db897ead45a28177c60000bd0561",
+    "50c3485dd763453cb6c4395016d7554d",
+    "518aafbbff244e3f96b61a15252aa96a",
+    "804770b6ac534b308ad4e449487db50a",
+    "892b4cd58cdf4d099510974d91fa64ab",
+    "adf2a02900864da2bf0e41b86516f6ef",
+    "dbc3d6cbf9fa4914b37137455e85576e"
+  ],
+  "old_publications_preserved": true,
+  "counts": {
+    "core.record_revision": 574843,
+    "core.climate_observation": 286854,
+    "core.drain_observation": 286854,
+    "core.resource_day": 996,
+    "core.measure_quality": 2874794,
+    "meta.correction": 0
+  },
+  "migration_count": 11,
+  "older_checksums_unchanged": true
+}

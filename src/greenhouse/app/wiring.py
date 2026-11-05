@@ -194,3 +194,16 @@ def harvest_action(service: HarvestService, publication: PublicationRef,
     weekly = service.get_harvest_weekly(context)
     return HarvestAction(publication=publication, context=context, summary=summary,
                          days=days, weekly=weekly, records=records)
+
+
+def energy_service(connection, raw_snapshots=None):
+    from greenhouse.db.energy_adapter import PostgresEnergyQueryAdapter
+    from greenhouse.queries.energy import EnergyService
+    return EnergyService(PostgresEnergyQueryAdapter(connection, raw_snapshots=raw_snapshots))
+
+
+def intensity_service(connection, raw_snapshots=None):
+    from greenhouse.db.harvest_adapter import PostgresHarvestQueryAdapter
+    from greenhouse.queries.intensity import EnergyIntensityService
+    return EnergyIntensityService(energy_service(connection, raw_snapshots),
+        PostgresHarvestQueryAdapter(connection, raw_snapshots=raw_snapshots))

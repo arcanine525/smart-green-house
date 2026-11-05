@@ -1,0 +1,129 @@
+{
+  "publication_id": "892b4cd58cdf4d099510974d91fa64ab",
+  "source_and_quality_exact": true,
+  "derived_tolerance": "1E-40",
+  "cycles": [
+    {
+      "compartment": "AICU",
+      "resource_days": 166,
+      "quantity_rows": 498,
+      "harvest_rows": 24,
+      "raw_outside_rows": 0,
+      "source_sums": {
+        "Heat_cons": "252.2952",
+        "ElecHigh": "169.251583338",
+        "ElecLow": "71.004749999"
+      },
+      "observed_a_kg": "853.750",
+      "energy_kwh": "19396.1458335625",
+      "intensity_kwh_kg_a": "22.71876525161054172767203513909224011713030746705710102489019033674963396778916544655929721815519766",
+      "sensitivity_kwh_kg_a": "34.89602342647379209370424597364568081991215226939970717423133235724743777452415812591508052708638361",
+      "all_match": true,
+      "lineage_verified": true
+    },
+    {
+      "compartment": "Automatoes",
+      "resource_days": 166,
+      "quantity_rows": 498,
+      "harvest_rows": 23,
+      "raw_outside_rows": 0,
+      "source_sums": {
+        "Heat_cons": "185.3139",
+        "ElecHigh": "155.6",
+        "ElecLow": "114.847583336"
+      },
+      "observed_a_kg": "897.500",
+      "energy_kwh": "20120.22916683333333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
+      "intensity_kwh_kg_a": "22.41808263714020427112349117920148560817084493964716805942432683379758588672237697307335190343546889",
+      "sensitivity_kwh_kg_a": "34.43417493064735376044568245125348189415041782729805013927576601671309192200557103064066852367688022",
+      "all_match": true,
+      "lineage_verified": true
+    },
+    {
+      "compartment": "Digilog",
+      "resource_days": 166,
+      "quantity_rows": 498,
+      "harvest_rows": 23,
+      "raw_outside_rows": 0,
+      "source_sums": {
+        "Heat_cons": "172.9920",
+        "ElecHigh": "191.118999997",
+        "ElecLow": "132.043249994"
+      },
+      "observed_a_kg": "844.375",
+      "energy_kwh": "23200.97395777083333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
+      "intensity_kwh_kg_a": "27.47709721127559832223044658277818899580557611645694547248951394029114236368122378485072785590920306",
+      "sensitivity_kwh_kg_a": "42.20482131651931902294596595114729829755736491487786824574389341228719467061435973353071798667653590",
+      "all_match": true,
+      "lineage_verified": true
+    },
+    {
+      "compartment": "IUACAAS",
+      "resource_days": 166,
+      "quantity_rows": 498,
+      "harvest_rows": 23,
+      "raw_outside_rows": 0,
+      "source_sums": {
+        "Heat_cons": "334.8204",
+        "ElecHigh": "162.021749993",
+        "ElecLow": "66.005250000"
+      },
+      "observed_a_kg": "805.625",
+      "energy_kwh": "20064.54166622916666666666666666666666666666666666666666666666666666666666666666666666666666666666667",
+      "intensity_kwh_kg_a": "24.90555986498577708818205327126971812774760796483061805016808895784846133953969485389190587018360487",
+      "sensitivity_kwh_kg_a": "38.25493995261815360744763382467028704422032583397982932505818463925523661753297129557796741660201708",
+      "all_match": true,
+      "lineage_verified": true
+    },
+    {
+      "compartment": "Reference",
+      "resource_days": 166,
+      "quantity_rows": 498,
+      "harvest_rows": 23,
+      "raw_outside_rows": 1,
+      "source_sums": {
+        "Heat_cons": "471.56",
+        "ElecHigh": "154.5",
+        "ElecLow": "112.7"
+      },
+      "observed_a_kg": "873.750",
+      "energy_kwh": "24886.80555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555556",
+      "intensity_kwh_kg_a": null,
+      "sensitivity_kwh_kg_a": null,
+      "all_match": true,
+      "lineage_verified": true
+    },
+    {
+      "compartment": "TheAutomators",
+      "resource_days": 166,
+      "quantity_rows": 498,
+      "harvest_rows": 23,
+      "raw_outside_rows": 0,
+      "source_sums": {
+        "Heat_cons": "362.60",
+        "ElecHigh": "177.1",
+        "ElecLow": "107.7"
+      },
+      "observed_a_kg": "896.7500",
+      "energy_kwh": "24095.13888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888889",
+      "intensity_kwh_kg_a": "26.86940494997367035281727224855186940494997367035281727224855186940494997367035281727224855186940495",
+      "sensitivity_kwh_kg_a": "41.27140600315955766192733017377567140600315955766192733017377567140600315955766192733017377567140600",
+      "all_match": true,
+      "lineage_verified": true
+    }
+  ],
+  "eligible_population": [
+    "agc-cycle-AICU",
+    "agc-cycle-Automatoes",
+    "agc-cycle-Digilog",
+    "agc-cycle-IUACAAS",
+    "agc-cycle-TheAutomators"
+  ],
+  "excluded_population": [
+    "agc-cycle-Reference"
+  ],
+  "portfolio_energy_kwh": "106877.0295132847222222222222222222222222222222222222222222222222222222222222222222222222222222222222",
+  "portfolio_a_kg": "4298.0000",
+  "portfolio_intensity": "24.86668904450551936301121968874411871154542164314151284835323923271806007962359753890698516105682229",
+  "all_match": true
+}

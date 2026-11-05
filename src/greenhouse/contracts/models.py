@@ -287,6 +287,8 @@ class CatalogPublication:
     climate_reason_codes: tuple[str, ...] = ()
     drain_bundle_version: str | None = None
     drain_reason_codes: tuple[str, ...] = ()
+    energy_bundle_version: str | None = None
+    energy_reason_codes: tuple[str, ...] = ()
 
     def __post_init__(self):
         for value in (self.scope_id, self.snapshot_id, self.publication_id, self.code_version):
@@ -308,6 +310,9 @@ class CatalogPublication:
         tuple_of(self.drain_reason_codes, str)
         if self.drain_bundle_version is not None and self.drain_reason_codes:
             raise ValueError('A present drain bundle carries no absence reasons')
+        tuple_of(self.energy_reason_codes, str)
+        if self.energy_bundle_version is not None and self.energy_reason_codes:
+            raise ValueError('A present energy bundle carries no absence reasons')
 
     @property
     def usable(self):
@@ -324,6 +329,10 @@ class CatalogPublication:
     @property
     def drain_usable(self):
         return self.drain_bundle_version is not None
+
+    @property
+    def energy_usable(self):
+        return self.energy_bundle_version is not None and self.harvest_usable
 
 
 @dataclass(frozen=True)
@@ -2070,3 +2079,154 @@ class DrainEvaluation:
                 and any(applied.rule_version is not None for applied in self.result.applications):
             raise ValueError('No-rule selection may not carry applied rule versions')
         tuple_of(self.slot_reviews, RuleSlotReview)
+
+
+ENERGY_INTENSITY_VERSION = 'energy-intensity-v1'
+
+
+def quantity_ratio(numerator, denominator):
+    """Canonical intensity division, 50 significant digits / half-even."""
+    if numerator is None or denominator is None or denominator <= 0:
+        return None
+    with localcontext() as ctx:
+        ctx.prec = 50
+        ctx.rounding = 'ROUND_HALF_EVEN'
+        return numerator / denominator
+
+
+@dataclass(frozen=True)
+class HarvestAContribution:
+    record: HarvestRecord
+    basis: EffectiveAreaBasis | None
+    absolute_a_kg: Decimal | None
+
+    def __post_init__(self):
+        if not isinstance(self.record, HarvestRecord):
+            raise ValueError('Expected a frozen harvest record')
+        a = self.record.prod_a
+        if self.basis is not None:
+            b = self.basis
+            if not isinstance(b, EffectiveAreaBasis) or (
+                    b.scope_id, b.compartment_id, b.measure_code, b.basis_version_id,
+                    b.area_m2, b.status, b.basis_kind, b.assumption_id, b.assumption_version) != (
+                    self.record.publication.scope_id, self.record.compartment_id, 'ProdA',
+                    a.basis_version_id, a.area_m2, a.basis_status, a.basis_kind,
+                    a.assumption_id, a.assumption_version) or not b.valid_from <= self.record.harvest_date < b.valid_to_exclusive:
+                raise ValueError('Harvest A basis differs from frozen record or effective date')
+        elif a.basis_version_id is not None:
+            raise ValueError('Frozen harvest basis provenance is required')
+        expected = exact_product(a.value, self.basis.area_m2) if a.accepted and self.basis else None
+        finite(self.absolute_a_kg, nullable=True, nonnegative=True)
+        if self.absolute_a_kg != expected:
+            raise ValueError('Harvest A absolute quantity differs from source times area')
+
+
+@dataclass(frozen=True)
+class EnergyIntensity:
+    publication: PublicationRef
+    context: QueryContext
+    cycle: CycleWindow
+    energy: EnergySummary
+    harvest_state: HarvestCompleteness
+    harvest_a: tuple[HarvestAContribution, ...]
+    observed_a_kg: Decimal | None
+    official_a_kg: Decimal | None
+    basis_gate: EnergyBasisGate
+    assumptions: tuple[str, ...]
+    intensity_kwh_kg_a: Decimal | None
+    heat_kwh_kg_a: Decimal | None
+    light_kwh_kg_a: Decimal | None
+    comparison_eligible: bool
+    reason_codes: tuple[str, ...]
+    sensitivity_factor: Decimal | None
+    sensitivity_kwh_kg_a: Decimal | None
+    metric_version: str = ENERGY_INTENSITY_VERSION
+    unit: str = 'kWh/kg A'
+
+    def __post_init__(self):
+        if not isinstance(self.publication, PublicationRef) or not isinstance(self.context, QueryContext) or not isinstance(
+                self.cycle, CycleWindow) or not isinstance(self.energy, EnergySummary) or not isinstance(
+                self.harvest_state, HarvestCompleteness) or not isinstance(self.basis_gate, EnergyBasisGate):
+            raise ValueError('Intensity requires typed frozen inputs')
+        self.context.matches(self.publication)
+        if self.energy.publication != self.publication or self.energy.context != self.context or (
+                self.cycle.cycle_id, self.cycle.compartment_id) != (self.context.cycle_id, self.context.compartment_ids[0]):
+            raise ValueError('Intensity must join aggregates from one pinned context')
+        tuple_of(self.harvest_a, HarvestAContribution)
+        keys = set()
+        for item in self.harvest_a:
+            r = item.record
+            if r.publication != self.publication or (r.cycle_id, r.compartment_id) != (
+                    self.cycle.cycle_id, self.cycle.compartment_id) or not self.energy.window_start <= r.harvest_date < self.energy.window_end or r.logical_record_key in keys:
+                raise ValueError('Harvest intensity contribution grain mismatch')
+            keys.add(r.logical_record_key)
+        for value in (self.observed_a_kg, self.official_a_kg, self.intensity_kwh_kg_a,
+                      self.heat_kwh_kg_a, self.light_kwh_kg_a, self.sensitivity_factor,
+                      self.sensitivity_kwh_kg_a):
+            finite(value, nullable=True, nonnegative=True)
+        if self.intensity_kwh_kg_a is not None and (self.official_a_kg is None or self.official_a_kg <= 0
+                or self.energy.official_total_kwh is None or not self.basis_gate.absolute_compatible):
+            raise ValueError('Intensity requires complete quantities, positive A and compatible bases')
+        if self.official_a_kg is not None and (not self.harvest_state.snapshot_complete
+                or any(not c.record.prod_a.accepted or c.basis is None for c in self.harvest_a)
+                or self.official_a_kg != self.observed_a_kg):
+            raise ValueError('Official harvest A requires its complete frozen snapshot and contributions')
+        if self.intensity_kwh_kg_a is not None:
+            light = exact_add(self.energy.components[1].official_absolute_kwh,
+                              self.energy.components[2].official_absolute_kwh)
+            if (self.intensity_kwh_kg_a, self.heat_kwh_kg_a, self.light_kwh_kg_a) != (
+                    quantity_ratio(self.energy.official_total_kwh, self.official_a_kg),
+                    quantity_ratio(self.energy.components[0].official_absolute_kwh, self.official_a_kg),
+                    quantity_ratio(light, self.official_a_kg)):
+                raise ValueError('Intensity amounts differ from independent aggregate ratio')
+        elif self.heat_kwh_kg_a is not None or self.light_kwh_kg_a is not None:
+            raise ValueError('Unavailable intensity must keep component ratios NULL')
+        if type(self.comparison_eligible) is not bool or self.comparison_eligible and (
+                self.intensity_kwh_kg_a is None or (self.context.start, self.context.end) != (self.cycle.start, self.cycle.end)):
+            raise ValueError('Comparison requires a usable whole-cycle intensity')
+        tuple_of(self.assumptions, str); tuple_of(self.reason_codes, str)
+        if self.metric_version != ENERGY_INTENSITY_VERSION or self.unit != 'kWh/kg A':
+            raise ValueError('Unexpected intensity version/unit')
+        if (self.sensitivity_factor is None) != (self.sensitivity_kwh_kg_a is None):
+            raise ValueError('Sensitivity factor and value travel together')
+        if self.sensitivity_factor is not None and (self.sensitivity_factor != Decimal('1.536')
+                or self.intensity_kwh_kg_a is None or self.sensitivity_kwh_kg_a != quantity_ratio(
+                    exact_product(self.energy.official_total_kwh, self.sensitivity_factor), self.official_a_kg)):
+            raise ValueError('Sensitivity must preserve the primary denominator and explicit factor')
+
+
+@dataclass(frozen=True)
+class EnergyPortfolio:
+    publication: PublicationRef
+    members: tuple[EnergyIntensity, ...]
+    included_cycle_ids: tuple[str, ...]
+    excluded_cycle_ids: tuple[str, ...]
+    energy_kwh: Decimal | None
+    production_a_kg: Decimal | None
+    intensity_kwh_kg_a: Decimal | None
+    reason_codes: tuple[str, ...]
+    metric_version: str = ENERGY_INTENSITY_VERSION
+
+    def __post_init__(self):
+        tuple_of(self.members, EnergyIntensity)
+        tuple_of(self.included_cycle_ids, str); tuple_of(self.excluded_cycle_ids, str)
+        tuple_of(self.reason_codes, str)
+        ids = [m.cycle.cycle_id for m in self.members]
+        if len(set(ids)) != len(ids) or any(m.publication != self.publication for m in self.members):
+            raise ValueError('Portfolio requires unique cycles in one publication')
+        if set(self.included_cycle_ids) & set(self.excluded_cycle_ids) or set(ids) != set(self.included_cycle_ids) | set(self.excluded_cycle_ids):
+            raise ValueError('Portfolio must disclose its entire population')
+        if any(not m.comparison_eligible for m in self.members if m.cycle.cycle_id in self.included_cycle_ids):
+            raise ValueError('Ineligible cycle cannot enter portfolio')
+        for value in (self.energy_kwh, self.production_a_kg, self.intensity_kwh_kg_a):
+            finite(value, nullable=True, nonnegative=True)
+        if self.metric_version != ENERGY_INTENSITY_VERSION:
+            raise ValueError('Unexpected portfolio metric version')
+        selected = [m for m in self.members if m.cycle.cycle_id in self.included_cycle_ids]
+        energy = production = None
+        for m in selected:
+            energy = m.energy.official_total_kwh if energy is None else exact_add(energy, m.energy.official_total_kwh)
+            production = m.official_a_kg if production is None else exact_add(production, m.official_a_kg)
+        if (self.energy_kwh, self.production_a_kg, self.intensity_kwh_kg_a) != (
+                energy, production, quantity_ratio(energy, production)):
+            raise ValueError('Portfolio must divide the sums of its disclosed eligible population')

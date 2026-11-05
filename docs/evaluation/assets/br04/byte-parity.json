@@ -1,0 +1,49 @@
+{
+  "publication_id": "892b4cd58cdf4d099510974d91fa64ab",
+  "immutable_id_lookup": true,
+  "all_match": true,
+  "files": [
+    {
+      "file": "energy-AICU-2019-12-16-2020-05-30-summary.csv",
+      "bytes": 1980,
+      "sha256": "22487bb985cff0bde8613f01e20f0d188d78eba462c26b8645bd0ff7985f8311",
+      "exact_service_parity": true
+    },
+    {
+      "file": "energy-AICU-2019-12-16-2020-05-30-quantities.csv",
+      "bytes": 358430,
+      "sha256": "3f737e0817d49a7913e89431d8941ed5327c191a2e4afdabeb7f76fd4ae803e6",
+      "exact_service_parity": true
+    },
+    {
+      "file": "energy-AICU-2019-12-16-2020-05-30-harvest.csv",
+      "bytes": 18048,
+      "sha256": "431d1ee64a7e355f202c3f751cd514f028391800d6fabc388b7e38b940244887",
+      "exact_service_parity": true
+    },
+    {
+      "file": "energy-AICU-2019-12-16-2020-05-30-portfolio.csv",
+      "bytes": 5265,
+      "sha256": "6d2ea185976052bc6edddea40f733fe5dfd43e2467387928d591a4a4b83fbcdb",
+      "exact_service_parity": true
+    },
+    {
+      "file": "energy-AICU-2019-12-16-2020-05-30-result.json",
+      "bytes": 74840,
+      "sha256": "8ded136e7c25f814b44ecdf72c06804b02656197d89939947a1dd1353e8088db",
+      "exact_service_parity": true
+    },
+    {
+      "file": "energy-AICU-2019-12-16-2020-05-30-portfolio.json",
+      "bytes": 440786,
+      "sha256": "b0541cff1052ae27bc0d2e0a242d703a919a12117df2d734fef16d93cca15f5a",
+      "exact_service_parity": true
+    },
+    {
+      "file": "energy-Reference-2019-12-16-2020-05-30-result.json",
+      "bytes": 73016,
+      "sha256": "e33ea4a48fa4dd11e016cd9c576196d07d388e32d62d0cafaafa9435e9ea93d7",
+      "exact_service_parity": true
+    }
+  ]
+}

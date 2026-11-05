@@ -1,0 +1,21 @@
+﻿# export_version=greenhouse-energy-intensity-v1
+# publication_id=892b4cd58cdf4d099510974d91fa64ab
+# scope_id=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot_id=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# cycle_id=agc-cycle-AICU
+# window=[2019-12-16,2020-05-30)
+# effective_window=[2019-12-16,2020-05-30)
+# quality_policy=AGC_QUALITY_V1
+# parser=agc-parser-v1
+# pipeline=pipeline-v6-energy
+# config_bundle_hash=031905aef0322a2cecef859f70667662c397ce3743e73634faa3ff6014818f64
+# metric_version=energy-intensity-v1
+# quantity_version=energy-quantity-v1
+# units=energy:kWh;harvest_a:kg;intensity:kWh/kg A;source heat:MJ/m²/day;electricity:kWh/m²/day
+# basis_status=assumed_unverified
+# basis_label=giả định chưa xác minh
+# assumptions=AGC_SHARED_BASIS_V1:v1
+# sensitivity=Resources area96m² / primary62.5m²; factor1.536; Production remains62.5m²; scenario only
+# NULL is empty; accepted zero stays0; no extrapolation; A-only denominator; whole-cycle ranking only
+cycle_id,compartment_id,start,end_exclusive,energy_kwh,heat_kwh,high_kwh,low_kwh,observed_energy_kwh,production_a_kg,observed_a_kg,intensity_kwh_kg_a,heat_kwh_kg_a,light_kwh_kg_a,complete_days,expected_days,coverage_pct,harvest_snapshot_complete,comparison_eligible,basis_status,basis_label,assumptions,sensitivity_factor,sensitivity_kwh_kg_a,reasons
+agc-cycle-AICU,AICU,2019-12-16,2020-05-30,19396.1458335624999999999999999999999999999999999999991,4380.1249999999999999999999999999999999999999999999991,10578.2239586250,4437.7968749375,19396.1458335624999999999999999999999999999999999999991,853.750,853.750,22.718765251610541727672035139092240117130307467057,5.1304538799414348462664714494875549048316251830161,17.588311371669106881405563689604685212298682284041,166,166,100,True,True,assumed_unverified,giả định chưa xác minh,AGC_SHARED_BASIS_V1:v1,1.536,34.896023426473792093704245973645680819912152269400,

@@ -7,7 +7,8 @@ SELECT ds.data_scope_id AS scope_id,ds.snapshot_id,p.publication_id,p.committed_
  c.bundle_version AS climate_bundle_version,
  CASE WHEN c.publication_id IS NULL THEN ARRAY['missing_expected_climate_bundle']::text[]
  ELSE ARRAY[]::text[] END AS climate_reason_codes,
- d.bundle_version AS drain_bundle_version
+ d.bundle_version AS drain_bundle_version,e.bundle_version AS energy_bundle_version,
+ e.quantity_version AS energy_quantity_version
 FROM meta.current_publication cp
 JOIN meta.publication p ON p.publication_id=cp.publication_id AND p.data_scope_id=cp.data_scope_id
 JOIN meta.data_scope ds ON ds.data_scope_id=cp.data_scope_id
@@ -17,4 +18,5 @@ LEFT JOIN mart.irrigation_publication r ON r.publication_id=p.publication_id
 LEFT JOIN mart.harvest_publication h ON h.publication_id=p.publication_id
 LEFT JOIN mart.climate_publication c ON c.publication_id=p.publication_id
 LEFT JOIN mart.drain_publication d ON d.publication_id=p.publication_id
+LEFT JOIN mart.energy_publication e ON e.publication_id=p.publication_id
 ORDER BY p.committed_at DESC,ds.data_scope_id

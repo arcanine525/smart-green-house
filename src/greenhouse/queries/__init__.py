@@ -12,3 +12,4 @@ from greenhouse.queries.irrigation import (
     IrrigationService, QueryAdapter, basis_compatible, calendar_days,
     evaluate_day, result_cache_key, summarize_irrigation,
 )
+from greenhouse.queries.intensity import EnergyIntensityService, join_intensity, portfolio

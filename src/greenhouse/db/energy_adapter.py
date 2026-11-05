@@ -46,3 +46,14 @@ class PostgresEnergyQueryAdapter(PostgresCoreQueryAdapter):
                 row['revision_id'], row['logical_record_key'], correction, basis,
                 row['normalized_kwh_m2'], row['absolute_source_quantity'], row['absolute_kwh']))
         return tuple(result)
+
+    def read_production_bases(self, context):
+        rows = self._rows('query_intensity_bases', (context.publication_id, context.scope_id,
+                                                   context.compartment_ids[0]))
+        return tuple(EffectiveAreaBasis(r['basis_version_id'], r['version'], r['data_scope_id'],
+            r['compartment_id'], r['measure_code'], r['area_m2'], r['basis_kind'],
+            BasisStatus(r['verification_status']), r['valid_from'], r['valid_to_exclusive'],
+            r['evidence_reference'], r['assumption_id'], r['assumption_version'],
+            r['assumption_statement'], r['assumption_evidence'],
+            ASSUMPTION_LABEL if r['verification_status'] == 'assumed_unverified' else 'verified')
+            for r in rows)

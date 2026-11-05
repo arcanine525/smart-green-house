@@ -1,0 +1,53 @@
+TESTED_STATE 232a7339eef249167bbfbd31cf55885aa0bd624d573b5c2e1916320ee5bf31d1 files 258
+============================= test session starts ==============================
+platform linux -- Python 3.12.12, pytest-8.4.2, pluggy-1.6.0 -- /usr/local/bin/python
+Runtime: Python 3.12.12 / Linux aarch64
+openjdk version "17.0.17" 2025-10-21
+Packages: pyspark=4.0.1, psycopg=3.3.7, paho-mqtt=2.1.0, pytest=8.4.2
+rootdir: /workspace
+configfile: pyproject.toml
+collecting ... collected 35 items
+
+tests/unit/test_energy_intensity.py::test_distinct_areas_preharvest_a_only_rerun_and_exact_export PASSED [  2%]
+tests/unit/test_energy_intensity.py::test_effective_daily_areas_absolute_before_ratio PASSED [  5%]
+tests/unit/test_energy_intensity.py::test_missing_invalid_component_preserves_observed_but_blocks_ratio[values0-50] PASSED [  8%]
+tests/unit/test_energy_intensity.py::test_missing_invalid_component_preserves_observed_but_blocks_ratio[values1-50] PASSED [ 11%]
+tests/unit/test_energy_intensity.py::test_unknown_or_disabled_assumption_is_null[unknown-True] PASSED [ 14%]
+tests/unit/test_energy_intensity.py::test_unknown_or_disabled_assumption_is_null[assumed_unverified-False] PASSED [ 17%]
+tests/unit/test_energy_intensity.py::test_zero_absent_missing_and_outside_harvest[harvest0-zero_class_a_production] PASSED [ 20%]
+tests/unit/test_energy_intensity.py::test_zero_absent_missing_and_outside_harvest[harvest1-no_harvest_in_window] PASSED [ 22%]
+tests/unit/test_energy_intensity.py::test_zero_absent_missing_and_outside_harvest[harvest2-harvest_snapshot_incomplete] PASSED [ 25%]
+tests/unit/test_energy_intensity.py::test_zero_absent_missing_and_outside_harvest[harvest3-harvest_snapshot_incomplete] PASSED [ 28%]
+tests/unit/test_energy_intensity.py::test_subwindow_without_harvest_keeps_preharvest_energy PASSED [ 31%]
+tests/unit/test_energy_intensity.py::test_accepted_zero_energy_is_not_missing PASSED [ 34%]
+tests/unit/test_energy_intensity.py::test_assumed_primary_sensitivity_verified_production_bridge PASSED [ 37%]
+tests/unit/test_energy_intensity.py::test_pairing_completeness_not_bypassed_by_a_only_denominator PASSED [ 40%]
+tests/unit/test_energy_intensity.py::test_portfolio_ratio_sums_explicit_population_and_versions PASSED [ 42%]
+tests/unit/test_energy_intensity.py::test_old_pin_and_basis_provenance_survive_toggle PASSED [ 45%]
+tests/unit/test_energy_intensity.py::test_wire_rejects_fabricated_ratio_or_portfolio_average PASSED [ 48%]
+tests/unit/test_energy_mart.py::test_literal_units_distinct_energy_and_production_area_before_first_harvest PASSED [ 51%]
+tests/unit/test_energy_mart.py::test_daily_effective_area_no_per_m2_pooling_and_no_harvest_fanout PASSED [ 54%]
+tests/unit/test_energy_mart.py::test_component_missing_invalid_suspect_zero_and_complete_intersection PASSED [ 57%]
+tests/unit/test_energy_mart.py::test_absent_source_day_and_all_zero_remain_distinct PASSED [ 60%]
+tests/unit/test_energy_mart.py::test_applicability_unknown_and_one_component_basis_gap_are_separate PASSED [ 62%]
+tests/unit/test_energy_mart.py::test_unknown_or_disabled_assumption_preserves_source_and_null_absolute[unknown-True] PASSED [ 65%]
+tests/unit/test_energy_mart.py::test_unknown_or_disabled_assumption_preserves_source_and_null_absolute[assumed_unverified-False] PASSED [ 68%]
+tests/unit/test_energy_mart.py::test_assumed_user_basis_mixed_verified_production_and_sensitivity PASSED [ 71%]
+tests/unit/test_energy_mart.py::test_effective_selection_overlap_rejected_and_day_gap_does_not_fallback PASSED [ 74%]
+tests/unit/test_energy_mart.py::test_fifty_digit_normalization_original_mj_and_shared_quantity_identity PASSED [ 77%]
+tests/unit/test_energy_mart.py::test_correction_history_lineage_seal_rollback_resume_and_idempotence PASSED [ 80%]
+tests/unit/test_energy_mart.py::test_pin_context_grain_and_no_harvest_completeness_dependency PASSED [ 82%]
+tests/unit/test_energy_mart.py::test_v6_seal_requires_all_five_bundles_and_rolls_back[irrigation] PASSED [ 85%]
+tests/unit/test_energy_mart.py::test_v6_seal_requires_all_five_bundles_and_rolls_back[harvest] PASSED [ 88%]
+tests/unit/test_energy_mart.py::test_v6_seal_requires_all_five_bundles_and_rolls_back[climate] PASSED [ 91%]
+tests/unit/test_energy_mart.py::test_v6_seal_requires_all_five_bundles_and_rolls_back[drain] PASSED [ 94%]
+tests/unit/test_energy_mart.py::test_v6_seal_requires_all_five_bundles_and_rolls_back[energy] PASSED [ 97%]
+tests/unit/test_energy_mart.py::test_additive_upgrade_preserves_basis_versions_and_old_migration_checksums PASSED [100%]
+Runtime: Python 3.12.12 / Linux aarch64
+openjdk version "17.0.17" 2025-10-21
+Packages: pyspark=4.0.1, psycopg=3.3.7, paho-mqtt=2.1.0, pytest=8.4.2
+Container memory.peak: 117694464 bytes
+Container memory.max: 2147483648 bytes
+
+============================== 35 passed in 6.71s ==============================
+FINAL_TESTED_STATE 232a7339eef249167bbfbd31cf55885aa0bd624d573b5c2e1916320ee5bf31d1 unchanged True
