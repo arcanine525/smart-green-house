@@ -1,0 +1,28 @@
+﻿# export_version=greenhouse-energy-cost-v1
+# publication_id=892b4cd58cdf4d099510974d91fa64ab
+# scope_id=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot_id=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# cycle_id=agc-cycle-AICU
+# compartment_ids=AICU
+# window=[2019-12-16,2020-05-30)
+# metric_version=energy-cost-v1
+# tariff_version=tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1
+# scenario_version=scenario:req-61d6e548059842018a1077f7d97ed4e4:v2
+# currency=EUR
+# basis_status=assumed_unverified
+# basis_label=giả định chưa xác minh
+# sensitivity_factor=1.536
+# quantity_coverage_pct=100
+# pricing_coverage_pct=100
+# expected_days=166
+# priced_days=166
+# quantity_complete_days=166
+# evaluation_grain=summary
+# notice=Price-only scenario analysis; unchanged physical consumption; historical EUR only
+# NULL is empty; accepted zero stays 0; no extrapolation; display 2dp differs from exact exports
+# scenario_name=Kịch bản tăng giá điện 20%
+# scenario_id=scenario:req-61d6e548059842018a1077f7d97ed4e4
+# scenario_version_num=2
+# baseline_tariff_version=tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1
+cycle_id,compartment_ids,start,end_exclusive,currency,baseline_tariff_version,scenario_version,expected_days,baseline_priced_days,scenario_priced_days,baseline_pricing_coverage_pct,scenario_pricing_coverage_pct,baseline_quantity_complete_days,scenario_quantity_complete_days,baseline_official_total_cost_per_m2,scenario_official_total_cost_per_m2,delta_total_cost_per_m2,delta_total_pct,baseline_official_total_cost_eur,scenario_official_total_cost_eur,delta_total_cost_eur,baseline_observed_total_cost_per_m2,scenario_observed_total_cost_per_m2,baseline_observed_total_cost_eur,scenario_observed_total_cost_eur,basis_status,basis_label,sensitivity_factor,baseline_sensitivity_total_cost_eur,scenario_sensitivity_total_cost_eur,baseline_reasons,scenario_reasons
+agc-cycle-AICU,AICU,2019-12-16,2020-05-30,EUR,tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1,scenario:req-61d6e548059842018a1077f7d97ed4e4:v2,166,166,166,100,100,166,166,18.47436682700,21.750430160400,3.276063333400,17.733020915293748270012090303937971059104162715021,1154.647926687500,1359.4018850250000,204.7539583375000,18.47436682700,21.750430160400,1154.647926687500,1359.4018850250000,assumed_unverified,giả định chưa xác minh,1.536,1773.539215392000000,2088.0412953984000000,,

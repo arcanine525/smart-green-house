@@ -1,0 +1,47 @@
+{
+  "all_match": true,
+  "files": {
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-summary.csv": {
+      "actual_bytes": 2691,
+      "actual_sha256": "0d795b26102e9c86f73889f5e88b0d80ad1234e2022778cf24bc298b19546a07",
+      "expected_sha256": "0d795b26102e9c86f73889f5e88b0d80ad1234e2022778cf24bc298b19546a07",
+      "match": true
+    },
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-components.csv": {
+      "actual_bytes": 2789,
+      "actual_sha256": "621dd615673e4d1f4e16b187a5ac7cb29f4c4d16f7ab7b0914031c788d7f47a4",
+      "expected_sha256": "621dd615673e4d1f4e16b187a5ac7cb29f4c4d16f7ab7b0914031c788d7f47a4",
+      "match": true
+    },
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-days.csv": {
+      "actual_bytes": 111671,
+      "actual_sha256": "946da9bdc112c56853e16a2302275d867d39b25d6351f331aee55424a03119ff",
+      "expected_sha256": "946da9bdc112c56853e16a2302275d867d39b25d6351f331aee55424a03119ff",
+      "match": true
+    },
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-weekly.csv": {
+      "actual_bytes": 6401,
+      "actual_sha256": "72adfdc10966350ce98793fb8dd55a5503b35d5e7e3c4f11cac3647c2eb7f499",
+      "expected_sha256": "72adfdc10966350ce98793fb8dd55a5503b35d5e7e3c4f11cac3647c2eb7f499",
+      "match": true
+    },
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-rates.csv": {
+      "actual_bytes": 3327,
+      "actual_sha256": "f804c75bbe15691a8e49f71c1ff4e0582a650659e96af949ddec607a9a1001b9",
+      "expected_sha256": "f804c75bbe15691a8e49f71c1ff4e0582a650659e96af949ddec607a9a1001b9",
+      "match": true
+    },
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-comparison.json": {
+      "actual_bytes": 2634346,
+      "actual_sha256": "4cbeb707cca6f8a24800dcf73ea6440bf490448cc1003fadad20e68ae67f3e2d",
+      "expected_sha256": "4cbeb707cca6f8a24800dcf73ea6440bf490448cc1003fadad20e68ae67f3e2d",
+      "match": true
+    },
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-scenario.json": {
+      "actual_bytes": 2966,
+      "actual_sha256": "2ad07ce1b1c9acf1c7e2747b2cfc9b02d9653eaa137b2d531d35d9574f83849d",
+      "expected_sha256": "2ad07ce1b1c9acf1c7e2747b2cfc9b02d9653eaa137b2d531d35d9574f83849d",
+      "match": true
+    }
+  }
+}

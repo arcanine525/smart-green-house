@@ -1379,6 +1379,7 @@ class ScenarioCommand:
     publication: PublicationRef
     changes: tuple[ScenarioChange, ...]
     scenario_id: str | None = None
+    analysis_context: QueryContext | None = None
 
     def __post_init__(self):
         for value in (self.request_id, self.baseline_version_id, self.name):
@@ -1390,6 +1391,8 @@ class ScenarioCommand:
         tuple_of(self.changes, ScenarioChange)
         if not self.changes or len({c.component for c in self.changes}) != len(self.changes):
             raise ValueError('Scenario changes must contain distinct components')
+        if self.analysis_context is not None and not isinstance(self.analysis_context, QueryContext):
+            raise ValueError('Invalid analysis context')
 
 
 @dataclass(frozen=True)
@@ -2333,6 +2336,7 @@ class CostScenario:
     changes: tuple[ScenarioChange, ...]
     author: str = 'user'
     created_at: datetime | None = None
+    analysis_context: QueryContext | None = None
 
     def __post_init__(self):
         for val in (self.scenario_version, self.scenario_id, self.request_id, self.baseline_tariff_version, self.name, self.author):
@@ -2346,6 +2350,8 @@ class CostScenario:
         tuple_of(self.changes, ScenarioChange)
         if self.created_at is not None:
             clock(self.created_at, aware=True)
+        if self.analysis_context is not None and not isinstance(self.analysis_context, QueryContext):
+            raise ValueError('Invalid analysis context')
 
 
 @dataclass(frozen=True)
@@ -2492,3 +2498,56 @@ class ScenarioComparison:
         tuple_of(self.component_deltas, ComponentCostDelta)
         for val in (self.delta_total_cost_per_m2, self.delta_total_pct, self.delta_total_cost_eur):
             finite(val, nullable=True)
+
+
+@dataclass(frozen=True)
+class WeeklyCostRow:
+    iso_week: str
+    start_date: date
+    end_date: date
+    days_count: int
+    priced_days: int
+    quantity_complete_days: int
+    heat_cost_per_m2: Decimal | None
+    elec_high_cost_per_m2: Decimal | None
+    elec_low_cost_per_m2: Decimal | None
+    total_cost_per_m2: Decimal | None
+    heat_cost_eur: Decimal | None
+    elec_high_cost_eur: Decimal | None
+    elec_low_cost_eur: Decimal | None
+    total_cost_eur: Decimal | None
+    effective_area_m2: Decimal | None
+    reason_codes: tuple[str, ...]
+
+    def __post_init__(self):
+        for val in (self.heat_cost_per_m2, self.elec_high_cost_per_m2, self.elec_low_cost_per_m2,
+                    self.total_cost_per_m2, self.heat_cost_eur, self.elec_high_cost_eur,
+                    self.elec_low_cost_eur, self.total_cost_eur, self.effective_area_m2):
+            finite(val, nullable=True, nonnegative=True)
+        tuple_of(self.reason_codes, str)
+
+
+@dataclass(frozen=True)
+class WeeklyComparisonRow:
+    iso_week: str
+    start_date: date
+    end_date: date
+    days_count: int
+    baseline_total_per_m2: Decimal | None
+    scenario_total_per_m2: Decimal | None
+    delta_total_per_m2: Decimal | None
+    delta_total_pct: Decimal | None
+    baseline_total_eur: Decimal | None
+    scenario_total_eur: Decimal | None
+    delta_total_eur: Decimal | None
+    heat_delta_eur: Decimal | None
+    elec_high_delta_eur: Decimal | None
+    elec_low_delta_eur: Decimal | None
+
+    def __post_init__(self):
+        for val in (self.baseline_total_per_m2, self.scenario_total_per_m2, self.delta_total_per_m2,
+                    self.delta_total_pct, self.baseline_total_eur, self.scenario_total_eur,
+                    self.delta_total_eur, self.heat_delta_eur, self.elec_high_delta_eur,
+                    self.elec_low_delta_eur):
+            finite(val, nullable=True)
+

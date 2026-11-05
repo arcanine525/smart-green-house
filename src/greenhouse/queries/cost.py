@@ -12,12 +12,14 @@ from greenhouse.contracts import (
     BasisStatus, ComponentCost, ComponentCostDelta, CostScenario, DayCost,
     EnergyComponent, EnergyCostSummary, EnergyQuantity,
     PublicationRef, QueryContext, ScenarioChange, ScenarioCommand, ScenarioComparison,
-    TariffProfile, TariffRate, exact_add, exact_product, exact_sub, exact_sum,
+    TariffProfile, TariffRate, WeeklyCostRow, WeeklyComparisonRow,
+    exact_add, exact_product, exact_sub, exact_sum,
 )
 from greenhouse.queries.energy import EnergyService, energy_basis_gate
 
 
 class CostAdapter(Protocol):
+    def validate_cycle(self, scope_id: str, snapshot_id: str, cycle_id: str, compartment_id: str) -> bool: ...
     def get_tariff(self, tariff_version: str) -> TariffProfile | None: ...
     def get_baseline_tariff(self, data_scope_id: str, compartment_id: str | None = None) -> TariffProfile | None: ...
     def register_tariff(self, profile: TariffProfile) -> TariffProfile: ...
@@ -25,6 +27,7 @@ class CostAdapter(Protocol):
     def get_scenario(self, scenario_version: str) -> CostScenario | None: ...
     def get_scenario_by_request_id(self, request_id: str) -> CostScenario | None: ...
     def get_latest_scenario_version(self, scenario_id: str) -> CostScenario | None: ...
+    def list_scenarios(self, data_scope_id: str | None = None) -> tuple[CostScenario, ...]: ...
     def register_scenario(self, scenario: CostScenario, command_payload: dict | None = None) -> CostScenario: ...
     def execute_scenario_transaction(
         self, command: ScenarioCommand, rate_factory: Callable[[str], tuple[TariffRate, ...]],
@@ -110,6 +113,15 @@ class EnergyCostService:
     def get_baseline_tariff(self, data_scope_id: str, compartment_id: str | None = None) -> TariffProfile | None:
         return self.adapter.get_baseline_tariff(data_scope_id, compartment_id)
 
+    def list_scenarios(self, data_scope_id: str | None = None) -> tuple[CostScenario, ...]:
+        return self.adapter.list_scenarios(data_scope_id)
+
+    def get_scenario(self, scenario_version: str) -> CostScenario | None:
+        return self.adapter.get_scenario(scenario_version)
+
+    def get_latest_scenario_version(self, scenario_id: str) -> CostScenario | None:
+        return self.adapter.get_latest_scenario_version(scenario_id)
+
     def execute_scenario_command(self, command: ScenarioCommand) -> CostScenario:
         if not isinstance(command, ScenarioCommand):
             raise ValueError('Expected a validated ScenarioCommand')
@@ -121,6 +133,7 @@ class EnergyCostService:
                 f'Scenario command publication {command.publication} does not match authoritative {authoritative_pub}'
             )
 
+        # Validate baseline tariff exists and belongs to publication scope
         baseline = self.adapter.get_tariff(command.baseline_version_id)
         if baseline is None:
             raise ValueError(f'Baseline tariff version not found: {command.baseline_version_id}')
@@ -128,6 +141,40 @@ class EnergyCostService:
             raise ValueError(
                 f'Baseline scope {baseline.data_scope_id} does not match command publication scope {command.publication.scope_id}'
             )
+
+        if command.analysis_context is not None:
+            ac = command.analysis_context
+            if ac.rule_version is not None:
+                raise ValueError('Scenario analysis context cannot have a threshold rule')
+            if (ac.publication_id != command.publication.publication_id or
+                ac.scope_id != command.publication.scope_id or
+                ac.snapshot_id != command.publication.snapshot_id):
+                raise ValueError(
+                    f'Analysis context publication {ac.publication_id} does not match command publication {command.publication.publication_id}'
+                )
+            if ac.start >= ac.end:
+                raise ValueError('Invalid analysis context calendar window')
+            if not ac.compartment_ids:
+                raise ValueError('Analysis context must specify at least one compartment')
+            for comp_id in ac.compartment_ids:
+                is_valid = False
+                if hasattr(self.adapter, 'validate_cycle'):
+                    is_valid = self.adapter.validate_cycle(ac.scope_id, ac.snapshot_id, ac.cycle_id, comp_id)
+                elif hasattr(self.energy, 'adapter') and hasattr(self.energy.adapter, 'cycle_window'):
+                    try:
+                        comp_context = replace(ac, compartment_ids=(comp_id,))
+                        self.energy.adapter.cycle_window(comp_context)
+                        is_valid = True
+                    except Exception:
+                        is_valid = False
+                if not is_valid:
+                    raise ValueError(
+                        f'Cycle {ac.cycle_id} and compartment {comp_id} are not mapped to scope {ac.scope_id} and snapshot {ac.snapshot_id}'
+                    )
+            if baseline.compartment_id is not None and baseline.compartment_id not in ac.compartment_ids:
+                raise ValueError(
+                    f'Baseline tariff compartment {baseline.compartment_id} does not match analysis context compartments {ac.compartment_ids}'
+                )
 
         # Pre-check R3: append to existing scenario cannot replace publication, snapshot, scope, or baseline
         if command.scenario_id is not None:
@@ -139,6 +186,17 @@ class EnergyCostService:
                     existing.baseline_tariff_version != command.baseline_version_id):
                     raise ValueError(
                         f'Cannot change publication, snapshot, scope, or baseline of existing logical scenario {command.scenario_id}'
+                    )
+                if existing.analysis_context is not None:
+                    if command.analysis_context is None:
+                        command = replace(command, analysis_context=existing.analysis_context)
+                    elif command.analysis_context != existing.analysis_context:
+                        raise ValueError(
+                            f'Cannot change analysis context of existing logical scenario {command.scenario_id}'
+                        )
+                elif command.analysis_context is not None:
+                    raise ValueError(
+                        f'Cannot add analysis context to legacy scenario {command.scenario_id} that has no context'
                     )
 
         def rate_factory(scenario_version: str) -> tuple[TariffRate, ...]:
@@ -158,6 +216,17 @@ class EnergyCostService:
             latest.baseline_tariff_version != command.baseline_version_id):
             raise ValueError(
                 f'Cannot change publication, snapshot, scope, or baseline of existing logical scenario {scenario_id}'
+            )
+        if latest.analysis_context is not None:
+            if command.analysis_context is None:
+                command = replace(command, analysis_context=latest.analysis_context)
+            elif command.analysis_context != latest.analysis_context:
+                raise ValueError(
+                    f'Cannot change analysis context of existing logical scenario {scenario_id}'
+                )
+        elif command.analysis_context is not None:
+            raise ValueError(
+                f'Cannot add analysis context to legacy scenario {scenario_id} that has no context'
             )
         cmd = replace(command, scenario_id=scenario_id)
         return self.execute_scenario_command(cmd)
@@ -182,6 +251,16 @@ class EnergyCostService:
                     f'QueryContext publication identity ({context.scope_id}, {context.publication_id}, {context.snapshot_id}) '
                     f'does not match scenario publication ({scenario.publication.scope_id}, {scenario.publication.publication_id}, {scenario.publication.snapshot_id})'
                 )
+            if scenario.analysis_context is not None:
+                ac = scenario.analysis_context
+                if (context.publication_id, context.scope_id, context.snapshot_id, context.cycle_id,
+                    context.compartment_ids, context.start, context.end) != (
+                    ac.publication_id, ac.scope_id, ac.snapshot_id, ac.cycle_id,
+                    ac.compartment_ids, ac.start, ac.end
+                ):
+                    raise ValueError(
+                        f'Query context does not match frozen analysis context of scenario {scenario_version}'
+                    )
             rates = scenario.rates
             tariff_ver = scenario.baseline_tariff_version
             scenario_ver = scenario_version
@@ -447,6 +526,17 @@ class EnergyCostService:
         if scenario_obj is None:
             raise ValueError(f'Scenario not found: {scenario_version}')
 
+        if scenario_obj.analysis_context is not None:
+            ac = scenario_obj.analysis_context
+            if (context.publication_id, context.scope_id, context.snapshot_id, context.cycle_id,
+                context.compartment_ids, context.start, context.end) != (
+                ac.publication_id, ac.scope_id, ac.snapshot_id, ac.cycle_id,
+                ac.compartment_ids, ac.start, ac.end
+            ):
+                raise ValueError(
+                    f'Comparison context does not match frozen analysis context of scenario {scenario_version}'
+                )
+
         if baseline_tariff_version is None:
             baseline_tariff_version = scenario_obj.baseline_tariff_version
         elif baseline_tariff_version != scenario_obj.baseline_tariff_version:
@@ -456,53 +546,268 @@ class EnergyCostService:
 
         baseline = self.get_cost(context, tariff_version=baseline_tariff_version)
         scenario = self.get_cost(context, scenario_version=scenario_version)
+        return compare_summaries(baseline, scenario)
 
-        deltas = []
-        for b_comp, s_comp in zip(baseline.components, scenario.components):
-            delta_m2 = (exact_sub(s_comp.official_cost_per_m2, b_comp.official_cost_per_m2)
-                        if (s_comp.official_cost_per_m2 is not None and b_comp.official_cost_per_m2 is not None) else None)
-            delta_eur = (exact_sub(s_comp.official_cost_eur, b_comp.official_cost_eur)
-                         if (s_comp.official_cost_eur is not None and b_comp.official_cost_eur is not None) else None)
+    def get_weekly_cost(self, context_or_summary: QueryContext | EnergyCostSummary, *,
+                        scenario_version: str | None = None,
+                        tariff_version: str | None = None) -> tuple[WeeklyCostRow, ...]:
+        if isinstance(context_or_summary, EnergyCostSummary):
+            return aggregate_weekly_cost(context_or_summary)
+        summary = self.get_cost(context_or_summary, scenario_version=scenario_version, tariff_version=tariff_version)
+        return aggregate_weekly_cost(summary)
 
-            d_pct = delta_pct(delta_m2, b_comp.official_cost_per_m2)
-            if d_pct is None and delta_eur is not None and b_comp.official_cost_eur:
-                d_pct = delta_pct(delta_eur, b_comp.official_cost_eur)
+    def compare_scenarios_weekly(self, comp_or_context: ScenarioComparison | QueryContext, *,
+                                 scenario_version: str | None = None,
+                                 baseline_tariff_version: str | None = None) -> tuple[WeeklyComparisonRow, ...]:
+        if isinstance(comp_or_context, ScenarioComparison):
+            return compare_weekly(comp_or_context)
+        if scenario_version is None:
+            raise ValueError('scenario_version required when querying by context')
+        comp = self.compare_scenarios(comp_or_context, scenario_version=scenario_version, baseline_tariff_version=baseline_tariff_version)
+        return compare_weekly(comp)
 
-            b_share = share_pct(b_comp.official_cost_per_m2, baseline.official_total_cost_per_m2)
-            if b_share is None and b_comp.official_cost_eur is not None and baseline.official_total_cost_eur:
-                b_share = share_pct(b_comp.official_cost_eur, baseline.official_total_cost_eur)
 
-            s_share = share_pct(s_comp.official_cost_per_m2, scenario.official_total_cost_per_m2)
-            if s_share is None and s_comp.official_cost_eur is not None and scenario.official_total_cost_eur:
-                s_share = share_pct(s_comp.official_cost_eur, scenario.official_total_cost_eur)
+def compare_summaries(baseline: EnergyCostSummary, scenario: EnergyCostSummary) -> ScenarioComparison:
+    deltas = []
+    for b_comp, s_comp in zip(baseline.components, scenario.components):
+        delta_m2 = (exact_sub(s_comp.official_cost_per_m2, b_comp.official_cost_per_m2)
+                    if (s_comp.official_cost_per_m2 is not None and b_comp.official_cost_per_m2 is not None) else None)
+        delta_eur = (exact_sub(s_comp.official_cost_eur, b_comp.official_cost_eur)
+                     if (s_comp.official_cost_eur is not None and b_comp.official_cost_eur is not None) else None)
 
-            deltas.append(ComponentCostDelta(
-                component=b_comp.component,
-                baseline_cost_per_m2=b_comp.official_cost_per_m2,
-                scenario_cost_per_m2=s_comp.official_cost_per_m2,
-                delta_cost_per_m2=delta_m2,
-                delta_cost_pct=d_pct,
-                baseline_cost_eur=b_comp.official_cost_eur,
-                scenario_cost_eur=s_comp.official_cost_eur,
-                delta_cost_eur=delta_eur,
-                baseline_share_pct=b_share,
-                scenario_share_pct=s_share,
-            ))
+        d_pct = delta_pct(delta_m2, b_comp.official_cost_per_m2)
+        if d_pct is None and delta_eur is not None and b_comp.official_cost_eur:
+            d_pct = delta_pct(delta_eur, b_comp.official_cost_eur)
 
-        delta_total_m2 = (exact_sub(scenario.official_total_cost_per_m2, baseline.official_total_cost_per_m2)
-                          if (scenario.official_total_cost_per_m2 is not None and baseline.official_total_cost_per_m2 is not None) else None)
-        delta_total_eur = (exact_sub(scenario.official_total_cost_eur, baseline.official_total_cost_eur)
-                           if (scenario.official_total_cost_eur is not None and baseline.official_total_cost_eur is not None) else None)
+        b_share = share_pct(b_comp.official_cost_per_m2, baseline.official_total_cost_per_m2)
+        if b_share is None and b_comp.official_cost_eur is not None and baseline.official_total_cost_eur:
+            b_share = share_pct(b_comp.official_cost_eur, baseline.official_total_cost_eur)
 
-        delta_total_p = delta_pct(delta_total_m2, baseline.official_total_cost_per_m2)
-        if delta_total_p is None and delta_total_eur is not None and baseline.official_total_cost_eur:
-            delta_total_p = delta_pct(delta_total_eur, baseline.official_total_cost_eur)
+        s_share = share_pct(s_comp.official_cost_per_m2, scenario.official_total_cost_per_m2)
+        if s_share is None and s_comp.official_cost_eur is not None and scenario.official_total_cost_eur:
+            s_share = share_pct(s_comp.official_cost_eur, scenario.official_total_cost_eur)
 
-        return ScenarioComparison(
-            baseline=baseline,
-            scenario=scenario,
-            component_deltas=(deltas[0], deltas[1], deltas[2]),
-            delta_total_cost_per_m2=delta_total_m2,
-            delta_total_pct=delta_total_p,
-            delta_total_cost_eur=delta_total_eur,
-        )
+        deltas.append(ComponentCostDelta(
+            component=b_comp.component,
+            baseline_cost_per_m2=b_comp.official_cost_per_m2,
+            scenario_cost_per_m2=s_comp.official_cost_per_m2,
+            delta_cost_per_m2=delta_m2,
+            delta_cost_pct=d_pct,
+            baseline_cost_eur=b_comp.official_cost_eur,
+            scenario_cost_eur=s_comp.official_cost_eur,
+            delta_cost_eur=delta_eur,
+            baseline_share_pct=b_share,
+            scenario_share_pct=s_share,
+        ))
+
+    delta_total_m2 = (exact_sub(scenario.official_total_cost_per_m2, baseline.official_total_cost_per_m2)
+                      if (scenario.official_total_cost_per_m2 is not None and baseline.official_total_cost_per_m2 is not None) else None)
+    delta_total_eur = (exact_sub(scenario.official_total_cost_eur, baseline.official_total_cost_eur)
+                       if (scenario.official_total_cost_eur is not None and baseline.official_total_cost_eur is not None) else None)
+
+    delta_total_p = delta_pct(delta_total_m2, baseline.official_total_cost_per_m2)
+    if delta_total_p is None and delta_total_eur is not None and baseline.official_total_cost_eur:
+        delta_total_p = delta_pct(delta_total_eur, baseline.official_total_cost_eur)
+
+    return ScenarioComparison(
+        baseline=baseline,
+        scenario=scenario,
+        component_deltas=(deltas[0], deltas[1], deltas[2]),
+        delta_total_cost_per_m2=delta_total_m2,
+        delta_total_pct=delta_total_p,
+        delta_total_cost_eur=delta_total_eur,
+    )
+
+
+def aggregate_weekly_cost(summary: EnergyCostSummary) -> tuple[WeeklyCostRow, ...]:
+    by_week: dict[str, dict] = {}
+
+    for comp_summary in summary.components:
+        comp = comp_summary.component
+        for dc in comp_summary.day_costs:
+            dt = dc.resource_date
+            year, week_num, _ = dt.isocalendar()
+            iso_week = f'{year}-W{week_num:02d}'
+
+            entry = by_week.setdefault(iso_week, {
+                'start_date': dt,
+                'end_date': dt,
+                'dates': set(),
+                'days': {},
+            })
+            if dt < entry['start_date']:
+                entry['start_date'] = dt
+            if dt > entry['end_date']:
+                entry['end_date'] = dt
+            entry['dates'].add(dt)
+            entry['days'].setdefault(dt, {})[comp] = dc
+
+    weekly_rows = []
+    for iso_week in sorted(by_week.keys()):
+        data = by_week[iso_week]
+        dates = sorted(data['dates'])
+        days_count = len(dates)
+
+        priced_count = 0
+        qty_count = 0
+        heat_dc_list = []
+        high_dc_list = []
+        low_dc_list = []
+        reasons = set()
+
+        for dt in dates:
+            day_map = data['days'].get(dt, {})
+            heat_dc = day_map.get(EnergyComponent.HEAT)
+            high_dc = day_map.get(EnergyComponent.ELEC_HIGH)
+            low_dc = day_map.get(EnergyComponent.ELEC_LOW)
+
+            day_priced = all(dc and dc.cost_per_m2 is not None for dc in (heat_dc, high_dc, low_dc))
+            if day_priced:
+                priced_count += 1
+            day_qty = all(dc and dc.quantity and dc.quantity.accepted for dc in (heat_dc, high_dc, low_dc))
+            if day_qty:
+                qty_count += 1
+
+            for dc in (heat_dc, high_dc, low_dc):
+                if dc and dc.reason_code:
+                    for r_part in dc.reason_code.split(';'):
+                        reasons.add(r_part)
+
+            if heat_dc:
+                heat_dc_list.append(heat_dc)
+            if high_dc:
+                high_dc_list.append(high_dc)
+            if low_dc:
+                low_dc_list.append(low_dc)
+
+        # Collect all accepted quantities in this week across all components
+        all_week_dcs = heat_dc_list + high_dc_list + low_dc_list
+        week_quantities = [dc.quantity for dc in all_week_dcs if dc.quantity and dc.quantity.accepted]
+
+        # Evaluate week-level basis gate
+        week_basis_gate = energy_basis_gate(q.basis for q in week_quantities) if week_quantities else None
+        if week_basis_gate is not None:
+            if not week_basis_gate.per_m2_compatible:
+                reasons.add('incompatible_or_unknown_basis')
+            reasons.update(week_basis_gate.reason_codes)
+        elif all_week_dcs and any(dc.quantity and dc.quantity.basis is None for dc in all_week_dcs):
+            reasons.add('incompatible_or_unknown_basis')
+
+        # Effective area: must be single common area across all accepted quantities in the week
+        distinct_areas = {
+            q.basis.area_m2 for q in week_quantities
+            if q.basis and q.basis.area_m2 is not None
+        }
+        if len(distinct_areas) == 1 and week_basis_gate and week_basis_gate.per_m2_compatible:
+            effective_area = next(iter(distinct_areas))
+        else:
+            effective_area = None
+
+        # Component-level pooling
+        def pool_component(dc_list):
+            if len(dc_list) != days_count or any(d.cost_per_m2 is None for d in dc_list):
+                comp_m2 = None
+            else:
+                comp_quantities = [d.quantity for d in dc_list if d.quantity and d.quantity.accepted]
+                all_none = bool(dc_list and all(d.quantity.basis is None for d in dc_list if d.quantity))
+                c_gate = energy_basis_gate(q.basis for q in comp_quantities) if comp_quantities else None
+                if all_none or (c_gate and c_gate.per_m2_compatible):
+                    comp_m2 = exact_sum(d.cost_per_m2 for d in dc_list)
+                else:
+                    comp_m2 = None
+
+            if len(dc_list) == days_count and all(d.cost_eur is not None for d in dc_list):
+                comp_eur = exact_sum(d.cost_eur for d in dc_list)
+            else:
+                comp_eur = None
+
+            return comp_m2, comp_eur
+
+        heat_m2, heat_eur = pool_component(heat_dc_list)
+        high_m2, high_eur = pool_component(high_dc_list)
+        low_m2, low_eur = pool_component(low_dc_list)
+
+        # Total per-m2 requires week_basis_gate to be per_m2_compatible
+        if (
+            heat_m2 is not None and high_m2 is not None and low_m2 is not None
+            and week_basis_gate is not None and week_basis_gate.per_m2_compatible
+        ):
+            total_m2 = exact_sum([heat_m2, high_m2, low_m2])
+        else:
+            total_m2 = None
+
+        # Total EUR requires absolute_compatible
+        if (
+            heat_eur is not None and high_eur is not None and low_eur is not None
+            and (week_basis_gate is None or week_basis_gate.absolute_compatible)
+        ):
+            total_eur = exact_sum([heat_eur, high_eur, low_eur])
+        else:
+            total_eur = None
+
+        weekly_rows.append(WeeklyCostRow(
+            iso_week=iso_week,
+            start_date=data['start_date'],
+            end_date=data['end_date'],
+            days_count=days_count,
+            priced_days=priced_count,
+            quantity_complete_days=qty_count,
+            heat_cost_per_m2=heat_m2,
+            elec_high_cost_per_m2=high_m2,
+            elec_low_cost_per_m2=low_m2,
+            total_cost_per_m2=total_m2,
+            heat_cost_eur=heat_eur,
+            elec_high_cost_eur=high_eur,
+            elec_low_cost_eur=low_eur,
+            total_cost_eur=total_eur,
+            effective_area_m2=effective_area,
+            reason_codes=tuple(sorted(reasons)),
+        ))
+    return tuple(weekly_rows)
+
+
+def compare_weekly(comparison: ScenarioComparison) -> tuple[WeeklyComparisonRow, ...]:
+    b_weeks = {w.iso_week: w for w in aggregate_weekly_cost(comparison.baseline)}
+    s_weeks = {w.iso_week: w for w in aggregate_weekly_cost(comparison.scenario)}
+
+    all_weeks = sorted(set(b_weeks.keys()) | set(s_weeks.keys()))
+    rows = []
+    for iso_week in all_weeks:
+        bw = b_weeks.get(iso_week)
+        sw = s_weeks.get(iso_week)
+        s_date = bw.start_date if bw else sw.start_date
+        e_date = bw.end_date if bw else sw.end_date
+        days = bw.days_count if bw else sw.days_count
+
+        b_tot_m2 = bw.total_cost_per_m2 if bw else None
+        s_tot_m2 = sw.total_cost_per_m2 if sw else None
+        b_tot_eur = bw.total_cost_eur if bw else None
+        s_tot_eur = sw.total_cost_eur if sw else None
+
+        delta_m2 = exact_sub(s_tot_m2, b_tot_m2) if (s_tot_m2 is not None and b_tot_m2 is not None) else None
+        delta_eur = exact_sub(s_tot_eur, b_tot_eur) if (s_tot_eur is not None and b_tot_eur is not None) else None
+        d_pct = delta_pct(delta_m2, b_tot_m2)
+        if d_pct is None and delta_eur is not None and b_tot_eur:
+            d_pct = delta_pct(delta_eur, b_tot_eur)
+
+        heat_delta = exact_sub(sw.heat_cost_eur, bw.heat_cost_eur) if (bw and sw and bw.heat_cost_eur is not None and sw.heat_cost_eur is not None) else None
+        high_delta = exact_sub(sw.elec_high_cost_eur, bw.elec_high_cost_eur) if (bw and sw and bw.elec_high_cost_eur is not None and sw.elec_high_cost_eur is not None) else None
+        low_delta = exact_sub(sw.elec_low_cost_eur, bw.elec_low_cost_eur) if (bw and sw and bw.elec_low_cost_eur is not None and sw.elec_low_cost_eur is not None) else None
+
+        rows.append(WeeklyComparisonRow(
+            iso_week=iso_week,
+            start_date=s_date,
+            end_date=e_date,
+            days_count=days,
+            baseline_total_per_m2=b_tot_m2,
+            scenario_total_per_m2=s_tot_m2,
+            delta_total_per_m2=delta_m2,
+            delta_total_pct=d_pct,
+            baseline_total_eur=b_tot_eur,
+            scenario_total_eur=s_tot_eur,
+            delta_total_eur=delta_eur,
+            heat_delta_eur=heat_delta,
+            elec_high_delta_eur=high_delta,
+            elec_low_delta_eur=low_delta,
+        ))
+    return tuple(rows)

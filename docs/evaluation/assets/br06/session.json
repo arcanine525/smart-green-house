@@ -1,0 +1,180 @@
+{
+  "generated_at": "2026-11-06T03:12:16.362Z",
+  "runtime": "Docker Chromium/Puppeteer 0.5CPU/768MiB",
+  "node": "v26.13.0",
+  "browser": "Chrome/156.0.8078.80",
+  "url": "http://172.25.0.2:8501/",
+  "publication": "892b4cd58cdf4d099510974d91fa64ab",
+  "steps": [
+    {
+      "name": "AICU baseline reference evaluation",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\n⚡ Năng lượng (BR-04)\n\n💶 Chi phí & Kịch bản (BR-06)\n\nCHI PHÍ & KỊCH BẢN GIÁ · BR-06\n\nPublication năng lượng\n\nKhoang · vụ\n\nKhoảng ngày (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nKịch bản đã lưu (164)\n\nChọn kịch bản giá\n\nChi phí năng lượng & Kịch bản biểu giá\n\nPhân tích chi phí theo kịch bản · Giữ nguyên mức tiêu thụ năng lượng vật lý · Tiền tệ EUR lịch sử của thí nghiệm (Economics.pdf). Không phải hóa đơn thanh toán thực tế, giá thị trường hiện tại hoặc lợi nhuận trang trại.\n\nPublication 892b4cd58cdf4d099510974d91fa64ab · Scope agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · Vụ agc-cycle-AICU · Khoang AICU · Khoảng [2019-12-16, 2020-05-30) (166 ngày)\n\nTổng quan chi phí\n\nTổng chi phí (EUR)\n\n1,154.65 EUR\n\nChi phí trên diện tích (EUR/m²)\n\n18.47 EUR/m²\n\nCoverage định giá (%)\n\n100.0%\n\n166/166 ngày\n\nCoverage lượng (%)\n\n100.0%\n\n166/166 ngày\n\n⚠️\n\ngiả định chưa xác minh (AGC_SHARED_BASIS_V1:v1): Diện tích trồng 62.5 m² dùng cho chi phí tuyệt đối EUR là giả định phân tích, không phải dữ liệu đo lường. Phân tích độ nhạy (Resources 96 m² / 62.5 m², hệ số 1.536): Tổng chi phí EUR độ nhạy = 1,773.54 EUR.\n\n📊 Đóng góp thành phần\n\n📅 Chi tiết ngày & Phép nhân\n\n📋 Biểu giá có hiệu lực\n\n⚙️ Tạo / Sửa đổi kịch bản\n\n💾 Xuất dữ liệu (Exports)\n\nChi phí theo thành phần năng lượng",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n1,154.65 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n18.47 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n166/166 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n166/166 ngày"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 892b4cd58cdf4d099510974d91fa64ab",
+        "AICU — agc-cycle-AICU",
+        "(Baseline tham chiếu - không dùng kịch bản)",
+        "2019-12-16 · heat · rev:db6a9494",
+        "Giữ nguyên",
+        "Thay đổi theo phần trăm (%)",
+        "Thay đổi theo phần trăm (%)"
+      ],
+      "exceptions": []
+    },
+    {
+      "name": "Baseline tariff rates table verification",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\n⚡ Năng lượng (BR-04)\n\n💶 Chi phí & Kịch bản (BR-06)\n\nCHI PHÍ & KỊCH BẢN GIÁ · BR-06\n\nPublication năng lượng\n\nKhoang · vụ\n\nKhoảng ngày (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nKịch bản đã lưu (164)\n\nChọn kịch bản giá\n\nChi phí năng lượng & Kịch bản biểu giá\n\nPhân tích chi phí theo kịch bản · Giữ nguyên mức tiêu thụ năng lượng vật lý · Tiền tệ EUR lịch sử của thí nghiệm (Economics.pdf). Không phải hóa đơn thanh toán thực tế, giá thị trường hiện tại hoặc lợi nhuận trang trại.\n\nPublication 892b4cd58cdf4d099510974d91fa64ab · Scope agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · Vụ agc-cycle-AICU · Khoang AICU · Khoảng [2019-12-16, 2020-05-30) (166 ngày)\n\nTổng quan chi phí\n\nTổng chi phí (EUR)\n\n1,154.65 EUR\n\nChi phí trên diện tích (EUR/m²)\n\n18.47 EUR/m²\n\nCoverage định giá (%)\n\n100.0%\n\n166/166 ngày\n\nCoverage lượng (%)\n\n100.0%\n\n166/166 ngày\n\n⚠️\n\ngiả định chưa xác minh (AGC_SHARED_BASIS_V1:v1): Diện tích trồng 62.5 m² dùng cho chi phí tuyệt đối EUR là giả định phân tích, không phải dữ liệu đo lường. Phân tích độ nhạy (Resources 96 m² / 62.5 m², hệ số 1.536): Tổng chi phí EUR độ nhạy = 1,773.54 EUR.\n\n📊 Đóng góp thành phần\n\n📅 Chi tiết ngày & Phép nhân\n\n📋 Biểu giá có hiệu lực\n\n⚙️ Tạo / Sửa đổi kịch bản\n\n💾 Xuất dữ liệu (Exports)\n\nBiểu giá và khoảng hiệu lực\n\nBiểu giá tham chiếu baseline: AGC 2020 Reference Tariff (tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1)\n\nNguồn tham chiếu: Economics.pdf pages 1-2 · Đơn vị tiền tệ: EUR",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n1,154.65 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n18.47 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n166/166 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n166/166 ngày"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 892b4cd58cdf4d099510974d91fa64ab",
+        "AICU — agc-cycle-AICU",
+        "(Baseline tham chiếu - không dùng kịch bản)",
+        "2019-12-16 · heat · rev:db6a9494",
+        "Giữ nguyên",
+        "Thay đổi theo phần trăm (%)",
+        "Thay đổi theo phần trăm (%)"
+      ],
+      "exceptions": []
+    },
+    {
+      "name": "Validation error rejection for -150%",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\n⚡ Năng lượng (BR-04)\n\n💶 Chi phí & Kịch bản (BR-06)\n\nCHI PHÍ & KỊCH BẢN GIÁ · BR-06\n\nPublication năng lượng\n\nKhoang · vụ\n\nKhoảng ngày (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nKịch bản đã lưu (164)\n\nChọn kịch bản giá\n\nChi phí năng lượng & Kịch bản biểu giá\n\nPhân tích chi phí theo kịch bản · Giữ nguyên mức tiêu thụ năng lượng vật lý · Tiền tệ EUR lịch sử của thí nghiệm (Economics.pdf). Không phải hóa đơn thanh toán thực tế, giá thị trường hiện tại hoặc lợi nhuận trang trại.\n\nPublication 892b4cd58cdf4d099510974d91fa64ab · Scope agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · Vụ agc-cycle-AICU · Khoang AICU · Khoảng [2019-12-16, 2020-05-30) (166 ngày)\n\nTổng quan chi phí\n\nTổng chi phí (EUR)\n\n1,154.65 EUR\n\nChi phí trên diện tích (EUR/m²)\n\n18.47 EUR/m²\n\nCoverage định giá (%)\n\n100.0%\n\n166/166 ngày\n\nCoverage lượng (%)\n\n100.0%\n\n166/166 ngày\n\n⚠️\n\ngiả định chưa xác minh (AGC_SHARED_BASIS_V1:v1): Diện tích trồng 62.5 m² dùng cho chi phí tuyệt đối EUR là giả định phân tích, không phải dữ liệu đo lường. Phân tích độ nhạy (Resources 96 m² / 62.5 m², hệ số 1.536): Tổng chi phí EUR độ nhạy = 1,773.54 EUR.\n\n📊 Đóng góp thành phần\n\n📅 Chi tiết ngày & Phép nhân\n\n📋 Biểu giá có hiệu lực\n\n⚙️ Tạo / Sửa đổi kịch bản\n\n💾 Xuất dữ liệu (Exports)\n\nQuản lý kịch bản biểu giá\n\nNgười dùng có thể tạo kịch bản mới hoặc tạo phiên bản sửa đổi (vN+1) cho một kịch bản đã có. Baseline tham chiếu là bất biến. Mọi kịch bản đều được lưu phiên bản và có thể mở lại chính xác.\n\nHành động\n\nTạo kịch bản mới\n\nThêm phiên bản sửa đổi (Revision) cho kịch bản đang chọn\n\nTên kịch bản\n\n1. Nhiệt sưởi (Heat - Heat_cons, gốc 0.0083 EUR/MJ)\n\nHình thức thay đổi nhiệt\n\nPhần trăm thay đổi nhiệt (%)\n\nĐơn giá nhiệt mới (EUR/MJ)\n\n2. Điện cao điểm (Electric High - ElecHigh, gốc 0.08 EUR/kWh)\n\nHình thức thay đổi điện cao điểm\n\nPhần trăm thay đổi điện cao điểm (%)\n\nĐơn giá điện cao điểm mới (EUR/kWh)\n\nPress Enter to submit form\n\n3. Điện thấp điểm (Electric Low - ElecLow, gốc 0.04 EUR/kWh)\n\nHình thức thay đổi điện thấp điểm\n\nPhần trăm thay đổi điện thấp điểm (%)\n\nĐơn giá điện thấp điểm mới (EUR/kWh)\n\nLưu kịch bản bất biến\n\nLỗi khi lưu kịch bản: Phần trăm thay đổi điện cao điểm: giá trị phải lớn hơn hoặc bằng -100",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n1,154.65 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n18.47 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n166/166 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n166/166 ngày"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 892b4cd58cdf4d099510974d91fa64ab",
+        "AICU — agc-cycle-AICU",
+        "(Baseline tham chiếu - không dùng kịch bản)",
+        "2019-12-16 · heat · rev:db6a9494",
+        "Giữ nguyên",
+        "Thay đổi theo phần trăm (%)",
+        "Thay đổi theo phần trăm (%)"
+      ],
+      "exceptions": []
+    },
+    {
+      "name": "AICU electric +20% scenario comparison",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\n⚡ Năng lượng (BR-04)\n\n💶 Chi phí & Kịch bản (BR-06)\n\nCHI PHÍ & KỊCH BẢN GIÁ · BR-06\n\nPublication năng lượng\n\nKhoang · vụ\n\nKhoảng ngày (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nKịch bản đã lưu (165)\n\nChọn kịch bản giá\n\nChi phí năng lượng & Kịch bản biểu giá\n\nPhân tích chi phí theo kịch bản · Giữ nguyên mức tiêu thụ năng lượng vật lý · Tiền tệ EUR lịch sử của thí nghiệm (Economics.pdf). Không phải hóa đơn thanh toán thực tế, giá thị trường hiện tại hoặc lợi nhuận trang trại.\n\nPublication 892b4cd58cdf4d099510974d91fa64ab · Scope agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · Vụ agc-cycle-AICU · Khoang AICU · Khoảng [2019-12-16, 2020-05-30) (166 ngày)\n\nSo sánh kịch bản: Kịch bản tăng giá điện 20%\n\nBaseline (EUR)\n\n1,154.65 EUR\n\nKịch bản (EUR)\n\n1,359.40 EUR\n\n+204.75 EUR (+17.73%)\n\nKịch bản (EUR/m²)\n\n21.75 EUR/m²\n\n+3.28 EUR/m²\n\nPriced / Expected Days\n\n166 / 166\n\n⚠️\n\ngiả định chưa xác minh (AGC_SHARED_BASIS_V1:v1): Diện tích trồng 62.5 m² dùng cho chi phí tuyệt đối EUR là giả định phân tích, không phải dữ liệu đo lường. Phân tích độ nhạy (Resources 96 m² / 62.5 m², hệ số 1.536): Tổng chi phí EUR độ nhạy = 1,773.54 EUR (Kịch bản: 2,088.04 EUR).\n\n📊 Đóng góp thành phần\n\n📅 Chi tiết ngày & Phép nhân\n\n📋 Biểu giá có hiệu lực\n\n⚙️ Tạo / Sửa đổi kịch bản\n\n💾 Xuất dữ liệu (Exports)\n\nQuản lý kịch bản biểu giá\n\nNgười dùng có thể tạo kịch bản mới hoặc tạo phiên bản sửa đổi (vN+1) cho một kịch bản đã có. Baseline tham chiếu là bất biến. Mọi kịch bản đều được lưu phiên bản và có thể mở lại chính xác.\n\nHành động\n\nTạo kịch bản mới\n\nThêm phiên bản sửa đổi (Revision) cho kịch bản đang chọn\n\nTên kịch bản\n\n1. Nhiệt sưởi (Heat - Heat_cons, gốc 0.0083 EUR/MJ)\n\nHình thức thay đổi nhiệt\n\nPhần trăm thay đổi nhiệt (%)\n\nĐơn giá nhiệt mới (EUR/MJ)\n\n2. Điện cao điểm (Electric High - ElecHigh, gốc 0.08 EUR/kWh)\n\nHình thức thay đổi điện cao điểm\n\nPhần trăm thay đổi điện cao điểm (%)\n\nĐơn giá điện cao điểm mới (EUR/kWh)\n\nPress Enter to submit form\n\n3. Điện thấp điểm (Electric Low - ElecLow, gốc 0.04 EUR/kWh)\n\nHình thức thay đổi điện thấp điểm\n\nPhần trăm thay đổi điện thấp điểm (%)\n\nĐơn giá điện thấp điểm mới (EUR/kWh)\n\nLưu kịch bản bất biến",
+      "metrics": [
+        "Baseline (EUR)\n\n1,154.65 EUR",
+        "Kịch bản (EUR)\n\n1,359.40 EUR\n\n+204.75 EUR (+17.73%)",
+        "Kịch bản (EUR/m²)\n\n21.75 EUR/m²\n\n+3.28 EUR/m²",
+        "Priced / Expected Days\n\n166 / 166"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 892b4cd58cdf4d099510974d91fa64ab",
+        "AICU — agc-cycle-AICU",
+        "Kịch bản tăng giá điện 20% (scenario:req-61d6e548059842018a1077f7d97ed4e4:v1)",
+        "2019-12-16 · heat · rev:db6a9494",
+        "Giữ nguyên",
+        "Thay đổi theo phần trăm (%)",
+        "Thay đổi theo phần trăm (%)"
+      ],
+      "exceptions": []
+    },
+    {
+      "name": "AICU v2 revision append comparison",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\n⚡ Năng lượng (BR-04)\n\n💶 Chi phí & Kịch bản (BR-06)\n\nCHI PHÍ & KỊCH BẢN GIÁ · BR-06\n\nPublication năng lượng\n\nKhoang · vụ\n\nKhoảng ngày (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nKịch bản đã lưu (166)\n\nChọn kịch bản giá\n\nChi phí năng lượng & Kịch bản biểu giá\n\nPhân tích chi phí theo kịch bản · Giữ nguyên mức tiêu thụ năng lượng vật lý · Tiền tệ EUR lịch sử của thí nghiệm (Economics.pdf). Không phải hóa đơn thanh toán thực tế, giá thị trường hiện tại hoặc lợi nhuận trang trại.\n\nPublication 892b4cd58cdf4d099510974d91fa64ab · Scope agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · Vụ agc-cycle-AICU · Khoang AICU · Khoảng [2019-12-16, 2020-05-30) (166 ngày)\n\nSo sánh kịch bản: Kịch bản tăng giá điện 20%\n\nBaseline (EUR)\n\n1,154.65 EUR\n\nKịch bản (EUR)\n\n1,359.40 EUR\n\n+204.75 EUR (+17.73%)\n\nKịch bản (EUR/m²)\n\n21.75 EUR/m²\n\n+3.28 EUR/m²\n\nPriced / Expected Days\n\n166 / 166\n\n⚠️\n\ngiả định chưa xác minh (AGC_SHARED_BASIS_V1:v1): Diện tích trồng 62.5 m² dùng cho chi phí tuyệt đối EUR là giả định phân tích, không phải dữ liệu đo lường. Phân tích độ nhạy (Resources 96 m² / 62.5 m², hệ số 1.536): Tổng chi phí EUR độ nhạy = 1,773.54 EUR (Kịch bản: 2,088.04 EUR).\n\n📊 Đóng góp thành phần\n\n📅 Chi tiết ngày & Phép nhân\n\n📋 Biểu giá có hiệu lực\n\n⚙️ Tạo / Sửa đổi kịch bản\n\n💾 Xuất dữ liệu (Exports)\n\nQuản lý kịch bản biểu giá\n\nNgười dùng có thể tạo kịch bản mới hoặc tạo phiên bản sửa đổi (vN+1) cho một kịch bản đã có. Baseline tham chiếu là bất biến. Mọi kịch bản đều được lưu phiên bản và có thể mở lại chính xác.\n\nHành động\n\nTạo kịch bản mới\n\nThêm phiên bản sửa đổi (Revision) cho kịch bản đang chọn\n\nĐang sửa đổi kịch bản: Kịch bản tăng giá điện 20% (scenario:req-61d6e548059842018a1077f7d97ed4e4) · Phiên bản hiện tại: v2\n\nTên kịch bản\n\n1. Nhiệt sưởi (Heat - Heat_cons, gốc 0.0083 EUR/MJ)\n\nHình thức thay đổi nhiệt\n\nPhần trăm thay đổi nhiệt (%)\n\nĐơn giá nhiệt mới (EUR/MJ)\n\n2. Điện cao điểm (Electric High - ElecHigh, gốc 0.08 EUR/kWh)\n\nHình thức thay đổi điện cao điểm\n\nPhần trăm thay đổi điện cao điểm (%)\n\nĐơn giá điện cao điểm mới (EUR/kWh)\n\n3. Điện thấp điểm (Electric Low - ElecLow, gốc 0.04 EUR/kWh)\n\nHình thức thay đổi điện thấp điểm\n\nPhần trăm thay đổi điện thấp điểm (%)\n\nĐơn giá điện thấp điểm mới (EUR/kWh)\n\nLưu kịch bản bất biến",
+      "metrics": [
+        "Baseline (EUR)\n\n1,154.65 EUR",
+        "Kịch bản (EUR)\n\n1,359.40 EUR\n\n+204.75 EUR (+17.73%)",
+        "Kịch bản (EUR/m²)\n\n21.75 EUR/m²\n\n+3.28 EUR/m²",
+        "Priced / Expected Days\n\n166 / 166"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 892b4cd58cdf4d099510974d91fa64ab",
+        "AICU — agc-cycle-AICU",
+        "Kịch bản tăng giá điện 20% (scenario:req-61d6e548059842018a1077f7d97ed4e4:v2)",
+        "2019-12-16 · heat · rev:db6a9494",
+        "Giữ nguyên",
+        "Thay đổi theo phần trăm (%)",
+        "Thay đổi theo phần trăm (%)"
+      ],
+      "exceptions": []
+    },
+    {
+      "name": "AICU old-v1 reopen after v2",
+      "text": "167 options available.\n166 options available.\n162 options available.\n160 options available.\n22 options available.\n16 options available.\n14 options available.\n7 options available.\n5 options available.\n2 options available.\n1 option available.\n167 options available.\nSkip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\n⚡ Năng lượng (BR-04)\n\n💶 Chi phí & Kịch bản (BR-06)\n\nCHI PHÍ & KỊCH BẢN GIÁ · BR-06\n\nPublication năng lượng\n\nKhoang · vụ\n\nKhoảng ngày (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nKịch bản đã lưu (166)\n\nChọn kịch bản giá\n\nChi phí năng lượng & Kịch bản biểu giá\n\nPhân tích chi phí theo kịch bản · Giữ nguyên mức tiêu thụ năng lượng vật lý · Tiền tệ EUR lịch sử của thí nghiệm (Economics.pdf). Không phải hóa đơn thanh toán thực tế, giá thị trường hiện tại hoặc lợi nhuận trang trại.\n\nPublication 892b4cd58cdf4d099510974d91fa64ab · Scope agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · Vụ agc-cycle-AICU · Khoang AICU · Khoảng [2019-12-16, 2020-05-30) (166 ngày)\n\nSo sánh kịch bản: Kịch bản tăng giá điện 20%\n\nBaseline (EUR)\n\n1,154.65 EUR\n\nKịch bản (EUR)\n\n1,359.40 EUR\n\n+204.75 EUR (+17.73%)\n\nKịch bản (EUR/m²)\n\n21.75 EUR/m²\n\n+3.28 EUR/m²\n\nPriced / Expected Days\n\n166 / 166\n\n⚠️\n\ngiả định chưa xác minh (AGC_SHARED_BASIS_V1:v1): Diện tích trồng 62.5 m² dùng cho chi phí tuyệt đối EUR là giả định phân tích, không phải dữ liệu đo lường. Phân tích độ nhạy (Resources 96 m² / 62.5 m², hệ số 1.536): Tổng chi phí EUR độ nhạy = 1,773.54 EUR (Kịch bản: 2,088.04 EUR).\n\n📊 Đóng góp thành phần\n\n📅 Chi tiết ngày & Phép nhân\n\n📋 Biểu giá có hiệu lực\n\n⚙️ Tạo / Sửa đổi kịch bản\n\n💾 Xuất dữ liệu (Exports)\n\nQuản lý kịch bản biểu giá\n\nNgười dùng có thể tạo kịch bản mới hoặc tạo phiên bản sửa đổi (vN+1) cho một kịch bản đã có. Baseline tham chiếu là bất biến. Mọi kịch bản đều được lưu phiên bản và có thể mở lại chính xác.\n\nHành động\n\nTạo kịch bản mới\n\nThêm phiên bản sửa đổi (Revision) cho kịch bản đang chọn\n\nĐang sửa đổi kịch bản: Kịch bản tăng giá điện 20% (scenario:req-61d6e548059842018a1077f7d97ed4e4) · Phiên bản hiện tại: v1\n\nTên kịch bản\n\n1. Nhiệt sưởi (Heat - Heat_cons, gốc 0.0083 EUR/MJ)\n\nHình thức thay đổi nhiệt\n\nPhần trăm thay đổi nhiệt (%)\n\nĐơn giá nhiệt mới (EUR/MJ)\n\n2. Điện cao điểm (Electric High - ElecHigh, gốc 0.08 EUR/kWh)\n\nHình thức thay đổi điện cao điểm\n\nPhần trăm thay đổi điện cao điểm (%)\n\nĐơn giá điện cao điểm mới (EUR/kWh)\n\n3. Điện thấp điểm (Electric Low - ElecLow, gốc 0.04 EUR/kWh)\n\nHình thức thay đổi điện thấp điểm\n\nPhần trăm thay đổi điện thấp điểm (%)\n\nĐơn giá điện thấp điểm mới (EUR/kWh)\n\nLưu kịch bản bất biến",
+      "metrics": [
+        "Baseline (EUR)\n\n1,154.65 EUR",
+        "Kịch bản (EUR)\n\n1,359.40 EUR\n\n+204.75 EUR (+17.73%)",
+        "Kịch bản (EUR/m²)\n\n21.75 EUR/m²\n\n+3.28 EUR/m²",
+        "Priced / Expected Days\n\n166 / 166"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 892b4cd58cdf4d099510974d91fa64ab",
+        "AICU — agc-cycle-AICU",
+        "Kịch bản tăng giá điện 20% (scenario:req-61d6e548059842018a1077f7d97ed4e4:v1)",
+        "2019-12-16 · heat · rev:db6a9494",
+        "Giữ nguyên",
+        "Thay đổi theo phần trăm (%)",
+        "Thay đổi theo phần trăm (%)"
+      ],
+      "exceptions": []
+    },
+    {
+      "name": "AICU fresh session reopen v2 durable verification",
+      "text": "162 options available.\n160 options available.\n22 options available.\n16 options available.\n14 options available.\n7 options available.\n5 options available.\n2 options available.\n1 option available.\n167 options available.\nSkip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\n⚡ Năng lượng (BR-04)\n\n💶 Chi phí & Kịch bản (BR-06)\n\nCHI PHÍ & KỊCH BẢN GIÁ · BR-06\n\nPublication năng lượng\n\nKhoang · vụ\n\nKhoảng ngày (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\n\nKịch bản đã lưu (166)\n\nChọn kịch bản giá\n\nChi phí năng lượng & Kịch bản biểu giá\n\nPhân tích chi phí theo kịch bản · Giữ nguyên mức tiêu thụ năng lượng vật lý · Tiền tệ EUR lịch sử của thí nghiệm (Economics.pdf). Không phải hóa đơn thanh toán thực tế, giá thị trường hiện tại hoặc lợi nhuận trang trại.\n\nPublication 892b4cd58cdf4d099510974d91fa64ab · Scope agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · Vụ agc-cycle-AICU · Khoang AICU · Khoảng [2019-12-16, 2020-05-30) (166 ngày)\n\nSo sánh kịch bản: Kịch bản tăng giá điện 20%\n\nBaseline (EUR)\n\n1,154.65 EUR\n\nKịch bản (EUR)\n\n1,359.40 EUR\n\n+204.75 EUR (+17.73%)\n\nKịch bản (EUR/m²)\n\n21.75 EUR/m²\n\n+3.28 EUR/m²\n\nPriced / Expected Days\n\n166 / 166\n\n⚠️\n\ngiả định chưa xác minh (AGC_SHARED_BASIS_V1:v1): Diện tích trồng 62.5 m² dùng cho chi phí tuyệt đối EUR là giả định phân tích, không phải dữ liệu đo lường. Phân tích độ nhạy (Resources 96 m² / 62.5 m², hệ số 1.536): Tổng chi phí EUR độ nhạy = 1,773.54 EUR (Kịch bản: 2,088.04 EUR).\n\n📊 Đóng góp thành phần\n\n📅 Chi tiết ngày & Phép nhân\n\n📋 Biểu giá có hiệu lực\n\n⚙️ Tạo / Sửa đổi kịch bản\n\n💾 Xuất dữ liệu (Exports)\n\nChi phí theo thành phần năng lượng",
+      "metrics": [
+        "Baseline (EUR)\n\n1,154.65 EUR",
+        "Kịch bản (EUR)\n\n1,359.40 EUR\n\n+204.75 EUR (+17.73%)",
+        "Kịch bản (EUR/m²)\n\n21.75 EUR/m²\n\n+3.28 EUR/m²",
+        "Priced / Expected Days\n\n166 / 166"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 892b4cd58cdf4d099510974d91fa64ab",
+        "AICU — agc-cycle-AICU",
+        "Kịch bản tăng giá điện 20% (scenario:req-61d6e548059842018a1077f7d97ed4e4:v2)",
+        "2019-12-16 · heat · rev:db6a9494",
+        "Giữ nguyên",
+        "Thay đổi theo phần trăm (%)",
+        "Thay đổi theo phần trăm (%)"
+      ],
+      "exceptions": []
+    }
+  ],
+  "downloads": {
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-summary.csv": {
+      "bytes": 2691,
+      "sha256": "0d795b26102e9c86f73889f5e88b0d80ad1234e2022778cf24bc298b19546a07"
+    },
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-components.csv": {
+      "bytes": 2789,
+      "sha256": "621dd615673e4d1f4e16b187a5ac7cb29f4c4d16f7ab7b0914031c788d7f47a4"
+    },
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-days.csv": {
+      "bytes": 111671,
+      "sha256": "946da9bdc112c56853e16a2302275d867d39b25d6351f331aee55424a03119ff"
+    },
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-weekly.csv": {
+      "bytes": 6401,
+      "sha256": "72adfdc10966350ce98793fb8dd55a5503b35d5e7e3c4f11cac3647c2eb7f499"
+    },
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-rates.csv": {
+      "bytes": 3327,
+      "sha256": "f804c75bbe15691a8e49f71c1ff4e0582a650659e96af949ddec607a9a1001b9"
+    },
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-comparison.json": {
+      "bytes": 2634346,
+      "sha256": "4cbeb707cca6f8a24800dcf73ea6440bf490448cc1003fadad20e68ae67f3e2d"
+    },
+    "cost-AICU-2019-12-16-2020-05-30-scenario_req-61d6e548059842018a1077f7d97ed4e4_v2-scenario.json": {
+      "bytes": 2966,
+      "sha256": "2ad07ce1b1c9acf1c7e2747b2cfc9b02d9653eaa137b2d531d35d9574f83849d"
+    }
+  }
+}

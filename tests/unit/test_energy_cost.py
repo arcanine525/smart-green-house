@@ -21,6 +21,7 @@ import psycopg
 import pytest
 
 from greenhouse.app.wiring import cost_service
+from greenhouse.queries.cost import aggregate_weekly_cost
 from greenhouse.contracts import (
     BasisStatus, ComponentCost, ComponentCostDelta, CostScenario, DayCost,
     EffectiveAreaBasis, EnergyComponent, EnergyCostSummary, EnergyQuantity,
@@ -537,6 +538,17 @@ def test_ac08_unknown_basis_pooling_gate(energy_scope):
     assert summary.official_total_cost_per_m2 is None
     assert 'incompatible_or_unknown_basis' in summary.reason_codes
 
+    # Weekly aggregation must also enforce basis gating:
+    # Component source-unit values preserved, total_cost_per_m2 is None, effective_area_m2 is None, reason explicit
+    weeks = aggregate_weekly_cost(summary)
+    assert len(weeks) == 1
+    assert weeks[0].heat_cost_per_m2 == Decimal('0.83')
+    assert weeks[0].elec_high_cost_per_m2 == Decimal('0.80')
+    assert weeks[0].elec_low_cost_per_m2 == Decimal('0.20')
+    assert weeks[0].total_cost_per_m2 is None
+    assert weeks[0].effective_area_m2 is None
+    assert 'incompatible_or_unknown_basis' in weeks[0].reason_codes
+
 
 def test_ac09_input_validation():
     """AC-09: Input validation rejects invalid rates, units, and intervals."""
@@ -912,6 +924,15 @@ def test_f3_changing_area_549_eur_and_cycle_window_clipping(energy_scope):
     assert heat_comp.official_cost_per_m2 is None
     assert high_comp.official_cost_per_m2 is None
     assert low_comp.official_cost_per_m2 is None
+
+    # Weekly aggregation must also enforce basis gating across variable areas:
+    # Absolute 549 EUR retained, total_cost_per_m2 is None, effective_area_m2 is None, reason explicit
+    weeks = aggregate_weekly_cost(summary)
+    assert len(weeks) == 1
+    assert weeks[0].total_cost_eur == Decimal('549')
+    assert weeks[0].total_cost_per_m2 is None
+    assert weeks[0].effective_area_m2 is None
+    assert 'per_m2_basis_not_common_and_fixed' in weeks[0].reason_codes
 
     # Cycle window clipping: query with 1 extra day on each side of a 1-day cycle
     e1 = energy_scope(rows=(('100', '10', '5'),), areas=('100',))

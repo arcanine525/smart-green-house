@@ -18,6 +18,7 @@ from greenhouse.contracts.models import (
     Versions, UnknownReasonShare, rule_segment_sort_key,
     ENERGY_COST_VERSION, TariffRate, TariffProfile, CostScenario, DayCost, ComponentCost,
     EnergyCostSummary, ComponentCostDelta, ScenarioComparison,
+    WeeklyCostRow, WeeklyComparisonRow,
     exact_add, exact_sub, exact_sum,
 )
 from greenhouse.contracts.serialization import from_dict, from_json, to_dict, to_json

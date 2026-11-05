@@ -64,6 +64,10 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
             compartment_id=first['compartment_id'],
         )
 
+    def validate_cycle(self, scope_id: str, snapshot_id: str, cycle_id: str, compartment_id: str) -> bool:
+        rows = self._rows('query_cycle', (scope_id, snapshot_id, cycle_id, compartment_id))
+        return len(rows) == 1
+
     def get_tariff(self, tariff_version: str) -> TariffProfile | None:
         with self.connection.cursor(row_factory=dict_row) as cursor:
             rows = cursor.execute(sql('read_tariff_profile'), (tariff_version,)).fetchall()
@@ -231,6 +235,22 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
             for c in raw_changes
         )
 
+        analysis_context = None
+        raw_payload = first.get('command_payload')
+        if isinstance(raw_payload, str):
+            try:
+                raw_payload = json.loads(raw_payload)
+            except Exception as e:
+                raise ValueError(f'Malformed command_payload for scenario {first["scenario_version"]}') from e
+        if isinstance(raw_payload, dict) and 'analysis_context' in raw_payload:
+            ctx_dict = raw_payload['analysis_context']
+            if ctx_dict is not None:
+                from greenhouse.contracts import from_dict, QueryContext
+                try:
+                    analysis_context = from_dict(QueryContext, ctx_dict)
+                except Exception as e:
+                    raise ValueError(f'Corrupted analysis_context in stored scenario {first["scenario_version"]}') from e
+
         return CostScenario(
             scenario_version=first['scenario_version'],
             scenario_id=first['scenario_id'],
@@ -243,7 +263,21 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
             changes=parsed_changes,
             author=first['author'],
             created_at=first.get('created_at'),
+            analysis_context=analysis_context,
         )
+
+    def list_scenarios(self, data_scope_id: str | None = None) -> tuple[CostScenario, ...]:
+        query = "SELECT DISTINCT scenario_version FROM config.cost_scenario ORDER BY scenario_version"
+        with self.connection.cursor() as cur:
+            rows = cur.execute(query).fetchall()
+        scenarios = []
+        for (ver,) in rows:
+            scen = self.get_scenario(ver)
+            if scen is not None:
+                if data_scope_id is None or scen.publication.scope_id == data_scope_id:
+                    scenarios.append(scen)
+        scenarios.sort(key=lambda s: (s.scenario_id, s.version))
+        return tuple(scenarios)
 
     def get_scenario(self, scenario_version: str) -> CostScenario | None:
         with self.connection.cursor(row_factory=dict_row) as cursor:
@@ -281,7 +315,8 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
                     existing_req.publication.publication_id == command.publication.publication_id and
                     existing_req.publication.snapshot_id == command.publication.snapshot_id and
                     existing_req.publication.scope_id == command.publication.scope_id and
-                    existing_req.changes == command.changes):
+                    existing_req.changes == command.changes and
+                    existing_req.analysis_context == command.analysis_context):
                     return existing_req
                 raise ValueError(f'Conflicting scenario command for existing request_id: {command.request_id}')
 
@@ -300,6 +335,17 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
                     latest.baseline_tariff_version != command.baseline_version_id):
                     raise ValueError(
                         f'Cannot change publication, snapshot, scope, or baseline of existing logical scenario {target_scen_id}'
+                    )
+                if latest.analysis_context is not None:
+                    if command.analysis_context is None:
+                        command = replace(command, analysis_context=latest.analysis_context)
+                    elif command.analysis_context != latest.analysis_context:
+                        raise ValueError(
+                            f'Cannot change analysis context of existing logical scenario {target_scen_id}'
+                        )
+                elif command.analysis_context is not None:
+                    raise ValueError(
+                        f'Cannot add analysis context to legacy scenario {target_scen_id} that has no context'
                     )
                 version = latest.version + 1
             else:
@@ -321,6 +367,7 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
                 name=command.name,
                 rates=scenario_rates,
                 changes=command.changes,
+                analysis_context=command.analysis_context,
             )
 
             # 7. Insert scenario and rates
@@ -333,7 +380,7 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
                 }
                 for c in scenario.changes
             ])
-            payload_json = json.dumps({
+            payload_dict = {
                 'request_id': command.request_id,
                 'scenario_id': target_scen_id,
                 'version': version,
@@ -349,7 +396,11 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
                     }
                     for c in command.changes
                 ],
-            })
+            }
+            if command.analysis_context is not None:
+                from greenhouse.contracts import to_dict
+                payload_dict['analysis_context'] = to_dict(command.analysis_context)
+            payload_json = json.dumps(payload_dict)
 
             self.connection.execute(sql('insert_cost_scenario'), (
                 scenario.scenario_version, scenario.scenario_id, scenario.version,
@@ -389,7 +440,8 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
                     existing_req.publication.snapshot_id == scenario.publication.snapshot_id and
                     existing_req.publication.scope_id == scenario.publication.scope_id and
                     existing_req.rates == scenario.rates and
-                    existing_req.changes == scenario.changes):
+                    existing_req.changes == scenario.changes and
+                    existing_req.analysis_context == scenario.analysis_context):
                     return existing_req
                 raise ValueError(f'Conflicting scenario command for existing request_id: {scenario.request_id}')
 
@@ -403,11 +455,12 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
                     existing_ver.publication.snapshot_id == scenario.publication.snapshot_id and
                     existing_ver.publication.scope_id == scenario.publication.scope_id and
                     existing_ver.rates == scenario.rates and
-                    existing_ver.changes == scenario.changes):
+                    existing_ver.changes == scenario.changes and
+                    existing_ver.analysis_context == scenario.analysis_context):
                     return existing_ver
                 raise ValueError(f'Scenario drift for {scenario.scenario_version}: stored scenario differs from candidate')
 
-            # Validate R3: append cannot change publication or baseline of existing logical scenario
+            # Validate R3: append cannot change publication, baseline, or erase analysis context of existing logical scenario
             latest = self.get_latest_scenario_version(scenario.scenario_id)
             if latest is not None:
                 if (latest.publication.publication_id != scenario.publication.publication_id or
@@ -417,6 +470,75 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
                     raise ValueError(
                         f'Cannot change publication, snapshot, scope, or baseline of existing logical scenario {scenario.scenario_id}'
                     )
+                if latest.analysis_context is not None:
+                    if scenario.analysis_context is None:
+                        raise ValueError(
+                            f'Cannot omit or erase analysis context of existing logical scenario {scenario.scenario_id}'
+                        )
+                    if scenario.analysis_context != latest.analysis_context:
+                        raise ValueError(
+                            f'Cannot change analysis context of existing logical scenario {scenario.scenario_id}'
+                        )
+                elif scenario.analysis_context is not None:
+                    raise ValueError(
+                        f'Cannot add analysis context to legacy scenario {scenario.scenario_id} that has no context'
+                    )
+
+            # Validate baseline exists and scope matches
+            baseline = self.get_tariff(scenario.baseline_tariff_version)
+            if baseline is None:
+                raise ValueError(f'Baseline tariff version not found: {scenario.baseline_tariff_version}')
+            if baseline.data_scope_id != scenario.publication.scope_id:
+                raise ValueError(
+                    f'Baseline scope {baseline.data_scope_id} does not match scenario publication scope {scenario.publication.scope_id}'
+                )
+
+            if scenario.analysis_context is not None:
+                ac = scenario.analysis_context
+                if ac.rule_version is not None:
+                    raise ValueError('Scenario analysis context cannot have a threshold rule')
+                if (ac.publication_id != scenario.publication.publication_id or
+                    ac.scope_id != scenario.publication.scope_id or
+                    ac.snapshot_id != scenario.publication.snapshot_id):
+                    raise ValueError(
+                        f'Analysis context publication {ac.publication_id} does not match scenario publication {scenario.publication.publication_id}'
+                    )
+                if ac.start >= ac.end:
+                    raise ValueError('Invalid analysis context calendar window')
+                if not ac.compartment_ids:
+                    raise ValueError('Analysis context must specify at least one compartment')
+                for comp_id in ac.compartment_ids:
+                    if not self.validate_cycle(ac.scope_id, ac.snapshot_id, ac.cycle_id, comp_id):
+                        raise ValueError(
+                            f'Cycle {ac.cycle_id} and compartment {comp_id} are not mapped to scope {ac.scope_id} and snapshot {ac.snapshot_id}'
+                        )
+                if baseline.compartment_id is not None and baseline.compartment_id not in ac.compartment_ids:
+                    raise ValueError(
+                        f'Baseline tariff compartment {baseline.compartment_id} does not match analysis context compartments {ac.compartment_ids}'
+                    )
+
+            # Guard caller-supplied command_payload consistency
+            if command_payload is not None and 'analysis_context' in command_payload:
+                from greenhouse.contracts import from_dict, to_dict, QueryContext
+                ctx_dict = command_payload['analysis_context']
+                if ctx_dict is not None:
+                    try:
+                        parsed_ctx = from_dict(QueryContext, ctx_dict)
+                    except Exception as e:
+                        raise ValueError('Malformed analysis_context in command_payload') from e
+                    if scenario.analysis_context is not None and parsed_ctx != scenario.analysis_context:
+                        raise ValueError('command_payload analysis_context does not match scenario.analysis_context')
+                    if scenario.analysis_context is None:
+                        raise ValueError('command_payload has analysis_context but scenario.analysis_context is None')
+                elif scenario.analysis_context is not None:
+                    raise ValueError('command_payload analysis_context is None but scenario.analysis_context is set')
+            elif command_payload is None and scenario.analysis_context is not None:
+                from greenhouse.contracts import to_dict
+                command_payload = {'analysis_context': to_dict(scenario.analysis_context)}
+            elif command_payload is not None and scenario.analysis_context is not None and 'analysis_context' not in command_payload:
+                from greenhouse.contracts import to_dict
+                command_payload = dict(command_payload)
+                command_payload['analysis_context'] = to_dict(scenario.analysis_context)
 
             changes_json = json.dumps([
                 {
