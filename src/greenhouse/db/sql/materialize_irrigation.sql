@@ -31,13 +31,13 @@ cycles AS MATERIALIZED (
  JOIN core.measure_quality qi ON qi.revision_id=r.revision_id AND qi.measure_code='Irr' AND qi.policy_version_id=p.quality_policy_version
  JOIN core.measure_quality qd ON qd.revision_id=r.revision_id AND qd.measure_code='Drain' AND qd.policy_version_id=p.quality_policy_version
  LEFT JOIN meta.correction cor ON cor.correction_id=r.correction_id
- LEFT JOIN meta.publication_basis pi ON pi.publication_id=p.publication_id AND pi.data_scope_id=p.data_scope_id
+ LEFT JOIN (meta.publication_basis pi JOIN config.area_basis_version bi USING(basis_version_id))
+ ON pi.publication_id=p.publication_id AND pi.data_scope_id=p.data_scope_id
  AND pi.compartment_id=c.compartment_id AND pi.measure_code='Irr' AND pi.analysis_context='shared_analysis'
- LEFT JOIN config.area_basis_version bi ON bi.basis_version_id=pi.basis_version_id
  AND d.resource_date>=bi.valid_from AND d.resource_date<bi.valid_to_exclusive
- LEFT JOIN meta.publication_basis pd ON pd.publication_id=p.publication_id AND pd.data_scope_id=p.data_scope_id
+ LEFT JOIN (meta.publication_basis pd JOIN config.area_basis_version bd USING(basis_version_id))
+ ON pd.publication_id=p.publication_id AND pd.data_scope_id=p.data_scope_id
  AND pd.compartment_id=c.compartment_id AND pd.measure_code='Drain' AND pd.analysis_context='shared_analysis'
- LEFT JOIN config.area_basis_version bd ON bd.basis_version_id=pd.basis_version_id
  AND d.resource_date>=bd.valid_from AND d.resource_date<bd.valid_to_exclusive
  WHERE p.publication_id=%s AND pm.record_type='resource'
 ), flags AS (

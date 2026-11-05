@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-11-05T08:56:28.204850+00:00",
+  "database": "greenhouse_t07_195889f1a3b1",
+  "current_publication": "518aafbbff244e3f96b61a15252aa96a",
+  "all_publications": [
+    "11d0e3523c024107936a2091e99ddec8",
+    "3459db897ead45a28177c60000bd0561",
+    "50c3485dd763453cb6c4395016d7554d",
+    "518aafbbff244e3f96b61a15252aa96a",
+    "804770b6ac534b308ad4e449487db50a",
+    "adf2a02900864da2bf0e41b86516f6ef",
+    "dbc3d6cbf9fa4914b37137455e85576e"
+  ],
+  "source_counts": {
+    "core.record_revision": 574843,
+    "core.climate_observation": 286854,
+    "core.drain_observation": 286854,
+    "core.resource_day": 996,
+    "core.measure_quality": 2874794,
+    "meta.correction": 0
+  },
+  "actual_migrations": [
+    "001_core_metadata.sql",
+    "002_agc_reference.sql",
+    "003_explanation_views.sql",
+    "004_pipeline_publication.sql",
+    "005_irrigation_mart.sql",
+    "006_harvest_mart.sql",
+    "007_harvest_rule.sql",
+    "008_rule_schedule.sql",
+    "009_climate_mart.sql",
+    "010_drain_mart.sql"
+  ],
+  "energy_actual_publication_not_run": true,
+  "older_migration_checksums_unchanged": true,
+  "tested_state_sha256": "f0adf6c13083f3022ade60f7c1d616ed04501790a9e08e494e37a2950517b131",
+  "tested_state_still_matches": true,
+  "document_links": "PASS"
+}

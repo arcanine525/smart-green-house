@@ -1057,6 +1057,270 @@ class EnergyComponent(StrEnum):
     ELEC_LOW = 'elec_low'
 
 
+ENERGY_QUANTITY_VERSION = 'energy-quantity-v1'
+ENERGY_MEASURES = {EnergyComponent.HEAT: 'Heat_cons', EnergyComponent.ELEC_HIGH: 'ElecHigh',
+                   EnergyComponent.ELEC_LOW: 'ElecLow'}
+
+
+def exact_product(left, right):
+    """Finite source quantity x area without ambient Decimal truncation."""
+    with localcontext() as ctx:
+        ctx.prec = max(50, len(left.as_tuple().digits) + len(right.as_tuple().digits) + 2)
+        return left * right
+
+
+def energy_kwh(value, component):
+    """Only the MJ/3.6 normalization rounds: 50 significant digits, half-even."""
+    if value is None:
+        return None
+    if component != EnergyComponent.HEAT:
+        return value
+    with localcontext() as ctx:
+        ctx.prec = 50
+        ctx.rounding = 'ROUND_HALF_EVEN'
+        return value / Decimal('3.6')
+
+
+@dataclass(frozen=True)
+class EffectiveAreaBasis:
+    """Publication-frozen, measure-specific effective area and evidence."""
+    basis_version_id: str
+    version: int
+    scope_id: str
+    compartment_id: str
+    measure_code: str
+    area_m2: Decimal
+    basis_kind: str
+    status: BasisStatus
+    valid_from: date
+    valid_to_exclusive: date
+    evidence_reference: str
+    assumption_id: str | None = None
+    assumption_version: int | None = None
+    assumption_statement: str | None = None
+    assumption_evidence: str | None = None
+    basis_label: str = 'verified'
+
+    def __post_init__(self):
+        for value in (self.basis_version_id, self.scope_id, self.compartment_id,
+                      self.measure_code, self.basis_kind, self.evidence_reference):
+            identifier(value)
+        if type(self.version) is not int or self.version < 1:
+            raise ValueError('Invalid effective basis version')
+        finite(self.area_m2, nonnegative=True)
+        if not self.area_m2:
+            raise ValueError('Effective area must be positive')
+        calendar_window(self.valid_from, self.valid_to_exclusive)
+        if self.status == BasisStatus.ASSUMED:
+            for value in (self.assumption_id, self.assumption_statement, self.assumption_evidence):
+                identifier(value)
+            if type(self.assumption_version) is not int or self.assumption_version < 1:
+                raise ValueError('Assumed effective basis requires a version')
+        elif self.status != BasisStatus.VERIFIED or any(value is not None for value in (
+                self.assumption_id, self.assumption_version, self.assumption_statement, self.assumption_evidence)):
+            raise ValueError('Known effective basis needs verified or explicit assumed provenance')
+        if self.basis_label != (ASSUMPTION_LABEL if self.status == BasisStatus.ASSUMED else 'verified'):
+            raise ValueError('Effective basis requires its visible verification label')
+
+    @property
+    def label(self):
+        return self.basis_label
+
+
+@dataclass(frozen=True)
+class EnergyQuantity:
+    """Same immutable day/component quantity identity for BR-04 and BR-06.
+
+    Source value is MJ/m² or kWh/m² on this source day. Accepted quantity
+    zero stays zero; unusable quality stays visible but never contributes.
+    """
+    publication: PublicationRef
+    cycle_id: str
+    compartment_id: str
+    resource_date: date
+    component: EnergyComponent
+    source_value: Decimal | None
+    source_unit: str
+    quality: QualityStatus
+    applicability: Applicability
+    reason_code: str | None
+    revision_id: str | None
+    logical_record_key: str | None
+    correction: CorrectionRef | None
+    basis: EffectiveAreaBasis | None
+    normalized_kwh_m2: Decimal | None
+    absolute_source_quantity: Decimal | None
+    absolute_kwh: Decimal | None
+    quantity_version: str = ENERGY_QUANTITY_VERSION
+
+    def __post_init__(self):
+        if not isinstance(self.publication, PublicationRef) or not isinstance(self.component, EnergyComponent):
+            raise ValueError('Invalid energy publication/component')
+        identifier(self.cycle_id); identifier(self.compartment_id)
+        if type(self.resource_date) is not date or self.quantity_version != ENERGY_QUANTITY_VERSION:
+            raise ValueError('Invalid energy date/quantity version')
+        expected_unit = 'MJ/m²/day' if self.component == EnergyComponent.HEAT else 'kWh/m²/day'
+        if self.source_unit != expected_unit:
+            raise ValueError('Unexpected component source unit')
+        if not isinstance(self.quality, QualityStatus) or not isinstance(self.applicability, Applicability):
+            raise ValueError('Energy quality/applicability must be contract enums')
+        finite(self.source_value, nullable=True)
+        if self.quality == QualityStatus.ACCEPTED and self.source_value is None:
+            raise ValueError('Accepted energy measure requires a value')
+        if self.quality == QualityStatus.MISSING and self.source_value is not None:
+            raise ValueError('Missing energy measure must be NULL')
+        if not self.accepted:
+            identifier(self.reason_code)
+        elif self.source_value < 0:
+            raise ValueError('Accepted energy cannot be negative')
+        if (self.revision_id is None) != (self.logical_record_key is None):
+            raise ValueError('Energy revision/key must travel together')
+        for value in (self.revision_id, self.logical_record_key):
+            if value is not None:
+                identifier(value)
+        if self.revision_id is None and (self.source_value is not None or self.quality != QualityStatus.MISSING):
+            raise ValueError('Absent resource day must remain missing')
+        if self.correction is not None and (not isinstance(self.correction, CorrectionRef) or self.revision_id is None):
+            raise ValueError('Correction requires a source revision')
+        if self.basis is not None:
+            if not isinstance(self.basis, EffectiveAreaBasis) or (
+                    self.basis.scope_id, self.basis.compartment_id, self.basis.measure_code) != (
+                    self.publication.scope_id, self.compartment_id, ENERGY_MEASURES[self.component]):
+                raise ValueError('Effective basis is outside the quantity scope/measure')
+            if not self.basis.valid_from <= self.resource_date < self.basis.valid_to_exclusive:
+                raise ValueError('Effective basis is outside the quantity day')
+        expected_source = (exact_product(self.source_value, self.basis.area_m2)
+                           if self.accepted and self.basis is not None else None)
+        expected_normalized = energy_kwh(self.source_value, self.component) if self.accepted else None
+        for value in (self.normalized_kwh_m2, self.absolute_source_quantity, self.absolute_kwh):
+            finite(value, nullable=True, nonnegative=True)
+        if (self.normalized_kwh_m2, self.absolute_source_quantity, self.absolute_kwh) != (
+                expected_normalized, expected_source, energy_kwh(expected_source, self.component)):
+            raise ValueError('Energy quantities differ from source/area/normalization contract')
+
+    @property
+    def accepted(self):
+        return self.quality == QualityStatus.ACCEPTED and self.applicability == Applicability.APPLICABLE
+
+    @property
+    def quantity_id(self):
+        return (self.publication.publication_id, self.cycle_id, self.compartment_id,
+                self.resource_date, self.component, self.revision_id, self.quantity_version)
+
+
+@dataclass(frozen=True)
+class EnergyBasisGate:
+    absolute_compatible: bool
+    per_m2_compatible: bool
+    status: BasisStatus
+    label: str | None
+    reason_codes: tuple[str, ...]
+
+    def __post_init__(self):
+        if type(self.absolute_compatible) is not bool or type(self.per_m2_compatible) is not bool:
+            raise ValueError('Basis compatibility flags must be booleans')
+        if not isinstance(self.status, BasisStatus) or (self.per_m2_compatible and not self.absolute_compatible):
+            raise ValueError('Invalid basis gate')
+        expected = ASSUMPTION_LABEL if self.status == BasisStatus.ASSUMED else 'verified' if self.status == BasisStatus.VERIFIED else None
+        if self.label != expected:
+            raise ValueError('Basis gate label must expose its status')
+        tuple_of(self.reason_codes, str)
+
+
+@dataclass(frozen=True)
+class EnergyBasisTotal:
+    basis: EffectiveAreaBasis | None
+    accepted_days: int
+    source_quantity_per_m2: Decimal | None
+    normalized_kwh_m2: Decimal | None
+    absolute_source_quantity: Decimal | None
+    absolute_kwh: Decimal | None
+
+    def __post_init__(self):
+        if self.basis is not None and not isinstance(self.basis, EffectiveAreaBasis):
+            raise ValueError('Invalid grouped energy basis')
+        if type(self.accepted_days) is not int or self.accepted_days < 0:
+            raise ValueError('Invalid grouped accepted day count')
+        for value in (self.source_quantity_per_m2, self.normalized_kwh_m2,
+                      self.absolute_source_quantity, self.absolute_kwh):
+            finite(value, nullable=True, nonnegative=True)
+
+
+@dataclass(frozen=True)
+class EnergyComponentTotal:
+    component: EnergyComponent
+    expected_days: int
+    accepted_days: int
+    absolute_days: int
+    coverage_pct: Decimal
+    observed_source_per_m2: Decimal | None
+    observed_kwh_m2: Decimal | None
+    observed_absolute_source: Decimal | None
+    observed_absolute_kwh: Decimal | None
+    official_absolute_kwh: Decimal | None
+    basis_totals: tuple[EnergyBasisTotal, ...]
+    reason_codes: tuple[str, ...]
+
+    def __post_init__(self):
+        if not isinstance(self.component, EnergyComponent) or any(type(n) is not int for n in (
+                self.expected_days, self.accepted_days, self.absolute_days)):
+            raise ValueError('Invalid energy component/counts')
+        if not 0 <= self.absolute_days <= self.accepted_days <= self.expected_days or self.expected_days < 1:
+            raise ValueError('Energy day counts are inconsistent')
+        finite(self.coverage_pct, nonnegative=True)
+        if self.coverage_pct > 100:
+            raise ValueError('Energy coverage exceeds 100%')
+        for value in (self.observed_source_per_m2, self.observed_kwh_m2, self.observed_absolute_source,
+                      self.observed_absolute_kwh, self.official_absolute_kwh):
+            finite(value, nullable=True, nonnegative=True)
+        if self.official_absolute_kwh is not None and self.absolute_days != self.expected_days:
+            raise ValueError('Official component quantity requires complete absolute days')
+        tuple_of(self.basis_totals, EnergyBasisTotal); tuple_of(self.reason_codes, str)
+
+
+@dataclass(frozen=True)
+class EnergySummary:
+    publication: PublicationRef
+    context: QueryContext
+    window_start: date
+    window_end: date
+    expected_days: int
+    complete_days: int
+    complete_coverage_pct: Decimal
+    incomplete_dates: tuple[date, ...]
+    components: tuple[EnergyComponentTotal, ...]
+    observed_total_kwh: Decimal | None
+    complete_day_total_kwh: Decimal | None
+    official_total_kwh: Decimal | None
+    official_total_kwh_m2: Decimal | None
+    basis_gate: EnergyBasisGate
+    reason_codes: tuple[str, ...]
+    quantity_version: str = ENERGY_QUANTITY_VERSION
+
+    def __post_init__(self):
+        if not isinstance(self.publication, PublicationRef) or not isinstance(self.context, QueryContext):
+            raise ValueError('Invalid energy summary pin')
+        self.context.matches(self.publication); calendar_window(self.window_start, self.window_end)
+        if self.expected_days != (self.window_end-self.window_start).days or not 0 <= self.complete_days <= self.expected_days:
+            raise ValueError('Invalid energy summary day counts')
+        tuple_of(self.components, EnergyComponentTotal); tuple_of(self.incomplete_dates, date)
+        if tuple(item.component for item in self.components) != tuple(EnergyComponent):
+            raise ValueError('Energy summary needs each independent component exactly once')
+        if len(self.incomplete_dates) != self.expected_days-self.complete_days:
+            raise ValueError('Incomplete energy dates do not match coverage')
+        if not isinstance(self.basis_gate, EnergyBasisGate) or self.quantity_version != ENERGY_QUANTITY_VERSION:
+            raise ValueError('Invalid shared quantity/basis version')
+        for value in (self.observed_total_kwh, self.complete_day_total_kwh,
+                      self.official_total_kwh, self.official_total_kwh_m2):
+            finite(value, nullable=True, nonnegative=True)
+        finite(self.complete_coverage_pct, nonnegative=True)
+        if self.official_total_kwh is not None and (self.complete_days != self.expected_days or not self.basis_gate.absolute_compatible):
+            raise ValueError('Official total needs full quantity coverage and compatible basis')
+        if self.official_total_kwh_m2 is not None and (self.complete_days != self.expected_days or not self.basis_gate.per_m2_compatible):
+            raise ValueError('Official per-area total needs a common fixed basis')
+        tuple_of(self.reason_codes, str)
+
+
 @dataclass(frozen=True)
 class ScenarioChange:
     component: EnergyComponent

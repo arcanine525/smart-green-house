@@ -30,9 +30,8 @@ def core_database():
     print("Synthetic test database created:", name)
     target = kwargs | {"dbname": name}
     with psycopg.connect(**target) as connection:
-        # T14 adds the additive 008_rule_schedule migration; T15 adds 009
-        # (climate) and T16 adds 010 (drain); 001..009 stay byte-identical.
-        assert len(migrate(connection)["applied"]) == 10
+        # The additive energy migration preserves checksums of 001..010.
+        assert len(migrate(connection)["applied"]) == 11
     try:
         yield target
     finally:

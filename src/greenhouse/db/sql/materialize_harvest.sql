@@ -53,13 +53,13 @@ WITH started AS MATERIALIZED (
  JOIN core.measure_quality qb ON qb.revision_id=r.revision_id AND qb.measure_code='ProdB'
  AND qb.policy_version_id=p.quality_policy_version
  LEFT JOIN meta.correction cor ON cor.correction_id=r.correction_id
- LEFT JOIN meta.publication_basis pi ON pi.publication_id=p.publication_id AND pi.data_scope_id=p.data_scope_id
+ LEFT JOIN (meta.publication_basis pi JOIN config.area_basis_version bi USING(basis_version_id))
+ ON pi.publication_id=p.publication_id AND pi.data_scope_id=p.data_scope_id
  AND pi.compartment_id=c.compartment_id AND pi.measure_code='ProdA' AND pi.analysis_context='shared_analysis'
- LEFT JOIN config.area_basis_version bi ON bi.basis_version_id=pi.basis_version_id
  AND h.harvest_date>=bi.valid_from AND h.harvest_date<bi.valid_to_exclusive
- LEFT JOIN meta.publication_basis pj ON pj.publication_id=p.publication_id AND pj.data_scope_id=p.data_scope_id
+ LEFT JOIN (meta.publication_basis pj JOIN config.area_basis_version bj USING(basis_version_id))
+ ON pj.publication_id=p.publication_id AND pj.data_scope_id=p.data_scope_id
  AND pj.compartment_id=c.compartment_id AND pj.measure_code='ProdB' AND pj.analysis_context='shared_analysis'
- LEFT JOIN config.area_basis_version bj ON bj.basis_version_id=pj.basis_version_id
  AND h.harvest_date>=bj.valid_from AND h.harvest_date<bj.valid_to_exclusive
  WHERE p.publication_id=%s AND pm.record_type='harvest'
 ), flags AS (

@@ -1,5 +1,10 @@
 # Query service và oracle BR-02
 
+Energy quantities for later BR-04/BR-06 share [EnergyService](energy.py) and the
+[effective basis/energy contract](../../../docs/implementation/energy-mart-contract.md).
+They read sealed component/day rows and separate observed, complete-day and
+official quantities; there is no intensity, tariff or scenario computation here.
+
 [IrrigationService](irrigation.py) chỉ phụ thuộc [contracts](../contracts/README.md) và `QueryAdapter` Protocol. Công thức là hàm thuần `summarize_irrigation(context, publication, cycle, days)`, không cần DB/Spark/CSV. PostgreSQL implementation ở [db/query_adapter.py](../db/query_adapter.py), SQL ở package DB; adapter mặc định đọc sealed water mart, core adapter chỉ dùng đối soát; không có adapter giả hoặc ClickHouse.
 
 ## Một tác vụ pin một publication

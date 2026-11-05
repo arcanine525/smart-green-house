@@ -12,9 +12,9 @@ CROSS JOIN LATERAL (VALUES ('Irr',d.irrigation_l_m2),('Drain',d.drain_l_m2)) v(m
 JOIN config.measure_definition m ON m.measure_code=v.measure_code AND m.record_type='resource'
 JOIN core.measure_quality q ON q.revision_id=r.revision_id AND q.measure_code=v.measure_code AND q.policy_version_id=p.quality_policy_version
 LEFT JOIN meta.correction cor ON cor.correction_id=r.correction_id
-LEFT JOIN meta.publication_basis pb ON pb.publication_id=p.publication_id AND pb.data_scope_id=p.data_scope_id
+LEFT JOIN (meta.publication_basis pb JOIN config.area_basis_version b USING(basis_version_id))
+ ON pb.publication_id=p.publication_id AND pb.data_scope_id=p.data_scope_id
  AND pb.compartment_id=c.compartment_id AND pb.measure_code=v.measure_code AND pb.analysis_context='shared_analysis'
-LEFT JOIN config.area_basis_version b ON b.basis_version_id=pb.basis_version_id
  AND d.resource_date>=b.valid_from AND d.resource_date<b.valid_to_exclusive
 WHERE pm.publication_id=%s AND pm.data_scope_id=%s AND r.snapshot_id=%s
  AND pm.record_type='resource' AND r.cycle_id=%s AND c.compartment_id=%s

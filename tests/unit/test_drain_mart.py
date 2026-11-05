@@ -46,7 +46,7 @@ from test_query_adapter import contracts_database, fixture_stage
 @pytest.fixture
 def drain_database(contracts_database):
     """Function-scoped disposable database that migrates the CURRENT
-    package (001..010) then drops itself."""
+    package migrations then drops itself."""
     with psycopg.connect(**contracts_database, autocommit=True) as admin:
         name = 'test_drain16_' + uuid4().hex[:10]
         admin.execute(psycopg.sql.SQL('CREATE DATABASE {}').format(
@@ -390,7 +390,8 @@ def test_drain_mart_pipeline_freezes_values_quality_counts(drain_database, tmp_p
             'SELECT count(*) FROM mart.fact_drain_slot WHERE publication_id=%s',
             (fixture['publication'],)).fetchone()[0]
         quality = rows[0].measure_quality
-    assert evaluation.publication.versions.code_version == 'pipeline-v5-drain'
+    from greenhouse.db.pipeline import CODE_VERSION
+    assert evaluation.publication.versions.code_version == CODE_VERSION
     assert count == 288 * 2
     assert set(quality) == set(DRAIN_POLICIES)
     for code in DRAIN_POLICIES:
