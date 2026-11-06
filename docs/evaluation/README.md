@@ -13,7 +13,7 @@ Mỗi báo cáo ghi phạm vi, dữ liệu, điều kiện chạy và giới h�
 
 ## Kiến trúc và hiệu năng
 
-- [Chạy lại local](local-repro.md): smoke test network nội bộ, backup synthetic và những bước chưa xác minh.
+- [Chạy lại local](local-repro.md): full AGC trên clone riêng, test offline, backup/restore sáu volume và replay AGC thật có giới hạn.
 
 - [Kịch bản khai thác](usability.md): sáu video Playwright theo BR, bằng chứng AppTest và protocol đánh giá người dùng tùy chọn.
 - [Correctness và phục hồi](correctness.md): lệnh test local, oracle từng BR, publication pin và fault/recovery.

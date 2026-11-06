@@ -106,11 +106,11 @@ lang: vi-VN
 - AppTest fixture đạt; thời lượng automation không đo thời gian người dùng.
 - **Chưa có người tham gia**; chưa đo phản hồi UX hoặc hiểu coverage.
 - Basis chưa xác minh; Reference incomplete; rule/scenario có nhãn.
-- Restore WAL, checkpoint và retained message synthetic; chưa full AGC/broker/outputs.
+- Full AGC/6 volume restore đạt; 30 event replay AGC phục hồi queue, WAL và checkpoint.
 
 ## 16. Kết luận và hướng tiếp theo
 
 - Sáu BR và replay local có bằng chứng correctness, performance và UI tự động.
-- T26 hoàn thành; còn diễn tập offline và video thuyết trình 20–30 phút.
+- T26–T28 hoàn thành; còn metadata nhóm và video thuyết trình 20–30 phút.
 - BR-01 gốc vượt p95; follow-up sau tối ưu đạt trong một lượt, chưa phải SLA.
 - ClickHouse chỉ xét sau khi có backfill/parity và bằng chứng phù hợp.

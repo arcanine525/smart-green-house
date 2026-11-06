@@ -62,6 +62,23 @@ publication thì app báo dữ liệu trống, không tự tạo fixture. Lệnh
 định chỉ kiểm tra môi trường, không nạp dữ liệu. Xem [ứng dụng](src/greenhouse/app/README.md)
 và [pipeline](src/greenhouse/db/README.md) để hiểu rule, basis, lineage và export.
 
+### Rule demo và diễn tập từ clone riêng
+
+Pipeline không tự gán ngưỡng nông học. Khi cần minh họa đánh giá khí hậu,
+EC/pH hoặc loại B, có thể đăng ký rõ các profile **demo**, rồi chọn version
+trong dashboard. Bỏ `--apply` để xem kế hoạch trước:
+
+```bash
+docker compose run --rm job python -m greenhouse.db.demo_rules --kind climate --apply
+docker compose run --rm job python -m greenhouse.db.demo_rules --kind drain --apply
+docker compose run --rm job python -m greenhouse.db.demo_rules --kind harvest --apply
+```
+
+Để kiểm tra toàn bộ snapshot trên database mới, cách ly Internet runtime và
+backup/restore raw, DB, outputs cùng trạng thái sensor, dùng
+[hướng dẫn diễn tập full AGC](scripts/repro/README.md). Các script tạo project
+Docker riêng; không trỏ vào volume hoặc database đang vận hành.
+
 ### Sensor replay và kiểm thử
 
 Simulator phát lại Climate qua MQTT, collector lưu spool trước ACK và Spark
@@ -250,5 +267,5 @@ Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên c�
 
 - Đánh giá người dùng theo [protocol](docs/evaluation/usability.md) là mở rộng tùy chọn; T26 dùng walkthrough Playwright theo phạm vi đã chốt. Không suy ra hiệu quả thực tế từ test tự động.
 - BR-01 vượt mục tiêu p95 ở lượt gốc; lượt sau tối ưu đạt 1.770,93 ms trong điều kiện đo, cần lặp lại trước khi kết luận SLA. Xem [benchmark](docs/evaluation/performance.md) và [follow-up](docs/evaluation/rule-engine-optimization.md).
-- Tiếp tục diễn tập toàn AGC từ môi trường sạch/offline và backup/restore thật; [kết quả chạy lại từng phần](docs/evaluation/local-repro.md). Hoàn thiện báo cáo, slides và video trước khi chốt nộp.
+- [Full AGC/offline và backup/restore](docs/evaluation/local-repro.md) đã đạt trên clone riêng; sensor phục hồi được kiểm trên 30 dòng AGC. Còn hoàn thiện metadata nhóm, báo cáo/slide cuối và video thuyết trình để chốt nộp.
 - ClickHouse chỉ là [phương án tương lai](docs/architecture/09-clickhouse-migration.md), chưa triển khai.

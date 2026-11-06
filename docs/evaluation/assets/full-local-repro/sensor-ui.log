@@ -1,0 +1,4 @@
+ Container gh-agc-20261106182240-7578-restored-ui-test-run-0cb7cec6c4b1 Creating 
+ Container gh-agc-20261106182240-7578-restored-ui-test-run-0cb7cec6c4b1 Created 
+2026-11-06 18:49:12.366 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+{"status": "passed", "replay_id": "agc-restore-89ea2cf29f75", "publication_id": "a8289b01f8c8aae54143198087d817d27d6475cdab7be328f0ad7b13dd8dd7c5", "accepted_events": 30, "complete": true, "climate_rule": "climate-demo-b01:Automatoes:v1", "drain_rule": "drain-demo-b03:Automatoes:v1", "charts": 4, "csv_export_available": true}

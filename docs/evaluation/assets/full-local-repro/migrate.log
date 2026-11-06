@@ -1,0 +1,3 @@
+ Container gh-agc-20261106182240-7578-job-run-71b48f7df8c5 Creating 
+ Container gh-agc-20261106182240-7578-job-run-71b48f7df8c5 Created 
+{"applied": ["001_core_metadata.sql", "002_agc_reference.sql", "003_explanation_views.sql", "004_pipeline_publication.sql", "005_irrigation_mart.sql", "006_harvest_mart.sql", "007_harvest_rule.sql", "008_rule_schedule.sql", "009_climate_mart.sql", "010_drain_mart.sql", "011_energy_mart.sql", "012_energy_cost.sql", "013_energy_cost_seal.sql", "014_scenario_payload.sql", "015_tariff_profile_compartment_unique.sql", "016_sensor_stream.sql"], "skipped": []}

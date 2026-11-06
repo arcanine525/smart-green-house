@@ -1,0 +1,8 @@
+ Container gh-agc-20261106182240-7578-job-run-18f14ca2467d Creating 
+ Container gh-agc-20261106182240-7578-job-run-18f14ca2467d Created 
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/06 18:34:20 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[Stage 0:>                                                          (0 + 1) / 2][Stage 0:=============================>                             (1 + 1) / 2]                                                                                {"workflow_id": "full-offline-rehearsal", "status": "completed", "publication_id": "3e4a051009084e11ab19efdd2343c9d3", "output": "/data/output/pipeline/full-offline-rehearsal"}

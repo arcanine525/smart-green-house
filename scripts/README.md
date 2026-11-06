@@ -1,5 +1,9 @@
 # Scripts
 
+- `rehearse_agc_batch.sh` → `rehearse_agc_restore.sh`: full snapshot AGC trên
+  project cô lập, kiểm sáu BR và phục hồi DB/raw/sáu volume cùng replay AGC thật.
+  Chuẩn bị image trước; xem [hướng dẫn](repro/README.md).
+
 - `prepare_walkthrough.sh`: clone một database AGC đã chuẩn bị sang database
   demo riêng và khởi động dashboard để quay T26. Xem
   [Playwright walkthrough](../tools/walkthrough/README.md) cho lệnh quay ≥6 video,

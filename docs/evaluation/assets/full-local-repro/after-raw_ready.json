@@ -1,0 +1,17 @@
+[
+  {
+    "path": "batch-00000001-00000005-0005.jsonl",
+    "bytes": 68188,
+    "sha256": "da15485735da8cd3020f45297b28c3a128cc1845608b6e67bd58c96626c9e3b5"
+  },
+  {
+    "path": "batch-00000006-00000010-0005.jsonl",
+    "bytes": 67907,
+    "sha256": "41c34d9a7e8afcf1999574152fb6c7fa7ef5a90d4f5e4cbf42e4018ca57982f4"
+  },
+  {
+    "path": "manifest.json",
+    "bytes": 1197,
+    "sha256": "a75852630ca4ce5656e4677d3c774937b5e2c5a15fb69f2e798703f7b0374474"
+  }
+]

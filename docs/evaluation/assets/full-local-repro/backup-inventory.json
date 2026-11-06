@@ -1,0 +1,52 @@
+[
+  {
+    "path": "database.dump",
+    "bytes": 168410607,
+    "sha256": "1e8e55fb7aba54358d30c96ae4f2e24304d848da0435bc50429b49d610c6b892"
+  },
+  {
+    "path": "import.tar.gz",
+    "bytes": 12224424,
+    "sha256": "7e7cc5a5ceb53c7fc06601e3e2b4b8bbe6e3eca9169610f2dcdc588806b529a2"
+  },
+  {
+    "path": "raw.tar.gz",
+    "bytes": 12483902,
+    "sha256": "d887851c523c60b149119967c13da2c2d01fa963eacd3979b4b69d8dc2ff977f"
+  },
+  {
+    "path": "sensor-state.tar.gz",
+    "bytes": 11037,
+    "sha256": "611373a49ca922177cbe80df599d9999dbe63865d20f3002ee90607af17c9c24"
+  },
+  {
+    "path": "volumes/broker_state.tar.gz",
+    "bytes": 9030,
+    "sha256": "68156572e71d99543e24699d3027b30dc98b333e6cac46c6c5800314727bf88e"
+  },
+  {
+    "path": "volumes/collector_spool.tar.gz",
+    "bytes": 24843,
+    "sha256": "08b7b07af076cc6f56dad0007b093d8b0d1d5a386ea274d4bc9c93a1d3afb393"
+  },
+  {
+    "path": "volumes/outputs.tar.gz",
+    "bytes": 221082722,
+    "sha256": "8ac8b3c9eb6d5edeb03f66e5802e9577da828d09efeb8efc1224cdbb99eb597d"
+  },
+  {
+    "path": "volumes/raw_ready.tar.gz",
+    "bytes": 12274,
+    "sha256": "890d79306ad1b735461693db451a9455c0269f0a2a9588e1858cfc46e2e15bce"
+  },
+  {
+    "path": "volumes/simulator_outbox.tar.gz",
+    "bytes": 260897,
+    "sha256": "ac7614616d84ef943c219d9a4dd72d7eb5bdae23a9e743572d0512cb1a35b5f4"
+  },
+  {
+    "path": "volumes/spark_checkpoints.tar.gz",
+    "bytes": 1050,
+    "sha256": "f6c44cfcbae48f0b7ead680e90a55dcd9911c653be40c38307f38f248027b882"
+  }
+]

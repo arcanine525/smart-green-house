@@ -76,3 +76,12 @@ Publication và checksum từng phép đối soát được giữ trong artifact
 
 Các báo cáo từng BR ghi cụ thể test, phiên bản, ngoại lệ và giới hạn đo. Một test
 pass trên fixture không chứng minh mọi tổ hợp hoặc mọi dataset đều đúng.
+
+
+## Xác nhận trên clone và runtime offline ngày 2026-11-07
+
+Source `32156a9`: **420 backend và 100 UI** pass; full AGC được dựng vào DB
+trống. Sau backup/restore, checksum 71 bảng, raw/ZIP và sáu volume khớp; 30 dòng
+AGC qua MQTT/Spark phục hồi queue, WAL và checkpoint không nhân event.
+[Phạm vi và artifact](assets/full-local-repro/README.md). Đây là lượt riêng,
+không cộng số test hoặc thời gian vào các lượt lịch sử ở trên.

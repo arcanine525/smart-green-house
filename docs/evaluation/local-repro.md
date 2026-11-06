@@ -1,4 +1,40 @@
-# Chạy lại local: bằng chứng từng phần
+# Chạy lại local và phục hồi
+
+## Kết quả hiện tại — full AGC và restore ngày 2026-11-07
+
+**T28 hoàn thành trong phạm vi snapshot và workload đã kiểm chứng.** Clone local
+mới ở HEAD `32156a9`, `.env.example`, image chuẩn bị trước và ZIP khóa checksum;
+full pipeline vào DB trống đã publish thành công. Runtime backend/frontend đều
+internal và thử kết nối IP ngoài bị chặn; host vẫn online. Không phụ thuộc
+cloud lúc chạy. Build có sử dụng cache và có tải dependency ở pha chuẩn bị.
+
+| Kiểm tra | Kết quả |
+|---|---|
+| Backend / UI suite offline | 420 / 100 pass |
+| App trên full AGC | 8 màn hình trước/sau restore; KPI, rule và scenario khớp |
+| Database | 71 bảng, 6.273.255 dòng lưu across các bảng, checksum và số dòng khớp |
+| Raw / archive | 47 file raw/manifest và ZIP gốc khớp |
+| Named volumes | outputs, broker, outbox, spool, ready, checkpoint đều khớp file |
+| MQTT AGC | 28 message queue được phục hồi trước publisher retry |
+| SQLite / Spark | WAL cần thiết để phục hồi; Spark tiếp tục batch 1, 30 event duy nhất |
+| Dashboard sensor | Đúng publication, 30 event, hai rule, bốn chart và CSV |
+| Resume pipeline | Kiểm outputs đã restore, giữ nguyên publication lịch sử |
+
+[Bằng chứng chi tiết](assets/full-local-repro/README.md),
+[kết quả máy đọc được](assets/full-local-repro/summary.json) và
+[lệnh tái lập](../../scripts/repro/README.md). DB trước backup 3.410.441.907 byte;
+ổ host còn khoảng 21 GiB khi bắt đầu và khoảng 16 GiB sau lượt. Đây là kiểm
+khả năng dựng lại/phục hồi, không phải benchmark để so với T25.
+
+Các script chỉ tác động project thử có tên riêng. Backup và project đích đã
+dừng được giữ local; nguồn thử được dọn sau kiểm archive. Sensor dùng 30 dòng
+AGC thật qua thiết bị giả lập, không phải replay toàn vụ hay sensor vật lý.
+Không tuyên bố mọi kiểu lỗi broker/mất điện đều đã được kiểm tra.
+
+Các mục bên dưới là **lịch sử những lượt trước**, với giới hạn tại thời điểm
+đó; không thay thế trạng thái và bằng chứng mới ở mục này.
+
+## Lượt từng phần ban đầu
 
 Lượt kiểm tra ngày 2026-11-06 dùng bản export `git archive` của HEAD
 `192aee190874436d203df6a92bbcdf778735809c`, cộng README/backup hướng dẫn đang

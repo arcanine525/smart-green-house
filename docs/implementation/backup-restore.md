@@ -1,12 +1,10 @@
 # Backup và khôi phục local
 
-Quy trình đã được smoke test trên dữ liệu tổng hợp: dump/restore DB, raw và
-một named-volume marker bằng `./scripts/test_backup_restore.sh`; thêm SQLite
-WAL/SHM của outbox/spool và Spark checkpoint thật bằng
-`./scripts/test_sensor_backup_restore.sh`. Lượt sensor dùng bốn **named volumes**
-synthetic và một retained message của broker, không phải restore toàn bộ named
-volumes hay AGC thật; xem
-[bằng chứng và giới hạn](../evaluation/local-repro.md#diễn-tập-sensor-backuprestore-synthetic).
+Đã diễn tập trên full snapshot AGC: dump/restore 71 bảng, ZIP/raw và cả sáu
+named volumes; replay 30 dòng AGC phục hồi queue MQTT, SQLite WAL và Spark
+checkpoint, giữ checksum và publication. Xem [bằng chứng](../evaluation/assets/full-local-repro/README.md)
+và [harness chạy trên project mới](../../scripts/repro/README.md). Các smoke
+synthetic trước đó vẫn được giữ trong [lịch sử](../evaluation/local-repro.md).
 Quy trình không bảo đảm snapshot nhất quán khi còn writer. Không dùng
 để ghi đè project/volume đang có dữ liệu. Database, raw và checkpoint cần được
 lưu cùng một mốc dừng; riêng database dump không đủ để tiếp tục sensor replay.
@@ -34,6 +32,7 @@ manifest/checksum và nguồn dùng bởi lineage. Ví dụ khi dùng mặc đ�
 
 ```bash
 cp -a ./data/raw "$backup_dir/raw"
+cp -a ./data/import "$backup_dir/import"
 ```
 
 Snapshot/archive ZIP gốc, cấu hình và mật khẩu local cũng cần được lưu riêng an
@@ -60,8 +59,9 @@ Lưu bản backup ngoài ổ đang chạy và kiểm soát quyền đọc; raw c
 ## Khôi phục trên project mới
 
 Dùng checkout/config riêng và **tên Compose mới chưa tồn tại**, không trỏ tới
-volume hay raw hiện hữu. Copy raw backup vào thư mục mới và đặt
-`GREENHOUSE_RAW_PATH` tới thư mục đó trong `.env` mới. Chuẩn bị image đã tải.
+volume hay raw hiện hữu. Copy raw và import backup vào thư mục mới; đặt
+`GREENHOUSE_IMPORT_PATH` tới import đã phục hồi (CLI resume kiểm ZIP gốc) và đặt
+`GREENHOUSE_RAW_PATH` tới thư mục raw đã phục hồi trong `.env` mới. Chuẩn bị image đã tải.
 Tạo DB mới, sau đó restore logical dump vào database trống:
 
 ```bash

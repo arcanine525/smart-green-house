@@ -2,8 +2,8 @@
 
 Cập nhật: 2026-11-07. Sáu BR đã có triển khai và bằng chứng correctness,
 benchmark cùng walkthrough UI tự động. **Chưa đủ bằng chứng để chốt toàn bộ
-project**: bộ chạy lại/offline và gói nộp còn thiếu bằng chứng; BR-01 vượt mục tiêu p95 2 giây
-trong benchmark gốc, dù lượt follow-up sau tối ưu đạt trong điều kiện đo; bộ sản phẩm nộp và diễn tập còn phải hoàn tất.
+project**: gói nộp còn phải hoàn thiện; BR-01 vượt mục tiêu p95 2 giây
+trong benchmark gốc, dù lượt follow-up sau tối ưu đạt trong điều kiện đo. T28 đã có full AGC/offline và backup/restore; T29–T30 còn mở.
 
 ## 1. Nguồn và cách đọc
 
@@ -84,3 +84,13 @@ tự động không đo hiểu biết hoặc phản hồi của người thật.
 T27 được đóng theo tiêu chí sáu BR/sensor có bằng chứng và giới hạn được mô tả.
 T28 (chạy lại/restore), T29 (tài liệu cuối) và T30 (gói nộp) vẫn có điều kiện
 riêng; nghiệm thu chức năng không đồng nghĩa đã hoàn thành bàn giao toàn project.
+
+
+## 7. Chốt bộ chạy lại — T28, ngày 2026-11-07
+
+**Đạt:** [full AGC/offline và restore](../evaluation/assets/full-local-repro/README.md)
+trên clone riêng, DB trống và image đã chuẩn bị; 420 backend/100 UI pass;
+71 bảng cùng ZIP/raw/sáu volume khớp; MQTT/WAL/checkpoint phục hồi 30 event AGC,
+UI lịch sử và replay kiểm thành công. Đây là phạm vi container offline và
+sensor window đã nêu, không khẳng định host ngắt Internet hay replay toàn vụ.
+T29–T30 tiếp tục là phần tài liệu và sản phẩm nộp cuối.

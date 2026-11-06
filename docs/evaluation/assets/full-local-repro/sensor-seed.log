@@ -1,0 +1,9 @@
+ Container gh-agc-20261106182240-7578-job-run-399e26c47bd9 Creating 
+ Container gh-agc-20261106182240-7578-job-run-399e26c47bd9 Created 
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/06 18:42:22 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/06 18:42:24 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+{"seeded": true, "real_agc": true, "events": 30, "queued_rows": 28, "spark_progress": [[0, 10]]}

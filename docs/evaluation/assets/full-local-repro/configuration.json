@@ -1,0 +1,1 @@
+{"publication": "3e4a051009084e11ab19efdd2343c9d3", "scenario_version": "scenario:offline-restore-electricity-plus20:v1", "baseline_eur": "17.600067710000", "scenario_eur": "20.8407343770000", "demo_rules": "harvest v2, climate v1, drain v1"}

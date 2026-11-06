@@ -6,12 +6,13 @@
 - Sơ đồ trong `figures/` có nguồn Mermaid `.mmd` và ảnh render `.png`.
 
 Các file đang đánh dấu **dự thảo**: chưa xác nhận Group ID, tên thành viên,
-phân công thực tế, toàn bộ diễn tập offline hoặc video thuyết trình 20–30 phút. Không
+phân công thực tế hoặc video thuyết trình 20–30 phút. Không
 đổi tên thành gói nộp cuối và không công bố các mục chưa có bằng chứng là đạt.
 Video giữ ngoài Git; nhóm cần hoàn thiện video thuyết trình, kiểm tra và lưu ở nơi nộp.
 Bộ walkthrough T26 có phạm vi riêng: sáu luồng BR tự động, không giọng đọc; xem
 [bằng chứng và cách mở video](../evaluation/usability.md). Đánh giá người thật
 là mở rộng tùy chọn theo quyết định user ngày 2026-11-07.
+[T28 full AGC/offline và restore](../evaluation/assets/full-local-repro/README.md) đã đạt trong phạm vi công bố.
 
 Để xuất lại PDF cần cài Mermaid CLI (`mmdc` và Chromium), Pandoc và LibreOffice
 (`soffice`) trên máy soạn tài liệu, sau đó chạy `./scripts/build_submission.sh`.

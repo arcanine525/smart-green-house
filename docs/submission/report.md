@@ -143,11 +143,12 @@ ngoại lệ trong `docs/evaluation/performance.md`.
 Sensor synthetic 30 event trong một lượt có published-to-queryable p50 1.212,57 ms,
 p95 1.491,60 ms; đây không phải SLA. Fault matrix kiểm duplicate/conflict,
 late, pause/resume và restart broker/collector/DB/Spark trên dịch vụ test riêng.
-Diễn tập backup synthetic phục hồi PostgreSQL, SQLite WAL/SHM và Spark checkpoint;
-Spark chỉ xử lý batch tiếp theo, checksum khớp. Lượt sau khôi phục outbox, spool,
-raw-ready và checkpoint qua bốn named volumes synthetic; một retained message
-broker cũng được khôi phục. Chưa chứng minh toàn bộ trạng thái broker, outputs
-hoặc AGC và sensor thực.
+Diễn tập ngày 07/11 dựng full AGC từ clone mới trên mạng container internal:
+420 backend và 100 UI test pass. Backup/restore 71 bảng, ZIP/raw và cả sáu named
+volumes khớp checksum; UI lịch sử/rule/scenario khớp trước và sau. Replay 30 dòng
+AGC phục hồi 28 message MQTT trước publisher retry; SQLite WAL hợp lệ, Spark
+tiếp tục batch 1, có 30 event duy nhất. Đây là cửa sổ sensor giới hạn, không
+khẳng định mọi lỗi broker/mất điện hay replay toàn vụ. Host vẫn online.
 
 Effectiveness: sáu walkthrough AppTest có đáp án trước đều pass. Bộ Playwright
 ngày 07/11 có sáu video 1080p, 93 bước và 19 file xuất, tất cả luồng đạt; có
@@ -165,8 +166,7 @@ replay local, cùng cơ chế publication, kiểm tra chất lượng và truy v
 đối soát và benchmark hỗ trợ so sánh ở phạm vi được đo; trade-off Hybrid/Kimball
 không thể kết luận chỉ từ tốc độ SELECT.
 
-Trước khi nộp cần: chạy lại toàn AGC từ môi trường sạch/offline khi đủ dung lượng; diễn tập backup/
-restore đầy đủ; hoàn thiện video 20–30 phút và metadata nhóm. BR-01 vượt p95 ở benchmark gốc, còn lượt follow-up sau tối ưu đạt trong điều kiện đo; cần lặp lại và không suy rộng thành SLA. Không kết luận
+Trước khi nộp cần: hoàn thiện video 20–30 phút, metadata nhóm và gói tài liệu cuối. BR-01 vượt p95 ở benchmark gốc, còn lượt follow-up sau tối ưu đạt trong điều kiện đo; cần lặp lại và không suy rộng thành SLA. Không kết luận
 project làm giảm tài nguyên hoặc tăng lợi nhuận nếu không có dữ liệu thực nghiệm.
 
 **Tài liệu chính:** `DE_Requirements.pdf`; `docs/br/`; `readme.md`;
