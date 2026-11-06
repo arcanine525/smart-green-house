@@ -251,6 +251,7 @@ def test_climate_no_rule_stays_unknown(run_app, contracts_database, published_cl
     at = open_climate(run_app, contracts_database)
     choose_cycle(at, cycle_row)
     assert any('rule_not_configured' in item.value for item in at.markdown)
+    assert any('không phải tỷ lệ dữ liệu nguồn có mặt' in item.value for item in at.caption)
 
 
 def test_climate_rule_and_filter_interaction(run_app, contracts_database, published_climate):

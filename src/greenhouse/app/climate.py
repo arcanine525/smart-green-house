@@ -279,6 +279,8 @@ def render(connection, settings, publications):
                    display.format_decimal(co2.out_hours)
                    if co2.out_hours is not None else 'NULL')
     kpis[3].metric('CO₂ coverage', f'{display.format_decimal(co2.coverage_pct)} %')
+    st.caption('Coverage ở đây là tỷ lệ thời gian đủ dữ liệu và rule để đánh giá, '
+               'không phải tỷ lệ dữ liệu nguồn có mặt. Chưa chọn rule thì coverage đánh giá là 0%.')
     chips = [f'{report.metric}: out {display.format_decimal(report.out_minutes)}p '
              f'(low {display.format_decimal(report.out_low_minutes)} / '
              f'high {display.format_decimal(report.out_high_minutes)}) · valid '

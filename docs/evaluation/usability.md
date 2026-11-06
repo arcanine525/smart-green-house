@@ -54,3 +54,42 @@ Với mỗi BR ghi:
 Mẫu ghi một dòng: `participant | BR | context/version | thời gian | đáp án |
 đúng/sai | coverage & giới hạn | trợ giúp | phản hồi`. Hiện chưa có dòng quan
 sát người thật; không điền giả định hoặc tổng hợp từ test tự động.
+
+## Walkthrough tự động bổ sung trên AGC đã publish
+
+Ngày 2026-11-06, [script](assets/effectiveness/agc_walkthrough.py) chạy UI
+production ở chế độ PostgreSQL **read-only** trên database benchmark hiện có,
+publication `df3e4bcbacab45a5b86fc37d2f53c00a`, snapshot AGC khóa và khoang
+Automatoes. Nó chuyển lần lượt qua sáu BR, tổng quan và chất lượng với cùng hai
+ngày 02–03/03/2020; mỗi màn hình phải giữ đúng publication, khoang và cửa sổ,
+không có lỗi UI. Toàn bộ tám màn hình đã qua. Thời gian của máy trong lượt này
+là **6,956 giây**, không phải thời gian thao tác của người dùng.
+
+Độc lập với service, script kiểm SHA-256 của `Automatoes/Resources.csv` theo
+manifest, đọc hai dòng CSV gốc bằng `csv`/`Decimal`, tính Irr **9,36 L/m²**,
+Drain **3,89 L/m²**, tỷ lệ paired **41,559829…%**. Màn hình nước hiển thị
+**9,36 / 3,89 / 41,56% / 100% coverage** và màn hình drain hiển thị cùng tổng
+nước theo ngày; assertion đã kiểm các giá trị. [Kết quả và toàn bộ metrics](assets/effectiveness/agc-walkthrough-20261106.json)
+ghi đầy đủ scope/version/cửa sổ. Các màn hình còn lại được kiểm điều hướng và
+ngữ cảnh trong lượt này, không được coi là có oracle độc lập mới cho mọi KPI.
+Chưa chọn rule climate/drain nên coverage đánh giá là 0%; đây không phải khẳng
+định dữ liệu nguồn thiếu. UI có giải thích riêng điều này.
+
+Để chạy lại cần **database đã có publication benchmark tương ứng**, raw snapshot
+và image UI đã build; lệnh chỉ đọc database/raw và ghi evidence vào thư mục tạm:
+
+```bash
+mkdir -p tmp/agc-ui-walkthrough
+chmod 777 tmp/agc-ui-walkthrough
+GREENHOUSE_UI_MEMORY=1536m docker compose --profile test run --rm --no-deps \
+  -e PGDATABASE=greenhouse_hybrid_bench_t25_20261106_104814 \
+  -e PGOPTIONS='-c default_transaction_read_only=on' \
+  -e GREENHOUSE_WALKTHROUGH_PUBLICATION=df3e4bcbacab45a5b86fc37d2f53c00a \
+  -e GREENHOUSE_WALKTHROUGH_OUTPUT=/evidence/agc-walkthrough.json \
+  -e GREENHOUSE_RAW_DIR=/data/raw -v "$PWD/data/raw:/data/raw:ro" \
+  -v "$PWD/docs/evaluation/assets/effectiveness/agc_walkthrough.py:/tmp/agc_walkthrough.py:ro" \
+  -v "$PWD/tmp/agc-ui-walkthrough:/evidence" ui-test python /tmp/agc_walkthrough.py
+```
+
+Đây vẫn là AppTest tự động, không có người tham gia hay phản hồi UI của con
+người; không thay thế protocol đánh giá ở trên.

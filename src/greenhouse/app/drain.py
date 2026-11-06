@@ -85,6 +85,8 @@ def _summary(evaluation):
         label = 'Ngưỡng minh họa của đồ án' if evaluation.rule_is_demo else 'Profile do kỹ sư nhập'
         st.warning(label + ' — chưa xác minh/hiệu chuẩn nông học cho giống cây hoặc giai đoạn này.')
         st.caption(f'Provenance: {evaluation.rule_evidence_reference}')
+    st.caption('Coverage ở đây là tỷ lệ thời gian đủ dữ liệu và rule để đánh giá, '
+               'không phải tỷ lệ dữ liệu nguồn có mặt. Chưa chọn rule thì coverage đánh giá là 0%.')
     for report in evaluation.result.metric_results:
         columns = st.columns(4)
         columns[0].metric(f'{report.metric.upper()} ngoài dải (phút)',

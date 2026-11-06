@@ -54,6 +54,7 @@ def test_drain_no_rule_keeps_raw_quality_and_json(run_app, contracts_database, p
     assert metric(at, 'EC ngoài dải (phút)') == 'NULL'
     assert metric(at, 'PH ngoài dải %') == 'NULL'
     assert any('rule_not_configured' in item.value for item in at.info)
+    assert any('không phải tỷ lệ dữ liệu nguồn có mặt' in item.value for item in at.caption)
     tables = [frame.value for frame in at.dataframe]
     source = next(frame for frame in tables if 'ec_status' in frame.columns)
     assert str(source.iloc[2]['ph']) == '0.0' or Decimal(str(source.iloc[2]['ph'])) == 0
