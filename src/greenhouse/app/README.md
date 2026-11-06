@@ -104,8 +104,9 @@ AppTest chạy `home.py` thật với DB fixture (không Spark — stage thay b�
 ## Giới hạn của màn hình nước T10
 
 - Một khoang mỗi lần xem (context một cycle + một khoang); so sánh nhiều khoang thuộc task sau.
-- Không caching kết quả (mỗi rerun truy vấn lại; cache phải mang đủ identity publication/
-  context/version — chưa cần cho quy mô hiện tại).
+- Màn hình nước này không cache kết quả. Climate/drain có cache evaluation giới hạn
+  theo database, publication/version, context, basis và chữ ký rule; xem
+  [benchmark cache](../../../docs/evaluation/performance.md#kiểm-tra-tối-ưu-cache-hiện-có-của-hybrid).
 - Connection mở mỗi rerun, không cache resource (an toàn đa session).
 - Xếp hạng/nhiều khoang và scenario không thuộc màn hình nước; prototype
   `prototypes/dashboard` là demo fixture-only, tách biệt.

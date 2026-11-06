@@ -61,8 +61,10 @@ Publication và checksum từng phép đối soát được giữ trong artifact
 - [`test_action_exports.py`](../../tests/ui/test_action_exports.py) và các test
   UI từng BR: pin publication xuyên nhiều truy vấn/CSV, giữ NULL khác 0 và
   metadata/cửa sổ; [scenario UI](../../tests/ui/test_cost_ui.py) mở lại version
-  và baseline đã pin. App không cache kết quả truy vấn; mỗi rerun lấy lại theo
-  publication/context/rule/scenario, tránh cache key thiếu version.
+  và baseline đã pin. UI không giữ cache connection; service climate/drain có
+  cache kết quả giới hạn, key gồm database, publication/version, context, basis
+  và chữ ký nội dung rule sau khi kiểm tra identity. Chi phí/scenario dùng context
+  và version đã pin; không suy ra cache scenario từ cache climate/drain.
 - [Sensor replay](sensor-replay.md): fault, trùng/conflict, late, restart broker,
   collector, PostgreSQL, Spark và pause/resume; đối soát batch với cùng scope
   và dữ liệu nguồn. Các restart này chạy trên dịch vụ test riêng.
