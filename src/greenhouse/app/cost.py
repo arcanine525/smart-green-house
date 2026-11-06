@@ -13,6 +13,7 @@ from uuid import uuid4
 
 import psycopg
 import streamlit as st
+from greenhouse.app import shared_context
 
 from greenhouse.app import cost_exports as exports, wiring
 from greenhouse.contracts import (
@@ -101,6 +102,7 @@ def render(connection, settings, publications):
 
     with st.sidebar:
         st.caption('CHI PHÍ & KỊCH BẢN GIÁ · BR-06')
+        shared_context.adopt_publication(st.session_state, 'cost_publication', usable, st.warning)
         selected_pub = st.selectbox(
             'Publication năng lượng', usable,
             format_func=lambda p: f'{p.scope_id} · {p.publication_id}',
@@ -119,6 +121,7 @@ def render(connection, settings, publications):
             st.session_state.pop(key, None)
 
     with st.sidebar:
+        shared_context.adopt_cycle(st.session_state, 'cost_cycle', cycles, st.warning)
         cycle = st.selectbox(
             'Khoang · vụ', cycles,
             format_func=lambda c: f'{c.compartment_name} — {c.cycle_id}',
@@ -130,6 +133,7 @@ def render(connection, settings, publications):
             for key in ('cost_window', 'cost_scenario_select'):
                 st.session_state.pop(key, None)
 
+        shared_context.adopt_window(st.session_state, 'cost_window', cycle, st.warning)
         window = st.date_input(
             'Khoảng ngày (cả hai đầu)',
             value=(cycle.start, cycle.end - timedelta(days=1)),
@@ -142,6 +146,7 @@ def render(connection, settings, publications):
             st.info('Chọn đủ hai đầu khoảng ngày.')
             st.stop()
 
+    shared_context.remember(st.session_state, publication, cycle, window)
     context = wiring.build_context(publication, cycle, *window)
 
     # 1. Baseline Tariff Lookup - NO implicit write from render()

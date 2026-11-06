@@ -6,6 +6,7 @@ from functools import partial
 
 import psycopg
 import streamlit as st
+from greenhouse.app import shared_context
 
 from greenhouse.app import display, exports, figures, wiring
 from greenhouse.app import drain_actions as actions, drain_exports as downloads
@@ -272,6 +273,7 @@ def render(connection, settings, publications):
     service = wiring.drain_service(connection, wiring.raw_snapshot_mapping(settings.raw_dir))
     with st.sidebar:
         st.caption('MÀN HÌNH EC/pH DRAIN · BR-03')
+        shared_context.adopt_publication(st.session_state, 'drain_pub_choice', usable, st.warning)
         selected = st.selectbox('Publication drain', usable,
             format_func=lambda row: f'{row.scope_id} · {row.publication_id[:12]} · drain-mart-v1',
             key='drain_pub_choice')
@@ -280,18 +282,21 @@ def render(connection, settings, publications):
         if st.session_state.get('drain_pub_key') != publication.publication_id:
             st.session_state['drain_pub_key'] = publication.publication_id
             _reset('cycle_choice')
+        shared_context.adopt_cycle(st.session_state, 'drain_cycle_choice', cycles, st.warning)
         cycle = st.selectbox('Khoang · vụ drain', cycles,
             format_func=lambda row: f'{row.compartment_name} — {row.cycle_id}', key='drain_cycle_choice')
         active = (publication.publication_id, cycle.cycle_id)
         if st.session_state.get('drain_active') != active:
             st.session_state['drain_active'] = active
             _reset('window', 'rule_choice', 'pending_rule', 'selected_key', 'source_revision')
+        shared_context.adopt_window(st.session_state, 'drain_window', cycle, st.warning)
         window = st.date_input('Khoảng ngày drain (cả hai đầu)',
             min_value=cycle.start, max_value=cycle.end - timedelta(days=1),
             value=(cycle.start, cycle.end - timedelta(days=1)), key='drain_window', format='DD/MM/YYYY')
         if not isinstance(window, (tuple, list)) or len(window) != 2:
             st.info('Chọn đủ hai đầu của khoảng ngày.')
             return
+        shared_context.remember(st.session_state, publication, cycle, window)
         options = catalog.schedule_rules(selected, cycle.compartment_id,
             measurement_context='drain_process_computer', metrics=('ec', 'ph'), bases=(RuleBasis.MEASURED,))
         labels = {None: '(không chọn — rule_not_configured)'}

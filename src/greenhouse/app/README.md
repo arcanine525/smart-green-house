@@ -1,13 +1,15 @@
-# Ứng dụng nước (BR-02) + thu hoạch (BR-05) — màn hình tối thiểu
+# Ứng dụng Smart Greenhouse
 
 Ứng dụng production chạy Streamlit + Plotly trong image UI. Mọi phép tính nằm ở
 [IrrigationService](../queries/README.md) / [HarvestService](../queries/README.md) +
 [PostgresQueryAdapter](../db/README.md#adapter-query-cho-ứng-dụng) /
 [PostgresHarvestQueryAdapter](../db/harvest_adapter.py); UI không nhúng SQL và không
 tính lại công thức. Bộ lọc lấy từ [catalog adapter](../db/catalog.py) qua
-[CatalogService](../queries/catalog.py) — không dán ID thủ công. Entry:
-[home.py](home.py) có radio chọn màn hình: nước (irrigation-mart-v1) và thu hoạch
-(harvest-mart-v3; [harvest.py](harvest.py)).
+[CatalogService](../queries/catalog.py) — không dán ID thủ công. Entry [home.py](home.py) điều hướng sáu BR, tổng quan vụ, chất lượng dữ liệu
+và sensor replay. Các màn hình lịch sử giữ cùng publication, khoang/vụ và khoảng
+ngày khi chuyển màn hình nếu chúng khả dụng; nếu không, ứng dụng cảnh báo và yêu
+cầu kiểm tra lại lựa chọn. Rule và scenario có version riêng, không ngầm đồng nhất.
+Replay có scope và publication riêng, không cộng vào lịch sử.
 
 ## Chạy
 
@@ -29,6 +31,20 @@ mount raw read-only (`GREENHOUSE_RAW_PATH` → `/data/raw`) chỉ để xác min
 (không đoán theo tên), hỗ trợ cả snapshot root lẫn layout khóa `raw/<dataset>/<sha>`;
 manifest lỗi/không đọc được/trùng snapshot_id bị bỏ qua — các snapshot đó hiển thị
 **chưa xác minh được**, không bịa "đã xác minh". Việc băm file/record vẫn nằm ở lineage.
+
+## Tổng quan và chất lượng
+
+Tổng quan liệt kê các mart khả dụng trong publication đã chọn; nhãn sẵn sàng
+không khẳng định dữ liệu đủ hoặc rule đã được cấu hình. Màn hình chất lượng đếm
+quyết định của từng measure trên các revision thuộc publication, đúng policy, vụ
+và khoảng ngày; đây không phải coverage so với số quan sát kỳ vọng. Chi tiết và
+CSV được tải theo yêu cầu, gồm trạng thái, lý do, revision và vị trí dòng nguồn.
+
+Quarantine/conflict/duplicate được báo riêng cho **lần nạp gắn với publication**;
+chúng không phải danh sách toàn bộ các lần nạp khác. Bản ghi thiếu thời gian được
+đưa vào danh sách và nêu rõ là chưa thể kiểm tra theo khoảng ngày. CSV ghi danh
+tính publication, scope, snapshot, vụ và cửa sổ để đối chiếu. Các bảng này có thể
+lớn; chọn cửa sổ hẹp trước khi tải chi tiết.
 
 ## Luồng một tác vụ (mỗi rerun)
 
@@ -85,13 +101,13 @@ docker compose --profile test run --rm test-runner      # bộ backend hiện c�
 fixture có prefix `test_ui_*` và tự drop; giữ bằng `GREENHOUSE_KEEP_TEST_DB=1`.
 AppTest chạy `home.py` thật với DB fixture (không Spark — stage thay bằng artifact nhỏ).
 
-## Giới hạn T10
+## Giới hạn của màn hình nước T10
 
 - Một khoang mỗi lần xem (context một cycle + một khoang); so sánh nhiều khoang thuộc task sau.
 - Không caching kết quả (mỗi rerun truy vấn lại; cache phải mang đủ identity publication/
   context/version — chưa cần cho quy mô hiện tại).
 - Connection mở mỗi rerun, không cache resource (an toàn đa session).
-- Xếp hạng/nhiều khoang, scenario chưa thuộc màn này; prototype
+- Xếp hạng/nhiều khoang và scenario không thuộc màn hình nước; prototype
   `prototypes/dashboard` là demo fixture-only, tách biệt.
 
 ## Màn hình thu hoạch (BR-05, T13)

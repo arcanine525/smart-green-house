@@ -12,6 +12,7 @@ from datetime import timedelta
 
 import psycopg
 import streamlit as st
+from greenhouse.app import shared_context
 
 from greenhouse.app import display, exports, figures, wiring
 from greenhouse.contracts import HarvestUnresolvedIssue, RuleStatus
@@ -80,6 +81,7 @@ def render(connection, settings, publications):
                     'python -m greenhouse run-pipeline --workflow-id harvest-screen',
                     language='bash')
             st.stop()
+        shared_context.adopt_publication(st.session_state, 'harv_pub_choice', harvest_rows, st.warning)
         selected = st.selectbox('Publication (scope đã publish)', harvest_rows,
                                 format_func=wiring.harvest_publication_label,
                                 key='harv_pub_choice')
@@ -103,6 +105,7 @@ def render(connection, settings, publications):
         st.session_state.pop('harv_cycle_choice', None)
 
     with st.sidebar:
+        shared_context.adopt_cycle(st.session_state, 'harv_cycle_choice', cycles, st.warning)
         cycle = st.selectbox('Khoang · vụ', cycles, format_func=lambda c: f'{c.compartment_name} — {c.cycle_id}',
                              key='harv_cycle_choice')
         active_key = f'{publication.publication_id}|{cycle.cycle_id}|{cycle.compartment_id}'
@@ -112,6 +115,7 @@ def render(connection, settings, publications):
                            'harv_rule_grain'):
                 st.session_state.pop(widget, None)
         cycle_last_inclusive = cycle.end - timedelta(days=1)
+        shared_context.adopt_window(st.session_state, 'harv_window', cycle, st.warning)
         window = st.date_input('Khoảng ngày (cả hai đầu, theo ngày nguồn)', key='harv_window',
                                min_value=cycle.start, max_value=cycle_last_inclusive,
                                value=(cycle.start, cycle_last_inclusive), format='DD/MM/YYYY')
@@ -122,6 +126,7 @@ def render(connection, settings, publications):
             _stop_record()
         else:
             start_inclusive = end_inclusive = window
+        shared_context.remember(st.session_state, publication, cycle, (start_inclusive, end_inclusive))
         rules = catalog.harvest_rules(selected, cycle.compartment_id)
 
         rule = st.selectbox('Rule kiểm tra (tùy chọn, version tường minh)', [None, *rules],

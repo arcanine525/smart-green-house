@@ -25,6 +25,7 @@ from decimal import Decimal
 
 import psycopg
 import streamlit as st
+from greenhouse.app import shared_context
 
 from greenhouse.app import display, exports, figures, wiring
 from greenhouse.contracts import QueryContext, RuleBasis
@@ -124,6 +125,7 @@ def render(connection, settings, publications):
                     'python -m greenhouse run-pipeline --workflow-id climate-br01',
                     language='bash')
             st.stop()
+        shared_context.adopt_publication(st.session_state, 'clim_pub_choice', climate_rows, st.warning)
         selected = st.selectbox('Publication (scope đã publish)', climate_rows,
                                 format_func=wiring.climate_publication_label,
                                 key='clim_pub_choice')
@@ -149,6 +151,7 @@ def render(connection, settings, publications):
         st.session_state.pop('clim_cycle_choice', None)
 
     with st.sidebar:
+        shared_context.adopt_cycle(st.session_state, 'clim_cycle_choice', cycles, st.warning)
         cycle = st.selectbox('Khoang · vụ', cycles,
                              format_func=lambda c: f'{c.compartment_name} — {c.cycle_id}',
                              key='clim_cycle_choice')
@@ -161,6 +164,7 @@ def render(connection, settings, publications):
                            'clim_min_filter', 'clim_page_offset'):
                 st.session_state.pop(widget, None)
         cycle_last_inclusive = cycle.end - timedelta(days=1)
+        shared_context.adopt_window(st.session_state, 'clim_window', cycle, st.warning)
         window = st.date_input('Khoảng ngày (cả hai đầu, theo ngày nguồn)', key='clim_window',
                                min_value=cycle.start, max_value=cycle_last_inclusive,
                                value=(cycle.start, cycle_last_inclusive), format='DD/MM/YYYY')
@@ -169,6 +173,7 @@ def render(connection, settings, publications):
         else:
             st.info('Khoảng ngày chưa đủ hai đầu — chọn lại ngày bắt đầu và ngày kết thúc.')
             st.stop()
+        shared_context.remember(st.session_state, publication, cycle, (start_inclusive, end_inclusive))
         basis = st.radio('Basis điều kiện', (RuleBasis.REQUESTED, RuleBasis.REALIZED), index=0,
                          format_func=lambda b: ('Requested (t_heat_sp/t_vent_sp/co2_sp)'
                                                 if b == RuleBasis.REQUESTED

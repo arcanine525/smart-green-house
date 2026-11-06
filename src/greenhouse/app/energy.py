@@ -2,6 +2,7 @@
 from datetime import timedelta
 from decimal import Decimal
 import streamlit as st
+from greenhouse.app import shared_context
 import plotly.graph_objects as go
 
 from greenhouse.app import wiring, energy_exports as exports
@@ -34,6 +35,7 @@ def render(connection, settings, publications):
         st.stop()
     with st.sidebar:
         st.caption('NĂNG LƯỢNG · BR-04')
+        shared_context.adopt_publication(st.session_state, 'energy_publication', usable, st.warning)
         selected = st.selectbox('Publication năng lượng', usable,
             format_func=lambda p: f'{p.scope_id} · {p.publication_id}', key='energy_publication')
     publication = service.energy.adapter.publication(selected.publication_id)
@@ -45,6 +47,7 @@ def render(connection, settings, publications):
         for key in ('energy_cycle', 'energy_window', 'energy_revision'):
             st.session_state.pop(key, None)
     with st.sidebar:
+        shared_context.adopt_cycle(st.session_state, 'energy_cycle', cycles, st.warning)
         cycle = st.selectbox('Khoang · vụ năng lượng', cycles,
             format_func=lambda c: f'{c.compartment_name} — {c.cycle_id}', key='energy_cycle')
         identity = (publication.publication_id, cycle.cycle_id)
@@ -52,11 +55,13 @@ def render(connection, settings, publications):
             st.session_state['energy_cycle_key'] = identity
             for key in ('energy_window', 'energy_revision'):
                 st.session_state.pop(key, None)
+        shared_context.adopt_window(st.session_state, 'energy_window', cycle, st.warning)
         window = st.date_input('Khoảng năng lượng (cả hai đầu)',
             value=(cycle.start, cycle.end-timedelta(days=1)), min_value=cycle.start,
             max_value=cycle.end-timedelta(days=1), format='DD/MM/YYYY', key='energy_window')
         if not isinstance(window, (tuple, list)) or len(window) != 2:
             st.info('Chọn đủ hai đầu khoảng ngày.'); st.stop()
+    shared_context.remember(st.session_state, publication, cycle, window)
     context = wiring.build_context(publication, cycle, *window)
     result = service.get_intensity(context)
     quantities = service.energy.get_quantities(context)

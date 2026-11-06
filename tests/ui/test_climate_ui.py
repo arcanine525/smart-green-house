@@ -370,3 +370,72 @@ def test_climate_source_inspection_and_json_without_rule(
     downloads = [button.label for button in at.download_button]
     assert any('JSON result' in label for label in downloads)
     assert not any('CSV detail' in label for label in downloads)
+
+
+def test_historical_navigation_keeps_window_and_quality_scope(run_app, contracts_database, published_climate):
+    fixture, cycle_row, _ = published_climate
+    at = open_climate(run_app, contracts_database)
+    choose_cycle(at, cycle_row)
+    window = (date(2020, 1, 2), date(2020, 1, 2))
+    at.date_input(key='clim_window').set_value(window).run()
+    assert not at.exception
+    at.radio(key='screen_choice').set_value('🏠 Tổng quan vụ').run()
+    assert not at.exception
+    assert at.date_input(key='overview_window').value == window
+    at.radio(key='screen_choice').set_value('🛡️ Chất lượng dữ liệu').run()
+    assert not at.exception
+    assert at.date_input(key='quality_window').value == window
+    at.checkbox(key='quality_load_details').check().run()
+    at.checkbox(key='quality_load_quarantine').check().run()
+    assert not at.exception
+    assert at.selectbox(key='quality_pub').value.publication_id == fixture['publication']
+    assert at.selectbox(key='quality_cycle').value.cycle_id == fixture['cycle']
+    at.radio(key='screen_choice').set_value(WATER_SCREEN).run()
+    assert not at.exception
+    assert at.date_input(key='window').value == window
+
+
+def test_quality_overview_respects_publication_and_date(contracts_database, published_climate):
+    from greenhouse.db.quality_overview import excluded, measures
+
+    fixture, _, _ = published_climate
+    with psycopg.connect(**contracts_database) as connection:
+        day_one = excluded(connection, fixture['publication'], fixture['cycle'],
+                           date(2020, 1, 1), date(2020, 1, 1))
+        day_two = excluded(connection, fixture['publication'], fixture['cycle'],
+                           date(2020, 1, 2), date(2020, 1, 2))
+        assert any(row['measure_code'] == 'Tair' and row['status'] == 'missing' for row in day_one)
+        assert not any(row['measure_code'] == 'Tair' and row['status'] == 'missing' for row in day_two)
+        assert all(row['relative_path'] and row['line_number'] >= 2 for row in day_one)
+        assert not measures(connection, 'unknown-publication', fixture['cycle'],
+                            date(2020, 1, 1), date(2020, 1, 2))
+
+
+def test_quality_quarantine_is_scoped_to_published_load_and_cycle(contracts_database, published_climate):
+    from greenhouse.db.quality_overview import quarantined
+
+    fixture, _, _ = published_climate
+    with psycopg.connect(**contracts_database) as connection:
+        row = connection.execute('''
+            SELECT p.run_id, r.source_record_id
+            FROM meta.publication p
+            JOIN meta.publication_member m ON m.publication_id = p.publication_id
+            JOIN core.record_revision r ON r.revision_id = m.revision_id
+            WHERE p.publication_id = %s AND r.cycle_id = %s
+              AND r.observed_at >= '2020-01-01' AND r.observed_at < '2020-01-02'
+            ORDER BY r.observed_at LIMIT 1
+        ''', (fixture['publication'], fixture['cycle'])).fetchone()
+        connection.execute('''
+            INSERT INTO meta.quarantine_record
+                (quarantine_id, source_record_id, run_id, disposition, reason_code, policy_version, details)
+            VALUES (%s, %s, %s, 'duplicate', 'fixture_duplicate', 'fixture', '{}'::jsonb)
+        ''', ('quality-test:' + uuid4().hex, row[1], row[0]))
+        first = quarantined(connection, fixture['publication'], fixture['cycle'],
+                            date(2020, 1, 1), date(2020, 1, 1))
+        second = quarantined(connection, fixture['publication'], fixture['cycle'],
+                             date(2020, 1, 2), date(2020, 1, 2))
+        assert any(item['source_record_id'] == row[1] for item in first)
+        assert not any(item['source_record_id'] == row[1] for item in second)
+        assert not quarantined(connection, 'other-publication', fixture['cycle'],
+                               date(2020, 1, 1), date(2020, 1, 1))
+        connection.rollback()

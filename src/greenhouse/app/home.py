@@ -11,7 +11,7 @@ from datetime import timedelta
 import psycopg
 import streamlit as st
 
-from greenhouse.app import display, exports, figures, wiring
+from greenhouse.app import display, exports, figures, shared_context, wiring
 from greenhouse.settings import Settings
 
 st.set_page_config(page_title='Smart Greenhouse · Nước', page_icon='💧', layout='wide')
@@ -60,9 +60,10 @@ def render(connection):
         screen = st.radio('Màn hình', ['💧 Nước (BR-02)', '🍅 Thu hoạch (BR-05)',
                                        '🌡️ Khí hậu (BR-01)', '🧪 EC/pH drain (BR-03)',
                                        '⚡ Năng lượng (BR-04)', '💶 Chi phí & Kịch bản (BR-06)',
-                                       '📡 Sensor replay (BR-01/03)'],
+                                       '📡 Sensor replay (BR-01/03)', '🏠 Tổng quan vụ', '🛡️ Chất lượng dữ liệu'],
                           key='screen_choice',
                           help='Replay và dữ liệu lịch sử là hai phạm vi riêng.')
+    shared_context.begin_screen(st.session_state, screen, historical=screen != '📡 Sensor replay (BR-01/03)')
     if screen == '📡 Sensor replay (BR-01/03)':
         from greenhouse.app import replay as replay_screen
         return replay_screen.render(connection, settings)
@@ -81,6 +82,9 @@ def render(connection):
                   'docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline '
                   '--workflow-id water-first')
 
+    if screen in ('🏠 Tổng quan vụ', '🛡️ Chất lượng dữ liệu'):
+        from greenhouse.app import overview
+        return overview.render(connection, settings, publications, quality=screen == '🛡️ Chất lượng dữ liệu')
     if screen == '🍅 Thu hoạch (BR-05)':
         from greenhouse.app import harvest as harvest_screen
         return harvest_screen.render(connection, settings, publications)
@@ -113,6 +117,7 @@ def render_water(connection, settings, publications):
     with st.sidebar:
         st.markdown('<div class="brand">smart<em> greenhouse</em></div>', unsafe_allow_html=True)
         st.caption('MÀN HÌNH NƯỚC · BR-02')
+        shared_context.adopt_publication(st.session_state, 'pub_choice', usable_rows, st.warning)
         selected = st.selectbox('Publication (scope đã publish)', usable_rows,
                                 format_func=wiring.publication_label, key='pub_choice')
         st.markdown('<div class="side-note">Bộ lọc lấy từ published catalog — không nhúng ID thủ công. '
@@ -136,6 +141,7 @@ def render_water(connection, settings, publications):
             st.session_state.pop(widget, None)
 
     with st.sidebar:
+        shared_context.adopt_cycle(st.session_state, 'cycle_choice', cycles, st.warning)
         cycle = st.selectbox('Khoang · vụ', cycles, format_func=lambda c: f'{c.compartment_name} — {c.cycle_id}',
                              key='cycle_choice')
         # Cycle/compartment changes invalidate every dependent choice, exactly
@@ -146,6 +152,7 @@ def render_water(connection, settings, publications):
             for widget in ('window', 'rule_choice', 'day_choice'):
                 st.session_state.pop(widget, None)
         cycle_last_inclusive = cycle.end - timedelta(days=1)
+        shared_context.adopt_window(st.session_state, 'window', cycle, st.warning)
         window = st.date_input('Khoảng ngày (cả hai đầu, theo ngày nguồn)', key='window',
                                min_value=cycle.start, max_value=cycle_last_inclusive,
                                value=(cycle.start, cycle_last_inclusive), format='DD/MM/YYYY')
@@ -158,6 +165,7 @@ def render_water(connection, settings, publications):
             st.stop()
         else:
             start_inclusive = end_inclusive = window
+        shared_context.remember(st.session_state, publication, cycle, (start_inclusive, end_inclusive))
         rules = catalog.rules(publication, cycle.compartment_id)
 
         def rule_label(rule_option):
