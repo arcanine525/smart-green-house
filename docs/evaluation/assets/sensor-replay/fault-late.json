@@ -1,0 +1,13 @@
+{
+  "scenario": "late-after-publication",
+  "replay_id": "late-91f324e13acf",
+  "partial_publication": "e0f68cb8de3cc288d5f1ba7b1acee4c0fb529609c5edd1059dfa85b185904bf7",
+  "final_publication": "bb293c9e43b3df7748025e2ca538084d4b30f65ef30049000ac708c4f85538d1",
+  "partial_missing_sequence": [
+    2
+  ],
+  "partial_episodes": 2,
+  "final_episodes": 1,
+  "final_episode_minutes": "15",
+  "old_publication_unchanged": true
+}

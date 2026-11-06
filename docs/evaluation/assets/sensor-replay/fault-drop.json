@@ -1,0 +1,132 @@
+{
+  "scenario": "drop",
+  "replay_id": "fault-741045ed6569",
+  "publication_id": "16a04221ea7f7186355d82d673291bb3e3a7a7f82de1a93c421c8fb42c62abac",
+  "input_rows": 6,
+  "audit": [
+    {
+      "event_id": "b91ef1e23a834258bf88333469e5bb03a235d6f9c8fc5e65b288151aebd2fa27",
+      "sequence": 1,
+      "fault_type": "drop"
+    },
+    {
+      "event_id": "0393a6ef37fa25df5b51005156a1cba5ded73d6c456c39234b84aae9dc024428",
+      "sequence": 2,
+      "fault_type": "drop"
+    },
+    {
+      "event_id": "453cacf5255e7a9e2e6fe188cb71bde585868635ac1ba5b18b53e87e0b00d5bb",
+      "sequence": 3,
+      "fault_type": "drop"
+    },
+    {
+      "event_id": "208317ee714db83692118d87bd63d3ec2e47ab53a7b4c79646952fd931be5757",
+      "sequence": 4,
+      "fault_type": "drop"
+    },
+    {
+      "event_id": "9bd400c25ca6b5ebe4a5023431542d51b90d0816a7d7660e510f44e2d859019f",
+      "sequence": 5,
+      "fault_type": "drop"
+    },
+    {
+      "event_id": "640e3a21c64024ccca45a15ad8a3deffe35941de4febf96a129058135c124a3d",
+      "sequence": 6,
+      "fault_type": "drop"
+    }
+  ],
+  "state": {
+    "complete": false,
+    "conflicts": [],
+    "replay_id": "fault-741045ed6569",
+    "quarantined": 0,
+    "fault_summary": {
+      "drops": 6,
+      "delays": 0,
+      "conflicts": 0,
+      "duplicates": 0
+    },
+    "replay_status": "completed",
+    "slot_conflicts": [],
+    "time_conflicts": [],
+    "accepted_events": 0,
+    "cursor_mismatch": false,
+    "cursor_sequence": 6,
+    "expected_events": 6,
+    "scope_conflicts": [],
+    "control_sequence": 5,
+    "observed_through": "2019-12-16T00:24:59.999999",
+    "received_through": "2026-11-06T14:39:42.072199+00:00",
+    "checksum_verified": true,
+    "missing_sequences": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "completion_requested": true,
+    "cursor_outside_cycle": false,
+    "rejected_source_rows": 0,
+    "emitted_unique_events": 0,
+    "emitted_total_messages": 0
+  },
+  "delivered_count": 5,
+  "deliveries": [
+    {
+      "outbox_table": "control_messages",
+      "outbox_row_id": 1,
+      "event_id": "52b4ad58b90a8c8562aed519d1a71a6ad2f17bffa461402128e28565ad3e2db6",
+      "message_type": "control",
+      "is_valid": true,
+      "quarantine_reason": null,
+      "payload_hash": "38ece4bc3ce8411bdf4939458a77c8a277a588bf6df95ffc2ef4be4d28ee5b7c",
+      "raw_payload_base64": "eyJjb250cm9sX21lc3NhZ2VfaWQiOiI1MmI0YWQ1OGI5MGE4Yzg1NjJhZWQ1MTlkMWE3MWE2YWQyZjE3YmZmYTQ2MTQwMjEyOGUyODU2NWFkM2UyZGI2IiwiY29udHJvbF9zZXF1ZW5jZSI6MSwiY29udHJvbF90eXBlIjoicmVwbGF5X2N1cnNvciIsInBheWxvYWQiOnsibG9naWNhbF9jdXJzb3JfbGluZSI6MywibG9naWNhbF9jdXJzb3Jfc2VxdWVuY2UiOjIsInNvdXJjZV9vYnNlcnZlZF9hdCI6IjIwMTktMTItMTZUMDA6MDQ6NTkuOTk5OTk4Iiwic3RhdHVzIjoicnVubmluZyJ9LCJwdWJsaXNoZWRfYXQiOiIyMDI2LTExLTA2VDE0OjM5OjQxLjQzMTY5OCswMDowMCIsInJlcGxheV9pZCI6ImZhdWx0LTc0MTA0NWVkNjU2OSIsInNjaGVtYV92ZXJzaW9uIjoiZ3JlZW5ob3VzZS1jb250cm9sLWVudmVsb3BlLXYxIn0="
+    },
+    {
+      "outbox_table": "control_messages",
+      "outbox_row_id": 2,
+      "event_id": "d0646d512ab6a11dd93e59eaffbd3e51d201a1aba6f397f31f3a85d0636e1662",
+      "message_type": "control",
+      "is_valid": true,
+      "quarantine_reason": null,
+      "payload_hash": "b2cf4fd1b8eff46913daae664e7ed0605820b12ea70f5d8359476abbb4bbb807",
+      "raw_payload_base64": "eyJjb250cm9sX21lc3NhZ2VfaWQiOiJkMDY0NmQ1MTJhYjZhMTFkZDkzZTU5ZWFmZmJkM2U1MWQyMDFhMWFiYTZmMzk3ZjMxZjNhODVkMDYzNmUxNjYyIiwiY29udHJvbF9zZXF1ZW5jZSI6MiwiY29udHJvbF90eXBlIjoicmVwbGF5X2N1cnNvciIsInBheWxvYWQiOnsibG9naWNhbF9jdXJzb3JfbGluZSI6NSwibG9naWNhbF9jdXJzb3Jfc2VxdWVuY2UiOjQsInNvdXJjZV9vYnNlcnZlZF9hdCI6IjIwMTktMTItMTZUMDA6MTU6MDAuMDAwMDAyIiwic3RhdHVzIjoicnVubmluZyJ9LCJwdWJsaXNoZWRfYXQiOiIyMDI2LTExLTA2VDE0OjM5OjQxLjQzNTYxMiswMDowMCIsInJlcGxheV9pZCI6ImZhdWx0LTc0MTA0NWVkNjU2OSIsInNjaGVtYV92ZXJzaW9uIjoiZ3JlZW5ob3VzZS1jb250cm9sLWVudmVsb3BlLXYxIn0="
+    },
+    {
+      "outbox_table": "control_messages",
+      "outbox_row_id": 3,
+      "event_id": "8d70982b2ccd8dee66e0d25a5ff009589b68b007f5d2ae970b5a1b0ee677b235",
+      "message_type": "control",
+      "is_valid": true,
+      "quarantine_reason": null,
+      "payload_hash": "2541459ddaba73faa8ad5bd41d183b08a272ef13275124cc4573101e00261583",
+      "raw_payload_base64": "eyJjb250cm9sX21lc3NhZ2VfaWQiOiI4ZDcwOTgyYjJjY2Q4ZGVlNjZlMGQyNWE1ZmYwMDk1ODliNjhiMDA3ZjVkMmFlOTcwYjVhMWIwZWU2NzdiMjM1IiwiY29udHJvbF9zZXF1ZW5jZSI6MywiY29udHJvbF90eXBlIjoicmVwbGF5X2N1cnNvciIsInBheWxvYWQiOnsibG9naWNhbF9jdXJzb3JfbGluZSI6NywibG9naWNhbF9jdXJzb3Jfc2VxdWVuY2UiOjYsInNvdXJjZV9vYnNlcnZlZF9hdCI6IjIwMTktMTItMTZUMDA6MjQ6NTkuOTk5OTk5Iiwic3RhdHVzIjoicnVubmluZyJ9LCJwdWJsaXNoZWRfYXQiOiIyMDI2LTExLTA2VDE0OjM5OjQxLjQ0MTUxMyswMDowMCIsInJlcGxheV9pZCI6ImZhdWx0LTc0MTA0NWVkNjU2OSIsInNjaGVtYV92ZXJzaW9uIjoiZ3JlZW5ob3VzZS1jb250cm9sLWVudmVsb3BlLXYxIn0="
+    },
+    {
+      "outbox_table": "control_messages",
+      "outbox_row_id": 4,
+      "event_id": "326b8ff0f4540804c269b27548f1b0c25b3aebb156852266a08a08c13b440fab",
+      "message_type": "control",
+      "is_valid": true,
+      "quarantine_reason": null,
+      "payload_hash": "4775088dbe32c0f390d20323b91fabe1e3685896a2da8fd2cf12480ef585d5b7",
+      "raw_payload_base64": "eyJjb250cm9sX21lc3NhZ2VfaWQiOiIzMjZiOGZmMGY0NTQwODA0YzI2OWIyNzU0OGYxYjBjMjViM2FlYmIxNTY4NTIyNjZhMDhhMDhjMTNiNDQwZmFiIiwiY29udHJvbF9zZXF1ZW5jZSI6NCwiY29udHJvbF90eXBlIjoicmVwbGF5X2N1cnNvciIsInBheWxvYWQiOnsibG9naWNhbF9jdXJzb3JfbGluZSI6NywibG9naWNhbF9jdXJzb3Jfc2VxdWVuY2UiOjYsInNvdXJjZV9vYnNlcnZlZF9hdCI6IjIwMTktMTItMTZUMDA6MjQ6NTkuOTk5OTk5Iiwic3RhdHVzIjoiY29tcGxldGVkIn0sInB1Ymxpc2hlZF9hdCI6IjIwMjYtMTEtMDZUMTQ6Mzk6NDEuNDQzMjE1KzAwOjAwIiwicmVwbGF5X2lkIjoiZmF1bHQtNzQxMDQ1ZWQ2NTY5Iiwic2NoZW1hX3ZlcnNpb24iOiJncmVlbmhvdXNlLWNvbnRyb2wtZW52ZWxvcGUtdjEifQ=="
+    },
+    {
+      "outbox_table": "control_messages",
+      "outbox_row_id": 5,
+      "event_id": "f7e940dc0e78fde6a91fd6c1d9699bee88a7919ef973cad4fa3ef357f6794aae",
+      "message_type": "control",
+      "is_valid": true,
+      "quarantine_reason": null,
+      "payload_hash": "5235ca95116bfc28492556df764b4866ca677069ff5f583ae76288f2c1e33181",
+      "raw_payload_base64": "eyJjb250cm9sX21lc3NhZ2VfaWQiOiJmN2U5NDBkYzBlNzhmZGU2YTkxZmQ2YzFkOTY5OWJlZTg4YTc5MTllZjk3M2NhZDRmYTNlZjM1N2Y2Nzk0YWFlIiwiY29udHJvbF9zZXF1ZW5jZSI6NSwiY29udHJvbF90eXBlIjoiY29tcGxldGlvbl9tYW5pZmVzdCIsInBheWxvYWQiOnsiZW1pdHRlZF90b3RhbF9tZXNzYWdlcyI6MCwiZW1pdHRlZF91bmlxdWVfZXZlbnRzIjowLCJleHBlY3RlZF91bmlxdWVfZXZlbnRzIjo2LCJmYXVsdF9zdW1tYXJ5Ijp7ImNvbmZsaWN0cyI6MCwiZGVsYXlzIjowLCJkcm9wcyI6NiwiZHVwbGljYXRlcyI6MH0sInBheWxvYWRfY2hlY2tzdW0iOiIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIiwicmVjb25jaWxpYXRpb25fcmVxdWVzdGVkIjp0cnVlLCJyZWplY3RlZF9zb3VyY2Vfcm93cyI6MH0sInB1Ymxpc2hlZF9hdCI6IjIwMjYtMTEtMDZUMTQ6Mzk6NDEuNDQzOTg0KzAwOjAwIiwicmVwbGF5X2lkIjoiZmF1bHQtNzQxMDQ1ZWQ2NTY5Iiwic2NoZW1hX3ZlcnNpb24iOiJncmVlbmhvdXNlLWNvbnRyb2wtZW52ZWxvcGUtdjEifQ=="
+    }
+  ],
+  "expected_valid_minutes": "0",
+  "observed_temperature_out_minutes": "0",
+  "observed_ec_out_minutes": "0",
+  "fixture_oracle_passed": true
+}

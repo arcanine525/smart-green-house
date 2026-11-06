@@ -1,0 +1,9 @@
+{
+  "replay_id": "spark-restart-68d74321fae0",
+  "independent_processes": 2,
+  "checkpoint_reused": true,
+  "deliveries": 4,
+  "processed_batches": 2,
+  "unique_events": 1,
+  "complete": true
+}

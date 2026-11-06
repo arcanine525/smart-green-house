@@ -13,6 +13,7 @@ Mỗi báo cáo ghi phạm vi, dữ liệu, điều kiện chạy và giới h�
 
 ## Kiến trúc và hiệu năng
 
+- [Nghiệm thu sensor replay](sensor-replay.md): parity, fault matrix, recovery và độ trễ.
 - [UI sensor replay](sensor-replay-ui.md): scope, quality, trạng thái và CSV.
 - [Structured Streaming replay](sensor-streaming.md): checkpoint, publication, quality và kiểm tra cục bộ.
 - [Kiến trúc Kimball thay thế](kimball.md): schema, ETL, adapter và parity với Hybrid.
