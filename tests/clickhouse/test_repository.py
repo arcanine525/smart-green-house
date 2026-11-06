@@ -101,6 +101,10 @@ class RepositoryTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'Stale'):
             self.repo.append_record(self.scope,changed,revision=2,correction_id='stale',
                 correction={'actor':'reviewer','evidence':'fixture','previous_revision':'wrong'})
+        serial_edit=copy.deepcopy(changed); serial_edit['values']['time']='43893'
+        with self.assertRaisesRegex(ValueError,'identity'):
+            self.repo.append_record(self.scope,serial_edit,revision=2,correction_id='bad-serial',
+                correction={'actor':'reviewer','evidence':'fixture','previous_revision':revision})
         changed['source_timestamp']='2020-03-03T00:00:00'
         with self.assertRaisesRegex(ValueError,'identity'):
             self.repo.append_record(self.scope,changed,revision=2,correction_id='bad-time',

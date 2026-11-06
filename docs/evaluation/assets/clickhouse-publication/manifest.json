@@ -1,0 +1,35 @@
+{
+  "source_head": "07c8f96",
+  "status": "passed",
+  "tests_passed": 22,
+  "scope": "T42 local writer fence and publication coordinator with actual ClickHouse/OS processes and a typed fixture mart",
+  "checks": [
+    "fsynced pending query fence, unique wire query identity",
+    "lost HTTP response after actual server completion",
+    "unknown query without terminal evidence retains fence",
+    "SIGKILL writer while INSERT observed active on server; terminal-log reconciliation before next writer",
+    "two independent publisher processes serialize same workflow to one publication ID",
+    "resume after PREPARING/WRITING/VERIFIED/COMPLETE without exposing partial data",
+    "incomplete bundle refused until verified",
+    "crash after real typed mart write; retry has two physical rows but one verified semantic row",
+    "pin previous publication across new publication/config versions",
+    "runtime migrations share writer fence",
+    "ingestion/Decimal/config/correction regressions pass"
+  ],
+  "limits": [
+    "Single local filesystem/host, no distributed locking",
+    "Typed fixture bundle is not a completed BR mart",
+    "Full AGC, real BR queries, sensor checkpoint and backup/restore remain gated by later tasks",
+    "Unknown terminal evidence fails closed; no automatic marker deletion or blind retry"
+  ],
+  "files": [
+    {
+      "file": "tests.log",
+      "sha256": "1222dab30423a97fd045de8b8784b34919ea2cf0ab3e7417d948ac095724160c"
+    },
+    {
+      "file": "result.json",
+      "sha256": "ff063d3d4a4809673b3b05795999e592b81eb86d8e33dec792c9be3f5f445c4c"
+    }
+  ]
+}

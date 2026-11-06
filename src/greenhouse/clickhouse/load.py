@@ -37,10 +37,9 @@ def verified_snapshot(root):
 
 
 def load_snapshot(client, coordinator, raw, output, scope, run_id=None):
-    from greenhouse.clickhouse.client import insert_rows
     from greenhouse.clickhouse.coordinator import writer_lock
     from greenhouse.clickhouse.encoding import canonical_json
-    migrate(client)
+    migrate(client,coordinator)
     manifest=verified_snapshot(raw)
     folder,ingestion=ingest_snapshot(raw,manifest,output,run_id=run_id)
     if ingestion['status'] not in ('completed','completed_with_issues'):
@@ -70,13 +69,13 @@ def load_snapshot(client, coordinator, raw, output, scope, run_id=None):
                             'source_record_id':record['source_record_id'],'source_file':record['source_file'],
                             'line_number':record['line_number'],'disposition':disposition,
                             'content_hash':digest(record),'payload':canonical_json(record)}
-                        with writer_lock(coordinator):
-                            insert_rows(client,'source_disposition',[row],query_id='disposition-'+digest(row))
+                        with writer_lock(coordinator,client):
+                            repo._insert('source_disposition',[row],query_id='disposition-'+digest(row))
     canonical=repo.canonical_records(scope,revision_ids=membership)
     membership_hash=digest(sorted(r['revision_id'] for r in canonical))
-    with writer_lock(coordinator):
-        insert_rows(client,'load_member',[{'scope_id':scope,'load_id':ingestion['run_id'],'revision_id':i} for i in membership],query_id='members-'+ingestion['run_id'])
-        insert_rows(client,'load_receipt',[{'scope_id':scope,'load_id':ingestion['run_id'],
+    with writer_lock(coordinator,client):
+        repo._insert('load_member',[{'scope_id':scope,'load_id':ingestion['run_id'],'revision_id':i} for i in membership],query_id='members-'+ingestion['run_id'])
+        repo._insert('load_receipt',[{'scope_id':scope,'load_id':ingestion['run_id'],
             'schema_version':SCHEMA_VERSION,'input_hash':digest(manifest),
             'counts_json':canonical_json(dict(counts)),'membership_checksum':membership_hash,'membership_count':len(membership)}],query_id='load-'+ingestion['run_id'])
     return {'scope_id':scope,'load_id':ingestion['run_id'],'status':'candidate_loaded',

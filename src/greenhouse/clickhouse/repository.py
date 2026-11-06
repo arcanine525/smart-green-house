@@ -4,9 +4,6 @@ Load receipts gate ingestion completion. Publication verification follows at T42
 Callers reconcile ambiguous server writes before allowing another attempt.
 """
 import json
-from uuid import uuid4
-
-from greenhouse.clickhouse.client import insert_rows
 from greenhouse.clickhouse.coordinator import writer_lock
 from greenhouse.clickhouse.encoding import canonical_json, decimal_projection, digest, source_clock_us
 
@@ -15,15 +12,21 @@ class Repository:
     def __init__(self, client, coordinator):
         self.client, self.coordinator = client, coordinator
 
-    def _insert(self, table, rows):
-        insert_rows(self.client, table, rows, query_id='core-' + uuid4().hex)
+    def _insert(self, table, rows, *, query_id=None):
+        if not rows:
+            return
+        if not table.replace('_','').isalnum() or not table.islower():
+            raise ValueError('Invalid internal table')
+        from greenhouse.clickhouse.journal import execute_write
+        execute_write(self.client,self.coordinator,'INSERT INTO '+table+' FORMAT JSONEachRow\n'+
+            '\n'.join(canonical_json(row) for row in rows),query_id=query_id)
 
     def register_configuration(self, kind, scope, version, request, payload):
         if not all(isinstance(v,str) and v.strip() for v in (kind,scope,version,request)):
             raise ValueError('Configuration requires explicit identity')
         content = canonical_json(payload)
         hashed = digest(payload)
-        with writer_lock(self.coordinator):
+        with writer_lock(self.coordinator, self.client):
             existing = self.client.query('''SELECT DISTINCT kind,scope_id,version_id,request_id,content_hash,payload
                 FROM configuration_envelope WHERE (kind={kind:String} AND scope_id={scope:String}
                 AND version_id={version:String}) OR request_id={request:String}''',
@@ -80,7 +83,7 @@ class Repository:
             payload['correction_audit'] = correction | {'correction_id':correction_id}
         hashed=digest(payload)
         key={'scope':scope,'kind':kind,'compartment':compartment,'logical':record['logical_key']}
-        with writer_lock(self.coordinator):
+        with writer_lock(self.coordinator, self.client):
             rows=self.client.query('''SELECT DISTINCT revision,revision_id,content_hash,payload,quality_policy_version FROM source_revision
                 WHERE scope_id={scope:String} AND record_type={kind:String} AND compartment_id={compartment:String}
                 AND logical_key={logical:String} ORDER BY revision''',key)
@@ -102,7 +105,10 @@ class Repository:
                 if correction['previous_revision']!=previous['revision_id']:
                     raise ValueError('Stale correction previous revision')
                 immutable=set(payload)-{'values','null_reasons','correction_audit'}
-                if any(payload[k]!=original.get(k) for k in immutable) or set(payload['values'])!=set(original['values']):
+                if (any(payload[k]!=original.get(k) for k in immutable)
+                        or set(payload['values'])!=set(original['values'])
+                        or payload['values']['time']!=original['values']['time']
+                        or payload['null_reasons'].get('time')!=original['null_reasons'].get('time')):
                     raise ValueError('Correction cannot change source identity, time or measure set')
                 from greenhouse.clickhouse.encoding import decimal_text
                 normalize=lambda v: None if v is None else decimal_text(v)

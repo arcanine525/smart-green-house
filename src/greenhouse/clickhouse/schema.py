@@ -1,6 +1,10 @@
 """Versioned candidate core DDL; explicit typed grain, no PostgreSQL dependency."""
 SCHEMA_VERSION = 'ch-core-v1'
 DDL = (
+    '''CREATE TABLE IF NOT EXISTS publication_state (
+        scope_id String, workflow_id String, publication_id String, generation UInt64,
+        stage LowCardinality(String), content_hash FixedString(64), payload String
+    ) ENGINE=MergeTree ORDER BY (scope_id,workflow_id,stage,content_hash)''',
     '''CREATE TABLE IF NOT EXISTS source_revision (
         scope_id String, snapshot_id String, record_type LowCardinality(String),
         compartment_id LowCardinality(String), logical_key String,
@@ -37,10 +41,17 @@ DDL = (
 )
 
 
-def migrate(client):
-    for statement in DDL:
-        client.execute(statement)
-    # Compatible additions for development databases created by the initial candidate.
-    client.execute('ALTER TABLE load_receipt ADD COLUMN IF NOT EXISTS membership_checksum String')
-    client.execute('ALTER TABLE load_receipt ADD COLUMN IF NOT EXISTS membership_count UInt64')
-    return SCHEMA_VERSION
+def migrate(client, coordinator=None):
+    """Runtime migrations share the write fence; no-root mode is maintenance only."""
+    def apply(execute):
+        for statement in DDL:
+            execute(statement)
+        execute('ALTER TABLE load_receipt ADD COLUMN IF NOT EXISTS membership_checksum String')
+        execute('ALTER TABLE load_receipt ADD COLUMN IF NOT EXISTS membership_count UInt64')
+        return SCHEMA_VERSION
+    if coordinator is None:
+        return apply(client.execute)
+    from greenhouse.clickhouse.coordinator import writer_lock
+    from greenhouse.clickhouse.journal import execute_write
+    with writer_lock(coordinator,client):
+        return apply(lambda sql:execute_write(client,coordinator,sql))

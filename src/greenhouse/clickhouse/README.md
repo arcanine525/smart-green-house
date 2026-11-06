@@ -47,5 +47,4 @@ docker compose -f compose.clickhouse.yaml -p greenhouse-ch-dev run --rm --no-dep
 Chuẩn bị thư mục `/candidate/coordinator` trong mount, quyền ghi UID 10001 và
 filesystem local hỗ trợ flock trước khi chạy; raw/output phải tách nhau. Thay
 SNAPSHOT_SHA/SCOPE bằng manifest đã khóa; export config/scenario theo API repository.
-Đây là nạp candidate, không làm dashboard đọc dữ liệu chưa publish. Unknown-write
-reconciliation/concurrent pipeline và warehouse recovery hoàn chỉnh thuộc T42.
+Đây là nạp candidate, không làm dashboard đọc dữ liệu chưa publish. Pending write fence và publication coordinator được mô tả trong [runbook](../../../docs/implementation/clickhouse-publication.md); full warehouse/sensor restore còn có gate riêng ở T50.
