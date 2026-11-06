@@ -44,3 +44,27 @@ không build/pull trong smoke. Lệnh được chạy sau bước chuẩn bị i
 container là internal nhưng host không bị ngắt Internet. Các bài dùng fixture
 synthetic; đây không chứng minh full AGC trên clone mới hoặc restore checkpoint
 thật. Những bước đó vẫn cần đủ dung lượng và diễn tập riêng.
+
+## Diễn tập sensor backup/restore synthetic
+
+Ngày 2026-11-06, `./scripts/test_sensor_backup_restore.sh` tạo hai project
+Compose và hai database PostgreSQL test riêng. Fixture gồm hai event Climate
+tổng hợp, manifest/checksum, **SQLite outbox và spool thật**, raw-ready và một
+Spark Structured Streaming checkpoint thật. Test giữ một SQLite read snapshot,
+commit dữ liệu vào WAL rồi kết thúc process đột ngột để tái hiện trạng thái
+WAL/SHM còn trên đĩa; không mô phỏng mất điện thực tế.
+
+Sau khi writer/Spark dừng, test dump PostgreSQL và lưu **cùng thời điểm** các
+file synthetic; phục hồi sang project/database mới với cùng hostname nội bộ
+`db`, database/user và đường dẫn source/checkpoint trong container. Ở bản phục
+hồi, bản sao chỉ có SQLite base file có **0 row** telemetry/spool; khi kèm WAL,
+SQLite `integrity_check` đạt và phục hồi **2 telemetry** cùng **6 spool rows**.
+Spark resume checkpoint, báo **batch ID 1 với 5 input rows**, thay vì xử lý lại
+batch ID 0; DB cuối có 2 batch, 6 delivery, 2 event duy nhất và publication
+complete với checksum khớp. [Kết quả máy đọc được](assets/local-repro/sensor-backup-restore-20261106.json).
+
+Đây là một lượt synthetic nhỏ dùng các thư mục bind được tar, không chứng minh
+restore toàn bộ **named volumes**, broker persistence hoặc AGC thật. Các kiểm
+tra broker restart riêng được ghi ở [sensor replay](sensor-replay.md). Script từ
+chối tên project/volume/network đã tồn tại và chỉ dọn các project test của nó;
+backup state và dump test ở `tmp/sensor-backup-restore/<run-id>`.

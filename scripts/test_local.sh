@@ -23,4 +23,6 @@ printf 'Running UI and export tests...\n'
 docker compose --profile test run --rm --no-deps ui-test python -m pytest tests/ui -q --tb=short 2>&1 | tee "$result_dir/ui.log"
 printf 'Running isolated sensor acceptance and real process restarts...\n'
 ./scripts/test_sensor_acceptance.sh 2>&1 | tee "$result_dir/sensor.log"
+printf 'Running synthetic sensor backup/restore...\n'
+./scripts/test_sensor_backup_restore.sh 2>&1 | tee "$result_dir/sensor-backup.log"
 printf 'All local checks passed. Evidence: %s\n' "$result_dir"

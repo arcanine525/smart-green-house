@@ -6,6 +6,8 @@
   chuẩn bị câu hỏi, đáp án và context theo [protocol](../docs/evaluation/usability.md).
 - `check_submission.sh`: kiểm cấu trúc PDF/video và Compose theo Group ID;
   không thay thế xem thủ công nội dung hoặc kiểm tra quyền truy cập.
+- `test_sensor_backup_restore.sh`: diễn tập restore synthetic với SQLite WAL/SHM,
+  PostgreSQL và Spark checkpoint thật trên hai database thử nghiệm.
 - `test_backup_restore.sh`: kiểm tra dump/restore PostgreSQL và sao chép raw/volume
   synthetic trên project Docker tạm; không thay thế diễn tập phục hồi AGC thật.
 - `test_effectiveness.sh`: chạy sáu walkthrough UI trên fixture với JUnit XML;

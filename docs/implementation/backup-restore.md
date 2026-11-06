@@ -1,9 +1,12 @@
 # Backup và khôi phục local
 
-Quy trình dưới đây đã được smoke test với DB, raw và một volume tổng hợp bằng
-`./scripts/test_backup_restore.sh` (2026-11-06: dump và restore một hàng,
-copy manifest và một marker volume đều khớp); chưa có bằng chứng khôi phục end-to-end AGC,
-SQLite WAL hoặc checkpoint thật, và không bảo đảm snapshot nhất quán khi còn writer. Không dùng
+Quy trình đã được smoke test trên dữ liệu tổng hợp: dump/restore DB, raw và
+một named-volume marker bằng `./scripts/test_backup_restore.sh`; thêm SQLite
+WAL/SHM của outbox/spool và Spark checkpoint thật bằng
+`./scripts/test_sensor_backup_restore.sh`. Lượt sensor dùng **bind directory**
+synthetic, không phải restore toàn bộ named volumes hay AGC thật; xem
+[bằng chứng và giới hạn](../evaluation/local-repro.md#diễn-tập-sensor-backuprestore-synthetic).
+Quy trình không bảo đảm snapshot nhất quán khi còn writer. Không dùng
 để ghi đè project/volume đang có dữ liệu. Database, raw và checkpoint cần được
 lưu cùng một mốc dừng; riêng database dump không đủ để tiếp tục sensor replay.
 
@@ -97,8 +100,12 @@ done
 ```
 
 Không phục hồi riêng checkpoint từ một mốc khác với database/spool. Giữ nguyên
-stream ID, replay scope và checkpoint generation khi resume; thay đổi chúng
-không phải cùng lượt replay. Khởi chạy app và kiểm tra publication, raw hash,
+stream ID, replay scope, checkpoint generation, đường dẫn ready trong container
+và endpoint database (`host`, `port`, `dbname`, `user`) khi resume: chúng được
+pin trong marker checkpoint. Compose mới vẫn có thể dùng hostname nội bộ `db`
+và đường dẫn `/data/ready` như cũ. Nếu một identity thay đổi, không tự sửa marker
+để ép resume; cần một kế hoạch tái dựng và generation mới từ dữ liệu đã bảo toàn.
+Thay đổi các identity này không phải cùng lượt replay. Khởi chạy app và kiểm tra publication, raw hash,
 KPI/CSV rồi thực hiện replay resume trên bản sao. Đối chiếu manifest và số lượng
 receipt/cursor; chỉ sau khi kiểm tra thành công mới xem đây là bản backup sử dụng
 được. Nếu checkpoint/spool thiếu hoặc không nhất quán, giữ bản gốc và đánh giá
