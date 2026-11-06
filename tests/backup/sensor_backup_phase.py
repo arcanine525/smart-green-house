@@ -78,7 +78,7 @@ def seed():
     lines = (packed_dir / packed.file_name).read_text().splitlines()
     assert len(lines) >= 4
     ready = ROOT / 'ready'
-    ready.mkdir()
+    ready.mkdir(exist_ok=True)
     (ready / 'batch-0001.jsonl').write_text(lines[0] + '\n')
     (ROOT / 'pending.json').write_text(json.dumps(lines[1:]))
     metadata = {'replay_id': replay_id, 'scope_id': simulator.data_scope_id,

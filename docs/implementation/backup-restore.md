@@ -3,7 +3,7 @@
 Quy trình đã được smoke test trên dữ liệu tổng hợp: dump/restore DB, raw và
 một named-volume marker bằng `./scripts/test_backup_restore.sh`; thêm SQLite
 WAL/SHM của outbox/spool và Spark checkpoint thật bằng
-`./scripts/test_sensor_backup_restore.sh`. Lượt sensor dùng **bind directory**
+`./scripts/test_sensor_backup_restore.sh`. Lượt sensor dùng bốn **named volumes**
 synthetic, không phải restore toàn bộ named volumes hay AGC thật; xem
 [bằng chứng và giới hạn](../evaluation/local-repro.md#diễn-tập-sensor-backuprestore-synthetic).
 Quy trình không bảo đảm snapshot nhất quán khi còn writer. Không dùng

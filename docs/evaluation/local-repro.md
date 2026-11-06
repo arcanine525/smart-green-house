@@ -90,3 +90,17 @@ hai event, Spark tiếp tục batch 1 và checksum khớp; [kết quả restore]
 Lượt này chưa chạy full pipeline AGC vào DB mới vì dung lượng host còn khoảng
 5,4 GiB; cũng chưa chứng minh build dependency không dùng cache, ngắt Internet
 của toàn host hoặc restore dữ liệu/named volume thật. Các giới hạn này vẫn mở.
+
+## Khôi phục sensor qua named volumes synthetic
+
+Ngày 2026-11-07 (17:09 UTC ngày 2026-11-06), bài diễn tập dùng hai project
+test riêng và tar/restore bốn named volumes: `simulator_outbox`,
+`collector_spool`, `raw_ready`, `spark_checkpoints`. Raw và metadata synthetic
+được lưu riêng trên bind directory; PostgreSQL được dump/restore. Sau phục hồi,
+SQLite đọc được WAL/SHM với 2 telemetry và 6 delivery; Spark tiếp tục batch 1
+với 5 dòng, publication có 2 event duy nhất và checksum khớp. Các project và
+volume test đã được dọn. [Kết quả](assets/local-repro/sensor-named-volumes-20261107.json).
+
+Đây là dữ liệu synthetic, không kiểm chứng broker persistence, volume `outputs`,
+hay khôi phục dữ liệu AGC và sensor thật của người dùng. Môi trường cũng dùng
+image đã build sẵn; T28 vẫn chưa hoàn tất.
