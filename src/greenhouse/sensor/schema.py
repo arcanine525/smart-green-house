@@ -456,6 +456,13 @@ def validate_control_envelope(envelope: dict[str, Any]) -> None:
             raise ValidationError("logical_cursor_sequence must be int >= 0")
         if payload["source_observed_at"] is not None and not isinstance(payload["source_observed_at"], str):
             raise ValidationError("source_observed_at in replay_cursor must be ISO string or None")
+        if payload["source_observed_at"] is not None:
+            try:
+                source_time = datetime.fromisoformat(payload["source_observed_at"])
+            except ValueError as err:
+                raise ValidationError("source_observed_at in replay_cursor must be an ISO timestamp") from err
+            if source_time.tzinfo is not None:
+                raise ValidationError("source_observed_at in replay_cursor must be source-naive")
 
     elif ctype == "completion_manifest":
         required_manifest = {

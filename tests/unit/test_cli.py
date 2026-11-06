@@ -23,15 +23,16 @@ def environment(tmp_path):
     }
 
 
-@pytest.mark.parametrize("command,owner", [
-    ("simulate", "T32"),
-    ("collect", "T33"), ("stream", "T34"),
-])
-def test_pending_commands_fail_without_claiming_success(command, owner):
-    result = subprocess.run([sys.executable, "-m", "greenhouse", command], capture_output=True, text=True)
-    assert result.returncode == 2
-    assert "chưa hiện thực" in result.stderr and owner in result.stderr
-    assert not result.stdout
+def test_stream_requires_explicit_identity(monkeypatch):
+    from greenhouse.sensor.stream_cli import stream_command
+    for key in ('GREENHOUSE_STREAM_ID', 'GREENHOUSE_CHECKPOINT_GENERATION',
+                'GREENHOUSE_REPLAY_ID', 'GREENHOUSE_REPLAY_SCOPE_ID',
+                'GREENHOUSE_REPLAY_CYCLE_ID', 'GREENHOUSE_REPLAY_COMPARTMENT_ID',
+                'GREENHOUSE_REPLAY_QUALITY_POLICY'):
+        monkeypatch.delenv(key, raising=False)
+    with pytest.raises(SystemExit) as error:
+        stream_command([])
+    assert error.value.code == 2
 
 
 @pytest.mark.parametrize("changes", [

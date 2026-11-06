@@ -14,6 +14,7 @@ Implements T33 acceptance criteria:
 - Publishes collector receipts carrying immutable outbox table + row ID + payload hash.
 """
 
+import base64
 from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
@@ -800,6 +801,7 @@ class BatchManager:
                         "compartment_id": d.compartment_id,
                         "event_id": d.event_id,
                         "raw_bytes_len": len(d.payload_bytes),
+                        "raw_payload_base64": base64.b64encode(d.payload_bytes).decode("ascii"),
                         "payload": parsed_payload,
                     }
                     line_bytes = json.dumps(line_dict, sort_keys=True, ensure_ascii=False).encode("utf-8") + b"\n"

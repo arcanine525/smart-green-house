@@ -67,4 +67,14 @@ Các kiểm thử quan trọng: crash giữa staging/publication, sau commit tr�
 
 Publication transaction có hook cho T09 materialize marts trên **cùng connection**; synthetic test chứng minh hook rollback cùng membership và pointer. `publication_seal` chốt membership checksum/count và artifact checksum; publication cũ bất biến. Rerun không đổi chọn lại publication cũ và không gọi hook. Step completed được kiểm checksum trước skip, attempt lỗi có batch path mới và giữ mọi pending/source để chẩn đoán. Spark chỉ staging, không coi JDBC nhiều connection là atomic publication.
 
-Raw snapshot khác là data scope khác, không merge/matching hoặc tự mở rộng basis. Correction tường minh trong locked snapshot có old/new/evidence/actor/version, chỉ append revision và giữ raw identity. Các cơ chế processed_batch, episodes, late sensor và streaming trong thiết kế trên thuộc các task sau; batch hiện chưa materialize KPI.
+Raw snapshot khác là data scope khác, không merge/matching hoặc tự mở rộng basis. Correction tường minh trong locked snapshot có old/new/evidence/actor/version, chỉ append revision và giữ raw identity. Các cơ chế processed_batch và replay publication được mô tả trong mục streaming bên dưới; KPI episode được đánh giá từ membership đã pin.
+
+
+## Streaming replay đã triển khai
+
+Stream đọc các file ready, ghi delivery và membership bất biến, sau đó đổi
+pointer replay trong cùng transaction với batch. Truy vấn BR-01/03 trên
+publication pin tái sử dụng quality và rule-duration engine của batch, tính
+đến cursor theo source time; event đến trễ tạo publication mới. Chi tiết
+và giới hạn: [đánh giá stream](../evaluation/sensor-streaming.md). Live
+view và fault matrix vẫn cần T35–T36.

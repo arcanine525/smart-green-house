@@ -13,6 +13,7 @@ Mỗi báo cáo ghi phạm vi, dữ liệu, điều kiện chạy và giới h�
 
 ## Kiến trúc và hiệu năng
 
+- [Structured Streaming replay](sensor-streaming.md): checkpoint, publication, quality và kiểm tra cục bộ.
 - [Kiến trúc Kimball thay thế](kimball.md): schema, ETL, adapter và parity với Hybrid.
 - [Benchmark Hybrid/Kimball](performance.md): pipeline mới/rerun/rebuild, storage, workload sáu BR và COPY so với INSERT; kèm số đo thô và lệnh tái lập.
 

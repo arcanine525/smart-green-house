@@ -18,3 +18,4 @@ addopts = "-p no:cacheprovider"
 
 [tool.setuptools.package-data]
 "greenhouse.db" = ["migrations/*.sql", "sql/*.sql"]
+"greenhouse.sensor" = ["*.schema.json"]

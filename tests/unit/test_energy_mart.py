@@ -290,7 +290,7 @@ def test_additive_upgrade_preserves_basis_versions_and_old_migration_checksums(c
             applications = conn.execute('SELECT * FROM config.basis_application ORDER BY basis_version_id').fetchall()
             checksums = conn.execute('SELECT version,checksum FROM meta.schema_migration ORDER BY version').fetchall()
             result = migrate(conn)
-            assert result['applied'] == ['011_energy_mart.sql', '012_energy_cost.sql', '013_energy_cost_seal.sql', '014_scenario_payload.sql', '015_tariff_profile_compartment_unique.sql'] and len(result['skipped']) == 10
+            assert result['applied'] == ['011_energy_mart.sql', '012_energy_cost.sql', '013_energy_cost_seal.sql', '014_scenario_payload.sql', '015_tariff_profile_compartment_unique.sql', '016_sensor_stream.sql'] and len(result['skipped']) == 10
             assert conn.execute('SELECT * FROM config.area_basis_version ORDER BY basis_version_id').fetchall() == versions
             assert conn.execute('SELECT * FROM config.basis_application ORDER BY basis_version_id').fetchall() == applications
             assert conn.execute("SELECT version,checksum FROM meta.schema_migration WHERE version<'011' ORDER BY version").fetchall() == checksums

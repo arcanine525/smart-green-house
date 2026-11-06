@@ -21,24 +21,13 @@ INSERT INTO core.harvest(revision_id,observed_at,prod_a_kg_m2,prod_b_kg_m2)
 
 INSERT INTO core.measure_quality
  SELECT r.revision_id,r.record_type,v.measure_code,p.policy_version_id,
- CASE WHEN EXISTS(SELECT 1 FROM jsonb_array_elements(i.issues) e WHERE e->>'code'='invalid_numeric' AND e->>'column'=v.measure_code) THEN 'invalid'
-      WHEN v.value IS NULL THEN 'missing'
-      WHEN p.definition->'nonnegative' ? v.measure_code AND v.value<0 THEN 'invalid'
-      WHEN p.definition->'suspect_zero' ? v.measure_code AND v.value=0 THEN 'suspect'
-      ELSE 'accepted' END,
- CASE WHEN v.value IS NULL OR (p.definition->'off_mode_zero' ? v.measure_code AND v.value=0)
- THEN 'unknown' ELSE 'applicable' END,
- CASE WHEN EXISTS(SELECT 1 FROM jsonb_array_elements(i.issues) e WHERE e->>'code'='invalid_numeric' AND e->>'column'=v.measure_code) THEN 'invalid_numeric'
-      WHEN v.value IS NULL THEN coalesce(i.null_reasons->>v.measure_code,'missing_source_value')
-      WHEN p.definition->'nonnegative' ? v.measure_code AND v.value<0 THEN 'negative_quantity'
-      WHEN p.definition->'suspect_zero' ? v.measure_code AND v.value=0 THEN 'demo_zero_ph_suspect'
-      WHEN p.definition->'off_mode_zero' ? v.measure_code AND v.value=0 THEN 'off_mode_unverified'
-      ELSE NULL END
+ q.verdict->>'status',q.verdict->>'applicability',q.verdict->>'reason'
  FROM core_input i JOIN core_batch_revision r USING(source_record_id)
  JOIN meta.pipeline_run pr ON pr.run_id=r.run_id
  JOIN config.quality_policy_version p ON p.policy_version_id=pr.quality_policy_version
  JOIN config.measure_definition m ON m.record_type=r.record_type
  CROSS JOIN LATERAL (SELECT m.measure_code,(i.vals->>m.measure_code)::numeric AS value) v
+ CROSS JOIN LATERAL (SELECT sensor_stream.measure_verdict(p.definition,i.issues,i.null_reasons,v.measure_code,v.value) AS verdict) q
  WHERE r.run_id=(SELECT run_id FROM core_input LIMIT 1);
 
 INSERT INTO meta.dq_issue

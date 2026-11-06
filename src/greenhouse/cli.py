@@ -9,9 +9,7 @@ import tempfile
 
 from greenhouse.settings import Settings
 
-PENDING = {
-    "stream": "T34 (Structured Streaming)",
-}
+PENDING = {}
 
 
 def setup_environment(settings):
@@ -38,11 +36,14 @@ def setup_environment(settings):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="python -m greenhouse")
-    parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", "migrate", "load-core", "explain-core", "run-pipeline", "transform", "publish", "correct-core", "lineage", "simulate", "collect", *PENDING])
+    parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", "migrate", "load-core", "explain-core", "run-pipeline", "transform", "publish", "correct-core", "lineage", "simulate", "collect", "stream", *PENDING])
     arguments, rest = parser.parse_known_args(argv)
     if arguments.command in PENDING:
         print(f"{arguments.command}: chưa hiện thực — thuộc task sau: {PENDING[arguments.command]}", file=sys.stderr)
         return 2
+    if arguments.command == "stream":
+        from greenhouse.sensor.stream_cli import stream_command
+        return stream_command(rest)
     if arguments.command == "simulate":
         from greenhouse.sensor.cli import simulate_command
         return simulate_command(rest)

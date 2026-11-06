@@ -1,6 +1,6 @@
 # Môi trường local Docker-first
 
-Scaffold T04 và snapshot T05 mở rộng trực tiếp Compose/Dockerfile của [ADR-002](../adr/002-container-stack-compatibility.md). Host chỉ cần Docker Engine + Compose v2 trở lên. Không có Python/Java/Spark trên host trong các lệnh runtime. Snapshot/inventory AGC đã có lệnh riêng; typed DB pipeline, migrations nghiệp vụ và sensor replay vẫn chưa hiện thực.
+Scaffold T04 và snapshot T05 mở rộng trực tiếp Compose/Dockerfile của [ADR-002](../adr/002-container-stack-compatibility.md). Host chỉ cần Docker Engine + Compose v2 trở lên. Không có Python/Java/Spark trên host trong các lệnh runtime. Snapshot/inventory, database pipeline, simulator, collector và stream replay đều có lệnh local; live view và nghiệm thu end-to-end tiếp tục ở T35–T36.
 
 ## Clone mới → build → setup → test → prototype
 
@@ -70,7 +70,7 @@ Giữ nguyên baseline T02 ở ADR-002: Python 3.12.12, Temurin JRE 17.0.17+10, 
 
 Build tools cũng pin pip 25.2, setuptools 80.9.0, wheel 0.45.1. Khóa phiên bản không phải bit-for-bit reproducibility; lock chưa pin hash mọi Python artifact và apt phụ thuộc repository. Dependency closure UI được resolve trong container Linux arm64 rồi pin; chưa kiểm chứng runtime amd64.
 
-## CLI và ranh giới chưa hiện thực
+## CLI và phạm vi hiện tại
 
 Một entrypoint: `python -m greenhouse <command>` bên trong container. Ví dụ:
 
@@ -93,9 +93,9 @@ docker compose --profile test run --rm test-runner
 | run-pipeline / publish | Bốn step có trạng thái, resume, local Spark staging/profile, một transaction publish; [contract](../../src/greenhouse/db/README.md#workflow-chạy-lại-và-publication) | Marts/KPI T09+ |
 | lineage / correct-core | Kiểm hash từ revision về raw / correction có audit và revision mới | Không sửa raw/time hoặc tự mở rộng basis |
 | transform | Alias run-pipeline: cả publish transaction và water mart hook mặc định | UI T10 / nghiệm thu BR-02 T11 |
-| simulate | Exit 2, “chưa hiện thực” | T32 |
-| collect | Exit 2, “chưa hiện thực” | T33 |
-| stream | Exit 2, “chưa hiện thực” | T34 |
+| simulate | Replay snapshot vào outbox bền vững, có fault injection tùy chọn | Xem [sensor](../../src/greenhouse/sensor/README.md) |
+| collect | Nhận MQTT và ghi spool/raw-ready bền vững | Xem [sensor](../../src/greenhouse/sensor/README.md) |
+| stream | Đọc raw-ready bằng Spark, ghi PostgreSQL và publication replay | Cần scope và checkpoint tường minh; [hướng dẫn](../../src/greenhouse/sensor/README.md) |
 
 Profile sensor có cấu hình hợp lệ nhưng không có simulator/collector/streaming hoạt động. Các volumes đã được phân tách, chưa chứng minh durable ACK, recovery hoặc batch–stream reconciliation. Không dùng container stub đã exit làm minh chứng tính năng hoàn tất.
 

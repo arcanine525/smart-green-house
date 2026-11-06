@@ -31,7 +31,7 @@ def core_database():
     target = kwargs | {"dbname": name}
     with psycopg.connect(**target) as connection:
         # The additive energy migration preserves checksums of 001..010.
-        assert len(migrate(connection)["applied"]) == 15
+        assert len(migrate(connection)["applied"]) == 16
     try:
         yield target
     finally:

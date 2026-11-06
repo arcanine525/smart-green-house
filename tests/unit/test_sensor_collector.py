@@ -14,6 +14,7 @@ Exercises:
 - Contiguous cursor progression: out-of-order receipts cannot advance over unconfirmed holes.
 """
 
+import base64
 from dataclasses import dataclass
 from datetime import datetime, timezone
 import hashlib
@@ -310,6 +311,21 @@ def test_atomic_batch_packing_and_manifest(tmp_path):
     expected_evt0 = hashlib.sha256(b"evt-0").hexdigest()
     assert first_record["event_id"] == expected_evt0
     assert first_record["is_valid"] is True
+
+
+
+def test_ready_file_preserves_exact_quarantined_payload(tmp_path):
+    spool = DurableSpool(tmp_path / "spool")
+    payload = b"\xff{broken json\x00"
+    record = spool.record_delivery("v1/telemetry/replay/AICU", payload, "2026-11-06T10:01:00Z")
+    ready = tmp_path / "ready"
+    batch = BatchManager(spool, ready).pack_batch()
+    stored = json.loads((ready / batch.file_name).read_text())
+    assert not record.is_valid
+    assert stored["payload"] is None
+    assert base64.b64decode(stored["raw_payload_base64"], validate=True) == payload
+    assert hashlib.sha256(payload).hexdigest() == stored["payload_hash"]
+    assert stored["quarantine_reason"]
 
 
 def test_immutable_ready_file_refuses_overwrite(tmp_path):
