@@ -65,6 +65,10 @@ class Repository:
     def append_record(self, scope, record, *, revision=1, correction_id='', correction=None, quality_policy='AGC_QUALITY_V1'):
         if not scope or not isinstance(revision,int) or isinstance(revision,bool) or revision<1:
             raise ValueError('Explicit scope and positive revision required')
+        if revision>1:
+            # Like PG correction_input: audited typed corrections clear lexical
+            # numeric issues; immutable raw audit remains in load_issue.
+            record=dict(record,issues=[],disposition='accepted')
         if not core_eligible(record):
             raise ValueError('Record has no eligible typed core values')
         if revision>1 and (not correction_id or not isinstance(correction,dict)
@@ -82,7 +86,8 @@ class Repository:
         if correction is not None:
             payload['correction_audit'] = correction | {'correction_id':correction_id}
         hashed=digest(payload)
-        key={'scope':scope,'kind':kind,'compartment':compartment,'logical':record['logical_key']}
+        identity=record_identity(record)
+        key={'scope':scope,'kind':kind,'compartment':compartment,'logical':identity}
         with writer_lock(self.coordinator, self.client):
             rows=self.client.query('''SELECT DISTINCT revision,revision_id,content_hash,payload,quality_policy_version,first_run_id FROM source_revision
                 WHERE scope_id={scope:String} AND record_type={kind:String} AND compartment_id={compartment:String}
@@ -104,7 +109,7 @@ class Repository:
                 original=json.loads(previous['payload'])
                 if correction['previous_revision']!=previous['revision_id']:
                     raise ValueError('Stale correction previous revision')
-                immutable=set(payload)-{'values','null_reasons','correction_audit'}
+                immutable=set(payload)-{'values','null_reasons','correction_audit','issues','disposition'}
                 if (any(payload[k]!=original.get(k) for k in immutable)
                         or set(payload['values'])!=set(original['values'])
                         or payload['values']['time']!=original['values']['time']
@@ -118,7 +123,7 @@ class Repository:
                     {'scope':scope,'correction':correction_id})
                 if reused:
                     raise ValueError('Correction ID already belongs to another revision')
-            revision_id=digest([scope,kind,compartment,record['logical_key'],revision,hashed])
+            revision_id=digest([scope,kind,compartment,identity,revision,hashed])
             measures=[]
             for measure,value in record['values'].items():
                 if measure=='time':
@@ -130,7 +135,7 @@ class Repository:
             # Write measures first: an interrupted attempt has no revision row.
             self._insert('source_measure',measures)
             self._insert('source_revision',[dict(scope_id=scope,snapshot_id=record['snapshot_id'],first_run_id=record['run_id'] if revision==1 else ordinals[1]['first_run_id'],record_type=kind,
-                compartment_id=compartment,logical_key=record['logical_key'],source_record_id=record['source_record_id'],
+                compartment_id=compartment,logical_key=identity,source_record_id=record['source_record_id'],
                 revision=revision,revision_id=revision_id,content_hash=hashed,source_file=record['source_file'],
                 file_checksum=record['file_checksum'],line_number=record['line_number'],line_end=record['line_end'],
                 raw_hash=record['raw_hash'],source_serial=str(record['values']['time']),
@@ -157,7 +162,7 @@ class Repository:
                            'source_timestamp','parser_version','is_close_boundary'):
                 if row[column]!=payload[column]:
                     raise ValueError('Stored revision metadata does not match source payload')
-            if row['logical_key']!=payload['logical_key'] or row['source_serial']!=str(payload['values']['time']):
+            if row['logical_key']!=record_identity(payload) or row['source_serial']!=str(payload['values']['time']):
                 raise ValueError('Stored revision source identity mismatch')
             for column in ('line_number','line_end'):
                 if int(row[column])!=payload[column]:
@@ -217,8 +222,25 @@ class Repository:
         return self.canonical_records(scope,revision_ids=ids)
 
 
+    def load_audit(self, scope, load_id):
+        receipt=self.client.query('SELECT DISTINCT audit_checksum FROM load_receipt WHERE scope_id={scope:String} AND load_id={load:String}',{'scope':scope,'load':load_id})
+        if len(receipt)!=1 or not receipt[0]['audit_checksum']:
+            raise ValueError('Load lacks frozen ingestion audit')
+        files=self.client.query('SELECT DISTINCT source_file,metadata FROM load_file WHERE scope_id={scope:String} AND load_id={load:String} ORDER BY source_file',{'scope':scope,'load':load_id})
+        issues=self.client.query('SELECT DISTINCT source_record_id,source_file,disposition,payload FROM load_issue WHERE scope_id={scope:String} AND load_id={load:String} ORDER BY source_record_id,disposition,payload',{'scope':scope,'load':load_id})
+        if digest({'files':files,'issues':issues})!=receipt[0]['audit_checksum']:
+            raise ValueError('Load ingestion audit checksum mismatch')
+        if len({r['source_file'] for r in files})!=len(files):
+            raise ValueError('Conflicting file ingestion metadata')
+        return {'files':files,'issues':issues,'checksum':receipt[0]['audit_checksum']}
+
+
 def core_eligible(record):
     """Match baseline: per-measure parse errors retain unaffected typed measures."""
     return (record['disposition']=='accepted' and not record['issues']) or (
         record['disposition']=='quarantine' and bool(record['logical_key'])
         and bool(record['issues']) and all(i['code']=='invalid_numeric' for i in record['issues']))
+
+
+def record_identity(record):
+    return record['source_record_id'] if record['source_file'].endswith('/Production.csv') else record['logical_key']

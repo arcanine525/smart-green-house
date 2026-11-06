@@ -1,6 +1,6 @@
 # ClickHouse candidate: chạy local
 
-Candidate có client, ingestion/publication và [luồng nước BR-02](clickhouse-water.md). Các BR còn lại tiếp tục theo T44–T48; PostgreSQL giữ vai trò baseline/mặc định đến T39. Thiết kế ở [ADR-003](../adr/003-clickhouse-warehouse.md).
+Candidate có client, ingestion/publication và [luồng nước BR-02](clickhouse-water.md) / [thu hoạch BR-05](clickhouse-harvest.md). Các BR còn lại tiếp tục theo T45–T48; PostgreSQL giữ vai trò baseline/mặc định đến T39. Thiết kế ở [ADR-003](../adr/003-clickhouse-warehouse.md).
 Không có fallback ngầm khi ClickHouse lỗi. Server và client dùng Compose riêng
 để không khởi động/sửa database người dùng trong giai đoạn chuyển đổi.
 

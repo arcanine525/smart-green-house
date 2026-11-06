@@ -272,4 +272,4 @@ Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên c�
 
 ### ClickHouse candidate
 
-Luồng BR-02 có bản ClickHouse chạy local, dùng cùng dashboard và contracts. Xem [cách chạy và đối soát](docs/implementation/clickhouse-water.md). Backend mặc định vẫn là PostgreSQL đến khi đủ các gate chuyển đổi; các BR ClickHouse còn lại đang được triển khai.
+Luồng BR-02 và BR-05 có bản ClickHouse chạy local, dùng cùng dashboard và contracts. Xem [cách chạy và đối soát](docs/implementation/clickhouse-water.md). Xem thêm [thu hoạch và completeness](docs/implementation/clickhouse-harvest.md). Backend mặc định vẫn là PostgreSQL đến khi đủ các gate chuyển đổi; các BR ClickHouse còn lại đang được triển khai.

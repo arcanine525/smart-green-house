@@ -1,6 +1,13 @@
 """Versioned candidate core DDL; explicit typed grain, no PostgreSQL dependency."""
 SCHEMA_VERSION = 'ch-core-v1'
 DDL = (
+    '''CREATE TABLE IF NOT EXISTS load_file (
+        scope_id String, load_id String, source_file String, metadata String
+    ) ENGINE=MergeTree ORDER BY (scope_id,load_id,source_file)''',
+    '''CREATE TABLE IF NOT EXISTS load_issue (
+        scope_id String, load_id String, source_record_id String,
+        source_file String, disposition LowCardinality(String), payload String
+    ) ENGINE=MergeTree ORDER BY (scope_id,load_id,source_record_id,disposition)''',
     '''CREATE TABLE IF NOT EXISTS publication_state (
         scope_id String, workflow_id String, publication_id String, generation UInt64,
         stage LowCardinality(String), content_hash FixedString(64), payload String
@@ -49,6 +56,7 @@ def migrate(client, coordinator=None):
         execute('ALTER TABLE load_receipt ADD COLUMN IF NOT EXISTS membership_checksum String')
         execute('ALTER TABLE load_receipt ADD COLUMN IF NOT EXISTS membership_count UInt64')
         execute('ALTER TABLE source_revision ADD COLUMN IF NOT EXISTS first_run_id String')
+        execute('ALTER TABLE load_receipt ADD COLUMN IF NOT EXISTS audit_checksum String')
         return SCHEMA_VERSION
     if coordinator is None:
         return apply(client.execute)

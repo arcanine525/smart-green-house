@@ -167,6 +167,9 @@ class WaterMart:
 
 
 class WaterAdapter:
+    LINEAGE_TABLE='water_measure'
+    LINEAGE_TYPE='resource'
+    LINEAGE_UNITS=(('Irr',RESOURCE_WATER_UNIT),('Drain',RESOURCE_WATER_UNIT))
     def __init__(self,client,*,raw_snapshots=None):
         # Read methods do not acquire writer locks or require coordinator mounts.
         self.client=client; self.mart=WaterMart(client,None)
@@ -175,26 +178,22 @@ class WaterAdapter:
 
     def _envelope(self,publication_id):
         if publication_id not in self._pinned:
-            scopes=self.client.query('SELECT DISTINCT scope_id FROM publication_state WHERE publication_id={id:String} AND stage=\'COMPLETE\'',{'id':publication_id})
-            if len(scopes)!=1:
-                raise ValueError('Unknown complete publication')
-            self._pinned[publication_id]=self.mart.publications().pin(scopes[0]['scope_id'],publication_id=publication_id)
+            from greenhouse.clickhouse.registry import publication_envelope
+            self._pinned[publication_id]=publication_envelope(self.client,publication_id)
         return self._pinned[publication_id]
 
     def publication(self,publication_id):
+        from greenhouse.clickhouse.registry import reference
         envelope=self._envelope(publication_id)
-        header=self.client.query('SELECT DISTINCT * FROM water_header WHERE publication_id={id:String}',{'id':publication_id})
-        if len(header)!=1:
-            raise ValueError('Missing water header')
-        config,_=self.mart.config(header[0]['scope_id'],header[0]['config_version'])
-        return PublicationRef(publication_id,header[0]['scope_id'],config['snapshot_id'],
-            Versions(envelope['load_id'],config['quality_policy_version'],config['parser_version'],CODE_VERSION,
-                     envelope['configuration']['checksum']),datetime.fromisoformat(envelope['committed_at']),'complete')
+        if 'water' not in envelope['receipts']:
+            raise ValueError('Publication lacks irrigation mart bundle')
+        return reference(self.client,publication_id,envelope)
 
     def pin_publication(self,scope_id):
-        envelope=self.mart.publications().pin(scope_id)
-        self._pinned[envelope['publication_id']]=envelope
-        return self.publication(envelope['publication_id'])
+        from greenhouse.clickhouse.registry import envelope
+        pinned=envelope(self.client,scope_id)
+        self._pinned[pinned['publication_id']]=pinned
+        return self.publication(pinned['publication_id'])
 
     def catalog_cycles(self,publication_id):
         ref=self.publication(publication_id)
@@ -268,10 +267,12 @@ class WaterAdapter:
                 result.append(CatalogPublication(scope['scope_id'],json.loads(snapshot_pins[0]['payload'])['snapshot_id'],
                     candidate['publication_id'],datetime.fromisoformat(candidate['committed_at']),'complete','clickhouse-core-v1'))
                 continue
-            envelope=self.mart.publications().pin(scope['scope_id'])
+            from greenhouse.clickhouse.registry import envelope as read_envelope
+            envelope=read_envelope(self.client,scope['scope_id'])
             ref=self.publication(envelope['publication_id']); receipt=envelope['receipts']['water']
             result.append(CatalogPublication(ref.scope_id,ref.snapshot_id,ref.publication_id,ref.committed_at,
-                ref.finality_status,ref.versions.code_version,BUNDLE,receipt['rows'],receipt['cycles']))
+                ref.finality_status,ref.versions.code_version,BUNDLE,receipt['rows'],receipt['cycles'],
+                harvest_bundle_version=envelope['receipts'].get('harvest',{}).get('version')))
         return tuple(result)
 
 
@@ -281,7 +282,7 @@ class WaterAdapter:
         context=self._envelope(publication.publication_id)
         if self.publication(publication.publication_id)!=publication:
             raise ValueError('Publication metadata mismatch')
-        rows=self.client.query('SELECT DISTINCT revision_id,cycle_id,compartment_id,logical_record_key FROM water_measure WHERE publication_id={pub:String}',{'pub':publication.publication_id})
+        rows=self.client.query('SELECT DISTINCT revision_id,cycle_id,compartment_id,logical_record_key FROM '+self.LINEAGE_TABLE+' WHERE publication_id={pub:String}',{'pub':publication.publication_id})
         rows=[r for r in rows if (r['revision_id']==revision_id if revision_id else r['logical_record_key']==record_key)]
         if len(rows)!=1:
             raise ValueError('Revision/key absent or ambiguous in pinned water membership')
@@ -293,10 +294,8 @@ class WaterAdapter:
         if raw is None:
             raise ValueError('Raw snapshot mount not configured')
         import hashlib
-        relative=Path(revision['source_file'])
-        target=raw/relative
-        if relative.is_absolute() or '..' in relative.parts or any(p.is_symlink() for p in [target,*target.parents]):
-            raise ValueError('Unsafe raw lineage path')
+        from greenhouse.clickhouse.raw_identity import source_path
+        target=source_path(raw,publication.snapshot_id,payload)
         with target.open('rb') as stream:
             if hashlib.file_digest(stream,'sha256').hexdigest()!=revision['file_checksum']:
                 raise ValueError('Raw file checksum mismatch')
@@ -305,10 +304,17 @@ class WaterAdapter:
         verified=hashlib.sha256(text.encode()).hexdigest()==revision['raw_hash']
         if not verified:
             raise ValueError('Raw record checksum mismatch')
-        return LineageResult(publication,revision['revision_id'],'resource',
-            (MeasureUnit('Irr',RESOURCE_WATER_UNIT),MeasureUnit('Drain',RESOURCE_WATER_UNIT)),
+        return LineageResult(publication,revision['revision_id'],self.LINEAGE_TYPE,
+            tuple(MeasureUnit(*unit) for unit in self.LINEAGE_UNITS),
             selected['logical_record_key'],selected['cycle_id'],selected['compartment_id'],revision['revision'],
             revision['source_record_id'],revision['first_run_id'],revision['source_file'],revision['file_checksum'],
             payload['snapshot_sha'],int(revision['line_number']),int(revision['line_end']),payload['raw_reference'],
             revision['raw_hash'],True,Decimal(revision['source_serial']),datetime.fromisoformat(revision['source_timestamp']),
             revision['correction_id'] or None,revision['revision']-1 if revision['correction_id'] else None)
+
+
+    def catalog_harvest_rules(self,scope_id,compartment_id):
+        from greenhouse.contracts import HarvestRuleProfile
+        rows=self.mart.repo.configurations()['rows']
+        return tuple(from_dict(HarvestRuleProfile,json.loads(r['payload'])) for r in rows if
+            r['kind']=='harvest_rule' and r['scope_id']==scope_id and json.loads(r['payload'])['compartment_id']==compartment_id)

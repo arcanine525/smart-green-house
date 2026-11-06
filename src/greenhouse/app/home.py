@@ -65,7 +65,7 @@ def render(connection):
                                        '📡 Sensor replay (BR-01/03)', '🏠 Tổng quan vụ', '🛡️ Chất lượng dữ liệu'],
                           key='screen_choice',
                           help='Replay và dữ liệu lịch sử là hai phạm vi riêng.')
-    if runtime.is_clickhouse(connection) and screen != '💧 Nước (BR-02)':
+    if runtime.is_clickhouse(connection) and screen not in ('💧 Nước (BR-02)','🍅 Thu hoạch (BR-05)'):
         stop_with('info', 'Màn hình này chưa có dữ liệu được công bố trên backend đang chọn.', 'Chọn Nước để xem phạm vi hiện có.')
     shared_context.begin_screen(st.session_state, screen, historical=screen != '📡 Sensor replay (BR-01/03)')
     if screen == '📡 Sensor replay (BR-01/03)':

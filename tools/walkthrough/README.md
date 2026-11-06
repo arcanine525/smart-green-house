@@ -77,3 +77,14 @@ Lượt T26 đã ghi có metadata tại
 [`docs/evaluation/assets/playwright-t26`](../../docs/evaluation/assets/playwright-t26/README.md).
 Các revision recorder dùng trong lượt đó được giữ để đối chiếu SHA; runner
 hiện hành vẫn là `tools/walkthrough/record.cjs` cùng lockfile tại đây.
+
+Candidate ClickHouse có smoke browser riêng cho water/harvest, chưa phải bộ video
+T51. Khi app candidate đã chạy qua ch-web và có publication tương ứng:
+
+```bash
+APP_URL=http://127.0.0.1:18582 node tools/walkthrough/check-water.cjs
+APP_URL=http://127.0.0.1:18582 node tools/walkthrough/check-harvest.cjs
+```
+
+Helper harvest kiểm Digilog toàn vụ, tải records CSV thật và xem Reference với
+nhãn snapshot chưa hoàn chỉnh. Artifact ở tmp, không tự tạo video thuyết trình.

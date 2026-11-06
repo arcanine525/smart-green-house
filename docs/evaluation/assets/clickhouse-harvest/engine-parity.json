@@ -1,0 +1,69 @@
+{
+  "status": "passed",
+  "comparisons": [
+    {
+      "compartment": "AICU",
+      "window": "two-day",
+      "match": true
+    },
+    {
+      "compartment": "Automatoes",
+      "window": "two-day",
+      "match": true
+    },
+    {
+      "compartment": "Digilog",
+      "window": "two-day",
+      "match": true
+    },
+    {
+      "compartment": "IUACAAS",
+      "window": "two-day",
+      "match": true
+    },
+    {
+      "compartment": "Reference",
+      "window": "two-day",
+      "match": true
+    },
+    {
+      "compartment": "TheAutomators",
+      "window": "two-day",
+      "match": true
+    },
+    {
+      "compartment": "AICU",
+      "window": "full-cycle",
+      "match": true
+    },
+    {
+      "compartment": "Automatoes",
+      "window": "full-cycle",
+      "match": true
+    },
+    {
+      "compartment": "Digilog",
+      "window": "full-cycle",
+      "match": true
+    },
+    {
+      "compartment": "IUACAAS",
+      "window": "full-cycle",
+      "match": true
+    },
+    {
+      "compartment": "Reference",
+      "window": "full-cycle",
+      "match": true
+    },
+    {
+      "compartment": "TheAutomators",
+      "window": "full-cycle",
+      "match": true
+    }
+  ],
+  "postgres_read_only": true,
+  "postgres_publication": "892b4cd58cdf4d099510974d91fa64ab",
+  "clickhouse_publication": "8d448a47e05743988de086f2da465a4f",
+  "tolerance": "exact Decimal equality"
+}

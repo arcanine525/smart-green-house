@@ -50,7 +50,11 @@ def load_snapshot(client, coordinator, raw, output, scope, run_id=None, *, kinds
          'files':manifest['files']})
     counts=Counter()
     membership=[]
+    audit_issues=[]
+    audit_files=[]
     for file in ingestion['files']:
+        selected=kinds is None or Path(file['source_file']).stem in kinds
+        audit_files.append({'source_file':file['source_file'],'metadata':canonical_json(file|{'core_selected':selected})})
         if kinds is not None and Path(file['source_file']).stem not in kinds:
             counts['deferred_source_rows']+=file.get('read',0)
             continue
@@ -68,6 +72,8 @@ def load_snapshot(client, coordinator, raw, output, scope, run_id=None, *, kinds
                         membership.append(revision_id)
                         counts['inserted' if created else 'reused']+=1
                     if disposition!='accepted':
+                        audit_issues.append({'source_record_id':record['source_record_id'],'source_file':record['source_file'],
+                            'disposition':disposition,'payload':canonical_json(record)})
                         row={'scope_id':scope,'snapshot_id':record['snapshot_id'],
                             'source_record_id':record['source_record_id'],'source_file':record['source_file'],
                             'line_number':record['line_number'],'disposition':disposition,
@@ -76,11 +82,16 @@ def load_snapshot(client, coordinator, raw, output, scope, run_id=None, *, kinds
                             repo._insert('source_disposition',[row],query_id='disposition-'+digest(row))
     canonical=repo.canonical_records(scope,revision_ids=membership)
     membership_hash=digest(sorted(r['revision_id'] for r in canonical))
+    audit_files.sort(key=lambda r:r['source_file'])
+    audit_issues.sort(key=lambda r:(r['source_record_id'],r['disposition'],r['payload']))
+    audit_checksum=digest({'files':audit_files,'issues':audit_issues})
     with writer_lock(coordinator,client):
+        repo._insert('load_file',[{'scope_id':scope,'load_id':ingestion['run_id']}|r for r in audit_files])
+        repo._insert('load_issue',[{'scope_id':scope,'load_id':ingestion['run_id']}|r for r in audit_issues])
         repo._insert('load_member',[{'scope_id':scope,'load_id':ingestion['run_id'],'revision_id':i} for i in membership],query_id='members-'+ingestion['run_id'])
         repo._insert('load_receipt',[{'scope_id':scope,'load_id':ingestion['run_id'],
             'schema_version':SCHEMA_VERSION,'input_hash':digest(manifest),
-            'counts_json':canonical_json(dict(counts)),'membership_checksum':membership_hash,'membership_count':len(membership)}],query_id='load-'+ingestion['run_id'])
+            'counts_json':canonical_json(dict(counts)),'membership_checksum':membership_hash,'membership_count':len(membership),'audit_checksum':audit_checksum}],query_id='load-'+ingestion['run_id'])
     return {'scope_id':scope,'load_id':ingestion['run_id'],'status':'candidate_loaded',
             'published':False,'counts':dict(counts),'membership_checksum':membership_hash,'ingestion_folder':str(folder)}
 

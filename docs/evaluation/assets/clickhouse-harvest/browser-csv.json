@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "local_path": "tmp/clickhouse-harvest-browser/harvest-records.csv",
+  "sha256": "1ec2e7ee522e4324eb6762b75b7cc87f9d04fa0125c0a24c936ce0aff0c3dd20",
+  "rows": 23,
+  "prod_a": "13.51",
+  "prod_b": "0.70322",
+  "publication": "8d448a47e05743988de086f2da465a4f"
+}

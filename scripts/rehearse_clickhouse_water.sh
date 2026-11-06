@@ -27,7 +27,7 @@ compose run --rm --no-deps --pull never -T --interactive=false \
 compose --profile test run --rm --no-deps --pull never -T --interactive=false \
   -v "$PWD/data/raw:/data/raw:ro" ch-ui-test \
   python tests/clickhouse/check_agc_water.py > "$root/agc-check.json" 2> "$root/agc-check.log"
-compose --profile app up -d --no-build --pull never ch-app ch-web > "$root/app.log" 2>&1
+compose --profile app up -d --wait --no-build --pull never ch-app ch-web > "$root/app.log" 2>&1
 compose exec -T ch-app python -c 'import time,urllib.request
 for attempt in range(60):
  try:

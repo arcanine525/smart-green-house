@@ -12,7 +12,9 @@ const out=path.resolve(process.env.EVIDENCE_DIR||'tmp/clickhouse-water/browser')
   const page=await context.newPage();
   await page.goto(process.env.APP_URL||'http://127.0.0.1:18582',{waitUntil:'domcontentloaded'});
   await page.getByText('Irrigation observed',{exact:true}).waitFor({timeout:240000});
-  assert((await page.locator('body').innerText()).includes('clickhouse-water-v1'));
+  const rendered=await page.locator('body').innerText();
+  const backendCode=['clickhouse-water-v1','clickhouse-warehouse-v1'].find(code=>rendered.includes(code));
+  assert(backendCode);
   await page.getByTestId('stSelectbox').nth(1).getByRole('combobox').click();
   await page.getByRole('option',{name:/^Automatoes —/}).click();
   await page.getByText('788,85 L/m²',{exact:true}).waitFor({timeout:240000});
@@ -25,7 +27,7 @@ const out=path.resolve(process.env.EVIDENCE_DIR||'tmp/clickhouse-water/browser')
   await page.getByRole('heading',{name:/Nước · tưới/}).scrollIntoViewIfNeeded();
   await page.screenshot({path:path.join(out,'browser-water.png'),fullPage:false});
   fs.writeFileSync(path.join(out,'browser-check.json'),JSON.stringify({status:'passed',
-   browser:'Chromium via Playwright 1.65.0',url:page.url(),backend_code:'clickhouse-water-v1',
+   browser:'Chromium via Playwright 1.65.0',url:page.url(),backend_code:backendCode,
    compartment:'Automatoes',window:'full cycle',irrigation:'788,85 L/m²',drain:'324,08 L/m²',
    download:download.suggestedFilename(),screenshot:'browser-water.png'},null,2)+'\n');
  }finally{await browser.close();}

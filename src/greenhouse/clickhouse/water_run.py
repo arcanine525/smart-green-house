@@ -47,10 +47,13 @@ def corrected_membership(repo,scope,load):
             return load
         new_load=digest([load,ids])
         repo._insert('load_member',[{'scope_id':scope,'load_id':new_load,'revision_id':i} for i in ids])
+        audit=repo.load_audit(scope,load)
+        repo._insert('load_file',[{'scope_id':scope,'load_id':new_load}|r for r in audit['files']])
+        repo._insert('load_issue',[{'scope_id':scope,'load_id':new_load}|r for r in audit['issues']])
         repo._insert('load_receipt',[{'scope_id':scope,'load_id':new_load,'schema_version':'ch-core-v1',
             'input_hash':digest({'base_load':load,'revisions':ids}),
             'counts_json':canonical_json({'canonical':len(ids),'base_load':load}),
-            'membership_checksum':digest(ids),'membership_count':len(ids)}])
+            'membership_checksum':digest(ids),'membership_count':len(ids),'audit_checksum':audit['checksum']}])
         return new_load
 
 

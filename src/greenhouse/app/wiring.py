@@ -38,6 +38,10 @@ def irrigation_service(connection, raw_snapshots=None) -> IrrigationService:
 
 
 def harvest_service(connection, raw_snapshots=None) -> HarvestService:
+    from greenhouse.app.runtime import is_clickhouse
+    if is_clickhouse(connection):
+        from greenhouse.clickhouse.harvest import HarvestAdapter
+        return HarvestService(HarvestAdapter(connection, raw_snapshots=raw_snapshots))
     from greenhouse.db.harvest_adapter import PostgresHarvestQueryAdapter
     return HarvestService(PostgresHarvestQueryAdapter(connection, raw_snapshots=raw_snapshots))
 
