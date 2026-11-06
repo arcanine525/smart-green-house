@@ -1,6 +1,6 @@
 # 09 — Roadmap chuyển PostgreSQL sang ClickHouse
 
-> T37–T39 tùy chọn sau MVP. Sơ đồ này không đưa ClickHouse vào deployment bắt buộc hiện tại.
+> Đợt chuyển đổi T37–T52, thiết kế ngày 2026-11-07. PostgreSQL là baseline đã nghiệm thu; ClickHouse chỉ trở thành mặc định sau parity, recovery, walkthrough và cutover đạt.
 
 Không đổi simulator, MQTT, raw format, source identity hoặc định nghĩa sáu BR chỉ để chuyển engine. Thiết kế vật lý, SQL marts, dedup, publication và cách lưu scenario cần adapter riêng; đây không phải thao tác thay connection string.
 
@@ -11,7 +11,7 @@ flowchart TB
     SEM["Shared semantic transforms"]
     RAW --> SEM
     SEM --> PG["PostgreSQL adapter<br/>baseline MVP"]
-    SEM --> CH["ClickHouse adapter<br/>ứng viên sau MVP"]
+    SEM --> CH["ClickHouse adapter<br/>ứng viên chuyển đổi"]
     CONF --> PG
     CONF --> CH
     PG --> PGR["6 BR + fault suite results"]
@@ -40,3 +40,25 @@ Không dựa vào background merge để bảo đảm KPI hết duplicate ngay. 
 Khi so PostgreSQL/ClickHouse, giữ Hybrid và workload giống nhau; khi so Hybrid/Kimball ở T24, giữ engine giống nhau. Công bố riêng hai thí nghiệm để không quy sai nguyên nhân cải thiện.
 
 Chuyển đổi ban đầu dùng backfill từ raw và khoảng dừng có kiểm soát, không cần CDC/dual-write. Mọi lần quay lại sau cutover phải mang theo events và configuration versions mới; PostgreSQL snapshot cũ một mình không đủ. Không xóa nguồn hoặc DB đối chứng trước khi nghiệm thu.
+
+## Publication và điều phối trong bản local
+
+[ADR-003](../adr/003-clickhouse-warehouse.md) và [mapping/contracts](../implementation/clickhouse-migration-contract.md) chốt cơ chế triển khai, tolerance và fault gates.
+
+```mermaid
+flowchart TB
+    COMMAND["App command / batch / stream sink"] --> LOCK["Shared coordinator volume<br/>POSIX flock, một writer"]
+    LOCK --> CONFIG["Immutable config / scenario envelope<br/>request ID + content hash"]
+    LOCK --> WRITE["Synchronous writes<br/>source revisions + publication attempt"]
+    WRITE --> CANON["Canonical membership<br/>dedup và correction trước aggregate"]
+    CANON --> MARTS["Typed marts theo publication<br/>6 BR + replay scope"]
+    MARTS --> VERIFY["Kiểm count / checksum / config / bundles"]
+    CONFIG --> VERIFY
+    VERIFY --> COMPLETE["Complete envelope + generation<br/>reader pin publication một lần"]
+    COMPLETE --> UI["Services / Streamlit / CSV<br/>cùng context và versions"]
+```
+
+Runtime ban đầu single-node và local filesystem; lock không là distributed lock.
+Mọi writer hợp lệ dùng cùng volume/lock và reconcile query chưa rõ kết quả trước
+retry. Candidate chưa complete không được đọc. Không dùng incremental aggregate
+trên duplicate chưa canonical; config envelope không thay facts bằng JSON blob.
