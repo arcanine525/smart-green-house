@@ -14,6 +14,7 @@ from uuid import uuid4
 import psycopg
 import streamlit as st
 from greenhouse.app import shared_context
+from greenhouse.app.runtime import is_clickhouse
 
 from greenhouse.app import cost_exports as exports, wiring
 from greenhouse.contracts import (
@@ -707,13 +708,16 @@ def render(connection, settings, publications):
                     saved_scen = cost_svc.execute_scenario_command(cmd)
 
                 # Explicit transaction ownership: commit to make durable across st.rerun / connection close
-                connection.commit()
+                if not is_clickhouse(connection):
+                    connection.commit()
 
             except (ValueError, psycopg.Error) as e:
-                connection.rollback()
+                if not is_clickhouse(connection):
+                    connection.rollback()
                 st.error(f'Lỗi khi lưu kịch bản: {e}')
             except Exception as e:
-                connection.rollback()
+                if not is_clickhouse(connection):
+                    connection.rollback()
                 st.error(f'Lỗi khi lưu kịch bản: {e}')
             else:
                 st.session_state['pending_scenario_select'] = f'{saved_scen.name} ({saved_scen.scenario_version})'

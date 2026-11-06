@@ -24,20 +24,23 @@ class Repository:
     def register_configuration(self, kind, scope, version, request, payload):
         if not all(isinstance(v,str) and v.strip() for v in (kind,scope,version,request)):
             raise ValueError('Configuration requires explicit identity')
-        content = canonical_json(payload)
-        hashed = digest(payload)
         with writer_lock(self.coordinator, self.client):
-            existing = self.client.query('''SELECT DISTINCT kind,scope_id,version_id,request_id,content_hash,payload
-                FROM configuration_envelope WHERE (kind={kind:String} AND scope_id={scope:String}
-                AND version_id={version:String}) OR request_id={request:String}''',
-                {'kind':kind,'scope':scope,'version':version,'request':request})
-            expected = {'kind':kind,'scope_id':scope,'version_id':version,'request_id':request,
-                        'content_hash':hashed,'payload':content}
-            if existing:
-                if len(existing)!=1 or existing[0]!=expected:
-                    raise ValueError('Configuration identity or request reused with different content')
-                return False
-            self._insert('configuration_envelope',[expected | {'schema_version':1}])
+            return self._register_configuration_locked(kind,scope,version,request,payload)
+
+    def _register_configuration_locked(self,kind,scope,version,request,payload):
+        """Internal: caller must already own the shared writer lock."""
+        content=canonical_json(payload); hashed=digest(payload)
+        existing = self.client.query('''SELECT DISTINCT kind,scope_id,version_id,request_id,content_hash,payload
+            FROM configuration_envelope WHERE (kind={kind:String} AND scope_id={scope:String}
+            AND version_id={version:String}) OR request_id={request:String}''',
+            {'kind':kind,'scope':scope,'version':version,'request':request})
+        expected = {'kind':kind,'scope_id':scope,'version_id':version,'request_id':request,
+                    'content_hash':hashed,'payload':content}
+        if existing:
+            if len(existing)!=1 or existing[0]!=expected:
+                raise ValueError('Configuration identity or request reused with different content')
+            return False
+        self._insert('configuration_envelope',[expected | {'schema_version':1}])
         return True
 
     def configurations(self):

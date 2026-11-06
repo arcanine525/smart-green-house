@@ -217,12 +217,22 @@ def harvest_action(service: HarvestService, publication: PublicationRef,
 
 
 def energy_service(connection, raw_snapshots=None):
+    from greenhouse.app.runtime import is_clickhouse
+    if is_clickhouse(connection):
+        from greenhouse.clickhouse.energy import EnergyAdapter
+        from greenhouse.queries.energy import EnergyService
+        return EnergyService(EnergyAdapter(connection,raw_snapshots=raw_snapshots))
     from greenhouse.db.energy_adapter import PostgresEnergyQueryAdapter
     from greenhouse.queries.energy import EnergyService
     return EnergyService(PostgresEnergyQueryAdapter(connection, raw_snapshots=raw_snapshots))
 
 
 def intensity_service(connection, raw_snapshots=None):
+    from greenhouse.app.runtime import is_clickhouse
+    if is_clickhouse(connection):
+        from greenhouse.clickhouse.harvest import HarvestAdapter
+        from greenhouse.queries.intensity import EnergyIntensityService
+        return EnergyIntensityService(energy_service(connection,raw_snapshots),HarvestAdapter(connection,raw_snapshots=raw_snapshots))
     from greenhouse.db.harvest_adapter import PostgresHarvestQueryAdapter
     from greenhouse.queries.intensity import EnergyIntensityService
     return EnergyIntensityService(energy_service(connection, raw_snapshots),
@@ -230,6 +240,12 @@ def intensity_service(connection, raw_snapshots=None):
 
 
 def cost_service(connection, raw_snapshots=None):
+    from greenhouse.app.runtime import is_clickhouse
+    if is_clickhouse(connection):
+        import os
+        from greenhouse.clickhouse.cost import CostAdapter
+        from greenhouse.queries.cost import EnergyCostService
+        return EnergyCostService(energy_service(connection,raw_snapshots),CostAdapter(connection,Path(os.environ.get('GREENHOUSE_CH_COORDINATOR','/candidate/coordinator')),raw_snapshots=raw_snapshots))
     from greenhouse.db.cost_adapter import PostgresCostAdapter
     from greenhouse.queries.cost import EnergyCostService
     return EnergyCostService(

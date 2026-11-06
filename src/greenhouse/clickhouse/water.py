@@ -274,7 +274,8 @@ class WaterAdapter:
                 ref.finality_status,ref.versions.code_version,BUNDLE,receipt['rows'],receipt['cycles'],
                 harvest_bundle_version=envelope['receipts'].get('harvest',{}).get('version'),
                 climate_bundle_version=envelope['receipts'].get('climate',{}).get('version'),
-                drain_bundle_version=envelope['receipts'].get('drain',{}).get('version')))
+                drain_bundle_version=envelope['receipts'].get('drain',{}).get('version'),
+                energy_bundle_version=envelope['receipts'].get('energy',{}).get('version') if envelope['receipts'].get('energy',{}).get('quantity_version')=='energy-quantity-v1' else None))
         return tuple(result)
 
 

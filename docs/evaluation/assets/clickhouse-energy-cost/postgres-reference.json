@@ -1,0 +1,213 @@
+{
+  "status": "passed",
+  "engine": "postgres",
+  "read_only": true,
+  "publication": "892b4cd58cdf4d099510974d91fa64ab",
+  "scenario": "ephemeral read-only price +20%, no persisted writes",
+  "results": [
+    {
+      "compartment": "AICU",
+      "window": "two-day",
+      "values": {
+        "official_energy_kwh": "308.270833291666666666666666666666666666666666666667",
+        "observed_energy_kwh": "308.270833291666666666666666666666666666666666666667",
+        "energy_coverage": "100",
+        "official_a_kg": "0",
+        "intensity_kwh_kg_a": "None",
+        "harvest_complete": true,
+        "baseline_eur": "16.013481872500",
+        "baseline_eur_m2": "0.25621570996",
+        "scenario_eur": "18.6503568720000",
+        "scenario_eur_m2": "0.298405709952",
+        "delta_eur": "2.6368749995000"
+      }
+    },
+    {
+      "compartment": "AICU",
+      "window": "full-cycle",
+      "values": {
+        "official_energy_kwh": "19396.1458335624999999999999999999999999999999999999991",
+        "observed_energy_kwh": "19396.1458335624999999999999999999999999999999999999991",
+        "energy_coverage": "100",
+        "official_a_kg": "853.750",
+        "intensity_kwh_kg_a": "22.718765251610541727672035139092240117130307467057",
+        "harvest_complete": true,
+        "baseline_eur": "1154.647926687500",
+        "baseline_eur_m2": "18.47436682700",
+        "scenario_eur": "1359.4018850250000",
+        "scenario_eur_m2": "21.750430160400",
+        "delta_eur": "204.7539583375000"
+      }
+    },
+    {
+      "compartment": "Automatoes",
+      "window": "two-day",
+      "values": {
+        "official_energy_kwh": "308.078125041666666666666666666666666666666666666667",
+        "observed_energy_kwh": "308.078125041666666666666666666666666666666666666667",
+        "energy_coverage": "100",
+        "official_a_kg": "0",
+        "intensity_kwh_kg_a": "None",
+        "harvest_complete": true,
+        "baseline_eur": "17.600067710000",
+        "baseline_eur_m2": "0.28160108336",
+        "scenario_eur": "20.8407343770000",
+        "scenario_eur_m2": "0.333451750032",
+        "delta_eur": "3.2406666670000"
+      }
+    },
+    {
+      "compartment": "Automatoes",
+      "window": "full-cycle",
+      "values": {
+        "official_energy_kwh": "20120.2291668333333333333333333333333333333333333333310",
+        "observed_energy_kwh": "20120.2291668333333333333333333333333333333333333333310",
+        "energy_coverage": "100",
+        "official_a_kg": "897.500",
+        "intensity_kwh_kg_a": "22.418082637140204271123491179201485608170844939647",
+        "harvest_complete": true,
+        "baseline_eur": "1161.250543965000",
+        "baseline_eur_m2": "18.58000870344",
+        "scenario_eur": "1374.2743356330000",
+        "scenario_eur_m2": "21.988389370128",
+        "delta_eur": "213.0237916680000"
+      }
+    },
+    {
+      "compartment": "Digilog",
+      "window": "two-day",
+      "values": {
+        "official_energy_kwh": "390.973958270833333333333333333333333333333333333333",
+        "observed_energy_kwh": "390.973958270833333333333333333333333333333333333333",
+        "energy_coverage": "100",
+        "official_a_kg": "0",
+        "intensity_kwh_kg_a": "None",
+        "harvest_complete": true,
+        "baseline_eur": "24.435434580000",
+        "baseline_eur_m2": "0.39096695328",
+        "scenario_eur": "29.1003512460000",
+        "scenario_eur_m2": "0.465605619936",
+        "delta_eur": "4.6649166660000"
+      }
+    },
+    {
+      "compartment": "Digilog",
+      "window": "full-cycle",
+      "values": {
+        "official_energy_kwh": "23200.97395777083333333333333333333333333333333333333860",
+        "observed_energy_kwh": "23200.97395777083333333333333333333333333333333333333860",
+        "energy_coverage": "100",
+        "official_a_kg": "844.375",
+        "intensity_kwh_kg_a": "27.477097211275598322230446582778188995805576116457",
+        "harvest_complete": true,
+        "baseline_eur": "1375.442724970000",
+        "baseline_eur_m2": "22.00708359952",
+        "scenario_eur": "1632.5833499640000",
+        "scenario_eur_m2": "26.121333599424",
+        "delta_eur": "257.1406249940000"
+      }
+    },
+    {
+      "compartment": "IUACAAS",
+      "window": "two-day",
+      "values": {
+        "official_energy_kwh": "398.072916666666666666666666666666666666666666666666",
+        "observed_energy_kwh": "398.072916666666666666666666666666666666666666666666",
+        "energy_coverage": "100",
+        "official_a_kg": "0",
+        "intensity_kwh_kg_a": "None",
+        "harvest_complete": true,
+        "baseline_eur": "22.086088750",
+        "baseline_eur_m2": "0.35337742",
+        "scenario_eur": "25.826088750",
+        "scenario_eur_m2": "0.41321742",
+        "delta_eur": "3.740000000"
+      }
+    },
+    {
+      "compartment": "IUACAAS",
+      "window": "full-cycle",
+      "values": {
+        "official_energy_kwh": "20064.54166622916666666666666666666666666666666666666507",
+        "observed_energy_kwh": "20064.54166622916666666666666666666666666666666666666507",
+        "energy_coverage": "100",
+        "official_a_kg": "805.625",
+        "intensity_kwh_kg_a": "24.905559864985777088182053271269718127747607964831",
+        "harvest_complete": true,
+        "baseline_eur": "1148.809957465000",
+        "baseline_eur_m2": "18.38095931944",
+        "scenario_eur": "1343.8343324580000",
+        "scenario_eur_m2": "21.501349319328",
+        "delta_eur": "195.0243749930000"
+      }
+    },
+    {
+      "compartment": "Reference",
+      "window": "two-day",
+      "values": {
+        "official_energy_kwh": "403.472222222222222222222222222222222222222222222222",
+        "observed_energy_kwh": "403.472222222222222222222222222222222222222222222222",
+        "energy_coverage": "100",
+        "official_a_kg": "None",
+        "intensity_kwh_kg_a": "None",
+        "harvest_complete": false,
+        "baseline_eur": "20.3990000",
+        "baseline_eur_m2": "0.326384",
+        "scenario_eur": "23.5990000",
+        "scenario_eur_m2": "0.377584",
+        "delta_eur": "3.2000000"
+      }
+    },
+    {
+      "compartment": "Reference",
+      "window": "full-cycle",
+      "values": {
+        "official_energy_kwh": "24886.8055555555555555555555555555555555555555555555556",
+        "observed_energy_kwh": "24886.8055555555555555555555555555555555555555555555556",
+        "energy_coverage": "100",
+        "official_a_kg": "None",
+        "intensity_kwh_kg_a": "None",
+        "harvest_complete": false,
+        "baseline_eur": "1298.8717500",
+        "baseline_eur_m2": "20.781948",
+        "scenario_eur": "1509.7217500",
+        "scenario_eur_m2": "24.155548",
+        "delta_eur": "210.8500000"
+      }
+    },
+    {
+      "compartment": "TheAutomators",
+      "window": "two-day",
+      "values": {
+        "official_energy_kwh": "426.909722222222222222222222222222222222222222222222",
+        "observed_energy_kwh": "426.909722222222222222222222222222222222222222222222",
+        "energy_coverage": "100",
+        "official_a_kg": "0",
+        "intensity_kwh_kg_a": "None",
+        "harvest_complete": true,
+        "baseline_eur": "23.9185625",
+        "baseline_eur_m2": "0.382697",
+        "scenario_eur": "28.0185625",
+        "scenario_eur_m2": "0.448297",
+        "delta_eur": "4.1000000"
+      }
+    },
+    {
+      "compartment": "TheAutomators",
+      "window": "full-cycle",
+      "values": {
+        "official_energy_kwh": "24095.1388888888888888888888888888888888888888888888870",
+        "observed_energy_kwh": "24095.1388888888888888888888888888888888888888888888870",
+        "energy_coverage": "100",
+        "official_a_kg": "896.7500",
+        "intensity_kwh_kg_a": "26.869404949973670352817272248551869404949973670353",
+        "harvest_complete": true,
+        "baseline_eur": "1342.8487500",
+        "baseline_eur_m2": "21.485580",
+        "scenario_eur": "1573.7987500",
+        "scenario_eur_m2": "25.180780",
+        "delta_eur": "230.9500000"
+      }
+    }
+  ]
+}
