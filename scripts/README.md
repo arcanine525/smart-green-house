@@ -1,5 +1,7 @@
 # Scripts
 
+- `test_effectiveness.sh`: chạy sáu walkthrough UI trên fixture với JUnit XML;
+  thời gian đo là thời gian test, không phải thời gian người dùng.
 - `test_local.sh`: build image, chạy toàn bộ unit/contract/recovery, UI/export
   và sensor acceptance tuần tự; log ở `tmp/local-tests/<run-id>`. Cần `.env`
   và các image/dependency đã chuẩn bị; không reset hay xóa dữ liệu project.
