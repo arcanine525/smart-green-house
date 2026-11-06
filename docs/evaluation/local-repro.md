@@ -104,3 +104,9 @@ volume test đã được dọn. [Kết quả](assets/local-repro/sensor-named-v
 Đây là dữ liệu synthetic, không kiểm chứng broker persistence, volume `outputs`,
 hay khôi phục dữ liệu AGC và sensor thật của người dùng. Môi trường cũng dùng
 image đã build sẵn; T28 vẫn chưa hoàn tất.
+
+Lượt tiếp theo ngày 2026-11-07 cũng backup và restore volume `broker_state`
+sau khi dừng Mosquitto bình thường. Broker trên project phục hồi trả lại đúng
+[retained message synthetic](assets/local-repro/broker-retained-20261107.txt);
+WAL và checkpoint vẫn phục hồi thành công. Kiểm tra này chưa chứng minh mọi
+trạng thái broker, hàng đợi phiên đang chờ, hoặc volume `outputs`.

@@ -47,14 +47,22 @@ for i in "${!volumes[@]}"; do
   source_mounts+=(-v "${source_project}_${volume}:/state/$path")
   restore_mounts+=(-v "${restore_project}_${volume}:/state/$path")
 done
+for project in "$source_project" "$restore_project"; do
+  docker volume create --label "com.docker.compose.project=$project" \
+    --label 'com.docker.compose.volume=broker_state' "${project}_broker_state" >/dev/null
+done
 printf 'Synthetic backup evidence: %s\n' "$backup_dir"
 docker compose -p "$source_project" up -d --wait --pull never db
+docker compose -p "$source_project" --profile sensor up -d --no-deps --wait --pull never broker
+docker compose -p "$source_project" exec -T broker \
+  mosquitto_pub -h 127.0.0.1 -t greenhouse/restore-test -m retained-synthetic -q 1 -r
 GREENHOUSE_JOB_CPUS=1.0 GREENHOUSE_JOB_MEMORY=1536m docker compose -p "$source_project" run --rm --no-deps --pull never \
   -e GREENHOUSE_RAW_DIR=/state/raw -e PYTHONPATH=/workspace/tests \
   -v "$source_dir:/state" "${source_mounts[@]}" -v "$PWD/tests/backup/sensor_backup_phase.py:/tmp/phase.py:ro" \
   job python /tmp/phase.py seed
 # No seed process or Spark writer remains. Archive both SQLite WAL/SHM sets,
 # source/manifest and the actual Spark checkpoint together.
+docker compose -p "$source_project" stop broker
 docker compose -p "$source_project" exec -T db sh -c \
   'exec pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Fc' > "$backup_dir/database.dump"
 tar -C "$source_dir" -cf "$backup_dir/sensor-state.tar" .
@@ -66,9 +74,17 @@ for volume in "${volumes[@]}"; do
   docker run --rm --network none -v "${restore_project}_${volume}:/target" \
     -v "$backup_dir/volumes:/backup:ro" "$archive_image" tar -C /target -xf "/backup/$volume.tar"
 done
+docker run --rm --network none -v "${source_project}_broker_state:/source:ro" \
+  -v "$backup_dir/volumes:/backup" "$archive_image" tar -C /source -cf /backup/broker_state.tar .
+docker run --rm --network none -v "${restore_project}_broker_state:/target" \
+  -v "$backup_dir/volumes:/backup:ro" "$archive_image" tar -C /target -xf /backup/broker_state.tar
 docker compose -p "$restore_project" up -d --wait --pull never db
 docker compose -p "$restore_project" exec -T db sh -c \
   'exec pg_restore -U "$POSTGRES_USER" -d "$POSTGRES_DB" --no-owner --no-privileges --exit-on-error' < "$backup_dir/database.dump"
+docker compose -p "$restore_project" --profile sensor up -d --no-deps --wait --pull never broker
+docker compose -p "$restore_project" exec -T broker \
+  mosquitto_sub -h 127.0.0.1 -t greenhouse/restore-test -C 1 -W 5 \
+  | tee "$backup_dir/broker-restore.txt" | grep -Fx 'retained-synthetic'
 GREENHOUSE_JOB_CPUS=1.0 GREENHOUSE_JOB_MEMORY=1536m docker compose -p "$restore_project" run --rm --no-deps --pull never \
   -e GREENHOUSE_RAW_DIR=/state/raw -e PYTHONPATH=/workspace/tests \
   -v "$restore_dir:/state" "${restore_mounts[@]}" -v "$PWD/tests/backup/sensor_backup_phase.py:/tmp/phase.py:ro" \

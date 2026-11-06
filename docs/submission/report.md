@@ -145,8 +145,9 @@ p95 1.491,60 ms; đây không phải SLA. Fault matrix kiểm duplicate/conflict
 late, pause/resume và restart broker/collector/DB/Spark trên dịch vụ test riêng.
 Diễn tập backup synthetic phục hồi PostgreSQL, SQLite WAL/SHM và Spark checkpoint;
 Spark chỉ xử lý batch tiếp theo, checksum khớp. Lượt sau khôi phục outbox, spool,
-raw-ready và checkpoint qua bốn named volumes synthetic; chưa chứng minh restore
-broker, outputs hoặc toàn bộ AGC và sensor thực.
+raw-ready và checkpoint qua bốn named volumes synthetic; một retained message
+broker cũng được khôi phục. Chưa chứng minh toàn bộ trạng thái broker, outputs
+hoặc AGC và sensor thực.
 
 Effectiveness: sáu walkthrough AppTest có đáp án trước đều pass. **Chưa có người
 tham gia**, thời gian test không phải thời gian người dùng và chưa có phản hồi hay
