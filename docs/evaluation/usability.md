@@ -34,6 +34,8 @@ Thời gian có setup chung và phụ thuộc cache/máy, không dùng so sánh 
 
 ## Protocol đánh giá người dùng cần thực hiện
 
+Có [phiếu tác vụ AGC](usability-participant.md) và [đáp án cho facilitator](usability-facilitator.md) dùng publication và rule đã pin; chúng chưa phải kết quả người tham gia.
+
 Để bổ sung hiệu quả khai thác thực tế, người đánh giá chuẩn bị fixture đúng sáu
 kịch bản, không cung cấp đáp án trong khi quan sát. Có thể nhờ thành viên nhóm
 đóng vai người dùng; ghi rõ đây là **đánh giá mô phỏng**, kinh nghiệm và mức quen
