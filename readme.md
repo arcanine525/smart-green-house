@@ -220,6 +220,7 @@ Toàn bộ sơ đồ được viết bằng **Mermaid** trong Markdown. Xem [m�
 | [07 — Data marts](docs/architecture/07-data-marts.md) | Conformed dimensions và luồng mart của sáu BR |
 | [08 — Application contracts](docs/architecture/08-application-contracts.md) | UI/service/adapter, query contracts và tạo scenario |
 | [09 — ClickHouse migration](docs/architecture/09-clickhouse-migration.md) | Backfill, parity checks, cutover và rollback sau MVP |
+| [Benchmark Hybrid/Kimball](docs/evaluation/performance.md) | Pipeline mới/rerun/rebuild, storage, sáu BR và COPY so với INSERT; số đo và lệnh tái lập |
 | [UI prototype](prototypes/dashboard/README.md) | Cách chạy, fixture, giới hạn và kiểm tra giao diện |
 
 Tài liệu nền:

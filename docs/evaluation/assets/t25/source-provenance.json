@@ -1,0 +1,11 @@
+{
+  "reconstructed_measured_script_sha256": "dd6279b3b22dd5fc4bfc6451d8a071bec978d36b18eed827fa1fb7eba63b1cb9",
+  "current_script_sha256": "bc6fcfee270ac6c4a66281192e09ca5bb48082e76102afb159d6f704336ffc53",
+  "correction_patch_sha256": "451192ef372cfa7b420d871c07b58e0c1b63c4b16fb9ac578f1b4f4c6baf8496",
+  "retained_stage_values_and_hashes_identical": [
+    "pipeline_lifecycle",
+    "workload_latencies"
+  ],
+  "patch_reconstructs_measured_source": true,
+  "note": "Final parity/storage/technology were measured after correcting real-row-count assumption and committing metadata outside the load timer. Original application source unchanged."
+}

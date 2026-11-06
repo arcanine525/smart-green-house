@@ -1,9 +1,19 @@
 # Bằng chứng đánh giá
 
-Scaffold và synthetic stack tests chỉ chứng minh môi trường chạy. Sáu BR vẫn chưa nghiệm thu toàn bộ; xem [requirements matrix](../implementation/requirements-matrix.md).
+Mỗi báo cáo ghi phạm vi, dữ liệu, điều kiện chạy và giới hạn của kết luận. Scaffold hoặc synthetic stack tests chỉ chứng minh môi trường hoạt động; không thay thế nghiệm thu nghiệp vụ. Xem thêm [ma trận yêu cầu](../implementation/requirements-matrix.md).
 
-| BR | Bằng chứng chức năng | Trạng thái |
+| BR | Báo cáo | Phạm vi |
 |---|---|---|
-| BR-02 (nước) | [br_02.md](br_02.md): đủ AC-01…AC-10, đối soát raw↔publication AGC, timings | Chức năng đạt trên fixture + cửa sổ AGC; basis nước vẫn `assumed_unverified` |
+| BR-01 | [Khí hậu](br_01.md) | Nhiệt độ/CO₂, coverage, episode và rule basis |
+| BR-02 | [Nước](br_02.md) | Irrigation/drain, cân bằng và đối soát nguồn |
+| BR-03 | [Drain](br_03.md) | EC/pH, episode và chất lượng dữ liệu |
+| BR-04 | [Năng lượng](br_04.md) | Quy đổi năng lượng và kWh/kg |
+| BR-05 | [Thu hoạch](br_05.md) | Sản lượng, tỷ lệ loại B và completeness |
+| BR-06 | [Chi phí](br_06.md) | Baseline tariff và scenario |
 
-T13/T15/T17/T19/T21 sẽ ghi các BR còn lại; T23 correctness, T25 performance, T26 usability và T36 sensor replay. Không tạo báo cáo pass khi chưa chạy các task đó. Bằng chứng scaffold T04 được ghi trong [hướng dẫn môi trường](../implementation/local-environment.md).
+## Kiến trúc và hiệu năng
+
+- [Kiến trúc Kimball thay thế](kimball.md): schema, ETL, adapter và parity với Hybrid.
+- [Benchmark Hybrid/Kimball](performance.md): pipeline mới/rerun/rebuild, storage, workload sáu BR và COPY so với INSERT; kèm số đo thô và lệnh tái lập.
+
+Benchmark trên snapshot lịch sử không thay thế đánh giá usability hoặc nghiệm thu đường sensor replay. Basis diện tích và nước vẫn phải được đọc theo nhãn `assumed_unverified` trong từng báo cáo. Bằng chứng dựng môi trường nằm trong [hướng dẫn local](../implementation/local-environment.md).

@@ -1,0 +1,47 @@
+{
+  "task": "T25",
+  "title": "Smart Greenhouse Architecture and Technology Benchmark",
+  "started_at": "2026-11-06T10:35:41.666740+00:00",
+  "status": "failed",
+  "stages": {
+    "system_metadata": {
+      "timestamp_utc": "2026-11-06T10:35:41.684820+00:00",
+      "python_version": "3.12.12",
+      "packages": {
+        "psycopg": "3.3.7",
+        "pyspark": "4.0.1"
+      },
+      "archive_sha256": "c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+      "platform": "Linux-7.0.14-linuxkit-aarch64-with-glibc2.36",
+      "processor": "",
+      "postgres_version": "PostgreSQL 17.10 (Debian 17.10-1.pgdg12+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+      "source_snapshot": "/data/raw/agc-2nd-2019/c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+      "raw_manifest_sha256": "c1e40f1ea6bf0d7c9a729843ec1f8be917ad5966b788857813608bab47d8b0bd",
+      "benchmark_script_sha256": "1c7808814a107e332eaa36a89047baa305335632b8e4b562c173fd2bfe9ee84c",
+      "parser_version": "agc-parser-v1",
+      "quality_policy": "AGC_QUALITY_V1",
+      "area_basis": "AGC_SHARED_BASIS_V1;62.5m2;assumed_unverified",
+      "cgroup": {
+        "cgroup_memory_max_bytes": "2147483648",
+        "cgroup_memory_peak_bytes": "36749312",
+        "cgroup_cpu_max": "150000 100000"
+      },
+      "container_processing_caps": {
+        "cpu": "1.5",
+        "memory": "2GiB"
+      },
+      "container_db_caps": {
+        "cpu": "0.5",
+        "memory": "512MiB"
+      }
+    }
+  },
+  "stage_script_sha256": {
+    "system_metadata": "1c7808814a107e332eaa36a89047baa305335632b8e4b562c173fd2bfe9ee84c"
+  },
+  "last_updated_at": "2026-11-06T10:35:41.704399+00:00",
+  "failed_stage": "execution",
+  "error_type": "DiskFull",
+  "error_message": "could not extend file \"base/2162444/2162882\": No space left on device\nHINT:  Check free disk space.",
+  "failed_at": "2026-11-06T10:42:58.758222+00:00"
+}
