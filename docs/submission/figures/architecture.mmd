@@ -1,0 +1,10 @@
+flowchart TB
+  AGC["AGC snapshot · CSV và manifest"] --> BATCH["Batch: parser + Spark"]
+  AGC --> SIM["Sensor simulator · replay"]
+  SIM --> MQTT["MQTT broker"] --> COL["Collector · durable spool"]
+  COL --> STREAM["Spark Structured Streaming"]
+  BATCH --> HIST[("PostgreSQL · historical core và marts")]
+  STREAM --> LIVE[("PostgreSQL · replay scope / publication")]
+  HIST --> APP["Streamlit + Plotly · 6 BR + replay"]
+  LIVE --> APP
+  APP --> CSV["CSV / JSON"]

@@ -172,6 +172,9 @@ Energy và Harvest được tổng hợp riêng trước khi ghép để tránh 
 
 ## Tài liệu và sơ đồ
 
+[Báo cáo, slide và kịch bản video dự thảo](docs/submission/README.md) giữ rõ các phần chưa hoàn tất.
+
+
 Toàn bộ sơ đồ được viết bằng **Mermaid** trong Markdown. Xem [mục lục kiến trúc](docs/architecture/README.md) hoặc mở từng thành phần:
 
 | Tài liệu | Nội dung |
