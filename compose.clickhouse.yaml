@@ -73,6 +73,27 @@ services:
       timeout: 3s
       retries: 40
       start_period: 5s
+  ch-job:
+    image: greenhouse-clickhouse-processing:local
+    build:
+      context: .
+      dockerfile: docker/processing/Dockerfile
+    profiles: [tools]
+    environment:
+      <<: *ch-app-env
+      GREENHOUSE_IMPORT_DIR: /data/import
+      GREENHOUSE_OUTPUT_DIR: /candidate/output
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+    volumes:
+      - ${GREENHOUSE_IMPORT_PATH:-./data/import}:/data/import:ro
+      - ${GREENHOUSE_RAW_PATH:-./data/raw}:/data/raw:ro
+      - ${GREENHOUSE_CH_STATE_PATH:-./tmp/clickhouse-state}:/candidate
+    networks: [backend]
+    cpus: 1
+    mem_limit: 1536m
+    command: [python, -m, greenhouse, --backend, clickhouse, setup]
   ch-web:
     image: greenhouse-clickhouse-client:local
     profiles: [app]

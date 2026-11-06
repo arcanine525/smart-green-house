@@ -36,17 +36,25 @@ def setup_environment(settings):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="python -m greenhouse")
+    parser.add_argument('--backend',choices=['postgres','clickhouse'],default=os.environ.get('GREENHOUSE_BACKEND','postgres'))
     parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", "migrate", "load-core", "explain-core", "run-pipeline", "transform", "publish", "correct-core", "lineage", "simulate", "collect", "stream", "register-agc-tariff", *PENDING])
     arguments, rest = parser.parse_known_args(argv)
+    if arguments.backend not in ('postgres','clickhouse'):
+        parser.error('GREENHOUSE_BACKEND must be postgres or clickhouse')
+    if arguments.command == 'stream':
+        from greenhouse.sensor.stream_cli import stream_command
+        return stream_command(['--backend',arguments.backend,*rest])
+    if arguments.backend == 'clickhouse' and arguments.command in (
+            'setup','test','migrate','load-core','explain-core','run-pipeline','transform','publish',
+            'correct-core','lineage','register-agc-tariff'):
+        from greenhouse.clickhouse.cli import command
+        return command(arguments.command,rest)
     if arguments.command == "register-agc-tariff":
         from greenhouse.db.reference_tariff import main as tariff_main
         return tariff_main(rest)
     if arguments.command in PENDING:
         print(f"{arguments.command}: chưa hiện thực — thuộc task sau: {PENDING[arguments.command]}", file=sys.stderr)
         return 2
-    if arguments.command == "stream":
-        from greenhouse.sensor.stream_cli import stream_command
-        return stream_command(rest)
     if arguments.command == "simulate":
         from greenhouse.sensor.cli import simulate_command
         return simulate_command(rest)

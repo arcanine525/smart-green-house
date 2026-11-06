@@ -1,5 +1,6 @@
 """Live replay view for BR-01/03; never presents source time as wall time."""
 from datetime import datetime, timezone
+from contextlib import closing
 
 import plotly.graph_objects as go
 import psycopg
@@ -7,9 +8,9 @@ import streamlit as st
 
 from greenhouse.app.replay_presenter import episode_rows, export_csv, liveness, summary_rows
 from greenhouse.contracts import RuleBasis
-from greenhouse.db.replay_catalog import current_replays, latest_quality, source_rules
-from greenhouse.sensor.replay_evaluation import evaluate_publication, map_historical_rule
-from greenhouse.sensor.replay_publication import read_publication
+from greenhouse.app.replay_reads import current_replays,latest_quality,source_rules,evaluate_publication,map_historical_rule,read_publication
+from greenhouse.app import runtime
+from greenhouse.clickhouse.client import ClickHouseError
 
 
 def _plot(events, category, field, title, unit):
@@ -38,10 +39,10 @@ def render(connection, settings):
         def refresh_view():
             # A fragment reruns after the enclosing script has closed its connection.
             try:
-                with psycopg.connect(**settings.connection_kwargs()) as fresh:
+                with closing(runtime.connect(settings)) as fresh:
                     _render_pinned(fresh)
-            except psycopg.Error:
-                st.error('Không kết nối được PostgreSQL; dữ liệu replay chưa sẵn sàng.')
+            except (psycopg.Error,ClickHouseError,ValueError):
+                st.error('Không kết nối được warehouse; dữ liệu replay chưa sẵn sàng.')
         refresh_view()
     else:
         _render_pinned(connection)
@@ -50,19 +51,23 @@ def render(connection, settings):
 def _render_pinned(connection):
     try:
         choices = current_replays(connection)
-    except psycopg.Error:
-        st.error('Không đọc được catalog replay; kiểm tra migration và PostgreSQL.')
+    except (psycopg.Error,ClickHouseError,ValueError):
+        st.error('Không đọc được catalog replay; kiểm tra migration và warehouse.')
         return
     if not choices:
         st.info('Chưa có replay publication. Chạy simulator, collector và stream worker để bắt đầu.')
         return
-    selected = st.selectbox('Replay · khoang', choices,
-        format_func=lambda row: f'{row[0]} · {row[4]} · {row[1][:10]}', key='replay_publication')
+    by_key={(r[2],r[0],r[4]):r for r in choices}
+    keys=list(by_key)
+    if st.session_state.get('replay_publication') not in keys:st.session_state.pop('replay_publication',None)
+    selected_key=st.selectbox('Replay · khoang',keys,
+        format_func=lambda key:f'{by_key[key][0]} · {by_key[key][4]} · {by_key[key][1][:10]}',key='replay_publication')
+    selected=by_key[selected_key]
     replay_id, publication_id, scope, cycle, compartment, observed, received, state, created = selected
     # All subsequent reads and exports are pinned to this immutable ID.
     try:
         metadata, events = read_publication(connection, publication_id)
-    except (ValueError, psycopg.Error):
+    except (ValueError, psycopg.Error, ClickHouseError):
         st.error('Publication replay đã chọn không đọc được.')
         return
     stale_seconds = st.slider('Ngưỡng mất tín hiệu (giây)', 10, 3600, 60, step=10, key='replay_stale_threshold')
@@ -78,7 +83,7 @@ def _render_pinned(connection):
         st.success('Replay đã đối soát manifest, checksum và sequence.')
     else:
         st.warning('Provisional: replay chưa đối soát đầy đủ; kết quả và episode có thể thay đổi khi dữ liệu đến trễ.')
-    st.write({'Đã xác nhận': state.get('accepted_events', 0), 'Thiếu sequence': len(state.get('missing_sequences', [])),
+    st.write({'Sequence hợp lệ': state.get('accepted_events', 0), 'Event trong pin': len(events), 'Thiếu sequence': len(state.get('missing_sequences', [])),
               'Conflict': len(state.get('conflicts', [])) + len(state.get('slot_conflicts', [])),
               'Quarantine': state.get('quarantined', 0), 'Lỗi scope': len(state.get('scope_conflicts', [])),
               'Lỗi thời gian': len(state.get('time_conflicts', []))})
@@ -92,8 +97,8 @@ def _render_pinned(connection):
               'Null / quality nguồn': latest['payload'].get('null_reasons', {})})
     with st.expander('Chất lượng mẫu mới nhất'):
         try:
-            st.dataframe(latest_quality(connection, metadata, latest), hide_index=True, width='stretch')
-        except (ValueError, psycopg.Error):
+            st.dataframe(latest_quality(connection, metadata, latest,publication_id=publication_id), hide_index=True, width='stretch')
+        except (ValueError, psycopg.Error, ClickHouseError):
             st.warning('Không đọc được verdict quality của mẫu này.')
     source_snapshot = latest['source_provenance']['snapshot_id']
     basis_label = st.selectbox('Basis khí hậu', ['requested', 'realized'], key='replay_climate_basis')
@@ -104,6 +109,8 @@ def _render_pinned(connection):
         drain_versions = ['Không chọn rule'] + [r[0] for r in drain_options]
         climate_labels = {r[0]: f'{r[0]} · {r[1]}' + (' · demo' if r[2] else '') for r in climate_options}
         drain_labels = {r[0]: f'{r[0]} · {r[1]}' + (' · demo' if r[2] else '') for r in drain_options}
+        if st.session_state.get('replay_climate_rule') not in climate_versions:st.session_state.pop('replay_climate_rule',None)
+        if st.session_state.get('replay_drain_rule') not in drain_versions:st.session_state.pop('replay_drain_rule',None)
         climate_id = st.selectbox('Rule khí hậu lịch sử ánh xạ sang replay', climate_versions,
                                   format_func=lambda value: climate_labels.get(value, value), key='replay_climate_rule')
         drain_id = st.selectbox('Rule EC/pH lịch sử ánh xạ sang replay', drain_versions,
@@ -112,7 +119,7 @@ def _render_pinned(connection):
         drain_rule = map_historical_rule(connection, publication_id, drain_id) if drain_id != drain_versions[0] else None
         evaluation = evaluate_publication(connection, publication_id, climate_rule=climate_rule,
             drain_rule=drain_rule, climate_basis=RuleBasis(basis_label))
-    except (ValueError, psycopg.Error) as error:
+    except (ValueError, psycopg.Error, ClickHouseError) as error:
         st.warning(f'Chưa thể tính KPI replay ({type(error).__name__}); kiểm tra rule, scope và cursor.')
         return
     st.subheader('KPI đến replay clock')

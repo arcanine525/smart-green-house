@@ -42,20 +42,31 @@ class ClickHouseSettings:
     @classmethod
     def from_env(cls, environ=None):
         env = os.environ if environ is None else environ
-        return cls(env.get('CH_HOST', 'clickhouse'), int(env.get('CH_PORT', '8123')),
+        try:
+            port=int(env.get('CH_PORT','8123')); timeout=int(env.get('CH_TIMEOUT','120'))
+        except (TypeError,ValueError):
+            raise ValueError('CH_PORT and CH_TIMEOUT must be integers') from None
+        return cls(env.get('CH_HOST', 'clickhouse'), port,
                    env.get('CH_DATABASE', 'greenhouse'), env.get('CH_USER', 'greenhouse'),
-                   env.get('CH_PASSWORD', ''), int(env.get('CH_TIMEOUT', '120')))
+                   env.get('CH_PASSWORD', ''), timeout)
 
 
 class Client:
     def __init__(self, settings):
         self.settings = settings
+        self._action_cache = None
+
+    def begin_action(self):
+        """Opt-in immutable verification reuse until this caller closes its action."""
+        self._action_cache={}
+        return self
 
     def ping(self):
         return self.query('SELECT 1 AS ready')
 
     def close(self):
-        """HTTP responses are individually closed; no pooled connection to close."""
+        """HTTP responses close individually; discard action-owned verified inputs."""
+        self._action_cache=None
 
     def execute(self, sql, parameters=None, *, query_id=None):
         """Return raw response; never auto-retry an ambiguous write.

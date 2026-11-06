@@ -92,6 +92,10 @@ rule metadata, đơn vị, time basis, identity publication/scope/snapshot, vers
 
 ## Kiểm thử
 
+Để chạy toàn bộ màn hình trên backend ClickHouse, gồm overview/quality và live
+replay, xem [cấu hình UI/CLI](../../../docs/implementation/clickhouse-ui-cli.md).
+Không cần PostgreSQL khả dụng; chuyển namespace backend sẽ reset state cũ.
+
 ```bash
 docker compose --profile test run --rm ui-test          # tests/ui (AppTest + service/export)
 docker compose --profile test run --rm test-runner      # bộ backend hiện có

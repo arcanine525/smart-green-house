@@ -156,8 +156,8 @@ def render(connection, settings, publications):
         baseline_tariff = cost_svc.get_baseline_tariff(publication.scope_id, None)
     if baseline_tariff is None:
         st.warning('Chưa có biểu giá tham chiếu (baseline tariff) cho scope này. '
-                   'Với AGC lịch sử, chạy: docker compose run --rm job python -m greenhouse '
-                   'register-agc-tariff --apply. Scope khác cần biểu giá cấu hình riêng.')
+                   'Đăng ký biểu giá cho backend và scope đang chọn theo hướng dẫn local. '
+                   'AGC dùng biểu giá lịch sử có provenance; scope khác cần cấu hình riêng.')
         st.stop()
 
     # 2. Existing Scenarios for this Scope

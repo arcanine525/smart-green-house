@@ -7,6 +7,10 @@ from greenhouse.contracts import PublicationRef, Versions
 
 
 def envelope(client,scope,publication_id=None):
+    cache=getattr(client,'_action_cache',None)
+    if cache is not None and publication_id is not None:
+        saved=cache.get(('historical-envelope',publication_id))
+        if saved is not None and saved[0]==scope:return saved[1]
     probe=Publications(client,None)
     rows=[r for r in probe._states(scope) if r['stage']=='COMPLETE'
           and (publication_id is None or r['publication_id']==publication_id)]
@@ -30,10 +34,14 @@ def envelope(client,scope,publication_id=None):
             validators[name]=SlotMart(client,None,name).verify
         else:
             raise ValueError('Unsupported publication bundle: '+name)
-    return Publications(client,None,bundles=validators).pin(scope,publication_id=selected['publication_id'])
+    verified=Publications(client,None,bundles=validators).pin(scope,publication_id=selected['publication_id'])
+    if cache is not None:cache[('historical-envelope',verified['publication_id'])]=(scope,verified)
+    return verified
 
 
 def publication_envelope(client,publication_id):
+    cache=getattr(client,'_action_cache',None)
+    if cache is not None and ('historical-envelope',publication_id) in cache:return cache[('historical-envelope',publication_id)][1]
     scopes=client.query('SELECT DISTINCT scope_id FROM publication_state WHERE publication_id={id:String} AND stage=\'COMPLETE\'',{'id':publication_id})
     if len(scopes)!=1:
         raise ValueError('Unknown complete publication')

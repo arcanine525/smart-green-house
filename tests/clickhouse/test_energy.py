@@ -28,7 +28,7 @@ from greenhouse.queries.cost import EnergyCostService
 class EnergyTest(unittest.TestCase):
     setUp=fixtures.WaterTest.setUp
 
-    def prepare(self,*,unknown_basis=False,missing_heat=False,zero_a=False):
+    def prepare(self,*,unknown_basis=False,missing_heat=False,zero_a=False,include_climate=False):
         resource=self.raw/'Automatoes/Resources.csv'
         with resource.open('w',newline='') as stream:
             w=csv.writer(stream);w.writerow(HEADERS['Resources'])
@@ -36,7 +36,18 @@ class EnergyTest(unittest.TestCase):
         prod=self.raw/'Automatoes/Production.csv'
         with prod.open('w',newline='') as stream:
             w=csv.writer(stream);w.writerow(HEADERS['Production']);w.writerow(['43892','0' if zero_a else '1','.5']+['0']*6);w.writerow(['43894','0' if zero_a else '2','.25']+['0']*6)
-        manifest=json.loads((self.raw/'manifest.json').read_text());manifest['files']=[{'path':'Automatoes/'+p.name,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'csv':{'data_rows':n}} for p,n in ((resource,5),(prod,2))]
+        files=[(resource,5),(prod,2)]
+        if include_climate:
+            climate=self.raw/'Automatoes/GreenhouseClimate.csv'
+            with climate.open('w',newline='') as stream:
+                w=csv.writer(stream);w.writerow(HEADERS['GreenhouseClimate'])
+                for i in range(30):
+                    values={'Tair':'30' if i<10 else '22','CO2air':'500','t_heat_sp':'20','t_vent_sp':'25',
+                        'co2_sp':'0' if i==5 else '500','t_heat_vip':'20','t_ventlee_vip':'25','co2_vip':'500',
+                        'EC_drain_PC':'6' if i<10 else '3','pH_drain_PC':'0' if i==5 else '6'}
+                    w.writerow([format(Decimal(43892)+Decimal(i)/Decimal(288),'.5f')]+[values.get(h,'') for h in HEADERS['GreenhouseClimate'][1:]])
+            files.append((climate,30))
+        manifest=json.loads((self.raw/'manifest.json').read_text());manifest['files']=[{'path':'Automatoes/'+p.name,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'csv':{'data_rows':n}} for p,n in files]
         (self.raw/'manifest.json').write_text(json.dumps(manifest))
         args=dict(start='2020-03-02',end='2020-03-07')
         self.harvest=harvest_configuration(self.snapshot,['Automatoes'],assumed_basis=True,**args)

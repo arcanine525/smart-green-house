@@ -253,29 +253,36 @@ class WaterAdapter:
         return rules[0]
 
     def catalog_publications(self):
-        scopes=self.client.query('SELECT DISTINCT h.scope_id FROM water_header h INNER JOIN publication_state p ON h.publication_id=p.publication_id AND h.scope_id=p.scope_id WHERE p.stage=\'COMPLETE\' ORDER BY h.scope_id')
+        # Application scopes declare a source snapshot. Bare coordinator-only
+        # envelopes without any source identity are not dataset filter options.
+        scopes=self.client.query('SELECT DISTINCT p.scope_id FROM publication_state p INNER JOIN configuration_envelope c ON p.scope_id=c.scope_id WHERE p.stage=\'COMPLETE\' AND c.kind=\'snapshot\' ORDER BY p.scope_id')
         result=[]
         for scope in scopes:
             states=self.mart.publications()._states(scope['scope_id'])
             completed=[r for r in states if r['stage']=='COMPLETE']
             latest=max(completed,key=lambda r:int(r['generation']))
             candidate=json.loads(latest['payload'])
+            snapshot_pins=[r for r in candidate['configuration']['pins'] if r['kind']=='snapshot']
+            if len(snapshot_pins)!=1:
+                raise ValueError('Publication lacks unambiguous snapshot identity')
+            snapshot=json.loads(snapshot_pins[0]['payload'])['snapshot_id']
             if 'water' not in candidate['required_bundles']:
-                snapshot_pins=[r for r in candidate['configuration']['pins'] if r['kind']=='snapshot']
-                if len(snapshot_pins)!=1:
-                    raise ValueError('Publication lacks unambiguous snapshot identity')
-                result.append(CatalogPublication(scope['scope_id'],json.loads(snapshot_pins[0]['payload'])['snapshot_id'],
+                result.append(CatalogPublication(scope['scope_id'],snapshot,
                     candidate['publication_id'],datetime.fromisoformat(candidate['committed_at']),'complete','clickhouse-core-v1'))
                 continue
-            from greenhouse.clickhouse.registry import envelope as read_envelope
-            envelope=read_envelope(self.client,scope['scope_id'])
-            ref=self.publication(envelope['publication_id']); receipt=envelope['receipts']['water']
-            result.append(CatalogPublication(ref.scope_id,ref.snapshot_id,ref.publication_id,ref.committed_at,
-                ref.finality_status,ref.versions.code_version,BUNDLE,receipt['rows'],receipt['cycles'],
-                harvest_bundle_version=envelope['receipts'].get('harvest',{}).get('version'),
-                climate_bundle_version=envelope['receipts'].get('climate',{}).get('version'),
-                drain_bundle_version=envelope['receipts'].get('drain',{}).get('version'),
-                energy_bundle_version=envelope['receipts'].get('energy',{}).get('version') if envelope['receipts'].get('energy',{}).get('quantity_version')=='energy-quantity-v1' else None))
+            # Catalog readiness means a sealed bundle receipt exists, just as
+            # the PG catalog contract. Verify the selected publication through
+            # publication()/registry before any KPI or export; discovery must
+            # not recompute every scope's complete marts on every UI action.
+            receipts=candidate['receipts'];receipt=receipts['water']
+            if receipt['version']!=BUNDLE:raise ValueError('Unknown water catalog bundle')
+            code='clickhouse-water-v1' if candidate['required_bundles']==['water'] else 'clickhouse-warehouse-v1'
+            result.append(CatalogPublication(scope['scope_id'],snapshot,candidate['publication_id'],
+                datetime.fromisoformat(candidate['committed_at']),'complete',code,BUNDLE,receipt['rows'],receipt['cycles'],
+                harvest_bundle_version=receipts.get('harvest',{}).get('version'),
+                climate_bundle_version=receipts.get('climate',{}).get('version'),
+                drain_bundle_version=receipts.get('drain',{}).get('version'),
+                energy_bundle_version=receipts.get('energy',{}).get('version') if receipts.get('energy',{}).get('quantity_version')=='energy-quantity-v1' else None))
         return tuple(result)
 
 

@@ -10,6 +10,7 @@ from greenhouse.settings import Settings
 @dataclass(frozen=True)
 class ClickHousePaths:
     raw_dir: Path
+    database: ClickHouseSettings
 
 
 def backend():
@@ -25,17 +26,25 @@ def settings():
     path=Path(os.environ.get('GREENHOUSE_RAW_DIR','/data/raw'))
     if not path.is_absolute():
         raise ValueError('Raw path in container must be absolute')
-    return ClickHousePaths(path)
+    return ClickHousePaths(path,ClickHouseSettings.from_env())
 
 
 def connect(configuration):
-    if backend()=='clickhouse':
-        client=Client(ClickHouseSettings.from_env())
+    if isinstance(configuration,ClickHousePaths):
+        client=Client(configuration.database)
         client.ping()
-        return client
+        return client.begin_action()
     import psycopg
     return psycopg.connect(**configuration.connection_kwargs())
 
 
 def is_clickhouse(connection):
     return isinstance(connection,Client)
+
+
+def identity(connection):
+    if is_clickhouse(connection):
+        s=connection.settings
+        return ('clickhouse',s.host,str(s.port),s.database,s.user)
+    info=connection.info
+    return ('postgres',*(str(v) for v in (info.host,info.port,info.dbname,info.user)))

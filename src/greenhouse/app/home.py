@@ -58,6 +58,7 @@ def stop_with(kind, title, detail=None, tips=None):
 
 def render(connection):
     settings = runtime.settings()
+    shared_context.begin_backend(st.session_state,runtime.identity(connection))
     with st.sidebar:
         screen = st.radio('Màn hình', ['💧 Nước (BR-02)', '🍅 Thu hoạch (BR-05)',
                                        '🌡️ Khí hậu (BR-01)', '🧪 EC/pH drain (BR-03)',
@@ -65,8 +66,6 @@ def render(connection):
                                        '📡 Sensor replay (BR-01/03)', '🏠 Tổng quan vụ', '🛡️ Chất lượng dữ liệu'],
                           key='screen_choice',
                           help='Replay và dữ liệu lịch sử là hai phạm vi riêng.')
-    if runtime.is_clickhouse(connection) and screen not in ('💧 Nước (BR-02)','🍅 Thu hoạch (BR-05)','🌡️ Khí hậu (BR-01)','🧪 EC/pH drain (BR-03)','⚡ Năng lượng (BR-04)','💶 Chi phí & Kịch bản (BR-06)'):
-        stop_with('info', 'Màn hình này chưa có dữ liệu được công bố trên backend đang chọn.', 'Chọn Nước để xem phạm vi hiện có.')
     shared_context.begin_screen(st.session_state, screen, historical=screen != '📡 Sensor replay (BR-01/03)')
     if screen == '📡 Sensor replay (BR-01/03)':
         from greenhouse.app import replay as replay_screen
@@ -80,11 +79,8 @@ def render(connection):
                   'Kiểm tra DB Compose rồi thử lại; chi tiết lỗi không hiển thị để tránh lộ cấu hình.')
     if not publications:
         stop_with('info', 'Chưa có publication nào được publish — ứng dụng không có dữ liệu fixture thay thế.',
-                  'Chạy pipeline để tạo publication có mart bundle (lệnh đầy đủ trong '
-                  'docs/implementation/local-environment.md):',
-                  'docker compose -p smart-greenhouse run --rm job python -m greenhouse migrate\n'
-                  'docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline '
-                  '--workflow-id water-first')
+                  'Chạy migration và pipeline cho backend đã chọn. Xem lệnh và configuration pins trong '
+                  'docs/implementation/clickhouse-ui-cli.md hoặc docs/implementation/local-environment.md.')
 
     if screen in ('🏠 Tổng quan vụ', '🛡️ Chất lượng dữ liệu'):
         from greenhouse.app import overview
@@ -114,9 +110,8 @@ def render_water(connection, settings, publications):
     usable_rows = [row for row in publications if row.usable]
     if not usable_rows:
         stop_with('error', 'Không có publication nào đủ water mart để xem.',
-                  'Publication hiện hành của scope hiện tại thiếu bundle irrigation-mart-v1 '
-                  '(publication cũ trước mart). Chạy workflow pipeline mới; ứng dụng không tự publish/backfill.',
-                  'docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id water-rerun')
+                  'Publication hiện hành thiếu water bundle. Chạy workflow pipeline mới cho backend đã chọn; '
+                  'ứng dụng không tự publish/backfill.')
 
     with st.sidebar:
         st.markdown('<div class="brand">smart<em> greenhouse</em></div>', unsafe_allow_html=True)
@@ -354,9 +349,15 @@ except ValueError as error:
 else:
     try:
         connection = runtime.connect(settings)
-    except (psycopg.Error, ClickHouseError):
+    except (psycopg.Error, ClickHouseError, ValueError):
         stop_with('error', 'Không kết nối được warehouse qua Compose.',
-                  'Chi tiết kết nối không hiển thị; kiểm tra service db và .env (không log credential).',
-                  'docker compose -p smart-greenhouse up -d --wait db')
+                  'Chi tiết kết nối không hiển thị; kiểm tra service warehouse và .env cho backend đã chọn.')
     with closing(connection):
-        render(connection)
+        try:
+            render(connection)
+        except (psycopg.Error, ClickHouseError):
+            stop_with('error', 'Warehouse chưa sẵn sàng cho thao tác này.',
+                      'Kiểm tra kết nối, migration và publication; không sử dụng kết quả từ backend khác.')
+        except ValueError:
+            stop_with('error', 'Publication hoặc cấu hình không xác minh được.',
+                      'Kiểm tra scope, version, receipt và dữ liệu raw trước khi thử lại.')

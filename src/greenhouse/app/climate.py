@@ -121,9 +121,8 @@ def render(connection, settings, publications):
             st.error('Không có publication nào đủ climate mart (climate-mart-v1) để xem.')
             st.caption('Publication hiện hành của scope thiếu climate bundle. Chạy một '
                        'workflow pipeline mới (v4); ứng dụng không tự publish/backfill.')
-            st.code('docker compose -p smart-greenhouse run --rm job '
-                    'python -m greenhouse run-pipeline --workflow-id climate-br01',
-                    language='bash')
+            st.caption('Xem lệnh cho backend đã chọn trong docs/implementation/clickhouse-ui-cli.md '
+                       'hoặc docs/implementation/local-environment.md.')
             st.stop()
         shared_context.adopt_publication(st.session_state, 'clim_pub_choice', climate_rows, st.warning)
         selected = st.selectbox('Publication (scope đã publish)', climate_rows,

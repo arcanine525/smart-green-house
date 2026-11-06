@@ -6,7 +6,7 @@ from io import StringIO
 import streamlit as st
 
 from greenhouse.app import shared_context, wiring
-from greenhouse.db import quality_overview
+from greenhouse.app import quality_reads as quality_overview
 
 
 def render(connection, settings, publications, *, quality=False):

@@ -1,0 +1,3 @@
+["greenhouse-clickhouse-client:local"] sha256:a8bff396cffa572f8f2639b04f65026e0218e4cbe1a6db8876a880ae233f6d04
+["greenhouse-clickhouse-ui:local"] sha256:2da5c800780a9eb4af76393354b68ae6056066165c4464f7fd6516351bbbe206
+["greenhouse-clickhouse-processing:local"] sha256:20c8883949f3825d20c04b388fcec2b615c6b753b154020ace5c12ad0e1195d6

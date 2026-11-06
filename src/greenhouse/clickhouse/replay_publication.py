@@ -80,6 +80,8 @@ def member_rows(publication,replay,selected):
 
 
 def _read_verified(client,publication):
+    cache=getattr(client,'_action_cache',None);key=('replay-verified',publication)
+    if cache is not None and key in cache:return cache[key]
     rows=client.query('SELECT DISTINCT * FROM replay_seal WHERE publication_id={pub:String}',{'pub':publication})
     if len(rows)!=1:raise ValueError('Unknown/unsealed or conflicting replay publication')
     seal=rows[0];body=json.loads(seal['payload'])
@@ -105,7 +107,9 @@ def _read_verified(client,publication):
     expected=member_rows(publication,config['replay_id'],selected)
     if members!=expected or digest(expected)!=body['members_hash']:
         raise ValueError('Replay membership differs from verified seal')
-    return seal,config,meta,tuple(event for _,_,event in sorted(selected,key=lambda r:(event_slot(r[2]),r[0])))
+    result=seal,config,meta,tuple(event for _,_,event in sorted(selected,key=lambda r:(event_slot(r[2]),r[0])))
+    if cache is not None:cache[key]=result
+    return result
 
 
 def read_publication(client,publication_id):

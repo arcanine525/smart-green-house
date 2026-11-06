@@ -1,5 +1,17 @@
 # Quay walkthrough T26
 
+Smoke điều hướng backend ClickHouse (chín màn hình, không quay video):
+
+```bash
+PUBLICATION_ID=PUBLICATION_DA_NGHIEM_THU APP_URL=http://127.0.0.1:18582 \
+  node tools/walkthrough/check-backends.cjs
+```
+
+Lệnh kiểm đúng publication hiển thị, export availability, quality details hoặc
+empty state và replay empty state trên candidate AGC. Populated replay dùng
+AppTest với bytes simulator thật trong suite T48. Sáu walkthrough video chi
+tiết ClickHouse vẫn là T51; xem [UI/CLI](../../docs/implementation/clickhouse-ui-cli.md).
+
 Phạm vi user chốt ngày 2026-11-07: ≥6 video, mỗi BR có luồng đầy đủ; chú thích
 Tiếng Việt, số bước, vị trí thao tác, không âm thanh; MP4 1920×1080. Các video
 là thao tác tự động Playwright trên trình duyệt thật. Không có người tham gia,

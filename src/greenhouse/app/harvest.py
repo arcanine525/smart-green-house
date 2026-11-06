@@ -77,9 +77,8 @@ def render(connection, settings, publications):
             st.caption('Publication hiện hành của scope thiếu bundle harvest-mart-v3 '
                        '(hoặc giữ bundle cũ). Chạy workflow pipeline mới; ứng dụng không '
                        'tự publish/backfill. Publication chỉ có water vẫn xem được ở màn hình Nước.')
-            st.code('docker compose -p smart-greenhouse run --rm job '
-                    'python -m greenhouse run-pipeline --workflow-id harvest-screen',
-                    language='bash')
+            st.caption('Xem lệnh cho backend đã chọn trong docs/implementation/clickhouse-ui-cli.md '
+                       'hoặc docs/implementation/local-environment.md.')
             st.stop()
         shared_context.adopt_publication(st.session_state, 'harv_pub_choice', harvest_rows, st.warning)
         selected = st.selectbox('Publication (scope đã publish)', harvest_rows,

@@ -64,3 +64,13 @@ def remember(state, publication, cycle, window):
                   'snapshot_id': publication.snapshot_id, 'cycle_id': cycle.cycle_id,
                   'compartment_id': cycle.compartment_id, 'window': (start, end)}
     state[PENDING] = None
+
+
+def begin_backend(state,identity):
+    """A different warehouse namespace starts fresh filter/intent state."""
+    previous=state.get('_warehouse_identity')
+    if previous!=identity:
+        for key in list(state):
+            if key not in ('screen_choice','_warehouse_identity'):
+                del state[key]
+    state['_warehouse_identity']=identity

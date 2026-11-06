@@ -44,8 +44,8 @@ def lost_checkpoint(*args,**kwargs):
  os._exit(86)
 sink.commit_and_publish=lost_checkpoint
 ''' if crash else '')+f'''
-from greenhouse.sensor.stream_cli import stream_command
-assert stream_command({arguments!r})==0
+from greenhouse.cli import main
+assert main(['stream',*{arguments!r}])==0
 from pyspark.sql import SparkSession
 spark=SparkSession.getActiveSession()
 if spark:spark.stop()

@@ -1,0 +1,69 @@
+{
+  "status": "passed",
+  "source_head": "ca17371",
+  "candidate_code": "T48 working tree; final packaged images ran 71-test suite and nine-screen Chromium smoke",
+  "tests_discovered": 71,
+  "tests_executed": 62,
+  "explicit_heavy_integration_skips": 9,
+  "postgres_ui_tests": 100,
+  "spark_main_entrypoint_recovery_tests": 1,
+  "browser_screens": 9,
+  "backend": "clickhouse",
+  "postgres_required_for_candidate": false,
+  "historical_publication": "ad97cc7537ca4b29aa7df18bb84ad8c2",
+  "limits": [
+    "AGC historical smoke has full Resources/Production and only 02–03 March climate; full source-window removal/backfill remains T38",
+    "Real browser replay is explicit empty state; populated replay/rule mapping/late refresh/fragment run on production home.py AppTest using exact simulator SQLite outbox bytes",
+    "Nine specialized MQTT/fault/restart tests are explicit skips in this UI suite; T47 evidence covers them, and the real Spark child crash/resume/reopen reran through the main CLI",
+    "Spark entrypoint recovery ran before final catalog-only changes; final packaged UI/core suite covers the final catalog and namespace behavior",
+    "Not T49 benchmark, T50 offline/backup, or T51 video acceptance"
+  ],
+  "provenance": "Final suite 71 discovered/62 run/9 skips passed in 75.334s; all100 PG UI checks passed in69.40s on disposable DB. Initial CLI correction retry could not find original revision after latest-only selection; now explicitly verifies the predecessor. Empty-state fixture initially migrated core only; it now includes water catalog schema. Source-less coordinator-only test envelopes are excluded from dataset discovery, while a source-declared core-only scope is visible not-ready. Catalog discovers sealed receipts and verifies only the selected pin before KPI/export. Initial PG test invocation accidentally loaded the processing-only root conftest Java report hook; final UI command uses --confcutdir=tests/ui. No Docker storage problem or cache pruning occurred.",
+  "files": [
+    {
+      "file": "browser-check.json",
+      "bytes": 3475,
+      "sha256": "ffb7f5873f11a6f071be415da871939e70cdef16e46d1a8a64df1a24e3cf4a84"
+    },
+    {
+      "file": "images.txt",
+      "bytes": 333,
+      "sha256": "ec58efd2483491e6c9ac162c16827fa65d0e9056e0ff41e29c484c98206d8cbd"
+    },
+    {
+      "file": "overview.png",
+      "bytes": 127147,
+      "sha256": "92a0df15b1305e6c3b83201aa576230959ae0542bdd55b92cefefa652260da30"
+    },
+    {
+      "file": "postgres-ui-tests.log",
+      "bytes": 191,
+      "sha256": "70bcd26d0dc00d69ef228f8872a4c55aa94c3b1847169b798866798824e8b061"
+    },
+    {
+      "file": "quality.png",
+      "bytes": 250797,
+      "sha256": "ce10a3924881d0908d079150acf22b06eef94e3eda4d6adfbf37d755f7f8efca"
+    },
+    {
+      "file": "replay.png",
+      "bytes": 73825,
+      "sha256": "9b66bb06e8847537fa0e7357b7951c6c0d9d8423ead2fc9d539692e4515255c1"
+    },
+    {
+      "file": "runtime.json",
+      "bytes": 174,
+      "sha256": "fcb76668b286369a4accede7cbf07c4b59dfcb3605ca48b8d27e551e9d2aa592"
+    },
+    {
+      "file": "spark-main-entrypoint-recovery.log",
+      "bytes": 688,
+      "sha256": "b8752260842918e858b124283e13b9d9f4050cf95cd4cbd5707c8071cf39eadb"
+    },
+    {
+      "file": "tests.log",
+      "bytes": 117433,
+      "sha256": "c0d44cccd39d6c0ba7b0bd0d1b574e3fa89f51c1c060edfaf0880b7190012dc5"
+    }
+  ]
+}

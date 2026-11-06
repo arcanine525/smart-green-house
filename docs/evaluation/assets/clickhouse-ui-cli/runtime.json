@@ -1,0 +1,1 @@
+{"backend": "clickhouse", "python": "3.12.12", "clickhouse": "25.8.33.6", "postgres_credentials_present": false, "candidate_publication": "ad97cc7537ca4b29aa7df18bb84ad8c2"}

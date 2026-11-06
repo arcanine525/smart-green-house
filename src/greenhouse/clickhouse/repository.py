@@ -276,6 +276,8 @@ class Repository:
 
 
     def load_membership(self, scope, load_id):
+        cache=getattr(self.client,'_action_cache',None);key=('load-membership',scope,load_id)
+        if cache is not None and key in cache:return cache[key]
         receipts=self.client.query('SELECT DISTINCT * FROM load_receipt WHERE scope_id={scope:String} AND load_id={load:String}',{'scope':scope,'load':load_id})
         if len(receipts)!=1:
             raise ValueError('Unknown, incomplete or conflicting load receipt')
@@ -284,7 +286,9 @@ class Repository:
         receipt=receipts[0]
         if len(ids)!=int(receipt['membership_count']) or digest(ids)!=receipt['membership_checksum']:
             raise ValueError('Load membership checksum/count mismatch')
-        return self.canonical_records(scope,revision_ids=ids)
+        result=self.canonical_records(scope,revision_ids=ids)
+        if cache is not None:cache[key]=result
+        return result
 
 
     def load_audit(self, scope, load_id):
