@@ -1,0 +1,1 @@
+{"status": "passed", "python": "3.12.12", "architecture": "aarch64", "spark": "4.0.1", "java": "openjdk version \"17.0.17\" 2025-10-21", "clickhouse": "25.8.33.6", "postgres_environment_present": false}

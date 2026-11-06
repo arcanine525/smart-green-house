@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "fault": "conflict",
+  "events": 0,
+  "complete": false,
+  "quarantined": 0,
+  "missing_sequences": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "source_slots": 6,
+  "expected_minutes": "30",
+  "temperature_valid_minutes": "0",
+  "temperature_out_minutes": "0",
+  "raw_quarantine_preserved": false,
+  "publication": "3bf76b16d4dead0a36d0c602cf72d03519dfeaf8d9e51efac67b9a7e524ed263"
+}

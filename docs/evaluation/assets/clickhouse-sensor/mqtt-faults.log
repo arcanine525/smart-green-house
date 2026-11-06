@@ -1,0 +1,54 @@
+ Container gh-ch-stream-tests-20261107-ch-stream-run-f5aa8d64759d Creating 
+ Container gh-ch-stream-tests-20261107-ch-stream-run-f5aa8d64759d Created 
+test_conflict (test_mqtt_faults.MqttFaultTest.test_conflict) ... Conflict delivery recorded for event_id=f5449c861eaa1446ce82e75df77b741bf6b7b384823ff371b105957a2d1847bf: divergent hash a596eba9115fdc25a2380127754c4397094a733b2702a8b1536fec92728bff3a vs original ea3fad5cb476b38af8f80d38c6400ea555b4f76d5e78974a03fd369e3f42ec57
+Conflict delivery recorded for event_id=1b7c07dd1ca51725bf1812687430d869d3436b4e0232b7008c20d94f38537dce: divergent hash 8942b19983df575921ad85a90bbdb4de9e6c998b8796dd53eef3a2ff3b6d8642 vs original 60c1805dbe87ef0d32440ef3429ba11d9655bdc4d7cfd16c92283578a309b618
+Conflict delivery recorded for event_id=03f7e28cceac0f0c31f10797dd0003a7d6e7d7736d785479910e5ec629fdcd64: divergent hash 9dc55ae8423644fa1ccb0382bc4fa5c9c4b90e27a6c39619522e9660c70153e8 vs original d9c30f985a7ddf3ffefa6741bf3c82ff74e5d4ad4d22d586f94e7dcc01ec96a6
+Conflict delivery recorded for event_id=985dababef7f84dff37fb192a06f4ffcbc62f56cb288ecce5b281effc024d401: divergent hash 5bfcb7d20b7d3c902a260f12d1a7ecca54b26536cb79edf85632f3619cbc739a vs original 17498eaffe69ca790e124ba1abad068a4d06cbe4f7bf5a85b0dd999010ceb19b
+Conflict delivery recorded for event_id=cf1a0be39b6f32042a9f88529d610832e17b47cafa69327d07ae48e951264841: divergent hash 6dfd2cdb3fc2841e5983584fb97705e8a1c4b1510e9fb59a4e9db2420e62ec3e vs original 50526e72b32f9f04f26ab8f40329efe4f94910215c06610bfc872ff1e7f2ab7b
+Conflict delivery recorded for event_id=3586a89db1dbbb969857f5f5daa207ec62937a916e06eccc74dfd393d54860f4: divergent hash e2c6f211fb643ae4757806af3cb4e083108023ab6fd5a67f881250358026ab0d vs original c5bdf2c82420c7a229ce54345f7dfb4e91a2d63bce888d94b549bf7e47c3c19c
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/06 21:34:17 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/06 21:34:20 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=14, family=2, type=1, proto=6, laddr=('127.0.0.1', 40608), raddr=('127.0.0.1', 34447)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"status": "passed", "fault": "conflict", "events": 0, "complete": false, "quarantined": 0, "missing_sequences": [1, 2, 3, 4, 5, 6], "source_slots": 6, "expected_minutes": "30", "temperature_valid_minutes": "0", "temperature_out_minutes": "0", "raw_quarantine_preserved": false, "publication": "3bf76b16d4dead0a36d0c602cf72d03519dfeaf8d9e51efac67b9a7e524ed263"}
+ok
+test_delay_out_of_order (test_mqtt_faults.MqttFaultTest.test_delay_out_of_order) ... 26/11/06 21:34:25 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=19, family=2, type=1, proto=6, laddr=('127.0.0.1', 58926), raddr=('127.0.0.1', 42423)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"status": "passed", "fault": "delay", "events": 6, "complete": true, "quarantined": 0, "missing_sequences": [], "source_slots": 6, "expected_minutes": "30", "temperature_valid_minutes": "30", "temperature_out_minutes": "20", "raw_quarantine_preserved": false, "publication": "643343f466bf5e4c60c95b62e2feaa6be014ff731048aa17168331eb829ece2a"}
+ok
+test_drop_gap (test_mqtt_faults.MqttFaultTest.test_drop_gap) ... 26/11/06 21:34:28 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=14, family=2, type=1, proto=6, laddr=('127.0.0.1', 37356), raddr=('127.0.0.1', 39039)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"status": "passed", "fault": "drop", "events": 0, "complete": false, "quarantined": 0, "missing_sequences": [1, 2, 3, 4, 5, 6], "source_slots": 6, "expected_minutes": "30", "temperature_valid_minutes": "0", "temperature_out_minutes": "0", "raw_quarantine_preserved": false, "publication": "3776105c324871a580ef1216593bdf0f8198c9ca2823e00f37d67b9eea86becc"}
+ok
+test_duplicate (test_mqtt_faults.MqttFaultTest.test_duplicate) ... 26/11/06 21:34:32 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=21, family=2, type=1, proto=6, laddr=('127.0.0.1', 46624), raddr=('127.0.0.1', 43869)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"status": "passed", "fault": "duplicate", "events": 6, "complete": true, "quarantined": 0, "missing_sequences": [], "source_slots": 6, "expected_minutes": "30", "temperature_valid_minutes": "30", "temperature_out_minutes": "20", "raw_quarantine_preserved": false, "publication": "5aad3807e7b61387b547f8017523afba678a3cc0a998ee9404b1438edc285d55"}
+ok
+test_invalid_schema (test_mqtt_faults.MqttFaultTest.test_invalid_schema) ... 26/11/06 21:34:35 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=21, family=2, type=1, proto=6, laddr=('127.0.0.1', 40818), raddr=('127.0.0.1', 35637)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"status": "passed", "fault": "invalid-schema", "events": 5, "complete": false, "quarantined": 1, "missing_sequences": [1], "source_slots": 6, "expected_minutes": "30", "temperature_valid_minutes": "25", "temperature_out_minutes": "20", "raw_quarantine_preserved": true, "publication": "6d932626f7dfd1540f24f20747be76c901a78cfa34af8dd2990fcc2723b6fdc8"}
+ok
+test_malformed_bytes (test_mqtt_faults.MqttFaultTest.test_malformed_bytes) ... 26/11/06 21:34:38 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=6, family=2, type=1, proto=6, laddr=('127.0.0.1', 37234), raddr=('127.0.0.1', 37291)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"status": "passed", "fault": "malformed", "events": 5, "complete": false, "quarantined": 1, "missing_sequences": [1], "source_slots": 6, "expected_minutes": "30", "temperature_valid_minutes": "25", "temperature_out_minutes": "20", "raw_quarantine_preserved": true, "publication": "da9493039902b83ac02dbc59bd82169dbfb36a58c5b964098ef7630e69350a54"}
+ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 25.825s
+
+OK

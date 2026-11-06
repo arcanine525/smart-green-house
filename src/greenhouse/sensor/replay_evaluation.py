@@ -1,5 +1,4 @@
 """Recompute replay BR-01/03 with existing rule engine on a pinned snapshot."""
-from dataclasses import dataclass
 from datetime import datetime, time, timedelta
 
 from greenhouse.contracts import CycleWindow, IntradayContext, RuleBasis
@@ -10,19 +9,7 @@ from greenhouse.sensor.replay_publication import read_publication
 from greenhouse.sensor.replay_slots import build_replay_rows
 
 
-@dataclass(frozen=True)
-class ReplayEvaluation:
-    publication_id: str
-    replay_id: str
-    scope_id: str
-    quality_policy_version: str
-    observed_through: datetime
-    window_end: datetime
-    provisional: bool
-    climate_rule_version: str | None
-    drain_rule_version: str | None
-    climate: object
-    drain: object
+from greenhouse.sensor.replay_models import ReplayEvaluation
 
 
 def evaluate_publication(connection, publication_id, *, climate_rule=None, drain_rule=None,

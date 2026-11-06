@@ -1,0 +1,119 @@
+{
+  "status": "passed",
+  "source_head": "b08c732",
+  "candidate_code": "T47 working tree; final packaged UI and processing images tested; specialized MQTT/restart runs used the same source via bind mounts before final unsealed-generation guard was added and tested in the final suite",
+  "tests_discovered": 59,
+  "tests_executed_ui_core": 50,
+  "explicit_integration_skips": 9,
+  "packaged_spark_cli_recovery_tests": 1,
+  "postgres_sensor_tests": 32,
+  "postgres_replay_ui_tests": 2,
+  "real_mqtt_fault_cases": 6,
+  "real_mqtt_baseline_events": 30,
+  "external_restart_scenarios": [
+    "ClickHouse stop/start, failed checkpoint and ambiguous INSERT ACK",
+    "Broker stop/start, fresh collector and publisher using retained SQLite state"
+  ],
+  "tolerance": "exact metric/quality/episode equality with batch; hand-calculated 150-minute and six-slot oracles",
+  "network": "All test CH/processing/broker containers on isolated internal backend; no PG environment configured for CH tests",
+  "provenance": "Batch/slot/planning helpers shared with PostgreSQL; affected PG regressions passed. Real Spark child died via os._exit immediately after DB publication and before checkpoint; release image exercised stream CLI on resume/reopen. Initial broker recovery assertion treated the deliberately disconnected old publisher as a failure; final run records that expected old-process error and requires a clean new publisher. First fault fixture falsely declared a snapshot ID for loose CSV; provenance guard correctly excluded it. Fixture registration now uses the simulator actual custom-source identity; product guard and numeric expectations were preserved. Final unsealed-generation guard additionally prevents scope/config alias before the first receipt; final unit/UI suite covers it.",
+  "limits": [
+    "Synthetic source fixtures only; full AGC replay/backfill/config migration remains T38",
+    "These are correctness/fault checks, not T49 latency/performance measurements",
+    "Replay/overview/quality UI completion remains T48; video set remains T51",
+    "No full PG100 UI rerun at T47; affected 32 sensor and 2 replay UI checks ran",
+    "Expected Spark connection-failure stack and resource warnings are retained in recovery logs"
+  ],
+  "files": [
+    {
+      "file": "broker-recovery.json",
+      "bytes": 679,
+      "sha256": "29f2f404985d61f5f0269bc5b78ae808c97d9c22f103a55a7920d68cc7b3be8e"
+    },
+    {
+      "file": "broker-recovery.log",
+      "bytes": 3226,
+      "sha256": "ae234ca864c512b6baaf91138124a24fcc44a407e556e32fef5700ccfd2f1db6"
+    },
+    {
+      "file": "clickhouse-recovery.json",
+      "bytes": 496,
+      "sha256": "581ecee3f5d8185db7b70cbb8537cdab8cc311cdea1c03556df659d58d881690"
+    },
+    {
+      "file": "clickhouse-recovery.log",
+      "bytes": 11761,
+      "sha256": "92048fd40e572cacf2ee9c30512ce5356db2a76108ae38069e73f82952c4e1d8"
+    },
+    {
+      "file": "faults/conflict.json",
+      "bytes": 416,
+      "sha256": "a3e7dcee294ae35c5742e9f48c5de72b23ae1587ff1a15e862c70749f472a9c8"
+    },
+    {
+      "file": "faults/delay.json",
+      "bytes": 370,
+      "sha256": "6d8fc347d3d41d08643f4428f57f796ff5f86213c0c5289a376a0cbf7ef329b4"
+    },
+    {
+      "file": "faults/drop.json",
+      "bytes": 412,
+      "sha256": "a4186f4b9cfc49c4966c86ece7abb53034f4ca421283d9cc806371c1807dd07a"
+    },
+    {
+      "file": "faults/duplicate.json",
+      "bytes": 374,
+      "sha256": "cb9f4a0edd7871c5333cd874e617e5ca47a553ddcab4967a2773c357eacfee5e"
+    },
+    {
+      "file": "faults/invalid-schema.json",
+      "bytes": 388,
+      "sha256": "0dcc61a899ec1668dac9bd44e4480125f6dae288ef19768fea4d6c8501bb986e"
+    },
+    {
+      "file": "faults/malformed.json",
+      "bytes": 383,
+      "sha256": "e0384e6c6a4ac2d78f0d5774d30fe47db546ff3f6d000fbf4e2d8ff7f3d6d4a0"
+    },
+    {
+      "file": "mqtt-baseline.json",
+      "bytes": 508,
+      "sha256": "83a6a0aadb2f9a4e8a338898a5b98853fa397cd6f9eb50b828b60d43a3f8440c"
+    },
+    {
+      "file": "mqtt-baseline.log",
+      "bytes": 2254,
+      "sha256": "b2965f55b14c8070acac33ceb7ae73b1f014452c019bbc14b1948bf183f94a4f"
+    },
+    {
+      "file": "mqtt-faults.log",
+      "bytes": 7273,
+      "sha256": "92dc7a89ebafad96b1b98d252a7e54d54ebf80d7f5058745d7dad363abcb3943"
+    },
+    {
+      "file": "postgres-replay-ui-tests.log",
+      "bytes": 98,
+      "sha256": "f7200fe6a91a0c7b99d07fe993394e6770d4988fcbc3df8014d0589daabfed18"
+    },
+    {
+      "file": "postgres-sensor-tests.log",
+      "bytes": 325,
+      "sha256": "78826f2e1530d2d3f85f51dbbffb71fa1d966b8a848571f749bcc92c29060bea"
+    },
+    {
+      "file": "runtime.json",
+      "bytes": 203,
+      "sha256": "4b78f87d0380b2d25f4411369b637e6ff0a316c7acb394d11958d028c4370a64"
+    },
+    {
+      "file": "spark-cli.log",
+      "bytes": 700,
+      "sha256": "125e8a743c0e015ea0dcb7098af6576a2e729fbe57d53a0f996124e3e1f7ed50"
+    },
+    {
+      "file": "tests.log",
+      "bytes": 111647,
+      "sha256": "3181010d3e4b7d25c4f8da26e503ec56c3c5724ec83bf396b9750d77da68e886"
+    }
+  ]
+}

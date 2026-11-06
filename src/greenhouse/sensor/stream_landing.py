@@ -1,7 +1,7 @@
 """Structured Streaming file source for collector delivery landing.
 
-This module only lands raw deliveries. It intentionally does not publish live
-metrics or treat a completion manifest as proof of reconciliation.
+Backend selection is explicit. Optional replay publications reconcile verified
+deliveries and cursor/manifest evidence; a manifest alone never proves complete.
 """
 import json
 import os
@@ -32,11 +32,29 @@ def start_landing(settings, ready_dir, checkpoint_dir, stream_id, generation,
     # existing checkpoint to a different generation or source path.
     checkpoint.mkdir(parents=True, exist_ok=True)
     marker = checkpoint / '.greenhouse-stream-identity.json'
-    endpoint = settings.connection_kwargs()
-    identity = json.dumps({'stream_id': stream_id, 'generation': generation,
-                           'ready_dir': str(ready),
-                           'database': {k: str(endpoint.get(k, '')) for k in ('host', 'port', 'dbname', 'user')}},
-                          sort_keys=True)
+    from greenhouse.clickhouse.stream_store import StreamSettings
+    clickhouse=isinstance(settings,StreamSettings)
+    if clickhouse:
+        if publication_options is None:
+            raise ValueError('ClickHouse streaming requires explicit replay publication scope')
+        from greenhouse.clickhouse.client import Client
+        from greenhouse.clickhouse.stream_store import migrate as migrate_stream
+        from greenhouse.clickhouse.replay_publication import migrate as migrate_replay
+        from greenhouse.clickhouse.replay_config import read_config
+        client=Client(settings.database)
+        migrate_stream(client,settings.coordinator);migrate_replay(client,settings.coordinator)
+        config,pin=read_config(client,publication_options['scope_id'],settings.config_version)
+        if any(config[k]!=v for k,v in publication_options.items()):
+            raise ValueError('Stream replay options differ from frozen configuration')
+        endpoint=dict(host=settings.database.host,port=settings.database.port,dbname=settings.database.database,user=settings.database.user)
+    else:
+        endpoint=settings.connection_kwargs()
+    identity_data={'stream_id':stream_id,'generation':generation,'ready_dir':str(ready),
+        'database':{k:str(endpoint.get(k,'')) for k in ('host','port','dbname','user')}}
+    if clickhouse:
+        identity_data.update(backend='clickhouse',configuration_scope=publication_options['scope_id'],
+            configuration_version=settings.config_version,configuration_hash=pin['content_hash'])
+    identity=json.dumps(identity_data,sort_keys=True)
     if not marker.exists() and any(checkpoint.iterdir()):
         raise ValueError('existing checkpoint has no stream identity marker')
     try:
@@ -66,11 +84,17 @@ def start_landing(settings, ready_dir, checkpoint_dir, stream_id, generation,
             except (json.JSONDecodeError, TypeError):
                 value = {'malformed_ready_line': row.value, 'source_file': row.source_file}
             rows.append(value)
-        with psycopg.connect(**settings.connection_kwargs()) as connection:
-            with connection.transaction():
-                commit_batch(connection, stream_id, generation, batch_id, rows)
-                if publication_options is not None:
-                    publish_replay(connection, **publication_options)
+        if clickhouse:
+            from greenhouse.clickhouse.client import Client
+            from greenhouse.clickhouse.replay_publication import commit_and_publish
+            commit_and_publish(Client(settings.database),settings.coordinator,stream_id,generation,batch_id,rows,
+                config_version=settings.config_version,publication_options=publication_options)
+        else:
+            with psycopg.connect(**settings.connection_kwargs()) as connection:
+                with connection.transaction():
+                    commit_batch(connection, stream_id, generation, batch_id, rows)
+                    if publication_options is not None:
+                        publish_replay(connection, **publication_options)
 
     writer = (source.writeStream.foreachBatch(write_batch)
               .option('checkpointLocation', str(checkpoint)))

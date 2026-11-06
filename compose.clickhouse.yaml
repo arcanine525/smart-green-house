@@ -91,6 +91,55 @@ services:
       timeout: 3s
       retries: 40
       start_period: 3s
+  ch-broker:
+    image: eclipse-mosquitto:2.0.22@sha256:09b62ff32c2e7b64d4b431b9a89236073289b68db273de2b089edeb9b0d92b5c
+    profiles: [sensor]
+    volumes:
+      - ./docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ch_broker:/mosquitto/data
+    networks: [backend]
+    healthcheck:
+      test: [CMD, mosquitto_pub, -h, 127.0.0.1, -t, spike/health, -m, ready, -q, '1']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+      start_period: 3s
+    cpus: 0.1
+    mem_limit: 128m
+  ch-stream:
+    image: greenhouse-clickhouse-processing:local
+    build:
+      context: .
+      dockerfile: docker/processing/Dockerfile
+    profiles: [sensor]
+    environment:
+      <<: *ch-app-env
+      MQTT_HOST: ch-broker
+      MQTT_PORT: '1883'
+      SPARK_LOCAL_IP: 127.0.0.1
+      PYSPARK_SUBMIT_ARGS: '--driver-memory 768m pyspark-shell'
+      GREENHOUSE_STREAM_ID: ${GREENHOUSE_CH_STREAM_ID:-}
+      GREENHOUSE_CHECKPOINT_GENERATION: ${GREENHOUSE_CH_GENERATION:-}
+      GREENHOUSE_REPLAY_ID: ${GREENHOUSE_CH_REPLAY_ID:-}
+      GREENHOUSE_REPLAY_SCOPE_ID: ${GREENHOUSE_CH_REPLAY_SCOPE_ID:-}
+      GREENHOUSE_REPLAY_CYCLE_ID: ${GREENHOUSE_CH_REPLAY_CYCLE_ID:-}
+      GREENHOUSE_REPLAY_COMPARTMENT_ID: ${GREENHOUSE_CH_REPLAY_COMPARTMENT_ID:-}
+      GREENHOUSE_REPLAY_QUALITY_POLICY: AGC_QUALITY_V1
+      GREENHOUSE_CH_REPLAY_CONFIG_VERSION: ${GREENHOUSE_CH_REPLAY_CONFIG_VERSION:-}
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+      ch-broker:
+        condition: service_healthy
+    volumes:
+      - ${GREENHOUSE_RAW_PATH:-./data/raw}:/data/raw:ro
+      - ${GREENHOUSE_CH_STATE_PATH:-./tmp/clickhouse-state}:/candidate
+      - ${GREENHOUSE_CH_READY_PATH:-./tmp/clickhouse-ready}:/data/ready:ro
+      - ${GREENHOUSE_CH_CHECKPOINT_PATH:-./tmp/clickhouse-checkpoints}:/data/checkpoints
+    networks: [backend]
+    cpus: 1
+    mem_limit: 1536m
+    command: [python, -m, greenhouse, stream, --backend, clickhouse, --ready-dir, /data/ready, --checkpoint-dir, /data/checkpoints/replay, --max-rows-per-batch, '5000']
   ch-ui-test:
     image: greenhouse-clickhouse-ui:local
     profiles: [test]
@@ -112,3 +161,4 @@ networks:
 volumes:
   ch_data:
   ch_logs:
+  ch_broker:

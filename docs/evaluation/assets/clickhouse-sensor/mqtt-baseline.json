@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "source_events": 30,
+  "raw_ready_files": 8,
+  "replay_publication": "7a94c890d0772377b1ff3e36bc42386eb492894507abafa026b2ece0db53f07a",
+  "batch_publication": "67c211cea2884b028807cd491c14383b",
+  "expected_minutes": "150",
+  "temperature_out_minutes": "50",
+  "ec_out_minutes": "50",
+  "ph_suspect_minutes": "5",
+  "joint_out_minutes": "45",
+  "complete": true,
+  "checksum_verified": true,
+  "batch_stream_metrics_episodes_quality_match": true,
+  "postgres_env_present": false
+}
