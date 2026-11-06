@@ -51,3 +51,23 @@ Chấm từng đáp án và phần giải thích đúng/sai/chưa đánh giá th
 không dùng thời gian AppTest làm thời gian người tham gia. Ghi nguyên phản hồi,
 trợ giúp và bất kỳ bối cảnh bị lệch; nếu lệch context, không chấm theo đáp án của
 context khác. Sau phiên, tổng hợp kết quả và hạn chế vào [usability](usability.md).
+
+## Kiểm tra phiếu trước phiên
+
+Ngày 2026-11-06, [AppTest chỉ đọc](assets/effectiveness/agc_facilitator_check.py)
+đã thực hiện cả sáu tác vụ, chọn đúng publication/rule/scenario và kiểm các đáp
+án hiển thị trong bảng. [Kết quả](assets/effectiveness/agc-facilitator-check-20261106.json)
+không có người tham gia; đây là kiểm tra tính khả thi và answer key, không phải
+quan sát usability. Trước khi chạy phiên mới có thể tái kiểm trên đúng database:
+
+```bash
+mkdir -p tmp/agc-ui-walkthrough
+chmod 777 tmp/agc-ui-walkthrough
+GREENHOUSE_UI_MEMORY=1536m docker compose --profile test run --rm --no-deps \
+  -e PGDATABASE=greenhouse_hybrid_bench_t25_20261106_104814 \
+  -e PGOPTIONS='-c default_transaction_read_only=on' \
+  -e AGC_STUDY_OUTPUT=/evidence/agc-study.json -e GREENHOUSE_RAW_DIR=/data/raw \
+  -v "$PWD/data/raw:/data/raw:ro" \
+  -v "$PWD/docs/evaluation/assets/effectiveness/agc_facilitator_check.py:/tmp/check.py:ro" \
+  -v "$PWD/tmp/agc-ui-walkthrough:/evidence" ui-test python /tmp/check.py
+```

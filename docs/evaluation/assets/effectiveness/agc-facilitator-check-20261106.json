@@ -1,0 +1,31 @@
+{
+  "kind": "automated_facilitator_task_verification",
+  "human_participants": 0,
+  "database_read_only": true,
+  "publication": "df3e4bcbacab45a5b86fc37d2f53c00a",
+  "tasks": {
+    "BR-01": "#1 · temperature · gốc 1180,00p (2020-05-21T11:45:00 → 2020-05-22T07:25:00) · high · peak 9,20 @ 2020-05-21T21:55:00 · trong báo cáo 1180,00p",
+    "BR-02": {
+      "Irrigation observed": "9,36 L/m²",
+      "Drain observed": "3,89 L/m²",
+      "Tỷ lệ drain (paired)": "41,56 %",
+      "Độ phủ paired": "100,00 %"
+    },
+    "BR-03": "ec · 80400 phút gốc · 2019-12-31T12:35:00 → 2020-02-25T08:35:00 · trong kỳ 80400 phút · peak 4.5 @ 2020-01-19T19:10:00 · high",
+    "BR-04": {
+      "Năng lượng (kWh)": "308.078",
+      "Sản lượng A (kg)": "0.000",
+      "kWh/kg A": "NULL"
+    },
+    "BR-05": {
+      "A observed": "0,05 kg/m²",
+      "B observed": "0,10 kg/m²",
+      "Share B (paired)": "66,67 %"
+    },
+    "BR-06": {
+      "Baseline (EUR)": "1,161.25 EUR",
+      "Kịch bản (EUR)": "1,175.15 EUR",
+      "Kịch bản (EUR/m²)": "18.80 EUR/m²"
+    }
+  }
+}
