@@ -24,7 +24,7 @@ GREENHOUSE_APP_PORT=18572 docker compose run --rm --no-deps --service-ports \
   -e PGOPTIONS='-c default_transaction_read_only=on' app
 ```
 
-Mở `http://127.0.0.1:18572`, chọn publication trên, xác nhận UI hiển thị raw
+Lệnh đã smoke test ngày 2026-11-06: health `ok`, session báo `transaction_read_only=on` và current publication đúng ID; container thử đã dừng. Mở `http://127.0.0.1:18572`, chọn publication trên, xác nhận UI hiển thị raw
 lineage khi có snapshot mount, sau đó đưa [phiếu tác vụ](usability-participant.md).
 Người tham gia cần tự chọn từng khoang, cửa sổ và rule; không cho xem đáp án.
 Công cụ ghi `python3 scripts/record_usability.py --participant P01 --output tmp/usability/P01.json` đo thời gian do facilitator bấm, không thay thế ghi chú.
