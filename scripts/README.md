@@ -34,3 +34,5 @@ Các lệnh runtime khác dùng trực tiếp `docker compose`; không cần cà
 Java hoặc Spark trên host.
 
 - `test_clickhouse_stack.sh`: smoke client, persistence và runtime internal trên project ClickHouse mới; chuẩn bị image theo [hướng dẫn](../docs/implementation/clickhouse-local-environment.md).
+
+- `rehearse_clickhouse_water.sh`: dựng project ClickHouse riêng, nạp Resources AGC, kiểm raw oracle sáu khoang và production water UI; giữ DB/outputs đã dừng. [Chi tiết](../docs/implementation/clickhouse-water.md).

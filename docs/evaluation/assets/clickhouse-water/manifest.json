@@ -1,0 +1,97 @@
+{
+  "status": "passed",
+  "source_head": "7eb78c6",
+  "candidate_code": "T43 uncommitted during execution; final candidate tests and stable AGC workflow resume verified",
+  "snapshot": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "accepted_resource_records": 996,
+  "cycles": 6,
+  "clickhouse_tests": 27,
+  "postgres_ui_regression_tests": 100,
+  "engine_parity_comparisons": 12,
+  "engine_parity_scope": "six compartments; two-day window and full 166-day cycle; exact Decimal equality",
+  "browser": "real Chromium; backend code confirmed; Automatoes selected; full-cycle KPIs and 166-row CSV verified",
+  "browser_csv": {
+    "local_path": "tmp/clickhouse-water/browser/browser-days.csv",
+    "sha256": "8b8a7a9680bf223ea3c5deaa1dc309b9c08b37f8806ec20aa0adbc4587652e46",
+    "rows": 166,
+    "irrigation_total": "788.851818181",
+    "drain_total": "324.08"
+  },
+  "network": {
+    "app_and_warehouse": "backend internal only",
+    "localhost": "fixed-destination TCP relay ch-web",
+    "app_egress_connect_ex": 101,
+    "relay": "frontend transport; no claim of network-level egress denial for relay"
+  },
+  "provenance": "Full Resources pipeline and raw oracle first executed during candidate development; final images then passed fixture/UI suite, AGC raw/full-cycle comparisons and same-publication resume. Localhost relay repair and browser verification executed as follow-ups; final harness integrates these stages.",
+  "limits": [
+    "Only BR-02 is migrated; other BR screens remain gated",
+    "Resources slice is not the full six-BR warehouse",
+    "PostgreSQL reference reads used an enforced read-only transaction; regression tests used a separate disposable database",
+    "Browser smoke is not the T51 video set",
+    "No ClickHouse performance or full backup/restore claim"
+  ],
+  "files": [
+    {
+      "file": "tests.log",
+      "bytes": 4537,
+      "sha256": "4025b730ef4487629a6102fd89f59056122334322424e739f310448208c48439"
+    },
+    {
+      "file": "postgres-ui-tests.log",
+      "bytes": 334,
+      "sha256": "dc41484d9d8427d9b42693d4b074fdc9bf2e1e7568518685f113b6adc9ed6225"
+    },
+    {
+      "file": "agc-check.json",
+      "bytes": 3424,
+      "sha256": "51410dab73592511e7f344290778c7e9bd6a82b1dbd150b8bab90ff04f4c5641"
+    },
+    {
+      "file": "postgres-reference.json",
+      "bytes": 3230,
+      "sha256": "c53b09d77efeec9056fa48ba16913f169bbcd880cc7b6b17b89dc66cf99cea6d"
+    },
+    {
+      "file": "engine-parity.json",
+      "bytes": 1520,
+      "sha256": "c889f63ca83fd6f2a7c98d557fbdbfd22e47cb889586016c3dd0c6c873f6a15d"
+    },
+    {
+      "file": "pipeline.json",
+      "bytes": 1096,
+      "sha256": "0baa80ac10b3597b69ab716e9b10710825f8f0b82dee68c63a8490e557a21deb"
+    },
+    {
+      "file": "resume.json",
+      "bytes": 726,
+      "sha256": "473d3aefd12462a117ea1b703b285b2f00d3dd4cb1b4550cb22779e23715641f"
+    },
+    {
+      "file": "browser-check.json",
+      "bytes": 367,
+      "sha256": "74748bd7d4c100657cc01a476769d880e91b881e93f23745b2cf4f426dce91d1"
+    },
+    {
+      "file": "browser-water.png",
+      "bytes": 305715,
+      "sha256": "d5e0ed973933e6d641beae1ef08b0b728724ad7ea4897e2b6a494db52cb9d80f"
+    },
+    {
+      "file": "app-egress.json",
+      "bytes": 33,
+      "sha256": "08c0437758b58e18b7b872fdf6ed5e193e46698ee933ee56f0fd98e45b1a144e"
+    },
+    {
+      "file": "host-app-health.txt",
+      "bytes": 2,
+      "sha256": "2689367b205c16ce32ed4200942b8b8b1e262dfc70d9bc9fbc77c49699a4f1df"
+    },
+    {
+      "file": "runtime-smoke.json",
+      "bytes": 213,
+      "sha256": "643181a816fe304477bec89c7ed9331ebf57c349b671a6fc03cf6b190f7c3654"
+    }
+  ],
+  "runtime_smoke": "Final shell harness passed with internal backend; client image skips the UI-only AppTest, covered by the 27-test UI image suite."
+}

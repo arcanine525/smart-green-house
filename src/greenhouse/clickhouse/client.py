@@ -51,6 +51,12 @@ class Client:
     def __init__(self, settings):
         self.settings = settings
 
+    def ping(self):
+        return self.query('SELECT 1 AS ready')
+
+    def close(self):
+        """HTTP responses are individually closed; no pooled connection to close."""
+
     def execute(self, sql, parameters=None, *, query_id=None):
         """Return raw response; never auto-retry an ambiguous write.
 

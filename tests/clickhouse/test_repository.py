@@ -78,10 +78,10 @@ class RepositoryTest(unittest.TestCase):
         (raw/'manifest.json').write_text(json.dumps(manifest))
         first=load_snapshot(self.client,self.directory.name,raw,root/'output',self.scope)
         second=load_snapshot(self.client,self.directory.name,raw,root/'output',self.scope)
-        self.assertEqual(first['counts'],{'accepted':1,'inserted':1,'quarantine':1,'conflict':2,'duplicate':1})
-        self.assertEqual(second['counts']['reused'],1)
+        self.assertEqual(first['counts'],{'accepted':1,'inserted':2,'quarantine':1,'conflict':2,'duplicate':1})
+        self.assertEqual(second['counts']['reused'],2)
         self.assertFalse(second['published'])
-        self.assertEqual(len(self.repo.load_membership(self.scope,first['load_id'])),1)
+        self.assertEqual(len(self.repo.load_membership(self.scope,first['load_id'])),2)
         source.write_text(source.read_text()+'corrupted')
         with self.assertRaises(ValueError):
             verified_snapshot(raw)

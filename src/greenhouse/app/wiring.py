@@ -20,11 +20,19 @@ from greenhouse.queries.harvest import HarvestService
 
 
 def catalog_service(connection) -> CatalogService:
+    from greenhouse.app.runtime import is_clickhouse
+    if is_clickhouse(connection):
+        from greenhouse.clickhouse.water import WaterAdapter
+        return CatalogService(WaterAdapter(connection))
     from greenhouse.db.catalog import PostgresCatalogAdapter
     return CatalogService(PostgresCatalogAdapter(connection))
 
 
 def irrigation_service(connection, raw_snapshots=None) -> IrrigationService:
+    from greenhouse.app.runtime import is_clickhouse
+    if is_clickhouse(connection):
+        from greenhouse.clickhouse.water import WaterAdapter
+        return IrrigationService(WaterAdapter(connection, raw_snapshots=raw_snapshots))
     from greenhouse.db.query_adapter import PostgresQueryAdapter
     return IrrigationService(PostgresQueryAdapter(connection, raw_snapshots=raw_snapshots))
 

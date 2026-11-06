@@ -12,6 +12,7 @@ RUN python -m pip install --no-cache-dir --no-deps --no-build-isolation . \
 COPY --chown=greenhouse:greenhouse prototypes/dashboard ./prototypes/dashboard
 # UI tests run in this same image (pytest/psycopg in the lock); no host venv.
 COPY --chown=greenhouse:greenhouse tests/ui ./tests/ui
+COPY --chown=greenhouse:greenhouse tests/clickhouse ./tests/clickhouse
 COPY .streamlit/config.toml ./.streamlit/config.toml
 USER greenhouse
 # Production water screen (BR-02); the fixture-only prototype is served by the

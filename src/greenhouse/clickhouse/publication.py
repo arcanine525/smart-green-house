@@ -78,6 +78,10 @@ class Publications:
             receipt=validator(scope,publication,core)
             if not isinstance(receipt,dict) or not {'version','rows','checksum'}<=receipt.keys():
                 raise ValueError('Bundle validator must return a versioned count/checksum receipt')
+            reference=receipt.get('configuration_ref')
+            if reference is not None and not any((p['kind'],p['version_id'],p['content_hash'])==
+                    (reference['kind'],reference['version'],reference['hash']) for p in selected):
+                raise ValueError('Bundle configuration is not pinned by this publication')
             receipts[name]=receipt
         return receipts
 

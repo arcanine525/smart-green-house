@@ -12,7 +12,7 @@ from pathlib import Path
 
 from greenhouse.clickhouse.client import Client, ClickHouseSettings
 from greenhouse.clickhouse.encoding import digest
-from greenhouse.clickhouse.repository import Repository
+from greenhouse.clickhouse.repository import Repository, core_eligible
 from greenhouse.clickhouse.schema import SCHEMA_VERSION, migrate
 from greenhouse.ingestion.run import ingest_snapshot
 
@@ -36,7 +36,7 @@ def verified_snapshot(root):
     return manifest
 
 
-def load_snapshot(client, coordinator, raw, output, scope, run_id=None):
+def load_snapshot(client, coordinator, raw, output, scope, run_id=None, *, kinds=None):
     from greenhouse.clickhouse.coordinator import writer_lock
     from greenhouse.clickhouse.encoding import canonical_json
     migrate(client,coordinator)
@@ -51,6 +51,9 @@ def load_snapshot(client, coordinator, raw, output, scope, run_id=None):
     counts=Counter()
     membership=[]
     for file in ingestion['files']:
+        if kinds is not None and Path(file['source_file']).stem not in kinds:
+            counts['deferred_source_rows']+=file.get('read',0)
+            continue
         if not file.get('outputs'):
             continue
         for category,relative in file['outputs'].items():
@@ -60,11 +63,11 @@ def load_snapshot(client, coordinator, raw, output, scope, run_id=None):
                     record=json.loads(line)
                     disposition=record['disposition']
                     counts[disposition]+=1
-                    if disposition=='accepted':
+                    if core_eligible(record):
                         revision_id,created=repo.append_record(scope,record)
                         membership.append(revision_id)
                         counts['inserted' if created else 'reused']+=1
-                    else:
+                    if disposition!='accepted':
                         row={'scope_id':scope,'snapshot_id':record['snapshot_id'],
                             'source_record_id':record['source_record_id'],'source_file':record['source_file'],
                             'line_number':record['line_number'],'disposition':disposition,

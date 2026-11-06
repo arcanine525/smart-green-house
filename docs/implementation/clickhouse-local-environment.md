@@ -1,7 +1,6 @@
 # ClickHouse candidate: chạy local
 
-Candidate hiện có client và smoke độc lập; sáu BR vẫn dùng PostgreSQL cho đến
-khi các adapter T41–T48 được triển khai/nghiệm thu. Thiết kế ở [ADR-003](../adr/003-clickhouse-warehouse.md).
+Candidate có client, ingestion/publication và [luồng nước BR-02](clickhouse-water.md). Các BR còn lại tiếp tục theo T44–T48; PostgreSQL giữ vai trò baseline/mặc định đến T39. Thiết kế ở [ADR-003](../adr/003-clickhouse-warehouse.md).
 Không có fallback ngầm khi ClickHouse lỗi. Server và client dùng Compose riêng
 để không khởi động/sửa database người dùng trong giai đoạn chuyển đổi.
 
@@ -28,7 +27,7 @@ unittest trong image. arm64 được chạy thật; manifest có amd64, chưa tu
 ```
 
 Wrapper gọi Compose, tạo project/volumes mới, kiểm kết nối, tham số SQL, Decimal,
-unit tests, restart giữ dữ liệu và egress bị chặn. Hai networks đều internal,
+unit tests, restart giữ dữ liệu và egress bị chặn. Backend internal,
 image đã chuẩn bị trước, `--pull never`. Khi pass chỉ dọn tài nguyên thuộc chính
 lượt smoke; khi fail giữ lại cho chẩn đoán. Evidence tại `tmp/clickhouse-smoke/`.
 Chưa phải test full warehouse, workload performance hoặc all fault scenarios.
@@ -42,7 +41,7 @@ docker compose -f compose.clickhouse.yaml -p greenhouse-ch-dev run --rm --no-dep
 docker compose -f compose.clickhouse.yaml -p greenhouse-ch-dev stop clickhouse
 ```
 
-HTTP chỉ publish `127.0.0.1:18123` (đổi bằng GREENHOUSE_CH_HTTP_PORT). Default
+Warehouse không publish HTTP trực tiếp. Dashboard publish `127.0.0.1:18581` (GREENHOUSE_CH_APP_PORT) qua `ch-web`, relay TCP đích cố định `ch-app:8501`; app và warehouse chỉ ở backend internal. Relay là thành phần truy cập localhost, không là forward proxy. Default
 server cap 1 CPU / 2 GiB, query max 2 threads / 768 MiB, server budget 1.5 GiB;
 đây là cấu hình nền, benchmark sẽ công bố riêng. Lưu data/logs trong named volume.
 Không dùng chung tên project/volume với ứng dụng PostgreSQL hoặc một lượt restore.

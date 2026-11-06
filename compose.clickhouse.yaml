@@ -9,13 +9,11 @@ services:
       CLICKHOUSE_USER: ${CH_USER:-greenhouse}
       CLICKHOUSE_PASSWORD: ${CH_PASSWORD:-change-me-clickhouse-local}
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: '1'
-    ports:
-      - '127.0.0.1:${GREENHOUSE_CH_HTTP_PORT:-18123}:8123'
     volumes:
       - ch_data:/var/lib/clickhouse
       - ch_logs:/var/log/clickhouse-server
       - ./docker/clickhouse/local.xml:/etc/clickhouse-server/config.d/local.xml:ro
-    networks: [backend, frontend]
+    networks: [backend]
     healthcheck:
       test: [CMD-SHELL, 'clickhouse-client --user "$${CLICKHOUSE_USER}" --password "$${CLICKHOUSE_PASSWORD}" --query "SELECT 1" >/dev/null']
       interval: 3s
@@ -45,11 +43,56 @@ services:
     networks: [backend]
     cpus: 0.5
     mem_limit: 256m
+  ch-app:
+    image: greenhouse-clickhouse-ui:local
+    build:
+      context: .
+      dockerfile: docker/ui/Dockerfile
+    profiles: [app]
+    environment: &ch-app-env
+      GREENHOUSE_BACKEND: clickhouse
+      CH_HOST: clickhouse
+      CH_PORT: '8123'
+      CH_DATABASE: ${CH_DATABASE:-greenhouse}
+      CH_USER: ${CH_USER:-greenhouse}
+      CH_PASSWORD: ${CH_PASSWORD:-change-me-clickhouse-local}
+      GREENHOUSE_RAW_DIR: /data/raw
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+    volumes:
+      - ${GREENHOUSE_RAW_PATH:-./data/raw}:/data/raw:ro
+    networks: [backend]
+    cpus: 1
+    mem_limit: 1536m
+  ch-web:
+    image: greenhouse-clickhouse-client:local
+    profiles: [app]
+    command: [python, -m, greenhouse.clickhouse.port_forward, --target-host, ch-app, --target-port, '8501']
+    depends_on: [ch-app]
+    networks: [backend, frontend]
+    ports:
+      - '127.0.0.1:${GREENHOUSE_CH_APP_PORT:-18581}:8501'
+    cpus: 0.1
+    mem_limit: 64m
+  ch-ui-test:
+    image: greenhouse-clickhouse-ui:local
+    profiles: [test]
+    environment:
+      <<: *ch-app-env
+      GREENHOUSE_CH_INTEGRATION: '1'
+      GREENHOUSE_CH_UI_TEST: '1'
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+    networks: [backend]
+    command: [python, -m, unittest, discover, -s, tests/clickhouse, -v]
+    cpus: 1
+    mem_limit: 1536m
 networks:
   backend:
     internal: true
-  frontend:
-    internal: true
+  frontend: {} # Only the fixed-destination localhost relay joins this bridge.
 volumes:
   ch_data:
   ch_logs:

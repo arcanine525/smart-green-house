@@ -13,6 +13,8 @@ import streamlit as st
 
 from greenhouse.app import display, exports, figures, shared_context, wiring
 from greenhouse.settings import Settings
+from greenhouse.app import runtime
+from greenhouse.clickhouse.client import ClickHouseError
 
 st.set_page_config(page_title='Smart Greenhouse · Nước', page_icon='💧', layout='wide')
 
@@ -55,7 +57,7 @@ def stop_with(kind, title, detail=None, tips=None):
 
 
 def render(connection):
-    settings = Settings.from_env()
+    settings = runtime.settings()
     with st.sidebar:
         screen = st.radio('Màn hình', ['💧 Nước (BR-02)', '🍅 Thu hoạch (BR-05)',
                                        '🌡️ Khí hậu (BR-01)', '🧪 EC/pH drain (BR-03)',
@@ -63,6 +65,8 @@ def render(connection):
                                        '📡 Sensor replay (BR-01/03)', '🏠 Tổng quan vụ', '🛡️ Chất lượng dữ liệu'],
                           key='screen_choice',
                           help='Replay và dữ liệu lịch sử là hai phạm vi riêng.')
+    if runtime.is_clickhouse(connection) and screen != '💧 Nước (BR-02)':
+        stop_with('info', 'Màn hình này chưa có dữ liệu được công bố trên backend đang chọn.', 'Chọn Nước để xem phạm vi hiện có.')
     shared_context.begin_screen(st.session_state, screen, historical=screen != '📡 Sensor replay (BR-01/03)')
     if screen == '📡 Sensor replay (BR-01/03)':
         from greenhouse.app import replay as replay_screen
@@ -71,8 +75,8 @@ def render(connection):
     catalog = wiring.catalog_service(connection)
     try:
         publications = catalog.publications()
-    except psycopg.Error:
-        stop_with('error', 'Không đọc được catalog publication từ PostgreSQL.',
+    except (psycopg.Error, ClickHouseError):
+        stop_with('error', 'Không đọc được catalog publication từ warehouse.',
                   'Kiểm tra DB Compose rồi thử lại; chi tiết lỗi không hiển thị để tránh lộ cấu hình.')
     if not publications:
         stop_with('info', 'Chưa có publication nào được publish — ứng dụng không có dữ liệu fixture thay thế.',
@@ -199,8 +203,8 @@ def render_water(connection, settings, publications):
     except ValueError as error:
         stop_with('error', 'Truy vấn nước không thực hiện được với bộ lọc hiện tại.',
                   f'{type(error).__name__}: {error}')
-    except psycopg.Error:
-        stop_with('error', 'Lỗi PostgreSQL khi đọc nước (không hiển thị chi tiết cấu hình).')
+    except (psycopg.Error, ClickHouseError):
+        stop_with('error', 'Lỗi warehouse khi đọc nước (không hiển thị chi tiết cấu hình).')
 
     summary, days, weekly = action.summary, action.days, action.weekly
 
@@ -343,15 +347,15 @@ def render_water(connection, settings, publications):
 
 
 try:
-    settings = Settings.from_env()
+    settings = runtime.settings()
 except ValueError as error:
-    stop_with('error', 'Cấu hình chưa đủ (PGHOST/PGDATABASE/PGUSER/PGPASSWORD).', str(error),
+    stop_with('error', 'Cấu hình backend chưa đủ.', str(error),
               'cp .env.example .env  # rồi chỉnh giá trị local')
 else:
     try:
-        connection = psycopg.connect(**settings.connection_kwargs())
-    except psycopg.Error:
-        stop_with('error', 'Không kết nối được PostgreSQL qua Compose.',
+        connection = runtime.connect(settings)
+    except (psycopg.Error, ClickHouseError):
+        stop_with('error', 'Không kết nối được warehouse qua Compose.',
                   'Chi tiết kết nối không hiển thị; kiểm tra service db và .env (không log credential).',
                   'docker compose -p smart-greenhouse up -d --wait db')
     with closing(connection):

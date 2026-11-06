@@ -65,8 +65,8 @@ class Repository:
     def append_record(self, scope, record, *, revision=1, correction_id='', correction=None, quality_policy='AGC_QUALITY_V1'):
         if not scope or not isinstance(revision,int) or isinstance(revision,bool) or revision<1:
             raise ValueError('Explicit scope and positive revision required')
-        if record['disposition']!='accepted' or record['issues']:
-            raise ValueError('Only accepted records may become candidate revisions')
+        if not core_eligible(record):
+            raise ValueError('Record has no eligible typed core values')
         if revision>1 and (not correction_id or not isinstance(correction,dict)
                 or set(correction)!={'actor','evidence','previous_revision'}
                 or not all(isinstance(v,str) and v.strip() for v in correction.values())):
@@ -84,7 +84,7 @@ class Repository:
         hashed=digest(payload)
         key={'scope':scope,'kind':kind,'compartment':compartment,'logical':record['logical_key']}
         with writer_lock(self.coordinator, self.client):
-            rows=self.client.query('''SELECT DISTINCT revision,revision_id,content_hash,payload,quality_policy_version FROM source_revision
+            rows=self.client.query('''SELECT DISTINCT revision,revision_id,content_hash,payload,quality_policy_version,first_run_id FROM source_revision
                 WHERE scope_id={scope:String} AND record_type={kind:String} AND compartment_id={compartment:String}
                 AND logical_key={logical:String} ORDER BY revision''',key)
             ordinals={}
@@ -129,7 +129,7 @@ class Repository:
                     'null_reason':record['null_reasons'].get(measure,'')})
             # Write measures first: an interrupted attempt has no revision row.
             self._insert('source_measure',measures)
-            self._insert('source_revision',[dict(scope_id=scope,snapshot_id=record['snapshot_id'],record_type=kind,
+            self._insert('source_revision',[dict(scope_id=scope,snapshot_id=record['snapshot_id'],first_run_id=record['run_id'] if revision==1 else ordinals[1]['first_run_id'],record_type=kind,
                 compartment_id=compartment,logical_key=record['logical_key'],source_record_id=record['source_record_id'],
                 revision=revision,revision_id=revision_id,content_hash=hashed,source_file=record['source_file'],
                 file_checksum=record['file_checksum'],line_number=record['line_number'],line_end=record['line_end'],
@@ -215,3 +215,10 @@ class Repository:
         if len(ids)!=int(receipt['membership_count']) or digest(ids)!=receipt['membership_checksum']:
             raise ValueError('Load membership checksum/count mismatch')
         return self.canonical_records(scope,revision_ids=ids)
+
+
+def core_eligible(record):
+    """Match baseline: per-measure parse errors retain unaffected typed measures."""
+    return (record['disposition']=='accepted' and not record['issues']) or (
+        record['disposition']=='quarantine' and bool(record['logical_key'])
+        and bool(record['issues']) and all(i['code']=='invalid_numeric' for i in record['issues']))

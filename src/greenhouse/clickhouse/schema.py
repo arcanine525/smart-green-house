@@ -6,7 +6,7 @@ DDL = (
         stage LowCardinality(String), content_hash FixedString(64), payload String
     ) ENGINE=MergeTree ORDER BY (scope_id,workflow_id,stage,content_hash)''',
     '''CREATE TABLE IF NOT EXISTS source_revision (
-        scope_id String, snapshot_id String, record_type LowCardinality(String),
+        scope_id String, snapshot_id String, first_run_id String, record_type LowCardinality(String),
         compartment_id LowCardinality(String), logical_key String,
         source_record_id String, revision UInt32, revision_id String,
         content_hash FixedString(64), source_file String, file_checksum FixedString(64),
@@ -48,6 +48,7 @@ def migrate(client, coordinator=None):
             execute(statement)
         execute('ALTER TABLE load_receipt ADD COLUMN IF NOT EXISTS membership_checksum String')
         execute('ALTER TABLE load_receipt ADD COLUMN IF NOT EXISTS membership_count UInt64')
+        execute('ALTER TABLE source_revision ADD COLUMN IF NOT EXISTS first_run_id String')
         return SCHEMA_VERSION
     if coordinator is None:
         return apply(client.execute)
