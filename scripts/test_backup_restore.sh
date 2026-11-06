@@ -5,7 +5,7 @@ run_id="$(date -u +%Y%m%d%H%M%S)-${RANDOM}"
 source_project="gh-backup-test-$run_id"
 restore_project="gh-restore-test-$run_id"
 for project in "$source_project" "$restore_project"; do
-  for volume in pg_data simulator_outbox; do
+  for volume in pg_data outputs broker_state simulator_outbox collector_spool raw_ready spark_checkpoints; do
     if docker volume inspect "${project}_${volume}" >/dev/null 2>&1; then
       printf 'Refusing existing volume: %s_%s\n' "$project" "$volume" >&2
       exit 1
