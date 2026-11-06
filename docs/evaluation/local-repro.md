@@ -83,7 +83,9 @@ Bản ZIP AGC có sẵn được **copy** vào `data/import` của clone. Servic
 chạy riêng trên network backend internal, xác minh ZIP/snapshot và tạo
 **45 file, 622.899 dòng CSV**, snapshot SHA đã khóa. Raw snapshot và ZIP copy nằm
 trong thư mục test bị Git ignore, không ghi đè nguồn gốc của người dùng.
-[Kết quả máy đọc được](assets/local-repro/clean-clone-20261106.json).
+[Kết quả máy đọc được](assets/local-repro/clean-clone-20261106.json). Từ chính
+clone này cũng chạy `test_sensor_backup_restore.sh`: SQLite WAL/SHM khôi phục
+hai event, Spark tiếp tục batch 1 và checksum khớp; [kết quả restore](assets/local-repro/clean-clone-sensor-restore-20261106.json).
 
 Lượt này chưa chạy full pipeline AGC vào DB mới vì dung lượng host còn khoảng
 5,4 GiB; cũng chưa chứng minh build dependency không dùng cache, ngắt Internet
