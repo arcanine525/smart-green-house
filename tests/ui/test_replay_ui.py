@@ -85,6 +85,7 @@ def test_replay_screen_with_no_historical_publication(empty_database, app_path, 
     assert any(item.label == 'Trạng thái replay' and item.value == 'completed' for item in app.metric)
     assert any(item.label == 'Tín hiệu collector' and item.value == 'Stale' for item in app.metric)
     assert any(publication in item.value for item in app.caption)
+    assert any('không phải tỷ lệ dữ liệu nguồn có mặt' in item.value for item in app.caption)
     assert any('đối soát' in item.value for item in app.success)
     assert len(app.dataframe) >= 1
     app.selectbox(key='replay_climate_rule').set_value(rule_id).run()

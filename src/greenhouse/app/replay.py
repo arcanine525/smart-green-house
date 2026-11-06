@@ -118,7 +118,9 @@ def _render_pinned(connection):
     st.subheader('KPI đến replay clock')
     st.caption(f'Cửa sổ source: {evaluation.climate.effective_start} đến {evaluation.window_end} (không gồm điểm cuối).')
     st.dataframe(summary_rows(evaluation), hide_index=True, width='stretch')
-    st.caption('Không có rule hoặc giá trị hợp lệ: out KPI để trống. Các rule demo không phải ngưỡng nông học đã xác minh.')
+    st.caption('Không có rule hoặc giá trị hợp lệ: out KPI để trống. Coverage là tỷ lệ thời gian đủ dữ liệu và rule '
+               'để đánh giá, không phải tỷ lệ dữ liệu nguồn có mặt; chưa chọn rule thì coverage đánh giá là 0%. '
+               'Các rule demo không phải ngưỡng nông học đã xác minh.')
     st.subheader('Episode')
     episodes = episode_rows(evaluation)
     if episodes:
