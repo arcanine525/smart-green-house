@@ -146,15 +146,99 @@ The `FaultScheduler` provides reproducible fault testing:
   - Input CSV files are stream-hashed in 64 KiB chunks rather than loaded into memory.
   - Records are streamed row-by-row via `SourceParser` and inserted into SQLite.
   - Operates comfortably within the 128 MiB container memory cgroup cap (`--memory=128m --cpus=0.2`).
-- **Transport Scope & T33 Deferral**:
-  - T32 implements local outbox transactional persistence, envelope formatting, and fault injection.
-  - Full broker transport policies, persistent disk queues, and MQTT network backpressure are deferred to T33.
+- **Transport Scope & T33 Implementation**:
+  - Full broker transport policies, persistent disk queues, MQTT network backpressure, and durable collector are implemented in T33.
+
+## Durable MQTT Collector & Transport Publisher (T33)
+
+T33 provides the end-to-end transport and ingestion path between the simulator outbox, Mosquitto broker, and raw-ready staging.
+
+```mermaid
+flowchart LR
+    OUTBOX["Simulator outbox<br/>outbox.db"] --> PUB["OutboxPublisher<br/>sliding window + credit"]
+    PUB -->|"MQTT v5 QoS 1<br/>UserProperty: table/row/hash"| MOSQ["Mosquitto Broker<br/>persistence + clean_session=False"]
+    MOSQ -->|"Deliver QoS 1"| COLL["MqttCollector<br/>manual_ack mode"]
+    COLL -->|"fsync commit"| SPOOL[("Durable Spool<br/>spool.db (WAL)")]
+    SPOOL -->|"Persisted"| RCPT["v1/receipts<br/>outbox row receipt"]
+    RCPT -->|"Ack & credit"| PUB
+    COLL -->|"client.ack(mid, qos)"| MOSQ
+    COLL -->|"Pack batches"| BM["BatchManager<br/>.tmp -> fsync -> rename"]
+    BM --> READY[("Raw-Ready Files<br/>/data/ready/*.jsonl")]
+```
+
+### 1. End-to-End Backpressure & Credit (Mosquitto Queue Protection)
+- **Problem**: Mosquitto queue limits (`max_queued_messages`, `max_queued_bytes`) can silently drop excess queued messages for offline/slow subscribers even when publisher receives PUBACK. Thus, broker PUBACK is transport acknowledgement only, never warehouse or collector persistence.
+- **Credit-Based Backpressure Solution**:
+  - `MqttCollector` commits incoming deliveries to SQLite WAL spool (`spool.db`) before issuing `client.ack(mid, qos)` and emits a signed receipt to `v1/receipts/{replay_id}/{compartment_id}`.
+  - Receipt carries immutable publisher identity: `outbox_table`, `outbox_row_id`, `replay_id`, `payload_hash`, `spool_free_bytes`, and transmission `credit`.
+  - `OutboxPublisher` maintains a bounded sliding in-flight window (`max_inflight`, default 20) backed by an active window cache and indexed SQLite `published_receipts` table, advancing checkpoint only when receipts are verified.
+  - When spool or ready capacity approaches physical quota, collector withholds ACK and emits `status="backpressure"`, causing publisher to pause and preventing Mosquitto queue overflow. Backpressure notices are strictly scoped by `replay_id` and `compartment_id` to prevent foreign replays from pausing unrelated publishers.
+  - In MQTT v5, `SessionExpiryInterval` (default 86,400s) is explicitly negotiated in `CONNECT` and `DISCONNECT` properties, ensuring Mosquitto preserves subscriber subscriptions and queued messages across collector offline periods.
+
+### 2. Finite Broker & Client Bounds and Packet Budget Policy
+- **Broker Configuration (`mosquitto.conf`)**:
+  - `max_queued_messages 1000` (or 100 in constrained test environments)
+  - `max_queued_bytes 10485760` (10 MiB)
+  - `max_inflight_messages 20`
+  - `max_packet_size 10485760` (10 MiB)
+- **Client Outgoing Queue Bounds**:
+  - `OutboxPublisher`: calls `client.max_inflight_messages_set(max_inflight)` (20) and `client.max_queued_messages_set(max_inflight * 5)` (100).
+  - `MqttCollector`: calls `client.max_inflight_messages_set(50)` and `client.max_queued_messages_set(100)`.
+- **Packet vs Payload Budget Separation**:
+  - In MQTT v5, `MaximumPacketSize` covers the entire packet frame including fixed header, topic name, packet identifier, and `UserProperty` headers.
+  - The collector separates the protocol `MaximumPacketSize` budget (`max_packet_bytes = max_payload_bytes + 65536`) from the raw application payload limit (`max_payload_bytes = 10485760`).
+  - **Oversized Packet Policy**: If an MQTT packet exceeds the protocol `MaximumPacketSize` or broker `max_packet_size`, the MQTT broker rejects or drops the packet at network level before application delivery. Such protocol-rejected packets are not received and cannot be spooled. Messages within protocol packet limits that exceed `max_payload_bytes` are accepted by the network, flagged by `handle_message`, and quarantined in the durable spool with their raw bytes preserved.
+- **Capacity Full & Resumption**:
+  - When spool or ready directory capacity is exhausted (taking into account projected batch sizes and safety headroom), the collector withholds `client.ack()` and emits backpressure receipts without terminating.
+  - Once downstream consumption clears ready files or quota space is restored, the collector automatically resumes intake and batch sealing on subsequent iterations without data loss.
+
+### 3. Transport Identity & Exact Outbox Mapping
+- Original payload bytes from the outbox are transmitted completely unadulterated.
+- Transport metadata is carried in MQTT v5 `UserProperty` headers:
+  - `outbox_table`: `"telemetry_messages"` or `"control_messages"`
+  - `outbox_row_id`: integer primary key in outbox table
+  - `replay_id`: unique replay identifier
+  - `payload_hash`: SHA-256 of exact payload bytes
+  - `compartment_id`: compartment target
+- Transport metadata is parsed defensively: non-integer row IDs or malformed headers do not crash MQTT callbacks and are quarantined with exact raw bytes.
+- Broker `mid` and `DUP` flags are treated as transient transport metadata, never durable event identity.
+- Mismatched or stale receipts (e.g. from prior replays or divergent hashes) are rejected.
+- Out-of-order receipts cannot advance over unconfirmed holes in outbox sequences.
+- Publisher registers in-flight state prior to wire transmission, eliminating receipt-vs-PUBACK race conditions. Retries are strictly bounded by `max_retries` with explicit failure reporting.
+
+### 4. Durable Spool & Quarantine Handling
+- Backed by SQLite WAL mode with `PRAGMA synchronous = FULL`.
+- Completely offline and decoupled from PostgreSQL (collector requires no database connection).
+- **Quarantine & Transport Receipts**:
+  - **Durable Raw Persistence**: A `persisted` receipt signifies that raw bytes are durably fsynced to the SQLite spool with verified, matching transport identity (`outbox_table`, `outbox_row_id`, `replay_id`, `compartment_id`, `payload_hash`).
+  - **Malformed Payload Handling**: If an outbox row contains intentional malformed non-JSON or schema-invalid bytes, but its transport identity is verified, the collector durably persists it as quarantine, ACKs to Mosquitto, and emits a `persisted` receipt with `disposition="quarantined"` and `quarantine_reason`. This allows outbox transmission reconciliation and checkpoints to advance cleanly without poison-loop infinite retries.
+  - **Invalid Transport Identity**: If transport metadata itself is damaged or mismatched (mismatched topic/header replay, mismatched table, corrupted declared hash, repeated keys, non-positive integer row ID), the raw bytes are retained in spool as quarantine, ACKed to Mosquitto to prevent broker head-of-line blocking, but receive a `rejected` receipt (never `persisted`).
+- **Lineage Preservation**:
+  - Duplicates (same `event_id` + identical hash): preserved with distinct `delivery_id` and collector `received_at`.
+  - Conflicts (same `event_id` + divergent hash): preserved with distinct `delivery_id`, distinct `payload_hash`, and collector `received_at`.
+
+### 5. Atomic Raw-Ready Batch Packing
+- `BatchManager` writes complete JSONL batches to temporary files (`/data/ready/.tmp_<batch_id>.jsonl`) on the **same filesystem** as `/data/ready`.
+- Calls `fsync()` on the file, atomically renames to `/data/ready/<batch_id>.jsonl` via `os.replace`, and calls `fsync()` on the directory entry.
+- Existing ready files are immutable and strictly protected from overwrite.
+- Quota check projects batch payload size and headroom before sealing to prevent overruns.
+- Deterministic recovery on startup cleans orphaned `.tmp_*` files, verifies SHA-256 file checksums and line hashes against `spool_messages` (raising `CorruptBatchError` if an unrecorded file is tampered with), and updates `manifest.json`.
 
 ## CLI Usage
 
 ```bash
 # Basic simulation of AICU climate data
 python -m greenhouse simulate --compartment AICU --limit 50 --outbox-dir /data/outbox
+
+# Simulate and publish directly to Mosquitto broker
+python -m greenhouse simulate --compartment AICU --limit 50 --outbox-dir /data/outbox --publish --mqtt-host broker
+
+# Resume or publish an existing completed outbox without re-running generation
+python -m greenhouse simulate --publish-only --outbox-dir /data/outbox --mqtt-host broker
+python -m greenhouse simulate --resume --publish --outbox-dir /data/outbox --mqtt-host broker
+
+# Run standalone durable MQTT collector with persistent MQTT v5 session
+python -m greenhouse collect --spool-dir /data/spool --ready-dir /data/ready --mqtt-host broker --session-expiry-interval 86400
 
 # Deterministic fault injection with seed
 python -m greenhouse simulate --compartment AICU --seed 42 --duplicate-rate 0.05 --conflict-rate 0.02 --outbox-dir tmp/outbox

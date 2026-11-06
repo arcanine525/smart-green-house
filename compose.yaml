@@ -123,7 +123,7 @@ services:
 
   simulator:
     <<: *sensor
-    command: [python, -m, greenhouse, simulate]
+    command: [python, -m, greenhouse, simulate, --publish]
     volumes:
       - ${GREENHOUSE_RAW_PATH:-./data/raw}:/data/raw:ro
       - simulator_outbox:/data/outbox
