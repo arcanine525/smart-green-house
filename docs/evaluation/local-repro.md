@@ -68,3 +68,23 @@ restore toàn bộ **named volumes**, broker persistence hoặc AGC thật. Các
 tra broker restart riêng được ghi ở [sensor replay](sensor-replay.md). Script từ
 chối tên project/volume/network đã tồn tại và chỉ dọn các project test của nó;
 backup state và dump test ở `tmp/sensor-backup-restore/<run-id>`.
+
+## Clone local sạch và snapshot AGC
+
+Một lượt khác ngày 2026-11-06 tạo **clone Git local** bằng `--no-hardlinks`,
+`--single-branch` tại commit `e3a586ed3c77d59ea0e2c1d397d7dab7912213fa`,
+copy `.env.example` thành `.env` trong clone và build image từ clone. Build sử dụng
+**Docker cache có sẵn**, không phải xác minh build không cache hay tải từ GitHub.
+Sau đó `test_offline_smoke.sh` dùng project/database mới, network backend và
+frontend `internal=true`: app health `ok`, **21 batch/contract**, **97 UI** và
+**19 sensor/recovery** pass. DB/volume test được dọn; Git status của clone sạch.
+
+Bản ZIP AGC có sẵn được **copy** vào `data/import` của clone. Service `snapshot`
+chạy riêng trên network backend internal, xác minh ZIP/snapshot và tạo
+**45 file, 622.899 dòng CSV**, snapshot SHA đã khóa. Raw snapshot và ZIP copy nằm
+trong thư mục test bị Git ignore, không ghi đè nguồn gốc của người dùng.
+[Kết quả máy đọc được](assets/local-repro/clean-clone-20261106.json).
+
+Lượt này chưa chạy full pipeline AGC vào DB mới vì dung lượng host còn khoảng
+5,4 GiB; cũng chưa chứng minh build dependency không dùng cache, ngắt Internet
+của toàn host hoặc restore dữ liệu/named volume thật. Các giới hạn này vẫn mở.

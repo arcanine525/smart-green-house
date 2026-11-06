@@ -1,0 +1,30 @@
+{
+  "clone_kind": "local git clone --no-hardlinks --single-branch",
+  "source_head": "e3a586ed3c77d59ea0e2c1d397d7dab7912213fa",
+  "configuration": ".env.example copied to ignored .env; no personal credentials",
+  "image_build": "from clone with existing Docker build cache; not a cache-free build",
+  "runtime_networks": [
+    "gh-offline-20261106164924-9833_backend internal=true",
+    "gh-offline-20261106164924-9833_frontend internal=true"
+  ],
+  "app_health": "app health: ok",
+  "test_results": {
+    "batch": "21 passed in 5.63s",
+    "ui": "97 passed in 57.36s",
+    "sensor_live": "1 passed in 10.44s",
+    "sensor_spark-restart": "1 passed in 13.89s",
+    "sensor_fault-matrix": "7 passed in 35.14s",
+    "sensor_mqtt-faults": "8 passed in 20.79s",
+    "sensor_db": "1 passed in 8.75s",
+    "sensor_broker": "1 passed in 13.14s"
+  },
+  "snapshot": {
+    "status": "created",
+    "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+    "file_count": 45,
+    "csv_count": 43,
+    "pdf_count": 2,
+    "total_csv_rows": 622899
+  },
+  "limitations": "Host network not disconnected; runtime containers internal. Source ZIP copied from local input. No full AGC warehouse rebuild, real-volume restore or human usability study."
+}
