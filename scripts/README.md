@@ -1,5 +1,8 @@
 # Scripts
 
+- `test_local.sh`: build image, chạy toàn bộ unit/contract/recovery, UI/export
+  và sensor acceptance tuần tự; log ở `tmp/local-tests/<run-id>`. Cần `.env`
+  và các image/dependency đã chuẩn bị; không reset hay xóa dữ liệu project.
 - `test_sensor_acceptance.sh`: chạy parity, fault matrix và restart sensor trên
   broker/PostgreSQL test riêng, sau đó dọn container/anonymous volume do chính
   script tạo. Cần Docker, Compose, `.env`, processing image đã build và backend
