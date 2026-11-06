@@ -143,6 +143,9 @@ ngoại lệ trong `docs/evaluation/performance.md`.
 Sensor synthetic 30 event trong một lượt có published-to-queryable p50 1.212,57 ms,
 p95 1.491,60 ms; đây không phải SLA. Fault matrix kiểm duplicate/conflict,
 late, pause/resume và restart broker/collector/DB/Spark trên dịch vụ test riêng.
+Diễn tập backup synthetic phục hồi PostgreSQL, SQLite WAL/SHM và Spark checkpoint;
+Spark chỉ xử lý batch tiếp theo, checksum khớp. Lượt này dùng dữ liệu nhỏ và bind
+mount, chưa chứng minh restore toàn bộ AGC hay named volumes.
 
 Effectiveness: sáu walkthrough AppTest có đáp án trước đều pass. **Chưa có người
 tham gia**, thời gian test không phải thời gian người dùng và chưa có phản hồi hay
