@@ -105,7 +105,7 @@ lang: vi-VN
 - Sáu walkthrough tự động pass trên fixture; thời gian test không phải thời gian người dùng.
 - **Chưa có người tham gia**, chưa có phản hồi hay điểm giải thích coverage.
 - Basis chưa xác minh; Reference incomplete; rule/scenario có nhãn.
-- Restore WAL và Spark checkpoint đã thử trên fixture; chưa diễn tập full AGC/named volumes.
+- Restore WAL và Spark checkpoint qua bốn named volumes synthetic; chưa diễn tập full AGC, broker và outputs.
 
 ## 16. Kết luận và hướng tiếp theo
 
