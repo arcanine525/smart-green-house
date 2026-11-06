@@ -1,0 +1,312 @@
+{
+  "br": "01",
+  "title": "Khí hậu",
+  "status": "passed",
+  "kind": "automated_playwright_walkthrough",
+  "script_sha256": "42be37cc6f63525943e129d0dd23376652ae95cc82119174bfe2c6c280a035cb",
+  "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+  "human_participants": 0,
+  "demo_database": "test_walkthrough_20261106T173153Z_9455",
+  "publication": "df3e4bcbacab45a5b86fc37d2f53c00a",
+  "playwright": "1.65.0",
+  "commit": "ae9303dcced49cd7eec334abe081dc1ef1733518",
+  "video": {
+    "file": "br-01.mp4",
+    "sha256": "f9db74a2b343828de55a26cb3fe8ccc4a67853768647f380d523765d52957fa1",
+    "width": 1920,
+    "height": 1080,
+    "duration_seconds": 240.16,
+    "audio": false
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": "Mở màn hình Khí hậu",
+      "detail": "Chọn BR ở thanh bên; các thao tác tiếp theo chạy trên bản sao dữ liệu AGC.",
+      "start_seconds": 1.858,
+      "end_seconds": 13.494,
+      "screenshot": "step-01.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\nNULL",
+        "Nhiệt độ coverage\n\n0,00 %",
+        "CO₂ out (giờ quan sát được)\n\nNULL",
+        "CO₂ coverage\n\n0,00 %",
+        "OR lệch (giờ, hợp lệ chung)\n\nNULL",
+        "OR lệch %\n\nNULL",
+        "Coverage giao chung\n\n0,00 %"
+      ]
+    },
+    {
+      "step": 2,
+      "title": "Xác nhận publication lịch sử",
+      "detail": "Một publication cố định cho bộ lọc, chỉ số, chi tiết và file xuất.",
+      "start_seconds": 13.494,
+      "end_seconds": 22.898,
+      "screenshot": "step-02.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\nNULL",
+        "Nhiệt độ coverage\n\n0,00 %",
+        "CO₂ out (giờ quan sát được)\n\nNULL",
+        "CO₂ coverage\n\n0,00 %",
+        "OR lệch (giờ, hợp lệ chung)\n\nNULL",
+        "OR lệch %\n\nNULL",
+        "Coverage giao chung\n\n0,00 %"
+      ]
+    },
+    {
+      "step": 3,
+      "title": "Chọn khoang và vụ IUACAAS",
+      "detail": "Khoang/vụ xác định phạm vi phân tích; chọn lại sẽ cập nhật bộ lọc liên quan.",
+      "start_seconds": 22.899,
+      "end_seconds": 37.305,
+      "screenshot": "step-03.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\nNULL",
+        "Nhiệt độ coverage\n\n0,00 %",
+        "CO₂ out (giờ quan sát được)\n\nNULL",
+        "CO₂ coverage\n\n0,00 %",
+        "OR lệch (giờ, hợp lệ chung)\n\nNULL",
+        "OR lệch %\n\nNULL",
+        "Coverage giao chung\n\n0,00 %"
+      ]
+    },
+    {
+      "step": 4,
+      "title": "Chọn rule khí hậu demo",
+      "detail": "Revision cố định; ngưỡng demo phải được phân biệt với chuẩn nông học.",
+      "start_seconds": 37.306,
+      "end_seconds": 51.018,
+      "screenshot": "step-04.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n876,58",
+        "Nhiệt độ coverage\n\n95,27 %",
+        "CO₂ out (giờ quan sát được)\n\n1309,67",
+        "CO₂ coverage\n\n58,83 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n1494,08",
+        "OR lệch %\n\n63,76",
+        "Coverage giao chung\n\n58,81 %"
+      ]
+    },
+    {
+      "step": 5,
+      "title": "Lọc các đợt nhiệt độ",
+      "detail": "Bộ lọc chỉ thay danh sách đợt; tổng KPI vẫn phản ánh phạm vi đã chọn.",
+      "start_seconds": 51.018,
+      "end_seconds": 61.011,
+      "screenshot": "step-05.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n876,58",
+        "Nhiệt độ coverage\n\n95,27 %",
+        "CO₂ out (giờ quan sát được)\n\n1309,67",
+        "CO₂ coverage\n\n58,83 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n1494,08",
+        "OR lệch %\n\n63,76",
+        "Coverage giao chung\n\n58,81 %"
+      ]
+    },
+    {
+      "step": 6,
+      "title": "Đọc KPI và coverage",
+      "detail": "Coverage biểu thị phần thời gian đủ điều kiện đánh giá theo rule.",
+      "start_seconds": 61.011,
+      "end_seconds": 68.337,
+      "screenshot": "step-06.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n876,58",
+        "Nhiệt độ coverage\n\n95,27 %",
+        "CO₂ out (giờ quan sát được)\n\n1309,67",
+        "CO₂ coverage\n\n58,83 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n1494,08",
+        "OR lệch %\n\n63,76",
+        "Coverage giao chung\n\n58,81 %"
+      ]
+    },
+    {
+      "step": 7,
+      "title": "Chọn đợt dài nhất",
+      "detail": "Đáp án: 1.180 phút, từ 21/05 11:45 đến 22/05/2020 07:25.",
+      "start_seconds": 68.337,
+      "end_seconds": 77.348,
+      "screenshot": "step-07.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n876,58",
+        "Nhiệt độ coverage\n\n95,27 %",
+        "CO₂ out (giờ quan sát được)\n\n1309,67",
+        "CO₂ coverage\n\n58,83 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n1494,08",
+        "OR lệch %\n\n63,76",
+        "Coverage giao chung\n\n58,81 %"
+      ]
+    },
+    {
+      "step": 8,
+      "title": "Tương tác biểu đồ nhiệt độ",
+      "detail": "Đọc actual, cận rule và khoảng trống; hover để xem thời điểm.",
+      "start_seconds": 77.348,
+      "end_seconds": 88.181,
+      "screenshot": "step-08.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n876,58",
+        "Nhiệt độ coverage\n\n95,27 %",
+        "CO₂ out (giờ quan sát được)\n\n1309,67",
+        "CO₂ coverage\n\n58,83 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n1494,08",
+        "OR lệch %\n\n63,76",
+        "Coverage giao chung\n\n58,81 %"
+      ]
+    },
+    {
+      "step": 9,
+      "title": "Mở nguồn của đỉnh lệch",
+      "detail": "Kiểm tra revision, dòng CSV và checksum raw của điểm đỉnh.",
+      "start_seconds": 88.181,
+      "end_seconds": 96.184,
+      "screenshot": "step-09.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n876,58",
+        "Nhiệt độ coverage\n\n95,27 %",
+        "CO₂ out (giờ quan sát được)\n\n1309,67",
+        "CO₂ coverage\n\n58,83 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n1494,08",
+        "OR lệch %\n\n63,76",
+        "Coverage giao chung\n\n58,81 %"
+      ]
+    },
+    {
+      "step": 10,
+      "title": "So sánh basis realized",
+      "detail": "Realized và requested là hai bối cảnh khác nhau; không tự thay thế nhau.",
+      "start_seconds": 96.184,
+      "end_seconds": 112.794,
+      "screenshot": "step-10.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n877,50",
+        "Nhiệt độ coverage\n\n99,85 %",
+        "CO₂ out (giờ quan sát được)\n\n1459,00",
+        "CO₂ coverage\n\n63,65 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n1643,25",
+        "OR lệch %\n\n64,80",
+        "Coverage giao chung\n\n63,65 %"
+      ]
+    },
+    {
+      "step": 11,
+      "title": "Trở lại basis requested",
+      "detail": "Giữ basis requested cho ví dụ cắt cửa sổ và các file xuất tiếp theo.",
+      "start_seconds": 112.794,
+      "end_seconds": 126.466,
+      "screenshot": "step-11.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n876,58",
+        "Nhiệt độ coverage\n\n95,27 %",
+        "CO₂ out (giờ quan sát được)\n\n1309,67",
+        "CO₂ coverage\n\n58,83 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n1494,08",
+        "OR lệch %\n\n63,76",
+        "Coverage giao chung\n\n58,81 %"
+      ]
+    },
+    {
+      "step": 12,
+      "title": "Giới hạn cửa sổ 21–22/05/2020",
+      "detail": "Thời điểm gốc của đợt vẫn được giữ khi xem một phần vụ.",
+      "start_seconds": 126.466,
+      "end_seconds": 166.516,
+      "screenshot": "step-12.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n30,75",
+        "Nhiệt độ coverage\n\n100,00 %",
+        "CO₂ out (giờ quan sát được)\n\n10,00",
+        "CO₂ coverage\n\n49,65 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n20,08",
+        "OR lệch %\n\n84,27",
+        "Coverage giao chung\n\n49,65 %"
+      ]
+    },
+    {
+      "step": 13,
+      "title": "Đọc lại danh sách và trace sau lọc",
+      "detail": "Kiểm tra đợt dài nhất cùng cửa sổ đang chọn trước khi tải file.",
+      "start_seconds": 166.516,
+      "end_seconds": 174.19,
+      "screenshot": "step-13.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n30,75",
+        "Nhiệt độ coverage\n\n100,00 %",
+        "CO₂ out (giờ quan sát được)\n\n10,00",
+        "CO₂ coverage\n\n49,65 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n20,08",
+        "OR lệch %\n\n84,27",
+        "Coverage giao chung\n\n49,65 %"
+      ]
+    },
+    {
+      "step": 14,
+      "title": "Xuất summary và danh sách đợt",
+      "detail": "CSV giữ thời lượng, cửa sổ, rule và basis phục vụ đối soát.",
+      "start_seconds": 174.191,
+      "end_seconds": 198.716,
+      "screenshot": "step-14.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n30,75",
+        "Nhiệt độ coverage\n\n100,00 %",
+        "CO₂ out (giờ quan sát được)\n\n10,00",
+        "CO₂ coverage\n\n49,65 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n20,08",
+        "OR lệch %\n\n84,27",
+        "Coverage giao chung\n\n49,65 %"
+      ]
+    },
+    {
+      "step": 15,
+      "title": "Xuất JSON kết quả có version",
+      "detail": "Kiểm tra publication của file trùng với publication đã chọn.",
+      "start_seconds": 198.717,
+      "end_seconds": 212.59,
+      "screenshot": "step-15.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n30,75",
+        "Nhiệt độ coverage\n\n100,00 %",
+        "CO₂ out (giờ quan sát được)\n\n10,00",
+        "CO₂ coverage\n\n49,65 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n20,08",
+        "OR lệch %\n\n84,27",
+        "Coverage giao chung\n\n49,65 %"
+      ]
+    },
+    {
+      "step": 16,
+      "title": "Hoàn tất BR-01",
+      "detail": "Các bước đã kiểm tra tự động. Video minh họa thao tác; không đo khả năng sử dụng của người thật.",
+      "start_seconds": 212.591,
+      "end_seconds": 220.44,
+      "screenshot": "step-16.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n30,75",
+        "Nhiệt độ coverage\n\n100,00 %",
+        "CO₂ out (giờ quan sát được)\n\n10,00",
+        "CO₂ coverage\n\n49,65 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n20,08",
+        "OR lệch %\n\n84,27",
+        "Coverage giao chung\n\n49,65 %"
+      ]
+    }
+  ],
+  "downloads": [
+    {
+      "file": "downloads/climate-IUACAAS-2020-05-21_2020-05-22-requested-summary.csv",
+      "sha256": "e60862d10cd9866351d1e05eb2fdc25552bff059f805e33be22719c079e1c56b",
+      "bytes": 2245
+    },
+    {
+      "file": "downloads/climate-IUACAAS-2020-05-21_2020-05-22-requested-episodes.csv",
+      "sha256": "64cb072c3efb89983e0f9520c885b2a9d2384fcb39f8b0e7e18ac2a02747b3b5",
+      "bytes": 3395
+    },
+    {
+      "file": "downloads/climate-IUACAAS-2020-05-21_2020-05-22-requested-result.json",
+      "sha256": "faa93bc29d4ab0bdce12ba866803444d0fea43db1629780306e3300f2ff85a8c",
+      "bytes": 64566
+    }
+  ]
+}

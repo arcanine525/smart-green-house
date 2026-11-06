@@ -1,0 +1,35 @@
+{
+  "database": "test_walkthrough_20261106T173153Z_9455",
+  "publication": "df3e4bcbacab45a5b86fc37d2f53c00a",
+  "snapshot": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "archive_sha256": "c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "added_demo_rule": {
+    "rule_version": "walkthrough-water:Automatoes:v1",
+    "rule_id": "walkthrough-water:Automatoes",
+    "version": 1,
+    "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+    "compartment_id": "Automatoes",
+    "min_drain_pct": "20",
+    "max_drain_pct": "40",
+    "min_irrigation_l_m2": "0",
+    "max_irrigation_l_m2": "20",
+    "evidence_reference": "Synthetic tutorial thresholds for T26 only; not agronomic guidance",
+    "is_demo": true,
+    "label": "demo_rule",
+    "unit": "L/m²",
+    "ratio_unit": "%"
+  },
+  "scenarios": [
+    [
+      "scenario:bench-scen-h-ab2ee38e:v1",
+      "Benchmark Scenario Hybrid",
+      "df3e4bcbacab45a5b86fc37d2f53c00a"
+    ]
+  ],
+  "raw_oracle": {
+    "resource_sha256": "8b3d980fc7b3646c746dfc577af59159a49eef31770b84898502ecc5ef1d45f5",
+    "area_assumption_m2": "62.5",
+    "baseline_eur": "17.600067710000",
+    "electric_plus20_eur": "20.8407343770000"
+  }
+}

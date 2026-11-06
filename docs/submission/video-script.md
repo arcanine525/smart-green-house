@@ -3,7 +3,7 @@
 Ba người trình bày được gọi là A/B/C để nhóm điền tên và xác nhận phân công.
 Kịch bản minh họa cố định snapshot AGC khóa và publication
 `df3e4bcbacab45a5b86fc37d2f53c00a`, khoang Automatoes, 02–03/03/2020; đối
-chiếu [walkthrough có oracle](../evaluation/usability.md#walkthrough-tự-động-bổ-sung-trên-agc-đã-publish).
+chiếu [walkthrough có oracle](../evaluation/assets/playwright-t26/README.md).
 Dùng cùng một snapshot/publication/version đã ghi trên màn hình; nếu demo fixture
 hoặc replay, nói rõ scope. Tổng thời lượng dự kiến **24 phút**, trong yêu cầu
 project 20–30 phút. Không đọc kết quả giả hoặc ghi khống đánh giá người dùng.

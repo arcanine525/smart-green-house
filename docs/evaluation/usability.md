@@ -1,5 +1,61 @@
 # Đánh giá khai thác sáu BR
 
+## Phạm vi T26 được cập nhật ngày 2026-11-07
+
+Theo quyết định user, T26 dùng **walkthrough tự động Playwright**, tối thiểu sáu
+video MP4 1080p, một video mỗi BR, với chú thích tiếng Việt, số bước và vị trí
+thao tác; không giọng đọc. Mỗi luồng bao gồm bộ lọc/context, KPI/biểu đồ,
+rule/basis/grain khi áp dụng, chi tiết/lineage và xuất dữ liệu. BR06 có tạo,
+lưu, mở lại scenario trên database demo riêng. Script và hướng dẫn ở
+[`tools/walkthrough`](../../tools/walkthrough/README.md).
+
+Đánh giá người thật là mở rộng tùy chọn, không còn là điều kiện đóng T26.
+Kết quả video chứng minh luồng thao tác tự động và đáp án được kiểm tra; không
+suy ra khả năng hiểu coverage, phản hồi UX hay thời gian thao tác của con người.
+Các kết quả AppTest và protocol người tham gia bên dưới được giữ làm lịch sử
+và tài liệu bổ sung; chúng không thay thế bộ video Playwright mới.
+
+## Kết quả video Playwright ngày 2026-11-07
+
+**6/6 luồng đạt, 93 bước, 19 file xuất; tổng video 16 phút 40 giây.** Mỗi video
+MP4 1920×1080, H.264, không audio, nhịp `PACE=1`. Đã giải mã toàn bộ sáu MP4,
+kiểm checksum, xem một khung hình đại diện mỗi BR và kiểm sáu player cùng nút
+chuyển bước bằng Chromium. Đây là bộ hướng dẫn theo BR, riêng với video thuyết
+trình project 20–30 phút của T30.
+
+| Video | Số bước | Thời lượng | Kết quả |
+|---|---:|---:|---|
+| BR-01 · Khí hậu | 16 | 4:00 | Pass |
+| BR-02 · Tưới và drain | 14 | 2:15 | Pass |
+| BR-03 · EC / pH drain | 15 | 2:42 | Pass |
+| BR-04 · Năng lượng | 13 | 2:02 | Pass |
+| BR-05 · Thu hoạch A / B | 15 | 2:33 | Pass |
+| BR-06 · Chi phí và kịch bản giá | 20 | 3:08 | Pass |
+
+Mở trên máy đã quay, từ root repository:
+
+```bash
+open tmp/walkthrough/20261106T173153Z-9455/videos/index.html
+```
+
+Trang local có sáu video và nút chuyển tới từng bước. Video/trace/file xuất giữ
+ngoài Git. [Danh mục bằng chứng](assets/playwright-t26/README.md),
+[kết quả máy đọc được](assets/playwright-t26/summary.json) và
+[kiểm tra MP4](assets/playwright-t26/verification.json) được lưu trong repository.
+
+Ứng dụng ở commit `ae9303d`, Playwright 1.65.0; publication
+`df3e4bcbacab45a5b86fc37d2f53c00a`, database demo riêng
+`test_walkthrough_20261106T173153Z_9455`. Rule nước được bổ sung chỉ trong bản sao.
+BR06 tạo scenario qua UI, bỏ chọn rồi mở lại đúng version; JSON baseline
+**17,60006771 EUR** và scenario **20,840734377 EUR** khớp oracle raw Decimal.
+BR01–05 tương tác biểu đồ; BR06 dùng bảng đóng góp hiện có trong ứng dụng.
+Chi tiết thao tác, snapshot, rule, basis và SHA recorder có trong bằng chứng.
+
+T26 hoàn thành theo phạm vi user đã chốt; không đo khả năng hiểu hoặc hiệu quả
+thao tác của người thật. Các lượt AppTest bên dưới là bằng chứng trước đó.
+
+## Kết quả AppTest trước đó
+
 Cập nhật 2026-11-06. Sáu kịch bản dưới đây có đáp án trước và được chạy qua
 Streamlit AppTest với fixture tổng hợp, PostgreSQL test và UI production. Cả sáu
 kịch bản tự động đều đạt. **Chưa có phiên đánh giá bởi người dùng**: không có
@@ -32,7 +88,7 @@ và `test_cost_ui.py`. Bằng chứng máy đọc được:
 `./scripts/test_effectiveness.sh`; kết quả mới ở `tmp/effectiveness/<run-id>`.
 Thời gian có setup chung và phụ thuộc cache/máy, không dùng so sánh giữa BR.
 
-## Protocol đánh giá người dùng cần thực hiện
+## Protocol đánh giá người dùng tùy chọn
 
 Có [phiếu tác vụ AGC](usability-participant.md) và [đáp án cho facilitator](usability-facilitator.md) dùng publication và rule đã pin; chúng chưa phải kết quả người tham gia.
 
@@ -113,4 +169,4 @@ GREENHOUSE_UI_MEMORY=1536m docker compose --profile test run --rm --no-deps \
 ```
 
 Đây vẫn là AppTest tự động, không có người tham gia hay phản hồi UI của con
-người; không thay thế protocol đánh giá ở trên.
+người; không thay thế quan sát con người nếu thực hiện protocol tùy chọn ở trên.

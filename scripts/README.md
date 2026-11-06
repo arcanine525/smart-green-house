@@ -1,5 +1,10 @@
 # Scripts
 
+- `prepare_walkthrough.sh`: clone một database AGC đã chuẩn bị sang database
+  demo riêng và khởi động dashboard để quay T26. Xem
+  [Playwright walkthrough](../tools/walkthrough/README.md) cho lệnh quay ≥6 video,
+  chú thích, assertion và trang review theo từng bước. Video giữ ngoài Git.
+
 - `test_offline_smoke.sh`: chạy batch Spark, UI và sensor synthetic trên project
   và network internal riêng, không pull image; cần chuẩn bị image trước.
 - `record_usability.py`: ghi phiên quan sát thật từng BR vào JSON local;

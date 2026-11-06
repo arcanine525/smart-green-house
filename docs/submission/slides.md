@@ -102,14 +102,15 @@ lang: vi-VN
 
 ## 15. Effectiveness và giới hạn
 
-- Sáu walkthrough tự động pass trên fixture; thời gian test không phải thời gian người dùng.
-- **Chưa có người tham gia**, chưa có phản hồi hay điểm giải thích coverage.
+- Sáu video Playwright 1080p: 93 bước, 19 file xuất, 6/6 luồng đạt.
+- AppTest fixture đạt; thời lượng automation không đo thời gian người dùng.
+- **Chưa có người tham gia**; chưa đo phản hồi UX hoặc hiểu coverage.
 - Basis chưa xác minh; Reference incomplete; rule/scenario có nhãn.
-- Restore WAL, checkpoint và một retained message broker synthetic; chưa diễn tập full AGC, broker và outputs.
+- Restore WAL, checkpoint và retained message synthetic; chưa full AGC/broker/outputs.
 
 ## 16. Kết luận và hướng tiếp theo
 
 - Sáu BR và replay local có bằng chứng correctness, performance và UI tự động.
-- Hoàn thành đánh giá người dùng, diễn tập offline và video 20–30 phút.
+- T26 hoàn thành; còn diễn tập offline và video thuyết trình 20–30 phút.
 - BR-01 gốc vượt p95; follow-up sau tối ưu đạt trong một lượt, chưa phải SLA.
 - ClickHouse chỉ xét sau khi có backfill/parity và bằng chứng phù hợp.

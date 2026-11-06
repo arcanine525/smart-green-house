@@ -149,7 +149,11 @@ raw-ready và checkpoint qua bốn named volumes synthetic; một retained messa
 broker cũng được khôi phục. Chưa chứng minh toàn bộ trạng thái broker, outputs
 hoặc AGC và sensor thực.
 
-Effectiveness: sáu walkthrough AppTest có đáp án trước đều pass. **Chưa có người
+Effectiveness: sáu walkthrough AppTest có đáp án trước đều pass. Bộ Playwright
+ngày 07/11 có sáu video 1080p, 93 bước và 19 file xuất, tất cả luồng đạt; có
+chú thích tiếng Việt và BR06 lưu/mở lại scenario trên database demo riêng.
+Checksum, kết quả và khung hình minh chứng ở `docs/evaluation/assets/playwright-t26/`.
+**Chưa có người
 tham gia**, thời gian test không phải thời gian người dùng và chưa có phản hồi hay
 đánh giá khả năng giải thích coverage. Protocol, dữ liệu fixture và kết quả ở
 `docs/evaluation/usability.md`. Không suy ra hiệu quả vận hành thực tế.
@@ -161,8 +165,7 @@ replay local, cùng cơ chế publication, kiểm tra chất lượng và truy v
 đối soát và benchmark hỗ trợ so sánh ở phạm vi được đo; trade-off Hybrid/Kimball
 không thể kết luận chỉ từ tốc độ SELECT.
 
-Trước khi nộp cần: thực hiện đánh giá với người dùng và ghi trung thực kết quả;
-chạy lại toàn AGC từ môi trường sạch/offline khi đủ dung lượng; diễn tập backup/
+Trước khi nộp cần: chạy lại toàn AGC từ môi trường sạch/offline khi đủ dung lượng; diễn tập backup/
 restore đầy đủ; hoàn thiện video 20–30 phút và metadata nhóm. BR-01 vượt p95 ở benchmark gốc, còn lượt follow-up sau tối ưu đạt trong điều kiện đo; cần lặp lại và không suy rộng thành SLA. Không kết luận
 project làm giảm tài nguyên hoặc tăng lợi nhuận nếu không có dữ liệu thực nghiệm.
 

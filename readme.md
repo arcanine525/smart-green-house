@@ -9,8 +9,8 @@ lượng, thu hoạch và chi phí; [đặc tả](docs/br/) và
 **Trạng thái:** sáu màn hình BR, simulator/collector/Structured Streaming và
 replay view đã triển khai. [Correctness và phục hồi](docs/evaluation/correctness.md)
 có test và oracle theo BR; [benchmark](docs/evaluation/performance.md) cho thấy
-lượt gốc BR-01 p95 uncached **4.060,81 ms**, chưa đạt 2.000 ms; [follow-up sau tối ưu](docs/evaluation/rule-engine-optimization.md) đo **1.770,93 ms** trên cùng workload trong một lượt riêng. Sáu walkthrough
-UI tự động đạt, nhưng [đánh giá người dùng](docs/evaluation/usability.md) chưa có
+lượt gốc BR-01 p95 uncached **4.060,81 ms**, chưa đạt 2.000 ms; [follow-up sau tối ưu](docs/evaluation/rule-engine-optimization.md) đo **1.770,93 ms** trên cùng workload trong một lượt riêng. [Sáu video walkthrough Playwright](docs/evaluation/usability.md) đã đạt: 93 bước,
+19 file xuất, MP4 1080p có chú thích tiếng Việt. Đây là đánh giá tự động, chưa có
 người tham gia. Kết quả lịch sử, replay và scenario luôn tách scope; giả định diện
 tích và ngưỡng demo có nhãn, không phải khuyến nghị canh tác.
 
@@ -81,6 +81,9 @@ Test tạo database fixture `test_` và container sensor riêng; log trong `tmp/
 Thời gian AppTest không phải thời gian thao tác người dùng. Có thể mở
 [prototype HTML](prototypes/dashboard/preview.html) offline; đây là fixture
 review giao diện, khác app production.
+
+Để quay lại hoặc mở bộ video sáu BR, xem [hướng dẫn Playwright](tools/walkthrough/README.md)
+và [danh mục video local](docs/evaluation/assets/playwright-t26/README.md).
 
 ## Dữ liệu và phạm vi
 
@@ -245,7 +248,7 @@ Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên c�
 
 ## Giới hạn và công việc còn lại
 
-- Cần thực hiện và ghi nhận đánh giá với người dùng theo [protocol](docs/evaluation/usability.md); không suy ra hiệu quả thực tế từ test tự động.
+- Đánh giá người dùng theo [protocol](docs/evaluation/usability.md) là mở rộng tùy chọn; T26 dùng walkthrough Playwright theo phạm vi đã chốt. Không suy ra hiệu quả thực tế từ test tự động.
 - BR-01 vượt mục tiêu p95 ở lượt gốc; lượt sau tối ưu đạt 1.770,93 ms trong điều kiện đo, cần lặp lại trước khi kết luận SLA. Xem [benchmark](docs/evaluation/performance.md) và [follow-up](docs/evaluation/rule-engine-optimization.md).
 - Tiếp tục diễn tập toàn AGC từ môi trường sạch/offline và backup/restore thật; [kết quả chạy lại từng phần](docs/evaluation/local-repro.md). Hoàn thiện báo cáo, slides và video trước khi chốt nộp.
 - ClickHouse chỉ là [phương án tương lai](docs/architecture/09-clickhouse-migration.md), chưa triển khai.
