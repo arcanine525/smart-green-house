@@ -1,5 +1,7 @@
 # Scripts
 
+- `check_submission.sh`: kiểm cấu trúc PDF/video và Compose theo Group ID;
+  không thay thế xem thủ công nội dung hoặc kiểm tra quyền truy cập.
 - `test_backup_restore.sh`: kiểm tra dump/restore PostgreSQL và sao chép raw/volume
   synthetic trên project Docker tạm; không thay thế diễn tập phục hồi AGC thật.
 - `test_effectiveness.sh`: chạy sáu walkthrough UI trên fixture với JUnit XML;

@@ -16,3 +16,20 @@ Video giữ ngoài Git; nhóm cần tự ghi, kiểm tra và lưu ở nơi nộp
 Các số trong tài liệu phải đối chiếu lại [correctness](../evaluation/correctness.md),
 [performance](../evaluation/performance.md), [usability](../evaluation/usability.md)
 và [sensor](../evaluation/sensor-replay.md) sau mỗi lượt đánh giá mới.
+
+## Kiểm tra gói nộp
+
+Sau khi xác nhận Group ID và tạo sản phẩm cuối, đặt vào một thư mục local:
+`<GROUP_ID>_technical_report.pdf`, `<GROUP_ID>_slides.pdf` và
+`<GROUP_ID>_video.mp4` hoặc `.webm`. Ứng dụng là repository/Compose này. Chạy:
+
+```bash
+./scripts/check_submission.sh GROUP_ID /duong/dan/den/goi-nop
+```
+
+Lệnh cần `pdfinfo`, `pdftotext`, `ffprobe` và Docker Compose, chỉ đọc file và
+kiểm tra cấu hình. Nó kiểm PDF có text/không gắn nhãn draft, tên file, video có
+cả hình/tiếng và dài 20–30 phút; cần xem thủ công nội dung, group ID, audio,
+demo, link và quyền truy cập nơi nộp. Test ngày 2026-11-06 xác nhận gói draft
+thiếu video bị từ chối; gói **giả lập** gồm PDF mẫu và video đen/im lặng 1.201
+giây được chấp nhận về cấu trúc. Gói giả lập không phải sản phẩm của project.
