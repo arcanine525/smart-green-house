@@ -51,6 +51,19 @@ Với mỗi BR ghi:
 4. Ghi bước gây nhầm lẫn, câu hỏi, phản hồi và mức độ nghiêm trọng; không sửa
    kết quả sau khi thấy đáp án. Sau mỗi phiên lưu bằng chứng không chứa bí mật.
 
+Một facilitator có thể ghi phiên thật bằng công cụ local:
+
+```bash
+python3 scripts/record_usability.py --participant P01 --output tmp/usability/P01.json
+```
+
+Công cụ hỏi mã ẩn danh, context/version, kết quả, giải thích coverage và phản hồi
+cho từng BR; đo thời gian giữa hai lần facilitator xác nhận bắt đầu/kết thúc bằng
+đồng hồ monotonic. Nó yêu cầu facilitator tự đối chiếu đáp án, phân biệt người
+dùng với thành viên đóng vai, lưu JSON quyền `0600` và từ chối ghi đè file. Cần
+có người tham gia thực sự; input giả lập chỉ dùng để test công cụ và không phải
+bằng chứng usability. Dữ liệu trong `tmp/` không được commit tự động.
+
 Mẫu ghi một dòng: `participant | BR | context/version | thời gian | đáp án |
 đúng/sai | coverage & giới hạn | trợ giúp | phản hồi`. Hiện chưa có dòng quan
 sát người thật; không điền giả định hoặc tổng hợp từ test tự động.
