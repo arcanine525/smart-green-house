@@ -2,8 +2,8 @@
 
 Cập nhật: 2026-11-06. Sáu BR đã có triển khai và bằng chứng correctness,
 benchmark cùng walkthrough UI tự động. **Chưa đủ bằng chứng để chốt toàn bộ
-project**: chưa có đánh giá người dùng thật; BR-01 chưa đạt mục tiêu p95 2 giây
-trên workload benchmark uncached; bộ sản phẩm nộp và diễn tập còn phải hoàn tất.
+project**: chưa có đánh giá người dùng thật; BR-01 vượt mục tiêu p95 2 giây
+trong benchmark gốc, dù lượt follow-up sau tối ưu đạt trong điều kiện đo; bộ sản phẩm nộp và diễn tập còn phải hoàn tất.
 
 ## 1. Nguồn và cách đọc
 
@@ -29,7 +29,7 @@ trên workload benchmark uncached; bộ sản phẩm nộp và diễn tập còn
 
 | Hạng mục | Correctness | Performance | Effectiveness / hạn chế |
 |---|---|---|---|
-| BR-01 khí hậu | [AC và raw reconciliation](../evaluation/br_01.md), 12/12 phép đối soát KPI/basis | **Chưa đạt:** Hybrid p95 4.060,81 ms và Kimball 3.028,13 ms trên workload toàn vụ uncached, mục tiêu 2.000 ms; 30 mẫu sau 5 warm-up. | Walkthrough tự động đạt; chưa có người thật. |
+| BR-01 khí hậu | [AC và raw reconciliation](../evaluation/br_01.md), 12/12 phép đối soát KPI/basis | **Benchmark gốc chưa đạt:** Hybrid 4.060,81 ms, Kimball 3.028,13 ms p95. [Follow-up sau tối ưu](../evaluation/rule-engine-optimization.md): Hybrid 1.770,93 ms, dưới 2.000 ms trong lượt đo này; chưa đo lại Kimball. | Walkthrough tự động đạt; chưa có người thật. |
 | BR-02 nước | [AC và raw reconciliation](../evaluation/br_02.md) | p95 Hybrid 76,39 ms ở workload đo. | Walkthrough tự động đạt; basis diện tích chưa xác minh. |
 | BR-03 drain | [AC và raw reconciliation](../evaluation/br_03.md) | p95 Hybrid 1.959,90 ms ở workload đo, gần ngưỡng. | Walkthrough tự động đạt; rule ngưỡng là demo/chưa xác minh. |
 | BR-04 năng lượng | [AC và raw reconciliation](../evaluation/br_04.md) | p95 Hybrid 19,82 ms ở workload đo. | Walkthrough tự động đạt; basis giả định, Reference incomplete. |
@@ -39,7 +39,7 @@ trên workload benchmark uncached; bộ sản phẩm nộp và diễn tập còn
 
 Chi tiết cấu hình, phân biệt cache, workload và kết quả Kimball ở
 [performance](../evaluation/performance.md). [Correctness](../evaluation/correctness.md)
-ghi 419 backend và 97 UI test của lượt 2026-11-06. [Usability](../evaluation/usability.md)
+ghi 419 backend và 97 UI test của lượt đầu; lượt sau tối ưu có 420 backend và 97 UI test. [Usability](../evaluation/usability.md)
 ghi sáu walkthrough tự động, protocol và phần chưa có quan sát con người.
 
 ## 4. Lịch sử mã BR và thứ tự ưu tiên tài liệu
@@ -57,7 +57,7 @@ Nguồn triển khai hiện hành là [BR-05 thu hoạch](../br/br_05_harvest-qu
 Bằng chứng correctness, benchmark và walkthrough đã được liên kết ở trên. Để
 chốt toàn bộ project, cần hoàn thành đánh giá người dùng theo protocol, ghi rõ
 bất kỳ kết quả thiếu hoặc không đạt, hoàn thiện bộ chạy lại/offline và bốn sản
-phẩm nộp. BR-01 vượt mục tiêu hiệu năng được giữ là **chưa đạt**, không loại khỏi
-bảng. Bằng chứng mới cần ghi nguồn, version, lệnh, kết quả và giới hạn thay vì
+phẩm nộp. Kết quả BR-01 vượt mục tiêu ở benchmark gốc và kết quả follow-up sau tối ưu
+được giữ riêng, không xóa số chưa đạt. Bằng chứng mới cần ghi nguồn, version, lệnh, kết quả và giới hạn thay vì
 đổi trạng thái bằng suy đoán. T37–T39 là mở rộng ClickHouse tùy chọn, không
 phải điều kiện của bản PostgreSQL.

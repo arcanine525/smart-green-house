@@ -1,0 +1,78 @@
+{
+  "database_read_only": true,
+  "publication_id": "df3e4bcbacab45a5b86fc37d2f53c00a",
+  "results": {
+    "AICU:climate:realized": {
+      "episodes": 6703,
+      "sha256": "4568cb908a6b6bf783cf268ce29197ceec66196abe27edf66454af4790efdfbf"
+    },
+    "AICU:climate:requested": {
+      "episodes": 1643,
+      "sha256": "bd065f60a351338a304babba2004506f2c37be9a7a3a17fa8e5f796abf063662"
+    },
+    "AICU:drain:measured": {
+      "episodes": 229,
+      "sha256": "0fe4710ca35a79842807d68e010e5fa2a8576551cd4f34c8aab6cd275c88dcee"
+    },
+    "Automatoes:climate:realized": {
+      "episodes": 4139,
+      "sha256": "12a6d05d3e914d55a87e3bd07effe29a81d2fd7e7464ee262b21784408438b2a"
+    },
+    "Automatoes:climate:requested": {
+      "episodes": 3959,
+      "sha256": "caef29f5b92526c9d11734d09cf25fa0798f4520b1e88cfb8ce78b16475c056a"
+    },
+    "Automatoes:drain:measured": {
+      "episodes": 447,
+      "sha256": "a3c323f0ed7923e9edfe5414c1b5f27484411d9d3161e851879482fabcb1d4bf"
+    },
+    "Digilog:climate:realized": {
+      "episodes": 6490,
+      "sha256": "7062e2fdcc47ae2a1e5852ba0997cff4e20e4ea4fb006e05e6821c04d1be8f98"
+    },
+    "Digilog:climate:requested": {
+      "episodes": 6837,
+      "sha256": "43adf5ad192fd769d309ab94e1300d58e83cabefc13372144919b66071b560f4"
+    },
+    "Digilog:drain:measured": {
+      "episodes": 120,
+      "sha256": "d11c298486b5988b51869b09d339ff06865f4ebd4173bc90d137dc6629fb0d14"
+    },
+    "IUACAAS:climate:realized": {
+      "episodes": 5465,
+      "sha256": "576ac6a17ef4d70c58eba41c3190fefa5302897879f493611b5b7cc3cbb1d866"
+    },
+    "IUACAAS:climate:requested": {
+      "episodes": 5175,
+      "sha256": "f3a34a763762edc6dd4140f872063ad5fb2c925bf1dd0a0d78359b6fc1453611"
+    },
+    "IUACAAS:drain:measured": {
+      "episodes": 509,
+      "sha256": "0c36cbcb6c96925740814b4bcfa34d3c2ab972769ed52e3887401e5a443aecc2"
+    },
+    "Reference:climate:realized": {
+      "episodes": 5204,
+      "sha256": "c9b0a5f7fc9c16f3adfac1e366b0fcb6384ef6db30dc26e64c502c8a1479c1c4"
+    },
+    "Reference:climate:requested": {
+      "episodes": 4606,
+      "sha256": "e4c9bfdbcaf49f925db8970f236c26926dfd5690ab3b47c90dd198746cf5caa0"
+    },
+    "Reference:drain:measured": {
+      "episodes": 167,
+      "sha256": "c467897a432990ceeb5c26db445fad43f7b5a440167fa47cdc7a190d7efbd268"
+    },
+    "TheAutomators:climate:realized": {
+      "episodes": 7887,
+      "sha256": "6fc6da23ca4037bef928634443bc18f3c6c026e2c7eb32345ee4e8b6389fa5f6"
+    },
+    "TheAutomators:climate:requested": {
+      "episodes": 7878,
+      "sha256": "6a987a2430a1eaa28943f1ef2503062ca21c0cbea5453b8698de8f31b10a3f16"
+    },
+    "TheAutomators:drain:measured": {
+      "episodes": 371,
+      "sha256": "c1daa953cfe314155634de978d1760e6295fbed8ceac1fb7d9e85c980f24f98d"
+    }
+  }
+}

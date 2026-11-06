@@ -95,9 +95,6 @@ def _grid_index(context, when: datetime) -> int:
     return int(total // context.cadence.total_seconds())
 
 
-def _grid_boundary(context, index: int) -> datetime:
-    return _grid_anchor(context) + index * context.cadence
-
 
 def _minutes(delta: timedelta) -> Decimal:
     seconds = delta.days * 86400 + delta.seconds + delta.microseconds / 1_000_000
@@ -386,7 +383,10 @@ def _evaluate_core(context, revisions, slots, metrics, publication, versions):
     if effective_start >= effective_end:
         raise ValueError('The requested window carries zero duration inside the cycle')
     expected = _minutes(effective_end - effective_start)
-    total_slots = int((cycle_end - cycle_start) // context.cadence)
+    cadence = context.cadence
+    cadence_minutes = Decimal(context.cadence_minutes)
+    # Preserve the existing floor-grid semantics: every iterated slot is full.
+    total_slots = int((cycle_end - cycle_start) // cadence)
 
     slot_states, segment_registry = _grid_view(context, revisions, slots, tuple(metrics))
 
@@ -400,8 +400,8 @@ def _evaluate_core(context, revisions, slots, metrics, publication, versions):
         states = slot_states.get(metric, {})
         records = []
         for step in range(total_slots):
-            when = _grid_boundary(context, step)
-            slot_end = min(when + context.cadence, cycle_end)
+            when = cycle_start + step * cadence
+            slot_end = min(when + cadence, cycle_end)
             if slot_end <= when:
                 break  # exact end-of-cycle sample: stored upstream, zero duration
             segment = _candidate_segment(segment_list, when)
@@ -409,11 +409,16 @@ def _evaluate_core(context, revisions, slots, metrics, publication, versions):
                 metric, states.get(step), segment)
             start_clipped = max(when, effective_start)
             end_clipped = min(slot_end, effective_end)
-            minutes_effective = _minutes(end_clipped - start_clipped) \
-                if start_clipped < end_clipped else ZERO
+            if start_clipped >= end_clipped:
+                minutes_effective = ZERO
+            elif start_clipped == when and end_clipped == slot_end:
+                minutes_effective = cadence_minutes
+            else:
+                # Only the boundary slots need fractional duration arithmetic.
+                minutes_effective = _minutes(end_clipped - start_clipped)
             records.append(_SlotRecord(
                 start=when, slot_end=slot_end, class_code=class_code, deviation=deviation,
-                direction=direction, minutes_inside_cycle=_minutes(slot_end - when),
+                direction=direction, minutes_inside_cycle=cadence_minutes,
                 minutes_in_effective=minutes_effective,
                 membership=None if segment is None else _segment_identity(segment),
                 applied_lower=applied_lower, applied_upper=applied_upper))

@@ -9,7 +9,7 @@ lượng, thu hoạch và chi phí; [đặc tả](docs/br/) và
 **Trạng thái:** sáu màn hình BR, simulator/collector/Structured Streaming và
 replay view đã triển khai. [Correctness và phục hồi](docs/evaluation/correctness.md)
 có test và oracle theo BR; [benchmark](docs/evaluation/performance.md) cho thấy
-BR-01 p95 uncached **4.060,81 ms**, chưa đạt mục tiêu 2.000 ms. Sáu walkthrough
+lượt gốc BR-01 p95 uncached **4.060,81 ms**, chưa đạt 2.000 ms; [follow-up sau tối ưu](docs/evaluation/rule-engine-optimization.md) đo **1.770,93 ms** trên cùng workload trong một lượt riêng. Sáu walkthrough
 UI tự động đạt, nhưng [đánh giá người dùng](docs/evaluation/usability.md) chưa có
 người tham gia. Kết quả lịch sử, replay và scenario luôn tách scope; giả định diện
 tích và ngưỡng demo có nhãn, không phải khuyến nghị canh tác.
@@ -238,6 +238,6 @@ Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên c�
 ## Giới hạn và công việc còn lại
 
 - Cần thực hiện và ghi nhận đánh giá với người dùng theo [protocol](docs/evaluation/usability.md); không suy ra hiệu quả thực tế từ test tự động.
-- BR-01 uncached chưa đạt mục tiêu p95; kết quả và phương pháp đo được giữ trong [benchmark](docs/evaluation/performance.md).
+- BR-01 vượt mục tiêu p95 ở lượt gốc; lượt sau tối ưu đạt 1.770,93 ms trong điều kiện đo, cần lặp lại trước khi kết luận SLA. Xem [benchmark](docs/evaluation/performance.md) và [follow-up](docs/evaluation/rule-engine-optimization.md).
 - Tiếp tục diễn tập toàn AGC từ môi trường sạch/offline và backup/restore thật; [kết quả chạy lại từng phần](docs/evaluation/local-repro.md). Hoàn thiện báo cáo, slides và video trước khi chốt nộp.
 - ClickHouse chỉ là [phương án tương lai](docs/architecture/09-clickhouse-migration.md), chưa triển khai.

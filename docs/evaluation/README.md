@@ -22,6 +22,7 @@ Mỗi báo cáo ghi phạm vi, dữ liệu, điều kiện chạy và giới h�
 - [UI sensor replay](sensor-replay-ui.md): scope, quality, trạng thái và CSV.
 - [Structured Streaming replay](sensor-streaming.md): checkpoint, publication, quality và kiểm tra cục bộ.
 - [Kiến trúc Kimball thay thế](kimball.md): schema, ETL, adapter và parity với Hybrid.
+- [Tối ưu engine rule](rule-engine-optimization.md): 30 mẫu trước/sau, hash BR-01/03 và giới hạn của lượt đo.
 - [Benchmark Hybrid/Kimball](performance.md): pipeline mới/rerun/rebuild, storage, workload sáu BR và COPY so với INSERT; kèm số đo thô và lệnh tái lập.
 
 Benchmark trên snapshot lịch sử không thay thế đánh giá usability hoặc nghiệm thu đường sensor replay. Basis diện tích và nước vẫn phải được đọc theo nhãn `assumed_unverified` trong từng báo cáo. Bằng chứng dựng môi trường nằm trong [hướng dẫn local](../implementation/local-environment.md).

@@ -130,8 +130,12 @@ con số không phải cold-cache hay benchmark nhiều máy.
 | BR-05 harvest p95 (ms) | 3,33 | 1,21 |
 | BR-06 cost p95 (ms) | 9,19 | 8,02 |
 
-BR-01 ở cả hai kiến trúc **chưa đạt** mục tiêu tham chiếu p95 ≤ 2.000 ms. Kimball
-rerun bị từ chối ghi đè, không được gọi là rerun thành công. Storage không gồm
+Trong benchmark gốc, BR-01 ở cả hai kiến trúc **chưa đạt** mục tiêu tham chiếu
+p95 ≤ 2.000 ms. Một cặp đo follow-up trên Hybrid cùng workload ghi p95 trước
+2.450,09 ms, sau tối ưu engine 1.770,93 ms, với 18 fingerprint khí hậu/drain
+khớp trên sáu khoang. Đây là một lượt riêng, không thay số cũ hay đảm bảo SLA;
+chi tiết `docs/evaluation/rule-engine-optimization.md`. Kimball chưa được đo lại.
+Kimball rerun bị từ chối ghi đè, không được gọi là rerun thành công. Storage không gồm
 WAL, image hoặc raw chung. COPY so với bounded INSERT được đo trên temporary table
 riêng, không suy rộng thành throughput production. Xem raw measurements và các
 ngoại lệ trong `docs/evaluation/performance.md`.
@@ -154,8 +158,7 @@ không thể kết luận chỉ từ tốc độ SELECT.
 
 Trước khi nộp cần: thực hiện đánh giá với người dùng và ghi trung thực kết quả;
 chạy lại toàn AGC từ môi trường sạch/offline khi đủ dung lượng; diễn tập backup/
-restore đầy đủ; hoàn thiện video 20–30 phút và metadata nhóm. BR-01 chưa đạt p95
-mục tiêu cần tiếp tục phân tích/tối ưu hoặc báo rõ là hạn chế. Không kết luận
+restore đầy đủ; hoàn thiện video 20–30 phút và metadata nhóm. BR-01 vượt p95 ở benchmark gốc, còn lượt follow-up sau tối ưu đạt trong điều kiện đo; cần lặp lại và không suy rộng thành SLA. Không kết luận
 project làm giảm tài nguyên hoặc tăng lợi nhuận nếu không có dữ liệu thực nghiệm.
 
 **Tài liệu chính:** `DE_Requirements.pdf`; `docs/br/`; `readme.md`;

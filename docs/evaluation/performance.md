@@ -4,7 +4,9 @@
 
 Đo trên cùng snapshot AGC, cùng PostgreSQL 17.10 và cùng giới hạn tài nguyên. Hybrid build mới mất **880.33 giây**; Kimball mất **40.35 giây**. Đây là một lần thực thi cho mỗi đường pipeline, không phải trung bình nhiều lần hay bảo đảm tốc độ trên hệ thống khác.
 
-Các trường hợp chưa đạt: BR-01 Climate Hybrid, BR-01 Climate Kimball. Mục tiêu tham chiếu là p95 ≤2.000 ms. Kết quả vượt mục tiêu được giữ nguyên; báo cáo này không đánh dấu toàn bộ dashboard đạt SLA.
+Trong lượt benchmark gốc, các trường hợp chưa đạt là BR-01 Climate Hybrid và BR-01 Climate Kimball. Mục tiêu tham chiếu là p95 ≤2.000 ms. Kết quả vượt mục tiêu được giữ nguyên; báo cáo này không đánh dấu toàn bộ dashboard đạt SLA.
+
+[Lượt tối ưu engine follow-up](rule-engine-optimization.md) ghi p95 Hybrid 1.770,93 ms sau thay đổi, so với 2.450,09 ms trước thay đổi trong cặp đo mới; đó là phép đo riêng, không thay số gốc và chưa đo lại Kimball.
 
 [Raw measurements](assets/t25/benchmark_results.json) chứa từng mẫu, checkpoint, checksum, thời điểm và SHA của script. [Cấu hình thực tế](assets/t25/runtime-environment.json), [script](assets/t25/benchmark_suite.py), [lệnh tái lập](assets/t25/run.sh) và [kiểm tra rebuild](assets/t25/rebuild-validation.json) đi kèm báo cáo.
 

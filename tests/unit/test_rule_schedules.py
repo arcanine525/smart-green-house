@@ -701,6 +701,34 @@ def test_query_window_clips_episode_and_summary(rule_engine_database):
     assert episode.clipped_minutes == Decimal('10')
 
 
+
+def test_fractional_boundary_clipping_with_non_divisor_cadence():
+    """Full slots and fractional boundary slots retain exact duration."""
+    cycle = CycleWindow('cycle:t14', 'comp:t14', date(2020, 1, 1), date(2020, 1, 2))
+    context = IntradayContext(
+        scope_id='scope:t14', cycle=cycle, compartment_ids=('comp:t14',),
+        start=WINDOW_START + timedelta(minutes=1, seconds=30),
+        end=WINDOW_START + timedelta(minutes=19, seconds=30),
+        measurement_context=DRAIN, basis=RuleBasis.MEASURED, cadence_minutes=7)
+    rule = demo_revision('fractional-seven-minute', (RuleScheduleSegment(
+        metric='ec', measurement_context=DRAIN, basis=RuleBasis.MEASURED,
+        start=WINDOW_START, end=WINDOW_START + timedelta(minutes=1435),
+        lower=Decimal('2'), upper=Decimal('5')),))
+    slots = tuple(ThresholdSlot(start=WINDOW_START + timedelta(minutes=7 * index),
+                                metric='ec', measurement_context=DRAIN,
+                                basis=RuleBasis.MEASURED, actual=Decimal('9'))
+                  for index in range(3))
+    result = evaluate((rule,), slots, ('ec',), context=context)
+    report, = result.metric_results
+    episode, = result.episodes
+    assert report.expected_minutes == Decimal('18')
+    assert report.valid_minutes == report.out_minutes == Decimal('18')
+    assert report.unknown_minutes == Decimal('0')
+    assert episode.original_minutes == Decimal('21')
+    assert episode.clipped_minutes == Decimal('18')
+    assert episode.clipped_start == context.start and episode.clipped_end == context.end
+
+
 def test_min_episode_filter_changes_only_list(rule_engine_database):
     drain = drain_rule(rule_engine_database, 't14-drain-min')
     slots = drain_slots(WINDOW_START, [(Decimal('9'), None, None)] * 3)

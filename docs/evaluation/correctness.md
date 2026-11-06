@@ -38,6 +38,11 @@ PostgreSQL restart 1, broker/collector/simulator restart 1. Chi tiết số đ�
 thời gian: [kết quả máy đọc được](assets/local-correctness/run-20261106.json).
 Đây là một lượt test local, không phải benchmark hoặc thử nghiệm người dùng.
 
+Sau tối ưu engine dùng chung, lượt khác ngày 2026-11-06 đạt **420 backend,
+97 UI, 2 test công cụ ghi usability và 19 sensor/recovery**; 18 fingerprint kết
+quả climate/drain toàn vụ trên sáu khoang trước/sau đều khớp. Lệnh, kết quả và
+ranh giới phép đo: [follow-up engine](rule-engine-optimization.md).
+
 ## Oracle và bằng chứng từng BR
 
 | BR | Oracle/đối soát ngoài core-vs-mart | Phạm vi và giới hạn |

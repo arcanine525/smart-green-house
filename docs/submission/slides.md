@@ -95,7 +95,8 @@ lang: vi-VN
 
 - Fresh build (một lượt): Hybrid 880,33 s; Kimball 40,35 s.
 - Database: Hybrid 3,319 GiB; Kimball 0,623 GiB (không gồm WAL/raw).
-- BR-01 p95 uncached: 4.060,81 / 3.028,13 ms; chưa đạt mục tiêu 2.000 ms.
+- BR-01 p95 gốc: 4.060,81 / 3.028,13 ms; cả hai vượt 2.000 ms.
+- Follow-up Hybrid sau tối ưu: 1.770,93 ms; một lượt riêng, không phải SLA.
 - BR-03 p95: 1.959,90 / 1.816,71 ms.
 - Query Automatoes: 30 mẫu + 5 warm-up.
 
@@ -110,5 +111,5 @@ lang: vi-VN
 
 - Sáu BR và replay local có bằng chứng correctness, performance và UI tự động.
 - Hoàn thành đánh giá người dùng, diễn tập offline và video 20–30 phút.
-- Phân tích BR-01 vượt p95; không suy rộng benchmark một lượt thành SLA.
+- BR-01 gốc vượt p95; follow-up sau tối ưu đạt trong một lượt, chưa phải SLA.
 - ClickHouse chỉ xét sau khi có backfill/parity và bằng chứng phù hợp.

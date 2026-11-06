@@ -18,7 +18,7 @@ project 20–30 phút. Không đọc kết quả giả hoặc ghi khống đánh
 | 11:30–14:00 | B | Demo BR-04/06: 308,078 kWh, kg A = 0 nên kWh/kg NULL, baseline 17,60 EUR, basis giả định, scenario +20%, version và CSV; slide 11. |
 | 14:00–16:00 | C | Replay screen: source time khác operational time, status, quality, fault/trace và restart; slide 12. |
 | 16:00–18:00 | C | Correctness: oracle/raw, contract, fault và 419/97/19 test; slide 13. |
-| 18:00–20:30 | C | So Hybrid/Kimball, phương pháp đo và BR-01 chưa đạt p95; slide 8 và 14. |
+| 18:00–20:30 | C | So Hybrid/Kimball, BR-01 vượt p95 trong lượt gốc và kết quả follow-up sau tối ưu; slide 8 và 14. |
 | 20:30–22:00 | A | Effectiveness: walkthrough tự động; báo trạng thái đánh giá người thật theo bằng chứng mới nhất; slide 15. |
 | 22:00–24:00 | C | Giới hạn, công việc còn lại và kết luận; slide 16. |
 
