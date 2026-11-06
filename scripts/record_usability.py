@@ -2,8 +2,8 @@
 """Record facilitator-observed usability tasks; no synthetic participant data.
 
 The facilitator prepares the six scenarios in docs/evaluation/usability.md and
-compares each participant answer to the known answer without coaching. Results
-are written only after an actual interactive session, using exclusive creation.
+compares each participant answer to the known answer without coaching. The tool
+records entered observations only; it cannot verify that a participant is real.
 """
 import argparse
 from datetime import datetime, timezone
@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import re
+import tempfile
 from time import monotonic
 
 TASKS = (
@@ -39,7 +40,7 @@ def choice(prompt, allowed):
         print('Chọn một trong: ' + ', '.join(allowed))
 
 
-def record_session(participant, context, run_input=input, clock=monotonic, now=None):
+def record_session(participant, context, run_input=input, clock=monotonic, now=None, on_update=None):
     # Input/clock parameters let test code exercise collection without claiming
     # the synthetic transcript is a human observation.
     def ask(prompt):
@@ -57,7 +58,11 @@ def record_session(participant, context, run_input=input, clock=monotonic, now=N
             print('Chọn một trong: ' + ', '.join(options))
 
     started = (now or (lambda: datetime.now(timezone.utc)))()
-    results = []
+    session = {'version': 1, 'participant_pseudonym': participant,
+               'started_at_utc': started.isoformat(), 'context': context,
+               'status': 'in_progress', 'tasks': []}
+    if on_update is not None:
+        on_update(session)
     for br, description in TASKS:
         print(f'\n{br}: {description}')
         run_input('Nhấn Enter khi người tham gia bắt đầu tác vụ...')
@@ -66,7 +71,7 @@ def record_session(participant, context, run_input=input, clock=monotonic, now=N
         duration = clock() - start
         if duration < 0:
             raise ValueError('Đồng hồ đo thời gian không hợp lệ')
-        results.append({
+        session['tasks'].append({
             'br': br,
             'elapsed_seconds': round(duration, 3),
             'completion': ask_choice('Kết quả [khong_tro_giup/co_tro_giup/khong_xong]: ',
@@ -79,8 +84,12 @@ def record_session(participant, context, run_input=input, clock=monotonic, now=N
                                               ('dung', 'sai', 'chua_danh_gia')),
             'feedback': ask('Phản hồi/vướng mắc: '),
         })
-    return {'version': 1, 'participant_pseudonym': participant,
-            'started_at_utc': started.isoformat(), 'context': context, 'tasks': results}
+        if on_update is not None:
+            on_update(session)
+    session['status'] = 'completed'
+    if on_update is not None:
+        on_update(session)
+    return session
 
 
 def main(argv=None):
@@ -101,12 +110,28 @@ def main(argv=None):
         'application_version': required('Commit/image version: '),
         'dataset_publication_rules': required('Dataset, publication, cửa sổ, rule/basis/scenario: '),
     }
-    session = record_session(args.participant, context)
     args.output.parent.mkdir(parents=True, exist_ok=True)
+    # Reserve a new path exclusively; only this run may replace its checkpoints.
     descriptor = os.open(args.output, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
-    with os.fdopen(descriptor, 'w', encoding='utf-8') as output:
-        json.dump(session, output, ensure_ascii=False, indent=2)
-        output.write('\n')
+    os.close(descriptor)
+
+    def save(session):
+        name = None
+        try:
+            with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8',
+                                             dir=args.output.parent, delete=False) as output:
+                name = output.name
+                json.dump(session, output, ensure_ascii=False, indent=2)
+                output.write('\n')
+                output.flush()
+                os.fsync(output.fileno())
+            os.replace(name, args.output)
+            name = None
+        finally:
+            if name is not None:
+                os.unlink(name)
+
+    record_session(args.participant, context, on_update=save)
     print(f'Đã lưu quan sát tại {args.output}; kiểm tra lại trước khi đưa vào báo cáo.')
 
 

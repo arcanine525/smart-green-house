@@ -62,7 +62,8 @@ python3 scripts/record_usability.py --participant P01 --output tmp/usability/P01
 Công cụ hỏi mã ẩn danh, context/version, kết quả, giải thích coverage và phản hồi
 cho từng BR; đo thời gian giữa hai lần facilitator xác nhận bắt đầu/kết thúc bằng
 đồng hồ monotonic. Nó yêu cầu facilitator tự đối chiếu đáp án, phân biệt người
-dùng với thành viên đóng vai, lưu JSON quyền `0600` và từ chối ghi đè file. Cần
+dùng với thành viên đóng vai, lưu JSON quyền `0600`, checkpoint sau mỗi tác vụ và từ chối ghi đè file. Phiên
+bị gián đoạn giữ `status: in_progress`; chỉ phiên đủ sáu tác vụ mới có `completed`. Cần
 có người tham gia thực sự; input giả lập chỉ dùng để test công cụ và không phải
 bằng chứng usability. Dữ liệu trong `tmp/` không được commit tự động.
 
