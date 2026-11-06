@@ -4,7 +4,7 @@ from datetime import datetime, time, timedelta
 
 from greenhouse.contracts import CycleWindow, IntradayContext, RuleBasis
 from greenhouse.queries.climate import build_slots as climate_slots, CLIMATE_METRICS, CLIMATE_CONTEXT
-from greenhouse.queries.drain import build_slots as drain_slots, DRAIN_METRICS, DRAIN_CONTEXT
+from greenhouse.queries.drain import build_slots as drain_slots, DRAIN_METRICS, DRAIN_CONTEXT, validate_drain_profile
 from greenhouse.queries.rule_duration import evaluate_rule_schedule
 from greenhouse.sensor.replay_publication import read_publication
 from greenhouse.sensor.replay_slots import build_replay_rows
@@ -53,6 +53,7 @@ def evaluate_publication(connection, publication_id, *, climate_rule=None, drain
         cycle_id=cycle_id, compartment_id=compartment, quality_policy_version=policy, cycle_end=cycle_end)
     climate_context = IntradayContext(scope, cycle, (compartment,), cycle_start, end, CLIMATE_CONTEXT, climate_basis)
     drain_context = IntradayContext(scope, cycle, (compartment,), cycle_start, end, DRAIN_CONTEXT, RuleBasis.MEASURED)
+    validate_drain_profile(drain_rule)
     climate = evaluate_rule_schedule(climate_context, (climate_rule,) if climate_rule else (),
                                      climate_slots(climates, climate_basis), CLIMATE_METRICS)
     drain = evaluate_rule_schedule(drain_context, (drain_rule,) if drain_rule else (),

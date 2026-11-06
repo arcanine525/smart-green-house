@@ -77,4 +77,4 @@ pointer replay trong cùng transaction với batch. Truy vấn BR-01/03 trên
 publication pin tái sử dụng quality và rule-duration engine của batch, tính
 đến cursor theo source time; event đến trễ tạo publication mới. Chi tiết
 và giới hạn: [đánh giá stream](../evaluation/sensor-streaming.md). Live
-view và fault matrix vẫn cần T35–T36.
+view tách scope replay; fault matrix đầy đủ vẫn cần T36.

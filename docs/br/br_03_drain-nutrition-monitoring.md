@@ -139,3 +139,24 @@ Sai số số thực `1e-6` trước làm tròn; thời lượng và số sự k
 - [Grain trong phân tích tham khảo](../ref/SmartGreenhouse_Case_Analysis.md#23-grain-ba-mức-cùng-tồn-tại) và [cột EC/pH drain](../ref/SmartGreenhouse_Case_Analysis.md#24-các-cột-quan-trọng); [BR-03 trong presentation tham khảo](../ref/GroupID_DE_Presentation.pdf#page=18) nêu câu hỏi EC/pH và dải minh họa. Đây không phải bằng chứng xác thực ngưỡng nông học. [Inventory T05](../implementation/data-inventory.md) đã đo token rỗng EC/pH, chưa phân loại quality; [quyết định profile](../implementation/data-decisions.md#5-profile-demo-và-biểu-giá-lịch-sử) giữ dải EC/pH và policy suspect ở trạng thái demo, chưa xác thực nông học.
 - `ReadMe.pdf`, mục GreenhouseClimate, LabAnalysis và GrodanSens, trong [dataset Kaggle](https://www.kaggle.com/datasets/piantic/autonomous-greenhouse-challengeagc-2nd-2019/).
 - [BR-01](br_01_climate-condition-monitoring.md) chia sẻ kỹ thuật duration/episode; [BR-02](br_02_irrigation-drainage-monitoring.md) cung cấp bối cảnh nước. Các BR phục vụ quyết định khác nhau và được nghiệm thu riêng.
+
+## 10. Phụ lục acceptance — sensor replay
+
+Phạm vi này là **dữ liệu AGC phát lại qua sensor giả lập**, tách khỏi publication
+lịch sử. EC/pH tiếp tục dùng quality và profile đo đã chọn, không suy luận quan
+hệ nhân quả với lượng tưới hay coi ngưỡng demo là khuyến nghị nông học.
+
+- **LIVE-01:** Chọn replay/khoang, pin publication; KPI, episode và CSV dùng
+  cùng scope, quality policy và revision rule được chọn.
+- **LIVE-02:** Hiện mẫu EC/pH gần nhất, quality theo từng measure, replay clock,
+  thời gian collector nhận và tuổi tín hiệu vận hành; không đổi timestamp AGC
+  thành giờ hiện tại.
+- **LIVE-03:** Thiếu measurement/rule là unknown, không điền 0; coverage chỉ đến
+  cursor, với EC và pH giữ verdict riêng.
+- **LIVE-04:** Pause, stale, gap, conflict và episode open/provisional phải thấy
+  rõ; late event có thể cập nhật publication mới sau khi nối/ngắt episode.
+- **LIVE-05:** CSV giữ provenance và rule như màn hình. Không cảnh báo ngoài,
+  không điều khiển thiết bị và không ngầm gộp historical với replay.
+
+Kiểm thử giao diện và fault matrix của toàn đường sensor tiếp tục ở T36;
+[hướng dẫn stream](../../src/greenhouse/sensor/README.md).

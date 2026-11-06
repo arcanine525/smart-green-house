@@ -41,7 +41,7 @@ nguồn khớp, và ghi rõ nguồn mapping trong evidence.
 
 Một late event có thể nối/ngắt episode. Cờ provisional của evaluation áp dụng
 cho toàn bộ kết quả khi replay chưa hoàn tất; chi tiết hiển thị episode mở và
-live view là phần T35. Không coi historical event time là thời điểm sensor thật.
+live view hiển thị riêng theo publication replay. Không coi historical event time là thời điểm sensor thật.
 
 ## Kiểm tra đã thực hiện
 

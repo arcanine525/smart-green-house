@@ -19,6 +19,7 @@ class ReplayState:
     cursor_sequence: int
     control_sequence: int
     received_through: str | None
+    replay_status: str
     expected_events: int | None
     emitted_unique_events: int | None
     emitted_total_messages: int | None
@@ -73,6 +74,7 @@ def reconcile(replay_id, records):
     cursor_sequence = control_sequence = 0
     observed = None
     cursor_status = None
+    replay_status = 'unknown'
     manifest = None
     while control_sequence + 1 in controls:
         seq = control_sequence + 1
@@ -90,6 +92,9 @@ def reconcile(replay_id, records):
             cursor_sequence = cursor
             observed = envelope['payload']['source_observed_at']
             cursor_status = envelope['payload']['status']
+            replay_status = cursor_status
+        elif envelope['control_type'] == 'pause_state':
+            replay_status = 'paused'
         elif envelope['control_type'] == 'completion_manifest':
             if manifest is not None:
                 conflicts.add(identity)
@@ -125,7 +130,7 @@ def reconcile(replay_id, records):
                     and cursor_sequence == expected == len(covered)
                     and manifest['emitted_unique_events'] == len(covered))
     return ReplayState(replay_id, observed, cursor_sequence, control_sequence,
-                       max(received).isoformat() if received else None, expected,
+                       max(received).isoformat() if received else None, replay_status, expected,
                        manifest['emitted_unique_events'] if manifest else None,
                        manifest['emitted_total_messages'] if manifest else None,
                        manifest.get('rejected_source_rows', 0) if manifest else None,

@@ -135,3 +135,13 @@ CSV excluded: identity/disposition/reason/issue_column/relative_path/line/serial
 (không giá trị quarantined); CSV audit: chỉ verified mới có token raw, metadata mang
 đầy đủ publication/cycle/khoang/cửa sổ yêu cầu và pipeline/quality/parser/code/config
 versions của publication đã pin.
+
+## Sensor replay (BR-01/03)
+
+Chọn **Sensor replay (BR-01/03)** ở navigation. Màn hình đọc publication replay
+riêng, có nút làm mới và tùy chọn tự làm mới 10 giây. Các trường replay clock,
+last received, stale và age phân biệt source time với thời gian vận hành. Rule
+lịch sử được chọn và ánh xạ tường minh theo cùng snapshot/khoang. KPI, episode
+và CSV cùng pin publication; kết quả chưa đối soát mang nhãn provisional.
+Chi tiết scope và lệnh chạy xem [sensor README](../sensor/README.md); T36 vẫn
+cần đo và nghiệm thu toàn đường sensor.

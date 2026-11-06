@@ -56,14 +56,23 @@ def stop_with(kind, title, detail=None, tips=None):
 
 def render(connection):
     settings = Settings.from_env()
-    catalog = wiring.catalog_service(connection)
+    with st.sidebar:
+        screen = st.radio('Màn hình', ['💧 Nước (BR-02)', '🍅 Thu hoạch (BR-05)',
+                                       '🌡️ Khí hậu (BR-01)', '🧪 EC/pH drain (BR-03)',
+                                       '⚡ Năng lượng (BR-04)', '💶 Chi phí & Kịch bản (BR-06)',
+                                       '📡 Sensor replay (BR-01/03)'],
+                          key='screen_choice',
+                          help='Replay và dữ liệu lịch sử là hai phạm vi riêng.')
+    if screen == '📡 Sensor replay (BR-01/03)':
+        from greenhouse.app import replay as replay_screen
+        return replay_screen.render(connection, settings)
 
+    catalog = wiring.catalog_service(connection)
     try:
         publications = catalog.publications()
     except psycopg.Error:
         stop_with('error', 'Không đọc được catalog publication từ PostgreSQL.',
                   'Kiểm tra DB Compose rồi thử lại; chi tiết lỗi không hiển thị để tránh lộ cấu hình.')
-
     if not publications:
         stop_with('info', 'Chưa có publication nào được publish — ứng dụng không có dữ liệu fixture thay thế.',
                   'Chạy pipeline để tạo publication có mart bundle (lệnh đầy đủ trong '
@@ -71,14 +80,6 @@ def render(connection):
                   'docker compose -p smart-greenhouse run --rm job python -m greenhouse migrate\n'
                   'docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline '
                   '--workflow-id water-first')
-
-    with st.sidebar:
-        screen = st.radio('Màn hình', ['💧 Nước (BR-02)', '🍅 Thu hoạch (BR-05)',
-                                       '🌡️ Khí hậu (BR-01)', '🧪 EC/pH drain (BR-03)',
-                                       '⚡ Năng lượng (BR-04)', '💶 Chi phí & Kịch bản (BR-06)'],
-                          key='screen_choice',
-                          help='Mỗi màn hình dùng bundle riêng (nước = irrigation-mart-v1, '
-                          'thu hoạch = harvest-mart-v3); session filter tách theo màn hình.')
 
     if screen == '🍅 Thu hoạch (BR-05)':
         from greenhouse.app import harvest as harvest_screen

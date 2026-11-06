@@ -123,3 +123,12 @@ def test_cursor_time_must_match_last_event_sequence(tmp_path):
     records = rows(tmp_path, [messages[0], ('control_messages', 1, dump(cursor)), messages[2]])
     state = reconcile('replay-101', records)
     assert state.cursor_mismatch and not state.complete
+
+
+def test_pause_control_changes_replay_status_until_cursor_resumes(tmp_path):
+    paused = control(1, 'pause_state', {'paused_at_line': 2, 'paused_at_sequence': 1, 'reason': 'test'})
+    cursor = control(2, 'replay_cursor', {'logical_cursor_line': 2, 'logical_cursor_sequence': 1,
+                     'source_observed_at': '2019-12-16T00:00:00', 'status': 'running'})
+    records = rows(tmp_path, [('control_messages', 1, dump(paused)), ('control_messages', 2, dump(cursor))])
+    assert reconcile('replay-101', records[:1]).replay_status == 'paused'
+    assert reconcile('replay-101', records).replay_status == 'running'

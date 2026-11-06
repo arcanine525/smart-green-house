@@ -1,6 +1,6 @@
 # Môi trường local Docker-first
 
-Scaffold T04 và snapshot T05 mở rộng trực tiếp Compose/Dockerfile của [ADR-002](../adr/002-container-stack-compatibility.md). Host chỉ cần Docker Engine + Compose v2 trở lên. Không có Python/Java/Spark trên host trong các lệnh runtime. Snapshot/inventory, database pipeline, simulator, collector và stream replay đều có lệnh local; live view và nghiệm thu end-to-end tiếp tục ở T35–T36.
+Scaffold T04 và snapshot T05 mở rộng trực tiếp Compose/Dockerfile của [ADR-002](../adr/002-container-stack-compatibility.md). Host chỉ cần Docker Engine + Compose v2 trở lên. Không có Python/Java/Spark trên host trong các lệnh runtime. Snapshot/inventory, database pipeline, simulator, collector và stream replay đều có lệnh local; live replay view đã có; nghiệm thu end-to-end và fault matrix tiếp tục ở T36.
 
 ## Clone mới → build → setup → test → prototype
 
@@ -97,7 +97,7 @@ docker compose --profile test run --rm test-runner
 | collect | Nhận MQTT và ghi spool/raw-ready bền vững | Xem [sensor](../../src/greenhouse/sensor/README.md) |
 | stream | Đọc raw-ready bằng Spark, ghi PostgreSQL và publication replay | Cần scope và checkpoint tường minh; [hướng dẫn](../../src/greenhouse/sensor/README.md) |
 
-Profile sensor có cấu hình hợp lệ nhưng không có simulator/collector/streaming hoạt động. Các volumes đã được phân tách, chưa chứng minh durable ACK, recovery hoặc batch–stream reconciliation. Không dùng container stub đã exit làm minh chứng tính năng hoàn tất.
+Profile sensor có simulator, collector và stream worker với volumes tách biệt. Durable spool/ACK và stream retry có kiểm thử riêng; fault matrix và đối soát batch–streaming đầy đủ vẫn thuộc T36.
 
 ## Tạo HTML và dừng dịch vụ
 
@@ -125,7 +125,7 @@ Kiểm chứng ngày 2026-11-04 trên Docker Linux arm64, VM 4 CPU/~7.62 GiB. Ru
 | Cấu hình | Profile sensor hợp lệ; backend internal, processing/test/sensor chỉ backend; chỉ app publish loopback; import/raw read-only; thiếu password bị Compose từ chối |
 | Test container RAM | `memory.peak` 495,677,440 byte (~472.71 MiB), limit 2 GiB; chỉ là số đo fixture, chưa phải sizing AGC |
 
-Bảng trên là bằng chứng scaffold gốc, không phải trạng thái nghiệm thu BR. Trạng thái parser/snapshot và candidate core hiện hành xem các contract ingestion/core bên dưới. Pipeline publication/recovery, marts, sensor durability/streaming, app nghiệp vụ, backup/restore và runtime amd64 chưa được nghiệm thu. Khả năng mở prototype/đạt synthetic tests không thay nghiệm thu sáu BR.
+Bảng trên là bằng chứng scaffold gốc, không phải trạng thái nghiệm thu BR. Trạng thái parser/snapshot và candidate core hiện hành xem các contract ingestion/core bên dưới. Pipeline, marts, sensor durability/streaming và app đã có bằng chứng theo từng phạm vi; backup/restore và runtime amd64 chưa được nghiệm thu. Khả năng mở prototype/đạt synthetic tests không thay nghiệm thu sáu BR.
 
 
 ## Nạp candidate core và giải thích dữ liệu
