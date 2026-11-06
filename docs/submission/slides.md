@@ -62,7 +62,8 @@ lang: vi-VN
 
 - Chọn publication, khoang, khoảng ngày, rule và basis.
 - Tìm đợt nhiệt độ ngoài điều kiện; mở nguồn và quality.
-- Water fixture: 40 tưới / 14 drain → 35% paired; ngày thiếu vẫn là NULL.
+- AGC Automatoes, 02–03/03/2020: tưới 9,36 / drain 3,89 L/m² → 41,56%.
+- Publication df3e4bcb…; coverage paired 100%; ngày thiếu vẫn là NULL.
 - Xuất CSV cùng publication và bộ lọc.
 
 ## 10. Demo: EC/pH và thu hoạch
@@ -73,9 +74,9 @@ lang: vi-VN
 
 ## 11. Demo: năng lượng và scenario
 
-- Fixture 500 kWh / 100 kg A → 5 kWh/kg A.
-- Kịch bản điện +20% giữ nguyên lượng, đổi giá có version.
-- Giá và basis giả định được hiển thị; không trình bày là hóa đơn thật.
+- Cùng Automatoes 02–03/03: 308,078 kWh; kg A = 0 → kWh/kg là NULL.
+- Baseline 17,60 EUR theo biểu giá lịch sử và diện tích giả định 62,5 m².
+- Kịch bản điện +20% giữ nguyên lượng; không trình bày là hóa đơn thật.
 
 ## 12. Demo: sensor replay
 

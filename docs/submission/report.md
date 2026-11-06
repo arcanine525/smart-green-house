@@ -107,6 +107,13 @@ drain cho tỷ lệ 35% trên cùng tập paired; năng lượng 500 kWh / 100 k
 cho 5 kWh/kg. Chúng là kiểm thử phần mềm, không chứng minh năng suất hay tiết
 kiệm của một trang trại thật.
 
+Walkthrough UI AGC trên publication `df3e4bcbacab45a5b86fc37d2f53c00a`,
+Automatoes ngày 02–03/03/2020 đã đối soát trực tiếp CSV raw: tưới/drain
+9,36/3,89 L/m², tỷ lệ 41,56%; năng lượng 308,078 kWh và chi phí 17,60 EUR
+với diện tích 62,5 m² giả định và biểu giá lịch sử. Phần còn lại của walkthrough
+kiểm điều hướng/ngữ cảnh; không phải oracle mới cho mọi KPI. Đây là một cửa sổ
+cụ thể, không đại diện toàn bộ vụ.
+
 Performance đo trên Apple M4, RAM 16 GiB; Docker được cấp 4 CPU, khoảng 7,62 GiB;
 DB 0,5 CPU/512 MiB; processing 1,5 CPU/2 GiB. Cùng snapshot AGC, mỗi đường
 build một lần, workload query dùng 30 mẫu sau 5 warm-up trên Automatoes. Các
