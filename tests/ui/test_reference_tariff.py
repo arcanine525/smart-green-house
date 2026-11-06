@@ -1,12 +1,15 @@
 """Exercise registration against a real, isolated published energy fixture."""
 from dataclasses import replace
 from decimal import Decimal
+import json
 
 import psycopg
 import pytest
 
 from greenhouse.db import reference_tariff
 from greenhouse.db.cost_adapter import PostgresCostAdapter
+from greenhouse.cli import main
+from test_climate_ui import run_app, metric
 from ui.energy_fixture import energy_scope
 
 
@@ -50,3 +53,22 @@ def test_registration_preserves_existing_baseline(energy_scope, contracts_databa
         with pytest.raises(ValueError, match='different scope-wide baseline'):
             reference_tariff.register_reference_tariff(conn, apply=True)
         assert adapter.get_baseline_tariff(fixture.scope) == newer
+
+
+def test_cli_setup_makes_cost_dashboard_available(energy_scope, contracts_database,
+                                                   monkeypatch, capsys, run_app):
+    fixture = energy_scope(rows=(('100', '10', '5'),), basis_status='assumed_unverified')
+    monkeypatch.setattr(reference_tariff, 'AGC_SCOPE', fixture.scope)
+    monkeypatch.setattr(reference_tariff, 'AGC_SNAPSHOT', fixture.snapshot)
+    monkeypatch.setattr(reference_tariff, 'AGC_SHA', fixture.tag * 2)
+    monkeypatch.setenv('PGDATABASE', contracts_database['dbname'])
+    assert main(['register-agc-tariff']) == 0
+    assert json.loads(capsys.readouterr().out)['status'] == 'ready'
+    assert main(['register-agc-tariff', '--apply']) == 0
+    assert json.loads(capsys.readouterr().out)['status'] == 'registered'
+    assert main(['register-agc-tariff', '--apply']) == 0
+    assert json.loads(capsys.readouterr().out)['status'] == 'already_registered'
+    app = run_app(contracts_database)
+    app.radio(key='screen_choice').set_value('💶 Chi phí & Kịch bản (BR-06)').run()
+    assert not app.exception
+    assert metric(app, 'Tổng chi phí (EUR)') == '114.38 EUR'
