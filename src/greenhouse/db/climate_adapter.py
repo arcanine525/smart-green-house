@@ -6,36 +6,13 @@ schedule revisions through the repository, and reuses the core lineage path
 (pinned membership + raw hashes). Raw CSV parsing never leaks here; the
 per-measure quality triplets stay frozen exactly as materialized.
 """
-from dataclasses import dataclass
 from datetime import datetime
 
 from greenhouse.contracts import CycleWindow
 from greenhouse.db.climate_mart import BUNDLE_VERSION
 from greenhouse.db.migrate import sql
 from greenhouse.db.query_adapter import PostgresCoreQueryAdapter
-
-
-@dataclass(frozen=True)
-class ClimateSlotRow:
-    """One frozen mart slot (values + ALL per-measure quality verdicts +
-    source identity). Not a public contract: the typed ThresholdSlot rows
-    are built by the pure service layer."""
-    slot_start: datetime
-    revision_id: str
-    logical_key: str
-    quality_policy_version: str
-    correction_id: str | None
-    correction_version: int | None
-    tair: float | None
-    co2air: float | None
-    t_heat_sp: float | None
-    t_vent_sp: float | None
-    co2_sp: float | None
-    t_heat_vip: float | None
-    t_ventlee_vip: float | None
-    co2_vip: float | None
-    measure_quality: dict
-
+from greenhouse.queries.slot_rows import ClimateSlotRow
 
 class PostgresClimateQueryAdapter(PostgresCoreQueryAdapter):
     """Default application adapter: sealed climate mart only; no core fallback."""

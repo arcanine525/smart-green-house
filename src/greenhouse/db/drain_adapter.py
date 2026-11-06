@@ -7,30 +7,13 @@ CSV parsing never leaks here; the per-measure quality triplets stay frozen
 exactly as materialized. measurement_context is the exact
 'drain_process_computer' identity — never renamed.
 """
-from dataclasses import dataclass
 from datetime import datetime
 
 from greenhouse.contracts import CycleWindow
 from greenhouse.db.drain_mart import BUNDLE_VERSION
 from greenhouse.db.migrate import sql
 from greenhouse.db.query_adapter import PostgresCoreQueryAdapter
-
-
-@dataclass(frozen=True)
-class DrainSlotRow:
-    """One frozen mart slot (values + the policy's drain measure quality
-    triplets + source identity). Not a public contract: the typed
-    ThresholdSlot rows are built by the pure service layer."""
-    slot_start: datetime
-    revision_id: str
-    logical_key: str
-    quality_policy_version: str
-    correction_id: str | None
-    correction_version: int | None
-    ec_drain: float | None
-    ph_drain: float | None
-    measure_quality: dict
-
+from greenhouse.queries.slot_rows import DrainSlotRow
 
 class PostgresDrainQueryAdapter(PostgresCoreQueryAdapter):
     """Default application adapter: sealed drain mart only; no core fallback."""

@@ -48,6 +48,10 @@ def harvest_service(connection, raw_snapshots=None) -> HarvestService:
 
 def climate_service(connection, raw_snapshots=None) -> ClimateService:
     """BR-01 evaluation service over the sealed climate bundle."""
+    from greenhouse.app.runtime import is_clickhouse
+    if is_clickhouse(connection):
+        from greenhouse.clickhouse.threshold import ClimateAdapter
+        return ClimateService(ClimateAdapter(connection,raw_snapshots=raw_snapshots))
     from greenhouse.db.climate_adapter import PostgresClimateQueryAdapter
     return ClimateService(PostgresClimateQueryAdapter(connection, raw_snapshots=raw_snapshots))
 
@@ -55,6 +59,10 @@ def climate_service(connection, raw_snapshots=None) -> ClimateService:
 def drain_service(connection, raw_snapshots=None) -> DrainService:
     """BR-03 evaluation service over the sealed drain bundle (exact
     'drain_process_computer' context, measured basis, fixed bounds)."""
+    from greenhouse.app.runtime import is_clickhouse
+    if is_clickhouse(connection):
+        from greenhouse.clickhouse.threshold import DrainAdapter
+        return DrainService(DrainAdapter(connection,raw_snapshots=raw_snapshots))
     from greenhouse.db.drain_adapter import PostgresDrainQueryAdapter
     return DrainService(PostgresDrainQueryAdapter(connection, raw_snapshots=raw_snapshots))
 
@@ -228,3 +236,15 @@ def cost_service(connection, raw_snapshots=None):
         energy_service(connection, raw_snapshots),
         PostgresCostAdapter(connection, raw_snapshots=raw_snapshots),
     )
+
+
+def save_drain_profile(connection,publication,cycle,**kwargs):
+    from greenhouse.app import runtime
+    if runtime.is_clickhouse(connection):
+        import os
+        from greenhouse.clickhouse.schedules import save_drain_profile as save
+        return save(connection,Path(os.environ.get('GREENHOUSE_CH_COORDINATOR','/candidate/coordinator')),publication,cycle,**kwargs)
+    from greenhouse.db.drain_profiles import save_drain_profile as save
+    revision=save(connection,publication,cycle,**kwargs)
+    connection.commit()
+    return revision

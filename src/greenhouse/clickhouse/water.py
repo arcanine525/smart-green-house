@@ -272,7 +272,9 @@ class WaterAdapter:
             ref=self.publication(envelope['publication_id']); receipt=envelope['receipts']['water']
             result.append(CatalogPublication(ref.scope_id,ref.snapshot_id,ref.publication_id,ref.committed_at,
                 ref.finality_status,ref.versions.code_version,BUNDLE,receipt['rows'],receipt['cycles'],
-                harvest_bundle_version=envelope['receipts'].get('harvest',{}).get('version')))
+                harvest_bundle_version=envelope['receipts'].get('harvest',{}).get('version'),
+                climate_bundle_version=envelope['receipts'].get('climate',{}).get('version'),
+                drain_bundle_version=envelope['receipts'].get('drain',{}).get('version')))
         return tuple(result)
 
 
@@ -318,3 +320,7 @@ class WaterAdapter:
         rows=self.mart.repo.configurations()['rows']
         return tuple(from_dict(HarvestRuleProfile,json.loads(r['payload'])) for r in rows if
             r['kind']=='harvest_rule' and r['scope_id']==scope_id and json.loads(r['payload'])['compartment_id']==compartment_id)
+
+    def catalog_schedule_rules(self,scope_id,compartment_id,*,measurement_context,metrics,bases):
+        from greenhouse.clickhouse.schedules import catalog_rules
+        return catalog_rules(self.client,scope_id,compartment_id,measurement_context=measurement_context,metrics=metrics,bases=bases)

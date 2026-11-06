@@ -22,6 +22,9 @@ def envelope(client,scope,publication_id=None):
         elif name=='harvest':
             from greenhouse.clickhouse.harvest import HarvestMart
             validators[name]=HarvestMart(client,None).verify
+        elif name in ('climate','drain'):
+            from greenhouse.clickhouse.threshold import SlotMart
+            validators[name]=SlotMart(client,None,name).verify
         else:
             raise ValueError('Unsupported publication bundle: '+name)
     return Publications(client,None,bundles=validators).pin(scope,publication_id=selected['publication_id'])

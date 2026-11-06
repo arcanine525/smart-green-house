@@ -122,3 +122,26 @@ class RepositoryTest(unittest.TestCase):
         self.assertEqual(rows[1]['value_exact'].rstrip('0'),record['values']['Irr'].rstrip('0'))
         self.assertIsNone(rows[1]['value_decimal'])
         self.assertEqual(rows[1]['projection_status'],'outside_decimal256_projection')
+
+    def test_batch_initial_replay_after_measure_write_and_scalar_compatibility(self):
+        from unittest.mock import patch
+        record=self.record()
+        scalar,_=self.repo.append_record(self.scope,record)
+        self.assertEqual(self.repo.append_initial_records(self.scope,[record]),[(scalar,False)])
+        second=copy.deepcopy(record);second['logical_key']='2020-03-03';second['source_timestamp']='2020-03-03T00:00:00'
+        second['source_record_id']='fixture-row-2';second['values']['time']='43893'
+        insert=self.repo._insert
+        def interrupted(table,rows,**kwargs):
+            if table=='source_revision': raise RuntimeError('Injected crash after measures')
+            return insert(table,rows,**kwargs)
+        with patch.object(self.repo,'_insert',side_effect=interrupted):
+            with self.assertRaisesRegex(RuntimeError,'Injected crash'):
+                self.repo.append_initial_records(self.scope,[second])
+        rows=self.repo.canonical_records(self.scope)
+        self.assertEqual([r['revision_id'] for r in rows],[scalar])
+        new=self.repo.append_initial_records(self.scope,[second])[0][0]
+        self.assertEqual(self.repo.append_initial_records(self.scope,[second]),[(new,False)])
+        self.assertEqual(len(self.repo.canonical_records(self.scope)),2)
+        changed=copy.deepcopy(second);changed['values']['Irr']='10'
+        with self.assertRaises(ValueError): self.repo.append_initial_records(self.scope,[changed])
+        self.assertEqual(len(self.repo.canonical_records(self.scope)),2)

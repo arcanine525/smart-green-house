@@ -11,7 +11,9 @@ from greenhouse.app import shared_context
 from greenhouse.app import display, exports, figures, wiring
 from greenhouse.app import drain_actions as actions, drain_exports as downloads
 from greenhouse.contracts import RuleBasis
-from greenhouse.db.drain_profiles import save_drain_profile
+from greenhouse.app.wiring import save_drain_profile
+from greenhouse.app.runtime import is_clickhouse
+from greenhouse.clickhouse.client import ClickHouseError
 from greenhouse.queries import episode_key, page_episodes
 
 EPISODE_PAGE_SIZE = 40
@@ -61,9 +63,9 @@ def _profile_form(connection, publication, cycle):
                     connection, publication, cycle, name=name, version=int(version),
                     ec_lower=ec_min, ec_upper=ec_max, ph_lower=ph_min, ph_upper=ph_max,
                     provenance=provenance)
-                connection.commit()  # Seal before the rerun/connection close.
-            except (ValueError, psycopg.Error) as error:
-                connection.rollback()
+            except (ValueError, psycopg.Error, ClickHouseError) as error:
+                if not is_clickhouse(connection):
+                    connection.rollback()
                 st.error('Không lưu profile: ' + str(error)[:220])
             else:
                 st.session_state['drain_pending_rule'] = revision.rule_version

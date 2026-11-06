@@ -4,7 +4,6 @@ The catalog never consults meta.current_publication for a chosen publication:
 callers pin by publication ID (see query_adapter), so catalog rows and later
 reads cannot race the pointer. Connection is owned by the caller.
 """
-from dataclasses import dataclass
 from datetime import date
 
 from psycopg.rows import dict_row
@@ -17,29 +16,7 @@ from greenhouse.db.drain_mart import BUNDLE_VERSION as DRAIN_BUNDLE_VERSION
 from greenhouse.db.energy_mart import BUNDLE_VERSION as ENERGY_BUNDLE_VERSION, QUANTITY_VERSION
 from greenhouse.db.harvest_mart import BUNDLE_VERSION as HARVEST_BUNDLE_VERSION
 from greenhouse.db.migrate import sql
-
-
-@dataclass(frozen=True)
-class ScheduleRevisionOption:
-    """Selectable immutable schedule revision for the UI (identity + keys
-    only; segments load through the repository at evaluation time)."""
-    rule_version: str
-    rule_id: str
-    version: int
-    evidence_reference: str
-    is_demo: bool
-    label: str
-    keys: tuple[tuple[str, str, RuleBasis], ...]
-    segment_count: int
-
-    def __post_init__(self):
-        if self.segment_count < 1:
-            raise ValueError('A schedule option represents an existing revision with segments')
-
-    @property
-    def demo_flag(self):
-        return self.is_demo
-
+from greenhouse.queries.slot_rows import ScheduleRevisionOption
 
 class PostgresCatalogAdapter:
     def __init__(self, connection):

@@ -62,6 +62,59 @@ class Repository:
         for row in exported['rows']:
             self.register_configuration(row['kind'],row['scope_id'],row['version_id'],row['request_id'],json.loads(row['payload']))
 
+    def append_initial_records(self,scope,records,*,quality_policy='AGC_QUALITY_V1'):
+        """Bounded batch of revision-1 rows under the same journal/lock protocol.
+
+        Measures precede source rows. A crash may leave identical orphan measures;
+        recovery reconciles the write ID before retry, canonical reads collapse
+        identical physical copies. Corrections still use the ordinal-checked API.
+        """
+        if not scope or not quality_policy:
+            raise ValueError('Explicit scope and policy required')
+        with writer_lock(self.coordinator,self.client):
+            existing=self.client.query('''SELECT DISTINCT record_type,compartment_id,logical_key,
+                revision_id,content_hash,quality_policy_version FROM source_revision
+                WHERE scope_id={scope:String} AND revision=1''',{'scope':scope})
+            stored={}
+            for row in existing:
+                key=(row['record_type'],row['compartment_id'],row['logical_key'])
+                if key in stored and stored[key]!=row:
+                    raise ValueError('Conflicting initial revision')
+                stored[key]=row
+            sources=[]; measures=[]; result=[]
+            for record in records:
+                if not core_eligible(record) or not record['logical_key']:
+                    raise ValueError('Record has no eligible core identity')
+                kind=record['source_file'].split('/')[-1].removesuffix('.csv')
+                comp=record['source_file'].split('/')[0]; logical=record_identity(record)
+                payload={k:v for k,v in record.items() if k!='run_id'}
+                hashed=digest(payload); rid=digest([scope,kind,comp,logical,1,hashed])
+                key=(kind,comp,logical)
+                expected=dict(record_type=kind,compartment_id=comp,logical_key=logical,
+                    revision_id=rid,content_hash=hashed,quality_policy_version=quality_policy)
+                if key in stored:
+                    if stored[key]!=expected:
+                        raise ValueError('Initial source conflict; correction needs new ordinal')
+                    result.append((rid,False)); continue
+                stored[key]=expected; result.append((rid,True))
+                for code,value in record['values'].items():
+                    if code=='time':
+                        continue
+                    exact,projection,status=decimal_projection(value)
+                    measures.append(dict(scope_id=scope,revision_id=rid,measure_code=code,value_exact=exact,
+                        value_decimal=projection,projection_status=status,null_reason=record['null_reasons'].get(code,'')))
+                sources.append(dict(scope_id=scope,snapshot_id=record['snapshot_id'],first_run_id=record['run_id'],
+                    **expected,source_record_id=record['source_record_id'],revision=1,source_file=record['source_file'],
+                    file_checksum=record['file_checksum'],line_number=record['line_number'],line_end=record['line_end'],
+                    raw_hash=record['raw_hash'],source_serial=str(record['values']['time']),source_timestamp=record['source_timestamp'],
+                    source_clock_us=source_clock_us(record['source_timestamp']),correction_id='',parser_version=record['parser_version'],
+                    is_close_boundary=record['is_close_boundary'],payload=canonical_json(payload)))
+            for offset in range(0,len(measures),4096):
+                self._insert('source_measure',measures[offset:offset+4096])
+            for offset in range(0,len(sources),512):
+                self._insert('source_revision',sources[offset:offset+512])
+            return result
+
     def append_record(self, scope, record, *, revision=1, correction_id='', correction=None, quality_policy='AGC_QUALITY_V1'):
         if not scope or not isinstance(revision,int) or isinstance(revision,bool) or revision<1:
             raise ValueError('Explicit scope and positive revision required')
@@ -194,19 +247,28 @@ class Repository:
             keys=[(r['record_type'],r['compartment_id'],r['logical_key']) for r in selected]
             if len(set(keys))!=len(keys):
                 raise ValueError('Pinned membership repeats logical key')
-        for row in selected:
-            measures=self.client.query('SELECT DISTINCT measure_code,value_exact,value_decimal,projection_status,null_reason FROM source_measure WHERE scope_id={scope:String} AND revision_id={id:String} ORDER BY measure_code',{'scope':scope,'id':row['revision_id']})
-            payload=json.loads(row['payload'])
-            expected=[]
-            for code,value in sorted(payload['values'].items()):
-                if code=='time':
-                    continue
-                exact,projection,status=decimal_projection(value)
-                expected.append({'measure_code':code,'value_exact':exact,'value_decimal':projection,
-                    'projection_status':status,'null_reason':payload['null_reasons'].get(code,'')})
-            comparable=lambda values:[r | {'value_decimal':Decimal(r['value_decimal']) if r['value_decimal'] is not None else None} for r in values]
-            if comparable(measures)!=comparable(expected):
-                raise ValueError('Revision measures incomplete or conflicting')
+        for offset in range(0,len(selected),512):
+            batch=selected[offset:offset+512]
+            measure_rows=self.client.query('''SELECT DISTINCT revision_id,measure_code,value_exact,value_decimal,projection_status,null_reason
+                FROM source_measure WHERE scope_id={scope:String} AND revision_id IN {ids:Array(String)} ORDER BY measure_code''',
+                {'scope':scope,'ids':str([r['revision_id'] for r in batch])})
+            by_revision={}
+            for measure in measure_rows:
+                measure=dict(measure); rid=measure.pop('revision_id')
+                by_revision.setdefault(rid,[]).append(measure)
+            for row in batch:
+                measures=by_revision.get(row['revision_id'],[])
+                payload=json.loads(row['payload'])
+                expected=[]
+                for code,value in sorted(payload['values'].items()):
+                    if code=='time':
+                        continue
+                    exact,projection,status=decimal_projection(value)
+                    expected.append({'measure_code':code,'value_exact':exact,'value_decimal':projection,
+                        'projection_status':status,'null_reason':payload['null_reasons'].get(code,'')})
+                comparable=lambda values:[r | {'value_decimal':Decimal(r['value_decimal']) if r['value_decimal'] is not None else None} for r in values]
+                if comparable(measures)!=comparable(expected):
+                    raise ValueError('Revision measures incomplete or conflicting')
         return selected
 
 

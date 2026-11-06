@@ -268,8 +268,8 @@ Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên c�
 - Đánh giá người dùng theo [protocol](docs/evaluation/usability.md) là mở rộng tùy chọn; T26 dùng walkthrough Playwright theo phạm vi đã chốt. Không suy ra hiệu quả thực tế từ test tự động.
 - BR-01 vượt mục tiêu p95 ở lượt gốc; lượt sau tối ưu đạt 1.770,93 ms trong điều kiện đo, cần lặp lại trước khi kết luận SLA. Xem [benchmark](docs/evaluation/performance.md) và [follow-up](docs/evaluation/rule-engine-optimization.md).
 - [Full AGC/offline và backup/restore](docs/evaluation/local-repro.md) đã đạt trên clone riêng; sensor phục hồi được kiểm trên 30 dòng AGC. Còn hoàn thiện metadata nhóm, báo cáo/slide cuối và video thuyết trình để chốt nộp.
-- ClickHouse chỉ là [phương án tương lai](docs/architecture/09-clickhouse-migration.md), chưa triển khai.
+- ClickHouse đang được chuyển đổi theo [các gate migration](docs/architecture/09-clickhouse-migration.md); PostgreSQL vẫn là baseline đến khi đủ nghiệm thu.
 
 ### ClickHouse candidate
 
-Luồng BR-02 và BR-05 có bản ClickHouse chạy local, dùng cùng dashboard và contracts. Xem [cách chạy và đối soát](docs/implementation/clickhouse-water.md). Xem thêm [thu hoạch và completeness](docs/implementation/clickhouse-harvest.md). Backend mặc định vẫn là PostgreSQL đến khi đủ các gate chuyển đổi; các BR ClickHouse còn lại đang được triển khai.
+Luồng BR-01/02/03/05 có bản ClickHouse chạy local, dùng cùng dashboard và contracts. Xem [cách chạy và đối soát](docs/implementation/clickhouse-water.md). Xem thêm [thu hoạch và completeness](docs/implementation/clickhouse-harvest.md), [khí hậu/drain và episode](docs/implementation/clickhouse-thresholds.md). Backend mặc định vẫn là PostgreSQL đến khi đủ các gate chuyển đổi; các BR ClickHouse còn lại đang được triển khai.

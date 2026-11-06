@@ -36,7 +36,7 @@ def verified_snapshot(root):
     return manifest
 
 
-def load_snapshot(client, coordinator, raw, output, scope, run_id=None, *, kinds=None):
+def load_snapshot(client, coordinator, raw, output, scope, run_id=None, *, kinds=None, climate_window=None):
     from greenhouse.clickhouse.coordinator import writer_lock
     from greenhouse.clickhouse.encoding import canonical_json
     migrate(client,coordinator)
@@ -48,13 +48,24 @@ def load_snapshot(client, coordinator, raw, output, scope, run_id=None, *, kinds
     repo.register_configuration('snapshot',scope,'source','snapshot:'+scope,
         {'snapshot_id':manifest['snapshot_id'],'archive':manifest['archive'],
          'files':manifest['files']})
+    if climate_window is not None:
+        from datetime import datetime
+        if len(climate_window)!=2 or [datetime.fromisoformat(v).isoformat() for v in climate_window]!=list(climate_window) or datetime.fromisoformat(climate_window[0])>=datetime.fromisoformat(climate_window[1]) or any(datetime.fromisoformat(v).tzinfo is not None for v in climate_window):
+            raise ValueError('Climate selection requires an explicit half-open source window')
     counts=Counter()
+    pending=[]
+    def flush():
+        if pending:
+            for rid,created in repo.append_initial_records(scope,pending):
+                membership.append(rid); counts['inserted' if created else 'reused']+=1
+            pending.clear()
     membership=[]
     audit_issues=[]
     audit_files=[]
     for file in ingestion['files']:
         selected=kinds is None or Path(file['source_file']).stem in kinds
-        audit_files.append({'source_file':file['source_file'],'metadata':canonical_json(file|{'core_selected':selected})})
+        selection={'climate_window':list(climate_window)} if climate_window and Path(file['source_file']).stem=='GreenhouseClimate' else {}
+        audit_files.append({'source_file':file['source_file'],'metadata':canonical_json(file|{'core_selected':selected}|selection)})
         if kinds is not None and Path(file['source_file']).stem not in kinds:
             counts['deferred_source_rows']+=file.get('read',0)
             continue
@@ -65,12 +76,15 @@ def load_snapshot(client, coordinator, raw, output, scope, run_id=None, *, kinds
             with gzip.open(target,'rt',encoding='utf-8') as stream:
                 for line in stream:
                     record=json.loads(line)
+                    if climate_window and Path(file['source_file']).stem=='GreenhouseClimate' and record.get('slot_start') is not None and not climate_window[0]<=record['slot_start']<climate_window[1]:
+                        counts['deferred_source_window']+=1
+                        continue
                     disposition=record['disposition']
                     counts[disposition]+=1
                     if core_eligible(record):
-                        revision_id,created=repo.append_record(scope,record)
-                        membership.append(revision_id)
-                        counts['inserted' if created else 'reused']+=1
+                        pending.append(record)
+                        if len(pending)>=512:
+                            flush()
                     if disposition!='accepted':
                         audit_issues.append({'source_record_id':record['source_record_id'],'source_file':record['source_file'],
                             'disposition':disposition,'payload':canonical_json(record)})
@@ -80,6 +94,7 @@ def load_snapshot(client, coordinator, raw, output, scope, run_id=None, *, kinds
                             'content_hash':digest(record),'payload':canonical_json(record)}
                         with writer_lock(coordinator,client):
                             repo._insert('source_disposition',[row],query_id='disposition-'+digest(row))
+    flush()
     canonical=repo.canonical_records(scope,revision_ids=membership)
     membership_hash=digest(sorted(r['revision_id'] for r in canonical))
     audit_files.sort(key=lambda r:r['source_file'])
