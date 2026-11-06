@@ -1,119 +1,86 @@
 # Smart Greenhouse
 
-Assignment môn **Data Engineering (DE)**: thiết kế hệ thống phân tích dữ liệu nhà kính, từ tiếp nhận và kiểm tra chất lượng đến data warehouse và dashboard hỗ trợ quyết định.
+Assignment môn **Data Engineering**: hệ thống phân tích dữ liệu nhà kính chạy
+local, từ AGC snapshot và sensor replay qua PostgreSQL data warehouse tới
+Streamlit/Plotly dashboard. Sáu nghiệp vụ bao gồm khí hậu, nước, EC/pH, năng
+lượng, thu hoạch và chi phí; [đặc tả](docs/br/) và
+[ma trận bằng chứng](docs/implementation/requirements-matrix.md) mô tả phạm vi.
 
-Project hướng đến ba nhóm người dùng: người vận hành theo dõi điều kiện nhà kính, kỹ sư canh tác phân tích nước và dinh dưỡng, quản lý đánh giá sản lượng, năng lượng và chi phí. Toàn bộ hệ thống được thiết kế để chạy **local**, với **PostgreSQL** là database đầu tiên và khả năng chuyển sang ClickHouse sau khi có kết quả đối soát.
+**Trạng thái:** sáu màn hình BR, simulator/collector/Structured Streaming và
+replay view đã triển khai. [Correctness và phục hồi](docs/evaluation/correctness.md)
+có test và oracle theo BR; [benchmark](docs/evaluation/performance.md) cho thấy
+BR-01 p95 uncached **4.060,81 ms**, chưa đạt mục tiêu 2.000 ms. Sáu walkthrough
+UI tự động đạt, nhưng [đánh giá người dùng](docs/evaluation/usability.md) chưa có
+người tham gia. Kết quả lịch sử, replay và scenario luôn tách scope; giả định diện
+tích và ngưỡng demo có nhãn, không phải khuyến nghị canh tác.
 
-**Bắt đầu:** [Chạy UI demo](#chạy-ui-demo) · [Yêu cầu nghiệp vụ](#yêu-cầu-nghiệp-vụ) · [Kiến trúc](#kiến-trúc-tổng-quan) · [Tài liệu và sơ đồ](#tài-liệu-và-sơ-đồ)
+## Chạy local
 
-## Trạng thái hiện tại
-
-| Hạng mục | Trạng thái |
-|---|---|
-| Sáu business requirements (BR) | Đã có đặc tả, công thức, điều kiện dữ liệu và tiêu chí nghiệm thu |
-| Kiến trúc và schema | Đã có ADR, sơ đồ Mermaid tổng quan và chi tiết |
-| Ứng dụng nước (BR-02) | Chạy được trên publication có water mart; [bằng chứng chức năng](docs/evaluation/br_02.md): 10/10 AC, đối soát raw↔publication AGC, p95 ≪ 2s — basis nước vẫn giả định chưa xác minh |
-| UI demo Streamlit + Plotly | Prototype fixture-only để review giao diện; có bản HTML tương tác offline |
-| PostgreSQL, Spark và MQTT | Có môi trường container và integration tests synthetic; pipeline AGC + water mart đã chạy |
-| Docker Compose | Scaffold batch/sensor/test/tools; app production và pipeline nước chạy qua container, sensor còn là stub |
-| ClickHouse | Phương án chuyển đổi sau MVP, chưa triển khai |
-
-Prototype dashboard chỉ để review giao diện với fixture tổng hợp. Ứng dụng nước đọc publication đã publish; các kết quả chưa trải qua nghiệm thu BR-02 hoàn chỉnh.
-
-## Chạy UI demo
-
-### Bản HTML — không cần cài Python
-
-Sau khi clone hoặc tải repository, mở `prototypes/dashboard/preview.html` bằng trình duyệt. File nhúng sẵn thư viện Plotly, biểu đồ và dữ liệu nên hoạt động offline. Khi xem repository trên GitHub, tải file về để mở; trang xem mã HTML không chạy dashboard trực tiếp.
-
-[File HTML demo](prototypes/dashboard/preview.html) · [Hướng dẫn và source của prototype](prototypes/dashboard/README.md)
-
-Các thao tác có thể thử:
-
-- Chọn một trong ba khoang và hai ngày minh họa.
-- Xem nhiệt độ, CO₂, EC hoặc pH; hover và zoom biểu đồ Plotly.
-- Mở chi tiết các đợt ngoài dải demo và kiểm tra khoảng thiếu dữ liệu.
-- Thay đổi giá điện để so sánh chi phí baseline với kịch bản.
-- Xuất CSV theo bộ lọc, kèm quality, đơn vị và phiên bản dữ liệu.
-
-### Chạy bằng Docker — ứng dụng nước và môi trường scaffold
-
-Host chỉ cần **Docker Engine + Compose v2 trở lên**; không cài Python/Java/Spark/PostgreSQL/Mosquitto trên host. Từ root clone mới:
+Cần Docker Engine và Docker Compose, đủ dung lượng cho image, PostgreSQL và
+snapshot. Lần build đầu tải base image, apt/pip và JDBC; chuẩn bị trước để vận
+hành offline. Không cần cài Python, Java, Spark, PostgreSQL hay tài khoản cloud
+trên host. Sau khi chuẩn bị, thao tác runtime dùng dịch vụ local.
 
 ```bash
 cp .env.example .env
+# Chỉnh GREENHOUSE_DB_PASSWORD và đường dẫn trong .env cho môi trường local.
 docker compose --profile '*' build
-docker compose --profile batch run --rm job
-docker compose --profile test run --rm test-runner
-docker compose --profile batch up -d --wait db app
+docker compose up -d --wait db
+docker compose run --rm job python -m greenhouse migrate
 ```
 
-Mở **http://127.0.0.1:8501**. Service app là **[ứng dụng nước](src/greenhouse/app/README.md)**: bộ lọc publication/khoang/ngày từ published catalog, KPI tưới/drain, biểu đồ ngày, bảng tuần, chi tiết ngày + lineage, xuất CSV/JSON. DB chưa có publication → ứng dụng báo trạng thái trống kèm lệnh; publication thiếu water mart → báo lỗi rõ, không fallback fixture. Lệnh `job` mặc định chỉ chạy `python -m greenhouse setup`: kiểm tra env/mount/DB, không ingest hoặc tạo schema nghiệp vụ. Chạy lại setup không sửa import/raw.
+`.env` không được commit. Với DB volume đã tồn tại, đổi password trong `.env`
+không tự đổi password trong PostgreSQL. Dừng dịch vụ bằng
+`docker compose --profile '*' down` (giữ named volumes). Xem
+[backup và khôi phục](docs/implementation/backup-restore.md) trước khi di chuyển
+hoặc thay đổi dữ liệu.
 
-`.env` bị Git ignore; giá trị password trong `.env.example` chỉ là mẫu local. Compose báo lỗi nếu thiếu `GREENHOUSE_DB_PASSWORD`. Có thể đổi cổng app và đường dẫn archive trong `.env`; mặc định nguồn nhập là `data/import/` (read-only), raw `data/raw/` (read-only khi xử lý), output nằm trong named volume riêng. Không cần dataset để chạy setup/tests/prototype; phần snapshot T05 có lệnh riêng ở dưới.
+### Chuẩn bị AGC và nạp dữ liệu lịch sử
 
-Kiểm tra cấu hình sensor mà không khởi chạy các stub:
+Lấy archive AGC 2nd edition theo [hướng dẫn snapshot](docs/implementation/dataset-snapshot.md),
+đặt bản ZIP đã khóa trong `data/import/`. SHA-256 bắt buộc:
+`c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68`.
+Đường dẫn import/raw có thể đổi trong `.env`; không commit dataset hoặc credential.
+Snapshot kiểm checksum, tạo manifest và không ghi đè snapshot bất biến.
 
 ```bash
-docker compose --profile sensor config --quiet
+docker compose --profile tools run --rm snapshot
+docker compose run --rm job python -m greenhouse run-pipeline --workflow-id first-local-run
+docker compose up -d --wait db app
 ```
 
-`ingest` có [parser/staging và manifest theo run](src/greenhouse/ingestion/README.md). Các lệnh [migrate, load-core, explain-core, run-pipeline, publish, lineage](src/greenhouse/db/README.md) dựng core PostgreSQL, chạy lại có recovery và publish membership/quality/basis cùng water mart. [Query contracts và service BR-02](src/greenhouse/queries/README.md) đọc published Resources qua PostgreSQL adapter, có sealed water mart, query ngày/ISO week/vụ, pure summary oracle và DTO dùng chung; [ứng dụng nước](src/greenhouse/app/README.md) và [catalog](src/greenhouse/app/README.md#chạy) tái dùng đúng service/DTO đó, không nhúng SQL vào UI. `transform` là alias của `run-pipeline`, chạy water mart hook trong publish transaction. `simulate`, `collect` và `stream` thực hiện replay sensor local qua outbox, MQTT, spool, Spark và publication PostgreSQL. Các tham số replay và checkpoint phải được cấu hình tường minh; xem [hướng dẫn sensor](src/greenhouse/sensor/README.md). Live view tách riêng historical và replay; nghiệm thu fault matrix vẫn thuộc T36.
+Mở **http://127.0.0.1:8501**. Chọn publication, khoang/vụ và khoảng ngày;
+chuyển giữa sáu BR, tổng quan và chất lượng bằng thanh bên. Nếu chưa có
+publication thì app báo dữ liệu trống, không tự tạo fixture. Lệnh `setup` mặc
+định chỉ kiểm tra môi trường, không nạp dữ liệu. Xem [ứng dụng](src/greenhouse/app/README.md)
+và [pipeline](src/greenhouse/db/README.md) để hiểu rule, basis, lineage và export.
 
-Tạo lại HTML bằng image UI, mặc định xuất vào `data/output/preview/preview.html` bị ignore:
+### Sensor replay và kiểm thử
+
+Simulator phát lại Climate qua MQTT, collector lưu spool trước ACK và Spark
+công bố replay trong scope riêng. [Hướng dẫn sensor](src/greenhouse/sensor/README.md)
+mô tả simulator, collector, stream ID, checkpoint, scope và resume; không gộp
+replay với publication lịch sử. [Bằng chứng replay](docs/evaluation/sensor-replay.md)
+bao gồm duplicate/conflict/late và restart dịch vụ test riêng.
 
 ```bash
-docker compose --profile tools run --rm preview-build
+./scripts/test_local.sh           # backend, UI/export, sensor fault & recovery
+./scripts/test_effectiveness.sh   # sáu walkthrough UI tự động, không phải test người thật
 ```
 
-Khi chủ đích cập nhật artifact tracked `prototypes/dashboard/preview.html`:
-
-```bash
-GREENHOUSE_PREVIEW_PATH=./prototypes/dashboard docker compose --profile tools run --rm preview-build
-```
-
-Dừng dịch vụ và giữ volumes bằng `docker compose --profile '*' down`. Chỉ dùng lệnh dưới khi muốn **xóa toàn bộ named volumes của project này**, gồm PostgreSQL, output và trạng thái sensor; bind mounts import/raw không bị xóa:
-
-```bash
-docker compose --profile '*' down -v
-```
-
-Chi tiết [service/profile/port/volume, resource limits, lệnh kiểm tra và giới hạn](docs/implementation/local-environment.md). Môi trường và tests chỉ chứng minh hạ tầng scaffold; chưa nghiệm thu sáu BR.
+Test tạo database fixture `test_` và container sensor riêng; log trong `tmp/`.
+Thời gian AppTest không phải thời gian thao tác người dùng. Có thể mở
+[prototype HTML](prototypes/dashboard/preview.html) offline; đây là fixture
+review giao diện, khác app production.
 
 ## Dữ liệu và phạm vi
 
-Nguồn dữ liệu đã khóa là **Autonomous Greenhouse Challenge, 2nd edition (2019–2020)**: dữ liệu lịch sử trồng cà chua trong các khoang nhà kính, gồm điều kiện khí hậu, tưới và drain, tài nguyên tiêu thụ, thu hoạch và các nguồn đo bổ sung. Bối cảnh và phân tích nguồn được ghi trong [tài liệu phân tích dataset](docs/ref/SmartGreenhouse_Case_Analysis.md).
-
-Ba loại dữ liệu chính có grain khác nhau:
-
-| Nguồn | Grain sử dụng | Mục đích |
-|---|---|---|
-| `GreenhouseClimate.csv` | Khoang/vụ × slot 5 phút | Khí hậu, setpoint và EC/pH drain |
-| `Resources.csv` | Khoang/vụ × ngày | Tưới, drain, nhiệt và điện |
-| `Production.csv` | Bản ghi thu hoạch | Sản lượng A/B, tỷ lệ và lũy kế |
-
-Sensor simulator sẽ phát lại Climate qua MQTT với tốc độ điều chỉnh được, bổ sung tình huống trùng, trễ, thiếu và lỗi dữ liệu để kiểm chứng pipeline. Resources và Production vẫn giữ grain nguồn. Dữ liệu lịch sử, replay và fault injection có scope riêng để tránh cộng trùng vào KPI.
-
-Demo giao diện hiện dùng **fixture tổng hợp**, chưa đọc dataset này. Các ngưỡng và basis diện tích trong demo là giả định có nhãn; không được diễn giải thành tiêu chuẩn canh tác hoặc kết quả thực tế.
-
-## Chuẩn bị snapshot AGC
-
-Nguồn ZIP đã khóa SHA-256 `c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68` (12,793,984 byte). Đặt ZIP trong `data/import/`, hoặc cấu hình `GREENHOUSE_IMPORT_PATH` trỏ tới thư mục chứa bản copy ZIP local. Import luôn read-only; bản giải nén thủ công không phải snapshot.
-
-```bash
-docker compose -p smart-greenhouse --profile tools build snapshot
-docker compose -p smart-greenhouse --profile tools run --rm snapshot
-```
-
-Nhánh tải ẩn danh (GET, không token) có network setup riêng:
-
-```bash
-docker compose -p smart-greenhouse --profile tools run --rm dataset-download
-```
-
-Cả hai lệnh tự kiểm fixture synthetic và checksum trước khi công bố snapshot. Raw mặc định ở `data/raw/agc-2nd-2019/<sha256>/`; chỉ snapshot writer được ghi raw, job/stream vẫn read-only. Chạy lại xác minh rồi báo already-exists, không ghi đè. Checksum sai giữ bằng chứng và thoát khác 0.
-
-[Inventory đo từ snapshot](docs/implementation/data-inventory.md): 45 file (43 CSV + 2 PDF), 622,899 dòng CSV. [Lệnh inventory, fixture × AC và giới hạn](docs/implementation/dataset-snapshot.md). [Ingest](src/greenhouse/ingestion/README.md) đọc nguồn vào staging JSONL gzip có lineage và manifest; đã có loader candidate core/quality riêng sau migrate; chưa có publication hoặc KPI nghiệm thu. Không commit dataset.
+AGC 2nd edition (2019–2020) chứa lịch sử nhà kính cà chua: `GreenhouseClimate.csv`
+ở grain khoang × slot 5 phút, `Resources.csv` ở grain khoang × ngày và
+`Production.csv` theo record thu hoạch. Weather và nguồn bổ sung không được tự
+trộn vào KPI. Thiếu dữ liệu, NULL, zero, partial và chất lượng theo measure được
+phân biệt; source timestamp chưa được gắn timezone suy đoán. Đọc
+[quyết định dữ liệu](docs/implementation/data-decisions.md) trước khi diễn giải.
 
 ## Yêu cầu nghiệp vụ
 
@@ -128,7 +95,7 @@ Cả hai lệnh tự kiểm fixture synthetic và checksum trước khi công b�
 
 Mỗi BR có quy tắc quality, missing data, đơn vị, mẫu số và tiêu chí đối soát. Giá trị `0`, `NULL`, kết quả partial và chưa đủ điều kiện tính được phân biệt rõ. Tính năng sensor replay mở rộng BR-01/03, không thay thế các yêu cầu phân tích lịch sử.
 
-[Ma trận truy vết yêu cầu](docs/implementation/requirements-matrix.md) nối sáu BR với nguồn/cột, biến đổi, màn hình, AC và bằng chứng dự kiến; đồng thời phân biệt BR hiện hành với mã BR trong presentation cũ. Các BR hiện đều chưa nghiệm thu.
+[Ma trận truy vết yêu cầu](docs/implementation/requirements-matrix.md) nối sáu BR với nguồn/cột, biến đổi, màn hình, AC và bằng chứng thực tế và các giới hạn còn lại; đồng thời phân biệt BR hiện hành với mã BR trong presentation cũ.
 
 ## Tech stack
 
@@ -141,13 +108,13 @@ Mỗi BR có quy tắc quality, missing data, đơn vị, mẫu số và tiêu c
 | Data warehouse | PostgreSQL | Staging, core, marts, metadata và cấu hình có version |
 | Dashboard | Streamlit + Plotly | Bộ lọc, biểu đồ, drill-down, scenario và export |
 | Đóng gói | Docker Compose | Processing, UI, sensor images; profiles và volumes local |
-| Kiểm thử | pytest; SQL assertions, contract/fault tests dự kiến | Spike integration hiện có; correctness BR, phục hồi và đối soát batch–streaming sẽ triển khai tiếp |
+| Kiểm thử | pytest; SQL assertions, contract/fault tests | Kiểm tra BR, publication, export và phục hồi sensor |
 
-UI prototype và spike synthetic có phạm vi riêng; chưa có pipeline AGC/BR hoàn chỉnh. Quyết định kiến trúc nằm trong [ADR-001](docs/adr/001-local-deployment-stack.md), phiên bản và bằng chứng spike trong [ADR-002](docs/adr/002-container-stack-compatibility.md).
+Prototype dùng fixture riêng; app production đọc publication đã công bố. Quyết định kiến trúc nằm trong [ADR-001](docs/adr/001-local-deployment-stack.md), phiên bản và bằng chứng spike trong [ADR-002](docs/adr/002-container-stack-compatibility.md).
 
 ## Kiến trúc tổng quan
 
-**Thiết kế đích**, chưa phải sơ đồ một hệ thống đã triển khai đầy đủ. Kiến trúc Hybrid giữ raw, chuẩn hóa dữ liệu trong core rồi tạo dimensional marts phục vụ các BR.
+Kiến trúc Hybrid giữ raw, chuẩn hóa dữ liệu trong core rồi tạo dimensional marts phục vụ các BR.
 
 ```mermaid
 flowchart TB
@@ -242,7 +209,7 @@ Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên c�
 ├── docker/                         # Processing / UI / sensor images và Mosquitto config
 ├── requirements*.lock              # Dependency closure từng image, pin chính xác
 ├── src/greenhouse/                 # Package, CLI, config và diagnostic probes
-│   └── app/                        # Ứng dụng nước production (Streamlit) + catalog + export
+│   └── app/                        # Sáu BR, replay, catalog và export (Streamlit)
 ├── tests/                          # Unit/integration tests, tests/ui (AppTest) và fixture synthetic
 ├── config/                         # Quy ước cấu hình
 ├── scripts/                        # Quy ước wrapper Compose
@@ -252,7 +219,7 @@ Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên c�
 │   ├── adr/                       # Quyết định kiến trúc
 │   ├── architecture/              # Mermaid diagrams và thiết kế chi tiết
 │   ├── br/                        # Sáu đặc tả nghiệp vụ
-│   ├── implementation/            # Ma trận truy vết yêu cầu và bằng chứng dự kiến
+│   ├── implementation/            # Ma trận truy vết yêu cầu và bằng chứng
 │   └── ref/                       # Tài liệu nghiên cứu và tham khảo
 └── prototypes/dashboard/
     ├── app.py                     # Ứng dụng Streamlit
@@ -264,12 +231,9 @@ Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên c�
     └── README.md
 ```
 
-## Hướng triển khai tiếp theo
+## Giới hạn và công việc còn lại
 
-1. Dựng môi trường local, snapshot, schema PostgreSQL và query contracts.
-2. Hoàn thiện một luồng nguồn → mart → dashboard → đối soát, bắt đầu với BR-02: ứng dụng nước đã chạy; còn nghiệm thu BR-02 và bằng chứng hiệu năng.
-3. Mở rộng sáu BR và đường sensor replay, kiểm tra duplicate, late data và restart.
-4. Đánh giá correctness, performance và hiệu quả khai thác; so Hybrid/Kimball trên cùng engine.
-5. Sau MVP, cân nhắc ClickHouse bằng backfill và benchmark trên cùng workload; giữ đường quay lại đã kiểm chứng.
-
-Khả năng chuyển database dựa trên raw độc lập, định danh nguồn ổn định, transforms dùng chung và adapter truy vấn. Không triển khai hai database hoặc dual-write trong phạm vi đầu tiên.
+- Cần thực hiện và ghi nhận đánh giá với người dùng theo [protocol](docs/evaluation/usability.md); không suy ra hiệu quả thực tế từ test tự động.
+- BR-01 uncached chưa đạt mục tiêu p95; kết quả và phương pháp đo được giữ trong [benchmark](docs/evaluation/performance.md).
+- Tiếp tục diễn tập toàn AGC từ môi trường sạch/offline và backup/restore thật; [kết quả chạy lại từng phần](docs/evaluation/local-repro.md). Hoàn thiện báo cáo, slides và video trước khi chốt nộp.
+- ClickHouse chỉ là [phương án tương lai](docs/architecture/09-clickhouse-migration.md), chưa triển khai.

@@ -1,6 +1,6 @@
 # Môi trường local Docker-first
 
-Scaffold T04 và snapshot T05 mở rộng trực tiếp Compose/Dockerfile của [ADR-002](../adr/002-container-stack-compatibility.md). Host chỉ cần Docker Engine + Compose v2 trở lên. Không có Python/Java/Spark trên host trong các lệnh runtime. Snapshot/inventory, database pipeline, simulator, collector và stream replay đều có lệnh local; live replay view đã có; nghiệm thu end-to-end và fault matrix tiếp tục ở T36.
+Hướng dẫn này giữ lại bằng chứng scaffold T04/T05 và các hướng dẫn theo giai đoạn; trạng thái, lệnh và giới hạn hiện hành xem [README](../../readme.md) và [chạy lại local](../evaluation/local-repro.md). Compose/Dockerfile theo [ADR-002](../adr/002-container-stack-compatibility.md). Host chỉ cần Docker Engine + Compose v2 trở lên. Không có Python/Java/Spark trên host trong các lệnh runtime. Snapshot/inventory, database pipeline, simulator, collector và stream replay đều có lệnh local; live replay view và [fault/recovery acceptance](../evaluation/sensor-replay.md) đã có.
 
 ## Clone mới → build → setup → test → prototype
 
@@ -25,12 +25,12 @@ Mở **http://127.0.0.1:8501**. Lệnh setup mặc định của `job` là `pyth
 | Service | Profile | Image / command | Port host | Volumes / mount |
 |---|---|---|---|---|
 | db | Luôn bật khi cần | PostgreSQL 17.10 | Không | `pg_data` → `/var/lib/postgresql/data` |
-| app | Base: batch, sensor | UI / [ứng dụng nước](../../src/greenhouse/app/README.md) (Streamlit) | `127.0.0.1:8501` mặc định | Raw host → `/data/raw:ro` chỉ để xác minh lineage; theme nằm trong image |
+| app | Base: batch, sensor | UI / [ứng dụng sáu BR và replay](../../src/greenhouse/app/README.md) (Streamlit) | `127.0.0.1:8501` mặc định | Raw host → `/data/raw:ro` chỉ để xác minh lineage; theme nằm trong image |
 | job | Base: batch, sensor | Processing / `greenhouse setup` mặc định | Không | Import host → `/data/import:ro`; raw host → `/data/raw:ro`; `outputs` → `/data/output` |
 | broker | sensor, test | Mosquitto 2.0.22 | Không | Config read-only; `broker_state` → `/mosquitto/data` |
-| simulator | sensor | Sensor / `greenhouse simulate` (stub) | Không | Raw host read-only; `simulator_outbox` → `/data/outbox` |
-| collector | sensor | Sensor / `greenhouse collect` (stub) | Không | `collector_spool` → `/data/spool`; `raw_ready` → `/data/ready` |
-| stream-worker | sensor | Processing / `greenhouse stream` (stub) | Không | `raw_ready` read-only; `spark_checkpoints`; raw host read-only; `outputs` |
+| simulator | sensor | Sensor / `greenhouse simulate` | Không | Raw host read-only; `simulator_outbox` → `/data/outbox` |
+| collector | sensor | Sensor / `greenhouse collect` | Không | `collector_spool` → `/data/spool`; `raw_ready` → `/data/ready` |
+| stream-worker | sensor | Processing / `greenhouse stream` | Không | `raw_ready` read-only; `spark_checkpoints`; raw host read-only; `outputs` |
 | test-runner | test | Processing / `greenhouse test -q -s` | Không | Không mount dữ liệu host; fixture synthetic đóng gói trong image |
 | ui-test | test | UI / `pytest tests/ui` (AppTest + service/export) | Không | Không mount dữ liệu host; database fixture `test_ui_*` tự drop; dùng budget `GREENHOUSE_UI_CPUS`/`GREENHOUSE_UI_MEMORY` (mặc định như app) |
 | snapshot | tools | Processing / `greenhouse snapshot` | Không | Import host RO; raw host RW; outputs |
@@ -66,7 +66,7 @@ Giữ nguyên baseline T02 ở ADR-002: Python 3.12.12, Temurin JRE 17.0.17+10, 
 |---|---|---|
 | `smart-greenhouse-processing:local` | [Processing Dockerfile](../../docker/processing/Dockerfile), [requirements.lock](../../requirements.lock) | Job/stream-worker/test-runner dùng cùng JRE, PySpark và JDBC đã kiểm SHA-256 lúc build; không tải Maven/Ivy khi chạy |
 | `smart-greenhouse-ui:local` | [UI Dockerfile](../../docker/ui/Dockerfile), [requirements-ui.lock](../../requirements-ui.lock) | App/prototype và export HTML dùng cùng Streamlit/Plotly; khóa đủ 35 dependencies Linux/CPython 3.12, `pip check` khi build |
-| `smart-greenhouse-sensor:local` | [Sensor Dockerfile](../../docker/sensor/Dockerfile), [requirements-sensor.lock](../../requirements-sensor.lock) | Simulator/collector dùng chung Python + MQTT client, không cần mang JVM/PySpark vào từng container; commands hiện là stub |
+| `smart-greenhouse-sensor:local` | [Sensor Dockerfile](../../docker/sensor/Dockerfile), [requirements-sensor.lock](../../requirements-sensor.lock) | Simulator/collector dùng chung Python + MQTT client, không cần mang JVM/PySpark vào từng container; commands đã được triển khai |
 
 Build tools cũng pin pip 25.2, setuptools 80.9.0, wheel 0.45.1. Khóa phiên bản không phải bit-for-bit reproducibility; lock chưa pin hash mọi Python artifact và apt phụ thuộc repository. Dependency closure UI được resolve trong container Linux arm64 rồi pin; chưa kiểm chứng runtime amd64.
 
@@ -97,7 +97,7 @@ docker compose --profile test run --rm test-runner
 | collect | Nhận MQTT và ghi spool/raw-ready bền vững | Xem [sensor](../../src/greenhouse/sensor/README.md) |
 | stream | Đọc raw-ready bằng Spark, ghi PostgreSQL và publication replay | Cần scope và checkpoint tường minh; [hướng dẫn](../../src/greenhouse/sensor/README.md) |
 
-Profile sensor có simulator, collector và stream worker với volumes tách biệt. Durable spool/ACK và stream retry có kiểm thử riêng; fault matrix và đối soát batch–streaming đầy đủ vẫn thuộc T36.
+Profile sensor có simulator, collector và stream worker với volumes tách biệt. Durable spool/ACK và stream retry có kiểm thử riêng; fault matrix và đối soát batch–streaming xem [báo cáo sensor](../evaluation/sensor-replay.md).
 
 ## Tạo HTML và dừng dịch vụ
 

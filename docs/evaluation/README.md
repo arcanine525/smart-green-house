@@ -13,6 +13,8 @@ Mỗi báo cáo ghi phạm vi, dữ liệu, điều kiện chạy và giới h�
 
 ## Kiến trúc và hiệu năng
 
+- [Chạy lại local](local-repro.md): smoke test network nội bộ, backup synthetic và những bước chưa xác minh.
+
 - [Kịch bản khai thác](usability.md): sáu walkthrough tự động và protocol đánh giá người dùng còn cần thực hiện.
 - [Correctness và phục hồi](correctness.md): lệnh test local, oracle từng BR, publication pin và fault/recovery.
 

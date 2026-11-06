@@ -1,5 +1,7 @@
 # Scripts
 
+- `test_backup_restore.sh`: kiểm tra dump/restore PostgreSQL và sao chép raw/volume
+  synthetic trên project Docker tạm; không thay thế diễn tập phục hồi AGC thật.
 - `test_effectiveness.sh`: chạy sáu walkthrough UI trên fixture với JUnit XML;
   thời gian đo là thời gian test, không phải thời gian người dùng.
 - `test_local.sh`: build image, chạy toàn bộ unit/contract/recovery, UI/export
