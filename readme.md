@@ -43,9 +43,16 @@ Lấy archive AGC 2nd edition theo [hướng dẫn snapshot](docs/implementation
 Đường dẫn import/raw có thể đổi trong `.env`; không commit dataset hoặc credential.
 Snapshot kiểm checksum, tạo manifest và không ghi đè snapshot bất biến.
 
+Lệnh biểu giá đăng ký baseline lịch sử từ `Economics.pdf` cho BR-06: nhiệt
+0,0083 EUR/MJ, điện cao 0,08 EUR/kWh và điện thấp 0,04 EUR/kWh trong khoảng
+hiệu lực đã ghi trong nguồn. Đây là giá tham chiếu, không phải hóa đơn thực.
+Chạy lệnh không có `--apply` để kiểm tra trước; lệnh chỉ chấp nhận scope AGC
+lịch sử đã công bố energy mart và không thay biểu giá baseline khác đã có.
+
 ```bash
 docker compose --profile tools run --rm snapshot
 docker compose run --rm job python -m greenhouse run-pipeline --workflow-id first-local-run
+docker compose run --rm job python -m greenhouse register-agc-tariff --apply
 docker compose up -d --wait db app
 ```
 

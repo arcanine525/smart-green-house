@@ -36,8 +36,11 @@ def setup_environment(settings):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="python -m greenhouse")
-    parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", "migrate", "load-core", "explain-core", "run-pipeline", "transform", "publish", "correct-core", "lineage", "simulate", "collect", "stream", *PENDING])
+    parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", "migrate", "load-core", "explain-core", "run-pipeline", "transform", "publish", "correct-core", "lineage", "simulate", "collect", "stream", "register-agc-tariff", *PENDING])
     arguments, rest = parser.parse_known_args(argv)
+    if arguments.command == "register-agc-tariff":
+        from greenhouse.db.reference_tariff import main as tariff_main
+        return tariff_main(rest)
     if arguments.command in PENDING:
         print(f"{arguments.command}: chưa hiện thực — thuộc task sau: {PENDING[arguments.command]}", file=sys.stderr)
         return 2
