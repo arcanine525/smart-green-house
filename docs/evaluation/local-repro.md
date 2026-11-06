@@ -26,3 +26,21 @@ khôi phục toàn bộ trạng thái sensor thực. Những phần đó vẫn c
 đủ dung lượng, lưu nguyên kết quả pass/fail và version. Mạng `internal` chỉ là
 bằng chứng cách ly của các container trong lượt thử; không phải chứng minh toàn
 bộ máy bị ngắt Internet.
+
+## Lượt smoke offline synthetic bổ sung
+
+Lúc 16:05 UTC ngày 2026-11-06, sau khi build và chuẩn bị image, chạy
+`./scripts/test_offline_smoke.sh` từ source HEAD
+`03b2a6f4c8c8936b137b461a84e7c5c69cec206b` (script điều phối mới chưa commit
+lúc chạy). Hai network Compose đều `internal=true`; application health `ok`;
+**21 test batch/contract pass**, trong đó test Spark batch và resume dùng JVM/Spark
+thật; **97 UI test pass**; **19 sensor/fault/recovery test pass**. Sensor dùng
+broker/PostgreSQL test riêng và thử restart thật. Kết quả:
+[JSON](assets/local-repro/offline-smoke-20261106.json). Tất cả volume/project
+do lượt thử tạo được dọn; dữ liệu project gốc không bị xóa.
+
+Script từ chối bắt đầu nếu image chưa có hoặc tên project/volume đã tồn tại;
+không build/pull trong smoke. Lệnh được chạy sau bước chuẩn bị image; network của
+container là internal nhưng host không bị ngắt Internet. Các bài dùng fixture
+synthetic; đây không chứng minh full AGC trên clone mới hoặc restore checkpoint
+thật. Những bước đó vẫn cần đủ dung lượng và diễn tập riêng.

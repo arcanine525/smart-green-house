@@ -1,5 +1,7 @@
 # Scripts
 
+- `test_offline_smoke.sh`: chạy batch Spark, UI và sensor synthetic trên project
+  và network internal riêng, không pull image; cần chuẩn bị image trước.
 - `record_usability.py`: ghi phiên quan sát thật từng BR vào JSON local;
   chuẩn bị câu hỏi, đáp án và context theo [protocol](../docs/evaluation/usability.md).
 - `check_submission.sh`: kiểm cấu trúc PDF/video và Compose theo Group ID;

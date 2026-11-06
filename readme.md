@@ -65,6 +65,7 @@ bao gồm duplicate/conflict/late và restart dịch vụ test riêng.
 
 ```bash
 ./scripts/test_local.sh           # backend, UI/export, sensor fault & recovery
+./scripts/test_offline_smoke.sh   # fixture: Spark + UI + sensor trên network internal
 ./scripts/test_effectiveness.sh   # sáu walkthrough UI tự động, không phải test người thật
 ```
 
