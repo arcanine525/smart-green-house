@@ -17,13 +17,21 @@
     "rows": 2,
     "irrigation_l_m2": "9.36",
     "drain_l_m2": "3.89",
-    "paired_ratio_percent": "41.55982905982905982905982906"
+    "paired_ratio_percent": "41.55982905982905982905982906",
+    "assumed_area_m2": "62.5",
+    "energy_kwh": "308.0781250416666666666666667",
+    "historical_cost_eur": "17.600067710000",
+    "tariff": {
+      "heat_eur_mj": "0.0083",
+      "high_eur_kwh": "0.08",
+      "low_eur_kwh": "0.04"
+    }
   },
-  "total_elapsed_seconds": 6.956,
+  "total_elapsed_seconds": 6.523,
   "screens": [
     {
       "screen": "climate",
-      "elapsed_seconds": 3.501,
+      "elapsed_seconds": 3.056,
       "metrics": {
         "Nhiệt độ out (giờ quan sát được)": "NULL",
         "Nhiệt độ coverage": "0,00 %",
@@ -37,7 +45,7 @@
     },
     {
       "screen": "water",
-      "elapsed_seconds": 0.033,
+      "elapsed_seconds": 0.039,
       "metrics": {
         "Irrigation observed": "9,36 L/m²",
         "Drain observed": "3,89 L/m²",
@@ -48,7 +56,7 @@
     },
     {
       "screen": "drain",
-      "elapsed_seconds": 2.159,
+      "elapsed_seconds": 2.178,
       "metrics": {
         "EC ngoài dải (phút)": "NULL",
         "EC ngoài dải %": "NULL",
@@ -69,7 +77,7 @@
     },
     {
       "screen": "energy",
-      "elapsed_seconds": 0.207,
+      "elapsed_seconds": 0.194,
       "metrics": {
         "Năng lượng (kWh)": "308.078",
         "Sản lượng A (kg)": "0.000",
@@ -81,7 +89,7 @@
     },
     {
       "screen": "harvest",
-      "elapsed_seconds": 0.038,
+      "elapsed_seconds": 0.039,
       "metrics": {
         "A observed": "0,00 kg/m²",
         "B observed": "0,00 kg/m²",
@@ -95,7 +103,7 @@
     },
     {
       "screen": "cost",
-      "elapsed_seconds": 0.063,
+      "elapsed_seconds": 0.067,
       "metrics": {
         "Tổng chi phí (EUR)": "17.60 EUR",
         "Chi phí trên diện tích (EUR/m²)": "0.28 EUR/m²",
@@ -106,13 +114,13 @@
     },
     {
       "screen": "overview",
-      "elapsed_seconds": 0.019,
+      "elapsed_seconds": 0.016,
       "metrics": {},
       "download_count": 0
     },
     {
       "screen": "quality",
-      "elapsed_seconds": 0.04,
+      "elapsed_seconds": 0.036,
       "metrics": {},
       "download_count": 0
     }

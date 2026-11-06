@@ -55,6 +55,16 @@ if len(source_rows) != 2:
 irrigation = sum((Decimal(row['Irr']) for row in source_rows), Decimal(0))
 drain = sum((Decimal(row['Drain']) for row in source_rows), Decimal(0))
 ratio = 100 * drain / irrigation
+# The documented benchmark assumption and historical rates are explicit;
+# they are not claims about verified greenhouse area or actual invoices.
+area_m2 = Decimal('62.5')
+energy_kwh = sum(((Decimal(row['Heat_cons']) / Decimal('3.6') +
+                   Decimal(row['ElecHigh']) + Decimal(row['ElecLow'])) * area_m2
+                  for row in source_rows), Decimal(0))
+cost_eur = sum(((Decimal(row['Heat_cons']) * Decimal('0.0083') +
+                 Decimal(row['ElecHigh']) * Decimal('0.08') +
+                 Decimal(row['ElecLow']) * Decimal('0.04')) * area_m2
+                for row in source_rows), Decimal(0))
 
 def ui_number(value):
     return str(value.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)).replace('.', ',')
@@ -99,6 +109,10 @@ with importlib.resources.as_file(importlib.resources.files('greenhouse.app') / '
                 raise AssertionError('Cross-screen irrigation differs from raw oracle')
             if metrics.get('Drain nguồn (L/m², ngày tính một lần)') != ui_number(drain):
                 raise AssertionError('Cross-screen drain differs from raw oracle')
+        if name == 'energy' and metrics.get('Năng lượng (kWh)') != f'{energy_kwh:,.3f}':
+            raise AssertionError('Energy differs from independent raw oracle')
+        if name == 'cost' and metrics.get('Tổng chi phí (EUR)') != f'{cost_eur:,.2f} EUR':
+            raise AssertionError('Historical tariff cost differs from independent raw oracle')
         evidence.append({'screen': name, 'elapsed_seconds': round(perf_counter() - start, 3),
                          'metrics': metrics,
                          'download_count': len(app.download_button)})
@@ -109,7 +123,10 @@ with importlib.resources.as_file(importlib.resources.files('greenhouse.app') / '
               'window_inclusive': [day.isoformat() for day in window],
               'raw_water_oracle': {'source': relative, 'sha256': expected_hash, 'rows': len(source_rows),
                                    'irrigation_l_m2': str(irrigation), 'drain_l_m2': str(drain),
-                                   'paired_ratio_percent': str(ratio)},
+                                   'paired_ratio_percent': str(ratio), 'assumed_area_m2': str(area_m2),
+                                   'energy_kwh': str(energy_kwh), 'historical_cost_eur': str(cost_eur),
+                                   'tariff': {'heat_eur_mj': '0.0083', 'high_eur_kwh': '0.08',
+                                              'low_eur_kwh': '0.04'}},
               'total_elapsed_seconds': round(perf_counter() - started, 3),
               'screens': evidence}
     output.parent.mkdir(parents=True, exist_ok=True)

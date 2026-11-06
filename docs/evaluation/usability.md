@@ -63,15 +63,20 @@ publication `df3e4bcbacab45a5b86fc37d2f53c00a`, snapshot AGC khóa và khoang
 Automatoes. Nó chuyển lần lượt qua sáu BR, tổng quan và chất lượng với cùng hai
 ngày 02–03/03/2020; mỗi màn hình phải giữ đúng publication, khoang và cửa sổ,
 không có lỗi UI. Toàn bộ tám màn hình đã qua. Thời gian của máy trong lượt này
-là **6,956 giây**, không phải thời gian thao tác của người dùng.
+là **6,523 giây**, không phải thời gian thao tác của người dùng.
 
 Độc lập với service, script kiểm SHA-256 của `Automatoes/Resources.csv` theo
 manifest, đọc hai dòng CSV gốc bằng `csv`/`Decimal`, tính Irr **9,36 L/m²**,
 Drain **3,89 L/m²**, tỷ lệ paired **41,559829…%**. Màn hình nước hiển thị
 **9,36 / 3,89 / 41,56% / 100% coverage** và màn hình drain hiển thị cùng tổng
-nước theo ngày; assertion đã kiểm các giá trị. [Kết quả và toàn bộ metrics](assets/effectiveness/agc-walkthrough-20261106.json)
-ghi đầy đủ scope/version/cửa sổ. Các màn hình còn lại được kiểm điều hướng và
-ngữ cảnh trong lượt này, không được coi là có oracle độc lập mới cho mọi KPI.
+nước theo ngày; assertion đã kiểm các giá trị. Cùng hai dòng raw, oracle
+chuyển đổi nhiệt MJ/3,6, cộng điện và nhân diện tích giả định 62,5 m² cho
+**308,078125… kWh**; nhân giá lịch sử nhiệt **0,0083 EUR/MJ**, điện cao/thấp
+**0,08/0,04 EUR/kWh** cho **17,60006771 EUR**. UI hiển thị lần lượt
+**308,078 kWh** và **17,60 EUR**; cả hai đều được assertion kiểm tra. Diện tích
+và giá là cơ sở tính được công bố, không phải diện tích đã xác minh hay hóa đơn
+thực. [Kết quả và toàn bộ metrics](assets/effectiveness/agc-walkthrough-20261106.json)
+ghi đầy đủ scope/version/cửa sổ. Các KPI khác được kiểm điều hướng và ngữ cảnh trong lượt này, không được coi là có oracle độc lập mới.
 Chưa chọn rule climate/drain nên coverage đánh giá là 0%; đây không phải khẳng
 định dữ liệu nguồn thiếu. UI có giải thích riêng điều này.
 
