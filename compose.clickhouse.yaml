@@ -1,0 +1,55 @@
+# Isolated candidate stack. Existing PostgreSQL deployment is unchanged.
+# Always supply a distinct project name when rehearsing the migration.
+name: greenhouse-clickhouse
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.8@sha256:0152dd511befe6a2c2ef53e930726179669b08116da78500b37c51c96ff5ee77
+    environment:
+      CLICKHOUSE_DB: ${CH_DATABASE:-greenhouse}
+      CLICKHOUSE_USER: ${CH_USER:-greenhouse}
+      CLICKHOUSE_PASSWORD: ${CH_PASSWORD:-change-me-clickhouse-local}
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: '1'
+    ports:
+      - '127.0.0.1:${GREENHOUSE_CH_HTTP_PORT:-18123}:8123'
+    volumes:
+      - ch_data:/var/lib/clickhouse
+      - ch_logs:/var/log/clickhouse-server
+      - ./docker/clickhouse/local.xml:/etc/clickhouse-server/config.d/local.xml:ro
+    networks: [backend, frontend]
+    healthcheck:
+      test: [CMD-SHELL, 'clickhouse-client --user "$${CLICKHOUSE_USER}" --password "$${CLICKHOUSE_PASSWORD}" --query "SELECT 1" >/dev/null']
+      interval: 3s
+      timeout: 3s
+      retries: 40
+      start_period: 20s
+    cpus: ${GREENHOUSE_CH_CPUS:-1}
+    mem_limit: ${GREENHOUSE_CH_MEMORY:-2g}
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+  ch-client:
+    image: greenhouse-clickhouse-client:local
+    build:
+      context: .
+      dockerfile: docker/clickhouse-client/Dockerfile
+    environment:
+      CH_HOST: clickhouse
+      CH_PORT: '8123'
+      CH_DATABASE: ${CH_DATABASE:-greenhouse}
+      CH_USER: ${CH_USER:-greenhouse}
+      CH_PASSWORD: ${CH_PASSWORD:-change-me-clickhouse-local}
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+    networks: [backend]
+    cpus: 0.5
+    mem_limit: 256m
+networks:
+  backend:
+    internal: true
+  frontend:
+    internal: true
+volumes:
+  ch_data:
+  ch_logs:

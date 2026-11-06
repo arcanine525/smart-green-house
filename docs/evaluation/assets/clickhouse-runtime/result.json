@@ -1,0 +1,1 @@
+{"status": "passed", "version": "25.8.33.6", "architecture": "aarch64", "python": "3.12.12", "decimal_exact": true, "persisted_rows_after_restart": 1, "container_egress_connect_ex": 101, "both_networks_internal": true}

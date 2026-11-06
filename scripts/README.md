@@ -32,3 +32,5 @@
 
 Các lệnh runtime khác dùng trực tiếp `docker compose`; không cần cài Python,
 Java hoặc Spark trên host.
+
+- `test_clickhouse_stack.sh`: smoke client, persistence và runtime internal trên project ClickHouse mới; chuẩn bị image theo [hướng dẫn](../docs/implementation/clickhouse-local-environment.md).

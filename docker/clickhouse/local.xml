@@ -1,0 +1,14 @@
+<clickhouse>
+    <!-- Bounded local demo; tune and record separately for benchmarks. -->
+    <max_server_memory_usage>1610612736</max_server_memory_usage>
+    <background_schedule_pool_size>16</background_schedule_pool_size>
+    <background_buffer_flush_schedule_pool_size>4</background_buffer_flush_schedule_pool_size>
+    <background_message_broker_schedule_pool_size>4</background_message_broker_schedule_pool_size>
+    <background_distributed_schedule_pool_size>4</background_distributed_schedule_pool_size>
+    <profiles>
+        <default>
+            <max_threads>2</max_threads>
+            <max_memory_usage>805306368</max_memory_usage>
+        </default>
+    </profiles>
+</clickhouse>

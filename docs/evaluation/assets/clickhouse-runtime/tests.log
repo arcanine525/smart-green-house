@@ -1,0 +1,11 @@
+ Container gh-ch-smoke-20261106191615-21236-ch-client-run-e53417bb2af4 Creating 
+ Container gh-ch-smoke-20261106191615-21236-ch-client-run-e53417bb2af4 Created 
+test_failed_write_has_no_retry_or_secret_in_error (test_client.ClientTest.test_failed_write_has_no_retry_or_secret_in_error) ... ok
+test_parameters_are_transmitted_separately_from_sql (test_client.ClientTest.test_parameters_are_transmitted_separately_from_sql) ... ok
+test_rejects_url_injection_and_empty_credentials (test_client.ClientTest.test_rejects_url_injection_and_empty_credentials) ... ok
+test_settings_need_no_postgres_credentials (test_client.ClientTest.test_settings_need_no_postgres_credentials) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK

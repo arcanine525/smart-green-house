@@ -1,0 +1,22 @@
+{
+  "source_head": "82e72fe",
+  "candidate_code": "Uncommitted T40 runtime implementation; no BR adapter migration claimed",
+  "image": "clickhouse/clickhouse-server:25.8@sha256:0152dd511befe6a2c2ef53e930726179669b08116da78500b37c51c96ff5ee77",
+  "runtime": "CPython 3.12.12 standard-library synchronous HTTP client",
+  "architecture_tested": "arm64",
+  "amd64": "image manifest only; not executed",
+  "scope": "connection, exact Decimal numeric round-trip, parameter boundary, redacted errors/no automatic retry, persistence after restart, internal networks and egress denial",
+  "tests_passed": 4,
+  "limits": "Not full AGC, six BR, performance, publication or sensor recovery acceptance",
+  "initial_failure": "First smoke compared literal decimal trailing zeros; corrected to exact numeric Decimal equality while requiring JSON decimal strings; first isolated project removed after inspecting evidence",
+  "files": [
+    {
+      "file": "result.json",
+      "sha256": "ff063d3d4a4809673b3b05795999e592b81eb86d8e33dec792c9be3f5f445c4c"
+    },
+    {
+      "file": "tests.log",
+      "sha256": "75f4ceabac4c21dced482665b7fc6d9987d797bddcedee5b16495675c5824522"
+    }
+  ]
+}
