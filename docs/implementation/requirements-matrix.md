@@ -64,3 +64,23 @@ phẩm nộp. Kết quả BR-01 vượt mục tiêu ở benchmark gốc và kế
 phải điều kiện của bản PostgreSQL.
 
 Theo quyết định user ngày 2026-11-07, đánh giá người thật là mở rộng tùy chọn, không chặn T26. Walkthrough tự động chỉ chứng minh luồng và kết quả được kiểm tra, không chứng minh khả năng sử dụng của người thật.
+
+
+## 6. Chốt nghiệm thu chức năng — T27, ngày 2026-11-07
+
+**Đạt trong phạm vi bằng chứng đã công bố** cho sáu BR và sensor extension
+BR-01/03. Main đã đối chiếu các ma trận AC trong báo cáo từng BR, oracle raw,
+kết quả test backend/UI/recovery, benchmark và sáu video Playwright. Danh mục
+artifact cùng SHA-256 và HEAD được review:
+[biên bản máy đọc được](../evaluation/assets/acceptance/review-20261107.json).
+Đây là lượt rà soát bằng chứng hiện có, không phải một lượt chạy mới toàn bộ test.
+
+Không còn lỗi chức năng đã biết chưa xử lý trong các luồng nghiệm thu này.
+BR-01 gốc không đạt p95 được giữ nguyên trong báo cáo; follow-up sau tối ưu đạt
+ở workload đã đo, chưa là SLA. Basis diện tích/timezone chưa xác minh, ngưỡng
+demo, Reference quarantine và giới hạn sensor 30 slot vẫn áp dụng. Walkthrough
+tự động không đo hiểu biết hoặc phản hồi của người thật.
+
+T27 được đóng theo tiêu chí sáu BR/sensor có bằng chứng và giới hạn được mô tả.
+T28 (chạy lại/restore), T29 (tài liệu cuối) và T30 (gói nộp) vẫn có điều kiện
+riêng; nghiệm thu chức năng không đồng nghĩa đã hoàn thành bàn giao toàn project.
