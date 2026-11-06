@@ -14,7 +14,7 @@ compose up -d --wait --no-build --pull never clickhouse > "$root/start.log" 2>&1
 for network in backend frontend; do
   [[ $(docker network inspect "${project}_${network}" --format '{{.Internal}}') == true ]]
 done
-compose run --rm --no-deps --pull never -T --interactive=false ch-client \
+compose run --rm --no-deps --pull never -T --interactive=false -e GREENHOUSE_CH_INTEGRATION=1 ch-client \
   python -m unittest discover -s tests/clickhouse -v > "$root/tests.log" 2>&1
 compose run --rm --no-deps --pull never -T --interactive=false ch-client \
   python -m greenhouse.clickhouse.client smoke > "$root/before.json" 2> "$root/before.log"

@@ -105,3 +105,14 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+def insert_rows(client, table, rows, *, query_id):
+    """Explicit column names + JSONEachRow, exact decimal strings, no auto retry."""
+    if not re.fullmatch(r'[a-z_][a-z0-9_]*', table):
+        raise ValueError('Invalid table name')
+    if not rows:
+        return
+    from greenhouse.clickhouse.encoding import canonical_json
+    client.execute('INSERT INTO ' + table + ' FORMAT JSONEachRow\n' +
+                   '\n'.join(canonical_json(row) for row in rows), query_id=query_id)

@@ -1,0 +1,34 @@
+{
+  "source_head": "370b850",
+  "status": "passed",
+  "scope": "T41 candidate core/ingestion and config storage; no six-BR or complete publication claim",
+  "tests_passed": 14,
+  "real_server": "ClickHouse 25.8.33.6 arm64",
+  "checks": [
+    "DDL idempotent on real server",
+    "CSV source checksums; accepted, duplicate, conflict, quarantine accounting",
+    "rerun preserves revision identity and stored load membership",
+    "latest canonical and explicitly pinned older revision",
+    "conflicting measures rejected before aggregation",
+    "audited corrections, stale previous revision and source time edits rejected",
+    "exact Decimal256 projection and lossless wider Decimal string with NULL projection",
+    "NULL and close boundary retained; source-naive microseconds",
+    "configuration checksum/schema roundtrip and request drift rejection",
+    "separate runtime restart persistence and container egress denial"
+  ],
+  "limits": [
+    "Fixture ingestion only; full historical AGC parity at T38",
+    "Publication/unknown-write/concurrent pipeline/recovery at T42",
+    "Business quality and marts/UI at T43–T48"
+  ],
+  "files": [
+    {
+      "file": "tests.log",
+      "sha256": "c3239d28ad32048c44862a22be5cbf0b7bdcbc629d15f03e13908025b43b0b6b"
+    },
+    {
+      "file": "result.json",
+      "sha256": "ff063d3d4a4809673b3b05795999e592b81eb86d8e33dec792c9be3f5f445c4c"
+    }
+  ]
+}
