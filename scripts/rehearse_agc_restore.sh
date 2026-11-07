@@ -12,7 +12,7 @@ for volume in pg_data outputs broker_state simulator_outbox collector_spool raw_
   if docker volume inspect "${restore_project}_${volume}" >/dev/null 2>&1; then exit 2; fi
 done
 printf '%s\n' "$restore_project" > "$REPRO_ROOT/restore-project.txt"
-export COMPOSE_FILE="$PWD/compose.yaml:$REPRO_ROOT/runtime.yaml"
+export COMPOSE_FILE="$PWD/compose.postgres.yaml:$REPRO_ROOT/runtime.yaml"
 export GREENHOUSE_APP_PORT="${REPRO_APP_PORT:-18573}"
 export GREENHOUSE_UI_MEMORY=1536m GREENHOUSE_APP_MEMORY=1536m
 export GREENHOUSE_UI_CPUS=1 GREENHOUSE_APP_CPUS=1

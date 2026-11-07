@@ -55,6 +55,11 @@ def reconcile(client, root):
         WHERE query_id={id:String} AND type IN ('QueryFinish','ExceptionBeforeStart','ExceptionWhileProcessing')''',{'id':query})
     if not rows:
         raise PendingWrite('Previous write has no terminal query evidence; pending fence retained for explicit recovery')
+    if operation.get('cutover_query'):
+        from greenhouse.clickhouse.cutover_journal import terminal
+        statuses={row['type'] for row in rows}
+        if len(statuses)!=1:raise PendingWrite('Conflicting terminal query evidence; keep the write fence')
+        terminal(root,operation['cutover_query'],next(iter(statuses)),'server query_log reconciliation')
     # Terminal failure may have partial inserts across blocks: semantic manifests
     # still need validation. Clearing the fence does not mark the batch complete.
     _clear(root)
@@ -67,7 +72,11 @@ def execute_write(client, root, sql, *, query_id=None):
     # Unique wire identity per request; never mistake an earlier retry's log
     # entry for terminal evidence of a later request with the same logical key.
     query_id=(query_id or 'warehouse')+'-'+uuid4().hex
-    _save(root,{'format':1,'query_id':query_id,'sql_hash':hashlib.sha256(sql.encode()).hexdigest()})
+    from greenhouse.clickhouse.cutover_journal import before_write,terminal
+    cutover_query=before_write(client,root,query_id,sql)
+    _save(root,{'format':1,'query_id':query_id,'sql_hash':hashlib.sha256(sql.encode()).hexdigest(),
+        'cutover_query':cutover_query})
     result=client.execute(sql,query_id=query_id)
+    if cutover_query:terminal(root,cutover_query,'QueryFinish','synchronous response before acknowledgment')
     _clear(root)
     return result

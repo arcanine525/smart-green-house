@@ -2,7 +2,11 @@
 # Reproducible local correctness and recovery suite. Never resets user data.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# Explicit optional PostgreSQL configuration; the default stack is ClickHouse.
+export COMPOSE_FILE="$PWD/compose.postgres.yaml"
 run_id="$(date -u +%Y%m%dT%H%M%SZ)-${RANDOM}"
+export COMPOSE_PROJECT_NAME="${GREENHOUSE_PG_TEST_PROJECT:-gh-pg-tests-$run_id}"
+export SENSOR_TEST_NETWORK="${COMPOSE_PROJECT_NAME}_backend"
 result_dir="$PWD/tmp/local-tests/$run_id"
 mkdir -p "$result_dir"
 printf 'Evidence: %s\n' "$result_dir"

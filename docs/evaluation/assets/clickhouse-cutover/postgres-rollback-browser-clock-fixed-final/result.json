@@ -1,0 +1,110 @@
+{
+  "status": "passed",
+  "backend": "postgres",
+  "url": "http://127.0.0.1:18584",
+  "publication": "c51402d9d25f45c182140b072397de78",
+  "replay": "walkthrough-live-b3efff6ba5c5",
+  "external_http_blocked": true,
+  "read_only_actions": true,
+  "mode": "all-nine-screens",
+  "expected_replay_clock": "2019-12-16T02:25:00",
+  "elapsed_seconds": 8.339,
+  "checks": [
+    {
+      "screen": "water",
+      "metrics": [
+        "Irrigation observed\n\n553,50 L/m²",
+        "Drain observed\n\n211,40 L/m²",
+        "Tỷ lệ drain (paired)\n\n38,19 %",
+        "Độ phủ paired\n\n100,00 %"
+      ],
+      "publication": "c51402d9d25f45c182140b072397de78"
+    },
+    {
+      "screen": "harvest",
+      "metrics": [
+        "A observed\n\n13,66 kg/m²",
+        "B observed\n\n0,10 kg/m²",
+        "Tổng paired A+B\n\n13,76 kg/m²",
+        "Share B (paired)\n\n0,73 %",
+        "Paired A (kg/m²)\n\n13,66",
+        "Paired B (kg/m²)\n\n0,10",
+        "Share A (paired)\n\n99,27 %"
+      ],
+      "publication": "c51402d9d25f45c182140b072397de78"
+    },
+    {
+      "screen": "climate",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\nNULL",
+        "Nhiệt độ coverage\n\n0,00 %",
+        "CO₂ out (giờ quan sát được)\n\nNULL",
+        "CO₂ coverage\n\n0,00 %",
+        "OR lệch (giờ, hợp lệ chung)\n\nNULL",
+        "OR lệch %\n\nNULL",
+        "Coverage giao chung\n\n0,00 %"
+      ],
+      "publication": "c51402d9d25f45c182140b072397de78"
+    },
+    {
+      "screen": "drain",
+      "metrics": [
+        "EC ngoài dải (phút)\n\nNULL",
+        "EC ngoài dải %\n\nNULL",
+        "EC coverage %\n\n0,00",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\nNULL",
+        "PH ngoài dải %\n\nNULL",
+        "PH coverage %\n\n0,00",
+        "PH suspect (phút)\n\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\nNULL",
+        "OR ngoài dải %\n\nNULL",
+        "Coverage giao chung %\n\n0,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n553,50",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n211,40",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ],
+      "publication": "c51402d9d25f45c182140b072397de78"
+    },
+    {
+      "screen": "energy",
+      "metrics": [
+        "Năng lượng (kWh)\n\n19,396.146",
+        "Sản lượng A (kg)\n\n853.750",
+        "kWh/kg A\n\n22.719",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ],
+      "publication": "c51402d9d25f45c182140b072397de78"
+    },
+    {
+      "screen": "cost",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n1,154.65 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n18.47 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n166/166 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n166/166 ngày"
+      ],
+      "publication": "c51402d9d25f45c182140b072397de78"
+    },
+    {
+      "screen": "overview",
+      "metrics": [],
+      "publication": "c51402d9d25f45c182140b072397de78"
+    },
+    {
+      "screen": "quality",
+      "metrics": [],
+      "publication": "c51402d9d25f45c182140b072397de78"
+    },
+    {
+      "screen": "replay",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n4421 s"
+      ],
+      "publication": null
+    }
+  ]
+}

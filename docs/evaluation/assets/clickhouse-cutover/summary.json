@@ -1,0 +1,180 @@
+{
+  "status": "passed",
+  "recorded_at": "2026-11-07T11:29:19.194503+00:00",
+  "parent_source_head": "f5ccd38f1ee536f6e66e906cf44d69170cb5c6e7",
+  "current_native_publication": "5d455686a06649e789908b9708a9d436",
+  "restored_pg_publication": "c51402d9d25f45c182140b072397de78",
+  "configuration_versions": 315,
+  "scenario_versions": 178,
+  "scenario_collision_families": [
+    "scenario:offline-restore-electricity-plus20"
+  ],
+  "original_pg_scenarios_unchanged": true,
+  "source_namespace_lookup_and_retry_exact": true,
+  "replay_pins": 7,
+  "replay_scopes": 4,
+  "all_replay_metadata_fields_exact": true,
+  "post_cutover_correction": {
+    "status": "passed",
+    "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+    "source_record_id": "e84b8553e8c830d789d696dcfdaa263c6ebbf33703d9c6f5cb0b2fd51bc011fd",
+    "old_values": {
+      "CO2_cons": "0.037110833",
+      "Drain": "2.04",
+      "ElecHigh": "1.5",
+      "ElecLow": "0.940666667",
+      "Heat_cons": "1.4535",
+      "Irr": "4.68",
+      "time": "43892"
+    },
+    "new_values": {
+      "CO2_cons": "0.037110833",
+      "Drain": "2.04",
+      "ElecHigh": "1.5",
+      "ElecLow": "0.940666667",
+      "Heat_cons": "1.4535",
+      "Irr": "5.68",
+      "time": "43892"
+    },
+    "correction_id": "cutover-resource-20261107",
+    "revision_id": "f6b81811864cb84776e817417f6b28a742f36f06efb5f7fee600b30502ec162e",
+    "previous_revision": "72d7a93c41a1b47eb109fa1b24c529f94ee01c69e07c491acfd71f4fbbb1d597",
+    "retry_exact": true,
+    "published": false
+  },
+  "six_brs_business_csv_lineage_and_raw_oracle_exact": true,
+  "threshold_groups": 18,
+  "episodes": 67829,
+  "journal_cursor": 62,
+  "journal_head": "bbfd7017ae3b8c72ca4445544b2ee8012eb0ac48576f579408ba11320fce7a03",
+  "journal_backup_exact": true,
+  "old_publication_unchanged": true,
+  "accepted_pg_backup": {
+    "status": "passed",
+    "bytes": 239741319,
+    "sha256": "be8839827fd1de38e5351606990c1af58277c706b9bf716ac9dbfda3c29b27f9",
+    "all_members_read": true,
+    "publication": "c51402d9d25f45c182140b072397de78"
+  },
+  "tests": {
+    "native_suite": "100 total, 91 run, 9 gated heavy skips",
+    "routing": "8 passed, includes two new default-backend tests",
+    "pg_cost": "24 passed, includes audit timestamp/author import"
+  },
+  "timing": {
+    "return_http_ready_seconds": 9.25005416699787,
+    "return_kpi_ready_seconds": 198.95398620899869,
+    "native_nine_screen_seconds": 432.35,
+    "pg_nine_screen_seconds": 8.339,
+    "scope": "Measured rehearsal, includes validation/repairs; HTTP readiness and KPI readiness are distinct. Not a zero-downtime or warm-query benchmark."
+  },
+  "runtime": {
+    "gh-ch-repro-20261107032510-rebuilt-ch-app-1": {
+      "status": "running",
+      "container_id": "ccd3c5dbeca4da64d80727e196e68f6b2cd4a77c5728bcedb65cfef0dd4aa8c3",
+      "image_id": "sha256:b81bcabae1f323eceb094245e651e7d8cc929f8b29a3012fd3aa5501d562026d",
+      "started_at": "2026-11-07T11:24:22.118671Z",
+      "data_volumes": [],
+      "backend": "clickhouse",
+      "pg_environment_keys": [],
+      "required_journal": "1"
+    },
+    "gh-ch-repro-20261107032510-rebuilt-ch-web-1": {
+      "status": "running",
+      "container_id": "2dc3ebbff970ae07fbf2351556295a1309811218741bf0ccedc70c2c8af047fb",
+      "image_id": "sha256:be77d33e050a9a0269f7f9966e4b946d23d87d15bcb90d8c404b954e9b891e70",
+      "started_at": "2026-11-07T10:51:22.916778084Z",
+      "data_volumes": []
+    },
+    "gh-ch-repro-20261107032510-rebuilt-clickhouse-1": {
+      "status": "running",
+      "container_id": "600e372fd89ab3cafc8c4df3753a039d492cc4839ce5ff25f9fd943ea5661e19",
+      "image_id": "sha256:a1304f616cd2a6ed51a616da1cd2e897850b520c3ebfbc2bcfba8d65581998ad",
+      "started_at": "2026-11-07T08:19:25.402321377Z",
+      "data_volumes": [
+        "gh-ch-repro-20261107032510-rebuilt_ch_data",
+        "gh-ch-repro-20261107032510-rebuilt_ch_logs"
+      ]
+    },
+    "gh-cutover-pg-202611070931-rollback-db-1": {
+      "status": "exited",
+      "container_id": "458a408a43a1acfbbb6cc8e943aefc1c2f701cc05e8f8db70199cd25d3108101",
+      "image_id": "sha256:6878867d6da44d8c000a91f9ce8d31a613bdc3e26b4ae4dde11bc2e22d270458",
+      "started_at": "2026-11-07T11:01:57.259706544Z",
+      "data_volumes": [
+        "gh-cutover-pg-202611070931_rollback_pg"
+      ]
+    },
+    "smart-greenhouse-db-1": {
+      "status": "exited",
+      "container_id": "003dddf89e2907c548b8b30a95a11e19d35423c2944acd3eea385398fdb7cf94",
+      "image_id": "sha256:6878867d6da44d8c000a91f9ce8d31a613bdc3e26b4ae4dde11bc2e22d270458",
+      "started_at": "2026-11-07T04:11:30.23267193Z",
+      "data_volumes": [
+        "smart-greenhouse_pg_data"
+      ]
+    },
+    "smart-greenhouse-app-1": {
+      "status": "exited",
+      "container_id": "ff657c1e9fecb10c38a7eb0d19d98d67bc483679f70f8d5f57ddd93273178d47",
+      "image_id": "sha256:bd19763aafb29ae7d11ce62feea589dc4a9b11d32f81c72bad3084f632160242",
+      "started_at": "2026-11-07T04:11:30.368414555Z",
+      "data_volumes": []
+    },
+    "smart-greenhouse-broker-1": {
+      "status": "exited",
+      "container_id": "d35b18007f1365c5d708c4d5149430727e853c3378616b9a2a13254a3a8d13e8",
+      "image_id": "sha256:c2cf757f19a94f094ef2a2e56471a819551d4755e63d0b3ade470d697c072595",
+      "started_at": "2026-11-07T04:11:30.28817668Z",
+      "data_volumes": [
+        "smart-greenhouse_broker_state",
+        "a50c6b4f7a13299ab39b9c2053c3610ef23277df53176ea96914c98a148aec9f"
+      ]
+    }
+  },
+  "local_archives": [
+    {
+      "path": "cutoff.json",
+      "bytes": 42451311,
+      "sha256": "1f30eb5be7b5ac5378b44774a50efb58b4c74743b4438c152a56ebb0dfa9d941",
+      "kept_locally": true
+    },
+    {
+      "path": "post-cutover.json",
+      "bytes": 220585718,
+      "sha256": "5b82542578bff26f118fe4f471549c77133cbb871117a807ed3b259b21d479a0",
+      "kept_locally": true
+    },
+    {
+      "path": "journal-backup/cutover-journal.sqlite",
+      "bytes": 176283648,
+      "sha256": "c0db63790ede96a4c33cd0cc39fb46afc90d639fb6bae7f70c6c76b536f6b287",
+      "kept_locally": true
+    },
+    {
+      "path": "journal-backup-clock-fix/cutover-journal.sqlite",
+      "bytes": 176283648,
+      "sha256": "c0db63790ede96a4c33cd0cc39fb46afc90d639fb6bae7f70c6c76b536f6b287",
+      "kept_locally": true
+    },
+    {
+      "path": "failed-clock-attempt.dump",
+      "bytes": 238807787,
+      "sha256": "f31672ee177e5e84a9b107f72334a8e15b96147491f8380b8e955e434f4f0e7e",
+      "kept_locally": true
+    },
+    {
+      "path": "accepted-rollback.dump",
+      "bytes": 239741319,
+      "sha256": "be8839827fd1de38e5351606990c1af58277c706b9bf716ac9dbfda3c29b27f9",
+      "kept_locally": true
+    }
+  ],
+  "limits": [
+    "Single host/local POSIX lock; arbitrary DBA bypass is outside the writer protocol.",
+    "Rehearsal covers the locked AGC snapshot, one audited resource correction, profiles/tariff/scenario and finite replay.",
+    "New snapshot/basis/config families require verified translators and parity before opening PG.",
+    "Legacy native timestamps originally NULL remain unknown in the source archive; PG import time is labeled separately.",
+    "Initial preparation stop was not fully timestamped; recorded return readiness is not total historical outage."
+  ]
+}

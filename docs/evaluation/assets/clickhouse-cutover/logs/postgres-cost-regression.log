@@ -1,0 +1,8 @@
+{"label": "postgres-cost-regression", "image": "greenhouse-cutover-processing:20261107", "image_id": "sha256:58ee3522b0eee3464f1d9cf356bc3732f6e37e3e50844946df3c9522b413a214", "source_head": "f5ccd38f1ee536f6e66e906cf44d69170cb5c6e7", "manifest_sha256": "754ce3fec51a31a1f675d53c243d08366c7f5bf8524a25ddcf2a1f572bb63f20"}
+........................                                                 [100%]Runtime: Python 3.12.12 / Linux aarch64
+openjdk version "17.0.17" 2025-10-21
+Packages: pyspark=4.0.1, psycopg=3.3.7, paho-mqtt=2.1.0, pytest=8.4.2
+Container memory.peak: 130203648 bytes
+Container memory.max: 1610612736 bytes
+
+24 passed in 3.04s

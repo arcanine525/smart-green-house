@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# Explicit optional PostgreSQL configuration; the default stack is ClickHouse.
+export COMPOSE_FILE="$PWD/compose.postgres.yaml"
 run_id="$(date -u +%Y%m%d%H%M%S)-${RANDOM}"
 source_project="gh-backup-test-$run_id"
 restore_project="gh-restore-test-$run_id"

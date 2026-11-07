@@ -14,7 +14,7 @@ class ClickHousePaths:
 
 
 def backend():
-    selected=os.environ.get('GREENHOUSE_BACKEND','postgres')
+    selected=os.environ.get('GREENHOUSE_BACKEND','clickhouse')
     if selected not in ('postgres','clickhouse'):
         raise ValueError('GREENHOUSE_BACKEND must be postgres or clickhouse')
     return selected

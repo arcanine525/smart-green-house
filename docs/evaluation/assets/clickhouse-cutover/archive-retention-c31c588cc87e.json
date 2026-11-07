@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "source_sha256": "c31c588cc87edf265e22c2f58c05f22568abbf4818d6803fe8202f5cfe0ce1bd",
+  "canonical_json_bytes": 215454925,
+  "encoded_base64_bytes": 20034680,
+  "full_journal_sql_preserved": true
+}

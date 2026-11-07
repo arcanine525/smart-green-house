@@ -36,7 +36,7 @@ def setup_environment(settings):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="python -m greenhouse")
-    parser.add_argument('--backend',choices=['postgres','clickhouse'],default=os.environ.get('GREENHOUSE_BACKEND','postgres'))
+    parser.add_argument('--backend',choices=['postgres','clickhouse'],default=os.environ.get('GREENHOUSE_BACKEND','clickhouse'))
     parser.add_argument("command", choices=["setup", "test", "preview", "snapshot", "inventory", "verify-fixtures", "ingest", "migrate", "load-core", "explain-core", "run-pipeline", "transform", "publish", "correct-core", "lineage", "simulate", "collect", "stream", "register-agc-tariff", *PENDING])
     arguments, rest = parser.parse_known_args(argv)
     if arguments.backend not in ('postgres','clickhouse'):

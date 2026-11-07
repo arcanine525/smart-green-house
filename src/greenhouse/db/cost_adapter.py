@@ -432,6 +432,8 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
 
             existing_req = self.get_scenario_by_request_id(scenario.request_id)
             if existing_req is not None:
+                if existing_req.author != scenario.author or (scenario.created_at is not None and existing_req.created_at != scenario.created_at):
+                    raise ValueError('Imported scenario audit identity differs from stored version')
                 if (existing_req.scenario_version == scenario.scenario_version and
                     existing_req.scenario_id == scenario.scenario_id and
                     existing_req.baseline_tariff_version == scenario.baseline_tariff_version and
@@ -551,11 +553,11 @@ class PostgresCostAdapter(PostgresCoreQueryAdapter):
             ])
             payload_json = json.dumps(command_payload) if command_payload is not None else None
 
-            self.connection.execute(sql('insert_cost_scenario'), (
+            self.connection.execute(sql('insert_cost_scenario_import'), (
                 scenario.scenario_version, scenario.scenario_id, scenario.version,
                 scenario.request_id, scenario.baseline_tariff_version,
                 scenario.publication.publication_id, scenario.name, scenario.author,
-                changes_json, payload_json,
+                changes_json, payload_json, scenario.created_at,
             ))
             for rate in scenario.rates:
                 self.connection.execute(sql('insert_cost_scenario_rate'), (

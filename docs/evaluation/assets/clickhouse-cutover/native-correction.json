@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+  "source_record_id": "e84b8553e8c830d789d696dcfdaa263c6ebbf33703d9c6f5cb0b2fd51bc011fd",
+  "old_values": {
+    "CO2_cons": "0.037110833",
+    "Drain": "2.04",
+    "ElecHigh": "1.5",
+    "ElecLow": "0.940666667",
+    "Heat_cons": "1.4535",
+    "Irr": "4.68",
+    "time": "43892"
+  },
+  "new_values": {
+    "CO2_cons": "0.037110833",
+    "Drain": "2.04",
+    "ElecHigh": "1.5",
+    "ElecLow": "0.940666667",
+    "Heat_cons": "1.4535",
+    "Irr": "5.68",
+    "time": "43892"
+  },
+  "correction_id": "cutover-resource-20261107",
+  "revision_id": "f6b81811864cb84776e817417f6b28a742f36f06efb5f7fee600b30502ec162e",
+  "previous_revision": "72d7a93c41a1b47eb109fa1b24c529f94ee01c69e07c491acfd71f4fbbb1d597",
+  "retry_exact": true,
+  "published": false
+}

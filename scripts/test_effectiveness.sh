@@ -2,6 +2,9 @@
 # Automated UI walkthroughs; timings are test timings, not human task times.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# Explicit optional PostgreSQL configuration; the default stack is ClickHouse.
+export COMPOSE_FILE="$PWD/compose.postgres.yaml"
+export COMPOSE_PROJECT_NAME="${GREENHOUSE_PG_TEST_PROJECT:-gh-pg-effectiveness-tests}"
 run_id="$(date -u +%Y%m%dT%H%M%SZ)-${RANDOM}"
 result_dir="$PWD/tmp/effectiveness/$run_id"
 mkdir -p "$result_dir"

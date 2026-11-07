@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "bytes": 176283648,
+  "sha256": "c0db63790ede96a4c33cd0cc39fb46afc90d639fb6bae7f70c6c76b536f6b287",
+  "head": "bbfd7017ae3b8c72ca4445544b2ee8012eb0ac48576f579408ba11320fce7a03",
+  "cursor": 62,
+  "baseline_hash": "265f4ba6782cf26c191906280a12a5a61624fd6bc5d11b07dc11a1aea35002b1",
+  "paused_write_refused": true,
+  "wal_backup_exact": true
+}

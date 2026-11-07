@@ -1,0 +1,3 @@
+ Container gh-ch-repro-20261107032510-rebuilt-ch-job-run-5a74838afd3b Creating
+ Container gh-ch-repro-20261107032510-rebuilt-ch-job-run-5a74838afd3b Created
+{"status": "ready", "backend": "clickhouse", "migrated": false}

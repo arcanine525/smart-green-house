@@ -1,0 +1,174 @@
+{
+  "status": "passed",
+  "profile": {
+    "rule_version": "drain-user:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:Automatoes:cutover-rollback:v1",
+    "rule_id": "drain-user:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:Automatoes:cutover-rollback",
+    "version": 1,
+    "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+    "compartment_id": "Automatoes",
+    "evidence_reference": "Cutover rollback rehearsal; user-unverified demonstration limits",
+    "is_demo": false,
+    "label": "user_unverified",
+    "segments": [
+      {
+        "metric": "ec",
+        "measurement_context": "drain_process_computer",
+        "basis": "measured",
+        "start": "2019-12-16T00:00:00",
+        "end": "2020-05-30T00:00:00",
+        "delta": null,
+        "lower": "2.1",
+        "upper": "5.1"
+      },
+      {
+        "metric": "ph",
+        "measurement_context": "drain_process_computer",
+        "basis": "measured",
+        "start": "2019-12-16T00:00:00",
+        "end": "2020-05-30T00:00:00",
+        "delta": null,
+        "lower": "5.4",
+        "upper": "6.6"
+      }
+    ]
+  },
+  "tariff": {
+    "tariff_version": "tariff:cutover-rollback-20261107:v1",
+    "tariff_id": "cutover-rollback-20261107",
+    "version": 1,
+    "data_scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+    "currency": "EUR",
+    "source_reference": "Audited rollback exercise",
+    "label": "Cutover rollback explicit tariff",
+    "rates": [
+      {
+        "rate_id": "tariff:cutover-rollback-20261107:v1:elec_high",
+        "tariff_version": "tariff:cutover-rollback-20261107:v1",
+        "component": "elec_high",
+        "currency": "EUR",
+        "price_unit": "EUR/kWh",
+        "rate": "0.08",
+        "valid_from": "2019-12-16",
+        "valid_to_exclusive": "2020-05-30",
+        "source_reference": "Economics.pdf page 1: ElecHigh 0.08 EUR/kWh"
+      },
+      {
+        "rate_id": "tariff:cutover-rollback-20261107:v1:elec_low",
+        "tariff_version": "tariff:cutover-rollback-20261107:v1",
+        "component": "elec_low",
+        "currency": "EUR",
+        "price_unit": "EUR/kWh",
+        "rate": "0.04",
+        "valid_from": "2019-12-16",
+        "valid_to_exclusive": "2020-05-30",
+        "source_reference": "Economics.pdf page 2: ElecLow 0.04 EUR/kWh"
+      },
+      {
+        "rate_id": "tariff:cutover-rollback-20261107:v1:heat",
+        "tariff_version": "tariff:cutover-rollback-20261107:v1",
+        "component": "heat",
+        "currency": "EUR",
+        "price_unit": "EUR/MJ",
+        "rate": "0.0083",
+        "valid_from": "2019-12-16",
+        "valid_to_exclusive": "2020-05-30",
+        "source_reference": "Economics.pdf page 2: Heat 0.0083 EUR/MJ"
+      }
+    ],
+    "is_baseline": false,
+    "compartment_id": null
+  },
+  "scenario": {
+    "scenario_version": "scenario:cutover-rollback-20261107:v1",
+    "scenario_id": "scenario:cutover-rollback-20261107",
+    "version": 1,
+    "request_id": "cutover-rollback-20261107",
+    "baseline_tariff_version": "tariff:cutover-rollback-20261107:v1",
+    "publication": {
+      "publication_id": "4b08bd51c092465783304f887d766d47",
+      "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+      "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+      "versions": {
+        "pipeline_run_id": "b46b4d1fa95641b891c447faed0c07dc",
+        "quality_policy_version": "AGC_QUALITY_V1",
+        "parser_version": "agc-parser-v1",
+        "code_version": "clickhouse-warehouse-v1",
+        "config_bundle_hash": "0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7",
+        "metric_version": "br02-summary-v1",
+        "rule_version": null,
+        "tariff_version": null,
+        "scenario_version": null
+      },
+      "committed_at": "2026-11-07T04:36:29.059885+00:00",
+      "finality_status": "complete",
+      "time_basis": "source_naive"
+    },
+    "name": "Cutover electricity +7.5%",
+    "rates": [
+      {
+        "rate_id": "rate:scenario:cutover-rollback-20261107:v1:elec_high:2019-12-16",
+        "tariff_version": "scenario:cutover-rollback-20261107:v1",
+        "component": "elec_high",
+        "currency": "EUR",
+        "price_unit": "EUR/kWh",
+        "rate": "0.08600",
+        "valid_from": "2019-12-16",
+        "valid_to_exclusive": "2020-05-30",
+        "source_reference": "Economics.pdf page 1: ElecHigh 0.08 EUR/kWh; scenario Cutover electricity +7.5%"
+      },
+      {
+        "rate_id": "rate:scenario:cutover-rollback-20261107:v1:elec_low:2019-12-16",
+        "tariff_version": "scenario:cutover-rollback-20261107:v1",
+        "component": "elec_low",
+        "currency": "EUR",
+        "price_unit": "EUR/kWh",
+        "rate": "0.04300",
+        "valid_from": "2019-12-16",
+        "valid_to_exclusive": "2020-05-30",
+        "source_reference": "Economics.pdf page 2: ElecLow 0.04 EUR/kWh; scenario Cutover electricity +7.5%"
+      },
+      {
+        "rate_id": "rate:scenario:cutover-rollback-20261107:v1:heat:2019-12-16",
+        "tariff_version": "scenario:cutover-rollback-20261107:v1",
+        "component": "heat",
+        "currency": "EUR",
+        "price_unit": "EUR/MJ",
+        "rate": "0.0083",
+        "valid_from": "2019-12-16",
+        "valid_to_exclusive": "2020-05-30",
+        "source_reference": "Economics.pdf page 2: Heat 0.0083 EUR/MJ"
+      }
+    ],
+    "changes": [
+      {
+        "component": "elec_high",
+        "price_unit": "EUR/kWh",
+        "price": null,
+        "change_percent": "7.5"
+      },
+      {
+        "component": "elec_low",
+        "price_unit": "EUR/kWh",
+        "price": null,
+        "change_percent": "7.5"
+      }
+    ],
+    "author": "cutover-rehearsal",
+    "created_at": "2026-11-07T10:03:44.666777+00:00",
+    "analysis_context": {
+      "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+      "publication_id": "4b08bd51c092465783304f887d766d47",
+      "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+      "cycle_id": "agc-cycle-Automatoes",
+      "compartment_ids": [
+        "Automatoes"
+      ],
+      "start": "2020-03-02",
+      "end": "2020-03-04",
+      "rule_version": null
+    }
+  },
+  "retries_exact": true,
+  "baseline_eur": "17.600067710000",
+  "scenario_eur": "18.815317710125000"
+}

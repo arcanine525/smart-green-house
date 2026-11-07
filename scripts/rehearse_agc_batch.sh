@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 : "${REPRO_UI_IMAGE:?Prepared UI image}"
 : "${REPRO_SENSOR_IMAGE:?Prepared sensor image}"
 [[ "$REPRO_ROOT" == /* ]] || { echo 'REPRO_ROOT must be absolute'; exit 2; }
-if [[ -n $(git status --porcelain -- src tests docker pyproject.toml compose.yaml 'requirements*.lock' .streamlit) ]]; then
+if [[ -n $(git status --porcelain -- src tests docker pyproject.toml compose.postgres.yaml 'requirements*.lock' .streamlit) ]]; then
   echo 'Use a checkout with clean application/build sources; commit or isolate changes first' >&2
   exit 2
 fi
@@ -48,7 +48,7 @@ networks:
   frontend:
     internal: true
 YAML
-export COMPOSE_FILE="$PWD/compose.yaml:$REPRO_ROOT/runtime.yaml"
+export COMPOSE_FILE="$PWD/compose.postgres.yaml:$REPRO_ROOT/runtime.yaml"
 export COMPOSE_PROJECT_NAME="$project"
 export GREENHOUSE_APP_PORT="${REPRO_APP_PORT:-18573}"
 export GREENHOUSE_UI_MEMORY=1536m

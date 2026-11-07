@@ -7,7 +7,7 @@ project="gh-offline-$run_id"
 evidence_dir="$PWD/tmp/offline-smoke/$run_id"
 mkdir -p "$evidence_dir"
 export COMPOSE_PROJECT_NAME="$project"
-export COMPOSE_FILE="$PWD/compose.yaml:$evidence_dir/offline.yaml"
+export COMPOSE_FILE="$PWD/compose.postgres.yaml:$evidence_dir/offline.yaml"
 export SENSOR_TEST_NETWORK="${project}_backend"
 # Override host app port; other services remain internal-only.
 export GREENHOUSE_APP_PORT="${GREENHOUSE_OFFLINE_TEST_PORT:-18571}"

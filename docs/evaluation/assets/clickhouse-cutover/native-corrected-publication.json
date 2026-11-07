@@ -1,0 +1,79 @@
+{
+  "reused_load": true,
+  "published": true,
+  "load_id": "a34cccc109772f02c4d8dec4f695d327f52da7f48a5b233c5daa8b747da6e0a2",
+  "publication_id": "5d455686a06649e789908b9708a9d436",
+  "receipts": {
+    "core": {
+      "version": "canonical-core-v1",
+      "rows": 287989,
+      "checksum": "1b465bd5dfad5f82c05d165eab737f9fcc16061085677a6e97607f525b91c6b1"
+    },
+    "configuration": {
+      "version": "config-envelope-v1",
+      "rows": 311,
+      "checksum": "983e64e920efe12a94477ae0b34229498e942fe131806d5bdba80ad319a4ee69"
+    },
+    "climate": {
+      "version": "climate-mart-v1",
+      "rows": 286854,
+      "cycles": 6,
+      "storage_version": "threshold-stream-v2",
+      "checksum_algorithm": "ordered-jsonl-sha256-v2",
+      "checksum": "7170e2852b2f9f63831bf1bb41335f58e52e1a13714182e8f2a76c22d6c26651",
+      "configuration_ref": {
+        "kind": "threshold",
+        "version": "pg-threshold-stream-v2",
+        "hash": "e4512483b5f6bb8b963ca9e7975dde83f78e385d1575b5b1adabbc6aec33887e"
+      }
+    },
+    "drain": {
+      "version": "drain-mart-v1",
+      "rows": 286854,
+      "cycles": 6,
+      "storage_version": "threshold-stream-v2",
+      "checksum_algorithm": "ordered-jsonl-sha256-v2",
+      "checksum": "37ef92054161e5ad3e5a79fb6b399449657d54d791cccaa90bcf8e811fe2f3dc",
+      "configuration_ref": {
+        "kind": "threshold",
+        "version": "pg-threshold-stream-v2",
+        "hash": "e4512483b5f6bb8b963ca9e7975dde83f78e385d1575b5b1adabbc6aec33887e"
+      }
+    },
+    "energy": {
+      "version": "energy-mart-v1",
+      "quantity_version": "energy-quantity-v1",
+      "rows": 2988,
+      "cycles": 6,
+      "checksum": "ce3ab0fbf2a50f1b2766c9a08f3020b03d773227a16449edd2b9f8b02249f8ab",
+      "configuration_ref": {
+        "kind": "energy",
+        "version": "pg-energy-v1",
+        "hash": "ddfee96682406bf544ea41607e3c06fb7ce853df41ab289cc5612db575a324b4"
+      }
+    },
+    "harvest": {
+      "version": "harvest-mart-v3",
+      "rows": 139,
+      "cycles": 6,
+      "checksum": "337d126e6a9b2b5074988315d394d91260305de81ddb865d7694ff1ba52fa4f1",
+      "load_ref": "a34cccc109772f02c4d8dec4f695d327f52da7f48a5b233c5daa8b747da6e0a2",
+      "configuration_ref": {
+        "kind": "harvest",
+        "version": "pg-harvest-v1",
+        "hash": "255c1cdab74bfad3b65f1597de0eeb93633da79b47177282bd20351eb6b26e4c"
+      }
+    },
+    "water": {
+      "version": "irrigation-mart-v1",
+      "rows": 996,
+      "cycles": 6,
+      "checksum": "295228106298cfda79777f942746244eba06d3bf5f4b48b009aea7f255c97d98",
+      "configuration_ref": {
+        "kind": "water",
+        "version": "pg-water-v1",
+        "hash": "f6da42bcb9a8e3047c679496b863af1a2668fd47191b0f48880b5f723b745205"
+      }
+    }
+  }
+}

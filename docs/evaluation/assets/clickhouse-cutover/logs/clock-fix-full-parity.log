@@ -1,0 +1,64 @@
+{"label": "clock-fix-full-parity", "image": "greenhouse-cutover-processing:20261107", "image_id": "sha256:4e99a12aa61d1c176aa96a3ce1eb0c5ccfe61255bf0c083b0142f31108726f5e", "source_head": "f5ccd38f1ee536f6e66e906cf44d69170cb5c6e7", "manifest_sha256": "9389f305196b9e415655b3fa68c521c8a551c15de8691eef7dbd94b3c73e177d"}
+{"stage": "read_business_reference.py", "status": "started"}
+{"stage": "business_reference", "compartment": "AICU"}
+{"stage": "business_reference", "compartment": "Automatoes"}
+{"stage": "business_reference", "compartment": "Digilog"}
+{"stage": "business_reference", "compartment": "IUACAAS"}
+{"stage": "business_reference", "compartment": "Reference"}
+{"stage": "business_reference", "compartment": "TheAutomators"}
+{"status": "passed", "backend": "postgres", "compartments": 6}
+{"stage": "read_export_reference.py", "status": "started"}
+{"status": "passed", "csv_exports": 60, "backend": "postgres"}
+{"stage": "read_lineage_reference.py", "status": "started"}
+{"status": "passed", "lineages": 30, "backend": "postgres"}
+{"stage": "read_parity_reference.py", "status": "started"}
+{"stage": "reference_group", "compartment": "AICU", "kind": "climate", "basis": "requested", "episodes": 1643, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "AICU", "kind": "climate", "basis": "realized", "episodes": 6703, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "AICU", "kind": "drain", "basis": "measured", "episodes": 229, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "Automatoes", "kind": "climate", "basis": "requested", "episodes": 3959, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "Automatoes", "kind": "climate", "basis": "realized", "episodes": 4139, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "Automatoes", "kind": "drain", "basis": "measured", "episodes": 447, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "Digilog", "kind": "climate", "basis": "requested", "episodes": 6837, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "Digilog", "kind": "climate", "basis": "realized", "episodes": 6490, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "Digilog", "kind": "drain", "basis": "measured", "episodes": 120, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "IUACAAS", "kind": "climate", "basis": "requested", "episodes": 5175, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "IUACAAS", "kind": "climate", "basis": "realized", "episodes": 5465, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "IUACAAS", "kind": "drain", "basis": "measured", "episodes": 509, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "Reference", "kind": "climate", "basis": "requested", "episodes": 4606, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "Reference", "kind": "climate", "basis": "realized", "episodes": 5204, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "Reference", "kind": "drain", "basis": "measured", "episodes": 167, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "TheAutomators", "kind": "climate", "basis": "requested", "episodes": 7878, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "TheAutomators", "kind": "climate", "basis": "realized", "episodes": 7887, "raw_oracle_match": true}
+{"stage": "reference_group", "compartment": "TheAutomators", "kind": "drain", "basis": "measured", "episodes": 371, "raw_oracle_match": true}
+{"status": "passed", "groups": 18, "episodes": 67829, "sha256": "52726388dcace45dccc440e63b85e31feb26e1b5e049b9d8cd496b63c1d63c7e"}
+{"stage": "check_parity.py", "status": "started"}
+{"stage": "candidate_publication_verified", "publication": "5d455686a06649e789908b9708a9d436"}
+{"stage": "business_reference", "compartment": "AICU"}
+{"stage": "business_reference", "compartment": "Automatoes"}
+{"stage": "business_reference", "compartment": "Digilog"}
+{"stage": "business_reference", "compartment": "IUACAAS"}
+{"stage": "business_reference", "compartment": "Reference"}
+{"stage": "business_reference", "compartment": "TheAutomators"}
+{"stage": "business", "status": "passed"}
+{"stage": "csv", "status": "passed"}
+{"stage": "lineage", "status": "passed"}
+{"stage": "threshold-AICU-climate-requested", "status": "passed"}
+{"stage": "threshold-AICU-climate-realized", "status": "passed"}
+{"stage": "threshold-AICU-drain-measured", "status": "passed"}
+{"stage": "threshold-Automatoes-climate-requested", "status": "passed"}
+{"stage": "threshold-Automatoes-climate-realized", "status": "passed"}
+{"stage": "threshold-Automatoes-drain-measured", "status": "passed"}
+{"stage": "threshold-Digilog-climate-requested", "status": "passed"}
+{"stage": "threshold-Digilog-climate-realized", "status": "passed"}
+{"stage": "threshold-Digilog-drain-measured", "status": "passed"}
+{"stage": "threshold-IUACAAS-climate-requested", "status": "passed"}
+{"stage": "threshold-IUACAAS-climate-realized", "status": "passed"}
+{"stage": "threshold-IUACAAS-drain-measured", "status": "passed"}
+{"stage": "threshold-Reference-climate-requested", "status": "passed"}
+{"stage": "threshold-Reference-climate-realized", "status": "passed"}
+{"stage": "threshold-Reference-drain-measured", "status": "passed"}
+{"stage": "threshold-TheAutomators-climate-requested", "status": "passed"}
+{"stage": "threshold-TheAutomators-climate-realized", "status": "passed"}
+{"stage": "threshold-TheAutomators-drain-measured", "status": "passed"}
+{"status": "passed", "threshold_groups": 18, "episodes": 67829}
+{"stage": "final_six_br_parity", "status": "passed", "elapsed_seconds": 317.28549285400004}

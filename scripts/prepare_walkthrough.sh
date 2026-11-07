@@ -2,6 +2,9 @@
 # Clone a prepared AGC publication for browser demos; never write to the source.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# Explicit optional PostgreSQL configuration; the default stack is ClickHouse.
+export COMPOSE_FILE="$PWD/compose.postgres.yaml"
+export COMPOSE_PROJECT_NAME="${GREENHOUSE_PG_PROJECT:?Set the separate PostgreSQL Compose project}"
 source_db="${1:?Pass the prepared AGC source database name}"
 [[ "$source_db" =~ ^[a-zA-Z0-9_]+$ ]] || exit 2
 run_id="$(date -u +%Y%m%dT%H%M%SZ)-$RANDOM"

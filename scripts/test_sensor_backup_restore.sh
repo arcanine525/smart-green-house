@@ -2,6 +2,8 @@
 # Small, isolated SQLite WAL + Spark checkpoint named-volume restore rehearsal.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# Explicit optional PostgreSQL configuration; the default stack is ClickHouse.
+export COMPOSE_FILE="$PWD/compose.postgres.yaml"
 run_id="$(date -u +%Y%m%d%H%M%S)-${RANDOM}"
 source_project="gh-sensor-backup-$run_id"
 restore_project="gh-sensor-restore-$run_id"

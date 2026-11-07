@@ -1,0 +1,13 @@
+{"label": "clock-fix-rebuild", "image": "greenhouse-cutover-processing:20261107", "image_id": "sha256:4e99a12aa61d1c176aa96a3ce1eb0c5ccfe61255bf0c083b0142f31108726f5e", "source_head": "f5ccd38f1ee536f6e66e906cf44d69170cb5c6e7", "manifest_sha256": "4884be679faa85299d2935747e56ce8e2bb7f1746be397be6a7915836b7da15a"}
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/07 11:10:18 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+[Stage 0:>                                                          (0 + 1) / 2]
+
+[Stage 0:=============================>                             (1 + 1) / 2]
+
+
+{"stage": "postgres_rebuilt", "workflow_id": "cutover_rollback_20261107", "status": "completed", "publication_id": "c51402d9d25f45c182140b072397de78", "output": "/cutover/postgres-output/pipeline/cutover_rollback_20261107"}

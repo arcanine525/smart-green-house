@@ -1,5 +1,5 @@
-# Isolated candidate stack. Existing PostgreSQL deployment is unchanged.
-# Always supply a distinct project name when rehearsing the migration.
+# Primary local ClickHouse stack. Use a distinct project for rehearsals.
+# PostgreSQL is available separately through compose.postgres.yaml.
 name: greenhouse-clickhouse
 services:
   clickhouse:
@@ -27,7 +27,8 @@ services:
         soft: 262144
         hard: 262144
   ch-client:
-    image: greenhouse-clickhouse-client:local
+    profiles: [tools]
+    image: ${GREENHOUSE_CH_CLIENT_IMAGE:-greenhouse-clickhouse-client:local}
     build:
       context: .
       dockerfile: docker/clickhouse-client/Dockerfile
@@ -44,11 +45,10 @@ services:
     cpus: 0.5
     mem_limit: 256m
   ch-app:
-    image: greenhouse-clickhouse-ui:local
+    image: ${GREENHOUSE_CH_UI_IMAGE:-greenhouse-clickhouse-ui:local}
     build:
       context: .
       dockerfile: docker/ui/Dockerfile
-    profiles: [app]
     environment: &ch-app-env
       GREENHOUSE_BACKEND: clickhouse
       CH_HOST: clickhouse
@@ -58,6 +58,7 @@ services:
       CH_PASSWORD: ${CH_PASSWORD:-change-me-clickhouse-local}
       GREENHOUSE_RAW_DIR: /data/raw
       GREENHOUSE_CH_COORDINATOR: /candidate/coordinator
+      GREENHOUSE_CH_REQUIRE_CUTOVER_JOURNAL: ${GREENHOUSE_CH_REQUIRE_CUTOVER_JOURNAL:-0}
     depends_on:
       clickhouse:
         condition: service_healthy
@@ -74,7 +75,7 @@ services:
       retries: 40
       start_period: 5s
   ch-job:
-    image: greenhouse-clickhouse-processing:local
+    image: ${GREENHOUSE_CH_PROCESSING_IMAGE:-greenhouse-clickhouse-processing:local}
     build:
       context: .
       dockerfile: docker/processing/Dockerfile
@@ -95,8 +96,7 @@ services:
     mem_limit: 1536m
     command: [python, -m, greenhouse, --backend, clickhouse, setup]
   ch-web:
-    image: greenhouse-clickhouse-client:local
-    profiles: [app]
+    image: ${GREENHOUSE_CH_CLIENT_IMAGE:-greenhouse-clickhouse-client:local}
     command: [python, -m, greenhouse.clickhouse.port_forward, --target-host, ch-app, --target-port, '8501']
     depends_on:
       ch-app:
@@ -128,7 +128,7 @@ services:
     cpus: 0.1
     mem_limit: 128m
   ch-stream:
-    image: greenhouse-clickhouse-processing:local
+    image: ${GREENHOUSE_CH_PROCESSING_IMAGE:-greenhouse-clickhouse-processing:local}
     build:
       context: .
       dockerfile: docker/processing/Dockerfile
@@ -162,7 +162,7 @@ services:
     mem_limit: 1536m
     command: [python, -m, greenhouse, stream, --backend, clickhouse, --ready-dir, /data/ready, --checkpoint-dir, /data/checkpoints/replay, --max-rows-per-batch, '5000']
   ch-ui-test:
-    image: greenhouse-clickhouse-ui:local
+    image: ${GREENHOUSE_CH_UI_IMAGE:-greenhouse-clickhouse-ui:local}
     profiles: [test]
     environment:
       <<: *ch-app-env

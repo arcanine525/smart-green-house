@@ -1,0 +1,14 @@
+{"label": "clock-fix-verification-retry", "image": "greenhouse-cutover-processing:20261107", "image_id": "sha256:4e99a12aa61d1c176aa96a3ce1eb0c5ccfe61255bf0c083b0142f31108726f5e", "source_head": "f5ccd38f1ee536f6e66e906cf44d69170cb5c6e7", "manifest_sha256": "f9d7dac460da94439905595ba3a44979deda2ea2ed96d96c7e546b9f4855f668"}
+{"stage": "business_reference", "compartment": "AICU"}
+{"stage": "business_reference", "compartment": "Automatoes"}
+{"stage": "business_reference", "compartment": "Digilog"}
+{"stage": "business_reference", "compartment": "IUACAAS"}
+{"stage": "business_reference", "compartment": "Reference"}
+{"stage": "business_reference", "compartment": "TheAutomators"}
+{"stage": "business_reference", "compartment": "AICU"}
+{"stage": "business_reference", "compartment": "Automatoes"}
+{"stage": "business_reference", "compartment": "Digilog"}
+{"stage": "business_reference", "compartment": "IUACAAS"}
+{"stage": "business_reference", "compartment": "Reference"}
+{"stage": "business_reference", "compartment": "TheAutomators"}
+{"stage": "rollback_verified", "status": "passed", "scenario_versions": 178}

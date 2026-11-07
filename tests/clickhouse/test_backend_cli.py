@@ -13,6 +13,18 @@ from greenhouse.cli import main
 
 
 class RoutingTest(unittest.TestCase):
+    def test_clickhouse_is_the_default_for_cli_and_ui_without_pg_environment(self):
+        from greenhouse.app import runtime
+        with patch.dict(os.environ,{},clear=True),patch('greenhouse.clickhouse.cli.command',return_value=0) as native:
+            self.assertEqual(runtime.backend(),'clickhouse')
+            self.assertEqual(main(['migrate']),0)
+            native.assert_called_once_with('migrate',[])
+
+    def test_explicit_postgres_keeps_the_rollback_entrypoint(self):
+        with patch.dict(os.environ,{},clear=True),patch('greenhouse.cli.core_command',return_value=0) as legacy:
+            self.assertEqual(main(['migrate','--backend','postgres']),0)
+            legacy.assert_called_once_with('migrate',[])
+
     def test_first_namespace_discards_unlabelled_history_and_write_intents(self):
         from greenhouse.app.shared_context import begin_backend
         state={'screen_choice':'cost','_historical_context':{'old':'pin'},'write_intent':'old'}

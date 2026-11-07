@@ -15,7 +15,7 @@ Covers AC-01 through AC-11:
 - Shared EnergyQuantity Identity
 """
 from dataclasses import replace
-from datetime import date, timedelta
+from datetime import date, datetime, timezone, timedelta
 from decimal import Decimal, localcontext
 import psycopg
 import pytest
@@ -32,6 +32,23 @@ from greenhouse.db.cost_adapter import HISTORICAL_TARIFF_ID, PostgresCostAdapter
 from test_energy_mart import contracts_database, energy_scope
 
 D0 = date(2020, 1, 1)
+
+
+def test_import_preserves_known_scenario_audit_and_rejects_changed_retry(energy_scope):
+    from greenhouse.queries.cost import derive_scenario_rates
+    e=energy_scope();adapter=PostgresCostAdapter(e.conn)
+    baseline=register_baseline_reference(adapter,e.scope)
+    sid='import-audit:'+e.scope;version=sid+':v1';name='Imported audit fixture'
+    changes=(ScenarioChange(EnergyComponent.ELEC_HIGH,'EUR/kWh',change_percent=Decimal('10')),)
+    source=CostScenario(version,sid,1,'request:'+sid,baseline.tariff_version,e.publication,name,
+        derive_scenario_rates(baseline,version,name,changes),changes,author='original-author',
+        created_at=datetime(2024,1,2,3,4,5,123456,tzinfo=timezone.utc),analysis_context=e.context)
+    assert adapter.register_scenario(source)==source
+    assert adapter.register_scenario(source)==source
+    with pytest.raises(ValueError,match='audit identity'):
+        adapter.register_scenario(replace(source,author='changed-author'))
+    with pytest.raises(ValueError,match='audit identity'):
+        adapter.register_scenario(replace(source,created_at=source.created_at+timedelta(microseconds=1)))
 
 
 def register_baseline_reference(adapter: PostgresCostAdapter, scope_id: str) -> TariffProfile:

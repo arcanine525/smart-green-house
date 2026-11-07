@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "source_archive_sha256": "d75b8a9986d4a3e8872a40aaad9e5dc95d0b09365ee3393e0b25fdc96afd2656",
+  "clickhouse": {
+    "publication_id": "4b08bd51c092465783304f887d766d47",
+    "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+    "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+    "versions": {
+      "pipeline_run_id": "b46b4d1fa95641b891c447faed0c07dc",
+      "quality_policy_version": "AGC_QUALITY_V1",
+      "parser_version": "agc-parser-v1",
+      "code_version": "clickhouse-warehouse-v1",
+      "config_bundle_hash": "0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7",
+      "metric_version": "br02-summary-v1",
+      "rule_version": null,
+      "tariff_version": null,
+      "scenario_version": null
+    },
+    "committed_at": "2026-11-07T04:36:29.059885+00:00",
+    "finality_status": "complete",
+    "time_basis": "source_naive"
+  },
+  "postgres": {
+    "publication_id": "3e4a051009084e11ab19efdd2343c9d3",
+    "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+    "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+    "versions": {
+      "pipeline_run_id": "4ac6fb2c19e04d2eb69fedf6372cc1be",
+      "quality_policy_version": "AGC_QUALITY_V1",
+      "parser_version": "agc-parser-v1",
+      "code_version": "pipeline-v6-energy",
+      "config_bundle_hash": "031905aef0322a2cecef859f70667662c397ce3743e73634faa3ff6014818f64",
+      "metric_version": "br02-summary-v1",
+      "rule_version": null,
+      "tariff_version": null,
+      "scenario_version": null
+    },
+    "committed_at": "2026-11-06T18:35:15.222801+00:00",
+    "finality_status": "provisional",
+    "time_basis": "source_naive"
+  },
+  "business_exact": true,
+  "configuration_kinds": {
+    "area_basis": 84,
+    "cost_scenario": 177,
+    "energy": 1,
+    "energy_workflow": 2,
+    "harvest": 1,
+    "harvest_rule": 12,
+    "irrigation_rule": 1,
+    "migration_publication_map": 1,
+    "migration_source": 1,
+    "native_rebuild_archive": 1,
+    "native_rebuild_map": 1,
+    "replay": 3,
+    "rule_schedule": 15,
+    "snapshot": 1,
+    "tariff": 7,
+    "threshold": 1,
+    "water": 1
+  }
+}

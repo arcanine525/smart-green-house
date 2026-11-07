@@ -1,0 +1,14 @@
+{"label": "default-routing-tests", "image": "greenhouse-cutover-ui:20261107", "image_id": "sha256:a1dec5ae9b99edaebd612dd624d5ab9bab85e81d1f8afd7ececb99c78dbc5134", "source_head": "f5ccd38f1ee536f6e66e906cf44d69170cb5c6e7", "manifest_sha256": "c767a06a1e048d89fd78535d13ba28003fc8a00ba62115e93edf297502333e9c"}
+test_catalog_discovers_receipts_but_selected_pin_still_verifies_data (test_backend_cli.BackendCLITest.test_catalog_discovers_receipts_but_selected_pin_still_verifies_data) ... ok
+test_core_only_scope_is_discoverable_and_explicitly_not_ready (test_backend_cli.BackendCLITest.test_core_only_scope_is_discoverable_and_explicitly_not_ready) ... ok
+test_migrate_pipeline_resume_lineage_explain_correction_and_new_pin (test_backend_cli.BackendCLITest.test_migrate_pipeline_resume_lineage_explain_correction_and_new_pin) ... ok
+test_clickhouse_is_the_default_for_cli_and_ui_without_pg_environment (test_backend_cli.RoutingTest.test_clickhouse_is_the_default_for_cli_and_ui_without_pg_environment) ... ok
+test_explicit_postgres_keeps_the_rollback_entrypoint (test_backend_cli.RoutingTest.test_explicit_postgres_keeps_the_rollback_entrypoint) ... ok
+test_first_namespace_discards_unlabelled_history_and_write_intents (test_backend_cli.RoutingTest.test_first_namespace_discards_unlabelled_history_and_write_intents) ... ok
+test_invalid_backend_and_credentials_are_safe (test_backend_cli.RoutingTest.test_invalid_backend_and_credentials_are_safe) ... ok
+test_stream_backend_flag_is_forwarded_after_top_level_parse (test_backend_cli.RoutingTest.test_stream_backend_flag_is_forwarded_after_top_level_parse) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 3.350s
+
+OK

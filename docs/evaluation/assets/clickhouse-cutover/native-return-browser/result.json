@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "backend": "clickhouse",
+  "url": "http://127.0.0.1:18584",
+  "publication": "5d455686a06649e789908b9708a9d436",
+  "replay": "walkthrough-live-b3efff6ba5c5",
+  "external_http_blocked": true,
+  "read_only_actions": true,
+  "mode": "water-only",
+  "expected_replay_clock": null,
+  "elapsed_seconds": 189.039,
+  "checks": [
+    {
+      "screen": "water",
+      "metrics": [
+        "Irrigation observed\n\n553,50 L/m²",
+        "Drain observed\n\n211,40 L/m²",
+        "Tỷ lệ drain (paired)\n\n38,19 %",
+        "Độ phủ paired\n\n100,00 %"
+      ],
+      "publication": "5d455686a06649e789908b9708a9d436"
+    }
+  ]
+}

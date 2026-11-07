@@ -1,0 +1,197 @@
+{
+  "status": "passed",
+  "postgres_publication": "c51402d9d25f45c182140b072397de78",
+  "clickhouse_publication": "5d455686a06649e789908b9708a9d436",
+  "threshold_groups": [
+    {
+      "compartment": "AICU",
+      "kind": "climate",
+      "basis": "requested",
+      "episodes": 1643,
+      "slots": 47808,
+      "slot_fingerprint": "d064461520ef01dee8218814bc62c61ca753103e6e61fb2f30f5dc00332acb88",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "AICU",
+      "kind": "climate",
+      "basis": "realized",
+      "episodes": 6703,
+      "slots": 47808,
+      "slot_fingerprint": "d064461520ef01dee8218814bc62c61ca753103e6e61fb2f30f5dc00332acb88",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "AICU",
+      "kind": "drain",
+      "basis": "measured",
+      "episodes": 229,
+      "slots": 47808,
+      "slot_fingerprint": "717716a9d0088582ca112f4a5696c25328ae565311c59cf319201cefd7cdc05c",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "Automatoes",
+      "kind": "climate",
+      "basis": "requested",
+      "episodes": 3959,
+      "slots": 47808,
+      "slot_fingerprint": "44e5221699e69750b742900eecffeb04f26406ca389f84c9f260895a199e9e09",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "Automatoes",
+      "kind": "climate",
+      "basis": "realized",
+      "episodes": 4139,
+      "slots": 47808,
+      "slot_fingerprint": "44e5221699e69750b742900eecffeb04f26406ca389f84c9f260895a199e9e09",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "Automatoes",
+      "kind": "drain",
+      "basis": "measured",
+      "episodes": 447,
+      "slots": 47808,
+      "slot_fingerprint": "a768733115096ec33ef9e85169216893c025144a2b57307826f7387c094a639e",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "Digilog",
+      "kind": "climate",
+      "basis": "requested",
+      "episodes": 6837,
+      "slots": 47808,
+      "slot_fingerprint": "e1d454b061873012b82716fed11dd83a8624cba3eebb0f6fc85fdcc13c0fa914",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "Digilog",
+      "kind": "climate",
+      "basis": "realized",
+      "episodes": 6490,
+      "slots": 47808,
+      "slot_fingerprint": "e1d454b061873012b82716fed11dd83a8624cba3eebb0f6fc85fdcc13c0fa914",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "Digilog",
+      "kind": "drain",
+      "basis": "measured",
+      "episodes": 120,
+      "slots": 47808,
+      "slot_fingerprint": "057da9b9c723bb7eab5605992274acf38d157b4e6b10bc22c48623c1a6b694b5",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "IUACAAS",
+      "kind": "climate",
+      "basis": "requested",
+      "episodes": 5175,
+      "slots": 47808,
+      "slot_fingerprint": "055a1558aaf6bede496709d853afaa3c64174fef49c45f29d3e3080fef77d39f",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "IUACAAS",
+      "kind": "climate",
+      "basis": "realized",
+      "episodes": 5465,
+      "slots": 47808,
+      "slot_fingerprint": "055a1558aaf6bede496709d853afaa3c64174fef49c45f29d3e3080fef77d39f",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "IUACAAS",
+      "kind": "drain",
+      "basis": "measured",
+      "episodes": 509,
+      "slots": 47808,
+      "slot_fingerprint": "a7ff7bab93ff78a2057f3c534dd78b52d5e97385849a1df36ca7c129efdfe1e9",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "Reference",
+      "kind": "climate",
+      "basis": "requested",
+      "episodes": 4606,
+      "slots": 47808,
+      "slot_fingerprint": "84870abdceec5b67c1d8b504488f8a77e4428df890361f64cf5393fb19a4677d",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "Reference",
+      "kind": "climate",
+      "basis": "realized",
+      "episodes": 5204,
+      "slots": 47808,
+      "slot_fingerprint": "84870abdceec5b67c1d8b504488f8a77e4428df890361f64cf5393fb19a4677d",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "Reference",
+      "kind": "drain",
+      "basis": "measured",
+      "episodes": 167,
+      "slots": 47808,
+      "slot_fingerprint": "198d406b7a1c8dc019e67cd102a50b7d3d1ba27116398108bfecd513cc475d37",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "TheAutomators",
+      "kind": "climate",
+      "basis": "requested",
+      "episodes": 7878,
+      "slots": 47808,
+      "slot_fingerprint": "09c3b9e195579c154f317b1a3b3b265aad1e9fd23a5fb7c1076ccc577f38f703",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "TheAutomators",
+      "kind": "climate",
+      "basis": "realized",
+      "episodes": 7887,
+      "slots": 47808,
+      "slot_fingerprint": "09c3b9e195579c154f317b1a3b3b265aad1e9fd23a5fb7c1076ccc577f38f703",
+      "matches_postgres_and_raw": true
+    },
+    {
+      "compartment": "TheAutomators",
+      "kind": "drain",
+      "basis": "measured",
+      "episodes": 371,
+      "slots": 47808,
+      "slot_fingerprint": "d79bb4c3a115ba00318c2ebf05367078b318a0c86c3cbbbf08bdeb9557ac3588",
+      "matches_postgres_and_raw": true
+    }
+  ],
+  "reference_rules_persisted": false,
+  "publication_verified": true,
+  "business_match": true,
+  "csv_match": true,
+  "lineage_match": true,
+  "threshold-AICU-climate-requested_match": true,
+  "threshold-AICU-climate-realized_match": true,
+  "threshold-AICU-drain-measured_match": true,
+  "threshold-Automatoes-climate-requested_match": true,
+  "threshold-Automatoes-climate-realized_match": true,
+  "threshold-Automatoes-drain-measured_match": true,
+  "threshold-Digilog-climate-requested_match": true,
+  "threshold-Digilog-climate-realized_match": true,
+  "threshold-Digilog-drain-measured_match": true,
+  "threshold-IUACAAS-climate-requested_match": true,
+  "threshold-IUACAAS-climate-realized_match": true,
+  "threshold-IUACAAS-drain-measured_match": true,
+  "threshold-Reference-climate-requested_match": true,
+  "threshold-Reference-climate-realized_match": true,
+  "threshold-Reference-drain-measured_match": true,
+  "threshold-TheAutomators-climate-requested_match": true,
+  "threshold-TheAutomators-climate-realized_match": true,
+  "threshold-TheAutomators-drain-measured_match": true,
+  "all_six_brs": true,
+  "includes_cycle_boundary_episodes": true,
+  "episodes_compared": 67829,
+  "elapsed_seconds": 317.28549285400004,
+  "scope": "Fresh corrected publications on both engines; PG/raw oracle, 96 CSV and 30 lineage probes"
+}

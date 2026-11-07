@@ -2,9 +2,17 @@
 # Sensor acceptance using only test-owned Docker containers/volumes.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# Explicit optional PostgreSQL configuration; the default stack is ClickHouse.
+export COMPOSE_FILE="$PWD/compose.postgres.yaml"
 root_dir=$PWD
 run_id="$(date -u +%Y%m%d%H%M%S)-${RANDOM}"
-network_name=${SENSOR_TEST_NETWORK:-smart-greenhouse_backend}
+network_name=${SENSOR_TEST_NETWORK:-${GREENHOUSE_PG_TEST_PROJECT:-greenhouse-postgres}_backend}
+[[ "$network_name" == *_backend ]] || { printf 'Expected a dedicated PostgreSQL Compose backend network.\n' >&2; exit 2; }
+export COMPOSE_PROJECT_NAME="${network_name%_backend}"
+docker network inspect "$network_name" >/dev/null 2>&1 || {
+    printf 'Start the optional PostgreSQL fixture project or run scripts/test_local.sh first.\n' >&2
+    exit 2
+}
 broker_name="greenhouse-recovery-broker-${run_id}"
 db_name="greenhouse-recovery-db-${run_id}"
 runner_name="greenhouse-recovery-runner-${run_id}"

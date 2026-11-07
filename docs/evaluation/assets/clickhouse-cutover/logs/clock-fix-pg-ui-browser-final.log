@@ -1,0 +1,9 @@
+{"screen":"water","status":"passed"}
+{"screen":"harvest","status":"passed"}
+{"screen":"climate","status":"passed"}
+{"screen":"drain","status":"passed"}
+{"screen":"energy","status":"passed"}
+{"screen":"cost","status":"passed"}
+{"screen":"overview","status":"passed"}
+{"screen":"quality","status":"passed"}
+{"screen":"replay","status":"passed"}

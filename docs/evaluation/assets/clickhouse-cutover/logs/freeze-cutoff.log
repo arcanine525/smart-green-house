@@ -1,0 +1,41 @@
+{"label": "freeze-cutoff", "image": "greenhouse-cutover-processing:20261107", "source_head": "f5ccd38f1ee536f6e66e906cf44d69170cb5c6e7"}
+{"stage": "business_reference", "compartment": "AICU"}
+{"stage": "business_reference", "compartment": "Automatoes"}
+{"stage": "business_reference", "compartment": "Digilog"}
+{"stage": "business_reference", "compartment": "IUACAAS"}
+{"stage": "business_reference", "compartment": "Reference"}
+{"stage": "business_reference", "compartment": "TheAutomators"}
+Traceback (most recent call last):
+  File "/cutover-tools/state.py", line 108, in <module>
+    args=parser.parse_args()
+                           ^^
+  File "/cutover-tools/state.py", line 61, in freeze
+    if (COORDINATOR/cutover_journal.NAME).exists():archive['journal']=cutover_journal.inspect(COORDINATOR)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/repro/common.py", line 33, in write_json
+    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/local/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/local/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/local/lib/python3.12/json/encoder.py", line 326, in _iterencode_list
+    yield from chunks
+  File "/usr/local/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/local/lib/python3.12/json/encoder.py", line 326, in _iterencode_list
+    yield from chunks
+  File "/usr/local/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable

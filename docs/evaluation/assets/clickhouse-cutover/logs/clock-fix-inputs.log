@@ -1,0 +1,2 @@
+{"label": "clock-fix-inputs", "image": "greenhouse-cutover-processing:20261107", "image_id": "sha256:4e99a12aa61d1c176aa96a3ce1eb0c5ccfe61255bf0c083b0142f31108726f5e", "source_head": "f5ccd38f1ee536f6e66e906cf44d69170cb5c6e7", "manifest_sha256": "ff6ffcd14a244afa1ee48ab9f4cc0a4960abc67d550507bc20b0b85907f206a4"}
+{"stage": "rollback_inputs", "status": "passed"}
