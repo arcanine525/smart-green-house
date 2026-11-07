@@ -1,11 +1,12 @@
-# Kịch bản project 24 phút — bản dự thảo
+# Group 29 — Kịch bản project 24 phút
 
 Video thuyết trình tổng thể **20–30 phút do user quay offline**. Bảy walkthrough
 ClickHouse đã có là bằng chứng thao tác, không thay cho video thuyết trình.
 Tổng 27 phút 22,56 s của cả bộ không được phát hết bên trong kịch bản 24 phút.
 Mỗi BR chỉ chèn highlight khoảng 30–45 s hoặc demo live ngắn, rồi giải thích.
 
-Dùng ba vai A/B/C; tên/MSSV giữ placeholder khi chốt gói. Phân công này là gợi ý
+Dùng ba vai A/B/C; tên/MSSV là placeholder trong `docs/submission/group.json`.
+Điền file đó rồi chạy `./scripts/build_submission.sh` để cập nhật cả hai PDFs. Phân công này là gợi ý
 trình bày cần nhóm xác nhận, không tự ghi nhận đóng góp thực tế. A giải thích
 BR-01/03; B giải thích BR-02/05; C giải thích BR-04/06. Có handoff ngắn giữa các
 người, tránh một người đọc hết phần của người khác.
@@ -31,11 +32,11 @@ người, tránh một người đọc hết phần của người khác.
 - App hiện hành ghim `5d455686a06649e789908b9708a9d436`: correction diễn tập
   `cutover-resource-20261107` cộng 1 Irr ngày 02/03, tổng 10,36/drain 3,89→37,55%.
   Giải thích audit+pin mới; không nói 10,36 là quan sát AGC gốc. Energy/harvest
-  vẫn cùng giá trị vì correction chỉ đổiIrr. PGrollback c51402d9…khớp pin mới.
+  vẫn cùng giá trị vì correction chỉ đổi Irr. PG rollback c51402d9…khớp pin mới.
 - Catalog UI chọn current complete pin; không hứa chọn pin cũ trong sidebar.
-  Muốn thuyết trình raw 9,36 dùng clip đã ghim 4 b 08 và ghi rõ. Muốn demo live dùng
+  Muốn thuyết trình raw 9,36 dùng clip đã ghim 4b08 và ghi rõ. Muốn demo live dùng
   số 10,36 và context hiện hành; không sửa warehouse để làm hình khớp clip.
-- Scenario đã lưu có frozen publication/context. Không ép mở scenario 4 b 08 lên 5 d 45.
+- Scenario đã lưu có frozen publication/context. Không ép mở scenario 4b08 lên 5d45.
   Dùng clip save/reopen hoặc chọn scenario đúng context; tạo mới chỉ khi cần và
   ghi lại request/version. Dryrun ưu tiên thao tác đọc để không đổi bản nghiệm thu.
 

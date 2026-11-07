@@ -1,6 +1,6 @@
 ---
 title: "Smart Greenhouse"
-subtitle: "Data Engineering · Project cuối kỳ · bản dự thảo"
+subtitle: "Data Engineering · Project cuối kỳ · Group 29"
 date: "07/11/2026"
 lang: vi-VN
 ---
@@ -61,8 +61,8 @@ lang: vi-VN
 ## IV · 9. Demo BR-01/02
 
 - Chọn scope/khoang/ngày/rule; xem episode, coverage và nguồn.
-- Video gốc 4 b 08…: Automatoes 02–03/03,tưới 9,36/drain 3,89→41,56%.
-- App hiện hành 5 d 45…: correction có audit+1 Irr→10,36/3,89→37,55%.
+- Video gốc 4b08…: Automatoes 02–03/03,tưới 9,36/drain 3,89→41,56%.
+- App hiện hành 5d45…: correction có audit+1 Irr→10,36/3,89→37,55%.
 - Raw/pin gốc không đổi; export ghim đúng pin, không trộn số.
 
 ## IV · 10. Demo BR-03/05
@@ -83,7 +83,7 @@ lang: vi-VN
 
 - Replay 30 dòng AGC, MQTT/Spark thật; theo dõi 10→30 và đối soát.
 - Tách source clock/freshness; xem quality, trace và export.
-- Bảy native video 1080 p:109 bước/21 exports/27 phút 22,56 s.
+- Bảy native video 1080p:109 bước/21 exports/27 phút 22,56 s.
 - Thuyết trình 24 phút chỉ dùng highlights; toàn bộ video nộp riêng.
 
 ## V · 13. Correctness và rollback
@@ -91,7 +91,7 @@ lang: vi-VN
 - Full 6 BR/96 CSV/30 lineage/18 nhómthreshold/67.829 episode khớpPG/raw.
 - T39:100 tests,91 chạy/chínheavy skips; không cộng các suite giao nhau.
 - Cutover:315 configs/178 scenarios/62 intents/bảy replay pins bảo toàn.
-- Backup đọc toàn bộ; reverse import→parity→mởapp; originalPG giữ nguyên.
+- Backup đọc toàn bộ; reverse import→parity→mởapp; original PG giữ nguyên.
 
 ## V · 14. Hai phép so riêng biệt
 
@@ -110,7 +110,7 @@ lang: vi-VN
 ## V · 16. Cold và kiến trúc: đọc đúng số
 
 - T49 cold catalog:PG 0,167 s/CH 141,242 s; không phải warm query.
-- PG Hybrid/Kimball gốc:BR-01 p 95 4061/3028 ms, đều vượt 2 s.
+- PG Hybrid/Kimball gốc:BR-01 p95 4061/3028 ms, đều vượt 2 s.
 - Hybrid follow-up 1771 ms là lượt riêng; không thay số benchmark gốc.
 - Chưa đo concurrent users/SLA; raw samples và điều kiện có trong report.
 

@@ -1,41 +1,32 @@
-# Tài liệu nộp — bản dự thảo
+# Nguồn tài liệu Project cuối kỳ
 
-- [Báo cáo PDF](report-draft.pdf) · [nguồn Markdown](report.md).
-- [Slide PDF](slides-draft.pdf) · [nguồn Markdown](slides.md).
-- [Kịch bản video 24 phút](video-script.md).
-- Sơ đồ trong `figures/` có nguồn Mermaid `.mmd` và ảnh render `.png`.
+- [Báo cáo PDF Group 29](../../project-submit/29_technical_report.pdf) · [Markdown](report.md).
+- [Slides PDF Group 29](../../project-submit/29_slides.pdf) · [Markdown](slides.md).
+- [Kịch bản 24 phút](video-script.md) · [metadata nhóm](group.json).
+- [Chỉ mục bàn giao](../../project-submit/README.md): file editable, video và checklist.
 
-Các file đang đánh dấu **dự thảo**: đã cập nhật backend ClickHouse và bằng chứng theo engine; metadata cuối chuyển T29.
-Group ID29 đã chốt; tên/MSSV dùng placeholder theo user. Chưa hoàn tất
-phân công thực tế hoặc video thuyết trình 20–30 phút. Không
-đổi tên thành gói nộp cuối và không công bố các mục chưa có bằng chứng là đạt.
-Video giữ ngoài Git; nhóm cần hoàn thiện video thuyết trình, kiểm tra và lưu ở nơi nộp.
-Bộ walkthrough hiện hành ClickHouse có bảy video/109bước/21exports (PG T26 giữ riêng),
-không thay video tổng thể; xem
-[bằng chứng và cách mở video](../evaluation/usability.md). Đánh giá người thật
-là mở rộng tùy chọn theo quyết định user ngày 2026-11-07.
-[T28 full AGC/offline và restore](../evaluation/assets/full-local-repro/README.md) đã đạt trong phạm vi công bố.
-
-Để xuất lại PDF cần cài Mermaid CLI (`mmdc` và Chromium), Pandoc và LibreOffice
-(`soffice`) trên máy soạn tài liệu, sau đó chạy `./scripts/build_submission.sh`.
-Đây là công cụ tạo artifact, không phải dependency runtime của ứng dụng local.
-Các số trong tài liệu phải đối chiếu lại [correctness](../evaluation/correctness.md),
-[performance](../evaluation/performance.md), [usability](../evaluation/usability.md)
-và [sensor](../evaluation/sensor-replay.md) sau mỗi lượt đánh giá mới.
-
-## Kiểm tra gói nộp
-
-Sau khi xác nhận Group ID và tạo sản phẩm cuối, đặt vào một thư mục local:
-`<GROUP_ID>_technical_report.pdf`, `<GROUP_ID>_slides.pdf` và
-`<GROUP_ID>_video.mp4` hoặc `.webm`. Ứng dụng là repository/Compose này. Chạy:
+Group ID **29**; ba tên/MSSV dùng placeholder theo yêu cầu user. Điền một nguồn
+`group.json`, xác nhận vai/đóng góp thực tế rồi build lại PDFs. Sáu phần báo cáo
+bám đề Project: bối cảnh/BR, dữ liệu, kỹ thuật/ứng dụng, alternative/phương pháp,
+kết quả, kết luận/bàn giao. Số liệu phân biệt PG/CH, warm/cold và publication gốc/
+correction có audit. Các bản PDF draft cũ đã được thay bằng đường dẫn gói hiện hành.
 
 ```bash
-./scripts/check_submission.sh GROUP_ID /duong/dan/den/goi-nop
+./scripts/build_submission.sh
 ```
 
-Lệnh cần `pdfinfo`, `pdftotext`, `ffprobe` và Docker Compose, chỉ đọc file và
-kiểm tra cấu hình. Nó kiểm PDF có text/không gắn nhãn draft, tên file, video có
-cả hình/tiếng và dài 20–30 phút; cần xem thủ công nội dung, group ID, audio,
-demo, link và quyền truy cập nơi nộp. Test ngày 2026-11-06 xác nhận gói draft
-thiếu video bị từ chối; gói **giả lập** gồm PDF mẫu và video đen/im lặng 1.201
-giây được chấp nhận về cấu trúc. Gói giả lập không phải sản phẩm của project.
+Cần Mermaid CLI/Chromium, Pandoc, LibreOffice, Python3 và Poppler trên máy soạn
+tài liệu; đây không phải dependency runtime app. Script xuất report A4, slide
+PDF và DOCX/PPTX tại `project-submit/`; sơ đồ có nguồn Mermaid trong `figures/`.
+Có thể sửa Markdown hoặc identity và tái xuất, rồi chạy kiểm tra gói để cập nhật
+checksum. Không chỉnh PDF binary rồi bỏ qua source/manifest.
+
+Video thuyết trình **20–30 phút do user quay offline**. Bộ bảy walkthrough CH
+đã có, không có giọng trình bày và không thay video tổng thể. Giới hạn usability:
+chưa có người tham gia. Không tạo video đen/placeholder để vượt kiểm tra. Gói
+trước video và gói cuối đủ bốn sản phẩm là hai trạng thái riêng; hướng dẫn kiểm
+ở [chỉ mục](../../project-submit/README.md). Agent không tự upload/nộp bài.
+
+Bằng chứng: [ma trận yêu cầu](../implementation/requirements-matrix.md),
+[correctness/benchmark/recovery](../evaluation/README.md),
+[walkthrough native](../evaluation/assets/clickhouse-walkthrough/README.md).

@@ -1,6 +1,6 @@
 ---
 title: "Smart Greenhouse: hệ thống dữ liệu và phân tích nhà kính"
-subtitle: "Báo cáo kỹ thuật môn Data Engineering — bản dự thảo"
+subtitle: "Báo cáo kỹ thuật môn Data Engineering · Group 29"
 date: "07/11/2026"
 lang: vi-VN
 ---
@@ -108,7 +108,7 @@ Source clock phục vụ episode khác operational clock phục vụ freshness/l
 
 # 3. Giải pháp kỹ thuật và ứng dụng
 
-![Kiến trúc thực chạy: native batch và sensor streaming](figures/architecture.png)
+![Kiến trúc thực chạy: native batch và sensor streaming](figures/architecture.png){width=6.1in}
 
 ## 3.1. Warehouse Hybrid trên ClickHouse
 
@@ -241,7 +241,7 @@ identity, normalized replay clock, received time, state/cursor/checksum và orig
 envelopes. Một scenario family trùng ID từ hai lineage được namespace và map
 bất biến; PG original không bị ghi đè. Backup PG cuối 239.741.319 byte đã đọc
 **toàn bộ** archive, không chỉ liệt kê header. Chỉ fixture agent được dựng lại;
-originalPG containers/volumes không bị thay đổi. App native chín màn hình đạt khi
+original PG containers/volumes không bị thay đổi. App native chín màn hình đạt khi
 PG dừng; quay lại native với journal active đã kiểm.
 
 Lỗi importer đã được main phát hiện qua caption replay clock: raw source timestamp
@@ -301,7 +301,7 @@ limitations và profiler ở `docs/evaluation/performance.md`,
 
 ## 5.4. Khả năng khai thác và vấn đề thực tế
 
-Bảy video native 1080 p đạt 109 bước,21 file xuất, tổng 27 phút 22,56 s: sáu BR và một
+Bảy video native 1080p đạt 109 bước,21 file xuất, tổng 27 phút 22,56 s: sáu BR và một
 sensor replay với MQTT/Spark thật. Full decode/player/chapter frames đã kiểm;
 metadata và checksums ở `docs/evaluation/assets/clickhouse-walkthrough/`.
 Video PG cũ là bộ riêng 93 bước/19 exports, không đổi nhãn thành CH. Walkthrough

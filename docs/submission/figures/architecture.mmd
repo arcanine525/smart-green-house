@@ -1,12 +1,9 @@
+%%{init: {'themeVariables': {'fontSize': '18px'}, 'flowchart': {'nodeSpacing': 28, 'rankSpacing': 28}}}%%
 flowchart TB
-  AGC["AGC ZIP + manifest"] --> RAW["Locked raw + provenance"]
-  RAW --> BATCH["Python native historical batch"]
-  RAW --> SIM["Simulator + SQLite outbox"]
-  SIM --> MQTT["MQTT QoS1"] --> COL["Durable collector + ready files"]
-  COL --> STREAM["Spark Structured Streaming"]
-  BATCH --> COORD["Shared writer lock + pending fence + journal"]
-  STREAM --> COORD
-  COORD --> CH[("ClickHouse core / config / typed marts")]
-  CH --> PUB["Verify bundles + COMPLETE pin"]
-  PUB --> APP["Streamlit / Plotly / CSV / JSON"]
-  PUB -. "cutoff + delta + reverse parity" .-> PG[("Optional PostgreSQL rollback")]
+  RAW["AGC raw + manifest"] --> BATCH["Python historical batch"]
+  RAW --> SENSOR["Replay: MQTT + collector<br/>Spark Structured Streaming"]
+  BATCH --> COORD["Coordinator: writer lock + journal"]
+  SENSOR --> COORD
+  COORD --> CH["ClickHouse core + typed marts<br/>Verified complete publication"]
+  CH --> UI["Streamlit / Plotly / exports"]
+  CH -. "delta + parity" .-> PG["Optional PostgreSQL rollback"]
