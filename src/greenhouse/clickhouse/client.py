@@ -68,26 +68,30 @@ class Client:
         """HTTP responses close individually; discard action-owned verified inputs."""
         self._action_cache=None
 
-    def execute(self, sql, parameters=None, *, query_id=None):
-        """Return raw response; never auto-retry an ambiguous write.
-
-        A caller-supplied query ID is required by the publication coordinator for
-        writes. The base client generates one for independent queries/smoke only.
-        """
+    def _request(self,sql,parameters,query_id,*,streaming=False):
         settings = self.settings
         query = {'database': settings.database, 'query_id': query_id or uuid4().hex,
                  'async_insert': '0', 'wait_end_of_query': '1',
                  'output_format_json_quote_decimals': '1'}
+        if streaming:
+            # Large source payload columns otherwise multiply their default
+            # ~65k-row blocks across in-order part readers on the 2 GiB server.
+            query.update(wait_end_of_query='0',max_threads='1',max_block_size='1024',
+                         max_streams_for_merge_tree_reading='1')
         for key, value in (parameters or {}).items():
             if not re.fullmatch(r'[a-zA-Z_][a-zA-Z0-9_]*', key):
                 raise ValueError('Invalid SQL parameter name')
             query['param_' + key] = str(value)
         credentials = base64.b64encode(f'{settings.user}:{settings.password}'.encode()).decode()
-        request = Request(f'http://{settings.host}:{settings.port}/?{urlencode(query)}',
+        return Request(f'http://{settings.host}:{settings.port}/?{urlencode(query)}',
                           data=sql.encode('utf-8'), method='POST',
                           headers={'Authorization': 'Basic ' + credentials,
                                    'Content-Type': 'text/plain; charset=utf-8'})
+    def execute(self, sql, parameters=None, *, query_id=None):
+        """Synchronous request; never auto-retry an ambiguous write."""
         try:
+            request=self._request(sql,parameters,query_id)
+            settings=self.settings
             with urlopen(request, timeout=settings.timeout) as response:
                 return response.read().decode('utf-8')
         except HTTPError as error:
@@ -100,6 +104,23 @@ class Client:
     def query(self, sql, parameters=None):
         result = json.loads(self.execute(sql.rstrip().rstrip(';') + ' FORMAT JSON', parameters))
         return result['data']
+
+    def iter_query(self,sql,parameters=None):
+        """Read bounded JSONEachRow frames, closing the response on exhaustion.
+
+        A partial HTTP response never becomes a verified receipt: consumers
+        must finish iteration before publishing their materialized proof.
+        """
+        request=self._request(sql.rstrip().rstrip(';')+' FORMAT JSONEachRow',parameters,None,streaming=True)
+        try:
+            with urlopen(request,timeout=self.settings.timeout) as response:
+                for line in response:
+                    if line.strip():yield json.loads(line)
+        except HTTPError as error:
+            status=error.code;error.close()
+            raise ClickHouseError(f'ClickHouse rejected query (HTTP {status}); inspect server query log by query ID') from None
+        except (URLError,TimeoutError,socket.timeout,OSError):
+            raise ClickHouseError('ClickHouse streaming read interrupted; no verified result is available') from None
 
 
 def main():

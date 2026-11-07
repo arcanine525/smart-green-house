@@ -21,7 +21,7 @@ class CostAdapter(EnergyAdapter):
         self.repo=Repository(client,coordinator)
 
     def _envelopes(self,kind):
-        return [r for r in self.repo.configurations()['rows'] if r['kind']==kind]
+        return self.repo.configurations(kind=kind)['rows']
 
     def validate_cycle(self,scope_id,snapshot_id,cycle_id,compartment_id):
         rows=self.client.query('''SELECT DISTINCT publication_id FROM energy_cycle WHERE scope_id={scope:String}

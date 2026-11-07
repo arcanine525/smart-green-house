@@ -1,0 +1,13 @@
+ Container gh-ch-full-20261107-ch-stream-run-941f58dd8f76 Creating
+ Container gh-ch-full-20261107-ch-stream-run-941f58dd8f76 Created
+{"stage": "historical_publication_verification_started", "publication_id": "8572a2e99a0a4a839aacb41f8f669916"}
+{"stage": "agc_sensor_source_ready", "selection_limit": 30, "source_snapshot": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68", "resume": false}
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/06 23:52:20 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/06 23:52:23 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+{"status": "passed", "source_events": 30, "replay_publication": "f68c949e50faf9cebb3e2d523173bf7d826f912bc86990cd31af0a2613ee4f82"}
+26/11/06 23:52:30 WARN DAGScheduler: Failed to cancel job group a7a4f2cd-43b8-4364-86b7-7599e1dea3f7. Cannot find active jobs for it.
+26/11/06 23:52:30 WARN DAGScheduler: Failed to cancel job group a7a4f2cd-43b8-4364-86b7-7599e1dea3f7. Cannot find active jobs for it.

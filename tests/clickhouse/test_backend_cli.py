@@ -79,6 +79,7 @@ class BackendCLITest(unittest.TestCase):
         rid=facts['rows'][0]['revision_id']
         lineage=self.invoke('lineage','--scope-id',self.scope,'--snapshot',str(self.raw),'--publication-id',pub.publication_id,'--revision-id',rid,'--kind','energy')
         self.assertTrue(lineage['raw_hash_verified'])
+        self.assertEqual([u['measure_code'] for u in lineage['units']],['CO2_cons','Drain','ElecHigh','ElecLow','Heat_cons','Irr'])
         from greenhouse.clickhouse.repository import Repository
         source=next(r for r in Repository(self.client,None).load_membership(self.scope,result['load_id']) if r['revision_id']==rid)
         values=json.loads(source['payload'])['values'];new=copy.deepcopy(values);new['Heat_cons']='72'

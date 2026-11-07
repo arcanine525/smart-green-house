@@ -53,6 +53,8 @@ def validated_config(config):
         raise ValueError('Unsupported threshold semantic configuration')
     if ({'missing':'per_measure','out_of_target_is_quality':False}|config['quality_definition'])!=AGC_QUALITY_DEFINITION:
         raise ValueError('Threshold quality definition drift')
+    if config.get('storage_version','threshold-list-v1') not in ('threshold-list-v1','threshold-stream-v2'):
+        raise ValueError('Unsupported threshold storage version')
     selection=config.get('climate_window')
     if selection is not None:
         if not isinstance(selection,list) or len(selection)!=2:
@@ -93,7 +95,13 @@ class SlotMart:
     def expected(self,scope,pub,core,version):
         config,pin=self.config(scope,version)
         cycles=[dict(scope_id=scope,publication_id=pub,bundle=self.bundle,**c) for c in config['cycles']]
-        mapping={c['compartment_id']:c for c in cycles}; measures=[]; seen=set()
+        rows=self._measure_rows(scope,pub,core,config,cycles)
+        measures=rows if config.get('storage_version')=='threshold-stream-v2' else list(rows)
+        return dict(scope_id=scope,publication_id=pub,bundle=self.bundle,config_version=version),cycles,measures,pin
+
+    def _measure_rows(self,scope,pub,core,config,cycles):
+        mapping={c['compartment_id']:c for c in cycles}; seen=set();last=None
+        streaming=config.get('storage_version')=='threshold-stream-v2'
         for revision in core:
             if revision['snapshot_id']!=config['snapshot_id'] or revision['quality_policy_version']!=config['quality_policy_version']:
                 raise ValueError('Threshold source snapshot/policy mismatch')
@@ -110,28 +118,34 @@ class SlotMart:
                 raise ValueError('Threshold source outside cycle boundary')
             if when.second or when.microsecond or when.minute%5:
                 raise ValueError('Threshold source is not on the five-minute grid')
-            key=(cycle['cycle_id'],stamp)
-            if key in seen:
-                raise ValueError('Duplicate threshold slot')
-            seen.add(key)
-            for code in MEASURES[self.bundle]:
+            key=(cycle['compartment_id'],stamp)
+            if streaming:
+                if last is not None and key<=last:raise ValueError('Duplicate or unordered threshold source slot')
+                last=key
+            else:
+                if key in seen:raise ValueError('Duplicate threshold slot')
+                seen.add(key)
+            for code in sorted(MEASURES[self.bundle]):
                 value,quality,applicability,reason=measure_verdict(config['quality_definition'],record,code)
                 exact,projection,status=decimal_projection(value)
-                measures.append(dict(scope_id=scope,publication_id=pub,bundle=self.bundle,
+                yield dict(scope_id=scope,publication_id=pub,bundle=self.bundle,
                     cycle_id=cycle['cycle_id'],compartment_id=cycle['compartment_id'],slot_clock_us=source_clock_us(when),
                     slot_start=stamp,revision_id=revision['revision_id'],logical_record_key=cycle['cycle_id']+':'+revision['logical_key'],
                     quality_policy_version=config['quality_policy_version'],correction_id=revision['correction_id'],
                     correction_version=revision['revision']-1,measure_code=code,value_exact=exact,value_decimal=projection,
-                    projection_status=status,quality=quality,applicability=applicability,reason=reason))
-        return dict(scope_id=scope,publication_id=pub,bundle=self.bundle,config_version=version),cycles,measures,pin
+                    projection_status=status,quality=quality,applicability=applicability,reason=reason)
 
     def build(self,scope,pub,core):
         if self.config_version is None:
             raise ValueError('Explicit threshold configuration required')
         header,cycles,measures,_=self.expected(scope,pub,core,self.config_version)
         self.repo._insert('threshold_cycle',cycles)
-        for offset in range(0,len(measures),4096):
-            self.repo._insert('threshold_measure',measures[offset:offset+4096])
+        batch=[]
+        for row in measures:
+            batch.append(row)
+            if len(batch)>=4096:
+                self.repo._insert('threshold_measure',batch);batch.clear()
+        if batch:self.repo._insert('threshold_measure',batch)
         self.repo._insert('threshold_header',[header])
 
     def verify(self,scope,pub,core):
@@ -139,6 +153,8 @@ class SlotMart:
         if len(headers)!=1:
             raise ValueError('Missing/conflicting threshold header')
         header,cycles,measures,pin=self.expected(scope,pub,core,headers[0]['config_version'])
+        if json.loads(pin['payload']).get('storage_version')=='threshold-stream-v2':
+            return self._verify_stream(scope,pub,header,cycles,measures,pin,headers)
         def normalize(rows):
             return sorted(canonical_json(r|({'value_decimal':decimal_text(r['value_decimal']) if r['value_decimal'] is not None else None,
                 'slot_clock_us':int(r['slot_clock_us'])} if 'value_decimal' in r else {})) for r in rows)
@@ -146,6 +162,35 @@ class SlotMart:
             raise ValueError('Threshold mart differs from canonical source/configuration')
         return {'version':VERSIONS[self.bundle],'rows':len(measures)//len(MEASURES[self.bundle]),'cycles':len(cycles),
             'checksum':digest([header,normalize(cycles),normalize(measures)]),
+            'configuration_ref':{'kind':'threshold','version':pin['version_id'],'hash':pin['content_hash']}}
+
+
+    def _verify_stream(self,scope,pub,header,cycles,expected,pin,headers):
+        from contextlib import closing
+        import hashlib
+        from itertools import zip_longest
+        normalize=lambda r:canonical_json(r|({'value_decimal':decimal_text(r['value_decimal']) if r['value_decimal'] is not None else None,
+            'slot_clock_us':int(r['slot_clock_us'])} if 'value_decimal' in r else {}))
+        normalized_cycles=sorted(map(normalize,cycles))
+        if headers!=[header] or normalized_cycles!=sorted(map(normalize,self.rows('threshold_cycle',scope,pub))):
+            raise ValueError('Threshold header/cycles differ from canonical configuration')
+        sql='SELECT * FROM threshold_measure WHERE scope_id={scope:String} AND publication_id={pub:String} AND bundle={bundle:String} ORDER BY compartment_id,slot_clock_us,measure_code SETTINGS max_bytes_before_external_sort=67108864'
+        checksum=hashlib.sha256();count=0;missing=object()
+        def logical_rows(rows):
+            previous=None
+            for row in rows:
+                if row!=previous:yield row
+                previous=row
+        with closing(self.client.iter_query(sql,{'scope':scope,'pub':pub,'bundle':self.bundle})) as actual:
+            for wanted,stored in zip_longest(expected,logical_rows(actual),fillvalue=missing):
+                if wanted is missing or stored is missing:raise ValueError('Threshold mart measure count differs from canonical source')
+                encoded=normalize(wanted)
+                if encoded!=normalize(stored):raise ValueError('Threshold mart differs from canonical source/configuration')
+                checksum.update(encoded.encode()+b'\n');count+=1
+        algorithm='ordered-jsonl-sha256-v2'
+        return {'version':VERSIONS[self.bundle],'rows':count//len(MEASURES[self.bundle]),'cycles':len(cycles),
+            'storage_version':'threshold-stream-v2','checksum_algorithm':algorithm,
+            'checksum':digest({'algorithm':algorithm,'header':header,'cycles':normalized_cycles,'measures':checksum.hexdigest(),'count':count}),
             'configuration_ref':{'kind':'threshold','version':pin['version_id'],'hash':pin['content_hash']}}
 
 
@@ -187,20 +232,15 @@ class SlotAdapter(WaterAdapter):
         cycle=self.cycle_window(context)
         start=max(datetime.combine(cycle.start,datetime.min.time()),window_start or datetime.min)
         end=min(datetime.combine(cycle.end,datetime.min.time()),window_end or datetime.max)
-        rows=self.client.query('''SELECT DISTINCT * FROM threshold_measure WHERE scope_id={scope:String}
+        from contextlib import closing
+        sql='''SELECT * FROM threshold_measure WHERE scope_id={scope:String}
             AND publication_id={pub:String} AND bundle={bundle:String} AND cycle_id={cycle:String}
             AND compartment_id={comp:String} AND slot_clock_us>={start:Int64} AND slot_clock_us<{end:Int64}
-            ORDER BY slot_clock_us,measure_code''',{'scope':context.scope_id,'pub':publication.publication_id,
-                'bundle':self.BUNDLE,'cycle':context.cycle_id,'comp':context.compartment_ids[0],
-                'start':source_clock_us(start),'end':source_clock_us(end)})
-        grouped={}
-        for row in rows:
-            measures=grouped.setdefault(row['slot_start'],{})
-            if row['measure_code'] in measures:
-                raise ValueError('Conflicting threshold slot measure')
-            measures[row['measure_code']]=row
-        result=[]
-        for stamp,measures in sorted(grouped.items()):
+            ORDER BY slot_clock_us,measure_code SETTINGS max_bytes_before_external_sort=67108864'''
+        parameters={'scope':context.scope_id,'pub':publication.publication_id,'bundle':self.BUNDLE,
+            'cycle':context.cycle_id,'comp':context.compartment_ids[0],
+            'start':source_clock_us(start),'end':source_clock_us(end)}
+        def assemble(stamp,measures):
             if set(measures)!=set(MEASURES[self.BUNDLE]):
                 raise ValueError('Incomplete threshold measure verdicts')
             first=next(iter(measures.values()))
@@ -211,17 +251,26 @@ class SlotAdapter(WaterAdapter):
                     for code,field in MEASURES[self.BUNDLE].items()}
             quality={code:{'status':r['quality'],'applicability':r['applicability'],'reason':r['reason']} for code,r in measures.items()}
             row_type=ClimateSlotRow if self.BUNDLE=='climate' else DrainSlotRow
-            result.append(row_type(slot_start=datetime.fromisoformat(stamp),revision_id=first['revision_id'],
+            return row_type(slot_start=datetime.fromisoformat(stamp),revision_id=first['revision_id'],
                 logical_key=first['logical_record_key'],quality_policy_version=first['quality_policy_version'],
                 correction_id=first['correction_id'] or None,correction_version=first['correction_version'] or None,
-                measure_quality=quality,**values))
+                measure_quality=quality,**values)
+        result=[];stamp=None;measures={}
+        with closing(self.client.iter_query(sql,parameters)) as rows:
+            for row in rows:
+                if stamp is not None and row['slot_start']!=stamp:
+                    result.append(assemble(stamp,measures));measures={}
+                stamp=row['slot_start'];code=row['measure_code']
+                if code in measures and measures[code]!=row:raise ValueError('Conflicting threshold slot measure')
+                measures[code]=row
+            if stamp is not None:result.append(assemble(stamp,measures))
         return tuple(result)
 
 
 class ClimateAdapter(SlotAdapter):
     BUNDLE='climate'
     LINEAGE_TYPE='climate'
-    LINEAGE_UNITS=tuple((code,'ppm' if code in ('CO2air','co2_sp','co2_vip') else '°C') for code in CLIMATE)
+    LINEAGE_UNITS=tuple((code,'ppm' if code in ('CO2air','co2_sp','co2_vip') else '°C') for code in sorted(CLIMATE))
 
     def read_climate_slots(self,context,publication,*,window_start=None,window_end=None):
         return self._read(context,publication,window_start,window_end)

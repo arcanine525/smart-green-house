@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "source_publication": "892b4cd58cdf4d099510974d91fa64ab",
+  "target_publication": "8572a2e99a0a4a839aacb41f8f669916",
+  "load_id": "9abecd871a194cddb4543bc105e4d5d9",
+  "source_metadata_hash": "f0731bf316455b6a8e4c0dbb7bce1f66c262c1946dc43df0273465bd975d72a1",
+  "source_table_counts": {
+    "config.area_basis_version": 84,
+    "config.assumption_application": 2,
+    "config.basis_application": 96,
+    "config.basis_assumption_version": 2,
+    "config.cost_scenario": 174,
+    "config.cost_scenario_rate": 522,
+    "config.harvest_rule_profile": 12,
+    "config.irrigation_rule_profile": 0,
+    "config.quality_policy_version": 1,
+    "config.rule_schedule_revision": 14,
+    "config.rule_schedule_segment": 40,
+    "config.tariff_profile": 7,
+    "config.tariff_rate": 21,
+    "meta.correction": 0,
+    "meta.dataset_snapshot": 1,
+    "meta.publication": 8,
+    "meta.publication_basis": 432,
+    "meta.publication_seal": 8,
+    "meta.source_folder_mapping": 6
+  },
+  "native_configuration_inventory": {
+    "area_basis": {
+      "versions": 84,
+      "source_content_hash": "8c9ef70bd1d4891eddfb8526163dbdf12cc021c2b57b9aa12f0bfd6f5ec31613",
+      "exact_native_match": true
+    },
+    "rule_schedule": {
+      "versions": 14,
+      "source_content_hash": "e812e49747f8aeafafe8c8aa70e2e5754ff1d1acd5f5f892fb09b10cf0deb809",
+      "exact_native_match": true
+    },
+    "harvest_rule": {
+      "versions": 12,
+      "source_content_hash": "7fd7dde2e12cea674b647ad7ce3579eebac613a9fefd0af0cdf3fa5c312e0bca",
+      "exact_native_match": true
+    },
+    "irrigation_rule": {
+      "versions": 0,
+      "source_content_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "exact_native_match": true
+    },
+    "tariff": {
+      "versions": 7,
+      "source_content_hash": "2e6dec3c873abea39ee64888df74504702337d93d9f5a66f7470495f42114942",
+      "exact_native_match": true
+    },
+    "scenario": {
+      "versions": 174,
+      "families": 167,
+      "exact_mapped_match": true
+    }
+  },
+  "load_audit_checksum": "6ee91e5fb3b07c31924f3b17d40476dcce9d9b82fec456b2883ea4d17d9db8b6",
+  "audited_source_files": 45,
+  "source_revisions": [
+    {
+      "record_type": "GreenhouseClimate",
+      "rows": 286854,
+      "unique_revisions": 286854
+    },
+    {
+      "record_type": "Production",
+      "rows": 139,
+      "unique_revisions": 139
+    },
+    {
+      "record_type": "Resources",
+      "rows": 996,
+      "unique_revisions": 996
+    }
+  ],
+  "load_issue_dispositions": {
+    "quarantine": 1
+  },
+  "source_sensor_schema": "not part of metadata export; audit source information_schema separately",
+  "scope": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical"
+}

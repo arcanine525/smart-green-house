@@ -169,7 +169,10 @@ class WaterMart:
 class WaterAdapter:
     LINEAGE_TABLE='water_measure'
     LINEAGE_TYPE='resource'
-    LINEAGE_UNITS=(('Irr',RESOURCE_WATER_UNIT),('Drain',RESOURCE_WATER_UNIT))
+    # Lineage describes the resource source subtype, including all six units,
+    # consistently with PostgreSQL rather than only this screen's two measures.
+    LINEAGE_UNITS=(('CO2_cons','kg/m²/day'),('Drain',RESOURCE_WATER_UNIT),
+        ('ElecHigh','kWh/m²/day'),('ElecLow','kWh/m²/day'),('Heat_cons','MJ/m²/day'),('Irr',RESOURCE_WATER_UNIT))
     def __init__(self,client,*,raw_snapshots=None):
         # Read methods do not acquire writer locks or require coordinator mounts.
         self.client=client; self.mart=WaterMart(client,None)
@@ -292,13 +295,14 @@ class WaterAdapter:
         context=self._envelope(publication.publication_id)
         if self.publication(publication.publication_id)!=publication:
             raise ValueError('Publication metadata mismatch')
-        rows=self.client.query('SELECT DISTINCT revision_id,cycle_id,compartment_id,logical_record_key FROM '+self.LINEAGE_TABLE+' WHERE publication_id={pub:String}',{'pub':publication.publication_id})
-        rows=[r for r in rows if (r['revision_id']==revision_id if revision_id else r['logical_record_key']==record_key)]
+        field,value=('revision_id',revision_id) if revision_id is not None else ('logical_record_key',record_key)
+        rows=self.client.query('SELECT DISTINCT revision_id,cycle_id,compartment_id,logical_record_key FROM '+self.LINEAGE_TABLE+
+            ' WHERE publication_id={pub:String} AND '+field+'={selected:String}',{'pub':publication.publication_id,'selected':value})
         if len(rows)!=1:
             raise ValueError('Revision/key absent or ambiguous in pinned water membership')
         selected=rows[0]
         core=self.mart.repo.load_membership(publication.scope_id,context['load_id'])
-        revision=next(r for r in core if r['revision_id']==selected['revision_id'])
+        revision=core.revision(selected['revision_id']) if hasattr(core,'revision') else next(r for r in core if r['revision_id']==selected['revision_id'])
         payload=json.loads(revision['payload'])
         raw=self.raw_snapshots.get(publication.snapshot_id)
         if raw is None:

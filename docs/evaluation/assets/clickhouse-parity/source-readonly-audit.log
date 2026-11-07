@@ -1,0 +1,6 @@
+BEGIN
+on
+{"sensor_schema_count" : 0}
+{"corrections" : 0}
+{"publications" : 8}
+ROLLBACK

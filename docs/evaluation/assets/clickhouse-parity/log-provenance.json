@@ -1,0 +1,57 @@
+[
+  {
+    "file": "sensor-final.log",
+    "original_bytes": 1376,
+    "original_sha256": "9dacc922dd29b0d8b0506b1348e9c48258fb6ae036d4909353c578087e9b8846"
+  },
+  {
+    "file": "proof-helper-build.log",
+    "original_bytes": 5876,
+    "original_sha256": "98dc2e827a557ecfcebce6654daf994370ebbb0f3522f47bc162deab2aee8208"
+  },
+  {
+    "file": "memory-recovery.log",
+    "original_bytes": 2661,
+    "original_sha256": "e0af28e533afe501bb4123559a64a8bc400ab5b0e7282534fa9ed7d3edd8627a"
+  },
+  {
+    "file": "sensor-initial-comparator-failure.log",
+    "original_bytes": 1748,
+    "original_sha256": "2ef4fba099ec3ae96f3be02c68a2f1ec97b4920a090c6860c2c168d302a3118e"
+  },
+  {
+    "file": "initial-memory-failure.log",
+    "original_bytes": 2014,
+    "original_sha256": "25a968a39066a69feb66b7ab2c828ec8a44b763094e7e2d060b0a042a460d6db"
+  },
+  {
+    "file": "source-readonly-audit.log",
+    "original_bytes": 87,
+    "original_sha256": "005ecafb545af21400fff532f148af053bbbae9c0863441628ac79436d54d783"
+  },
+  {
+    "file": "sensor-completed-replay-guard.log",
+    "original_bytes": 969,
+    "original_sha256": "311d487dfe5b558c80caa52a42bdd85d40353261ce16536a611abed386126693"
+  },
+  {
+    "file": "tests.log",
+    "original_bytes": 118490,
+    "original_sha256": "ee773a692dc5370b937de73597da92f4f9a369df46f981ad9455cb00af8b45ed"
+  },
+  {
+    "file": "full-retry.log",
+    "original_bytes": 1779,
+    "original_sha256": "bd78165b99243b5e06a97c19f25bf7c322c6811adb37bc97b45b2e9725b28869"
+  },
+  {
+    "file": "sensor-completion-guard.log",
+    "original_bytes": 624,
+    "original_sha256": "80038582b6d70e2f83c83e470eb31e2bff29b59ecb1dd4f48060bded3d7d6184"
+  },
+  {
+    "file": "build.log",
+    "original_bytes": 8336,
+    "original_sha256": "190513ccb6d665a327c6ec8b1d4b0c9d02913a88be11f07e3e91c3e53cfac507"
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "status": "imported",
+  "scenario_versions": 174,
+  "inserted": 174,
+  "reused": 0,
+  "source_metadata_hash": "f0731bf316455b6a8e4c0dbb7bce1f66c262c1946dc43df0273465bd975d72a1",
+  "mapping_hash": "175cb097e7a11ef9e8d9b15603af1787ba249f709e6fd3293a469d5806d69aee",
+  "source_publication": "892b4cd58cdf4d099510974d91fa64ab",
+  "target_publication": "8572a2e99a0a4a839aacb41f8f669916"
+}

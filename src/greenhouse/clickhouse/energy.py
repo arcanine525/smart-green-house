@@ -153,7 +153,7 @@ class EnergyMart:
 
 class EnergyAdapter(WaterAdapter):
     LINEAGE_TABLE='energy_measure';LINEAGE_TYPE='resource'
-    LINEAGE_UNITS=(('Heat_cons','MJ/m²/day'),('ElecHigh','kWh/m²/day'),('ElecLow','kWh/m²/day'))
+    LINEAGE_UNITS=WaterAdapter.LINEAGE_UNITS
 
     def __init__(self,client,*,raw_snapshots=None):
         super().__init__(client,raw_snapshots=raw_snapshots);self.mart=EnergyMart(client,None)

@@ -7,8 +7,7 @@ from greenhouse.queries.slot_rows import ScheduleRevisionOption
 
 
 def read_rule_schedule(client,rule_version):
-    rows=[r for r in Repository(client,None).configurations()['rows']
-          if r['kind']=='rule_schedule' and r['version_id']==rule_version]
+    rows=[r for r in Repository(client,None).configurations(kind='rule_schedule')['rows'] if r['version_id']==rule_version]
     if len(rows)>1:
         raise ValueError('Ambiguous rule schedule identity')
     if not rows:
@@ -30,7 +29,7 @@ def register_rule_schedule(client,coordinator,revision):
 
 def catalog_rules(client,scope_id,compartment_id,*,measurement_context,metrics,bases):
     bases={getattr(b,'value',b) for b in bases}; result=[]
-    for row in Repository(client,None).configurations()['rows']:
+    for row in Repository(client,None).configurations(kind='rule_schedule')['rows']:
         if row['kind']!='rule_schedule' or row['scope_id']!=scope_id:
             continue
         revision=read_rule_schedule(client,row['version_id'])

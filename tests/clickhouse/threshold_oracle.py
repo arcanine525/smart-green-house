@@ -42,7 +42,7 @@ def source_rows(path,start,end):
     return {k:v for k,v in rows.items() if k not in conflicts}
 
 
-def evaluate(rows,start,end,kind,basis):
+def evaluate(rows,start,end,kind,basis,*,include_boundary_episodes=False):
     metrics=('temperature','co2') if kind=='climate' else ('ec','ph')
     reports=[];episodes=[];states={}
     for metric in metrics:
@@ -80,4 +80,4 @@ def evaluate(rows,start,end,kind,basis):
             when+=timedelta(minutes=5)
         if run is not None: episodes.append([metric,run.isoformat(),end.isoformat(),str(Decimal((end-run).total_seconds()/60))])
         reports.append({'metric':metric}|{k:str(v) for k,v in counts.items()})
-    return reports,[e for e in episodes if start.isoformat()<e[1] and e[2]<end.isoformat()]
+    return reports,episodes if include_boundary_episodes else [e for e in episodes if start.isoformat()<e[1] and e[2]<end.isoformat()]

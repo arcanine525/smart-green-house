@@ -38,11 +38,12 @@ def corrected_membership(repo,scope,load):
     """Freeze latest revisions of the same source keys; preserve original load."""
     with writer_lock(repo.coordinator,repo.client):
         base=repo.load_membership(scope,load)
+        if not repo.client.query('SELECT revision_id FROM source_revision WHERE scope_id={scope:String} AND revision>1 LIMIT 1',{'scope':scope}):
+            return load
         latest=repo.canonical_records(scope)
         key=lambda r:(r['record_type'],r['compartment_id'],r['logical_key'])
         keys={key(r) for r in base}
-        chosen=[r for r in latest if key(r) in keys]
-        ids=sorted(r['revision_id'] for r in chosen)
+        ids=sorted(r['revision_id'] for r in latest if key(r) in keys)
         if ids==sorted(r['revision_id'] for r in base):
             return load
         new_load=digest([load,ids])

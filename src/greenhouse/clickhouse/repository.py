@@ -43,8 +43,15 @@ class Repository:
         self._insert('configuration_envelope',[expected | {'schema_version':1}])
         return True
 
-    def configurations(self):
-        rows = self.client.query('SELECT DISTINCT * FROM configuration_envelope ORDER BY kind,scope_id,version_id')
+    def configurations(self,*,kind=None):
+        if kind is not None and (not isinstance(kind,str) or not kind.strip()):
+            raise ValueError('Configuration kind must be explicit text')
+        # Publication/export verification retains the complete registry. A
+        # typed reader can inspect one family without transferring the archived
+        # source migration manifest on every tariff/scenario/rule lookup.
+        where='' if kind is None else ' WHERE kind={kind:String}'
+        rows = self.client.query('SELECT DISTINCT * FROM configuration_envelope'+where+' ORDER BY kind,scope_id,version_id',
+            None if kind is None else {'kind':kind})
         identities, requests = set(),set()
         for row in rows:
             key = (row['kind'],row['scope_id'],row['version_id'])
@@ -74,10 +81,14 @@ class Repository:
         """
         if not scope or not quality_policy:
             raise ValueError('Explicit scope and policy required')
+        records=list(records)
+        keys=[(r['source_file'].split('/')[-1].removesuffix('.csv'),r['source_file'].split('/')[0],record_identity(r)) for r in records]
+        if not keys:return []
         with writer_lock(self.coordinator,self.client):
             existing=self.client.query('''SELECT DISTINCT record_type,compartment_id,logical_key,
                 revision_id,content_hash,quality_policy_version FROM source_revision
-                WHERE scope_id={scope:String} AND revision=1''',{'scope':scope})
+                WHERE scope_id={scope:String} AND revision=1
+                AND (record_type,compartment_id,logical_key) IN {keys:Array(Tuple(String,String,String))}''',{'scope':scope,'keys':str(keys)})
             stored={}
             for row in existing:
                 key=(row['record_type'],row['compartment_id'],row['logical_key'])
@@ -208,71 +219,81 @@ class Repository:
         Explicit IDs let future publication readers retain old membership.
         """
         from decimal import Decimal
-        rows=self.client.query('SELECT DISTINCT * FROM source_revision WHERE scope_id={scope:String} ORDER BY record_type,compartment_id,logical_key,revision', {'scope':scope})
-        by_key,seen_ids={},{}
-        for row in rows:
-            payload=json.loads(row['payload'])
-            if digest(payload)!=row['content_hash']:
-                raise ValueError('Stored revision checksum mismatch')
-            for column in ('snapshot_id','source_record_id','source_file','file_checksum','raw_hash',
-                           'source_timestamp','parser_version','is_close_boundary'):
-                if row[column]!=payload[column]:
-                    raise ValueError('Stored revision metadata does not match source payload')
-            if row['logical_key']!=record_identity(payload) or row['source_serial']!=str(payload['values']['time']):
-                raise ValueError('Stored revision source identity mismatch')
-            for column in ('line_number','line_end'):
-                if int(row[column])!=payload[column]:
-                    raise ValueError('Stored revision source line mismatch')
-            clock=row['source_clock_us']
-            if (int(clock) if clock is not None else None)!=source_clock_us(payload['source_timestamp']):
-                raise ValueError('Stored revision source clock mismatch')
-            if row['record_type']!=payload['source_file'].split('/')[-1].removesuffix('.csv') or row['compartment_id']!=payload['source_file'].split('/')[0]:
-                raise ValueError('Stored revision record type/compartment mismatch')
-            if row['revision_id']!=digest([scope,row['record_type'],row['compartment_id'],row['logical_key'],row['revision'],row['content_hash']]):
-                raise ValueError('Stored revision ID mismatch')
-            key=(row['record_type'],row['compartment_id'],row['logical_key'])
-            revisions=by_key.setdefault(key,{})
-            if row['revision'] in revisions:
-                raise ValueError('Conflicting logical revision rows')
-            if row['revision_id'] in seen_ids:
-                raise ValueError('Revision ID reused across logical keys')
-            revisions[row['revision']]=row
-            seen_ids[row['revision_id']]=row
-        for revisions in by_key.values():
-            if sorted(revisions)!=list(range(1,max(revisions)+1)):
-                raise ValueError('Revision history has gaps')
-        if revision_ids is None:
-            selected=[revisions[max(revisions)] for revisions in by_key.values()]
-        else:
-            if len(set(revision_ids))!=len(revision_ids) or any(i not in seen_ids for i in revision_ids):
-                raise ValueError('Unknown or repeated pinned revision')
-            selected=[seen_ids[i] for i in revision_ids]
-            keys=[(r['record_type'],r['compartment_id'],r['logical_key']) for r in selected]
-            if len(set(keys))!=len(keys):
-                raise ValueError('Pinned membership repeats logical key')
-        for offset in range(0,len(selected),512):
-            batch=selected[offset:offset+512]
-            measure_rows=self.client.query('''SELECT DISTINCT revision_id,measure_code,value_exact,value_decimal,projection_status,null_reason
-                FROM source_measure WHERE scope_id={scope:String} AND revision_id IN {ids:Array(String)} ORDER BY measure_code''',
-                {'scope':scope,'ids':str([r['revision_id'] for r in batch])})
-            by_revision={}
-            for measure in measure_rows:
-                measure=dict(measure); rid=measure.pop('revision_id')
-                by_revision.setdefault(rid,[]).append(measure)
-            for row in batch:
-                measures=by_revision.get(row['revision_id'],[])
-                payload=json.loads(row['payload'])
-                expected=[]
-                for code,value in sorted(payload['values'].items()):
-                    if code=='time':
-                        continue
-                    exact,projection,status=decimal_projection(value)
-                    expected.append({'measure_code':code,'value_exact':exact,'value_decimal':projection,
-                        'projection_status':status,'null_reason':payload['null_reasons'].get(code,'')})
-                comparable=lambda values:[r | {'value_decimal':Decimal(r['value_decimal']) if r['value_decimal'] is not None else None} for r in values]
-                if comparable(measures)!=comparable(expected):
-                    raise ValueError('Revision measures incomplete or conflicting')
-        return selected
+        from contextlib import closing
+        from greenhouse.clickhouse.rows import VerifiedRows
+        wanted=None if revision_ids is None else set(revision_ids)
+        if wanted is not None and len(wanted)!=len(revision_ids):
+            raise ValueError('Unknown or repeated pinned revision')
+        selected=VerifiedRows();seen_ids=set();found=set();selected_keys=set()
+        last_key=None;ordinal=0;previous=None
+        sql='SELECT * FROM source_revision WHERE scope_id={scope:String} ORDER BY record_type,compartment_id,logical_key,revision,revision_id SETTINGS max_bytes_before_external_sort=67108864'
+        try:
+            with closing(self.client.iter_query(sql,{'scope':scope})) as rows:
+                for row in rows:
+                    payload=json.loads(row['payload'])
+                    if digest(payload)!=row['content_hash']:
+                        raise ValueError('Stored revision checksum mismatch')
+                    for column in ('snapshot_id','source_record_id','source_file','file_checksum','raw_hash',
+                                   'source_timestamp','parser_version','is_close_boundary'):
+                        if row[column]!=payload[column]:
+                            raise ValueError('Stored revision metadata does not match source payload')
+                    if row['logical_key']!=record_identity(payload) or row['source_serial']!=str(payload['values']['time']):
+                        raise ValueError('Stored revision source identity mismatch')
+                    for column in ('line_number','line_end'):
+                        if int(row[column])!=payload[column]:
+                            raise ValueError('Stored revision source line mismatch')
+                    clock=row['source_clock_us']
+                    if (int(clock) if clock is not None else None)!=source_clock_us(payload['source_timestamp']):
+                        raise ValueError('Stored revision source clock mismatch')
+                    if row['record_type']!=payload['source_file'].split('/')[-1].removesuffix('.csv') or row['compartment_id']!=payload['source_file'].split('/')[0]:
+                        raise ValueError('Stored revision record type/compartment mismatch')
+                    if row['revision_id']!=digest([scope,row['record_type'],row['compartment_id'],row['logical_key'],row['revision'],row['content_hash']]):
+                        raise ValueError('Stored revision ID mismatch')
+                    key=(row['record_type'],row['compartment_id'],row['logical_key'])
+                    if key!=last_key:
+                        if wanted is None and previous is not None:selected.append(previous)
+                        ordinal=0;last_key=key
+                    if row['revision']==ordinal and row==previous:continue
+                    if row['revision']<=ordinal:raise ValueError('Conflicting logical revision rows')
+                    if row['revision']!=ordinal+1:raise ValueError('Revision history has gaps')
+                    ordinal=row['revision']
+                    if row['revision_id'] in seen_ids:raise ValueError('Revision ID reused across logical keys')
+                    seen_ids.add(row['revision_id'])
+                    if wanted is not None and row['revision_id'] in wanted:
+                        if key in selected_keys:raise ValueError('Pinned membership repeats logical key')
+                        selected_keys.add(key);found.add(row['revision_id']);selected.append(row)
+                    previous=row
+            if wanted is None and previous is not None:selected.append(previous)
+            if wanted is not None and wanted!=found:raise ValueError('Unknown or repeated pinned revision')
+            selected.seal()
+            for offset in range(0,len(selected),512):
+                batch=selected[offset:offset+512]
+                measure_rows=self.client.query('''SELECT DISTINCT revision_id,measure_code,value_exact,value_decimal,projection_status,null_reason
+                    FROM source_measure WHERE scope_id={scope:String} AND revision_id IN {ids:Array(String)} ORDER BY measure_code''',
+                    {'scope':scope,'ids':str([r['revision_id'] for r in batch])})
+                by_revision={}
+                for measure in measure_rows:
+                    measure=dict(measure); rid=measure.pop('revision_id')
+                    by_revision.setdefault(rid,[]).append(measure)
+                for row in batch:
+                    measures=by_revision.get(row['revision_id'],[])
+                    payload=json.loads(row['payload'])
+                    expected=[]
+                    for code,value in sorted(payload['values'].items()):
+                        if code=='time':
+                            continue
+                        exact,projection,status=decimal_projection(value)
+                        expected.append({'measure_code':code,'value_exact':exact,'value_decimal':projection,
+                            'projection_status':status,'null_reason':payload['null_reasons'].get(code,'')})
+                    comparable=lambda values:[r | {'value_decimal':Decimal(r['value_decimal']) if r['value_decimal'] is not None else None} for r in values]
+                    if comparable(measures)!=comparable(expected):
+                        raise ValueError('Revision measures incomplete or conflicting')
+            if len(selected)<=4096:
+                result=list(selected);selected.close();return result
+            return selected
+        except BaseException:
+            selected.close()
+            raise
 
 
     def load_membership(self, scope, load_id):
