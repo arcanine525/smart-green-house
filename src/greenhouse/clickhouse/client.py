@@ -55,10 +55,14 @@ class Client:
     def __init__(self, settings):
         self.settings = settings
         self._action_cache = None
+        self._shared_proofs=False
+        self._shared_proof_hits=0
+        self._shared_proof_misses=0
 
-    def begin_action(self):
+    def begin_action(self,*,shared_proofs=False):
         """Opt-in immutable verification reuse until this caller closes its action."""
         self._action_cache={}
+        self._shared_proofs=shared_proofs
         return self
 
     def ping(self):
@@ -67,6 +71,7 @@ class Client:
     def close(self):
         """HTTP responses close individually; discard action-owned verified inputs."""
         self._action_cache=None
+        self._shared_proofs=False
 
     def _request(self,sql,parameters,query_id,*,streaming=False):
         settings = self.settings

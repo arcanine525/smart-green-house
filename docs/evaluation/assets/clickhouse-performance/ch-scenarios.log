@@ -1,0 +1,3 @@
+ Container gh-engine-benchmark-20261107-ch-scenarios-compact Creating
+ Container gh-engine-benchmark-20261107-ch-scenarios-compact Created
+{"status": "measured", "backend": "clickhouse", "summary": {"write_ms": {"p50": 4896.684773000288, "p95": 5634.626670000216}, "read_ms": {"p50": 105.32897899975069, "p95": 140.0519170001644}, "retry_ms": {"p50": 5007.006064500274, "p95": 6166.694586999256}}}

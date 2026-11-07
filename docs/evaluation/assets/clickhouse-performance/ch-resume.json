@@ -1,0 +1,107 @@
+{
+  "status": "measured",
+  "backend": "clickhouse",
+  "mode": "rerun",
+  "started_at_utc": "2026-11-07T03:02:34.090989+00:00",
+  "workflow_id": "engine-benchmark-ch-fresh-v1",
+  "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+  "independent_runs": 1,
+  "database_os_caches_flushed": false,
+  "phases_seconds": {
+    "publication_verification": [
+      166.26641361699967
+    ],
+    "publication_total": [
+      166.3882250329998
+    ]
+  },
+  "stage_timings_overlap": true,
+  "pipeline_result": {
+    "resumed": true,
+    "published": true,
+    "load_id": "fe0c21de8ec84744ba06c57ca5d2d528",
+    "publication_id": "2be7aa20c0ff4fc8b5d8fd0fbc87b635",
+    "receipts": {
+      "climate": {
+        "checksum": "04d5daa3efc0ac0cef0515ccaa91aa14d10b203e6ff8e059a83d2215c3ecbc2a",
+        "checksum_algorithm": "ordered-jsonl-sha256-v2",
+        "configuration_ref": {
+          "hash": "e4512483b5f6bb8b963ca9e7975dde83f78e385d1575b5b1adabbc6aec33887e",
+          "kind": "threshold",
+          "version": "pg-threshold-stream-v2"
+        },
+        "cycles": 6,
+        "rows": 286854,
+        "storage_version": "threshold-stream-v2",
+        "version": "climate-mart-v1"
+      },
+      "configuration": {
+        "checksum": "195559037d77b695ab9a2b36e23736029b08f88461f4c258fedb9c6d28846971",
+        "rows": 124,
+        "version": "config-envelope-v1"
+      },
+      "core": {
+        "checksum": "e9c8671752fd3d57307057257eaf24d05ee858659341010b7940a24f2cd770c2",
+        "rows": 287989,
+        "version": "canonical-core-v1"
+      },
+      "drain": {
+        "checksum": "47fd9ff5053a80e4a4cad048d6afac9d7febf014523e9438621e15538bd91b5a",
+        "checksum_algorithm": "ordered-jsonl-sha256-v2",
+        "configuration_ref": {
+          "hash": "e4512483b5f6bb8b963ca9e7975dde83f78e385d1575b5b1adabbc6aec33887e",
+          "kind": "threshold",
+          "version": "pg-threshold-stream-v2"
+        },
+        "cycles": 6,
+        "rows": 286854,
+        "storage_version": "threshold-stream-v2",
+        "version": "drain-mart-v1"
+      },
+      "energy": {
+        "checksum": "ee7324a700e77acd8a9c6a7a538320acb980741b142c843e2d56c1c4698317ab",
+        "configuration_ref": {
+          "hash": "ddfee96682406bf544ea41607e3c06fb7ce853df41ab289cc5612db575a324b4",
+          "kind": "energy",
+          "version": "pg-energy-v1"
+        },
+        "cycles": 6,
+        "quantity_version": "energy-quantity-v1",
+        "rows": 2988,
+        "version": "energy-mart-v1"
+      },
+      "harvest": {
+        "checksum": "3409ededbb235f1bcf61f1584cc989f58185cedc3ac7b1e9b178979c5ac58bc3",
+        "configuration_ref": {
+          "hash": "255c1cdab74bfad3b65f1597de0eeb93633da79b47177282bd20351eb6b26e4c",
+          "kind": "harvest",
+          "version": "pg-harvest-v1"
+        },
+        "cycles": 6,
+        "load_ref": "fe0c21de8ec84744ba06c57ca5d2d528",
+        "rows": 139,
+        "version": "harvest-mart-v3"
+      },
+      "water": {
+        "checksum": "075d2941ee90fa611721825401be2dd9568426ceb98366f5125de1d8847f8412",
+        "configuration_ref": {
+          "hash": "f6da42bcb9a8e3047c679496b863af1a2668fd47191b0f48880b5f723b745205",
+          "kind": "water",
+          "version": "pg-water-v1"
+        },
+        "cycles": 6,
+        "rows": 996,
+        "version": "irrigation-mart-v1"
+      }
+    }
+  },
+  "pipeline_seconds": 170.45335045200045,
+  "finished_at_utc": "2026-11-07T03:05:24.545457+00:00",
+  "total_with_query_metadata_seconds": 170.45339095200052,
+  "processing_cgroup": {
+    "cpu.max": "150000 100000",
+    "memory.max": "2147483648",
+    "memory.peak": "1703124992"
+  }
+}

@@ -28,6 +28,7 @@ from read_parity_reference import episodes
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--publication-id',required=True)
+    parser.add_argument('--transient-rules',action='store_true',help='Evaluate reference-only oracle rules without adding configuration rows')
     for name in ('raw','coordinator','references','output'):parser.add_argument('--'+name,type=Path,required=True)
     args=parser.parse_args();refs=args.references
     thresholds=json.loads((refs/'postgres-full-cycle-csv-reference.json').read_text())
@@ -37,7 +38,7 @@ def main():
     source=thresholds['source_publication'];expected_id=source['publication_id']
     for value in (expected_business,expected_lineage,expected_csv):
         if not value['read_only'] or value['publication_id']!=expected_id:raise ValueError('Mixed source references')
-    report={'status':'in_progress','postgres_publication':expected_id,'clickhouse_publication':args.publication_id,'threshold_groups':[]}
+    report={'status':'in_progress','postgres_publication':expected_id,'clickhouse_publication':args.publication_id,'threshold_groups':[],'reference_rules_persisted':not args.transient_rules}
     args.output.mkdir(parents=True,exist_ok=True)
     def save():
         (args.output/'parity.json').write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n')
@@ -49,7 +50,8 @@ def main():
         report[label+'_match']=True;save();print(json.dumps({'stage':label,'status':'passed'}),flush=True)
     client=Client(ClickHouseSettings.from_env())
     # Register explicit ephemeral-reference rules before opening the read action.
-    for row in thresholds['results']:register_rule_schedule(client,args.coordinator,from_dict(RuleScheduleRevision,row['rule']))
+    if not args.transient_rules:
+        for row in thresholds['results']:register_rule_schedule(client,args.coordinator,from_dict(RuleScheduleRevision,row['rule']))
     with closing(client.begin_action()):
         pub=reference(client,args.publication_id)
         if (pub.scope_id,pub.snapshot_id)!=(source['scope_id'],source['snapshot_id']):raise ValueError('Candidate source scope/snapshot differs')
@@ -71,6 +73,11 @@ def main():
             # than transferring the same whole-cycle facts twice in this test.
             class FrozenSlots:
                 def __getattr__(self,name):return getattr(adapter,name)
+                def schedule(self,version):
+                    if not args.transient_rules:return adapter.schedule(version)
+                    revision=from_dict(RuleScheduleRevision,row['rule'])
+                    if revision.rule_version!=version:raise ValueError('Reference rule version differs')
+                    return revision
                 def read_climate_slots(self,context,publication):
                     context.matches(publication);return slots
                 def read_drain_slots(self,context,publication):

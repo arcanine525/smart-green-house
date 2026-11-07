@@ -1,0 +1,51 @@
+         10559841 function calls (10491271 primitive calls) in 3.277 seconds
+
+   Ordered by: cumulative time
+   List reduced from 417 to 45 due to restriction <45>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.034    0.034    3.557    3.557 /migration/profile_workloads.py:60(<lambda>)
+        1    0.006    0.006    3.523    3.523 /usr/local/lib/python3.12/site-packages/greenhouse/queries/climate.py:286(get_evaluation)
+        1    0.000    0.000    1.188    1.188 /usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/threshold.py:277(read_climate_slots)
+        1    0.364    0.364    1.188    1.188 /usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/threshold.py:228(_read)
+        1    0.000    0.000    1.108    1.108 /usr/local/lib/python3.12/site-packages/greenhouse/queries/rule_duration.py:303(evaluate_rule_schedule)
+        1    0.204    0.204    1.107    1.107 /usr/local/lib/python3.12/site-packages/greenhouse/queries/climate.py:93(build_slots)
+        1    0.222    0.222    0.839    0.839 /usr/local/lib/python3.12/site-packages/greenhouse/queries/rule_duration.py:340(_evaluate_core)
+    47809    0.027    0.000    0.723    0.000 /usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/client.py:113(iter_query)
+   338006    0.087    0.000    0.368    0.000 {built-in method builtins.min}
+    95616    0.023    0.000    0.366    0.000 /usr/local/lib/python3.12/site-packages/greenhouse/queries/climate.py:82(combined_quality)
+    47809    0.029    0.000    0.274    0.000 /migration/profile_workloads.py:37(__next__)
+    48165    0.033    0.000    0.270    0.000 /usr/local/lib/python3.12/json/__init__.py:299(loads)
+   334656    0.167    0.000    0.267    0.000 /usr/local/lib/python3.12/site-packages/greenhouse/queries/climate.py:89(<genexpr>)
+        1    0.028    0.028    0.267    0.267 /usr/local/lib/python3.12/site-packages/greenhouse/queries/rule_duration.py:583(_build_episodes)
+    95616    0.094    0.000    0.241    0.000 /usr/local/lib/python3.12/site-packages/greenhouse/contracts/models.py:1674(__post_init__)
+    51773    0.010    0.000    0.234    0.000 {built-in method builtins.next}
+        1    0.027    0.027    0.234    0.234 /usr/local/lib/python3.12/site-packages/greenhouse/queries/rule_duration.py:265(_grid_view)
+    47809    0.017    0.000    0.223    0.000 /usr/local/lib/python3.12/http/client.py:683(readline)
+     4294    0.002    0.000    0.209    0.000 /usr/local/lib/python3.12/socket.py:706(readinto)
+    47809    0.038    0.000    0.206    0.000 {function HTTPResponse.readline at 0xffff95f8b7e0}
+     4294    0.205    0.000    0.205    0.000 {method 'recv_into' of '_socket.socket' objects}
+    95616    0.068    0.000    0.203    0.000 /usr/local/lib/python3.12/site-packages/greenhouse/queries/rule_duration.py:88(_grid_index)
+       14    0.000    0.000    0.196    0.014 /migration/profile_workloads.py:48(open_request)
+       14    0.000    0.000    0.196    0.014 /usr/local/lib/python3.12/urllib/request.py:138(urlopen)
+       14    0.000    0.000    0.196    0.014 /usr/local/lib/python3.12/urllib/request.py:496(open)
+       14    0.000    0.000    0.196    0.014 /usr/local/lib/python3.12/urllib/request.py:525(_open)
+       28    0.000    0.000    0.196    0.007 /usr/local/lib/python3.12/urllib/request.py:485(_call_chain)
+       14    0.000    0.000    0.196    0.014 /usr/local/lib/python3.12/urllib/request.py:1372(http_open)
+       14    0.000    0.000    0.196    0.014 /usr/local/lib/python3.12/urllib/request.py:1303(do_open)
+       14    0.000    0.000    0.193    0.014 /usr/local/lib/python3.12/http/client.py:1386(getresponse)
+       14    0.000    0.000    0.193    0.014 /usr/local/lib/python3.12/http/client.py:324(begin)
+      258    0.000    0.000    0.191    0.001 {method 'readline' of '_io.BufferedReader' objects}
+       14    0.000    0.000    0.191    0.014 /usr/local/lib/python3.12/http/client.py:291(_read_status)
+    48165    0.036    0.000    0.181    0.000 /usr/local/lib/python3.12/json/decoder.py:333(decode)
+     7930    0.017    0.000    0.158    0.000 {built-in method builtins.sum}
+    48165    0.115    0.000    0.115    0.000 /usr/local/lib/python3.12/json/decoder.py:344(raw_decode)
+        6    0.000    0.000    0.110    0.018 /usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/threshold.py:209(publication)
+    27530    0.005    0.000    0.109    0.000 /usr/local/lib/python3.12/site-packages/greenhouse/queries/rule_duration.py:611(<genexpr>)
+        6    0.000    0.000    0.108    0.018 /usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/water.py:182(_envelope)
+        1    0.000    0.000    0.108    0.108 /usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/registry.py:53(publication_envelope)
+  1136674    0.106    0.000    0.106    0.000 {method 'get' of 'dict' objects}
+        1    0.000    0.000    0.105    0.105 /usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/registry.py:9(envelope)
+        1    0.000    0.000    0.105    0.105 /usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/proof_cache.py:97(verified)
+        1    0.000    0.000    0.105    0.105 /usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/proof_cache.py:59(_verified)
+    23572    0.097    0.000    0.104    0.000 /usr/local/lib/python3.12/site-packages/greenhouse/queries/rule_duration.py:99(_minutes)

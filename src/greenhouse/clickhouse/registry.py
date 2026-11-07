@@ -11,6 +11,17 @@ def envelope(client,scope,publication_id=None):
     if cache is not None and publication_id is not None:
         saved=cache.get(('historical-envelope',publication_id))
         if saved is not None and saved[0]==scope:return saved[1]
+    if cache is not None and getattr(client,'_shared_proofs',False):
+        from greenhouse.clickhouse.proof_cache import verified
+        return verified(client,scope,publication_id,lambda selected:_envelope(client,scope,selected))
+    return _envelope(client,scope,publication_id)
+
+
+def _envelope(client,scope,publication_id=None):
+    cache=getattr(client,'_action_cache',None)
+    if cache is not None and publication_id is not None:
+        saved=cache.get(('historical-envelope',publication_id))
+        if saved is not None and saved[0]==scope:return saved[1]
     probe=Publications(client,None)
     rows=[r for r in probe._states(scope) if r['stage']=='COMPLETE'
           and (publication_id is None or r['publication_id']==publication_id)]

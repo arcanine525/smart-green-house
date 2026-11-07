@@ -54,6 +54,7 @@ def main():
         *(config[k] for k in ('water','harvest','threshold','energy')),
         water_version='pg-water-v1',harvest_version='pg-harvest-v1',threshold_version='pg-threshold-stream-v2',energy_version='pg-energy-v1')
     print(json.dumps({'stage':'pipeline_complete',**result}),flush=True)
+    return result
 
 
 if __name__=='__main__':main()

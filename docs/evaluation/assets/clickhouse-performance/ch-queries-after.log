@@ -1,0 +1,11 @@
+ Container gh-engine-benchmark-20261107-ch-queries-compact Creating
+ Container gh-engine-benchmark-20261107-ch-queries-compact Created
+{"stage": "cold_publication_started", "backend": "clickhouse"}
+{"stage": "cold_publication_passed", "seconds": 141.2418136059996}
+{"stage": "workload_measured", "workload": "BR01", "p95_ms": 1786.4812929992695}
+{"stage": "workload_measured", "workload": "BR02", "p95_ms": 108.25020799984486}
+{"stage": "workload_measured", "workload": "BR03", "p95_ms": 1362.619167000048}
+{"stage": "workload_measured", "workload": "BR04", "p95_ms": 118.41450000065379}
+{"stage": "workload_measured", "workload": "BR05", "p95_ms": 99.18704100073228}
+{"stage": "workload_measured", "workload": "BR06", "p95_ms": 134.12283300021954}
+{"status": "measured", "backend": "clickhouse", "smoke": false, "all_warm_summary_targets_met": true}

@@ -218,7 +218,6 @@ class Repository:
         Physical identical retries collapse here, never by waiting for merges.
         Explicit IDs let future publication readers retain old membership.
         """
-        from decimal import Decimal
         from contextlib import closing
         from greenhouse.clickhouse.rows import VerifiedRows
         wanted=None if revision_ids is None else set(revision_ids)
@@ -266,34 +265,64 @@ class Repository:
             if wanted is None and previous is not None:selected.append(previous)
             if wanted is not None and wanted!=found:raise ValueError('Unknown or repeated pinned revision')
             selected.seal()
-            for offset in range(0,len(selected),512):
-                batch=selected[offset:offset+512]
-                measure_rows=self.client.query('''SELECT DISTINCT revision_id,measure_code,value_exact,value_decimal,projection_status,null_reason
-                    FROM source_measure WHERE scope_id={scope:String} AND revision_id IN {ids:Array(String)} ORDER BY measure_code''',
-                    {'scope':scope,'ids':str([r['revision_id'] for r in batch])})
-                by_revision={}
-                for measure in measure_rows:
-                    measure=dict(measure); rid=measure.pop('revision_id')
-                    by_revision.setdefault(rid,[]).append(measure)
-                for row in batch:
-                    measures=by_revision.get(row['revision_id'],[])
-                    payload=json.loads(row['payload'])
-                    expected=[]
-                    for code,value in sorted(payload['values'].items()):
-                        if code=='time':
-                            continue
-                        exact,projection,status=decimal_projection(value)
-                        expected.append({'measure_code':code,'value_exact':exact,'value_decimal':projection,
-                            'projection_status':status,'null_reason':payload['null_reasons'].get(code,'')})
-                    comparable=lambda values:[r | {'value_decimal':Decimal(r['value_decimal']) if r['value_decimal'] is not None else None} for r in values]
-                    if comparable(measures)!=comparable(expected):
-                        raise ValueError('Revision measures incomplete or conflicting')
+            self._verify_selected_measures(scope,selected)
             if len(selected)<=4096:
                 result=list(selected);selected.close();return result
             return selected
         except BaseException:
             selected.close()
             raise
+
+
+    @staticmethod
+    def _verify_record_measures(row,measures):
+        from decimal import Decimal
+        payload=json.loads(row['payload']);expected=[]
+        for code,value in sorted(payload['values'].items()):
+            if code=='time':continue
+            exact,projection,status=decimal_projection(value)
+            expected.append({'measure_code':code,'value_exact':exact,'value_decimal':projection,
+                'projection_status':status,'null_reason':payload['null_reasons'].get(code,'')})
+        comparable=lambda values:[r | {'value_decimal':Decimal(r['value_decimal']) if r['value_decimal'] is not None else None} for r in values]
+        if comparable(measures)!=comparable(expected):
+            raise ValueError('Revision measures incomplete or conflicting')
+
+    def _verify_selected_measures(self,scope,selected):
+        if len(selected)<=4096:
+            for offset in range(0,len(selected),512):
+                batch=selected[offset:offset+512]
+                rows=self.client.query('''SELECT DISTINCT revision_id,measure_code,value_exact,value_decimal,projection_status,null_reason
+                    FROM source_measure WHERE scope_id={scope:String} AND revision_id IN {ids:Array(String)} ORDER BY measure_code''',
+                    {'scope':scope,'ids':str([r['revision_id'] for r in batch])})
+                by_revision={}
+                for measure in rows:
+                    measure=dict(measure);rid=measure.pop('revision_id')
+                    by_revision.setdefault(rid,[]).append(measure)
+                for row in batch:self._verify_record_measures(row,by_revision.get(row['revision_id'],[]))
+            return
+        # A large random IN set touches most sparse-index granules per batch.
+        # Walk the ordered measure key once instead, retaining only one source
+        # record's measures. In-order aggregation and external-sort thresholds
+        # bound the server as well as the Python reader.
+        from contextlib import closing
+        fields=('measure_code','value_exact','value_decimal','projection_status','null_reason')
+        sql='''SELECT revision_id,groupArray(tuple(measure_code,value_exact,value_decimal,projection_status,null_reason)) AS measures
+            FROM source_measure WHERE scope_id={scope:String} GROUP BY revision_id ORDER BY revision_id
+            SETTINGS optimize_aggregation_in_order=1,max_bytes_before_external_group_by=67108864,max_bytes_before_external_sort=67108864'''
+        matched=0;previous=None
+        with closing(self.client.iter_query(sql,{'scope':scope})) as groups:
+            for group in groups:
+                revision=group['revision_id']
+                if previous is not None and revision<=previous:raise ValueError('Unordered or repeated measure group')
+                previous=revision
+                # Old revisions and pre-commit orphan measures are outside this
+                # frozen membership, just as in the bounded IN path.
+                if not selected.has_revision(revision):continue
+                measures=sorted({tuple(values) for values in group['measures']},key=lambda values:values[0])
+                if any(len(values)!=len(fields) for values in measures):raise ValueError('Invalid typed measure group')
+                self._verify_record_measures(selected.revision(revision),[dict(zip(fields,values,strict=True)) for values in measures])
+                matched+=1
+        if matched!=len(selected):raise ValueError('Revision measures incomplete or conflicting')
 
 
     def load_membership(self, scope, load_id):

@@ -1,0 +1,15 @@
+{
+  "measurement": "Apparent regular-file bytes for successful fresh paths only; failed pilot outputs excluded",
+  "postgres": {
+    "workflow_bytes": 313909482,
+    "ingestion_bytes": 91419947,
+    "ingestion_run": "1c4d9f6558df416ca88a0acf0013b19e"
+  },
+  "clickhouse": {
+    "output_bytes": 91427951,
+    "coordinator_bytes": 0
+  },
+  "shared_raw_zip_excluded": true,
+  "anonymous_verification_spools_excluded": true,
+  "clickhouse_server_log_allocated_KiB": 407384
+}

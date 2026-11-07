@@ -62,6 +62,7 @@ class BoundedCoreTest(unittest.TestCase):
             r=copy.deepcopy(self.record());day=date(2020,3,2)+timedelta(days=i)
             r.update(logical_key=day.isoformat(),source_timestamp=day.isoformat()+'T00:00:00',source_record_id='large:'+str(i))
             r['values']['time']=str(43892+i);records.append(r)
+        records[-1]['values']['Irr']='0.'+'1234567890'*5
         for offset in range(0,len(records),512):
             self.repo.append_initial_records(self.scope,(record for record in records[offset:offset+512]))
         rows=self.repo.canonical_records(self.scope);self.addCleanup(rows.close)
@@ -77,6 +78,15 @@ class BoundedCoreTest(unittest.TestCase):
         self.assertEqual(len(newer),4200);self.assertEqual(newer[-1],last)
         picked=self.repo.canonical_records(self.scope,revision_ids=[last['revision_id'],first['revision_id']])
         self.assertEqual({r['revision_id'] for r in picked},{first['revision_id'],last['revision_id']})
+        measures=self.client.query('SELECT * FROM source_measure WHERE scope_id={scope:String} AND revision_id={id:String}',
+            {'scope':self.scope,'id':last['revision_id']})
+        self.assertTrue(any(m['projection_status']=='outside_decimal256_projection' and m['value_decimal'] is None for m in measures))
+        self.repo._insert('source_measure',[measures[0]])
+        retry=self.repo.canonical_records(self.scope);self.addCleanup(retry.close)
+        self.assertEqual(retry[-1],last)
+        self.repo._insert('source_measure',[dict(measures[0],value_exact='999',value_decimal='999',projection_status='exact')])
+        with self.assertRaisesRegex(ValueError,'measures incomplete or conflicting'):
+            self.repo.canonical_records(self.scope)
 
 
 @unittest.skipUnless(os.environ.get('GREENHOUSE_CH_INTEGRATION')=='1','isolated server required')

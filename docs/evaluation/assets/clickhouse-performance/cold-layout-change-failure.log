@@ -1,0 +1,28 @@
+ Container gh-engine-benchmark-20261107-ch-queries-compact Creating
+ Container gh-engine-benchmark-20261107-ch-queries-compact Created
+{"stage": "cold_publication_started", "backend": "clickhouse"}
+Traceback (most recent call last):
+  File "/migration/benchmark_queries.py", line 120, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/migration/benchmark_queries.py", line 57, in main
+    publication=wiring.energy_service(connection).adapter.publication(args.publication_id)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/energy.py", line 163, in publication
+    envelope=self._envelope(publication_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/water.py", line 185, in _envelope
+    self._pinned[publication_id]=publication_envelope(self.client,publication_id)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/registry.py", line 59, in publication_envelope
+    return envelope(client,scopes[0]['scope_id'],publication_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/registry.py", line 16, in envelope
+    return verified(client,scope,publication_id,lambda selected:_envelope(client,scope,selected))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/proof_cache.py", line 99, in verified
+    try:return _verified(client,scope,publication_id,loader)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/proof_cache.py", line 83, in _verified
+    raise WarehouseChanged('Warehouse changed during verification; retry when writers are stable')
+greenhouse.clickhouse.proof_cache.WarehouseChanged: Warehouse changed during verification; retry when writers are stable

@@ -233,37 +233,41 @@ class SlotAdapter(WaterAdapter):
         start=max(datetime.combine(cycle.start,datetime.min.time()),window_start or datetime.min)
         end=min(datetime.combine(cycle.end,datetime.min.time()),window_end or datetime.max)
         from contextlib import closing
-        sql='''SELECT * FROM threshold_measure WHERE scope_id={scope:String}
+        sql='''SELECT slot_clock_us,
+            groupUniqArray(tuple(slot_start,revision_id,logical_record_key,quality_policy_version,correction_id,correction_version)) AS metadata,
+            arrayMap(m -> tuple(m.1,m.2,m.5,m.6,m.7),
+                groupUniqArray(tuple(measure_code,value_exact,value_decimal,projection_status,quality,applicability,reason))) AS measures
+            FROM threshold_measure WHERE scope_id={scope:String}
             AND publication_id={pub:String} AND bundle={bundle:String} AND cycle_id={cycle:String}
             AND compartment_id={comp:String} AND slot_clock_us>={start:Int64} AND slot_clock_us<{end:Int64}
-            ORDER BY slot_clock_us,measure_code SETTINGS max_bytes_before_external_sort=67108864'''
+            GROUP BY slot_clock_us ORDER BY slot_clock_us
+            SETTINGS optimize_aggregation_in_order=1,max_bytes_before_external_group_by=67108864,max_bytes_before_external_sort=67108864'''
         parameters={'scope':context.scope_id,'pub':publication.publication_id,'bundle':self.BUNDLE,
             'cycle':context.cycle_id,'comp':context.compartment_ids[0],
             'start':source_clock_us(start),'end':source_clock_us(end)}
-        def assemble(stamp,measures):
-            if set(measures)!=set(MEASURES[self.BUNDLE]):
-                raise ValueError('Incomplete threshold measure verdicts')
-            first=next(iter(measures.values()))
-            keys=('revision_id','logical_record_key','quality_policy_version','correction_id','correction_version')
-            if any(any(r[k]!=first[k] for k in keys) for r in measures.values()):
-                raise ValueError('Mixed threshold revisions')
-            values={field:Decimal(measures[code]['value_exact']) if measures[code]['value_exact'] is not None else None
-                    for code,field in MEASURES[self.BUNDLE].items()}
-            quality={code:{'status':r['quality'],'applicability':r['applicability'],'reason':r['reason']} for code,r in measures.items()}
-            row_type=ClimateSlotRow if self.BUNDLE=='climate' else DrainSlotRow
-            return row_type(slot_start=datetime.fromisoformat(stamp),revision_id=first['revision_id'],
-                logical_key=first['logical_record_key'],quality_policy_version=first['quality_policy_version'],
-                correction_id=first['correction_id'] or None,correction_version=first['correction_version'] or None,
-                measure_quality=quality,**values)
-        result=[];stamp=None;measures={}
-        with closing(self.client.iter_query(sql,parameters)) as rows:
-            for row in rows:
-                if stamp is not None and row['slot_start']!=stamp:
-                    result.append(assemble(stamp,measures));measures={}
-                stamp=row['slot_start'];code=row['measure_code']
-                if code in measures and measures[code]!=row:raise ValueError('Conflicting threshold slot measure')
-                measures[code]=row
-            if stamp is not None:result.append(assemble(stamp,measures))
+        result=[]
+        row_type=ClimateSlotRow if self.BUNDLE=='climate' else DrainSlotRow
+        with closing(self.client.iter_query(sql,parameters)) as groups:
+            for group in groups:
+                # Deduplicate FULL physical tuples before projecting fields.
+                # Two variants differing only in projection columns still
+                # produce two entries with the same code and must fail below.
+                if len(group['metadata'])!=1:raise ValueError('Mixed threshold revisions')
+                stamp,revision,logical_key,policy,correction,version=group['metadata'][0]
+                measures={}
+                for item in group['measures']:
+                    code=item[0]
+                    if code in measures:raise ValueError('Conflicting threshold slot measure')
+                    measures[code]=item
+                if set(measures)!=set(MEASURES[self.BUNDLE]):raise ValueError('Incomplete threshold measure verdicts')
+                values={};quality={}
+                for code in sorted(measures):
+                    _,exact,verdict,applicability,reason=measures[code]
+                    values[MEASURES[self.BUNDLE][code]]=Decimal(exact) if exact is not None else None
+                    quality[code]={'status':verdict,'applicability':applicability,'reason':reason}
+                result.append(row_type(slot_start=datetime.fromisoformat(stamp),revision_id=revision,
+                    logical_key=logical_key,quality_policy_version=policy,correction_id=correction or None,
+                    correction_version=version or None,measure_quality=quality,**values))
         return tuple(result)
 
 

@@ -1,0 +1,12 @@
+ Container gh-ch-compact-tests-20261107-ch-ui-test-run-bb1f2af865bf Creating
+ Container gh-ch-compact-tests-20261107-ch-ui-test-run-bb1f2af865bf Created
+test_bounded_source_selection_is_pinned_and_tampered_mart_is_refused (test_threshold.ThresholdTest.test_bounded_source_selection_is_pinned_and_tampered_mart_is_refused) ... ok
+test_duration_episode_quality_off_mode_and_verified_lineage (test_threshold.ThresholdTest.test_duration_episode_quality_off_mode_and_verified_lineage) ... ok
+test_new_rule_boundary_and_late_correction_keep_old_publication (test_threshold.ThresholdTest.test_new_rule_boundary_and_late_correction_keep_old_publication) ... ok
+test_profile_atomic_envelope_and_catalog_group (test_threshold.ThresholdTest.test_profile_atomic_envelope_and_catalog_group) ... ok
+test_slot_reader_keeps_projection_conflicts_after_exact_retry_collapse (test_threshold.ThresholdTest.test_slot_reader_keeps_projection_conflicts_after_exact_retry_collapse) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 2.479s
+
+OK

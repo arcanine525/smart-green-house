@@ -1,0 +1,333 @@
+{
+  "status": "passed",
+  "at_utc": "2026-11-07T03:18:06.973977+00:00",
+  "source_head": "6b1a64976a5d8a295680e72f8e63cfa4b5e0c486",
+  "source_postgres_unchanged_read_only": true,
+  "same_caps": true,
+  "warmup_per_br": 5,
+  "samples_per_br": 30,
+  "all_business_fingerprints_match": true,
+  "all_clickhouse_warm_targets_met": true,
+  "full_6br_correctness_before_measurement": true,
+  "sensor_trials_per_engine": 1,
+  "sensor_events_per_trial": 30,
+  "sensor_is_full_file_replay": false,
+  "os_caches_flushed": false,
+  "lifecycle_independent_trials_per_engine": 1,
+  "tests_discovered": 84,
+  "tests_executed": 75,
+  "explicit_heavy_skips": 9,
+  "benchmark_final_state": "Post-compaction stable historical parts; pure evaluation cache disabled; guarded process proof cache enabled",
+  "ch_maintenance_seconds_with_probe": 25.21785072000057,
+  "limits": [
+    "Single local host; sequential engines; warm query samples are not independent deployments",
+    "Fresh implementation lifecycle differs: PG Spark candidate stage; CH Python mart builders",
+    "CH cold process proof is deliberately measured separately; warm proof guards remain enabled",
+    "Native resume paths perform different verification and are not equivalent work units",
+    "PG failed pilots and sensor harness serialization failure excluded from successful latency samples; documented separately",
+    "CH final query measurement follows documented compaction; prior failed p95 and layout-change guard failure retained",
+    "Only disposable agent test volumes were removed after evidence capture; original deployment volumes retained"
+  ],
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 1370,
+      "sha256": "42c4831bd97dba3fa6f984cc095a2e945f1c4d406682b2d56ca576513a267de6"
+    },
+    {
+      "file": "build.log",
+      "bytes": 36254,
+      "sha256": "1ac7a69126282b4a8af1fe113759d46d1e14a016c5cb43400d86ced67d502246"
+    },
+    {
+      "file": "candidate-code.json",
+      "bytes": 5102,
+      "sha256": "80b2a7d0187effc56b33f806ebde26bb93826408fc830550b55a6493d0f1eb5c"
+    },
+    {
+      "file": "ch-cold-layout-change-failure.json",
+      "bytes": 238,
+      "sha256": "ed5f59a145b5875dea3934d49ecde9e786eaf3ccfca5c695a1d9f1092e4ac818"
+    },
+    {
+      "file": "ch-cold-layout-change-incomplete-report.json",
+      "bytes": 389,
+      "sha256": "5877902946f3dc0b4ca4ead1eeea5fa64f7d885bb778efa116a3d14579b81141"
+    },
+    {
+      "file": "ch-fresh.json",
+      "bytes": 4588,
+      "sha256": "628fb108deea0a5ddc28b1ca9bf5cb0d54cb1a889d6282de3fd88136fc80e8e7"
+    },
+    {
+      "file": "ch-fresh.log",
+      "bytes": 3263,
+      "sha256": "7aeb3beff684134399f7e71c2132411ee4f70989f1e7c2b962c1d7443d08d95b"
+    },
+    {
+      "file": "ch-part-maintenance.json",
+      "bytes": 5629,
+      "sha256": "05cbf953d188635aa81d897e23d25904830cda07bb7e7b1f9f880b678531a914"
+    },
+    {
+      "file": "ch-queries-after.log",
+      "bytes": 851,
+      "sha256": "39b1a1a9e28f2547acfbf5ba435b41af6dab5e3a2a7e68565d3faed7ef4eb9cc"
+    },
+    {
+      "file": "ch-queries-before-optimization.json",
+      "bytes": 9123,
+      "sha256": "b3bbf85a522209c0e39ff8a5bc7ed5e0bd87581d0715f453984c1ba0618cf172"
+    },
+    {
+      "file": "ch-queries.json",
+      "bytes": 9105,
+      "sha256": "44d405fb4785634b96afc7282bf8663f99af0f1da3dd8d87bcfbbb9174d55817"
+    },
+    {
+      "file": "ch-query-processing-runtime.json",
+      "bytes": 242,
+      "sha256": "37f6a2da92d46a85a13de836f5763221e42f893198606560dee8265bc236fa10"
+    },
+    {
+      "file": "ch-resources.jsonl",
+      "bytes": 87752,
+      "sha256": "a1e8fa3e442cf48db3ee443617e652a62a8fa10e8e8bb0a98b8523dfa3f193c3"
+    },
+    {
+      "file": "ch-resume.json",
+      "bytes": 3759,
+      "sha256": "92e7b371be14915df2dfc3c05139be5d41a45838f5055fe1871393c310036346"
+    },
+    {
+      "file": "ch-resume.log",
+      "bytes": 2880,
+      "sha256": "68f5d3ddd3c6e31657a0befce905735900b9e0a31e3f8ddf6f2d24bc4bbc77b9"
+    },
+    {
+      "file": "ch-scenario-import.json",
+      "bytes": 389,
+      "sha256": "3d556724d61f8f0a787c29d48282a4769657f75c1dce67d569a6a8ed2e6d42d9"
+    },
+    {
+      "file": "ch-scenarios.json",
+      "bytes": 9067,
+      "sha256": "64a300b079c7ffa7515154ee800f06a68a230616b2a493d7372887c1121bfd56"
+    },
+    {
+      "file": "ch-scenarios.log",
+      "bytes": 398,
+      "sha256": "f0f7779f4620748df7764ff52f261d76bcac86dd0ef7b4425d751c4c33e089ef"
+    },
+    {
+      "file": "ch-sensor.json",
+      "bytes": 9009,
+      "sha256": "653644e0cfcb0e9a2b297abe5465957284c8a7c124aa79b97775c109d857b7bd"
+    },
+    {
+      "file": "ch-sensor.log",
+      "bytes": 1147,
+      "sha256": "75d0afe6e0f1d91b59de2e7f23994e787c7b7a7a8e7ebf07322f99b1e6741eff"
+    },
+    {
+      "file": "ch-server-cgroup-and-volume.txt",
+      "bytes": 354,
+      "sha256": "0291f8f39dadd9484a960261176dc56c36100a6cf9f4d5df97ddd1a3a7afbdcb"
+    },
+    {
+      "file": "ch-server.json",
+      "bytes": 1162,
+      "sha256": "2519da8589fd52a77db464fba2aa66e291d0fdfa3399c14cc728f9a4d282b133"
+    },
+    {
+      "file": "ch-storage.json",
+      "bytes": 25441,
+      "sha256": "eb48c2bb9edd7655927e9ce7389fa6b4f280d75a81a0c90a09e3d0262ab18321"
+    },
+    {
+      "file": "cold-layout-change-failure.log",
+      "bytes": 2178,
+      "sha256": "be6ed43b3b7fde8681697f89cea0d36b6a807a2109c802557cb245e346af1127"
+    },
+    {
+      "file": "diagnostic-cpu-profile.txt",
+      "bytes": 5431,
+      "sha256": "98b07ec5210f54e1384f655ebd52b36df3b8ff647114fa2619de006009c0536d"
+    },
+    {
+      "file": "diagnostic-http-gc-controls.json.gz",
+      "bytes": 604654,
+      "sha256": "9b25fb0e0ed88bd57f037a0bf7f29c604af50c3b5b3fc35f6281764ac2908955"
+    },
+    {
+      "file": "diagnostic-http-gc-summary.json",
+      "bytes": 45751,
+      "sha256": "cfb87b39df89d6d69856547bd94053a78e4e834b28fbf757c3e760f960222f20"
+    },
+    {
+      "file": "diagnostics/query_pauses.py",
+      "bytes": 1053,
+      "sha256": "902a3203b06620320efbf52c065a5a02ed27e39e5bf48f3f4f87b4d8bafe8edc"
+    },
+    {
+      "file": "diagnostics/slot_transport.py",
+      "bytes": 3181,
+      "sha256": "b658f760471be1621b6073cb50ed9f9d76314f6c8fdbd5202167881446ce4fa2"
+    },
+    {
+      "file": "environment.json",
+      "bytes": 211,
+      "sha256": "9fc5fff076e90b34e2ef07bb58284319444108e3dbf8552247ef2794418440db"
+    },
+    {
+      "file": "fresh-candidate-parity.json",
+      "bytes": 6352,
+      "sha256": "4fe0e0e29beb4158064b7ebc2391eb524a7aa138ab58db5ba30f94d56677cdaa"
+    },
+    {
+      "file": "log-provenance.json",
+      "bytes": 2607,
+      "sha256": "dd02de8eb1f2e235b7ce23c8bf0ebd0693565dcb5b115cca0a119ccd4aa48138"
+    },
+    {
+      "file": "measurement-phases.json",
+      "bytes": 1630,
+      "sha256": "051ec32fb281b0a0ca3eb08ae36a7d380e2c20faf88f6f27162fb440b24e1245"
+    },
+    {
+      "file": "part-history-diagnostic.log",
+      "bytes": 4397,
+      "sha256": "f9fccec5797c0bb1b325bacf34fe3fcc8d672732ca9b58a792e729cebadf3976"
+    },
+    {
+      "file": "part-maintenance.log",
+      "bytes": 514,
+      "sha256": "6b31f1a9d2a79e4735cbf2648cc4427155ccae5fbd112e7de219262dc52f80d9"
+    },
+    {
+      "file": "pg-fresh.json",
+      "bytes": 1558,
+      "sha256": "fef4b14d32a47a9e255e834bdf9dc101d998bb2d6eeea43d592f1b525f046312"
+    },
+    {
+      "file": "pg-fresh.log",
+      "bytes": 910,
+      "sha256": "6af2877337c469ff8b159d92ada80ac82ecc8700dfa86c4b0f0251db50fc916d"
+    },
+    {
+      "file": "pg-pilot-initial-failure.json",
+      "bytes": 746,
+      "sha256": "5ebd4ca3848394d07df269ab346c632832de93714ecf84411b416909126b437a"
+    },
+    {
+      "file": "pg-pilot-storage-failure.json",
+      "bytes": 720,
+      "sha256": "db63a9762dbb2b57585d04789ced9d18271035967d872b8e128913d98c90d68b"
+    },
+    {
+      "file": "pg-queries.json",
+      "bytes": 9070,
+      "sha256": "b988bfd9c5eda9d3a3afd323f489056ee4074a9532fafa366abb6e673da25e8a"
+    },
+    {
+      "file": "pg-resources-v3.jsonl",
+      "bytes": 54277,
+      "sha256": "e2c2d5ec85232d978565682e5aa0fa929c5a8a5862eacae6275c1ffcfb2e2351"
+    },
+    {
+      "file": "pg-resume.json",
+      "bytes": 1566,
+      "sha256": "f20d1552c30dd13727451a8dce9e532ddc59d279fdb3a365418e2476f6a26f0c"
+    },
+    {
+      "file": "pg-scenario-seed.json",
+      "bytes": 417,
+      "sha256": "a0a21b94c177f27807a71bda1fd2e0dbe973ea567d46d46566e8998f06e14cad"
+    },
+    {
+      "file": "pg-scenarios.json",
+      "bytes": 9055,
+      "sha256": "993ba2e9e49f8cf71f595e3f883a20380d180dd4c5849a342c526ba20db4690e"
+    },
+    {
+      "file": "pg-sensor-harness-initial-failure.json",
+      "bytes": 230,
+      "sha256": "630f1c2993f7a6d0e7e426ebf68eead97b1cb520e134f23aaf1c569b860e48e4"
+    },
+    {
+      "file": "pg-sensor.json",
+      "bytes": 9017,
+      "sha256": "e0f8f9d8cb36b21179e6e4e08ce2bbddf1614e354d53b1ceed412919c5cf13da"
+    },
+    {
+      "file": "pg-server-cgroup-and-volume.txt",
+      "bytes": 352,
+      "sha256": "d7ae5f51e8a3728e538b06ef7ffb7c545f2b429319d87f38523ce59a37a32847"
+    },
+    {
+      "file": "pg-server.json",
+      "bytes": 1142,
+      "sha256": "22e2160bbfafd7be174b978056210ced57a1e6e50018b6f9d68b7766cae9ab75"
+    },
+    {
+      "file": "pg-storage.json",
+      "bytes": 45767,
+      "sha256": "9a4b06f82a00eb1095ffe8e84b4e8ca77585729d78e8c96a90c14464f0db6463"
+    },
+    {
+      "file": "processing-code-after.json",
+      "bytes": 18945,
+      "sha256": "ffedfbfe6ecee79e63a4c55dd14619fb89322e8b3786ae80fc7f799e3bc4f3b7"
+    },
+    {
+      "file": "processing-code-before.json",
+      "bytes": 18945,
+      "sha256": "230caa4b839f4cef4d3e4db86943d04d4dd50cdedaec499ee2bf1bd37dcc3ca5"
+    },
+    {
+      "file": "processing-versions.json",
+      "bytes": 127,
+      "sha256": "a6fc44f89361855e51cf095561b83ef7a87f2e72b59efc6560e09420dbecb100"
+    },
+    {
+      "file": "projection-conflict-after.log",
+      "bytes": 1063,
+      "sha256": "3a0b04fc05a91226f6019fea0a9dbda4966e2fe976cedecaacf00db2f03235b5"
+    },
+    {
+      "file": "projection-conflict-before.log",
+      "bytes": 1063,
+      "sha256": "4ca7af7fb65151d5acbfe140798f2f75c1f44eb2e9c8a49abf2ac990843a5e75"
+    },
+    {
+      "file": "resource-inventory-initial-race.json",
+      "bytes": 1390,
+      "sha256": "ad6b8c8ef2fca9571611c4f30965b96b535033bed531d463537b8aba7fccb55a"
+    },
+    {
+      "file": "server-pause-diagnostic.log",
+      "bytes": 11286,
+      "sha256": "4e8b1c49b5e12933e5a3f5991f5d9654ebefd5466ae427e2232257b8529f82e6"
+    },
+    {
+      "file": "staging-footprint.json",
+      "bytes": 471,
+      "sha256": "4ad2b76e822d40610c536d108d365c55118b7cfad2cfee17f218b0fca2290de1"
+    },
+    {
+      "file": "storage-recovery.json",
+      "bytes": 683,
+      "sha256": "aab4163ec34880b12f5caecec73fdc734445814131859c49b7b8af63a9575e8b"
+    },
+    {
+      "file": "tests.log",
+      "bytes": 119914,
+      "sha256": "de3784b56d7305787bbb34cfe1d6cba468c8b0fa446d8b04806f7734e0db4ca2"
+    },
+    {
+      "file": "transport-diagnostic.log",
+      "bytes": 672,
+      "sha256": "d573ebd650b9834434135cb6296d5702b9381fe246bfd23ae39b41dbafa39524"
+    }
+  ]
+}

@@ -33,7 +33,7 @@ def connect(configuration):
     if isinstance(configuration,ClickHousePaths):
         client=Client(configuration.database)
         client.ping()
-        return client.begin_action()
+        return client.begin_action(shared_proofs=True)
     import psycopg
     return psycopg.connect(**configuration.connection_kwargs())
 

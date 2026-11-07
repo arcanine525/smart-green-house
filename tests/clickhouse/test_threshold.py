@@ -131,6 +131,30 @@ class ThresholdTest(unittest.TestCase):
         opts=d.catalog_schedule_rules(self.scope,'Automatoes',measurement_context='drain_process_computer',metrics=('ec','ph'),bases=(RuleBasis.MEASURED,))
         self.assertEqual({r.rule_version for r in opts},{self.drain_rule.rule_version,revision.rule_version})
 
+    def test_slot_reader_keeps_projection_conflicts_after_exact_retry_collapse(self):
+        _,adapter,_,publication,context=self.prepare()
+        self.client.begin_action()
+        original=adapter.read_climate_slots(context,publication)
+        parameters={'scope':self.scope,'pub':publication.publication_id}
+        row=self.client.query("""SELECT * FROM threshold_measure WHERE scope_id={scope:String}
+            AND publication_id={pub:String} AND bundle='climate' AND measure_code='Tair'
+            AND slot_start>='2020-03-03' AND slot_start<'2020-03-04'
+            AND value_exact IS NOT NULL LIMIT 1""",parameters)[0]
+        repository=Repository(self.client,self.root)
+        repository._insert('threshold_measure',[row])
+        self.assertEqual(adapter.read_climate_slots(context,publication),original)
+        # Projection columns do not belong to the row DTO. A compact response
+        # must still distinguish full physical tuples that differ only there.
+        repository._insert('threshold_measure',[dict(row,value_decimal='999.654321')])
+        try:
+            with self.assertRaisesRegex(ValueError,'Conflicting threshold slot measure'):
+                adapter.read_climate_slots(context,publication)
+        finally:
+            self.client.close()
+            self.client.execute("""ALTER TABLE threshold_measure DELETE WHERE scope_id={scope:String}
+                AND publication_id={pub:String} AND bundle='climate' AND measure_code='Tair'
+                AND value_decimal=999.654321 SETTINGS mutations_sync=2""",parameters)
+
     def test_bounded_source_selection_is_pinned_and_tampered_mart_is_refused(self):
         result,a,d,pub,q=self.prepare()
         from greenhouse.clickhouse.threshold import validated_config

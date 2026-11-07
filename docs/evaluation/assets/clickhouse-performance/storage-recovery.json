@@ -1,0 +1,19 @@
+{
+  "status": "recovered",
+  "observed": [
+    "Docker overlay2 root filesystem read-only",
+    "BuildKit metadata write rejected read-only",
+    "host available space 236 MiB"
+  ],
+  "docker_build_cache_reclaimed_bytes": 1845000000,
+  "failed_probe_trace_bytes_removed": 1146949966,
+  "video_files_removed": 0,
+  "user_volumes_removed": 0,
+  "disposable_benchmark_volume_reset": true,
+  "old_disposable_restore_database_removed": true,
+  "old_restore_backup_all_hashes_reverified": true,
+  "host_available_after_cleanup_GiB": 9.6,
+  "original_services_restored_healthy": true,
+  "benchmark_fresh_v2_status": "failed",
+  "benchmark_failure_not_included_as_successful_timing": true
+}

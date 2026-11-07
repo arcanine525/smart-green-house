@@ -1,0 +1,203 @@
+{
+  "status": "measured",
+  "backend": "postgres",
+  "replay_id": "bench-sensor-a9168dee3acf",
+  "publication_id": "966174e89c104e702269695788746476cdd2911690c95568461a6b20ccc8eb8a",
+  "source_snapshot": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "source_file_checksum": "3415b31b7958c735f836c7fa8f890a93020786be5c86dc2e7c42771fb0a02cd3",
+  "selection_events": 30,
+  "full_file_replay": false,
+  "independent_replay_trials": 1,
+  "sample_unit": "event in one burst; correlated",
+  "setup_including_spark_and_historical_proof_seconds": 3.7811806690000367,
+  "poll_interval_seconds": 0.1,
+  "source_bytes_match": true,
+  "complete": true,
+  "checksum_verified": true,
+  "business_fingerprint": "7783fdfa2f63909171709dea99b43bb5e6956af13fde3dca15ce4d1030d1f675",
+  "cross_engine_reference_matched": false,
+  "p50_ms": 1226.7194375000372,
+  "p95_ms": 1409.616167000081,
+  "samples": [
+    {
+      "event_id": "24c2172316b24fa825d027c6dd9b9d7db8616e089f7e30f8df32b6dc53aa15d9",
+      "publisher_call_utc": "2026-11-07T01:48:13.297307+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1237.1231670000498
+    },
+    {
+      "event_id": "2c639517d8073ba66250bba0b528087b0fc3b1b3a266a5c3bef54c968dfe349b",
+      "publisher_call_utc": "2026-11-07T01:48:13.439149+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1095.281458000045
+    },
+    {
+      "event_id": "32447a5e2c7cb2fdf347c491d0109f45ac1dfa719ae3cf1d93c1286da422be69",
+      "publisher_call_utc": "2026-11-07T01:48:13.152968+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1381.4622920000375
+    },
+    {
+      "event_id": "43422f0d4e02d2b63bc3ba615521d24e3d8f45a9f21aa0b32d536552a23c5af6",
+      "publisher_call_utc": "2026-11-07T01:48:13.306250+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1228.1806670000606
+    },
+    {
+      "event_id": "4ae6e229302139455cd648f654d01ff648154e3cb3698d78d6f7421cc3282ef7",
+      "publisher_call_utc": "2026-11-07T01:48:13.148543+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1385.8865420000939
+    },
+    {
+      "event_id": "4fcb5f57ad69ebaa119176cf53dabe7b0297ccce806b4128acbb22a3358599d5",
+      "publisher_call_utc": "2026-11-07T01:48:13.436737+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1097.6934170000732
+    },
+    {
+      "event_id": "5c325e32a730c1e3100f4fe01ff3bdd3cce83461b48c98fd2c5ddf8c60c1b3a3",
+      "publisher_call_utc": "2026-11-07T01:48:13.462174+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1072.256500000094
+    },
+    {
+      "event_id": "6035cf234d31d47bb26be6281155b9c6dc77d2f9396610efc2c23bf1b9800fa1",
+      "publisher_call_utc": "2026-11-07T01:48:13.434306+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1100.1245420000032
+    },
+    {
+      "event_id": "6c7fd72fe3a1b4e89ec0cd4ae9935a17f97ebfef1092e49ee5e63e7664db83be",
+      "publisher_call_utc": "2026-11-07T01:48:13.480293+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1054.1377499999953
+    },
+    {
+      "event_id": "723bacd1be25b6d6db2de7fc4dd345c7f0f6463c9e687205e0654eafb1975a41",
+      "publisher_call_utc": "2026-11-07T01:48:13.441741+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1092.6901670000007
+    },
+    {
+      "event_id": "752fce289687585f8e339fe6c797970704a5c9c4dc7046e1fb26dc24e55d9453",
+      "publisher_call_utc": "2026-11-07T01:48:13.324726+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1209.7038330000487
+    },
+    {
+      "event_id": "7f15f091ad11f6232941d6fd13906a9b9de6aa8e278695bb904a6e055d0460a7",
+      "publisher_call_utc": "2026-11-07T01:48:13.329259+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1205.171792000101
+    },
+    {
+      "event_id": "884d404c0f6db2fb91394fa3605d4b2910406ad22e90fb8e7f71e6f55bc66a3f",
+      "publisher_call_utc": "2026-11-07T01:48:13.313575+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1220.8562920000077
+    },
+    {
+      "event_id": "905daa2f23c2031db5a8bdebbad5993e11cb9b56da4e3eb11aae758c607ceaa3",
+      "publisher_call_utc": "2026-11-07T01:48:13.446813+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1087.618333000023
+    },
+    {
+      "event_id": "9298d1b74ca5630d23111f9249444f97d0efb857cc0add543270da7d3c046962",
+      "publisher_call_utc": "2026-11-07T01:48:13.291011+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1243.4215830000994
+    },
+    {
+      "event_id": "a9a2209cad289c911f52ddefab1cc82de052c394d73ed6a23c778085a7476e1c",
+      "publisher_call_utc": "2026-11-07T01:48:13.294074+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1240.356833000078
+    },
+    {
+      "event_id": "b66f910cbaf71d110adca6607dcb8fdac84af7b40a1c2bcbb5288e06d6c38dee",
+      "publisher_call_utc": "2026-11-07T01:48:13.300909+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1233.5215420000623
+    },
+    {
+      "event_id": "bdb8008993b6eedd80eeaad8febaebfbb8e966d432268e3270392a7096c223b2",
+      "publisher_call_utc": "2026-11-07T01:48:13.132187+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1402.242959000091
+    },
+    {
+      "event_id": "c1230e2c6d91c688f2d91ec753c0bebed242f6a7bda83e9938ec5b151b3b28a5",
+      "publisher_call_utc": "2026-11-07T01:48:13.120337+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1414.1027919999942
+    },
+    {
+      "event_id": "c3cc2d8a3e58d9d3ba05c58880548af5b7c5ff92a71f8cdeb3f1bccda6e9c766",
+      "publisher_call_utc": "2026-11-07T01:48:13.124814+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1409.616167000081
+    },
+    {
+      "event_id": "c48fb8c5f4e599ad6377c966fe3be44c6d7ee60d4d7db9ddd12a6d1519662eae",
+      "publisher_call_utc": "2026-11-07T01:48:13.137672+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1396.7581250000194
+    },
+    {
+      "event_id": "cbb4bf59249c9b40033d0ee898b28056df238f5d49c50778685b82d1e4197359",
+      "publisher_call_utc": "2026-11-07T01:48:13.146346+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1388.0878749999965
+    },
+    {
+      "event_id": "cec3bf4d2401bc214e15321bbcefa58af7a08b45b90a0d2cfcbef7eb6a1f55eb",
+      "publisher_call_utc": "2026-11-07T01:48:13.456245+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1078.1856670000707
+    },
+    {
+      "event_id": "d81d91931f49217def6fe96f104cff7f8fd9f36a4f29e563a01d6caa0fff8cde",
+      "publisher_call_utc": "2026-11-07T01:48:13.450914+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1083.5164580000765
+    },
+    {
+      "event_id": "d8ca1f7ef108599c1dc0857114f8994d31a19a8a812e6c9735a0e1459465b2f6",
+      "publisher_call_utc": "2026-11-07T01:48:13.476601+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1057.8290000000834
+    },
+    {
+      "event_id": "da450541bcb596e41782cf699199b0f6ac600f9c31167c4b6dd9fbce1a3e37a0",
+      "publisher_call_utc": "2026-11-07T01:48:13.319861+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1214.5693330000995
+    },
+    {
+      "event_id": "eefdd6de86eb5688ddc6a83caf9542803c68955dbed7eec50d26d5cf094cbf16",
+      "publisher_call_utc": "2026-11-07T01:48:13.141378+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1393.052209000075
+    },
+    {
+      "event_id": "f53b953a0c79b93e8eda52a1b8d75b90be3eddbbbfdd2965855987bd0e5771f5",
+      "publisher_call_utc": "2026-11-07T01:48:13.155518+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1378.9118340000641
+    },
+    {
+      "event_id": "fba8e02da76a424dc36938dc25fbc8aae90877b81788ceb345e037595c3dda03",
+      "publisher_call_utc": "2026-11-07T01:48:13.309172+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1225.2582080000138
+    },
+    {
+      "event_id": "fcf746da5833a5c47842e81faa93b6d7b43ecc082efe89e310043721ccfe7ae1",
+      "publisher_call_utc": "2026-11-07T01:48:13.128706+00:00",
+      "queryable_observed_utc": "2026-11-07T01:48:14.534431+00:00",
+      "latency_ms": 1405.725250000046
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+ Container gh-engine-benchmark-20261107-ch-job-run-3bbba4ecfb17 Creating
+ Container gh-engine-benchmark-20261107-ch-job-run-3bbba4ecfb17 Created
+[
+  {
+    "event_type": "RemovePart",
+    "table": "configuration_envelope",
+    "part_name": "all_1_296_59",
+    "rows": 296,
+    "duration_ms": 0,
+    "event_time": "2026-11-07 02:42:01",
+    "merged_from": []
+  },
+  {
+    "event_type": "RemovePart",
+    "table": "configuration_envelope",
+    "part_name": "all_297_297_0",
+    "rows": 1,
+    "duration_ms": 0,
+    "event_time": "2026-11-07 02:42:01",
+    "merged_from": []
+  },
+  {
+    "event_type": "RemovePart",
+    "table": "configuration_envelope",
+    "part_name": "all_298_298_0",
+    "rows": 1,
+    "duration_ms": 0,
+    "event_time": "2026-11-07 02:42:01",
+    "merged_from": []
+  },
+  {
+    "event_type": "RemovePart",
+    "table": "configuration_envelope",
+    "part_name": "all_299_299_0",
+    "rows": 1,
+    "duration_ms": 0,
+    "event_time": "2026-11-07 02:42:01",
+    "merged_from": []
+  },
+  {
+    "event_type": "MergePartsStart",
+    "table": "source_measure",
+    "part_name": "all_3898_3924_6",
+    "rows": 0,
+    "duration_ms": 0,
+    "event_time": "2026-11-07 02:38:10",
+    "merged_from": [
+      "all_3898_3922_5",
+      "all_3923_3923_0",
+      "all_3924_3924_0"
+    ]
+  },
+  {
+    "event_type": "MergeParts",
+    "table": "source_measure",
+    "part_name": "all_3898_3924_6",
+    "rows": 96084,
+    "duration_ms": 41,
+    "event_time": "2026-11-07 02:38:10",
+    "merged_from": [
+      "all_3898_3922_5",
+      "all_3923_3923_0",
+      "all_3924_3924_0"
+    ]
+  },
+  {
+    "event_type": "RemovePart",
+    "table": "publication_state",
+    "part_name": "all_1_1_0",
+    "rows": 1,
+    "duration_ms": 0,
+    "event_time": "2026-11-07 02:36:49",
+    "merged_from": []
+  },
+  {
+    "event_type": "RemovePart",
+    "table": "publication_state",
+    "part_name": "all_2_2_0",
+    "rows": 1,
+    "duration_ms": 0,
+    "event_time": "2026-11-07 02:36:49",
+    "merged_from": []
+  },
+  {
+    "event_type": "RemovePart",
+    "table": "publication_state",
+    "part_name": "all_3_3_0",
+    "rows": 1,
+    "duration_ms": 0,
+    "event_time": "2026-11-07 02:36:49",
+    "merged_from": []
+  },
+  {
+    "event_type": "RemovePart",
+    "table": "publication_state",
+    "part_name": "all_4_4_0",
+    "rows": 1,
+    "duration_ms": 0,
+    "event_time": "2026-11-07 02:36:49",
+    "merged_from": []
+  },
+  {
+    "event_type": "MergePartsStart",
+    "table": "source_revision",
+    "part_name": "all_561_563_1",
+    "rows": 0,
+    "duration_ms": 0,
+    "event_time": "2026-11-07 02:35:34",
+    "merged_from": [
+      "all_561_561_0",
+      "all_562_562_0",
+      "all_563_563_0"
+    ]
+  },
+  {
+    "event_type": "MergeParts",
+    "table": "source_revision",
+    "part_name": "all_561_563_1",
+    "rows": 1269,
+    "duration_ms": 9,
+    "event_time": "2026-11-07 02:35:34",
+    "merged_from": [
+      "all_561_561_0",
+      "all_562_562_0",
+      "all_563_563_0"
+    ]
+  }
+]
+[{"name": "configuration_envelope", "engine": "MergeTree"}, {"name": "energy_basis", "engine": "MergeTree"}, {"name": "energy_cycle", "engine": "MergeTree"}, {"name": "energy_header", "engine": "MergeTree"}, {"name": "energy_measure", "engine": "MergeTree"}, {"name": "harvest_cycle", "engine": "MergeTree"}, {"name": "harvest_header", "engine": "MergeTree"}, {"name": "harvest_measure", "engine": "MergeTree"}, {"name": "harvest_state", "engine": "MergeTree"}, {"name": "load_file", "engine": "MergeTree"}, {"name": "load_issue", "engine": "MergeTree"}, {"name": "load_member", "engine": "MergeTree"}, {"name": "load_receipt", "engine": "MergeTree"}, {"name": "publication_state", "engine": "MergeTree"}, {"name": "replay_member", "engine": "MergeTree"}, {"name": "replay_pointer", "engine": "MergeTree"}, {"name": "replay_seal", "engine": "MergeTree"}, {"name": "source_disposition", "engine": "MergeTree"}, {"name": "source_measure", "engine": "MergeTree"}, {"name": "source_revision", "engine": "MergeTree"}, {"name": "stream_batch", "engine": "MergeTree"}, {"name": "stream_delivery", "engine": "MergeTree"}, {"name": "threshold_cycle", "engine": "MergeTree"}, {"name": "threshold_header", "engine": "MergeTree"}, {"name": "threshold_measure", "engine": "MergeTree"}, {"name": "water_cycle", "engine": "MergeTree"}, {"name": "water_header", "engine": "MergeTree"}, {"name": "water_measure", "engine": "MergeTree"}]

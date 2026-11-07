@@ -52,6 +52,9 @@ class VerifiedRows(Sequence):
         if revision_id not in self._revisions:raise ValueError('Revision absent from verified membership')
         return self[self._revisions[revision_id]]
 
+    def has_revision(self,revision_id):
+        return revision_id in self._revisions
+
     def __del__(self):
         handle=getattr(self,'_file',None)
         if handle is not None:handle.close()

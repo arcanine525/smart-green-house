@@ -220,6 +220,7 @@ Toàn bộ sơ đồ được viết bằng **Mermaid** trong Markdown. Xem [m�
 | [08 — Application contracts](docs/architecture/08-application-contracts.md) | UI/service/adapter, query contracts và tạo scenario |
 | [09 — ClickHouse migration](docs/architecture/09-clickhouse-migration.md) | Backfill, parity checks, cutover và rollback sau MVP |
 | [Benchmark Hybrid/Kimball](docs/evaluation/performance.md) | Pipeline mới/rerun/rebuild, storage, sáu BR và COPY so với INSERT; số đo và lệnh tái lập |
+| [Benchmark PostgreSQL/ClickHouse](docs/evaluation/clickhouse-performance.md) | Cùng workload/caps, 30 mẫu mỗi BR, scenario/sensor, storage và các giới hạn đã đo |
 | [UI prototype](prototypes/dashboard/README.md) | Cách chạy, fixture, giới hạn và kiểm tra giao diện |
 
 Tài liệu nền:

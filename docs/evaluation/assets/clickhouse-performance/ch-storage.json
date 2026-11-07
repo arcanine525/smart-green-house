@@ -1,0 +1,527 @@
+{
+  "backend": "clickhouse",
+  "at_utc": "2026-11-07T02:59:30.796969+00:00",
+  "version": "25.8.33.6",
+  "tables": [
+    {
+      "name": "configuration_envelope",
+      "engine": "MergeTree",
+      "sorting_key": "kind, scope_id, version_id, content_hash",
+      "primary_key": "kind, scope_id, version_id, content_hash",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.configuration_envelope (`kind` LowCardinality(String), `scope_id` String, `version_id` String, `request_id` String, `content_hash` FixedString(64), `schema_version` UInt16, `payload` String) ENGINE = MergeTree ORDER BY (kind, scope_id, version_id, content_hash) SETTINGS index_granularity = 8192",
+      "total_rows": 334,
+      "total_bytes": 194904
+    },
+    {
+      "name": "energy_basis",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id, compartment_id, measure_code, valid_from, basis_version_id",
+      "primary_key": "scope_id, publication_id, compartment_id, measure_code, valid_from, basis_version_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.energy_basis (`scope_id` String, `publication_id` String, `compartment_id` String, `measure_code` LowCardinality(String), `basis_version_id` String, `area_exact` String, `area_decimal` Nullable(Decimal(76, 38)), `status` LowCardinality(String), `valid_from` Date32, `valid_to_exclusive` Date32, `payload` String) ENGINE = MergeTree ORDER BY (scope_id, publication_id, compartment_id, measure_code, valid_from, basis_version_id) SETTINGS index_granularity = 8192",
+      "total_rows": 30,
+      "total_bytes": 3225
+    },
+    {
+      "name": "energy_cycle",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id, cycle_id",
+      "primary_key": "scope_id, publication_id, cycle_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.energy_cycle (`scope_id` String, `publication_id` String, `cycle_id` String, `compartment_id` String, `compartment_name` String, `start` Date32, `end` Date32) ENGINE = MergeTree ORDER BY (scope_id, publication_id, cycle_id) SETTINGS index_granularity = 8192",
+      "total_rows": 6,
+      "total_bytes": 1296
+    },
+    {
+      "name": "energy_header",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id",
+      "primary_key": "scope_id, publication_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.energy_header (`scope_id` String, `publication_id` String, `config_version` String) ENGINE = MergeTree ORDER BY (scope_id, publication_id) SETTINGS index_granularity = 8192",
+      "total_rows": 1,
+      "total_bytes": 653
+    },
+    {
+      "name": "energy_measure",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id, cycle_id, resource_date, component",
+      "primary_key": "scope_id, publication_id, cycle_id, resource_date, component",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.energy_measure (`scope_id` String, `publication_id` String, `cycle_id` String, `compartment_id` String, `resource_date` Date32, `component` LowCardinality(String), `measure_code` LowCardinality(String), `source_unit` String, `revision_id` String, `logical_record_key` String, `correction_id` String, `correction_version` UInt32, `source_exact` Nullable(String), `source_decimal` Nullable(Decimal(76, 38)), `projection_status` LowCardinality(String), `quality` LowCardinality(String), `applicability` LowCardinality(String), `reason` Nullable(String), `basis_version_id` Nullable(String), `normalized_kwh_m2` Nullable(String), `absolute_source_quantity` Nullable(String), `absolute_kwh` Nullable(String)) ENGINE = MergeTree ORDER BY (scope_id, publication_id, cycle_id, resource_date, component) SETTINGS index_granularity = 8192",
+      "total_rows": 2988,
+      "total_bytes": 151741
+    },
+    {
+      "name": "harvest_cycle",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id, cycle_id",
+      "primary_key": "scope_id, publication_id, cycle_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.harvest_cycle (`scope_id` String, `publication_id` String, `cycle_id` String, `compartment_id` String, `compartment_name` String, `start` Date32, `end` Date32) ENGINE = MergeTree ORDER BY (scope_id, publication_id, cycle_id) SETTINGS index_granularity = 8192",
+      "total_rows": 6,
+      "total_bytes": 1296
+    },
+    {
+      "name": "harvest_header",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id",
+      "primary_key": "scope_id, publication_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.harvest_header (`scope_id` String, `publication_id` String, `config_version` String, `load_id` String) ENGINE = MergeTree ORDER BY (scope_id, publication_id) SETTINGS index_granularity = 8192",
+      "total_rows": 1,
+      "total_bytes": 785
+    },
+    {
+      "name": "harvest_measure",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id, cycle_id, harvest_date, source_record_id, measure_code",
+      "primary_key": "scope_id, publication_id, cycle_id, harvest_date, source_record_id, measure_code",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.harvest_measure (`scope_id` String, `publication_id` String, `cycle_id` String, `compartment_id` String, `harvest_date` Date32, `source_record_id` String, `revision_id` String, `logical_record_key` String, `correction_id` String, `correction_version` UInt32, `measure_code` LowCardinality(String), `value_exact` Nullable(String), `value_decimal` Nullable(Decimal(76, 38)), `projection_status` LowCardinality(String), `quality` LowCardinality(String), `applicability` LowCardinality(String), `reason` Nullable(String), `source_unit` String, `basis_metadata` String) ENGINE = MergeTree ORDER BY (scope_id, publication_id, cycle_id, harvest_date, source_record_id, measure_code) SETTINGS index_granularity = 8192",
+      "total_rows": 278,
+      "total_bytes": 34443
+    },
+    {
+      "name": "harvest_state",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id, cycle_id",
+      "primary_key": "scope_id, publication_id, cycle_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.harvest_state (`scope_id` String, `publication_id` String, `cycle_id` String, `snapshot_complete` Bool, `source_resolved` Bool, `accepted_records` UInt64, `paired_records` UInt64, `completeness` String) ENGINE = MergeTree ORDER BY (scope_id, publication_id, cycle_id) SETTINGS index_granularity = 8192",
+      "total_rows": 6,
+      "total_bytes": 2053
+    },
+    {
+      "name": "load_file",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, load_id, source_file",
+      "primary_key": "scope_id, load_id, source_file",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.load_file (`scope_id` String, `load_id` String, `source_file` String, `metadata` String) ENGINE = MergeTree ORDER BY (scope_id, load_id, source_file) SETTINGS index_granularity = 8192",
+      "total_rows": 45,
+      "total_bytes": 9512
+    },
+    {
+      "name": "load_issue",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, load_id, source_record_id, disposition",
+      "primary_key": "scope_id, load_id, source_record_id, disposition",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.load_issue (`scope_id` String, `load_id` String, `source_record_id` String, `source_file` String, `disposition` LowCardinality(String), `payload` String) ENGINE = MergeTree ORDER BY (scope_id, load_id, source_record_id, disposition) SETTINGS index_granularity = 8192",
+      "total_rows": 1,
+      "total_bytes": 2081
+    },
+    {
+      "name": "load_member",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, load_id, revision_id",
+      "primary_key": "scope_id, load_id, revision_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.load_member (`scope_id` String, `load_id` String, `revision_id` String) ENGINE = MergeTree ORDER BY (scope_id, load_id, revision_id) SETTINGS index_granularity = 8192",
+      "total_rows": 287989,
+      "total_bytes": 18493274
+    },
+    {
+      "name": "load_receipt",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, load_id, input_hash",
+      "primary_key": "scope_id, load_id, input_hash",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.load_receipt (`scope_id` String, `load_id` String, `schema_version` String, `input_hash` FixedString(64), `counts_json` String, `membership_checksum` String, `membership_count` UInt64, `audit_checksum` String) ENGINE = MergeTree ORDER BY (scope_id, load_id, input_hash) SETTINGS index_granularity = 8192",
+      "total_rows": 1,
+      "total_bytes": 1469
+    },
+    {
+      "name": "publication_state",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, workflow_id, stage, content_hash",
+      "primary_key": "scope_id, workflow_id, stage, content_hash",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.publication_state (`scope_id` String, `workflow_id` String, `publication_id` String, `generation` UInt64, `stage` LowCardinality(String), `content_hash` FixedString(64), `payload` String) ENGINE = MergeTree ORDER BY (scope_id, workflow_id, stage, content_hash) SETTINGS index_granularity = 8192",
+      "total_rows": 4,
+      "total_bytes": 506795
+    },
+    {
+      "name": "replay_member",
+      "engine": "MergeTree",
+      "sorting_key": "publication_id, identity, payload_hash",
+      "primary_key": "publication_id, identity, payload_hash",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.replay_member (`publication_id` FixedString(64), `replay_id` String, `identity` String, `payload_hash` FixedString(64), `source_record_id` String, `slot_clock_us` Int64, `event` String) ENGINE = MergeTree ORDER BY (publication_id, identity, payload_hash) SETTINGS index_granularity = 8192",
+      "total_rows": 0,
+      "total_bytes": 0
+    },
+    {
+      "name": "replay_pointer",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, replay_id, generation, publication_id",
+      "primary_key": "scope_id, replay_id, generation, publication_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.replay_pointer (`replay_id` String, `scope_id` String, `generation` UInt64, `publication_id` FixedString(64)) ENGINE = MergeTree ORDER BY (scope_id, replay_id, generation, publication_id) SETTINGS index_granularity = 8192",
+      "total_rows": 0,
+      "total_bytes": 0
+    },
+    {
+      "name": "replay_seal",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, replay_id, publication_id",
+      "primary_key": "scope_id, replay_id, publication_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.replay_seal (`publication_id` FixedString(64), `replay_id` String, `scope_id` String, `config_version` String, `config_hash` FixedString(64), `cursor_sequence` UInt64, `observed_clock_us` Nullable(Int64), `created_at` String, `payload` String, `seal_hash` FixedString(64)) ENGINE = MergeTree ORDER BY (scope_id, replay_id, publication_id) SETTINGS index_granularity = 8192",
+      "total_rows": 0,
+      "total_bytes": 0
+    },
+    {
+      "name": "source_disposition",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, source_record_id, disposition, content_hash",
+      "primary_key": "scope_id, source_record_id, disposition, content_hash",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.source_disposition (`scope_id` String, `snapshot_id` String, `source_record_id` String, `source_file` String, `line_number` UInt64, `disposition` LowCardinality(String), `content_hash` FixedString(64), `payload` String) ENGINE = MergeTree ORDER BY (scope_id, source_record_id, disposition, content_hash) SETTINGS index_granularity = 8192",
+      "total_rows": 1,
+      "total_bytes": 2421
+    },
+    {
+      "name": "source_measure",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, revision_id, measure_code",
+      "primary_key": "scope_id, revision_id, measure_code",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.source_measure (`scope_id` String, `revision_id` String, `measure_code` LowCardinality(String), `value_exact` Nullable(String), `value_decimal` Nullable(Decimal(76, 38)), `projection_status` LowCardinality(String), `null_reason` String) ENGINE = MergeTree ORDER BY (scope_id, revision_id, measure_code) SETTINGS index_granularity = 8192",
+      "total_rows": 14062934,
+      "total_bytes": 122770362
+    },
+    {
+      "name": "source_revision",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, record_type, compartment_id, logical_key, revision, revision_id",
+      "primary_key": "scope_id, record_type, compartment_id, logical_key, revision, revision_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.source_revision (`scope_id` String, `snapshot_id` String, `first_run_id` String, `record_type` LowCardinality(String), `compartment_id` LowCardinality(String), `logical_key` String, `source_record_id` String, `revision` UInt32, `revision_id` String, `content_hash` FixedString(64), `source_file` String, `file_checksum` FixedString(64), `line_number` UInt64, `line_end` UInt64, `raw_hash` FixedString(64), `source_serial` String, `source_timestamp` String, `source_clock_us` Nullable(Int64), `correction_id` String, `parser_version` String, `quality_policy_version` String, `is_close_boundary` Bool, `payload` String) ENGINE = MergeTree ORDER BY (scope_id, record_type, compartment_id, logical_key, revision, revision_id) SETTINGS index_granularity = 8192",
+      "total_rows": 287989,
+      "total_bytes": 200647784
+    },
+    {
+      "name": "stream_batch",
+      "engine": "MergeTree",
+      "sorting_key": "stream_id, generation, batch_id",
+      "primary_key": "stream_id, generation, batch_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.stream_batch (`stream_id` String, `generation` String, `batch_id` UInt64, `scope_id` String, `config_version` String, `config_hash` FixedString(64), `content_sha256` FixedString(64), `rows` UInt64) ENGINE = MergeTree ORDER BY (stream_id, generation, batch_id) SETTINGS index_granularity = 8192",
+      "total_rows": 0,
+      "total_bytes": 0
+    },
+    {
+      "name": "stream_delivery",
+      "engine": "MergeTree",
+      "sorting_key": "stream_id, generation, batch_id, ordinal",
+      "primary_key": "stream_id, generation, batch_id, ordinal",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.stream_delivery (`stream_id` String, `generation` String, `batch_id` UInt64, `ordinal` UInt64, `scope_id` String, `config_version` String, `record` String, `disposition` LowCardinality(String), `reason` Nullable(String), `replay_id` Nullable(String), `identity` Nullable(String), `payload_hash` Nullable(String)) ENGINE = MergeTree ORDER BY (stream_id, generation, batch_id, ordinal) SETTINGS index_granularity = 8192",
+      "total_rows": 0,
+      "total_bytes": 0
+    },
+    {
+      "name": "threshold_cycle",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id, bundle, cycle_id",
+      "primary_key": "scope_id, publication_id, bundle, cycle_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.threshold_cycle (`scope_id` String, `publication_id` String, `bundle` LowCardinality(String), `cycle_id` String, `compartment_id` String, `compartment_name` String, `start` Date32, `end` Date32) ENGINE = MergeTree ORDER BY (scope_id, publication_id, bundle, cycle_id) SETTINGS index_granularity = 8192",
+      "total_rows": 12,
+      "total_bytes": 1419
+    },
+    {
+      "name": "threshold_header",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id, bundle",
+      "primary_key": "scope_id, publication_id, bundle",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.threshold_header (`scope_id` String, `publication_id` String, `bundle` LowCardinality(String), `config_version` String) ENGINE = MergeTree ORDER BY (scope_id, publication_id, bundle) SETTINGS index_granularity = 8192",
+      "total_rows": 2,
+      "total_bytes": 779
+    },
+    {
+      "name": "threshold_measure",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id, bundle, cycle_id, slot_clock_us, measure_code",
+      "primary_key": "scope_id, publication_id, bundle, cycle_id, slot_clock_us, measure_code",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.threshold_measure (`scope_id` String, `publication_id` String, `bundle` LowCardinality(String), `cycle_id` String, `compartment_id` String, `slot_clock_us` Int64, `slot_start` String, `revision_id` String, `logical_record_key` String, `quality_policy_version` String, `correction_id` String, `correction_version` UInt32, `measure_code` LowCardinality(String), `value_exact` Nullable(String), `value_decimal` Nullable(Decimal(76, 38)), `projection_status` LowCardinality(String), `quality` LowCardinality(String), `applicability` LowCardinality(String), `reason` Nullable(String)) ENGINE = MergeTree ORDER BY (scope_id, publication_id, bundle, cycle_id, slot_clock_us, measure_code) SETTINGS index_granularity = 8192",
+      "total_rows": 2868540,
+      "total_bytes": 69904189
+    },
+    {
+      "name": "water_cycle",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id, cycle_id",
+      "primary_key": "scope_id, publication_id, cycle_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.water_cycle (`scope_id` String, `publication_id` String, `cycle_id` String, `compartment_id` String, `compartment_name` String, `start` Date32, `end` Date32) ENGINE = MergeTree ORDER BY (scope_id, publication_id, cycle_id) SETTINGS index_granularity = 8192",
+      "total_rows": 6,
+      "total_bytes": 1296
+    },
+    {
+      "name": "water_header",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id",
+      "primary_key": "scope_id, publication_id",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.water_header (`scope_id` String, `publication_id` String, `config_version` String, `snapshot_id` String) ENGINE = MergeTree ORDER BY (scope_id, publication_id) SETTINGS index_granularity = 8192",
+      "total_rows": 1,
+      "total_bytes": 832
+    },
+    {
+      "name": "water_measure",
+      "engine": "MergeTree",
+      "sorting_key": "scope_id, publication_id, cycle_id, resource_date, measure_code",
+      "primary_key": "scope_id, publication_id, cycle_id, resource_date, measure_code",
+      "partition_key": "",
+      "create_table_query": "CREATE TABLE greenhouse_bench_ch.water_measure (`scope_id` String, `publication_id` String, `cycle_id` String, `compartment_id` String, `resource_date` Date32, `measure_code` LowCardinality(String), `revision_id` String, `logical_record_key` String, `correction_id` String, `correction_version` UInt32, `value_exact` Nullable(String), `value_decimal` Nullable(Decimal(76, 38)), `projection_status` LowCardinality(String), `quality` LowCardinality(String), `applicability` LowCardinality(String), `reason` Nullable(String), `source_unit` String, `basis_metadata` String) ENGINE = MergeTree ORDER BY (scope_id, publication_id, cycle_id, resource_date, measure_code) SETTINGS index_granularity = 8192",
+      "total_rows": 1992,
+      "total_bytes": 103565
+    }
+  ],
+  "parts": [
+    {
+      "table": "configuration_envelope",
+      "active": 0,
+      "parts": 42,
+      "rows": 2233,
+      "bytes_on_disk": 1426705,
+      "compressed_bytes": 1395618,
+      "uncompressed_bytes": 17567615
+    },
+    {
+      "table": "configuration_envelope",
+      "active": 1,
+      "parts": 1,
+      "rows": 334,
+      "bytes_on_disk": 194904,
+      "compressed_bytes": 194091,
+      "uncompressed_bytes": 2582641
+    },
+    {
+      "table": "energy_basis",
+      "active": 1,
+      "parts": 1,
+      "rows": 30,
+      "bytes_on_disk": 3225,
+      "compressed_bytes": 2290,
+      "uncompressed_bytes": 30866
+    },
+    {
+      "table": "energy_cycle",
+      "active": 1,
+      "parts": 1,
+      "rows": 6,
+      "bytes_on_disk": 1296,
+      "compressed_bytes": 543,
+      "uncompressed_bytes": 1008
+    },
+    {
+      "table": "energy_header",
+      "active": 1,
+      "parts": 1,
+      "rows": 1,
+      "bytes_on_disk": 653,
+      "compressed_bytes": 215,
+      "uncompressed_bytes": 135
+    },
+    {
+      "table": "energy_measure",
+      "active": 1,
+      "parts": 1,
+      "rows": 2988,
+      "bytes_on_disk": 151741,
+      "compressed_bytes": 150575,
+      "uncompressed_bytes": 1178156
+    },
+    {
+      "table": "harvest_cycle",
+      "active": 1,
+      "parts": 1,
+      "rows": 6,
+      "bytes_on_disk": 1296,
+      "compressed_bytes": 543,
+      "uncompressed_bytes": 1008
+    },
+    {
+      "table": "harvest_header",
+      "active": 1,
+      "parts": 1,
+      "rows": 1,
+      "bytes_on_disk": 785,
+      "compressed_bytes": 276,
+      "uncompressed_bytes": 169
+    },
+    {
+      "table": "harvest_measure",
+      "active": 1,
+      "parts": 1,
+      "rows": 278,
+      "bytes_on_disk": 34443,
+      "compressed_bytes": 33095,
+      "uncompressed_bytes": 190068
+    },
+    {
+      "table": "harvest_state",
+      "active": 1,
+      "parts": 1,
+      "rows": 6,
+      "bytes_on_disk": 2053,
+      "compressed_bytes": 1201,
+      "uncompressed_bytes": 4217
+    },
+    {
+      "table": "load_file",
+      "active": 1,
+      "parts": 1,
+      "rows": 45,
+      "bytes_on_disk": 9512,
+      "compressed_bytes": 8967,
+      "uncompressed_bytes": 56572
+    },
+    {
+      "table": "load_issue",
+      "active": 1,
+      "parts": 1,
+      "rows": 1,
+      "bytes_on_disk": 2081,
+      "compressed_bytes": 1448,
+      "uncompressed_bytes": 1666
+    },
+    {
+      "table": "load_member",
+      "active": 1,
+      "parts": 1,
+      "rows": 287989,
+      "bytes_on_disk": 18493274,
+      "compressed_bytes": 18490977,
+      "uncompressed_bytes": 53853943
+    },
+    {
+      "table": "load_receipt",
+      "active": 1,
+      "parts": 1,
+      "rows": 1,
+      "bytes_on_disk": 1469,
+      "compressed_bytes": 618,
+      "uncompressed_bytes": 414
+    },
+    {
+      "table": "publication_state",
+      "active": 1,
+      "parts": 1,
+      "rows": 4,
+      "bytes_on_disk": 506795,
+      "compressed_bytes": 506022,
+      "uncompressed_bytes": 6928817
+    },
+    {
+      "table": "source_disposition",
+      "active": 1,
+      "parts": 1,
+      "rows": 1,
+      "bytes_on_disk": 2421,
+      "compressed_bytes": 1618,
+      "uncompressed_bytes": 1783
+    },
+    {
+      "table": "source_measure",
+      "active": 1,
+      "parts": 1,
+      "rows": 14062934,
+      "bytes_on_disk": 122770362,
+      "compressed_bytes": 122675687,
+      "uncompressed_bytes": 2742733446
+    },
+    {
+      "table": "source_revision",
+      "active": 1,
+      "parts": 1,
+      "rows": 287989,
+      "bytes_on_disk": 200647784,
+      "compressed_bytes": 200628418,
+      "uncompressed_bytes": 984015087
+    },
+    {
+      "table": "threshold_cycle",
+      "active": 1,
+      "parts": 1,
+      "rows": 12,
+      "bytes_on_disk": 1419,
+      "compressed_bytes": 636,
+      "uncompressed_bytes": 2075
+    },
+    {
+      "table": "threshold_header",
+      "active": 1,
+      "parts": 1,
+      "rows": 2,
+      "bytes_on_disk": 779,
+      "compressed_bytes": 318,
+      "uncompressed_bytes": 339
+    },
+    {
+      "table": "threshold_measure",
+      "active": 1,
+      "parts": 1,
+      "rows": 2868540,
+      "bytes_on_disk": 69904189,
+      "compressed_bytes": 69875330,
+      "uncompressed_bytes": 986695920
+    },
+    {
+      "table": "water_cycle",
+      "active": 1,
+      "parts": 1,
+      "rows": 6,
+      "bytes_on_disk": 1296,
+      "compressed_bytes": 543,
+      "uncompressed_bytes": 1008
+    },
+    {
+      "table": "water_header",
+      "active": 1,
+      "parts": 1,
+      "rows": 1,
+      "bytes_on_disk": 832,
+      "compressed_bytes": 319,
+      "uncompressed_bytes": 212
+    },
+    {
+      "table": "water_measure",
+      "active": 1,
+      "parts": 1,
+      "rows": 1992,
+      "bytes_on_disk": 103565,
+      "compressed_bytes": 102356,
+      "uncompressed_bytes": 1113805
+    }
+  ],
+  "active_part_bytes": 412836174,
+  "inactive_part_bytes": 1426705,
+  "background_merges": [],
+  "server_settings": [
+    {
+      "name": "max_bytes_before_external_group_by",
+      "value": "0"
+    },
+    {
+      "name": "max_bytes_before_external_sort",
+      "value": "0"
+    },
+    {
+      "name": "max_memory_usage",
+      "value": "0"
+    },
+    {
+      "name": "max_threads",
+      "value": "'auto(1)'"
+    }
+  ],
+  "storage_note": "Active/inactive MergeTree parts include part indexes; system logs and coordinator/ready files excluded. Record Docker volume allocated bytes separately."
+}

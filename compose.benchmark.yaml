@@ -1,0 +1,104 @@
+# Disposable engine comparison. Start/measure one database at a time.
+name: greenhouse-engine-benchmark
+x-job: &job
+  image: greenhouse-clickhouse-processing:local
+  init: true
+  networks: [backend]
+  cpus: 1.5
+  mem_limit: 2g
+  volumes:
+    - ${GREENHOUSE_BENCH_STATE_PATH:-./tmp/engine-benchmark}:/bench
+    - ${GREENHOUSE_RAW_PATH:-./data/raw}:/data/raw:ro
+    - ${GREENHOUSE_IMPORT_PATH:-./data/import}:/data/import:ro
+    - ./scripts/clickhouse:/migration:ro
+  command: [python, -m, greenhouse, --help]
+services:
+  postgres:
+    profiles: [postgres]
+    image: postgres:17.10-bookworm@sha256:9b18b78397054fce88a9552e9d5a3ad5bb7fd258c5b3cc1c5028e46373d6ea8f
+    environment:
+      POSTGRES_DB: greenhouse_bench_pg
+      POSTGRES_USER: greenhouse_bench
+      POSTGRES_PASSWORD: ${GREENHOUSE_BENCH_PG_PASSWORD:-benchmark-local-only}
+    command: [postgres, -c, shared_buffers=512MB, -c, effective_cache_size=1536MB, -c, work_mem=4MB, -c, max_parallel_workers_per_gather=0]
+    volumes: [pg_data:/var/lib/postgresql/data]
+    networks: [backend]
+    cpus: 1
+    mem_limit: 2g
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 2s
+      timeout: 3s
+      retries: 40
+  clickhouse:
+    profiles: [clickhouse]
+    image: clickhouse/clickhouse-server:25.8@sha256:0152dd511befe6a2c2ef53e930726179669b08116da78500b37c51c96ff5ee77
+    environment:
+      CLICKHOUSE_DB: greenhouse_bench_ch
+      CLICKHOUSE_USER: greenhouse_bench
+      CLICKHOUSE_PASSWORD: ${GREENHOUSE_BENCH_CH_PASSWORD:-benchmark-local-only}
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: '1'
+    volumes:
+      - ch_data:/var/lib/clickhouse
+      - ch_logs:/var/log/clickhouse-server
+      - ./docker/clickhouse/local.xml:/etc/clickhouse-server/config.d/local.xml:ro
+    networks: [backend]
+    cpus: 1
+    mem_limit: 2g
+    ulimits:
+      nofile: {soft: 262144, hard: 262144}
+    healthcheck:
+      test: [CMD-SHELL, 'clickhouse-client --user "$${CLICKHOUSE_USER}" --password "$${CLICKHOUSE_PASSWORD}" --query "SELECT 1" >/dev/null']
+      interval: 2s
+      timeout: 3s
+      retries: 40
+      start_period: 20s
+  pg-job:
+    <<: *job
+    profiles: [postgres]
+    environment:
+      GREENHOUSE_BACKEND: postgres
+      PGHOST: postgres
+      PGPORT: '5432'
+      PGDATABASE: greenhouse_bench_pg
+      PGUSER: greenhouse_bench
+      PGPASSWORD: ${GREENHOUSE_BENCH_PG_PASSWORD:-benchmark-local-only}
+      GREENHOUSE_RAW_DIR: /data/raw
+      GREENHOUSE_IMPORT_DIR: /data/import
+      GREENHOUSE_OUTPUT_DIR: /bench/pg/output
+      MQTT_HOST: broker
+      SPARK_LOCAL_IP: 127.0.0.1
+      PYSPARK_SUBMIT_ARGS: '--driver-memory 768m pyspark-shell'
+  ch-job:
+    <<: *job
+    profiles: [clickhouse]
+    environment:
+      GREENHOUSE_BACKEND: clickhouse
+      CH_HOST: clickhouse
+      CH_PORT: '8123'
+      CH_DATABASE: greenhouse_bench_ch
+      CH_USER: greenhouse_bench
+      CH_PASSWORD: ${GREENHOUSE_BENCH_CH_PASSWORD:-benchmark-local-only}
+      GREENHOUSE_RAW_DIR: /data/raw
+      GREENHOUSE_IMPORT_DIR: /data/import
+      GREENHOUSE_OUTPUT_DIR: /bench/ch/output
+      GREENHOUSE_CH_COORDINATOR: /bench/ch/coordinator
+      MQTT_HOST: broker
+      SPARK_LOCAL_IP: 127.0.0.1
+      PYSPARK_SUBMIT_ARGS: '--driver-memory 768m pyspark-shell'
+  broker:
+    profiles: [postgres,clickhouse]
+    image: eclipse-mosquitto:2.0.22@sha256:09b62ff32c2e7b64d4b431b9a89236073289b68db273de2b089edeb9b0d92b5c
+    volumes:
+      - ./docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - broker_data:/mosquitto/data
+    networks: [backend]
+    cpus: 0.1
+    mem_limit: 128m
+networks:
+  backend: {internal: true}
+volumes:
+  pg_data:
+  ch_data:
+  ch_logs:
+  broker_data:

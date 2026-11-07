@@ -1,0 +1,14 @@
+{
+  "status": "in_progress",
+  "backend": "clickhouse",
+  "publication_id": "2be7aa20c0ff4fc8b5d8fd0fbc87b635",
+  "started_at_utc": "2026-11-07T02:35:15.246801+00:00",
+  "smoke": false,
+  "warmup": 5,
+  "iterations": 30,
+  "fresh_connection_each_call": true,
+  "database_os_caches_flushed": false,
+  "evaluation_cache": false,
+  "clickhouse_process_proof_cache": true,
+  "workloads": {}
+}
