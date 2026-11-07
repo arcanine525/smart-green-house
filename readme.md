@@ -144,3 +144,8 @@ kiểm gói trước video và kiểm cuối cùng là hai trạng thái riêng.
 Giới hạn thực tế: single-node/local flock; cold proof có thể mất nhiều phút;
 raw/basis/rule chưa phải xác minh nông học; replay không chứng minh sensor phần
 cứng; chưa có user study. Mọi mở rộng hoặc tối ưu cần giữ các contract và gate.
+
+## Hướng dẫn cho coding agent
+
+Đọc [AGENTS.md](AGENTS.md) trước khi sửa project. [Trạng thái bàn giao](docs/agents/PROJECT_STATE.md)
+ghi các mốc đã nghiệm thu, publication/context cần phân biệt và phần user tự hoàn tất.

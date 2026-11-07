@@ -1,7 +1,7 @@
 {
   "kind": "pre_video_delivery_bundle",
   "group_id": "29",
-  "source_base_head": "666200ee3a6c078b383b8133235182228de15e4f",
+  "source_base_head": "7689c370ca4f0298589ca752f542cfce27784f70",
   "source_identity": "Per-file hashes in ZIP source-manifest.json; base HEAD is not claimed as an exact clean source commit",
   "artifacts": [
     {
@@ -31,8 +31,8 @@
     },
     {
       "file": "29_application.zip",
-      "bytes": 27306982,
-      "sha256": "586497d497559396793edf2f6986735cc758cacbec0839e5b2045f6b41abcf7f"
+      "bytes": 27318258,
+      "sha256": "d8f847d71568fbb573f53e3b2651b8eedc72c852b3ea903b2b822153dbd5a7e6"
     },
     {
       "file": "README.md",
