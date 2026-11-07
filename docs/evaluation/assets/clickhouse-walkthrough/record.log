@@ -1,0 +1,251 @@
+BR-01 1: Mở màn hình Khí hậu
+BR-01 2: Xác nhận publication lịch sử
+BR-01 3: Chọn khoang và vụ IUACAAS
+BR-01 4: Chọn rule khí hậu demo
+BR-01 5: Lọc các đợt nhiệt độ
+BR-01 6: Đọc KPI và coverage
+BR-01 7: Chọn đợt dài nhất
+BR-01 8: Tương tác biểu đồ nhiệt độ
+BR-01 9: Mở nguồn của đỉnh lệch
+BR-01 10: So sánh basis realized
+BR-01 11: Trở lại basis requested
+BR-01 12: Giới hạn cửa sổ 21–22/05/2020
+BR-01 13: Đọc lại danh sách và trace sau lọc
+BR-01 14: Xuất summary và danh sách đợt
+BR-01 15: Xuất JSON kết quả có version
+BR-01 16: Hoàn tất BR-01
+PASS BR-01 /Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/br-01/br-01.mp4
+BR-02 1: Mở màn hình Tưới và drain
+BR-02 2: Xác nhận publication lịch sử
+BR-02 3: Chọn khoang và vụ Automatoes
+BR-02 4: Đọc dữ liệu toàn vụ
+BR-02 5: Khám phá biểu đồ ngày
+BR-02 6: Lọc ngày 02–03/03/2020
+BR-02 7: Đối chiếu tổng và tỷ lệ paired
+BR-02 8: Chọn rule demo có version
+BR-02 9: Đọc tổng hợp theo tuần
+BR-02 10: Chọn một ngày để xem chi tiết
+BR-02 11: Mở lineage về CSV gốc
+BR-02 12: Xuất CSV ngày
+BR-02 13: Xuất tổng hợp tuần và JSON
+BR-02 14: Hoàn tất BR-02
+PASS BR-02 /Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/br-02/br-02.mp4
+BR-03 1: Mở màn hình EC / pH drain
+BR-03 2: Xác nhận publication lịch sử
+BR-03 3: Chọn khoang và vụ Reference
+BR-03 4: Chọn profile EC/pH demo
+BR-03 5: Lọc đợt EC
+BR-03 6: Đọc KPI EC và coverage
+BR-03 7: Xem đợt EC dài nhất
+BR-03 8: Khám phá trace đợt EC
+BR-03 9: Chuyển sang các đợt pH
+BR-03 10: Trở lại EC và chọn cửa sổ nhỏ
+BR-03 11: Chọn ngày nguồn
+BR-03 12: Chọn slot nguồn và xác minh lineage
+BR-03 13: Xuất summary và đợt drain
+BR-03 14: Xuất JSON kết quả drain
+BR-03 15: Hoàn tất BR-03
+PASS BR-03 /Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/br-03/br-03.mp4
+BR-04 1: Mở màn hình Năng lượng
+BR-04 2: Xác nhận publication lịch sử
+BR-04 3: Chọn khoang và vụ Automatoes
+BR-04 4: Đọc năng lượng và cường độ toàn vụ
+BR-04 5: Khám phá so sánh các khoang
+BR-04 6: Mở công thức và đóng góp
+BR-04 7: Lọc hai ngày 02–03/03/2020
+BR-04 8: Đối chiếu trường hợp mẫu số bằng 0
+BR-04 9: Chọn revision đóng góp
+BR-04 10: Xác minh lineage raw
+BR-04 11: Xuất summary và quantities
+BR-04 12: Xuất JSON cường độ và portfolio
+BR-04 13: Hoàn tất BR-04
+PASS BR-04 /Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/br-04/br-04.mp4
+BR-05 1: Mở màn hình Thu hoạch A / B
+BR-05 2: Xác nhận publication lịch sử
+BR-05 3: Chọn khoang và vụ Digilog
+BR-05 4: Đọc sản lượng và lũy kế toàn vụ
+BR-05 5: Khám phá biểu đồ thu hoạch
+BR-05 6: Chọn ngưỡng loại B demo
+BR-05 7: Lọc ngày 19/02/2020
+BR-05 8: Đối chiếu A, B và share B
+BR-05 9: Đổi grain từ record sang day
+BR-05 10: Xem kết luận theo week
+BR-05 11: Trở lại record và chọn lần thu
+BR-05 12: Mở lineage record accepted
+BR-05 13: Xuất lần thu và tổng hợp tuần
+BR-05 14: Xuất JSON có metadata
+BR-05 15: Hoàn tất BR-05
+PASS BR-05 /Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/br-05/br-05.mp4
+BR-06 1: Mở màn hình Chi phí và kịch bản giá
+BR-06 2: Xác nhận publication lịch sử
+BR-06 3: Chọn khoang và vụ Automatoes
+BR-06 4: Lọc hai ngày 02–03/03/2020
+BR-06 5: Đọc baseline lịch sử
+BR-06 6: Xem giá có hiệu lực
+BR-06 7: Mở phép nhân theo ngày
+BR-06 8: Đổi tổng hợp từ ngày sang tuần
+BR-06 9: Trở lại grain ngày
+BR-06 10: Truy vết nguồn năng lượng
+BR-06 11: Mở form tạo kịch bản
+BR-06 12: Đặt tên scenario mới
+BR-06 13: Giữ giá nhiệt; tăng điện cao điểm 20%
+BR-06 14: Tăng điện thấp điểm 20%
+BR-06 15: Lưu kịch bản bất biến
+BR-06 16: Đọc baseline, scenario và chênh lệch
+BR-06 17: Khám phá đóng góp thành phần
+BR-06 18: Bỏ chọn rồi mở lại scenario đã lưu
+BR-06 19: Xuất kết quả kịch bản
+BR-06 20: Hoàn tất BR-06
+PASS BR-06 /Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/br-06/br-06.mp4
+BR-07 1: Mở sensor replay
+BR-07 2: Chọn replay đang phát dở
+BR-07 3: Kiểm tra provisional: 10/30 event
+BR-07 4: Đọc clock nguồn và tín hiệu collector
+BR-07 5: Chọn rule khí hậu có version
+BR-07 6: Chọn rule EC/pH có version
+BR-07 7: Xem quality mẫu mới nhất
+BR-07 8: Khám phá các chuỗi measurement
+BR-07 9: So sánh basis realized
+BR-07 10: Trở lại requested và xuất provisional
+BR-07 11: Bật tự làm mới
+locator.check: Timeout 60000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('checkbox', { name: 'Tự làm mới mỗi 10 giây', exact: true })[22m
+[2m    - locator resolved to <input title="" tabindex="0" type="checkbox" data-react-aria-pressable="true" aria-label="Tự làm mới mỗi 10 giây"/>[22m
+[2m  - attempting click action[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <label data-rac="" data-hovered="true" data-react-aria-pressable="true" class="st-emotion-cache-13dlemf e1ap2qgk4">…</label> intercepts pointer events[22m
+[2m  - retrying click action[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <div data-testid="stMainBlockContainer" class="stMainBlockContainer block-container st-emotion-cache-lhe5w4 e87roqt5">…</div> intercepts pointer events[22m
+[2m  - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <label data-rac="" data-hovered="true" data-react-aria-pressable="true" class="st-emotion-cache-13dlemf e1ap2qgk4">…</label> intercepts pointer events[22m
+[2m  2 × retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div data-testid="stToolbar" class="stAppToolbar st-emotion-cache-14vh5up e149qiiz2">…</div> from <header data-testid="stHeader" class="stAppHeader st-emotion-cache-a34odj e149qiiz1">…</header> subtree intercepts pointer events[22m
+[2m  28 × retrying click action[22m
+[2m       - waiting 500ms[22m
+[2m       - waiting for element to be visible, enabled and stable[22m
+[2m       - element is visible, enabled and stable[22m
+[2m       - scrolling into view if needed[22m
+[2m       - done scrolling[22m
+[2m       - <div data-testid="stMainBlockContainer" class="stMainBlockContainer block-container st-emotion-cache-lhe5w4 e87roqt5">…</div> intercepts pointer events[22m
+[2m     - retrying click action[22m
+[2m       - waiting 500ms[22m
+[2m       - waiting for element to be visible, enabled and stable[22m
+[2m       - element is visible, enabled and stable[22m
+[2m       - scrolling into view if needed[22m
+[2m       - done scrolling[22m
+[2m       - <label data-rac="" data-hovered="true" data-react-aria-pressable="true" class="st-emotion-cache-13dlemf e1ap2qgk4">…</label> intercepts pointer events[22m
+[2m     - retrying click action[22m
+[2m       - waiting 500ms[22m
+[2m       - waiting for element to be visible, enabled and stable[22m
+[2m       - element is visible, enabled and stable[22m
+[2m       - scrolling into view if needed[22m
+[2m       - done scrolling[22m
+[2m       - <div data-testid="stToolbar" class="stAppToolbar st-emotion-cache-14vh5up e149qiiz2">…</div> from <header data-testid="stHeader" class="stAppHeader st-emotion-cache-a34odj e149qiiz1">…</header> subtree intercepts pointer events[22m
+[2m     - retrying click action[22m
+[2m       - waiting 500ms[22m
+[2m       - waiting for element to be visible, enabled and stable[22m
+[2m       - element is visible, enabled and stable[22m
+[2m       - scrolling into view if needed[22m
+[2m       - done scrolling[22m
+[2m       - <div data-testid="stToolbar" class="stAppToolbar st-emotion-cache-14vh5up e149qiiz2">…</div> from <header data-testid="stHeader" class="stAppHeader st-emotion-cache-a34odj e149qiiz1">…</header> subtree intercepts pointer events[22m
+[2m  - retrying click action[22m
+[2m    - waiting 500ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <div data-testid="stMainBlockContainer" class="stMainBlockContainer block-container st-emotion-cache-lhe5w4 e87roqt5">…</div> intercepts pointer events[22m
+[2m  - retrying click action[22m
+[2m    - waiting 500ms[22m
+
+    at /Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/record.cjs:182:261
+    at async step (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/record.cjs:49:12)
+    at async flows.07 (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/record.cjs:182:2)
+    at async /Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/record.cjs:194:305 {
+  log: [
+    "  - waiting for getByRole('checkbox', { name: 'Tự làm mới mỗi 10 giây', exact: true })",
+    '    - locator resolved to <input title="" tabindex="0" type="checkbox" data-react-aria-pressable="true" aria-label="Tự làm mới mỗi 10 giây"/>',
+    '  - attempting click action',
+    '    - waiting for element to be visible, enabled and stable',
+    '    - element is visible, enabled and stable',
+    '    - scrolling into view if needed',
+    '    - done scrolling',
+    '    - <label data-rac="" data-hovered="true" data-react-aria-pressable="true" class="st-emotion-cache-13dlemf e1ap2qgk4">…</label> intercepts pointer events',
+    '  - retrying click action',
+    '    - waiting for element to be visible, enabled and stable',
+    '    - element is visible, enabled and stable',
+    '    - scrolling into view if needed',
+    '    - done scrolling',
+    '    - <div data-testid="stMainBlockContainer" class="stMainBlockContainer block-container st-emotion-cache-lhe5w4 e87roqt5">…</div> intercepts pointer events',
+    '  - retrying click action',
+    '    - waiting 20ms',
+    '    - waiting for element to be visible, enabled and stable',
+    '    - element is visible, enabled and stable',
+    '    - scrolling into view if needed',
+    '    - done scrolling',
+    '    - <label data-rac="" data-hovered="true" data-react-aria-pressable="true" class="st-emotion-cache-13dlemf e1ap2qgk4">…</label> intercepts pointer events',
+    '  2 × retrying click action',
+    '      - waiting 100ms',
+    '      - waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <div data-testid="stToolbar" class="stAppToolbar st-emotion-cache-14vh5up e149qiiz2">…</div> from <header data-testid="stHeader" class="stAppHeader st-emotion-cache-a34odj e149qiiz1">…</header> subtree intercepts pointer events',
+    '  28 × retrying click action',
+    '       - waiting 500ms',
+    '       - waiting for element to be visible, enabled and stable',
+    '       - element is visible, enabled and stable',
+    '       - scrolling into view if needed',
+    '       - done scrolling',
+    '       - <div data-testid="stMainBlockContainer" class="stMainBlockContainer block-container st-emotion-cache-lhe5w4 e87roqt5">…</div> intercepts pointer events',
+    '     - retrying click action',
+    '       - waiting 500ms',
+    '       - waiting for element to be visible, enabled and stable',
+    '       - element is visible, enabled and stable',
+    '       - scrolling into view if needed',
+    '       - done scrolling',
+    '       - <label data-rac="" data-hovered="true" data-react-aria-pressable="true" class="st-emotion-cache-13dlemf e1ap2qgk4">…</label> intercepts pointer events',
+    '     - retrying click action',
+    '       - waiting 500ms',
+    '       - waiting for element to be visible, enabled and stable',
+    '       - element is visible, enabled and stable',
+    '       - scrolling into view if needed',
+    '       - done scrolling',
+    '       - <div data-testid="stToolbar" class="stAppToolbar st-emotion-cache-14vh5up e149qiiz2">…</div> from <header data-testid="stHeader" class="stAppHeader st-emotion-cache-a34odj e149qiiz1">…</header> subtree intercepts pointer events',
+    '     - retrying click action',
+    '       - waiting 500ms',
+    '       - waiting for element to be visible, enabled and stable',
+    '       - element is visible, enabled and stable',
+    '       - scrolling into view if needed',
+    '       - done scrolling',
+    '       - <div data-testid="stToolbar" class="stAppToolbar st-emotion-cache-14vh5up e149qiiz2">…</div> from <header data-testid="stHeader" class="stAppHeader st-emotion-cache-a34odj e149qiiz1">…</header> subtree intercepts pointer events',
+    '  - retrying click action',
+    '    - waiting 500ms',
+    '    - waiting for element to be visible, enabled and stable',
+    '    - element is visible, enabled and stable',
+    '    - scrolling into view if needed',
+    '    - done scrolling',
+    '    - <div data-testid="stMainBlockContainer" class="stMainBlockContainer block-container st-emotion-cache-lhe5w4 e87roqt5">…</div> intercepts pointer events',
+    '  - retrying click action',
+    '    - waiting 500ms'
+  ],
+  name: 'TimeoutError'
+}

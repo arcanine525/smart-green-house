@@ -1,0 +1,9 @@
+locator.waitFor: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for getByText('Irrigation observed', { exact: true }) to be visible[22m
+
+    at /Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/warm-ui.cjs:12:60 {
+  log: [
+    "  - waiting for getByText('Irrigation observed', { exact: true }) to be visible"
+  ]
+}

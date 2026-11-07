@@ -1,0 +1,15 @@
+{
+  "status": "interrupted_before_simulation",
+  "reason": "Docker daemon restart observed; old job terminal exit125 and no container/handle remains",
+  "run": "live-replay-v2",
+  "state_directory_empty": true,
+  "restarted_only_owned_services": [
+    "gh-ch-repro-20261107032510-rebuilt-clickhouse-1",
+    "gh-ch-repro-20261107032510-rebuilt-ch-broker-1",
+    "gh-ch-repro-20261107032510-rebuilt-ch-app-1",
+    "gh-ch-repro-20261107032510-rebuilt-ch-web-1"
+  ],
+  "new_run": "live-replay-v3",
+  "at": "2026-11-07T06:31:27.772287+00:00",
+  "protected_original_volumes_modified_by_this_recovery": false
+}

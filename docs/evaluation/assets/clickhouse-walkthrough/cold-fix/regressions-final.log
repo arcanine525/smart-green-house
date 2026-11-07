@@ -1,0 +1,11 @@
+test_real_http_200_late_throw_rejects_unverified_prefix (test_stream_protocol.RealStreamProtocolTest.test_real_http_200_late_throw_rejects_unverified_prefix) ... ok
+test_complete_json_with_exception_never_returns_partial_data (test_stream_protocol.StreamProtocolTest.test_complete_json_with_exception_never_returns_partial_data) ... ok
+test_legitimate_exception_column_remains_data_with_plain_error_mode (test_stream_protocol.StreamProtocolTest.test_legitimate_exception_column_remains_data_with_plain_error_mode) ... ok
+test_plain_exception_trailer_is_typed_and_closes_prefix (test_stream_protocol.StreamProtocolTest.test_plain_exception_trailer_is_typed_and_closes_prefix) ... ok
+test_all_cycles_verified_with_bounded_read_and_identical_receipt (test_threshold_memory.ThresholdMemoryTest.test_all_cycles_verified_with_bounded_read_and_identical_receipt) ... ok
+test_unconfigured_cycle_or_compartment_cannot_hide_from_verifier (test_threshold_memory.ThresholdMemoryTest.test_unconfigured_cycle_or_compartment_cannot_hide_from_verifier) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 14.667s
+
+OK

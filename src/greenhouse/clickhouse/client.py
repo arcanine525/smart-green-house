@@ -6,6 +6,7 @@ Errors deliberately omit response bodies/URLs/credentials from user logs.
 import base64
 from decimal import Decimal
 from dataclasses import dataclass, field
+from http.client import HTTPException
 import json
 import os
 import re
@@ -82,7 +83,8 @@ class Client:
             # Large source payload columns otherwise multiply their default
             # ~65k-row blocks across in-order part readers on the 2 GiB server.
             query.update(wait_end_of_query='0',max_threads='1',max_block_size='1024',
-                         max_streams_for_merge_tree_reading='1')
+                         max_streams_for_merge_tree_reading='1',
+                         http_write_exception_in_output_format='0')
         for key, value in (parameters or {}).items():
             if not re.fullmatch(r'[a-zA-Z_][a-zA-Z0-9_]*', key):
                 raise ValueError('Invalid SQL parameter name')
@@ -103,11 +105,17 @@ class Client:
             status = error.code
             error.close()
             raise ClickHouseError(f'ClickHouse rejected query (HTTP {status}); inspect server query log by query ID') from None
-        except (URLError, TimeoutError, socket.timeout, OSError):
+        except (URLError, TimeoutError, socket.timeout, OSError, HTTPException):
             raise ClickHouseError('ClickHouse connection failed; write outcome may be unknown, reconcile query ID before retry') from None
 
     def query(self, sql, parameters=None):
-        result = json.loads(self.execute(sql.rstrip().rstrip(';') + ' FORMAT JSON', parameters))
+        raw = self.execute(sql.rstrip().rstrip(';') + ' FORMAT JSON', parameters)
+        try:
+            result = json.loads(raw)
+        except (ValueError, UnicodeError):
+            raise ClickHouseError('Invalid or interrupted JSON response; no verified result is available') from None
+        if not isinstance(result,dict) or 'exception' in result or not isinstance(result.get('data'),list):
+            raise ClickHouseError('ClickHouse returned an incomplete or failed query result')
         return result['data']
 
     def iter_query(self,sql,parameters=None):
@@ -120,11 +128,21 @@ class Client:
         try:
             with urlopen(request,timeout=self.settings.timeout) as response:
                 for line in response:
-                    if line.strip():yield json.loads(line)
+                    if line.strip():
+                        try:
+                            row=json.loads(line)
+                        except (ValueError,UnicodeError):
+                            # With plaintext exception framing, a late server
+                            # failure cannot masquerade as a data row named
+                            # "exception". A prefix is never a complete proof.
+                            raise ClickHouseError('ClickHouse stream failed or was malformed; no verified result is available') from None
+                        if not isinstance(row,dict):
+                            raise ClickHouseError('Invalid ClickHouse row frame; no verified result is available')
+                        yield row
         except HTTPError as error:
             status=error.code;error.close()
             raise ClickHouseError(f'ClickHouse rejected query (HTTP {status}); inspect server query log by query ID') from None
-        except (URLError,TimeoutError,socket.timeout,OSError):
+        except (URLError,TimeoutError,socket.timeout,OSError,HTTPException):
             raise ClickHouseError('ClickHouse streaming read interrupted; no verified result is available') from None
 
 

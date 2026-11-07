@@ -1,0 +1,13 @@
+ Container gh-ch-repro-20261107032510-rebuilt-ch-broker-1 Running 
+ Container gh-ch-repro-20261107032510-rebuilt-ch-broker-1 Waiting 
+ Container gh-ch-repro-20261107032510-rebuilt-ch-broker-1 Healthy 
+ Container gh-ch-repro-20261107032510-rebuilt-ch-job-run-dde0a31e78c6 Creating 
+ Container gh-ch-repro-20261107032510-rebuilt-ch-job-run-dde0a31e78c6 Created 
+time="2026-11-07T13:25:57+07:00" level=error msg="error waiting for container: unexpected EOF"
+
+Traceback (most recent call last):
+  File "/Users/hiep.le/Downloads/project/internal/data-eng/scripts/run_walkthrough_replay.py", line 31, in <module>
+    subprocess.run(command+['run','--rm','--no-deps','--pull','never','-T','--interactive=false',
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['docker', 'compose', '-f', 'compose.clickhouse.yaml', '-f', '/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/rebuilt/runtime.yaml', '-f', '/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-walkthrough/20261107T0517/runtime.yaml', '-p', 'gh-ch-repro-20261107032510-rebuilt', '--profile', 'tools', '--profile', 'sensor', 'run', '--rm', '--no-deps', '--pull', 'never', '-T', '--interactive=false', '-e', 'GREENHOUSE_WALKTHROUGH_REPLAY_RUN=live-replay-v2', 'ch-job', 'python', '/walkthrough/live_replay.py', 'prepare']' returned non-zero exit status 125.

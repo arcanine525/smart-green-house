@@ -1,0 +1,87 @@
+{
+  "status": "confirmed",
+  "server_memory_errors": [
+    {
+      "event_time": "2026-11-07 06:41:59",
+      "query_id": "833b5d5bff9a4486a7963ac53cc7a308",
+      "exception_code": 241,
+      "memory_usage": 254011546,
+      "exception_prefix": "Code: 241. DB::Exception: (total) memory limit exceeded: would use 1.50 GiB (attempt to allocate chunk of 4.06 MiB bytes), current RSS: 1.26 GiB, maximum: 1.50 GiB. OvercommitTracker decision: Query was selected to stop by OvercommitTracker: While executing MergeSortingTransform. (MEMORY_LIMIT_EXCEEDED) (version 25.8.33.6 (official build)"
+    },
+    {
+      "event_time": "2026-11-07 07:17:45",
+      "query_id": "2f14d33b265e411a9601fe86431d0738",
+      "exception_code": 241,
+      "memory_usage": 578018464,
+      "exception_prefix": "Code: 241. DB::Exception: (total) memory limit exceeded: would use 747.32 MiB (attempt to allocate chunk of 4.05 MiB bytes), current RSS: 1.50 GiB, maximum: 1.50 GiB. OvercommitTracker decision: Query was selected to stop by OvercommitTracker: (while reading column revision_id): (while reading from part /var/lib/clickhouse/store/e91/e91d4"
+    },
+    {
+      "event_time": "2026-11-07 07:36:13",
+      "query_id": "b54e526658094d109bb8362b5d5cdad3",
+      "exception_code": 241,
+      "memory_usage": 31884079,
+      "exception_prefix": "Code: 241. DB::Exception: Query memory limit exceeded: would use 34.64 MiB (attempt to allocate chunk of 4.24 MiB bytes), maximum: 32.00 MiB: (avg_value_size_hint = 22, avg_chars_size = 16.8, limit = 8192): (while reading column quality_policy_version): (while reading from part /var/lib/clickhouse/store/fe0/fe0c0fd7-a795-441d-bb24-b7da741"
+    },
+    {
+      "event_time": "2026-11-07 07:37:40",
+      "query_id": "e8fd3ad59c57418886c75fe7a73ee3be",
+      "exception_code": 241,
+      "memory_usage": 31884079,
+      "exception_prefix": "Code: 241. DB::Exception: Query memory limit exceeded: would use 34.64 MiB (attempt to allocate chunk of 4.24 MiB bytes), maximum: 32.00 MiB: (avg_value_size_hint = 22, avg_chars_size = 16.8, limit = 8192): (while reading column quality_policy_version): (while reading from part /var/lib/clickhouse/store/fe0/fe0c0fd7-a795-441d-bb24-b7da741"
+    },
+    {
+      "event_time": "2026-11-07 07:38:26",
+      "query_id": "2222a1d8575c41a7872296cacce2f12f",
+      "exception_code": 241,
+      "memory_usage": 33087229,
+      "exception_prefix": "Code: 241. DB::Exception: Query memory limit exceeded: would use 32.56 MiB (attempt to allocate chunk of 5.01 MiB bytes), maximum: 32.00 MiB: While executing ParallelFormattingOutputFormat. (MEMORY_LIMIT_EXCEEDED) (version 25.8.33.6 (official build))"
+    },
+    {
+      "event_time": "2026-11-07 07:41:01",
+      "query_id": "c97c6805e4884430b223a2d7af421214",
+      "exception_code": 241,
+      "memory_usage": 66718900,
+      "exception_prefix": "Code: 241. DB::Exception: Query memory limit exceeded: would use 67.85 MiB (attempt to allocate chunk of 4.22 MiB bytes), maximum: 64.00 MiB: While executing MergeTreeSelect(pool: ReadPoolInOrder, algorithm: InOrder). (MEMORY_LIMIT_EXCEEDED) (version 25.8.33.6 (official build))"
+    }
+  ],
+  "server_limit_bytes": 1610612736,
+  "query_limit_bytes": 805306368,
+  "limits_changed": false,
+  "old_global_sort_regression": "memory-baseline-64m-wide.log",
+  "fixed_regressions": "regressions-final.log",
+  "cold_restart_receipt": "../cold-browser-startup/result.json",
+  "additional_cause": {
+    "confirmed": "optional metric_log background horizontal merge",
+    "peak_witness": {
+      "at": "2026-11-07T08:14:08.355569+00:00",
+      "merges": [
+        {
+          "database": "system",
+          "table": "metric_log",
+          "memory_usage": 889667257,
+          "elapsed": 0.210592334
+        }
+      ],
+      "metrics": [
+        {
+          "metric": "MemoryTracking",
+          "value": 1493622089
+        },
+        {
+          "metric": "MergesMutationsMemoryTracking",
+          "value": 985636649
+        }
+      ]
+    },
+    "metadata_query_victim_peak_bytes": [
+      7999756,
+      17503280
+    ],
+    "before_20_ui_runs": "6 failures/errors without metadata cap; 2 with 1024; 2 with64",
+    "after_pausing_only_metric_log": "20/20 passed on unchanged UI image, 136.150 seconds",
+    "discarded_hypothesis": "Changing metadata block size did not resolve the problem; changes reverted",
+    "fixed_runtime_receipt": "../metric-log-runtime-fix.json",
+    "legacy_parts_receipt": "../metric-log-preservation.json",
+    "official_setting_reference": "merge-setting-reference.json"
+  }
+}

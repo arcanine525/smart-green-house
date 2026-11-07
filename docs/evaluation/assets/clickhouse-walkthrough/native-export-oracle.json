@@ -1,0 +1,99 @@
+{
+  "status": "passed",
+  "publication": "4b08bd51c092465783304f887d766d47",
+  "checks": [
+    {
+      "label": "irrigation",
+      "actual": "9.36",
+      "expected": "9.36",
+      "absolute_tolerance": "0"
+    },
+    {
+      "label": "drain",
+      "actual": "3.89",
+      "expected": "3.89",
+      "absolute_tolerance": "0"
+    },
+    {
+      "label": "paired_ratio",
+      "actual": "41.559829059829059829059829059829059829059829059829",
+      "expected": "41.55982905982905982905982906",
+      "absolute_tolerance": "1e-24"
+    },
+    {
+      "label": "energy_kwh",
+      "actual": "308.078125041666666666666666666666666666666666666667",
+      "expected": "308.0781250416666666666666667",
+      "absolute_tolerance": "1e-24"
+    },
+    {
+      "label": "harvest_a",
+      "actual": "0.05",
+      "expected": "0.05",
+      "absolute_tolerance": "0"
+    },
+    {
+      "label": "harvest_b",
+      "actual": "0.1",
+      "expected": "0.1",
+      "absolute_tolerance": "0"
+    },
+    {
+      "label": "harvest_share_b",
+      "actual": "66.666666666666666666666666666666666666666666666667",
+      "expected": "66.66666666666666666666666667",
+      "absolute_tolerance": "1e-24"
+    },
+    {
+      "label": "baseline_eur",
+      "actual": "17.600067710000",
+      "expected": "17.600067710000",
+      "absolute_tolerance": "0"
+    },
+    {
+      "label": "scenario_eur",
+      "actual": "20.8407343770000",
+      "expected": "20.8407343770000",
+      "absolute_tolerance": "0"
+    }
+  ],
+  "zero_denominator_contract": "passed",
+  "scenario_rate_and_change_contract": "passed",
+  "raw_oracle": {
+    "resource_sha256": "8b3d980fc7b3646c746dfc577af59159a49eef31770b84898502ecc5ef1d45f5",
+    "production_sha256": "88bd324cf9f116c71516415ef8c6cdf82640a70dc94c387dd2106ce0ed124eca",
+    "area_assumption_m2": "62.5",
+    "irrigation_l_m2": "9.36",
+    "drain_l_m2": "3.89",
+    "drain_paired_percent": "41.55982905982905982905982906",
+    "energy_kwh": "308.0781250416666666666666667",
+    "baseline_eur": "17.600067710000",
+    "electric_plus20_eur": "20.8407343770000",
+    "harvest_a_kg_m2": "0.05",
+    "harvest_b_kg_m2": "0.1",
+    "harvest_share_b_percent": "66.66666666666666666666666667"
+  },
+  "files": [
+    {
+      "file": "br-02/downloads/water-Automatoes-2020-03-02_2020-03-03-summary.json",
+      "sha256": "6255be374511a825c4a7b29e32d1fdd365050b79d0b5a327e6b443bd8b4ada40"
+    },
+    {
+      "file": "br-04/downloads/energy-Automatoes-2020-03-02-2020-03-04-result.json",
+      "sha256": "3cd244a1cf25100327ee3e8d963a68a0ce1ccee0c0569458fdc231ba2720bd8d"
+    },
+    {
+      "file": "br-05/downloads/harvest-Digilog-2020-02-19_2020-02-19-summary.json",
+      "sha256": "d1c499ae8a78647f38ebd49b176f6664a956ba8ad50abdb4f5e2d982ef480d67"
+    },
+    {
+      "file": "br-06/downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-9ea51bd854f84191aec268ddc691846d_v1-comparison.json",
+      "sha256": "563946bdb7fdd0f4ed92b3d4a79d0791b6ade4bef2a6d23d4b2afbabb1beb333"
+    },
+    {
+      "file": "br-06/downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-9ea51bd854f84191aec268ddc691846d_v1-scenario.json",
+      "sha256": "314f055fbc93e79e70bc1fb15d50ebde9341fbe0e111945709bb6da50db63761"
+    }
+  ],
+  "tolerance_source": "Migration contract locked before implementation: absolute 1e-24 for repeating divisions; finite amounts exact"
+}

@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "project": "gh-ch-repro-20261107032510-rebuilt",
+  "container_id": "600e372fd89ab3cafc8c4df3753a039d492cc4839ce5ff25f9fd943ea5661e19",
+  "database_image": "sha256:a1304f616cd2a6ed51a616da1cd2e897850b520c3ebfbc2bcfba8d65581998ad",
+  "volumes": [
+    [
+      "/var/lib/clickhouse",
+      "gh-ch-repro-20261107032510-rebuilt_ch_data"
+    ],
+    [
+      "/var/log/clickhouse-server",
+      "gh-ch-repro-20261107032510-rebuilt_ch_logs"
+    ]
+  ],
+  "business_volumes_replaced": false,
+  "original_postgres_changed": false,
+  "config_sha256": "5fba87641207e72842b46634ff87c0c8452fc7c86a5a1227a8efb34960551625",
+  "metric_log_collector_disabled": true,
+  "query_log_unchanged": true,
+  "server_memory_limit_bytes": 1610612736,
+  "legacy_metric_log_retained_parts": 28,
+  "legacy_merge_setting_persisted": true,
+  "note": "Resumed after Docker Desktop /host_mnt path normalization assertion; original helper had completed same-volume DB recreation and legacy-table preservation"
+}

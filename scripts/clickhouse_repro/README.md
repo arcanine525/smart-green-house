@@ -141,3 +141,29 @@ không tuyên bố raw rebuild có cùng publication ID hay cùng physical DB ha
 Raw-rebuild harness này hỗ trợ snapshot chưa có correction. Nó từ chối source
 revision >1/correction hoặc config kind chưa hỗ trợ, thay vì bỏ dữ liệu. Physical
 backup vẫn giữ toàn bộ bytes; workflow chuyển delta/correction thuộc cutover.
+
+
+## Metric log trong runtime 2 GiB
+
+Cấu hình hiện hành tắt collector `system.metric_log` tùy chọn. T51 đo được
+một merge bảng log rộng dùng 848 MiB và làm truy vấn UI nhỏ bị hủy; giảm block
+đọc không giải quyết nguyên nhân. `system.metrics` và `system.asynchronous_metrics`
+vẫn đọc được theo nhu cầu. **Giữ `query_log` bật** vì recovery pending-write cần
+terminal query ID/type; không thay nó bằng suy luận từ process list rỗng.
+
+Database mới dùng `docker/clickhouse/local.xml` đã cập nhật. Với bản rehearsal
+cũ còn `system.metric_log`, dừng writer và dùng helper có guard project/database
+để lưu DDL, inventory/checksum part và tắt riêng automatic merge bảng log cũ:
+
+```bash
+repro --target rebuilt --label preserve-metric-log -- \
+  python /repro/preserve_metric_log.py --output /state/metric-log-preservation.json
+```
+
+Nạp lại XML mới bằng recreate **container cùng volume**, rồi kiểm config
+preprocessed có `query_log` và không có `metric_log`; so volume identity và
+part inventory trước/sau. Helper không xóa log cũ, không đổi memory limit hay
+merge settings của bảng nghiệp vụ. `max_bytes_to_merge_at_max_space_in_pool=0`
+được mô tả là tắt automatic merge trong `system.merge_tree_settings` của đúng
+ClickHouse 25.8. `SYSTEM STOP MERGES` tạm thời một mình không phải cấu hình bền
+vững qua restart. Các số benchmark T49 giữ nguyên nhãn cấu hình lúc đo.

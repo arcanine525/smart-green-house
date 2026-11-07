@@ -1,0 +1,28 @@
+BR-07 1: Mở sensor replay
+BR-07 2: Chọn replay đang phát dở
+BR-07 3: Kiểm tra provisional: 10/30 event
+BR-07 4: Đọc clock nguồn và tín hiệu collector
+BR-07 5: Chọn rule khí hậu có version
+BR-07 6: Chọn rule EC/pH có version
+BR-07 7: Xem quality mẫu mới nhất
+BR-07 8: Khám phá các chuỗi measurement
+BR-07 9: So sánh basis realized
+BR-07 10: Trở lại requested và xuất provisional
+BR-07 11: Bật tự làm mới
+BR-07 12: Phát 20 event còn lại qua CLI thật
+BR-07 13: Làm mới và đối soát complete
+BR-07 14: Đổi ngưỡng mất tín hiệu
+locator.waitFor: Timeout 180000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('slider', { name: 'Ngưỡng mất tín hiệu (giây)', exact: true }) to be visible[22m
+
+    at focus (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/record.cjs:37:12)
+    at /Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/record.cjs:190:235
+    at step (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/record.cjs:49:18)
+    at async flows.07 (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/record.cjs:190:2)
+    at async /Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/record.cjs:199:305 {
+  log: [
+    "  - waiting for getByRole('slider', { name: 'Ngưỡng mất tín hiệu (giây)', exact: true }) to be visible"
+  ],
+  name: 'TimeoutError'
+}

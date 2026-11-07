@@ -1,0 +1,7 @@
+{
+  "status": "failed_attempt_preserved",
+  "cause": "Playwright input click intercepted by associated visible label. Fix clicks label and checks actual checkbox state. No SUT or data changes.",
+  "failed_artifact_root": "project-submit/demo-videos/failed/sensor-checkbox",
+  "completion_started": false,
+  "six_br_results_unchanged": true
+}

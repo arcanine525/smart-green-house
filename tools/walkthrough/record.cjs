@@ -6,10 +6,18 @@ const base=process.env.APP_URL||'http://127.0.0.1:18572';
 const out=path.resolve(process.env.EVIDENCE_DIR||'tmp/walkthrough/videos');
 const selected=(process.env.BRS||'01,02,03,04,05,06').split(',');
 const pace=Number(process.env.PACE||1);
-const PUBLICATION='df3e4bcbacab45a5b86fc37d2f53c00a';
+const contextFile=path.resolve(process.env.DEMO_CONTEXT||path.join(out,'..','context.json'));
+const demo=JSON.parse(fs.readFileSync(contextFile,'utf8'));
+const backend=demo.backend||'postgres';
+const PUBLICATION=demo.publication;
+if(backend==='clickhouse'){
+ if(demo.purpose!=='isolated_walkthrough'||!/^gh-ch-repro-[a-z0-9-]+$/.test(demo.project)||demo.database!=='greenhouse_repro'||demo.pg_credentials_present!==false||demo.publication_reference?.versions?.code_version!=='clickhouse-warehouse-v1')throw Error('Verified native isolated context required');
+ for(const [key,expected,tolerance] of [['irrigation_l_m2',9.36,1e-9],['drain_l_m2',3.89,1e-9],['energy_kwh',308.078,.00051],['baseline_eur',17.60006771,1e-8],['electric_plus20_eur',20.840734377,1e-8],['harvest_share_b_percent',66.6666666667,1e-8]])if(Math.abs(Number(demo.raw_oracle?.[key])-expected)>tolerance||!Number.isFinite(Number(demo.raw_oracle?.[key])))throw Error('Raw oracle mismatch: '+key);
+}else if(backend!=='postgres'||!demo.database.startsWith('test_walkthrough_')||PUBLICATION!=='df3e4bcbacab45a5b86fc37d2f53c00a')throw Error('Expected original PostgreSQL walkthrough copy');
+if(!Number.isFinite(pace)||pace<=0)throw Error('PACE must be positive');
 const sha=f=>crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
 const scriptSha=sha(__filename),lockfileSha=sha(path.join(__dirname,'package-lock.json'));
-const titles={'01':'Khí hậu','02':'Tưới và drain','03':'EC / pH drain','04':'Năng lượng','05':'Thu hoạch A / B','06':'Chi phí và kịch bản giá'};
+const titles={'01':'Khí hậu','02':'Tưới và drain','03':'EC / pH drain','04':'Năng lượng','05':'Thu hoạch A / B','06':'Chi phí và kịch bản giá','07':'Sensor replay · bổ sung BR-01/03'};
 let page,context,dir,steps,downloads,started,br;
 const pause=ms=>page.waitForTimeout(ms*pace);
 async function settled(){
@@ -18,12 +26,12 @@ async function settled(){
  await page.locator('[data-testid="stException"]').waitFor({state:'hidden',timeout:1000});
 }
 async function annotate(title,detail){
- await page.evaluate(({title,detail,br})=>{
+ await page.evaluate(({title,detail,br,backend})=>{
   let box=document.getElementById('walkthrough-caption');
   if(!box){box=document.createElement('div');box.id='walkthrough-caption';box.style.cssText='position:fixed;bottom:0;left:0;right:0;height:136px;box-sizing:border-box;padding:18px 34px;background:#102b24;color:#fff;z-index:2147483646;pointer-events:none;font-family:Arial,sans-serif;box-shadow:0 -3px 15px #0003';document.body.append(box);}
-  box.replaceChildren();for(const [text,size,color] of [[`SMART GREENHOUSE · BR-${br} · WALKTHROUGH TỰ ĐỘNG PLAYWRIGHT`,15,'#b3d7c5'],[title,26,'#fff'],[detail,21,'#e0eae5']]){let el=document.createElement('div');el.textContent=text;el.style.cssText=`font-size:${size}px;color:${color};margin:0 0 6px;line-height:1.25`;box.append(el);}
+  box.replaceChildren();for(const [text,size,color] of [[`SMART GREENHOUSE · ${backend.toUpperCase()} · ${br==='07'?'SENSOR · BR-01/03':'BR-'+br} · WALKTHROUGH TỰ ĐỘNG PLAYWRIGHT`,15,'#b3d7c5'],[title,26,'#fff'],[detail,21,'#e0eae5']]){let el=document.createElement('div');el.textContent=text;el.style.cssText=`font-size:${size}px;color:${color};margin:0 0 6px;line-height:1.25`;box.append(el);}
   if(!document.getElementById('walkthrough-style')){let s=document.createElement('style');s.id='walkthrough-style';s.textContent='[data-testid="stMainBlockContainer"]{padding-bottom:180px!important} [data-testid="stSidebarContent"]{padding-bottom:160px!important}';document.head.append(s);}
- },{title,detail,br});
+ },{title,detail,br,backend});
 }
 async function focus(loc){
  await loc.waitFor({state:'visible',timeout:180000});await loc.scrollIntoViewIfNeeded();
@@ -58,11 +66,20 @@ async function metric(label,value){const loc=page.locator('[data-testid="stMetri
 async function readMetrics(){await focus(page.locator('[data-testid="stMetric"]').first());}
 async function chart(index=0){const loc=page.locator('[data-testid="stPlotlyChart"]').nth(index);await focus(loc);const box=await loc.boundingBox();await page.mouse.move(box.x+box.width*.55,box.y+Math.min(box.height*.48,220),{steps:20});await pause(1000);const legend=loc.locator('.legendtoggle').first();if(await legend.count()){await legend.click();await pause(1300);await legend.click();}await pause(800);}
 async function download(label){const loc=page.getByRole('button',{name:label,exact:true});await focus(loc);const promise=page.waitForEvent('download',{timeout:60000});await loc.click();const d=await promise;const name=d.suggestedFilename();const target=path.join(dir,'downloads',name);await d.saveAs(target);if(await d.failure())throw Error(await d.failure());if(fs.statSync(target).size<20)throw Error('Empty export');downloads.push({file:'downloads/'+name,sha256:sha(target),bytes:fs.statSync(target).size});await settled();}
-async function checkExportPublication(){const json=downloads.filter(x=>x.file.endsWith('.json'));if(!json.length)throw Error('Missing JSON export');for(const x of json){const text=fs.readFileSync(path.join(dir,x.file),'utf8');JSON.parse(text);if(!text.includes(PUBLICATION))throw Error('Export publication mismatch');}}
+async function checkExportPublication(){const json=downloads.filter(x=>x.file.endsWith('.json'));if(!json.length)throw Error('Missing JSON export');for(const x of json){const text=fs.readFileSync(path.join(dir,x.file),'utf8');JSON.parse(text);if(!text.includes(PUBLICATION))throw Error('Export publication mismatch');if(backend==='clickhouse'&&!text.includes('clickhouse-warehouse-v1'))throw Error('Native export code version missing');}}
 async function common(comp,label='Khoang · vụ'){
  await step('Mở màn hình '+titles[br],'Chọn BR ở thanh bên; các thao tác tiếp theo chạy trên bản sao dữ liệu AGC.',async()=>{await click(page.locator('[data-testid="stSidebar"]').getByText(new RegExp('BR-'+br+'\\)')).first());});
  await step('Xác nhận publication lịch sử','Một publication cố định cho bộ lọc, chỉ số, chi tiết và file xuất.',async()=>{const loc=page.getByRole('combobox',{name:/^Publication/}).first();await focus(loc);await loc.click();await pause(1400);await page.getByRole('option',{selected:true}).click();await settled();});
  await step('Chọn khoang và vụ '+comp,'Khoang/vụ xác định phạm vi phân tích; chọn lại sẽ cập nhật bộ lọc liên quan.',()=>combo(label,comp));
+}
+async function autoRefresh(enabled){
+ const box=page.getByRole('checkbox',{name:'Tự làm mới mỗi 10 giây',exact:true});
+ if(await box.isChecked()!==enabled)await click(box.locator('xpath=ancestor::label'));
+ await expect(box).toBeChecked({checked:enabled});
+}
+async function replayCount(number){
+ const state=page.getByTestId('stJson').first();await focus(state);
+ await expect(state).toContainText(new RegExp('Sequence hợp lệ[\\s\"\':]*'+number));
 }
 const flows={
  '02':async()=>{
@@ -154,18 +171,38 @@ const flows={
  await step('Xuất kết quả kịch bản','CSV và JSON giữ version cùng điều kiện phân tích đã dùng.',async()=>{await tab('💾 Xuất dữ liệu (Exports)');await download('CSV Summary chi phí (Baseline vs Kịch bản)');await download('JSON Chi phí (ScenarioComparison typed)');await download('JSON Kịch bản DTO (CostScenario typed)');if(!downloads.length)throw Error('No scenario comparison export');await checkExportPublication();});
  }
 };
+flows['07']=async()=>{
+ if(backend!=='clickhouse'||!demo.live_replay||demo.live_replay.accepted_events!==10)throw Error('Prepared actual partial replay required');
+ const live=demo.live_replay;
+ await step('Mở sensor replay','Replay là scope riêng; thời gian nguồn AGC không phải đồng hồ vận hành.',()=>click(page.getByText('📡 Sensor replay (BR-01/03)',{exact:true})));
+ await step('Chọn replay đang phát dở','Chọn đúng replay mới, không dùng kết quả hoàn tất của buổi kiểm tra trước.',()=>combo('Replay · khoang',live.replay_id));
+ await step('Kiểm tra provisional: 10/30 event','Mới nhận 10 event; manifest khai báo 30. Chưa thể coi checksum và replay là hoàn tất.',async()=>{await expect(page.getByText(/Provisional: replay chưa đối soát đầy đủ/)).toBeVisible();await replayCount(10);await expect(page.locator('body')).toContainText(live.publication_id);});
+ await step('Đọc clock nguồn và tín hiệu collector','Ngày nguồn 2019 là lịch sử. Tuổi tín hiệu được tính từ lần nhận theo đồng hồ UTC.',readMetrics);
+ await step('Chọn rule khí hậu có version','Ánh xạ rule demo từ lịch sử sang đúng replay; không coi là khuyến cáo nông học.',()=>combo('Rule khí hậu lịch sử ánh xạ sang replay','climate-demo-b01:Automatoes:v1'));
+ await step('Chọn rule EC/pH có version','Dùng rule drain process computer; coverage đánh giá khác coverage nguồn.',()=>combo('Rule EC/pH lịch sử ánh xạ sang replay','drain-demo-b03:Automatoes:v1'));
+ await step('Xem quality mẫu mới nhất','Đọc status, applicability và reason của từng measure; giá trị thiếu không thành số 0.',()=>expander('Chất lượng mẫu mới nhất'));
+ await step('Khám phá các chuỗi measurement','Hover nhiệt độ, CO₂, EC và pH theo source clock.',async()=>{for(let i=0;i<4;i++)await chart(i);});
+ await step('So sánh basis realized','Requested và realized là hai đánh giá riêng; không fallback thay cho nhau.',()=>combo('Basis khí hậu','realized'));
+ await step('Trở lại requested và xuất provisional','CSV giữ publication cũ cùng provisional=true; dữ liệu tiếp theo không ghi đè file này.',async()=>{await combo('Basis khí hậu','requested');await download('Tải KPI và episode CSV');const text=fs.readFileSync(path.join(dir,downloads.at(-1).file),'utf8');if(!text.includes(live.publication_id)||!text.includes('True'))throw Error('Partial CSV provenance differs');});
+ await step('Bật tự làm mới','Dashboard đọc lại mỗi 10 giây; nó không tự tạo measurement.',async()=>{await autoRefresh(true);await pause(11000);});
+ await step('Phát 20 event còn lại qua CLI thật','Publisher/collector/Spark chạy ngoài dashboard. Video quan sát dữ liệu đến, không giả nút phát sensor.',async()=>{const [command,...args]=live.completion_command;await new Promise((resolve,reject)=>require('node:child_process').execFile(command,args,{timeout:180000},(error,stdout,stderr)=>{fs.writeFileSync(path.join(dir,'stream-completion.log'),stdout+'\n'+stderr);error?reject(error):resolve();}));});
+ await step('Làm mới và đối soát complete','Nhận đủ 30 event duy nhất, không thiếu sequence, checksum khớp.',async()=>{await click(page.getByRole('button',{name:'Làm mới ngay',exact:true}));await expect(page.getByText('Replay đã đối soát manifest, checksum và sequence.',{exact:true})).toBeVisible();await replayCount(30);const result=JSON.parse(fs.readFileSync(live.complete_result_host_path,'utf8'));if(result.status!=='passed'||result.accepted_events!==30||!result.original_envelopes_exact||!result.checksum_verified)throw Error('Actual replay completion proof failed');await expect(page.locator('body')).toContainText(result.publication_id);});
+ await step('Đổi ngưỡng mất tín hiệu','Trạng thái stale phản ánh lần nhận gần nhất, không kết luận thời gian AGC là thời gian thực.',async()=>{const slider=page.getByTestId('stSlider').filter({hasText:'Ngưỡng mất tín hiệu (giây)'});await focus(slider);const input=slider.locator('input[type=range]');await input.focus();await input.press('Home');await settled();await expect(input).toHaveValue('10');await readMetrics();});
+ await step('Dừng tự làm mới và xuất kết quả hoàn tất','CSV mới giữ publication complete riêng, không thay đổi pin provisional đã xuất.',async()=>{await autoRefresh(false);await settled();await download('Tải KPI và episode CSV');const result=JSON.parse(fs.readFileSync(live.complete_result_host_path,'utf8'));if(!fs.readFileSync(path.join(dir,downloads.at(-1).file),'utf8').includes(result.publication_id))throw Error('Complete CSV publication mismatch');});
+};
 (async()=>{
- const demo=JSON.parse(fs.readFileSync(process.env.DEMO_CONTEXT||path.join(out,'..','context.json'),'utf8'));if(!demo.database.startsWith('test_walkthrough_')||demo.publication!==PUBLICATION)throw Error('Expected prepared walkthrough copy');fs.mkdirSync(out,{recursive:true});const browser=await chromium.launch();
- try{for(br of selected){if(!flows[br])throw Error('Unknown BR '+br);dir=path.join(out,'br-'+br);if(fs.existsSync(path.join(dir,'result.json')))throw Error('Use a new output directory; result exists: '+dir);fs.mkdirSync(path.join(dir,'downloads'),{recursive:true});steps=[];downloads=[];
+ fs.mkdirSync(out,{recursive:true});const browser=await chromium.launch();
+ try{for(br of selected){if(!flows[br])throw Error('Unknown BR '+br);dir=path.join(out,br==='07'?'sensor-replay':'br-'+br);if(fs.existsSync(path.join(dir,'result.json')))throw Error('Use a new output directory; result exists: '+dir);fs.mkdirSync(path.join(dir,'downloads'),{recursive:true});fs.copyFileSync(__filename,path.join(dir,'recorder.cjs'));fs.copyFileSync(contextFile,path.join(dir,'context.json'));steps=[];downloads=[];
  context=await browser.newContext({viewport:{width:1920,height:1080},recordVideo:{dir:path.join(dir,'recording'),size:{width:1920,height:1080}},acceptDownloads:true,locale:'vi-VN'});
- await context.tracing.start({screenshots:true,snapshots:true,sources:true});page=await context.newPage();await page.addInitScript(()=>{document.addEventListener('mousemove',e=>{let dot=document.getElementById('walkthrough-pointer');if(!dot){dot=document.createElement('div');dot.id='walkthrough-pointer';dot.style.cssText='position:fixed;width:22px;height:22px;border:3px solid #e4ab26;border-radius:50%;background:#e4ab2630;z-index:2147483647;pointer-events:none';document.body.append(dot);}dot.style.left=(e.clientX-11)+'px';dot.style.top=(e.clientY-11)+'px';});});page.setDefaultTimeout(60000);started=Date.now();let error;
- try{await page.goto(base);await page.getByText('Irrigation observed',{exact:true}).waitFor({timeout:180000});await settled();await flows[br]();await step('Hoàn tất BR-'+br,'Các bước đã kiểm tra tự động. Video minh họa thao tác; không đo khả năng sử dụng của người thật.',readMetrics);}
+ await context.route('**/*',route=>{const url=new URL(route.request().url());if(['http:','https:'].includes(url.protocol)&&url.origin!==new URL(base).origin)return route.abort();return route.continue();});
+ await context.tracing.start({screenshots:false,snapshots:true,sources:true});page=await context.newPage();await page.addInitScript(()=>{document.addEventListener('mousemove',e=>{let dot=document.getElementById('walkthrough-pointer');if(!dot){dot=document.createElement('div');dot.id='walkthrough-pointer';dot.style.cssText='position:fixed;width:22px;height:22px;border:3px solid #e4ab26;border-radius:50%;background:#e4ab2630;z-index:2147483647;pointer-events:none';document.body.append(dot);}dot.style.left=(e.clientX-11)+'px';dot.style.top=(e.clientY-11)+'px';});});page.setDefaultTimeout(60000);started=Date.now();let error;
+ try{await page.goto(base);await page.getByText('Irrigation observed',{exact:true}).waitFor({timeout:600000});await settled();if(backend==='clickhouse'){await expect(page.locator('body')).toContainText('clickhouse-warehouse-v1');await expect(page.locator('body')).toContainText(PUBLICATION.slice(0,12));}await flows[br]();await step(br==='07'?'Hoàn tất sensor replay':'Hoàn tất BR-'+br,'Các bước đã kiểm tra tự động. Video minh họa thao tác; không đo khả năng sử dụng của người thật.',readMetrics);}
  catch(e){error=e;await page.screenshot({path:path.join(dir,'failure.png')}).catch(()=>{});fs.writeFileSync(path.join(dir,'failure.txt'),String(e.stack));}
  await context.tracing.stop({path:path.join(dir,'trace.zip')});const video=page.video();await context.close();const raw=await video.path();
  if(error)throw error;
- const mp4=path.join(dir,`br-${br}.mp4`);execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-y','-i',raw,'-an','-c:v','libx264','-preset','fast','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart',mp4],{stdio:'inherit'});
+ const videoFile=br==='07'?'sensor-replay.mp4':`br-${br}.mp4`;const mp4=path.join(dir,videoFile);execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-y','-i',raw,'-an','-c:v','libx264','-preset','fast','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart',mp4],{stdio:'inherit'});
  const probe=JSON.parse(execFileSync('ffprobe',['-v','error','-show_streams','-show_format','-of','json',mp4],{encoding:'utf8'}));if(probe.streams[0].width!==1920||probe.streams[0].height!==1080)throw Error('Wrong video dimensions');
- fs.writeFileSync(path.join(dir,'result.json'),JSON.stringify({br,title:titles[br],status:'passed',kind:'automated_playwright_walkthrough',script_sha256:scriptSha,lockfile_sha256:lockfileSha,human_participants:0,demo_database:demo.database,publication:PUBLICATION,playwright:require('playwright/package.json').version,commit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),video:{file:`br-${br}.mp4`,sha256:sha(mp4),width:1920,height:1080,duration_seconds:Number(probe.format.duration),audio:false},steps,downloads},null,2));
+ fs.writeFileSync(path.join(dir,'result.json'),JSON.stringify({br,title:titles[br],status:'passed',kind:'automated_playwright_walkthrough',script_sha256:scriptSha,lockfile_sha256:lockfileSha,human_participants:0,business_requirements:br==='07'?['01','03']:[br],backend,pace,context_sha256:sha(contextFile),configuration_hash:demo.configuration_hash||null,source_revision:demo.runtime_verification||null,external_http_blocked:true,trace_options:{screenshots:false,snapshots:true,sources:true},demo_database:demo.database,publication:PUBLICATION,playwright:require('playwright/package.json').version,commit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),video:{file:videoFile,sha256:sha(mp4),width:1920,height:1080,duration_seconds:Number(probe.format.duration),audio:false},steps,downloads},null,2));
  console.log('PASS BR-'+br+' '+mp4);
  }}finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1});

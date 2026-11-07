@@ -1,0 +1,23 @@
+test_all_cycles_verified_with_bounded_read_and_identical_receipt (test_threshold_memory.ThresholdMemoryTest.test_all_cycles_verified_with_bounded_read_and_identical_receipt) ... ERROR
+
+======================================================================
+ERROR: test_all_cycles_verified_with_bounded_read_and_identical_receipt (test_threshold_memory.ThresholdMemoryTest.test_all_cycles_verified_with_bounded_read_and_identical_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tests/test_threshold_memory.py", line 61, in test_all_cycles_verified_with_bounded_read_and_identical_receipt
+    result=bounded._verify_stream(scope,pub,header,cycles,expected(),pin,[header])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/baseline-threshold.py", line 185, in _verify_stream
+    for wanted,stored in zip_longest(expected,logical_rows(actual),fillvalue=missing):
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/baseline-threshold.py", line 181, in logical_rows
+    for row in rows:
+               ^^^^
+  File "/candidate-src/greenhouse/clickhouse/client.py", line 144, in iter_query
+    raise ClickHouseError(f'ClickHouse rejected query (HTTP {status}); inspect server query log by query ID') from None
+greenhouse.clickhouse.client.ClickHouseError: ClickHouse rejected query (HTTP 500); inspect server query log by query ID
+
+----------------------------------------------------------------------
+Ran 1 test in 7.517s
+
+FAILED (errors=1)

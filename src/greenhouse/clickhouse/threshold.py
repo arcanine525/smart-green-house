@@ -174,14 +174,34 @@ class SlotMart:
         normalized_cycles=sorted(map(normalize,cycles))
         if headers!=[header] or normalized_cycles!=sorted(map(normalize,self.rows('threshold_cycle',scope,pub))):
             raise ValueError('Threshold header/cycles differ from canonical configuration')
-        sql='SELECT * FROM threshold_measure WHERE scope_id={scope:String} AND publication_id={pub:String} AND bundle={bundle:String} ORDER BY compartment_id,slot_clock_us,measure_code SETTINGS max_bytes_before_external_sort=67108864'
+        parameters={'scope':scope,'pub':pub,'bundle':self.bundle}
+        # Preserve the historical compartment/slot/code checksum order while
+        # reading each cycle through the MergeTree sorting-key prefix. Sorting
+        # every wide measure row by compartment required an unbounded merge
+        # sort even though the output iterator itself was bounded.
+        unknown=self.client.query('''SELECT count() AS n FROM threshold_measure
+            WHERE scope_id={scope:String} AND publication_id={pub:String}
+            AND bundle={bundle:String} AND cycle_id NOT IN {cycles:Array(String)}''',
+            parameters|{'cycles':str([c['cycle_id'] for c in cycles])})
+        if int(unknown[0]['n']):
+            raise ValueError('Threshold mart contains rows outside configured cycles')
+        sql='''SELECT * FROM threshold_measure WHERE scope_id={scope:String}
+            AND publication_id={pub:String} AND bundle={bundle:String}
+            AND cycle_id={cycle:String} ORDER BY slot_clock_us,measure_code
+            SETTINGS optimize_read_in_order=1,max_bytes_before_external_sort=67108864'''
+        def actual_rows():
+            for cycle in sorted(cycles,key=lambda c:c['compartment_id']):
+                # Do not filter by compartment: a row carrying the wrong
+                # compartment inside this cycle must still fail comparison.
+                with closing(self.client.iter_query(sql,parameters|{'cycle':cycle['cycle_id']})) as rows:
+                    yield from rows
         checksum=hashlib.sha256();count=0;missing=object()
         def logical_rows(rows):
             previous=None
             for row in rows:
                 if row!=previous:yield row
                 previous=row
-        with closing(self.client.iter_query(sql,{'scope':scope,'pub':pub,'bundle':self.bundle})) as actual:
+        with closing(actual_rows()) as actual:
             for wanted,stored in zip_longest(expected,logical_rows(actual),fillvalue=missing):
                 if wanted is missing or stored is missing:raise ValueError('Threshold mart measure count differs from canonical source')
                 encoded=normalize(wanted)

@@ -1,0 +1,69 @@
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:09:55.263 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:10:01.841 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:10:07.604 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:10:12.936 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:10:18.462 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+FAIL
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:10:27.926 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:10:37.094 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:10:45.898 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:10:52.302 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:10:59.140 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:11:08.660 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:11:15.947 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:11:23.099 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:11:30.948 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+FAIL
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:11:36.954 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:11:44.134 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:11:49.767 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:11:55.477 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:12:01.978 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports) ... 2026-11-07 08:12:08.989 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+
+======================================================================
+FAIL: test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/tests/clickhouse/test_water_ui.py", line 47, in test_production_water_screen_filters_rule_lineage_and_exports
+    self.assertTrue(any('demo_rule' in item.value for item in app.markdown))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_production_water_screen_filters_rule_lineage_and_exports (test_water_ui.WaterUITest.test_production_water_screen_filters_rule_lineage_and_exports)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/tests/clickhouse/test_water_ui.py", line 47, in test_production_water_screen_filters_rule_lineage_and_exports
+    self.assertTrue(any('demo_rule' in item.value for item in app.markdown))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 20 tests in 141.228s
+
+FAILED (failures=2)
+PROBE_MARKDOWN ["<style>\n.stApp{background:#f5f6f0;color:#243d31}header[data-testid=\"stHeader\"]{background:#f5f6f0}\n[data-testid=\"stSidebar\"]{background:#173d30;color:#dbe4db}\n.block-container{padding-top:3.5rem;padding-bottom:2rem;max-width:1600px}\nh1{font-size:1.9rem!important;letter-spacing:-1px;font-weight:600!important}\n[data-testid=\"stVerticalBlockBorderWrapper\"]>div{border-color:#e7ebe2!important;border-radius:12px!important}\n[data-testid=\"stVerticalBlockBorderWrapper\"]{background:white;border-radius:12px}\n.brand{font-size:26px;font-weight:650;letter-spacing:-1.2px;margin:0 0 2px}.brand em{color:#d7e9ab;font-style:normal}\n.side-note{border:1px solid #41634f;border-radius:9px;padding:14px;margin-top:34px;font-size:12px;color:#adc5b3!important}\n.subtitle{font-size:13px;color:#7c867c;margin-top:-8px;margin-bottom:14px}\n.chip{display:inline-block;background:#edf3e4;color:#67814e;font-size:10px;border-radius:5px;padding:4px 8px;margin:2px 6px 2px 0}\n.assumption{border:1px solid #d9b26a;background:#fdf6e4;color:#8a6420;border-radius:9px;padding:10px 14px;font-size:12.5px;margin:10px 0}\n/* Sidebar: light text for labels/captions on the dark panel, but control\n   values/options keep dark text on their own light surfaces. Visible date\n   components are spinbutton/literal spans (the date input itself is hidden),\n   so the whole date-field subtree is restored to dark text; select controls\n   are buttons. Labels outside these containers stay light. */\n[data-testid=\"stSidebar\"] *{color:#dbe4db}\n[data-testid=\"stSidebar\"] input,\n[data-testid=\"stSidebar\"] button,\n[data-testid=\"stSidebar\"] [data-testid=\"stDateInputField\"],\n[data-testid=\"stSidebar\"] [data-testid=\"stDateInputField\"] *,\n[data-testid=\"stSidebar\"] [role=\"spinbutton\"],\n[data-testid=\"stSidebar\"] [role=\"spinbutton\"] *{color:#243d31!important}\n.rule-note{font-size:11.5px;color:#8c9681;margin:4px 0 12px}\n.foot{font-size:10px;color:#99a18d;margin-top:25px;border-top:1px solid #e4e9dc;padding-top:14px}\n</style>"]
+PROBE_ERRORS ["Không đọc được catalog publication từ warehouse."]
+PROBE_SELECTIONS []
+PROBE_CAPTIONS ["Kiểm tra DB Compose rồi thử lại; chi tiết lỗi không hiển thị để tránh lộ cấu hình."]
+PROBE_MARKDOWN ["<style>\n.stApp{background:#f5f6f0;color:#243d31}header[data-testid=\"stHeader\"]{background:#f5f6f0}\n[data-testid=\"stSidebar\"]{background:#173d30;color:#dbe4db}\n.block-container{padding-top:3.5rem;padding-bottom:2rem;max-width:1600px}\nh1{font-size:1.9rem!important;letter-spacing:-1px;font-weight:600!important}\n[data-testid=\"stVerticalBlockBorderWrapper\"]>div{border-color:#e7ebe2!important;border-radius:12px!important}\n[data-testid=\"stVerticalBlockBorderWrapper\"]{background:white;border-radius:12px}\n.brand{font-size:26px;font-weight:650;letter-spacing:-1.2px;margin:0 0 2px}.brand em{color:#d7e9ab;font-style:normal}\n.side-note{border:1px solid #41634f;border-radius:9px;padding:14px;margin-top:34px;font-size:12px;color:#adc5b3!important}\n.subtitle{font-size:13px;color:#7c867c;margin-top:-8px;margin-bottom:14px}\n.chip{display:inline-block;background:#edf3e4;color:#67814e;font-size:10px;border-radius:5px;padding:4px 8px;margin:2px 6px 2px 0}\n.assumption{border:1px solid #d9b26a;background:#fdf6e4;color:#8a6420;border-radius:9px;padding:10px 14px;font-size:12.5px;margin:10px 0}\n/* Sidebar: light text for labels/captions on the dark panel, but control\n   values/options keep dark text on their own light surfaces. Visible date\n   components are spinbutton/literal spans (the date input itself is hidden),\n   so the whole date-field subtree is restored to dark text; select controls\n   are buttons. Labels outside these containers stay light. */\n[data-testid=\"stSidebar\"] *{color:#dbe4db}\n[data-testid=\"stSidebar\"] input,\n[data-testid=\"stSidebar\"] button,\n[data-testid=\"stSidebar\"] [data-testid=\"stDateInputField\"],\n[data-testid=\"stSidebar\"] [data-testid=\"stDateInputField\"] *,\n[data-testid=\"stSidebar\"] [role=\"spinbutton\"],\n[data-testid=\"stSidebar\"] [role=\"spinbutton\"] *{color:#243d31!important}\n.rule-note{font-size:11.5px;color:#8c9681;margin:4px 0 12px}\n.foot{font-size:10px;color:#99a18d;margin-top:25px;border-top:1px solid #e4e9dc;padding-top:14px}\n</style>"]
+PROBE_ERRORS ["Không đọc được catalog publication từ warehouse."]
+PROBE_SELECTIONS []
+PROBE_CAPTIONS ["Kiểm tra DB Compose rồi thử lại; chi tiết lỗi không hiển thị để tránh lộ cấu hình."]

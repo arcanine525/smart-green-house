@@ -1,0 +1,7 @@
+{
+  "status": "aborted",
+  "reason": "First browser did not receive metrics after server became idle; a separate browser returned exact native publication and water KPIs. Preserve attempt, instrument a fresh client; no SUT fix claimed.",
+  "elapsed_seconds_approx": 500,
+  "tool_exit_code": 1,
+  "root_cause": "Not established; do not infer a SUT defect or successful cold browser startup from the retry."
+}

@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "ui_image": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b",
+  "files": {
+    "client.py": {
+      "installed_path": "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/client.py",
+      "sha256": "4ccb3ce69dbbb7278e4935419ec5dd78cfcc07f80a6b704884be3ec44d9089df",
+      "diagnostic_marker_present": false
+    },
+    "threshold.py": {
+      "installed_path": "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/threshold.py",
+      "sha256": "b1400cf8274589ed94caeabc43df63d803524f6683362232eae1c02f90e5b035",
+      "diagnostic_marker_present": false
+    }
+  },
+  "no_source_bind": true
+}

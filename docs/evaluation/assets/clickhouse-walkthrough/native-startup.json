@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "backend": "clickhouse",
+  "publication": "4b08bd51c092465783304f887d766d47",
+  "external_http_blocked": true,
+  "elapsed_seconds": 349.459,
+  "note": "Unrecorded browser readiness; elapsed is this attempt only, not total cold startup or a warm query benchmark"
+}

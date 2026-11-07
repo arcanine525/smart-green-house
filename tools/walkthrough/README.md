@@ -1,4 +1,82 @@
-# Quay walkthrough T26
+# Quay walkthrough PostgreSQL và ClickHouse
+
+Công cụ trên máy quay: Python ≥3.11, Node.js ≥20, ffmpeg và ffprobe.
+Chuẩn bị dependency/browser theo lockfile khi có Internet, trước runtime local:
+
+```bash
+npm ci --prefix tools/walkthrough
+tools/walkthrough/node_modules/.bin/playwright install chromium
+```
+
+
+## ClickHouse — walkthrough mới T51
+
+Bộ ClickHouse được quay lại trên bản sao raw-rebuild đã qua toàn bộ kiểm tra
+T50. Cần hoàn tất [`scripts/clickhouse_repro/README.md`](../../scripts/clickhouse_repro/README.md)
+trước; `--setup` trỏ tới `current.json` của lần diễn tập đó. Database phải là
+`greenhouse_repro`, project riêng `gh-ch-repro-*`; các lệnh từ chối project nguồn.
+Đây là bản sao demo có ghi rule, replay và scenario, chỉ dùng cho walkthrough.
+
+```bash
+python3 scripts/prepare_clickhouse_walkthrough.py \
+  --setup tmp/clickhouse-repro/current.json \
+  --output tmp/clickhouse-walkthrough/<run-id>
+python3 scripts/run_walkthrough_replay.py \
+  --setup tmp/clickhouse-repro/current.json \
+  --preparation tmp/clickhouse-walkthrough/<run-id> prepare
+node tools/walkthrough/warm-ui.cjs tmp/clickhouse-walkthrough/<run-id>
+APP_URL=http://127.0.0.1:18584 \
+DEMO_CONTEXT=tmp/clickhouse-walkthrough/<run-id>/context.json \
+EVIDENCE_DIR=project-submit/demo-videos/clickhouse \
+BRS=01,02,03,04,05,06,07 PACE=1 node tools/walkthrough/record.cjs
+node tools/walkthrough/build-index.cjs project-submit/demo-videos/clickhouse
+python3 scripts/verify_clickhouse_browser_startup.py \
+  --setup tmp/clickhouse-repro/current.json \
+  --preparation tmp/clickhouse-walkthrough/<run-id>
+node tools/walkthrough/check-index.cjs project-submit/demo-videos/clickhouse \
+  tmp/clickhouse-walkthrough/<run-id>/player-verification.json
+python3 tools/walkthrough/finalize_clickhouse.py \
+  --preparation tmp/clickhouse-walkthrough/<run-id> \
+  --videos project-submit/demo-videos/clickhouse \
+  --output docs/evaluation/assets/clickhouse-walkthrough
+```
+
+Chạy tuần tự. Cold proof có thể mất vài phút; bước warm-up được ghi riêng,
+không tính vào benchmark warm. Chuẩn bị cần ít nhất 3 GiB trống; raw rebuild
+trước đó cần nhiều hơn theo harness. Chuẩn bị replay phát 10 measurement AGC
+thật cùng manifest khai báo 30. Video sensor phát tiếp 20 event qua CLI thật,
+MQTT, collector và Spark trên cùng checkpoint, rồi kiểm publication complete,
+checksum, sequence và fingerprint. CLI chạy ngoài dashboard, có chú thích rõ.
+Preparation sao chép parity đã đạt cho đúng publication, kiểm hai module
+client/threshold trong image khớp source và server XML khớp bản hiện hành.
+Nếu dùng rehearsal/image tạo trước bản sửa T51, cần rebuild image, nạp XML mới,
+bảo toàn metric log cũ theo runbook rồi chạy lại parity; không đổi nhãn image
+cũ thành bản đã sửa. Cold probe sau ghi hình chỉ restart app của bản demo.
+Không chạy lệnh `complete` trước khi quay sensor vì sẽ mất chuyển trạng thái.
+Nếu phải quay lại sau khi replay đã complete, dùng `--run-name live-replay-v2`
+ở lệnh `prepare`. Wrapper tạo scope/outbox/checkpoint mới và ghi
+`context-live-replay-v2.json`; dùng file đó cho `DEMO_CONTEXT` và `--context`
+của finalizer. Giữ context và source recorder theo từng clip; các video lịch
+sử chỉ được ghép khi publication/config/snapshot/oracle vẫn khớp.
+
+`07` là video sensor bổ sung BR-01/03. Trang index ClickHouse bắt buộc đủ sáu
+BR và sensor, `PACE=1`, cùng historical publication/config; context từng clip
+được giữ/hash riêng. Script kiểm SHA video/download và
+ảnh từng bước. Trình duyệt chặn HTTP ra ngoài origin local. App chỉ nối mạng
+backend internal; relay localhost có frontend bridge. Preparation kiểm engine,
+không có credential PostgreSQL và publication native. Oracle nước/năng lượng/
+thu hoạch/chi phí được tính độc lập từ CSV đã kiểm SHA.
+
+MP4, WebM gốc, trace, ảnh và download giữ local trong
+`project-submit/demo-videos/` (Git bỏ qua cả thư mục). Chỉ chép metadata và ảnh
+đã review vào evidence trong `docs/evaluation/`. Các lần quay lỗi phải giữ log
+và không được tính là pass. Video không âm thanh, không có người tham gia;
+video thuyết trình tổng thể được user tự quay offline. Finalizer kiểm toàn bộ
+frame MP4, publication/config/snapshot trong JSON và trích frame từ video;
+`main_visual_review` vẫn pending cho tới khi main thực sự xem ảnh. Không ghi
+đè bộ evidence đã có; khi quay lại, dùng output khác.
+
+## PostgreSQL — baseline T26
 
 Smoke điều hướng backend ClickHouse (chín màn hình, không quay video):
 
@@ -10,7 +88,7 @@ PUBLICATION_ID=PUBLICATION_DA_NGHIEM_THU APP_URL=http://127.0.0.1:18582 \
 Lệnh kiểm đúng publication hiển thị, export availability, quality details hoặc
 empty state và replay empty state trên candidate AGC. Populated replay dùng
 AppTest với bytes simulator thật trong suite T48. Sáu walkthrough video chi
-tiết ClickHouse vẫn là T51; xem [UI/CLI](../../docs/implementation/clickhouse-ui-cli.md).
+tiết ClickHouse theo quy trình riêng ở trên; xem [UI/CLI](../../docs/implementation/clickhouse-ui-cli.md).
 
 Phạm vi user chốt ngày 2026-11-07: ≥6 video, mỗi BR có luồng đầy đủ; chú thích
 Tiếng Việt, số bước, vị trí thao tác, không âm thanh; MP4 1920×1080. Các video

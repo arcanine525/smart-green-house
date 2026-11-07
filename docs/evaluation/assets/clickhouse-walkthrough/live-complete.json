@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "phase": "complete",
+  "backend": "clickhouse",
+  "replay_id": "walkthrough-live-c4b35d584519",
+  "publication_id": "a17563ff87c9589ddba705457a98654ab359d28bc0d7d274837463b67616e902",
+  "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:sim-walkthrough-live-c4b35d584519",
+  "accepted_events": 30,
+  "original_envelopes_exact": true,
+  "complete": true,
+  "checksum_verified": true,
+  "business_fingerprint": "7783fdfa2f63909171709dea99b43bb5e6956af13fde3dca15ce4d1030d1f675",
+  "source_sha256": "3415b31b7958c735f836c7fa8f890a93020786be5c86dc2e7c42771fb0a02cd3",
+  "spark_progress": [
+    [
+      1,
+      20
+    ]
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "backend": "clickhouse",
+  "artifact_root": "/Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse",
+  "local_file_player": true,
+  "chapter_navigation": true,
+  "videos": [
+    {
+      "br": "01",
+      "chapter": 3,
+      "requested_seconds": 32.302,
+      "width": 1920,
+      "height": 1080,
+      "currentTime": 32.3887,
+      "duration": 218.64,
+      "error": null
+    },
+    {
+      "br": "02",
+      "chapter": 3,
+      "requested_seconds": 23.969,
+      "width": 1920,
+      "height": 1080,
+      "currentTime": 24.0001,
+      "duration": 165.2,
+      "error": null
+    },
+    {
+      "br": "03",
+      "chapter": 3,
+      "requested_seconds": 30.335,
+      "width": 1920,
+      "height": 1080,
+      "currentTime": 30.4048,
+      "duration": 193.44,
+      "error": null
+    },
+    {
+      "br": "04",
+      "chapter": 3,
+      "requested_seconds": 27.256,
+      "width": 1920,
+      "height": 1080,
+      "currentTime": 27.4672,
+      "duration": 150.16,
+      "error": null
+    },
+    {
+      "br": "05",
+      "chapter": 3,
+      "requested_seconds": 29.287,
+      "width": 1920,
+      "height": 1080,
+      "currentTime": 29.4895,
+      "duration": 205.24,
+      "error": null
+    },
+    {
+      "br": "06",
+      "chapter": 3,
+      "requested_seconds": 36.242,
+      "width": 1920,
+      "height": 1080,
+      "currentTime": 36.2531,
+      "duration": 339.2,
+      "error": null
+    },
+    {
+      "br": "07",
+      "chapter": 3,
+      "requested_seconds": 33.019,
+      "width": 1920,
+      "height": 1080,
+      "currentTime": 33.072,
+      "duration": 370.68,
+      "error": null
+    }
+  ]
+}

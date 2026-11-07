@@ -1,9 +1,10 @@
 # Ma trận truy vết yêu cầu Smart Greenhouse
 
-Cập nhật: 2026-11-07. Sáu BR đã có triển khai và bằng chứng correctness,
-benchmark cùng walkthrough UI tự động. **Chưa đủ bằng chứng để chốt toàn bộ
-project**: gói nộp còn phải hoàn thiện; BR-01 vượt mục tiêu p95 2 giây
-trong benchmark gốc, dù lượt follow-up sau tối ưu đạt trong điều kiện đo. T28 đã có full AGC/offline và backup/restore; T29–T30 còn mở.
+Cập nhật: 2026-11-07. Sáu BR có baseline PostgreSQL và ứng viên ClickHouse
+được kiểm riêng theo engine. Các bảng ở mục 2–7 giữ kết quả PostgreSQL lịch sử;
+không dùng số đo đó làm bằng chứng ClickHouse. Full parity, benchmark và
+restore ClickHouse đã đạt trong phạm vi công bố. Walkthrough ClickHouse T51
+đã đạt; cutover T39 và gói report/slides/app vẫn có điều kiện riêng.
 
 ## 1. Nguồn và cách đọc
 
@@ -25,7 +26,7 @@ trong benchmark gốc, dù lượt follow-up sau tối ưu đạt trong điều 
 | [BR-06 — Chi phí và biểu giá](../br/br_06_energy-cost-scenarios.md) | Quản lý trang trại/ngân sách; người vận hành, nhóm phân tích | `Resources.csv`: `Heat_cons`, `ElecHigh`, `ElecLow`; khoang/vụ × ngày × component. `Economics.pdf` cung cấp giá lịch sử, `ReadMe.pdf` cung cấp đơn vị/khung giờ; `TariffRate`, `CostScenario` là cấu hình ứng dụng có version, không phải CSV có sẵn. | Accepted quantities dùng chung BR-04 + tariff/basis hiệu lực → `EnergyCostDay`, `EnergyCostPeriod`, `ScenarioComparison`. Decimal quantity × rate theo ngày/component, chặn overlap/gap; giữ lượng/snapshot khi đổi giá; chỉ cộng khi basis đủ điều kiện. | Xem baseline, đóng góp component và lượng × giá; tạo/lưu/mở scenario điện +20%, xem delta và xuất CSV; chặn đổi khung giờ nguồn. | [BR-06/AC-01…AC-11](../br/br_06_energy-cost-scenarios.md#7-tiêu-chí-nghiệm-thu-và-ví-dụ-chuẩn): fixture baseline 1.83 → scenario 2.03 EUR/m², delta 0.20; đơn vị giá nhiệt, temporal join, gap, basis, validation, version/rerun. | **Correctness:** [BR-06](../evaluation/br_06.md), [tổng hợp](../evaluation/correctness.md); **performance:** [benchmark](../evaluation/performance.md); **effectiveness:** [video Playwright; 6/6 luồng đạt](../evaluation/usability.md). | Scenario giá là phân tích, không phải hóa đơn hay telemetry. |
 
 
-## 3. Trạng thái bằng chứng và giới hạn
+## 3. Bằng chứng PostgreSQL và giới hạn của baseline
 
 | Hạng mục | Correctness | Performance | Effectiveness / hạn chế |
 |---|---|---|---|
@@ -60,8 +61,8 @@ chốt toàn bộ project, cần ghi rõ
 bất kỳ kết quả thiếu hoặc không đạt, hoàn thiện bộ chạy lại/offline và bốn sản
 phẩm nộp. Kết quả BR-01 vượt mục tiêu ở benchmark gốc và kết quả follow-up sau tối ưu
 được giữ riêng, không xóa số chưa đạt. Bằng chứng mới cần ghi nguồn, version, lệnh, kết quả và giới hạn thay vì
-đổi trạng thái bằng suy đoán. T37–T39 là mở rộng ClickHouse tùy chọn, không
-phải điều kiện của bản PostgreSQL.
+đổi trạng thái bằng suy đoán. Bản PostgreSQL là baseline đã nghiệm thu; theo quyết định chuyển backend,
+T37–T52 có gate ClickHouse riêng trước cutover và tài liệu cuối.
 
 Theo quyết định user ngày 2026-11-07, đánh giá người thật là mở rộng tùy chọn, không chặn T26. Walkthrough tự động chỉ chứng minh luồng và kết quả được kiểm tra, không chứng minh khả năng sử dụng của người thật.
 
@@ -94,3 +95,33 @@ trên clone riêng, DB trống và image đã chuẩn bị; 420 backend/100 UI p
 UI lịch sử và replay kiểm thành công. Đây là phạm vi container offline và
 sensor window đã nêu, không khẳng định host ngắt Internet hay replay toàn vụ.
 T29–T30 tiếp tục là phần tài liệu và sản phẩm nộp cuối.
+
+## 8. Gate ứng viên ClickHouse — T51
+
+Gate này kiểm backend ClickHouse riêng với baseline PostgreSQL ở các mục
+trước. Publication lịch sử `4b08bd51c092465783304f887d766d47` có cùng snapshot,
+công thức và tolerance đã khóa; source/config versions và lineage được kiểm
+qua native adapters, không truy vấn PostgreSQL từ app.
+
+| BR | Dữ liệu phục vụ ClickHouse | Bằng chứng triển khai và AC |
+|---|---|---|
+| BR-01 | `threshold_measure`, bundle `climate`; rule/version và episode qua pure services | [Climate/drain](clickhouse-thresholds.md), [full parity](../evaluation/clickhouse-parity.md) |
+| BR-02 | `water_measure` theo cycle/ngày/measure và basis/quality | [Water](clickhouse-water.md), paired denominator/coverage và raw lineage |
+| BR-03 | `threshold_measure`, bundle `drain`; giữ context EC/pH process computer | [Climate/drain](clickhouse-thresholds.md), episode/rule/gap/unknown và nước ngày |
+| BR-04 | `energy_measure` và `harvest_measure` được tổng hợp riêng rồi ghép | [Energy/cost](clickhouse-energy-cost.md), MJ/3,6, kg A và NULL/coverage/basis |
+| BR-05 | `harvest_measure` và `harvest_state` giữ completeness/quarantine | [Harvest](clickhouse-harvest.md), share B theo record/ngày/tuần và lineage |
+| BR-06 | Cùng quantities BR-04, tariff/scenario envelope bất biến trong `configuration_envelope` | [Energy/cost](clickhouse-energy-cost.md), lưu/mở lại scenario, Decimal/rates/request conflict |
+
+Lượt kiểm sau sửa cold proof có **91 test, 82 chạy đạt/chín skip** cho harness
+heavy riêng; full AGC đạt **6/6 BR, 96 CSV, 30 lineage, 18 nhóm threshold và
+67.829 episode**. Các [fault/sensor](clickhouse-sensor.md),
+[benchmark paired](../evaluation/clickhouse-performance.md) và
+[offline/restore](../evaluation/clickhouse-local-repro.md) có phạm vi, phiên bản
+và giới hạn riêng; không cộng số test qua nhiều suite thành số duy nhất.
+
+Walkthrough ClickHouse đạt bảy video/109 bước/21 file xuất; đầy đủ decode, player
+và main visual review. [Metadata](../evaluation/assets/clickhouse-walkthrough/README.md). [Biên bản ứng viên](../evaluation/clickhouse-acceptance.md)
+ghi lỗi RAM/HTTP stream đã phát hiện, regression, cấu hình telemetry và giới
+hạn vận hành. Chưa dùng gate này để tuyên bố đã cutover hoặc gói nộp cuối đã
+đủ; T39, T52, T29–T30 còn điều kiện riêng. Video thuyết trình tổng thể T53 do
+user tự thực hiện offline; sáu walkthrough BR không thay thế video đó.

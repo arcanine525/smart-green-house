@@ -1,0 +1,160 @@
+{"at": "2026-11-07T08:13:35.241123+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 476103829}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:35.776213+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 15112112, "elapsed": 0.052523917}], "metrics": [{"metric": "MemoryTracking", "value": 494167749}, {"metric": "MergesMutationsMemoryTracking", "value": 17837864}]}
+{"at": "2026-11-07T08:13:36.287447+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 476315361}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:36.797716+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 26030336, "elapsed": 0.094889959}], "metrics": [{"metric": "MemoryTracking", "value": 502519877}, {"metric": "MergesMutationsMemoryTracking", "value": 26030336}]}
+{"at": "2026-11-07T08:13:37.304275+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 476534157}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:37.811433+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 14204976, "elapsed": 0.046368834}], "metrics": [{"metric": "MemoryTracking", "value": 496251177}, {"metric": "MergesMutationsMemoryTracking", "value": 16937064}]}
+{"at": "2026-11-07T08:13:38.317606+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 481832507}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:38.828982+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 481928459}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:39.345009+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 482020131}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:39.853759+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 482061051}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:40.361261+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 482125443}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:40.869397+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 486426486}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:41.379759+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 489132920}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:41.885068+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 491980815}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:42.390033+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 501084284}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:42.894722+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 497161879}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:43.399631+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 494100553}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:43.904665+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 490277859}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:44.417733+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 498866666}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:44.922152+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 498295781}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:45.427014+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 514671341}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:45.942111+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 522058043}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:46.447590+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 523398621}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:46.951785+00:00", "merges": [{"database": "greenhouse_t51_packaged_20261107", "table": "source_measure", "memory_usage": 11608362, "elapsed": 0.00904475}], "metrics": [{"metric": "MemoryTracking", "value": 543696852}, {"metric": "MergesMutationsMemoryTracking", "value": 15300635}]}
+{"at": "2026-11-07T08:13:47.459131+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 538279570}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:47.964609+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 548996963}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:48.470722+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 525392619}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:48.975871+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 521333455}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:49.480371+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 526045894}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:49.985711+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 530723166}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:50.489974+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 537457303}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:50.993995+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 545211298}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:51.545461+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 521710465}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:52.049565+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 536611277}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:52.554711+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 527409810}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:53.059093+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 531166635}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:53.573894+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 535625986}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:54.081841+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 534495236}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:54.641633+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 532599275}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:55.151263+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 538653504}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:55.655426+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 539399003}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:56.165598+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 513991231}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:56.674042+00:00", "merges": [{"database": "system", "table": "trace_log", "memory_usage": 14722349, "elapsed": 0.191566833}], "metrics": [{"metric": "MemoryTracking", "value": 533330253}, {"metric": "MergesMutationsMemoryTracking", "value": 14722349}]}
+{"at": "2026-11-07T08:13:57.186914+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 522846972}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:57.691020+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 527159452}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:58.197384+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 531638692}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:58.703142+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 514404126}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:59.208204+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 513973670}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:13:59.716849+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 519863812}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:00.222723+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 523650676}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:00.728767+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 525908780}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:01.241864+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 524955193}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:01.746095+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 533487164}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:02.250632+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 520968182}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:02.755172+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 529153163}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:03.261487+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 542782875}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:03.768559+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 502541666}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:04.282426+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 499283113}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:04.795371+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 505147430}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:05.303111+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 511764106}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:05.809886+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 509386505}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:06.314678+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 489672145}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:06.822537+00:00", "merges": [{"database": "greenhouse_t51_packaged_20261107", "table": "publication_state", "memory_usage": 21355882, "elapsed": 0.007800334}], "metrics": [{"metric": "MemoryTracking", "value": 499710623}, {"metric": "MergesMutationsMemoryTracking", "value": 5425536}]}
+{"at": "2026-11-07T08:14:07.342283+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 500923202}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:07.846527+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 503404414}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:08.355569+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 889667257, "elapsed": 0.210592334}], "metrics": [{"metric": "MemoryTracking", "value": 1493622089}, {"metric": "MergesMutationsMemoryTracking", "value": 985636649}]}
+{"at": "2026-11-07T08:14:08.863693+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 515202457}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:09.368296+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 509254990}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:09.875275+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 515078136}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:10.380533+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 513671439}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:10.887890+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 0, "elapsed": 0.002830375}], "metrics": [{"metric": "MemoryTracking", "value": 516511535}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:11.401776+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 499018868}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:11.946026+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 23290264, "elapsed": 0.1875485}], "metrics": [{"metric": "MemoryTracking", "value": 530187336}, {"metric": "MergesMutationsMemoryTracking", "value": 23290264}]}
+{"at": "2026-11-07T08:14:12.452636+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 507964957}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:12.959646+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 502802875}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:13.466992+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 504962003}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:13.979426+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 17837864, "elapsed": 0.197659833}], "metrics": [{"metric": "MemoryTracking", "value": 563065313}, {"metric": "MergesMutationsMemoryTracking", "value": 17837864}]}
+{"at": "2026-11-07T08:14:14.554146+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 513477547}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:15.060032+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 745724713, "elapsed": 0.179861376}], "metrics": [{"metric": "MemoryTracking", "value": 1318432961}, {"metric": "MergesMutationsMemoryTracking", "value": 815515433}]}
+{"at": "2026-11-07T08:14:15.566882+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 706466953, "elapsed": 0.155688417}], "metrics": [{"metric": "MemoryTracking", "value": 1246138645}, {"metric": "MergesMutationsMemoryTracking", "value": 741319140}]}
+{"at": "2026-11-07T08:14:16.076697+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 23761306, "elapsed": 0.33087875}], "metrics": [{"metric": "MemoryTracking", "value": 537520485}, {"metric": "MergesMutationsMemoryTracking", "value": 23761306}]}
+{"at": "2026-11-07T08:14:16.583863+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 515556273}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:17.088006+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 513463181}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:17.592966+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 517161601}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:18.098397+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 529513146}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:18.603591+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 525166303}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:19.108193+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 507303234}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:19.612309+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 507929869}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:20.116796+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 513264334}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:20.620901+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 531246502}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:21.125465+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 535008849}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:21.630285+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 641601701}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:22.145713+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 517742885}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:22.650549+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 511981083}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:23.163075+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 513090205}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:23.674961+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 518435902}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:24.181593+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 517990772}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:24.692731+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 520846645}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:25.202360+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 527529681}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:25.706995+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 529316633}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:26.217733+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 529852028}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:26.722254+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 507770992}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:27.227590+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 511634176}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:27.731785+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 517436817}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:28.238102+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 517546636}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:28.746845+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 519723860}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:29.281315+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 526832524}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:29.788651+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 507532362}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:30.293604+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 519709512}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:30.798298+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 516606115}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:31.302387+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 524772214}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:31.807052+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 524293439}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:32.312493+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 523720274}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:32.817841+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 528440898}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:33.323876+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 531866290}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:33.829967+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 536000582}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:34.334660+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 509336578}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:34.838708+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 517026295}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:35.342923+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 521664596}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:35.847609+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 520519762}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:36.351710+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 559451748}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:36.858361+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 583694145}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:37.365044+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 517339093}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:37.869558+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 522465934}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:38.377493+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 528013213}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:38.882349+00:00", "merges": [{"database": "system", "table": "processors_profile_log", "memory_usage": 6454902, "elapsed": 0.323050751}], "metrics": [{"metric": "MemoryTracking", "value": 534463672}, {"metric": "MergesMutationsMemoryTracking", "value": 8989187}]}
+{"at": "2026-11-07T08:14:39.387716+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 536524003}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:39.892249+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 536508310}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:40.398144+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 523863806}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:40.903928+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 526810390}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:41.409760+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 536147651}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:41.915167+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 500957605}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:42.420663+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 507591736}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:42.925768+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 507081999}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:43.446538+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 511078187}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:43.951974+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 512400509}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:44.465716+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 553356316}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:45.066891+00:00", "merges": [{"database": "system", "table": "part_log", "memory_usage": 16859152, "elapsed": 0.299917542}], "metrics": [{"metric": "MemoryTracking", "value": 559329385}, {"metric": "MergesMutationsMemoryTracking", "value": 10521315}]}
+{"at": "2026-11-07T08:14:45.754347+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 504101455}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:46.370326+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 512764521}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:46.951572+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 15112112, "elapsed": 0.407040125}], "metrics": [{"metric": "MemoryTracking", "value": 524064677}, {"metric": "MergesMutationsMemoryTracking", "value": 17837864}]}
+{"at": "2026-11-07T08:14:47.488695+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 498946305}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:47.999200+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 422930857, "elapsed": 0.153612709}, {"database": "greenhouse_t51_packaged_20261107", "table": "water_measure", "memory_usage": 296168, "elapsed": 0.002253166}], "metrics": [{"metric": "MemoryTracking", "value": 1058851085}, {"metric": "MergesMutationsMemoryTracking", "value": 553753352}]}
+{"at": "2026-11-07T08:14:48.542740+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 506323301}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:49.048744+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 12384000, "elapsed": 0.152349459}], "metrics": [{"metric": "MemoryTracking", "value": 527055403}, {"metric": "MergesMutationsMemoryTracking", "value": 15112112}]}
+{"at": "2026-11-07T08:14:49.562818+00:00", "merges": [{"database": "system", "table": "query_log", "memory_usage": 378926468, "elapsed": 0.219458167}, {"database": "system", "table": "metric_log", "memory_usage": 9656912, "elapsed": 0.1049505}], "metrics": [{"metric": "MemoryTracking", "value": 882682156}, {"metric": "MergesMutationsMemoryTracking", "value": 391310468}]}
+{"at": "2026-11-07T08:14:50.078592+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 499675652}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:50.583903+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 493948429}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:51.092217+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 26016384, "elapsed": 0.185328458}], "metrics": [{"metric": "MemoryTracking", "value": 521812659}, {"metric": "MergesMutationsMemoryTracking", "value": 26016384}]}
+{"at": "2026-11-07T08:14:51.647831+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 516130857}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:52.155544+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 504854623}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:52.665922+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 501944989}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:53.173923+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 689018729, "elapsed": 0.19432875}], "metrics": [{"metric": "MemoryTracking", "value": 1262418144}, {"metric": "MergesMutationsMemoryTracking", "value": 776258265}]}
+{"at": "2026-11-07T08:14:53.682389+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 495494997}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:54.187864+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 15112112, "elapsed": 0.100528126}], "metrics": [{"metric": "MemoryTracking", "value": 516540049}, {"metric": "MergesMutationsMemoryTracking", "value": 15112112}]}
+{"at": "2026-11-07T08:14:54.741853+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 500299149}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:55.246753+00:00", "merges": [{"database": "system", "table": "metric_log", "memory_usage": 42597167, "elapsed": 0.199199833}], "metrics": [{"metric": "MemoryTracking", "value": 549051112}, {"metric": "MergesMutationsMemoryTracking", "value": 42597167}]}
+{"at": "2026-11-07T08:14:55.752256+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 510423916}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:56.257187+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 519220499}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}
+{"at": "2026-11-07T08:14:56.762455+00:00", "merges": [], "metrics": [{"metric": "MemoryTracking", "value": 518077292}, {"metric": "MergesMutationsMemoryTracking", "value": 0}]}

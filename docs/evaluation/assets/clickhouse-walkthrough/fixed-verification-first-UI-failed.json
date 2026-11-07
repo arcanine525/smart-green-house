@@ -1,0 +1,8 @@
+{
+  "packaged-ui-tests": {
+    "exit_code": 1,
+    "elapsed_seconds": 77.96460974999991,
+    "log": "diagnostics/packaged-ui-tests.log",
+    "sha256": "f65f42a6b417099ec2405a5e22fd9d667ffb76c7e705eb17b22faaa98feefbdf"
+  }
+}

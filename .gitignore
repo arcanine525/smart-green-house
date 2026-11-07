@@ -25,6 +25,7 @@
 *.mp4
 *.webm
 *.mov
+/project-submit/demo-videos/
 
 # Python UI demo environment and caches
 /.venv-ui/

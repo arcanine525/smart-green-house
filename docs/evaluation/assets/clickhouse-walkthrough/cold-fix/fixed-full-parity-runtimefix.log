@@ -1,0 +1,38 @@
+ Container gh-ch-repro-20261107032510-rebuilt-t51-full-parity Creating 
+ Container gh-ch-repro-20261107032510-rebuilt-t51-full-parity Created 
+{"stage": "candidate_publication_verified", "publication": "4b08bd51c092465783304f887d766d47"}
+{"stage": "business_reference", "compartment": "AICU"}
+{"stage": "business_reference", "compartment": "Automatoes"}
+{"stage": "business_reference", "compartment": "Digilog"}
+{"stage": "business_reference", "compartment": "IUACAAS"}
+{"stage": "business_reference", "compartment": "Reference"}
+{"stage": "business_reference", "compartment": "TheAutomators"}
+{"stage": "business", "status": "passed"}
+{"stage": "csv", "status": "passed"}
+Traceback (most recent call last):
+  File "/migration/check_parity.py", line 103, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/migration/check_parity.py", line 62, in main
+    check('lineage',lineage(client,pub.publication_id,args.raw),expected_lineage['results'])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/migration/read_lineage_reference.py", line 28, in project
+    lineage=services[kind].get_lineage(pub,revision_id=row.revision_id)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/queries/irrigation.py", line 226, in get_lineage
+    return self.adapter.read_lineage(publication, revision_id=revision_id, record_key=record_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/water.py", line 312, in read_lineage
+    target=source_path(raw,publication.snapshot_id,payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/raw_identity.py", line 12, in source_path
+    manifest=json.loads((raw/'manifest.json').read_text())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/data/raw/manifest.json'
+

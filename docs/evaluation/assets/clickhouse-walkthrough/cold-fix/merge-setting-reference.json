@@ -1,0 +1,12 @@
+[
+  {
+    "name": "max_bytes_to_merge_at_max_space_in_pool",
+    "value": "161061273600",
+    "description": "\n    The maximum total parts size (in bytes) to be merged into one part, if there\n    are enough resources available. Corresponds roughly to the maximum possible\n    part size created by an automatic background merge. (0 means merges will be disabled)\n\n    Possible values:\n\n    - Any non-negative integer.\n\n    The merge scheduler periodically analyzes the sizes and number of parts in\n    partitions, and if there are enough free resources in the pool, it starts\n    background merges. Merges occur until the total size of the source parts is\n    larger than `max_bytes_to_merge_at_max_space_in_pool`.\n\n    Merges initiated by [OPTIMIZE FINAL](/sql-reference/statements/optimize)\n    ignore `max_bytes_to_merge_at_max_space_in_pool` (only the free disk space\n    is taken into account).\n    "
+  },
+  {
+    "name": "max_bytes_to_merge_at_min_space_in_pool",
+    "value": "1048576",
+    "description": "\n    The maximum total part size (in bytes) to be merged into one part, with the\n    minimum available resources in the background pool.\n\n    Possible values:\n    - Any positive integer.\n\n    `max_bytes_to_merge_at_min_space_in_pool` defines the maximum total size of\n    parts which can be merged despite the lack of available disk space (in pool).\n    This is necessary to reduce the number of small parts and the chance of\n    `Too many parts` errors.\n    Merges book disk space by doubling the total merged parts sizes.\n    Thus, with a small amount of free disk space, a situation may occur in which\n    there is free space, but this space is already booked by ongoing large merges,\n    so other merges are unable to start, and the number of small parts grows\n    with every insert.\n    "
+  }
+]
