@@ -1,0 +1,1135 @@
+{
+  "kind": "automated_playwright_walkthrough",
+  "backend": "clickhouse",
+  "artifact_root": "project-submit/demo-videos/clickhouse",
+  "human_participants": 0,
+  "videos": [
+    {
+      "br": "01",
+      "title": "Khí hậu",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "da45348dc97433114d6bbd319cff7407704f54b167042aef034e74b8d9e1eee8",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "business_requirements": [
+        "01"
+      ],
+      "backend": "clickhouse",
+      "pace": 1,
+      "context_sha256": "59412651743aa986b4c5e686f51338c95d986b4394d0d145a3c568aed7c39cc0",
+      "configuration_hash": "0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7",
+      "source_revision": {
+        "ui_image": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b",
+        "fixed_images": {
+          "ui": {
+            "tag": "greenhouse-ch-walkthrough-ui:20261107-cold-fix",
+            "id": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b"
+          },
+          "processing": {
+            "tag": "greenhouse-ch-walkthrough-processing:20261107-cold-fix",
+            "id": "sha256:9511c439faba6542f282c4954fe7d64c55702a453f39d4c927aa1fb9301d67c1"
+          },
+          "client": {
+            "tag": "greenhouse-ch-walkthrough-client:20261107-cold-fix",
+            "id": "sha256:dbdca0b36ca689bbc4044896f3f1b5dfdb7ae4cc2c64d838ff3f6d5db48ff045"
+          }
+        },
+        "source_changes_relative_to_commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+        "source_changes": {
+          "src/greenhouse/clickhouse/client.py": "4ccb3ce69dbbb7278e4935419ec5dd78cfcc07f80a6b704884be3ec44d9089df",
+          "src/greenhouse/clickhouse/threshold.py": "b1400cf8274589ed94caeabc43df63d803524f6683362232eae1c02f90e5b035"
+        },
+        "app_postgres_credentials_present": false,
+        "app_networks": [
+          "gh-ch-repro-20261107032510-rebuilt_backend"
+        ],
+        "server_config_sha256": "5fba87641207e72842b46634ff87c0c8452fc7c86a5a1227a8efb34960551625",
+        "metric_log_collector_disabled": true,
+        "legacy_metric_log_merge_limit": 0
+      },
+      "external_http_blocked": true,
+      "trace_options": {
+        "screenshots": false,
+        "snapshots": true,
+        "sources": true
+      },
+      "demo_database": "greenhouse_repro",
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "playwright": "1.65.0",
+      "commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+      "video": {
+        "file": "br-01.mp4",
+        "sha256": "af0ac3bd522ee60a0b0e21feeaa48b8511e8ddcb6414900ff2046fc4e2f0fa17",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 218.64,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/climate-IUACAAS-2020-05-21_2020-05-22-requested-summary.csv",
+          "sha256": "87e40b244ea3a841c3f31e7a72ea197b40ead00c382d93463d301be78a8424d7",
+          "bytes": 2247
+        },
+        {
+          "file": "downloads/climate-IUACAAS-2020-05-21_2020-05-22-requested-episodes.csv",
+          "sha256": "d229d46eec5307a785522061cfed5fa574ae49ead198a09ff354151415309cd6",
+          "bytes": 3397
+        },
+        {
+          "file": "downloads/climate-IUACAAS-2020-05-21_2020-05-22-requested-result.json",
+          "sha256": "4ce2a204978a0d6573ca38dafff708db470e9e2760a1a5126234c640f97b9ec5",
+          "bytes": 64575
+        }
+      ],
+      "step_count": 16,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở màn hình Khí hậu",
+          "start_seconds": 7.541
+        },
+        {
+          "step": 2,
+          "title": "Xác nhận publication lịch sử",
+          "start_seconds": 22.801
+        },
+        {
+          "step": 3,
+          "title": "Chọn khoang và vụ IUACAAS",
+          "start_seconds": 32.302
+        },
+        {
+          "step": 4,
+          "title": "Chọn rule khí hậu demo",
+          "start_seconds": 47.325
+        },
+        {
+          "step": 5,
+          "title": "Lọc các đợt nhiệt độ",
+          "start_seconds": 65.482
+        },
+        {
+          "step": 6,
+          "title": "Đọc KPI và coverage",
+          "start_seconds": 77.69
+        },
+        {
+          "step": 7,
+          "title": "Chọn đợt dài nhất",
+          "start_seconds": 85.092
+        },
+        {
+          "step": 8,
+          "title": "Tương tác biểu đồ nhiệt độ",
+          "start_seconds": 94.201
+        },
+        {
+          "step": 9,
+          "title": "Mở nguồn của đỉnh lệch",
+          "start_seconds": 105.161
+        },
+        {
+          "step": 10,
+          "title": "So sánh basis realized",
+          "start_seconds": 113.246
+        },
+        {
+          "step": 11,
+          "title": "Trở lại basis requested",
+          "start_seconds": 130.68
+        },
+        {
+          "step": 12,
+          "title": "Giới hạn cửa sổ 21–22/05/2020",
+          "start_seconds": 143.028
+        },
+        {
+          "step": 13,
+          "title": "Đọc lại danh sách và trace sau lọc",
+          "start_seconds": 173.195
+        },
+        {
+          "step": 14,
+          "title": "Xuất summary và danh sách đợt",
+          "start_seconds": 180.57
+        },
+        {
+          "step": 15,
+          "title": "Xuất JSON kết quả có version",
+          "start_seconds": 198.292
+        },
+        {
+          "step": 16,
+          "title": "Hoàn tất BR-01",
+          "start_seconds": 210.232
+        }
+      ]
+    },
+    {
+      "br": "02",
+      "title": "Tưới và drain",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "da45348dc97433114d6bbd319cff7407704f54b167042aef034e74b8d9e1eee8",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "business_requirements": [
+        "02"
+      ],
+      "backend": "clickhouse",
+      "pace": 1,
+      "context_sha256": "59412651743aa986b4c5e686f51338c95d986b4394d0d145a3c568aed7c39cc0",
+      "configuration_hash": "0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7",
+      "source_revision": {
+        "ui_image": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b",
+        "fixed_images": {
+          "ui": {
+            "tag": "greenhouse-ch-walkthrough-ui:20261107-cold-fix",
+            "id": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b"
+          },
+          "processing": {
+            "tag": "greenhouse-ch-walkthrough-processing:20261107-cold-fix",
+            "id": "sha256:9511c439faba6542f282c4954fe7d64c55702a453f39d4c927aa1fb9301d67c1"
+          },
+          "client": {
+            "tag": "greenhouse-ch-walkthrough-client:20261107-cold-fix",
+            "id": "sha256:dbdca0b36ca689bbc4044896f3f1b5dfdb7ae4cc2c64d838ff3f6d5db48ff045"
+          }
+        },
+        "source_changes_relative_to_commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+        "source_changes": {
+          "src/greenhouse/clickhouse/client.py": "4ccb3ce69dbbb7278e4935419ec5dd78cfcc07f80a6b704884be3ec44d9089df",
+          "src/greenhouse/clickhouse/threshold.py": "b1400cf8274589ed94caeabc43df63d803524f6683362232eae1c02f90e5b035"
+        },
+        "app_postgres_credentials_present": false,
+        "app_networks": [
+          "gh-ch-repro-20261107032510-rebuilt_backend"
+        ],
+        "server_config_sha256": "5fba87641207e72842b46634ff87c0c8452fc7c86a5a1227a8efb34960551625",
+        "metric_log_collector_disabled": true,
+        "legacy_metric_log_merge_limit": 0
+      },
+      "external_http_blocked": true,
+      "trace_options": {
+        "screenshots": false,
+        "snapshots": true,
+        "sources": true
+      },
+      "demo_database": "greenhouse_repro",
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "playwright": "1.65.0",
+      "commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+      "video": {
+        "file": "br-02.mp4",
+        "sha256": "59605d5fef894e5264ab0ae8751c1e4c7a07d7dfe9dda6cd7fa4382295a38df5",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 165.2,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/water-Automatoes-2020-03-02_2020-03-03-days.csv",
+          "sha256": "6c967374c0d91d4d8bfd605a4fb364e24a1336b33d87a7cf3784999c565e7f26",
+          "bytes": 3466
+        },
+        {
+          "file": "downloads/water-Automatoes-2020-03-02_2020-03-03-weekly.csv",
+          "sha256": "03888d0a0bba663cfac9c055807a56bd886df3b751b92b88c45049db69971a16",
+          "bytes": 3266
+        },
+        {
+          "file": "downloads/water-Automatoes-2020-03-02_2020-03-03-summary.json",
+          "sha256": "6255be374511a825c4a7b29e32d1fdd365050b79d0b5a327e6b443bd8b4ada40",
+          "bytes": 2718
+        }
+      ],
+      "step_count": 14,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở màn hình Tưới và drain",
+          "start_seconds": 6.39
+        },
+        {
+          "step": 2,
+          "title": "Xác nhận publication lịch sử",
+          "start_seconds": 14.479
+        },
+        {
+          "step": 3,
+          "title": "Chọn khoang và vụ Automatoes",
+          "start_seconds": 23.969
+        },
+        {
+          "step": 4,
+          "title": "Đọc dữ liệu toàn vụ",
+          "start_seconds": 35.473
+        },
+        {
+          "step": 5,
+          "title": "Khám phá biểu đồ ngày",
+          "start_seconds": 42.857
+        },
+        {
+          "step": 6,
+          "title": "Lọc ngày 02–03/03/2020",
+          "start_seconds": 53.791
+        },
+        {
+          "step": 7,
+          "title": "Đối chiếu tổng và tỷ lệ paired",
+          "start_seconds": 75.912
+        },
+        {
+          "step": 8,
+          "title": "Chọn rule demo có version",
+          "start_seconds": 83.258
+        },
+        {
+          "step": 9,
+          "title": "Đọc tổng hợp theo tuần",
+          "start_seconds": 95.983
+        },
+        {
+          "step": 10,
+          "title": "Chọn một ngày để xem chi tiết",
+          "start_seconds": 104.094
+        },
+        {
+          "step": 11,
+          "title": "Mở lineage về CSV gốc",
+          "start_seconds": 118.372
+        },
+        {
+          "step": 12,
+          "title": "Xuất CSV ngày",
+          "start_seconds": 126.404
+        },
+        {
+          "step": 13,
+          "title": "Xuất tổng hợp tuần và JSON",
+          "start_seconds": 138.921
+        },
+        {
+          "step": 14,
+          "title": "Hoàn tất BR-02",
+          "start_seconds": 156.92
+        }
+      ]
+    },
+    {
+      "br": "03",
+      "title": "EC / pH drain",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "da45348dc97433114d6bbd319cff7407704f54b167042aef034e74b8d9e1eee8",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "business_requirements": [
+        "03"
+      ],
+      "backend": "clickhouse",
+      "pace": 1,
+      "context_sha256": "59412651743aa986b4c5e686f51338c95d986b4394d0d145a3c568aed7c39cc0",
+      "configuration_hash": "0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7",
+      "source_revision": {
+        "ui_image": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b",
+        "fixed_images": {
+          "ui": {
+            "tag": "greenhouse-ch-walkthrough-ui:20261107-cold-fix",
+            "id": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b"
+          },
+          "processing": {
+            "tag": "greenhouse-ch-walkthrough-processing:20261107-cold-fix",
+            "id": "sha256:9511c439faba6542f282c4954fe7d64c55702a453f39d4c927aa1fb9301d67c1"
+          },
+          "client": {
+            "tag": "greenhouse-ch-walkthrough-client:20261107-cold-fix",
+            "id": "sha256:dbdca0b36ca689bbc4044896f3f1b5dfdb7ae4cc2c64d838ff3f6d5db48ff045"
+          }
+        },
+        "source_changes_relative_to_commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+        "source_changes": {
+          "src/greenhouse/clickhouse/client.py": "4ccb3ce69dbbb7278e4935419ec5dd78cfcc07f80a6b704884be3ec44d9089df",
+          "src/greenhouse/clickhouse/threshold.py": "b1400cf8274589ed94caeabc43df63d803524f6683362232eae1c02f90e5b035"
+        },
+        "app_postgres_credentials_present": false,
+        "app_networks": [
+          "gh-ch-repro-20261107032510-rebuilt_backend"
+        ],
+        "server_config_sha256": "5fba87641207e72842b46634ff87c0c8452fc7c86a5a1227a8efb34960551625",
+        "metric_log_collector_disabled": true,
+        "legacy_metric_log_merge_limit": 0
+      },
+      "external_http_blocked": true,
+      "trace_options": {
+        "screenshots": false,
+        "snapshots": true,
+        "sources": true
+      },
+      "demo_database": "greenhouse_repro",
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "playwright": "1.65.0",
+      "commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+      "video": {
+        "file": "br-03.mp4",
+        "sha256": "91b975e18629d533103b3cf1f66990f4af041ba42c11a39349b07e7c8cfaa801",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 193.44,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/drain-Reference-2020-03-02-2020-03-04-summary.csv",
+          "sha256": "22fc45dc97cc974fc5770312e700d6bb6cdbb0cfdd237e2ca414a1cd6d4d8087",
+          "bytes": 2336
+        },
+        {
+          "file": "downloads/drain-Reference-2020-03-02-2020-03-04-episodes.csv",
+          "sha256": "dda2c961352857db70618cef372f8695d45c3ba6d66df4161b6b0db94f5a7f5b",
+          "bytes": 2269
+        },
+        {
+          "file": "downloads/drain-Reference-2020-03-02-2020-03-04-result.json",
+          "sha256": "dc34b1944d188c9f77e516746ef26a6ac0ca6419d325b5eb53de884121a21ef0",
+          "bytes": 333613
+        }
+      ],
+      "step_count": 15,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở màn hình EC / pH drain",
+          "start_seconds": 7.195
+        },
+        {
+          "step": 2,
+          "title": "Xác nhận publication lịch sử",
+          "start_seconds": 20.768
+        },
+        {
+          "step": 3,
+          "title": "Chọn khoang và vụ Reference",
+          "start_seconds": 30.335
+        },
+        {
+          "step": 4,
+          "title": "Chọn profile EC/pH demo",
+          "start_seconds": 43.67
+        },
+        {
+          "step": 5,
+          "title": "Lọc đợt EC",
+          "start_seconds": 57.652
+        },
+        {
+          "step": 6,
+          "title": "Đọc KPI EC và coverage",
+          "start_seconds": 68.51
+        },
+        {
+          "step": 7,
+          "title": "Xem đợt EC dài nhất",
+          "start_seconds": 75.93
+        },
+        {
+          "step": 8,
+          "title": "Khám phá trace đợt EC",
+          "start_seconds": 84.983
+        },
+        {
+          "step": 9,
+          "title": "Chuyển sang các đợt pH",
+          "start_seconds": 96.003
+        },
+        {
+          "step": 10,
+          "title": "Trở lại EC và chọn cửa sổ nhỏ",
+          "start_seconds": 106.514
+        },
+        {
+          "step": 11,
+          "title": "Chọn ngày nguồn",
+          "start_seconds": 137.418
+        },
+        {
+          "step": 12,
+          "title": "Chọn slot nguồn và xác minh lineage",
+          "start_seconds": 151.456
+        },
+        {
+          "step": 13,
+          "title": "Xuất summary và đợt drain",
+          "start_seconds": 167.626
+        },
+        {
+          "step": 14,
+          "title": "Xuất JSON kết quả drain",
+          "start_seconds": 177.478
+        },
+        {
+          "step": 15,
+          "title": "Hoàn tất BR-03",
+          "start_seconds": 185.63
+        }
+      ]
+    },
+    {
+      "br": "04",
+      "title": "Năng lượng",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "da45348dc97433114d6bbd319cff7407704f54b167042aef034e74b8d9e1eee8",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "business_requirements": [
+        "04"
+      ],
+      "backend": "clickhouse",
+      "pace": 1,
+      "context_sha256": "59412651743aa986b4c5e686f51338c95d986b4394d0d145a3c568aed7c39cc0",
+      "configuration_hash": "0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7",
+      "source_revision": {
+        "ui_image": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b",
+        "fixed_images": {
+          "ui": {
+            "tag": "greenhouse-ch-walkthrough-ui:20261107-cold-fix",
+            "id": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b"
+          },
+          "processing": {
+            "tag": "greenhouse-ch-walkthrough-processing:20261107-cold-fix",
+            "id": "sha256:9511c439faba6542f282c4954fe7d64c55702a453f39d4c927aa1fb9301d67c1"
+          },
+          "client": {
+            "tag": "greenhouse-ch-walkthrough-client:20261107-cold-fix",
+            "id": "sha256:dbdca0b36ca689bbc4044896f3f1b5dfdb7ae4cc2c64d838ff3f6d5db48ff045"
+          }
+        },
+        "source_changes_relative_to_commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+        "source_changes": {
+          "src/greenhouse/clickhouse/client.py": "4ccb3ce69dbbb7278e4935419ec5dd78cfcc07f80a6b704884be3ec44d9089df",
+          "src/greenhouse/clickhouse/threshold.py": "b1400cf8274589ed94caeabc43df63d803524f6683362232eae1c02f90e5b035"
+        },
+        "app_postgres_credentials_present": false,
+        "app_networks": [
+          "gh-ch-repro-20261107032510-rebuilt_backend"
+        ],
+        "server_config_sha256": "5fba87641207e72842b46634ff87c0c8452fc7c86a5a1227a8efb34960551625",
+        "metric_log_collector_disabled": true,
+        "legacy_metric_log_merge_limit": 0
+      },
+      "external_http_blocked": true,
+      "trace_options": {
+        "screenshots": false,
+        "snapshots": true,
+        "sources": true
+      },
+      "demo_database": "greenhouse_repro",
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "playwright": "1.65.0",
+      "commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+      "video": {
+        "file": "br-04.mp4",
+        "sha256": "1b50686dbc03193eb2472691fe76e355db7d10e82c2422588d0a878fb14a58fc",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 150.16,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/energy-Automatoes-2020-03-02-2020-03-04-summary.csv",
+          "sha256": "09af2a7c6c9566ed9f98b93ce5d47bf9a0d88490b2b9106163c610546a008406",
+          "bytes": 1846
+        },
+        {
+          "file": "downloads/energy-Automatoes-2020-03-02-2020-03-04-quantities.csv",
+          "sha256": "20244a8f2e5dcfa4cc4ab541a23f978aa7635bbd37862d82317b72a341ed6960",
+          "bytes": 6114
+        },
+        {
+          "file": "downloads/energy-Automatoes-2020-03-02-2020-03-04-result.json",
+          "sha256": "3cd244a1cf25100327ee3e8d963a68a0ce1ccee0c0569458fdc231ba2720bd8d",
+          "bytes": 8240
+        },
+        {
+          "file": "downloads/energy-Automatoes-2020-03-02-2020-03-04-portfolio.json",
+          "sha256": "627b349ec97b7fee7bff4f5bfd77a0035eec568e21211a32b0b0aab51890409c",
+          "bytes": 445125
+        }
+      ],
+      "step_count": 13,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở màn hình Năng lượng",
+          "start_seconds": 6.401
+        },
+        {
+          "step": 2,
+          "title": "Xác nhận publication lịch sử",
+          "start_seconds": 17.742
+        },
+        {
+          "step": 3,
+          "title": "Chọn khoang và vụ Automatoes",
+          "start_seconds": 27.256
+        },
+        {
+          "step": 4,
+          "title": "Đọc năng lượng và cường độ toàn vụ",
+          "start_seconds": 38.716
+        },
+        {
+          "step": 5,
+          "title": "Khám phá so sánh các khoang",
+          "start_seconds": 46.044
+        },
+        {
+          "step": 6,
+          "title": "Mở công thức và đóng góp",
+          "start_seconds": 55.565
+        },
+        {
+          "step": 7,
+          "title": "Lọc hai ngày 02–03/03/2020",
+          "start_seconds": 63.641
+        },
+        {
+          "step": 8,
+          "title": "Đối chiếu trường hợp mẫu số bằng 0",
+          "start_seconds": 85.24
+        },
+        {
+          "step": 9,
+          "title": "Chọn revision đóng góp",
+          "start_seconds": 92.581
+        },
+        {
+          "step": 10,
+          "title": "Xác minh lineage raw",
+          "start_seconds": 100.671
+        },
+        {
+          "step": 11,
+          "title": "Xuất summary và quantities",
+          "start_seconds": 111.671
+        },
+        {
+          "step": 12,
+          "title": "Xuất JSON cường độ và portfolio",
+          "start_seconds": 126.823
+        },
+        {
+          "step": 13,
+          "title": "Hoàn tất BR-04",
+          "start_seconds": 141.911
+        }
+      ]
+    },
+    {
+      "br": "05",
+      "title": "Thu hoạch A / B",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "da45348dc97433114d6bbd319cff7407704f54b167042aef034e74b8d9e1eee8",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "business_requirements": [
+        "05"
+      ],
+      "backend": "clickhouse",
+      "pace": 1,
+      "context_sha256": "59412651743aa986b4c5e686f51338c95d986b4394d0d145a3c568aed7c39cc0",
+      "configuration_hash": "0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7",
+      "source_revision": {
+        "ui_image": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b",
+        "fixed_images": {
+          "ui": {
+            "tag": "greenhouse-ch-walkthrough-ui:20261107-cold-fix",
+            "id": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b"
+          },
+          "processing": {
+            "tag": "greenhouse-ch-walkthrough-processing:20261107-cold-fix",
+            "id": "sha256:9511c439faba6542f282c4954fe7d64c55702a453f39d4c927aa1fb9301d67c1"
+          },
+          "client": {
+            "tag": "greenhouse-ch-walkthrough-client:20261107-cold-fix",
+            "id": "sha256:dbdca0b36ca689bbc4044896f3f1b5dfdb7ae4cc2c64d838ff3f6d5db48ff045"
+          }
+        },
+        "source_changes_relative_to_commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+        "source_changes": {
+          "src/greenhouse/clickhouse/client.py": "4ccb3ce69dbbb7278e4935419ec5dd78cfcc07f80a6b704884be3ec44d9089df",
+          "src/greenhouse/clickhouse/threshold.py": "b1400cf8274589ed94caeabc43df63d803524f6683362232eae1c02f90e5b035"
+        },
+        "app_postgres_credentials_present": false,
+        "app_networks": [
+          "gh-ch-repro-20261107032510-rebuilt_backend"
+        ],
+        "server_config_sha256": "5fba87641207e72842b46634ff87c0c8452fc7c86a5a1227a8efb34960551625",
+        "metric_log_collector_disabled": true,
+        "legacy_metric_log_merge_limit": 0
+      },
+      "external_http_blocked": true,
+      "trace_options": {
+        "screenshots": false,
+        "snapshots": true,
+        "sources": true
+      },
+      "demo_database": "greenhouse_repro",
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "playwright": "1.65.0",
+      "commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+      "video": {
+        "file": "br-05.mp4",
+        "sha256": "651d22ef1090cf2f850b22fc7cbe2c27016d5c63f35fa15d5a1bda1e91ef9c74",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 205.24,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/harvest-Digilog-2020-02-19_2020-02-19-records.csv",
+          "sha256": "3b4eaf6f5bab3788b083fd0a76bdc3546336c10dcaabab5171286ffaf192ce9e",
+          "bytes": 3878
+        },
+        {
+          "file": "downloads/harvest-Digilog-2020-02-19_2020-02-19-weekly.csv",
+          "sha256": "497b36b787a3a7ba0dc66f23449a9f027ef6754ab53e5aedd021d0e7b3d2cb4c",
+          "bytes": 4755
+        },
+        {
+          "file": "downloads/harvest-Digilog-2020-02-19_2020-02-19-summary.json",
+          "sha256": "d1c499ae8a78647f38ebd49b176f6664a956ba8ad50abdb4f5e2d982ef480d67",
+          "bytes": 4617
+        }
+      ],
+      "step_count": 15,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở màn hình Thu hoạch A / B",
+          "start_seconds": 8.082
+        },
+        {
+          "step": 2,
+          "title": "Xác nhận publication lịch sử",
+          "start_seconds": 19.625
+        },
+        {
+          "step": 3,
+          "title": "Chọn khoang và vụ Digilog",
+          "start_seconds": 29.287
+        },
+        {
+          "step": 4,
+          "title": "Đọc sản lượng và lũy kế toàn vụ",
+          "start_seconds": 41.227
+        },
+        {
+          "step": 5,
+          "title": "Khám phá biểu đồ thu hoạch",
+          "start_seconds": 48.681
+        },
+        {
+          "step": 6,
+          "title": "Chọn ngưỡng loại B demo",
+          "start_seconds": 59.678
+        },
+        {
+          "step": 7,
+          "title": "Lọc ngày 19/02/2020",
+          "start_seconds": 74.09
+        },
+        {
+          "step": 8,
+          "title": "Đối chiếu A, B và share B",
+          "start_seconds": 101.374
+        },
+        {
+          "step": 9,
+          "title": "Đổi grain từ record sang day",
+          "start_seconds": 108.775
+        },
+        {
+          "step": 10,
+          "title": "Xem kết luận theo week",
+          "start_seconds": 122.047
+        },
+        {
+          "step": 11,
+          "title": "Trở lại record và chọn lần thu",
+          "start_seconds": 135.248
+        },
+        {
+          "step": 12,
+          "title": "Mở lineage record accepted",
+          "start_seconds": 150.356
+        },
+        {
+          "step": 13,
+          "title": "Xuất lần thu và tổng hợp tuần",
+          "start_seconds": 158.407
+        },
+        {
+          "step": 14,
+          "title": "Xuất JSON có metadata",
+          "start_seconds": 184.565
+        },
+        {
+          "step": 15,
+          "title": "Hoàn tất BR-05",
+          "start_seconds": 197.421
+        }
+      ]
+    },
+    {
+      "br": "06",
+      "title": "Chi phí và kịch bản giá",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "da45348dc97433114d6bbd319cff7407704f54b167042aef034e74b8d9e1eee8",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "business_requirements": [
+        "06"
+      ],
+      "backend": "clickhouse",
+      "pace": 1,
+      "context_sha256": "59412651743aa986b4c5e686f51338c95d986b4394d0d145a3c568aed7c39cc0",
+      "configuration_hash": "0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7",
+      "source_revision": {
+        "ui_image": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b",
+        "fixed_images": {
+          "ui": {
+            "tag": "greenhouse-ch-walkthrough-ui:20261107-cold-fix",
+            "id": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b"
+          },
+          "processing": {
+            "tag": "greenhouse-ch-walkthrough-processing:20261107-cold-fix",
+            "id": "sha256:9511c439faba6542f282c4954fe7d64c55702a453f39d4c927aa1fb9301d67c1"
+          },
+          "client": {
+            "tag": "greenhouse-ch-walkthrough-client:20261107-cold-fix",
+            "id": "sha256:dbdca0b36ca689bbc4044896f3f1b5dfdb7ae4cc2c64d838ff3f6d5db48ff045"
+          }
+        },
+        "source_changes_relative_to_commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+        "source_changes": {
+          "src/greenhouse/clickhouse/client.py": "4ccb3ce69dbbb7278e4935419ec5dd78cfcc07f80a6b704884be3ec44d9089df",
+          "src/greenhouse/clickhouse/threshold.py": "b1400cf8274589ed94caeabc43df63d803524f6683362232eae1c02f90e5b035"
+        },
+        "app_postgres_credentials_present": false,
+        "app_networks": [
+          "gh-ch-repro-20261107032510-rebuilt_backend"
+        ],
+        "server_config_sha256": "5fba87641207e72842b46634ff87c0c8452fc7c86a5a1227a8efb34960551625",
+        "metric_log_collector_disabled": true,
+        "legacy_metric_log_merge_limit": 0
+      },
+      "external_http_blocked": true,
+      "trace_options": {
+        "screenshots": false,
+        "snapshots": true,
+        "sources": true
+      },
+      "demo_database": "greenhouse_repro",
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "playwright": "1.65.0",
+      "commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+      "video": {
+        "file": "br-06.mp4",
+        "sha256": "6b96a54e9a1a2a27e4461b54b7d7701b049b6ef3770afd897b40b66971b18a50",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 339.2,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-9ea51bd854f84191aec268ddc691846d_v1-summary.csv",
+          "sha256": "6b13607c7244eba68267848528410a7886671a13cae582e32f8bd7e475479e76",
+          "bytes": 2708
+        },
+        {
+          "file": "downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-9ea51bd854f84191aec268ddc691846d_v1-comparison.json",
+          "sha256": "563946bdb7fdd0f4ed92b3d4a79d0791b6ade4bef2a6d23d4b2afbabb1beb333",
+          "bytes": 38067
+        },
+        {
+          "file": "downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-9ea51bd854f84191aec268ddc691846d_v1-scenario.json",
+          "sha256": "314f055fbc93e79e70bc1fb15d50ebde9341fbe0e111945709bb6da50db63761",
+          "bytes": 2979
+        }
+      ],
+      "step_count": 20,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở màn hình Chi phí và kịch bản giá",
+          "start_seconds": 7.874
+        },
+        {
+          "step": 2,
+          "title": "Xác nhận publication lịch sử",
+          "start_seconds": 26.718
+        },
+        {
+          "step": 3,
+          "title": "Chọn khoang và vụ Automatoes",
+          "start_seconds": 36.242
+        },
+        {
+          "step": 4,
+          "title": "Lọc hai ngày 02–03/03/2020",
+          "start_seconds": 55.432
+        },
+        {
+          "step": 5,
+          "title": "Đọc baseline lịch sử",
+          "start_seconds": 91.011
+        },
+        {
+          "step": 6,
+          "title": "Xem giá có hiệu lực",
+          "start_seconds": 98.404
+        },
+        {
+          "step": 7,
+          "title": "Mở phép nhân theo ngày",
+          "start_seconds": 106.512
+        },
+        {
+          "step": 8,
+          "title": "Đổi tổng hợp từ ngày sang tuần",
+          "start_seconds": 114.656
+        },
+        {
+          "step": 9,
+          "title": "Trở lại grain ngày",
+          "start_seconds": 133.165
+        },
+        {
+          "step": 10,
+          "title": "Truy vết nguồn năng lượng",
+          "start_seconds": 151.311
+        },
+        {
+          "step": 11,
+          "title": "Mở form tạo kịch bản",
+          "start_seconds": 161.223
+        },
+        {
+          "step": 12,
+          "title": "Đặt tên scenario mới",
+          "start_seconds": 169.338
+        },
+        {
+          "step": 13,
+          "title": "Giữ giá nhiệt; tăng điện cao điểm 20%",
+          "start_seconds": 176.742
+        },
+        {
+          "step": 14,
+          "title": "Tăng điện thấp điểm 20%",
+          "start_seconds": 186.368
+        },
+        {
+          "step": 15,
+          "title": "Lưu kịch bản bất biến",
+          "start_seconds": 196.516
+        },
+        {
+          "step": 16,
+          "title": "Đọc baseline, scenario và chênh lệch",
+          "start_seconds": 235.898
+        },
+        {
+          "step": 17,
+          "title": "Khám phá đóng góp thành phần",
+          "start_seconds": 243.311
+        },
+        {
+          "step": 18,
+          "title": "Bỏ chọn rồi mở lại scenario đã lưu",
+          "start_seconds": 252.36
+        },
+        {
+          "step": 19,
+          "title": "Xuất kết quả kịch bản",
+          "start_seconds": 284.076
+        },
+        {
+          "step": 20,
+          "title": "Hoàn tất BR-06",
+          "start_seconds": 330.76
+        }
+      ]
+    },
+    {
+      "br": "07",
+      "title": "Sensor replay · bổ sung BR-01/03",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "da45348dc97433114d6bbd319cff7407704f54b167042aef034e74b8d9e1eee8",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "business_requirements": [
+        "01",
+        "03"
+      ],
+      "backend": "clickhouse",
+      "pace": 1,
+      "context_sha256": "59412651743aa986b4c5e686f51338c95d986b4394d0d145a3c568aed7c39cc0",
+      "configuration_hash": "0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7",
+      "source_revision": {
+        "ui_image": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b",
+        "fixed_images": {
+          "ui": {
+            "tag": "greenhouse-ch-walkthrough-ui:20261107-cold-fix",
+            "id": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b"
+          },
+          "processing": {
+            "tag": "greenhouse-ch-walkthrough-processing:20261107-cold-fix",
+            "id": "sha256:9511c439faba6542f282c4954fe7d64c55702a453f39d4c927aa1fb9301d67c1"
+          },
+          "client": {
+            "tag": "greenhouse-ch-walkthrough-client:20261107-cold-fix",
+            "id": "sha256:dbdca0b36ca689bbc4044896f3f1b5dfdb7ae4cc2c64d838ff3f6d5db48ff045"
+          }
+        },
+        "source_changes_relative_to_commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+        "source_changes": {
+          "src/greenhouse/clickhouse/client.py": "4ccb3ce69dbbb7278e4935419ec5dd78cfcc07f80a6b704884be3ec44d9089df",
+          "src/greenhouse/clickhouse/threshold.py": "b1400cf8274589ed94caeabc43df63d803524f6683362232eae1c02f90e5b035"
+        },
+        "app_postgres_credentials_present": false,
+        "app_networks": [
+          "gh-ch-repro-20261107032510-rebuilt_backend"
+        ],
+        "server_config_sha256": "5fba87641207e72842b46634ff87c0c8452fc7c86a5a1227a8efb34960551625",
+        "metric_log_collector_disabled": true,
+        "legacy_metric_log_merge_limit": 0
+      },
+      "external_http_blocked": true,
+      "trace_options": {
+        "screenshots": false,
+        "snapshots": true,
+        "sources": true
+      },
+      "demo_database": "greenhouse_repro",
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "playwright": "1.65.0",
+      "commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+      "video": {
+        "file": "sensor-replay.mp4",
+        "sha256": "778b207368f1209055b0605dd00df2277cbfb9f86578a1c4ccd7d567745c409c",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 370.68,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/replay-e5eb431e6d96.csv",
+          "sha256": "a5bfa50e1fe8af776c90a91911c275b437c2f619ebeb7c605802be18a59426b5",
+          "bytes": 3063
+        },
+        {
+          "file": "downloads/replay-a17563ff87c9.csv",
+          "sha256": "a67fa4a5a2b6f86e16c1a65bdf905092f89d5a31af02e9898c608e9a67ca76cc",
+          "bytes": 2965
+        }
+      ],
+      "step_count": 16,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở sensor replay",
+          "start_seconds": 8.212
+        },
+        {
+          "step": 2,
+          "title": "Chọn replay đang phát dở",
+          "start_seconds": 24.352
+        },
+        {
+          "step": 3,
+          "title": "Kiểm tra provisional: 10/30 event",
+          "start_seconds": 33.019
+        },
+        {
+          "step": 4,
+          "title": "Đọc clock nguồn và tín hiệu collector",
+          "start_seconds": 40.368
+        },
+        {
+          "step": 5,
+          "title": "Chọn rule khí hậu có version",
+          "start_seconds": 47.754
+        },
+        {
+          "step": 6,
+          "title": "Chọn rule EC/pH có version",
+          "start_seconds": 63.749
+        },
+        {
+          "step": 7,
+          "title": "Xem quality mẫu mới nhất",
+          "start_seconds": 79.617
+        },
+        {
+          "step": 8,
+          "title": "Khám phá các chuỗi measurement",
+          "start_seconds": 87.653
+        },
+        {
+          "step": 9,
+          "title": "So sánh basis realized",
+          "start_seconds": 106.782
+        },
+        {
+          "step": 10,
+          "title": "Trở lại requested và xuất provisional",
+          "start_seconds": 122.999
+        },
+        {
+          "step": 11,
+          "title": "Bật tự làm mới",
+          "start_seconds": 148.464
+        },
+        {
+          "step": 12,
+          "title": "Phát 20 event còn lại qua CLI thật",
+          "start_seconds": 183.344
+        },
+        {
+          "step": 13,
+          "title": "Làm mới và đối soát complete",
+          "start_seconds": 225.269
+        },
+        {
+          "step": 14,
+          "title": "Đổi ngưỡng mất tín hiệu",
+          "start_seconds": 261.428
+        },
+        {
+          "step": 15,
+          "title": "Dừng tự làm mới và xuất kết quả hoàn tất",
+          "start_seconds": 331.948
+        },
+        {
+          "step": 16,
+          "title": "Hoàn tất sensor replay",
+          "start_seconds": 362.302
+        }
+      ]
+    }
+  ]
+}

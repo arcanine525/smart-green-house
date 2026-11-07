@@ -1,0 +1,257 @@
+[
+  {
+    "step": 1,
+    "title": "Mở màn hình Thu hoạch A / B",
+    "detail": "Chọn BR ở thanh bên; các thao tác tiếp theo chạy trên bản sao dữ liệu AGC.",
+    "start_seconds": 8.082,
+    "end_seconds": 19.624,
+    "screenshot": "step-01.png",
+    "metrics": [
+      "A observed\n\n13,66 kg/m²",
+      "B observed\n\n0,10 kg/m²",
+      "Tổng paired A+B\n\n13,76 kg/m²",
+      "Share B (paired)\n\n0,73 %",
+      "Paired A (kg/m²)\n\n13,66",
+      "Paired B (kg/m²)\n\n0,10",
+      "Share A (paired)\n\n99,27 %"
+    ]
+  },
+  {
+    "step": 2,
+    "title": "Xác nhận publication lịch sử",
+    "detail": "Một publication cố định cho bộ lọc, chỉ số, chi tiết và file xuất.",
+    "start_seconds": 19.625,
+    "end_seconds": 29.287,
+    "screenshot": "step-02.png",
+    "metrics": [
+      "A observed\n\n13,66 kg/m²",
+      "B observed\n\n0,10 kg/m²",
+      "Tổng paired A+B\n\n13,76 kg/m²",
+      "Share B (paired)\n\n0,73 %",
+      "Paired A (kg/m²)\n\n13,66",
+      "Paired B (kg/m²)\n\n0,10",
+      "Share A (paired)\n\n99,27 %"
+    ]
+  },
+  {
+    "step": 3,
+    "title": "Chọn khoang và vụ Digilog",
+    "detail": "Khoang/vụ xác định phạm vi phân tích; chọn lại sẽ cập nhật bộ lọc liên quan.",
+    "start_seconds": 29.287,
+    "end_seconds": 41.227,
+    "screenshot": "step-03.png",
+    "metrics": [
+      "A observed\n\n13,51 kg/m²",
+      "B observed\n\n0,70 kg/m²",
+      "Tổng paired A+B\n\n14,21 kg/m²",
+      "Share B (paired)\n\n4,95 %",
+      "Paired A (kg/m²)\n\n13,51",
+      "Paired B (kg/m²)\n\n0,70",
+      "Share A (paired)\n\n95,05 %"
+    ]
+  },
+  {
+    "step": 4,
+    "title": "Đọc sản lượng và lũy kế toàn vụ",
+    "detail": "Phân biệt tổng observed, paired và completeness của snapshot.",
+    "start_seconds": 41.227,
+    "end_seconds": 48.681,
+    "screenshot": "step-04.png",
+    "metrics": [
+      "A observed\n\n13,51 kg/m²",
+      "B observed\n\n0,70 kg/m²",
+      "Tổng paired A+B\n\n14,21 kg/m²",
+      "Share B (paired)\n\n4,95 %",
+      "Paired A (kg/m²)\n\n13,51",
+      "Paired B (kg/m²)\n\n0,70",
+      "Share A (paired)\n\n95,05 %"
+    ]
+  },
+  {
+    "step": 5,
+    "title": "Khám phá biểu đồ thu hoạch",
+    "detail": "Hover và ẩn/hiện chuỗi A/B, lũy kế; dữ liệu có grain record thu hoạch.",
+    "start_seconds": 48.681,
+    "end_seconds": 59.677,
+    "screenshot": "step-05.png",
+    "metrics": [
+      "A observed\n\n13,51 kg/m²",
+      "B observed\n\n0,70 kg/m²",
+      "Tổng paired A+B\n\n14,21 kg/m²",
+      "Share B (paired)\n\n4,95 %",
+      "Paired A (kg/m²)\n\n13,51",
+      "Paired B (kg/m²)\n\n0,70",
+      "Share A (paired)\n\n95,05 %"
+    ]
+  },
+  {
+    "step": 6,
+    "title": "Chọn ngưỡng loại B demo",
+    "detail": "Profile demo 10% được chọn theo version; không coi là tiêu chuẩn đã xác minh.",
+    "start_seconds": 59.678,
+    "end_seconds": 74.09,
+    "screenshot": "step-06.png",
+    "metrics": [
+      "A observed\n\n13,51 kg/m²",
+      "B observed\n\n0,70 kg/m²",
+      "Tổng paired A+B\n\n14,21 kg/m²",
+      "Share B (paired)\n\n4,95 %",
+      "Paired A (kg/m²)\n\n13,51",
+      "Paired B (kg/m²)\n\n0,70",
+      "Share A (paired)\n\n95,05 %"
+    ]
+  },
+  {
+    "step": 7,
+    "title": "Lọc ngày 19/02/2020",
+    "detail": "Chọn cùng một ngày ở cả hai đầu để xem lần thu cụ thể.",
+    "start_seconds": 74.09,
+    "end_seconds": 101.373,
+    "screenshot": "step-07.png",
+    "metrics": [
+      "A observed\n\n0,05 kg/m²",
+      "B observed\n\n0,10 kg/m²",
+      "Tổng paired A+B\n\n0,15 kg/m²",
+      "Share B (paired)\n\n66,67 %",
+      "Paired A (kg/m²)\n\n0,05",
+      "Paired B (kg/m²)\n\n0,10",
+      "Share A (paired)\n\n33,33 %"
+    ]
+  },
+  {
+    "step": 8,
+    "title": "Đối chiếu A, B và share B",
+    "detail": "A 0,05; B 0,10 kg/m²; share B 66,67%, vượt ngưỡng demo 10%.",
+    "start_seconds": 101.374,
+    "end_seconds": 108.774,
+    "screenshot": "step-08.png",
+    "metrics": [
+      "A observed\n\n0,05 kg/m²",
+      "B observed\n\n0,10 kg/m²",
+      "Tổng paired A+B\n\n0,15 kg/m²",
+      "Share B (paired)\n\n66,67 %",
+      "Paired A (kg/m²)\n\n0,05",
+      "Paired B (kg/m²)\n\n0,10",
+      "Share A (paired)\n\n33,33 %"
+    ]
+  },
+  {
+    "step": 9,
+    "title": "Đổi grain từ record sang day",
+    "detail": "Kết luận rule áp dụng theo grain đang chọn, không nhầm record với trung bình.",
+    "start_seconds": 108.775,
+    "end_seconds": 122.046,
+    "screenshot": "step-09.png",
+    "metrics": [
+      "A observed\n\n0,05 kg/m²",
+      "B observed\n\n0,10 kg/m²",
+      "Tổng paired A+B\n\n0,15 kg/m²",
+      "Share B (paired)\n\n66,67 %",
+      "Paired A (kg/m²)\n\n0,05",
+      "Paired B (kg/m²)\n\n0,10",
+      "Share A (paired)\n\n33,33 %"
+    ]
+  },
+  {
+    "step": 10,
+    "title": "Xem kết luận theo week",
+    "detail": "Tuần tổng hợp khối lượng; tỷ lệ dùng tổng tử/mẫu.",
+    "start_seconds": 122.047,
+    "end_seconds": 135.248,
+    "screenshot": "step-10.png",
+    "metrics": [
+      "A observed\n\n0,05 kg/m²",
+      "B observed\n\n0,10 kg/m²",
+      "Tổng paired A+B\n\n0,15 kg/m²",
+      "Share B (paired)\n\n66,67 %",
+      "Paired A (kg/m²)\n\n0,05",
+      "Paired B (kg/m²)\n\n0,10",
+      "Share A (paired)\n\n33,33 %"
+    ]
+  },
+  {
+    "step": 11,
+    "title": "Trở lại record và chọn lần thu",
+    "detail": "Xem danh tính source/revision, chất lượng A và B của lần thu.",
+    "start_seconds": 135.248,
+    "end_seconds": 150.355,
+    "screenshot": "step-11.png",
+    "metrics": [
+      "A observed\n\n0,05 kg/m²",
+      "B observed\n\n0,10 kg/m²",
+      "Tổng paired A+B\n\n0,15 kg/m²",
+      "Share B (paired)\n\n66,67 %",
+      "Paired A (kg/m²)\n\n0,05",
+      "Paired B (kg/m²)\n\n0,10",
+      "Share A (paired)\n\n33,33 %"
+    ]
+  },
+  {
+    "step": 12,
+    "title": "Mở lineage record accepted",
+    "detail": "Tên CSV, dòng và checksum xác minh record được dùng trong KPI.",
+    "start_seconds": 150.356,
+    "end_seconds": 158.406,
+    "screenshot": "step-12.png",
+    "metrics": [
+      "A observed\n\n0,05 kg/m²",
+      "B observed\n\n0,10 kg/m²",
+      "Tổng paired A+B\n\n0,15 kg/m²",
+      "Share B (paired)\n\n66,67 %",
+      "Paired A (kg/m²)\n\n0,05",
+      "Paired B (kg/m²)\n\n0,10",
+      "Share A (paired)\n\n33,33 %"
+    ]
+  },
+  {
+    "step": 13,
+    "title": "Xuất lần thu và tổng hợp tuần",
+    "detail": "CSV phản ánh đúng cửa sổ; không tự nội suy ngày không có lần thu.",
+    "start_seconds": 158.407,
+    "end_seconds": 184.564,
+    "screenshot": "step-13.png",
+    "metrics": [
+      "A observed\n\n0,05 kg/m²",
+      "B observed\n\n0,10 kg/m²",
+      "Tổng paired A+B\n\n0,15 kg/m²",
+      "Share B (paired)\n\n66,67 %",
+      "Paired A (kg/m²)\n\n0,05",
+      "Paired B (kg/m²)\n\n0,10",
+      "Share A (paired)\n\n33,33 %"
+    ]
+  },
+  {
+    "step": 14,
+    "title": "Xuất JSON có metadata",
+    "detail": "Đối chiếu publication trước khi dùng file làm bằng chứng.",
+    "start_seconds": 184.565,
+    "end_seconds": 197.42,
+    "screenshot": "step-14.png",
+    "metrics": [
+      "A observed\n\n0,05 kg/m²",
+      "B observed\n\n0,10 kg/m²",
+      "Tổng paired A+B\n\n0,15 kg/m²",
+      "Share B (paired)\n\n66,67 %",
+      "Paired A (kg/m²)\n\n0,05",
+      "Paired B (kg/m²)\n\n0,10",
+      "Share A (paired)\n\n33,33 %"
+    ]
+  },
+  {
+    "step": 15,
+    "title": "Hoàn tất BR-05",
+    "detail": "Các bước đã kiểm tra tự động. Video minh họa thao tác; không đo khả năng sử dụng của người thật.",
+    "start_seconds": 197.421,
+    "end_seconds": 204.767,
+    "screenshot": "step-15.png",
+    "metrics": [
+      "A observed\n\n0,05 kg/m²",
+      "B observed\n\n0,10 kg/m²",
+      "Tổng paired A+B\n\n0,15 kg/m²",
+      "Share B (paired)\n\n66,67 %",
+      "Paired A (kg/m²)\n\n0,05",
+      "Paired B (kg/m²)\n\n0,10",
+      "Share A (paired)\n\n33,33 %"
+    ]
+  }
+]

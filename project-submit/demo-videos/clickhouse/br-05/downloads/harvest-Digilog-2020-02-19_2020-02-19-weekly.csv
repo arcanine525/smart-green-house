@@ -1,0 +1,38 @@
+﻿# export=greenhouse-harvest-csv-v1
+# evaluation_grain=week
+# verdict_semantics=every row verdict is that row's OWN share compared to the selected rule threshold (equal is inside); record counters stay separate grain facts; a requested-window summary verdict is NOT any week row
+# quantity_unit=kg/m²
+# share_unit=%
+# source_quantity_unit=kg/m²/harvest
+# decimal=exact source scale (no rounding)
+# null=empty field
+# bool=true/false
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# publication=4b08bd51c092465783304f887d766d47
+# finality=complete
+# committed_at=2026-11-07T04:36:29.059885+00:00
+# cycle=agc-cycle-Digilog
+# compartment=Digilog
+# requested_window=[2020-02-19,2020-02-20)
+# effective_window=[2020-02-19,2020-02-20)
+# time_basis=source_naive (source timezone unresolved)
+# observed_kg_m2: prod_a=0.05,prod_b=0.1; paired_kg_m2: prod_a=0.05,prod_b=0.1,pair_set_only_total=0.15
+# share_pct: a=33.333333333333333333333333333333333333333333333333,b=66.666666666666666666666666666666666666666666666667 (weighted paired masses; per-week subsets state their own records)
+# counts: accepted_records=1,paired_records=1
+# cumulative: origin=2019-12-16, a=0.05,total=0.15,label=giả định chưa xác minh (a = accepted ProdA; total = paired A+B; contributors stop at effective end)
+# completeness: snapshot_complete=True,source_resolved=True,expected_files=1,files_present=1,files_loaded=1,files_failed=0,unresolved=0,conflicts=0,state_accepted=23,state_paired=23,usable: prod_a=23,prod_b=23,event_dates: a=23,b=23
+# expected_relative_path=Digilog/Production.csv
+# pipeline_run=b46b4d1fa95641b891c447faed0c07dc
+# quality_policy=AGC_QUALITY_V1
+# parser_version=agc-parser-v1
+# code_version=clickhouse-warehouse-v1
+# config_bundle_hash=0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7
+# metric_version=br05-summary-v1
+# status=complete
+# rule_status=outside_range
+# rule_version=harvest-demo-b10:Digilog:v2
+# record_quality_population: window_records=1 prod_a: accepted=1,missing=0,invalid=0,suspect=0; prod_b: accepted=1,missing=0,invalid=0,suspect=0; scope: only the effective window records (separate from whole-cycle state_* completeness and from frozen unresolved sources; no-event days are never claimed as coverage)
+# rule_profile=harvest-demo-b10:Digilog:v2 profile_version=2 max_class_b_share=10 % demo=true evidence=Synthetic demo per docs/br/br_05_harvest-quality-tracking.md §4.2/AC-08: 10% class-B share boundary example; explicitly NOT an AGC standard threshold. Supersedes the earlier unsupported demo wording (v1).
+iso_year,iso_week,window_start,window_end,prod_a_observed_kg_m2,prod_b_observed_kg_m2,paired_prod_a_kg_m2,paired_prod_b_kg_m2,paired_total_kg_m2,class_a_share_pct,class_b_share_pct,accepted_records,paired_records,cumulative_a_kg_m2,cumulative_total_kg_m2,cumulative_origin,cumulative_basis_label,rule_status,rule_version,rule_profile_version,rule_profile_label,rule_profile_is_demo,rule_profile_evidence,rule_threshold_pct,outside_rule_records,rule_unknown_records,status,state_snapshot_complete,state_source_resolved,state_expected_files,state_files_present,state_files_loaded,state_files_failed,state_expected_relative_path,state_records_read,state_records_accepted,state_records_quarantine,state_records_duplicate,state_records_conflict,state_unresolved_records,state_conflicted_records,state_accepted_records,state_paired_records,state_prod_a_usable_records,state_prod_b_usable_records,state_event_a_dates,state_event_b_dates,state_reasons,unit,metric_version,publication_id,scope_id,snapshot_id,pipeline_run_id,quality_policy_version,parser_version,code_version,config_bundle_hash,reason_codes
+2020,8,2020-02-19,2020-02-20,0.05,0.1,0.05,0.1,0.15,33.333333333333333333333333333333333333333333333333,66.666666666666666666666666666666666666666666666667,1,1,0.05,0.15,2019-12-16,giả định chưa xác minh,outside_range,harvest-demo-b10:Digilog:v2,2,demo_rule,true,Synthetic demo per docs/br/br_05_harvest-quality-tracking.md §4.2/AC-08: 10% class-B share boundary example; explicitly NOT an AGC standard threshold. Supersedes the earlier unsupported demo wording (v1).,10,1,0,complete,true,true,1,1,1,0,Digilog/Production.csv,23,23,0,0,0,0,0,23,23,23,23,23,23,,kg/m²,br05-summary-v1,4b08bd51c092465783304f887d766d47,agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical,agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68,b46b4d1fa95641b891c447faed0c07dc,AGC_QUALITY_V1,agc-parser-v1,clickhouse-warehouse-v1,0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7,outside_harvest_rule
