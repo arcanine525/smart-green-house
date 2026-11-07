@@ -1,0 +1,89 @@
+{
+  "reviewed_head": "d98c99d9eb5187addf6ecf628c4f9c4844dd62b3",
+  "review_date": "2026-11-07",
+  "decision": "accepted_with_documented_limits",
+  "scope": [
+    "BR-01",
+    "BR-02",
+    "BR-03",
+    "BR-04",
+    "BR-05",
+    "BR-06",
+    "sensor BR-01/03"
+  ],
+  "method": "Review existing AC matrices, raw oracles, test reports, measured performance and verified Playwright artifacts; no new full-suite run claimed.",
+  "deferred_delivery_tasks": [
+    "T28",
+    "T29",
+    "T30"
+  ],
+  "limits": [
+    "BR01 original p95 failed; optimized follow-up passed one measured workload, not SLA",
+    "Unverified area basis and timezone; demo rules are not agronomic guidance",
+    "Reference production quarantine retained",
+    "Automated walkthrough, no human usability evaluation",
+    "AGC sensor parity covers 30 slots; MQTT/fault/recovery tests also use synthetic fixtures"
+  ],
+  "evidence": [
+    {
+      "path": "docs/implementation/requirements-matrix.md",
+      "sha256": "bd88379a945945defcb3f836753d0224a4a7420c461d60d4a985f705e4b6703b"
+    },
+    {
+      "path": "docs/evaluation/correctness.md",
+      "sha256": "aa9a19fd9614101bd910f1c0745480e3001d7a58e4b12d0710b8e8bf54101fe6"
+    },
+    {
+      "path": "docs/evaluation/performance.md",
+      "sha256": "79352497193d1ea8c412be0746ea7a5324d117b7b136c640d919a5adf81cf190"
+    },
+    {
+      "path": "docs/evaluation/rule-engine-optimization.md",
+      "sha256": "729fd828694cc6602ed311262fa7a843e2447ea9e7db08a530b151ceb0bab07c"
+    },
+    {
+      "path": "docs/evaluation/assets/rule-engine/test-results.json",
+      "sha256": "3c321c9c133711ec14b36011fa5bba28e9648a498a0c2b7096c329a421ad9cd5"
+    },
+    {
+      "path": "docs/evaluation/sensor-replay.md",
+      "sha256": "47bc8888d93477913268ee5fbe69caadefd477d0bababb3af45b8292783780d4"
+    },
+    {
+      "path": "docs/evaluation/assets/sensor-replay/agc-window.json",
+      "sha256": "f0d48ce7508d87f4dc5fcbc38721cd9ccced4044633b0bb57d9543e61db97f5f"
+    },
+    {
+      "path": "docs/evaluation/assets/playwright-t26/summary.json",
+      "sha256": "c13ec5a787d0911a2d62b4de59e1984c2e2a53502c54e77907c963f6a07e78dc"
+    },
+    {
+      "path": "docs/evaluation/assets/playwright-t26/verification.json",
+      "sha256": "70c527dcb7411bece9b64f65c9de056e5b30f0e39c5e88cc741b44e56d96cefc"
+    },
+    {
+      "path": "docs/evaluation/br_01.md",
+      "sha256": "cebda8e16221473cbdcda45427f76cd79dd803ceda1730844cd323f7f1d2dad3"
+    },
+    {
+      "path": "docs/evaluation/br_02.md",
+      "sha256": "02c2739228a689cc212af3da51dc0b2884f6b6e804c30d32e1f002214e4cfa0e"
+    },
+    {
+      "path": "docs/evaluation/br_03.md",
+      "sha256": "dd4274aaa085cb7de864c17d6ed0fb892d7425525bfec92f04fb4e4a43bf2195"
+    },
+    {
+      "path": "docs/evaluation/br_04.md",
+      "sha256": "439f92890ad6be6dd26e469e585c61eea56c295cb29ea037c0b10b35b408cd9b"
+    },
+    {
+      "path": "docs/evaluation/br_05.md",
+      "sha256": "34fed7c90352a814f6f05c679a4a4272f4c3c0671267ee6ef647968c958f7c2f"
+    },
+    {
+      "path": "docs/evaluation/br_06.md",
+      "sha256": "7dfe7f3a3860421536af1b93b917dda1bb00ada32fe9fc739f7c65cb549e813e"
+    }
+  ]
+}

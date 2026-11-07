@@ -25,8 +25,24 @@
 *.mp4
 *.webm
 *.mov
+/project-submit/demo-videos/
 
 # Python UI demo environment and caches
 /.venv-ui/
 __pycache__/
 *.py[cod]
+
+# Dataset archives, raw snapshots and generated outputs (fixtures stay tracked).
+/data/
+.pytest_cache/
+.ruff_cache/
+spark-warehouse/
+metastore_db/
+derby.log
+checkpoints/
+*.egg-info/
+/build/
+/dist/
+
+# Reproducible application archive stays local; code and hash manifests are tracked.
+/project-submit/*_application.zip

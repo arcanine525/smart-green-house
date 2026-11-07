@@ -1,0 +1,22 @@
+{
+  "synthetic": true,
+  "replay_id": "backup-c6b3e77ba826",
+  "source_sha256": "53745c1fa37592792ef091b223f4fc97e9220b39848c8292bd4711bf5b0e2f0f",
+  "deliveries": 6,
+  "batches": 2,
+  "unique_events": 2,
+  "complete": true,
+  "checksum_verified": true,
+  "sqlite_wal_recovered": [
+    "outbox",
+    "spool"
+  ],
+  "base_rows_without_wal": 0,
+  "spark_checkpoint_resumed": true,
+  "restored_spark_progress": [
+    [
+      1,
+      5
+    ]
+  ]
+}

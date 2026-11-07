@@ -1,173 +1,73 @@
-# 05 — Core schema PostgreSQL
+# 05 — Core schema ClickHouse
 
-Core giữ đúng grain nguồn, metadata nghiệp vụ và lịch sử correction. Trong ERD, `revision_id` là khóa bất biến của một phiên bản; một logical record có thể có nhiều revision, nhưng publication chỉ chọn một. Truy vấn core cho UI phải qua membership của publication, không đọc tất cả revision rồi SUM.
-
-```mermaid
-erDiagram
-    SITE ||--o{ COMPARTMENT : contains
-    COMPARTMENT ||--o{ GROWING_CYCLE : hosts
-    TEAM ||--o{ GROWING_CYCLE : operates
-    CROP ||--o{ GROWING_CYCLE : grown_in
-    GROWING_CYCLE ||--o{ RECORD_REVISION : contextualizes
-    DATA_SCOPE ||--o{ RECORD_REVISION : isolates
-    SOURCE_RECORD ||--o{ RECORD_REVISION : derives
-    RECORD_REVISION ||--o| CLIMATE_OBSERVATION : typed_as
-    RECORD_REVISION ||--o| DRAIN_OBSERVATION : typed_as
-    RECORD_REVISION ||--o| RESOURCE_DAY : typed_as
-    RECORD_REVISION ||--o| HARVEST : typed_as
-    COMPARTMENT ||--o{ AREA_BASIS_VERSION : has
-    SITE {
-        string site_id PK
-        string name
-        string source_time_basis
-    }
-    COMPARTMENT {
-        string compartment_id PK
-        string site_id FK
-        string name
-    }
-    TEAM {
-        string team_id PK
-        string name
-        boolean is_reference
-    }
-    CROP {
-        string crop_id PK
-        string species
-        string cultivar
-    }
-    GROWING_CYCLE {
-        string cycle_id PK
-        string compartment_id FK
-        string team_id FK
-        string crop_id FK
-        timestamp start_source_time
-        timestamp end_source_time_exclusive
-    }
-    DATA_SCOPE {
-        string data_scope_id PK
-        string source_snapshot_id FK
-        string mode
-        string replay_id
-    }
-    SOURCE_RECORD {
-        string source_record_id PK
-        string source_file_id FK
-        int row_number
-        string raw_hash
-    }
-    RECORD_REVISION {
-        string revision_id PK
-        string data_scope_id FK
-        string cycle_id FK
-        string source_record_id FK
-        string record_type
-        string logical_record_key
-        int revision_number
-        string content_hash
-        string correction_version
-    }
-    CLIMATE_OBSERVATION {
-        string revision_id PK, FK
-        timestamp slot_start
-        decimal source_time_serial
-        decimal tair
-        decimal co2air
-        decimal t_heat_sp
-        decimal t_vent_sp
-        decimal co2_sp
-        decimal t_heat_vip
-        decimal t_ventlee_vip
-        decimal co2_vip
-    }
-    DRAIN_OBSERVATION {
-        string revision_id PK, FK
-        timestamp slot_start
-        string measurement_context
-        decimal ec_drain
-        decimal ph_drain
-    }
-    RESOURCE_DAY {
-        string revision_id PK, FK
-        date resource_date
-        decimal irrigation_l_m2
-        decimal drain_l_m2
-        decimal heat_mj_m2
-        decimal elec_high_kwh_m2
-        decimal elec_low_kwh_m2
-    }
-    HARVEST {
-        string revision_id PK, FK
-        date harvest_date
-        decimal prod_a_kg_m2
-        decimal prod_b_kg_m2
-    }
-    AREA_BASIS_VERSION {
-        string basis_version_id PK
-        string compartment_id FK
-        string measure_context
-        date valid_from
-        date valid_to_exclusive
-        decimal area_m2
-        string basis_kind
-        string verification_status
-        string evidence_reference
-    }
-```
-
-Một source row Climate sinh logical records climate và drain riêng, cùng source reference. Các subtype của `RECORD_REVISION` loại trừ nhau theo `record_type`; đây là invariant cần constraint/validation, không suy ra tự động từ các cạnh ERD.
-
-| Entity | Grain nghiệp vụ trong một scope | Kiểm tra bắt buộc |
-|---|---|---|
-| ClimateObservation | cycle × slot 5 phút | Requested/realized riêng; điểm cuối vụ không tạo thêm duration |
-| DrainObservation | cycle × slot × context | Context drain process computer; quality EC/pH độc lập |
-| ResourceDay | cycle × ngày | Một nguồn tổng ngày; không SUM counter 5 phút vào cùng total |
-| Harvest | cycle × source record | Không mặc định một harvest/ngày; giữ record ID |
-| AreaBasisVersion | compartment × measure context × hiệu lực × version | Một mapping hợp lệ cho measure/ngày; không tự lấy floor area |
-
-`RECORD_REVISION` unique `(scope, record_type, logical_record_key, revision_number)`. Trong publication, logical record chỉ chọn một revision; chỉ đúng scope/cycle/source được phép liên kết. FK đảm bảo quan hệ; slot uniqueness, subtype và temporal overlap cần kiểm tra thêm. Các bảng fact có thể giữ cột NULL; dùng trạng thái quality để quyết định accepted thay vì bỏ cả row.
+Các bảng là MergeTree append-only. Quan hệ trong ERD là quan hệ logic được
+repository/manifests kiểm, không phải foreign key hoặc unique constraint CH.
 
 ```mermaid
 erDiagram
-    RECORD_REVISION ||--o{ MEASURE_QUALITY : assessed_by
-    QUALITY_POLICY_VERSION ||--o{ MEASURE_QUALITY : applies
-    RECORD_REVISION ||--o{ DQ_ISSUE : explains
-    SOURCE_RECORD ||--o{ QUARANTINE_RECORD : retained_as
-    RECORD_REVISION {
-        string revision_id PK
-        string logical_record_key
-        string content_hash
+    source_revision ||--|{ source_measure : "scope_id + revision_id"
+    source_revision ||--o{ load_member : "frozen revision membership"
+    load_receipt ||--|{ load_member : "scope_id + load_id"
+    load_receipt ||--|{ load_file : "frozen ingestion audit"
+    load_receipt ||--o{ load_issue : "quarantine and conflicts"
+    source_revision {
+        String scope_id
+        String snapshot_id
+        String source_record_id
+        String record_type
+        String compartment_id
+        String logical_key
+        UInt32 revision
+        String revision_id
+        String content_hash
+        String source_timestamp
+        Int64 source_clock_us
+        String correction_id
+        String payload
     }
-    QUALITY_POLICY_VERSION {
-        string policy_version_id PK
-        string definition_hash
-        string evidence_reference
+    source_measure {
+        String scope_id
+        String revision_id
+        String measure_code
+        String value_exact
+        Decimal256 value_decimal
+        String projection_status
+        String null_reason
     }
-    MEASURE_QUALITY {
-        string revision_id PK, FK
-        string measure_code PK
-        string policy_version_id PK, FK
-        string status
-        string reason_code
+    load_member {
+        String scope_id
+        String load_id
+        String revision_id
     }
-    DQ_ISSUE {
-        string issue_id PK
-        string revision_id FK
-        string measure_code
-        string reason_code
-        string evidence_reference
+    load_receipt {
+        String scope_id
+        String load_id
+        String membership_checksum
+        UInt64 membership_count
+        String audit_checksum
     }
-    SOURCE_RECORD {
-        string source_record_id PK
-        string raw_reference
+    load_file {
+        String source_file
+        String metadata
     }
-    QUARANTINE_RECORD {
-        string quarantine_id PK
-        string source_record_id FK
-        string raw_reference
-        string event_id
-        string reason_code
+    load_issue {
+        String source_record_id
+        String disposition
+        String payload
     }
 ```
 
-Với payload chưa parse được, `source_record_id` có thể chưa xác định: quarantine vẫn phải giữ raw reference và delivery identity. MEASURE_QUALITY dùng bốn trạng thái accepted/missing/invalid/suspect; đánh giá ngoài ngưỡng nghiệp vụ nằm ở mart, không phải lỗi cảm biến mặc định.
+Semantic key: Climate/Resources dùng type × compartment × logical time; harvest
+còn giữ source record identity để không gộp các record thu hoạch cùng ngày.
+Revision ordinal liên tiếp và correction parent được kiểm trước append. Hai
+payload khác nhau cho cùng ordinal là conflict; không chọn last-write-wins.
+Published membership giữ revision cụ thể, nên correction không đổi pin cũ.
+
+`value_exact` là biểu diễn Decimal canonical; Decimal(76,38) / Decimal256 chỉ là projection
+khi round-trip chính xác. Giá trị ngoài miền projection vẫn có exact String,
+không truncate hoặc đi qua Float64 để tính tiền/KPI. Source clock lưu string và
+microseconds naive; received/operating clock có UTC thật.
+
+Physical retries giống nhau được collapse trước aggregate. Không đợi background
+merge để tuyên bố số liệu đúng. `source_disposition` giữ audit dòng không đủ điều
+kiện core, không biến quarantine thành missing giả.

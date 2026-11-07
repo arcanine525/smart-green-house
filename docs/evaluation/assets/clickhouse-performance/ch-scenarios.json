@@ -1,0 +1,346 @@
+{
+  "status": "measured",
+  "backend": "clickhouse",
+  "publication_id": "2be7aa20c0ff4fc8b5d8fd0fbc87b635",
+  "scenario_family": "benchmark-price-2ae55442d7244b7a9f33b68d5dd62d9f",
+  "initial_scenario_versions": 174,
+  "warmup": 5,
+  "iterations": 30,
+  "started_at_utc": "2026-11-07T02:53:45.288466+00:00",
+  "samples": [
+    {
+      "phase": "warmup",
+      "version": 1,
+      "write_ms": 3732.962752000276,
+      "read_ms": 90.53774999938469,
+      "retry_ms": 3724.997626000004,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "warmup",
+      "version": 2,
+      "write_ms": 3844.6785429996453,
+      "read_ms": 95.69491599995672,
+      "retry_ms": 4084.933460000684,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "warmup",
+      "version": 3,
+      "write_ms": 4132.539627000369,
+      "read_ms": 90.54275000016787,
+      "retry_ms": 3958.6879190001127,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "warmup",
+      "version": 4,
+      "write_ms": 3863.394084999527,
+      "read_ms": 91.53641700049775,
+      "retry_ms": 4343.806210999901,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "warmup",
+      "version": 5,
+      "write_ms": 3884.9142919998485,
+      "read_ms": 93.94733400040423,
+      "retry_ms": 4000.6525429998874,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 6,
+      "write_ms": 3834.3201269999554,
+      "read_ms": 140.0519170001644,
+      "retry_ms": 4529.426877999867,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 7,
+      "write_ms": 4000.2595850000944,
+      "read_ms": 96.62699999989854,
+      "retry_ms": 4050.569211000038,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 8,
+      "write_ms": 4284.695126999395,
+      "read_ms": 102.84591700019519,
+      "retry_ms": 4160.706459999346,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 9,
+      "write_ms": 4234.399001999918,
+      "read_ms": 96.00941700045951,
+      "retry_ms": 4259.400418999576,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 10,
+      "write_ms": 4827.079794000383,
+      "read_ms": 95.9606670003268,
+      "retry_ms": 4097.6742520006155,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 11,
+      "write_ms": 4187.712752000152,
+      "read_ms": 132.57870799952798,
+      "retry_ms": 4325.337627000408,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 12,
+      "write_ms": 5084.771334999459,
+      "read_ms": 117.53362599938555,
+      "retry_ms": 5193.258086000242,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 13,
+      "write_ms": 4839.902669000367,
+      "read_ms": 115.1870419998886,
+      "retry_ms": 4442.3488769998585,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 14,
+      "write_ms": 4440.6776280002305,
+      "read_ms": 99.8412079998161,
+      "retry_ms": 4426.030294000157,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 15,
+      "write_ms": 4630.763960999502,
+      "read_ms": 96.57100000003993,
+      "retry_ms": 4425.671418000093,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 16,
+      "write_ms": 4325.061918999381,
+      "read_ms": 105.94629099978192,
+      "retry_ms": 5222.0292940000945,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 17,
+      "write_ms": 4519.71479399981,
+      "read_ms": 105.67208299926278,
+      "retry_ms": 4685.38541900034,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 18,
+      "write_ms": 4883.711502000551,
+      "read_ms": 97.50999999960186,
+      "retry_ms": 4687.6562930001455,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 19,
+      "write_ms": 4492.052335000153,
+      "read_ms": 92.7948339995055,
+      "retry_ms": 5344.161586000155,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 20,
+      "write_ms": 4909.658044000025,
+      "read_ms": 101.41304199987644,
+      "retry_ms": 5024.521543999981,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 21,
+      "write_ms": 4763.1290440003795,
+      "read_ms": 104.9858750002386,
+      "retry_ms": 4980.586376000247,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 22,
+      "write_ms": 5012.880085999313,
+      "read_ms": 102.34074999971199,
+      "retry_ms": 5387.632544000553,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 23,
+      "write_ms": 4688.356001999637,
+      "read_ms": 99.4752079996033,
+      "retry_ms": 4937.755168999502,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 24,
+      "write_ms": 4972.124711000106,
+      "read_ms": 112.7905829998781,
+      "retry_ms": 4989.490585000567,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 25,
+      "write_ms": 4921.81258599976,
+      "read_ms": 102.8954169996723,
+      "retry_ms": 5598.6035440000705,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 26,
+      "write_ms": 4953.889710999647,
+      "read_ms": 105.69533400030195,
+      "retry_ms": 4872.510418999809,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 27,
+      "write_ms": 4997.554086000491,
+      "read_ms": 99.778707999576,
+      "retry_ms": 5055.840043999524,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 28,
+      "write_ms": 5032.395293999798,
+      "read_ms": 163.8002919999053,
+      "retry_ms": 5792.536128000393,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 29,
+      "write_ms": 5596.95617000034,
+      "read_ms": 113.98012500012555,
+      "retry_ms": 5513.558835999902,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 30,
+      "write_ms": 5312.831709999955,
+      "read_ms": 101.30250000020169,
+      "retry_ms": 5060.854169000777,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 31,
+      "write_ms": 5912.274711000464,
+      "read_ms": 110.51704100009374,
+      "retry_ms": 5258.119877999889,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 32,
+      "write_ms": 5625.078170000052,
+      "read_ms": 116.08712499946705,
+      "retry_ms": 6181.520461000218,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 33,
+      "write_ms": 5569.772210999872,
+      "read_ms": 117.24858300021879,
+      "retry_ms": 6166.694586999256,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 34,
+      "write_ms": 5634.626670000216,
+      "read_ms": 107.26483300004475,
+      "retry_ms": 5448.83775299968,
+      "same_request_reused": true,
+      "exact_readback": true
+    },
+    {
+      "phase": "measured",
+      "version": 35,
+      "write_ms": 5428.352961000201,
+      "read_ms": 109.14487499940151,
+      "retry_ms": 5379.418669000188,
+      "same_request_reused": true,
+      "exact_readback": true
+    }
+  ],
+  "fresh_connection_per_operation": true,
+  "clickhouse_proof_cache": "same guarded process cache as production UI",
+  "fixture_only": true,
+  "summary": {
+    "write_ms": {
+      "p50": 4896.684773000288,
+      "p95": 5634.626670000216
+    },
+    "read_ms": {
+      "p50": 105.32897899975069,
+      "p95": 140.0519170001644
+    },
+    "retry_ms": {
+      "p50": 5007.006064500274,
+      "p95": 6166.694586999256
+    }
+  },
+  "final_scenario_versions": 209,
+  "finished_at_utc": "2026-11-07T02:59:29.442633+00:00"
+}

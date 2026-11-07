@@ -1,0 +1,33 @@
+{"at": "2026-11-07T10:34:02.244924+00:00", "monotonic_seconds": 14843.733716875, "phase": "awaiting_native_browser_gate"}
+{"at": "2026-11-07T10:34:42.088984+00:00", "monotonic_seconds": 14883.577404791, "phase": "native_browser_passed_with_project_postgres_stopped", "screens": 9, "elapsed_seconds": 432.35}
+{"at": "2026-11-07T10:34:42.089771+00:00", "monotonic_seconds": 14883.578156291, "phase": "rollback_downtime_start"}
+{"at": "2026-11-07T10:34:43.096696+00:00", "monotonic_seconds": 14884.585100416, "phase": "native_app_stopped_for_rollback"}
+{"at": "2026-11-07T10:34:45.640544+00:00", "monotonic_seconds": 14887.128948208, "phase": "rollback_postgres_healthy"}
+{"at": "2026-11-07T10:34:45.641959+00:00", "monotonic_seconds": 14887.130348375, "phase": "rollback-inputs_started"}
+{"at": "2026-11-07T10:34:51.528147+00:00", "monotonic_seconds": 14893.016664041, "phase": "rollback-inputs_passed"}
+{"at": "2026-11-07T10:34:51.529333+00:00", "monotonic_seconds": 14893.017720916, "phase": "rollback-rebuild_started"}
+{"at": "2026-11-07T10:38:16.685951+00:00", "monotonic_seconds": 15098.174103625, "phase": "rollback-rebuild_passed"}
+{"at": "2026-11-07T10:38:16.686699+00:00", "monotonic_seconds": 15098.174735458, "phase": "rollback-verification_started"}
+{"phase": "rollback_scenario_mapping_repair_passed", "at": "2026-11-07T10:44:44.474235+00:00", "monotonic_seconds": 15485.960918083, "scenario_versions": 178, "collision_families": ["scenario:offline-restore-electricity-plus20"]}
+{"phase": "full_six_br_parity_passed_before_pg_ui", "at": "2026-11-07T10:51:13.890280+00:00", "monotonic_seconds": 15875.37627875, "groups": 18, "episodes": 67829}
+{"phase": "postgres_rollback_ui_passed", "at": "2026-11-07T10:57:59.343900+00:00", "monotonic_seconds": 16280.829170833, "screens": 9, "elapsed_seconds": 13.132}
+{"phase": "clock_fix_private_fixture_reset_started_after_verified_backup", "at": "2026-11-07T11:08:04.923359+00:00", "monotonic_seconds": 16886.40442725}
+{"phase": "clock_fix_private_baseline_restored_and_analyzed", "at": "2026-11-07T11:09:11.915182+00:00", "monotonic_seconds": 16953.396151291}
+{"phase": "clock-fix-baseline_started", "at": "2026-11-07T11:09:11.916519+00:00", "monotonic_seconds": 16953.397275541}
+{"phase": "clock-fix-baseline_passed", "at": "2026-11-07T11:09:24.129543+00:00", "monotonic_seconds": 16965.610347458}
+{"phase": "clock-fix-inputs_started", "at": "2026-11-07T11:09:24.130183+00:00", "monotonic_seconds": 16965.610917625}
+{"phase": "clock-fix-inputs_passed", "at": "2026-11-07T11:09:29.653915+00:00", "monotonic_seconds": 16971.134759166}
+{"phase": "clock-fix-rebuild_started", "at": "2026-11-07T11:09:29.655099+00:00", "monotonic_seconds": 16971.135819333}
+{"phase": "clock-fix-rebuild_passed", "at": "2026-11-07T11:12:21.018525+00:00", "monotonic_seconds": 17142.499530458}
+{"phase": "clock-fix-verification_started", "at": "2026-11-07T11:12:21.021135+00:00", "monotonic_seconds": 17142.501455916}
+{"phase": "clock-fix-verification_passed", "at": "2026-11-07T11:12:57.668523+00:00", "monotonic_seconds": 17179.1491795}
+{"phase": "clock-fix-verification-retry_started", "at": "2026-11-07T11:12:57.672485+00:00", "monotonic_seconds": 17179.152723083}
+{"phase": "clock-fix-verification-retry_passed", "at": "2026-11-07T11:13:14.578693+00:00", "monotonic_seconds": 17196.059044458}
+{"phase": "clock-fix-full-parity_started", "at": "2026-11-07T11:13:14.580130+00:00", "monotonic_seconds": 17196.060328083}
+{"phase": "clock_fix_all_metadata_and_six_br_parity_passed_waiting_for_main_ui", "at": "2026-11-07T11:18:32.445842+00:00", "monotonic_seconds": 17513.924514375}
+{"phase": "clock_fix_all_gates_before_pg_ui", "at": "2026-11-07T11:19:29.952075+00:00", "monotonic_seconds": 17571.428734625, "postgres_publication": "c51402d9d25f45c182140b072397de78"}
+{"phase": "accepted_clock_fixed_pg_ui_passed", "at": "2026-11-07T11:23:57.630760+00:00", "monotonic_seconds": 17839.106649708}
+{"phase": "accepted_pg_backup_verified", "at": "2026-11-07T11:24:18.949798+00:00", "monotonic_seconds": 17860.425567166}
+{"phase": "return_to_native_switch_started", "at": "2026-11-07T11:24:18.950056+00:00", "monotonic_seconds": 17860.425804291}
+{"phase": "native_return_http_healthy", "at": "2026-11-07T11:24:28.200060+00:00", "monotonic_seconds": 17869.675858458}
+{"phase": "native_return_kpi_ready", "at": "2026-11-07T11:27:37.903678+00:00", "monotonic_seconds": 18059.3797905}

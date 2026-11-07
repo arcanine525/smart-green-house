@@ -1,0 +1,19 @@
+ Container gh-ch-full-20261107-ch-stream-run-a1212c361491 Creating
+ Container gh-ch-full-20261107-ch-stream-run-a1212c361491 Created
+{"stage": "agc_sensor_source_ready", "selection_limit": 30, "source_snapshot": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68", "resume": false}
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/06 23:39:53 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/06 23:39:55 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/11/06 23:40:02 WARN DAGScheduler: Failed to cancel job group 5f4ece66-aa45-4b23-a4d5-3a390d1164af. Cannot find active jobs for it.
+26/11/06 23:40:02 WARN DAGScheduler: Failed to cancel job group 5f4ece66-aa45-4b23-a4d5-3a390d1164af. Cannot find active jobs for it.
+Traceback (most recent call last):
+  File "/workspace/tests/clickhouse/check_agc_sensor.py", line 132, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/tests/clickhouse/check_agc_sensor.py", line 116, in main
+    if before.slot_start!=after.slot_start or before.measure_quality!=after.measure_quality:raise ValueError('AGC replay per-measure quality differs')
+                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: AGC replay per-measure quality differs

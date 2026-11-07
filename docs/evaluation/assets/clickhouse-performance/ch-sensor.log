@@ -1,0 +1,11 @@
+ Container gh-engine-benchmark-20261107-ch-sensor-compact Creating
+ Container gh-engine-benchmark-20261107-ch-sensor-compact Created
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/07 03:02:24 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/07 03:02:27 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+{"status": "measured", "backend": "clickhouse", "p50_ms": 2562.347521999982, "p95_ms": 2794.9446679995162, "publication_id": "395ad49436a56b6a991f61c4d9b10116077075218d946f53414eb127f23ff83b"}
+26/11/07 03:02:32 WARN DAGScheduler: Failed to cancel job group 2adf3e52-247d-4709-98ea-63c395e56145. Cannot find active jobs for it.
+26/11/07 03:02:32 WARN DAGScheduler: Failed to cancel job group 2adf3e52-247d-4709-98ea-63c395e56145. Cannot find active jobs for it.

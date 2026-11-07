@@ -1,0 +1,47 @@
+[
+  {
+    "path": ".greenhouse-stream-identity.json",
+    "bytes": 180,
+    "sha256": "6663fbf6b2e3183fcb3718d4112d2ec54a3b5a3eddbf51cafa6e0f054f05d95a"
+  },
+  {
+    "path": ".metadata.crc",
+    "bytes": 12,
+    "sha256": "bfd4c65b7383a10b2d787e6c26d49299a878274f66760bcd00d7357f080261f6"
+  },
+  {
+    "path": "commits/.0.crc",
+    "bytes": 12,
+    "sha256": "14ec6e87331e6a8e80272a00a46cdd63a836f7917375c4728a750e3ce601c6ca"
+  },
+  {
+    "path": "commits/0",
+    "bytes": 29,
+    "sha256": "e03ead7f1597d288754d29e9b5a074314bc908309db0ead6f6768071d41c41a7"
+  },
+  {
+    "path": "metadata",
+    "bytes": 45,
+    "sha256": "bb64ab260aaf866178f2e088d772b95333c03e86c3e627e99cc631b9222f8e5b"
+  },
+  {
+    "path": "offsets/.0.crc",
+    "bytes": 16,
+    "sha256": "3ebdefc7c87f350ea86546d0a383c7657578e3ac629c5bc64c538c9e2096dafd"
+  },
+  {
+    "path": "offsets/0",
+    "bytes": 783,
+    "sha256": "3d9a65f645a675b26944eaa38e371c80b0056179be1b4a37689aa50dafc485b9"
+  },
+  {
+    "path": "sources/0/.0.crc",
+    "bytes": 12,
+    "sha256": "d08d7136be52c6d3a5d78584503bb0eea2a578d93057789a485d8ef9edabd50d"
+  },
+  {
+    "path": "sources/0/0",
+    "bytes": 210,
+    "sha256": "5ef5afc082c12b5881a1e305165113ffffbdb7e40ad8bb96d1130cee9ebd4b32"
+  }
+]

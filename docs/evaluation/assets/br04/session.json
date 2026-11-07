@@ -1,0 +1,130 @@
+{
+  "generated_at": "2026-11-05T10:32:28.797Z",
+  "runtime": "Docker Chromium/Puppeteer 0.5CPU/768MiB",
+  "node": "v26.13.0",
+  "browser": "Chrome/156.0.8078.80",
+  "url": "http://172.25.0.2:8501/",
+  "publication": "892b4cd58cdf4d099510974d91fa64ab",
+  "steps": [
+    {
+      "name": "AICU assumed primary and five-cycle portfolio",
+      "text": "3 options available.\n2 options available.\n6 options available.\n1 option available.\nSkip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\n⚡ Năng lượng (BR-04)\n\nNĂNG LƯỢNG · BR-04\n\nPublication năng lượng\n\nKhoang · vụ năng lượng\n\nKhoảng năng lượng (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\nNăng lượng trên sản lượng loại A\n\nPublication 892b4cd58cdf4d099510974d91fa64ab · snapshot agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68 · AICU · [2019-12-16, 2020-05-30) · ngày nguồn naive\n\nenergy-intensity-v1 · energy-quantity-v1 · quality AGC_QUALITY_V1 · pipeline pipeline-v6-energy\n\ngiả định chưa xác minh · AGC_SHARED_BASIS_V1:v1. Resources/Production primary62.5m² là giả định phân tích; không phải xác minh nguồn. Sensitivity riêng: Resources96m², Production giữ62.5m², hệ số96/62.5=1.536.\n\nNăng lượng (kWh)\n\n19,396.146\n\nSản lượng A (kg)\n\n853.750\n\nkWh/kg A\n\n22.719\n\nCoverage năng lượng (%)\n\n100.000\n\nMẫu số CHỈ ProdA; ProdB vẫn xem được nhưng không cộng vào mẫu số. Tổng năng lượng gồm mọi ngày trong kỳ, kể cả trước thu hoạch đầu; không ngoại suy phần thiếu.\n\nNhiệt kWh/kg A: 5.130 · Điện chiếu sáng kWh/kg A: 17.588\n\nSensitivity Resources96 / Production62.5 (kWh/kg A): 34.896\n\nTổng quan sát (kWh): 19,396.146 · A quan sát (kg): 853.750\n\nThành phần và độ đầy đủ\n\nNgày thiếu: Không có\n\nHarvest snapshot complete: True · unresolved: 0 · paired: 24\n\nSo sánh toàn vụ · tập đủ điều kiện\n\nMột dòng mỗi khoang/vụ; chỉ xếp hạng tập đủ điều kiện cùng cửa sổ, quality và assumption version. Số hạng là trên tập được bao gồm, không phải toàn bộ sáu khoang.\n\nPortfolio kWh/kg A · ΣE / ΣA\n\n24.867\n\nBao gồm: agc-cycle-AICU, agc-cycle-Automatoes, agc-cycle-Digilog, agc-cycle-IUACAAS, agc-cycle-TheAutomators\n\nLoại: agc-cycle-Reference\n\n0\n5\n10\n15\n20\n25\n1/5 · Automatoes\n2/5 · AICU\n3/5 · IUACAAS\n4/5 · TheAutomators\n5/5 · Digilog\nkWh/kg A · giả định được ghi trong bảng\nTập đủ điều kiện\nkeyboard_arrow_right\n\nCông thức, basis và đóng góp\n\nTruy nguồn đóng góp\n\nRevision nguồn energy / harvest A\n\nXác minh lineage raw\n\nXuất đúng kết quả đã pin\n\nCSV summary năng lượng\n\nCSV quantities năng lượng\n\nCSV harvest A contributions\n\nCSV portfolio (gồm excluded)\n\nJSON intensity (typed)\n\nJSON portfolio (typed)",
+      "metrics": [
+        "Năng lượng (kWh)\n\n19,396.146",
+        "Sản lượng A (kg)\n\n853.750",
+        "kWh/kg A\n\n22.719",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 892b4cd58cdf4d099510974d91fa64ab",
+        "AICU — agc-cycle-AICU",
+        "db6a9494ac05f4566d0661b1905c5bcf"
+      ],
+      "exceptions": [],
+      "charts": 1
+    },
+    {
+      "name": "Resource revision raw hash and file line verified",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\n⚡ Năng lượng (BR-04)\n\nNĂNG LƯỢNG · BR-04\n\nPublication năng lượng\n\nKhoang · vụ năng lượng\n\nKhoảng năng lượng (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\nNăng lượng trên sản lượng loại A\n\nPublication 892b4cd58cdf4d099510974d91fa64ab · snapshot agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68 · AICU · [2019-12-16, 2020-05-30) · ngày nguồn naive\n\nenergy-intensity-v1 · energy-quantity-v1 · quality AGC_QUALITY_V1 · pipeline pipeline-v6-energy\n\ngiả định chưa xác minh · AGC_SHARED_BASIS_V1:v1. Resources/Production primary62.5m² là giả định phân tích; không phải xác minh nguồn. Sensitivity riêng: Resources96m², Production giữ62.5m², hệ số96/62.5=1.536.\n\nNăng lượng (kWh)\n\n19,396.146\n\nSản lượng A (kg)\n\n853.750\n\nkWh/kg A\n\n22.719\n\nCoverage năng lượng (%)\n\n100.000\n\nMẫu số CHỈ ProdA; ProdB vẫn xem được nhưng không cộng vào mẫu số. Tổng năng lượng gồm mọi ngày trong kỳ, kể cả trước thu hoạch đầu; không ngoại suy phần thiếu.\n\nNhiệt kWh/kg A: 5.130 · Điện chiếu sáng kWh/kg A: 17.588\n\nSensitivity Resources96 / Production62.5 (kWh/kg A): 34.896\n\nTổng quan sát (kWh): 19,396.146 · A quan sát (kg): 853.750\n\nThành phần và độ đầy đủ\n\nNgày thiếu: Không có\n\nHarvest snapshot complete: True · unresolved: 0 · paired: 24\n\nSo sánh toàn vụ · tập đủ điều kiện\n\nMột dòng mỗi khoang/vụ; chỉ xếp hạng tập đủ điều kiện cùng cửa sổ, quality và assumption version. Số hạng là trên tập được bao gồm, không phải toàn bộ sáu khoang.\n\nPortfolio kWh/kg A · ΣE / ΣA\n\n24.867\n\nBao gồm: agc-cycle-AICU, agc-cycle-Automatoes, agc-cycle-Digilog, agc-cycle-IUACAAS, agc-cycle-TheAutomators\n\nLoại: agc-cycle-Reference\n\n0\n5\n10\n15\n20\n25\n1/5 · Automatoes\n2/5 · AICU\n3/5 · IUACAAS\n4/5 · TheAutomators\n5/5 · Digilog\nkWh/kg A · giả định được ghi trong bảng\nTập đủ điều kiện\nkeyboard_arrow_right\n\nCông thức, basis và đóng góp\n\nTruy nguồn đóng góp\n\nRevision nguồn energy / harvest A\n\nXác minh lineage raw\n\nFile AICU/Resources.csv · dòng 2–2\n\nRaw hash verified: True\n\n{\n\"publication\":{\n\"publication_id\":\"892b4cd58cdf4d099510974d91fa64ab\"\n\"scope_id\":\"agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical\"\n\"snapshot_id\":\"agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68\"\n\"versions\":{\n\"pipeline_run_id\":\"8bb40faa886a4beeaf5fa08ad3e672aa\"\n\"quality_policy_version\":\"AGC_QUALITY_V1\"\n\"parser_version\":\"agc-parser-v1\"\n\"code_version\":\"pipeline-v6-energy\"\n\"config_bundle_hash\":\"031905aef0322a2cecef859f70667662c397ce3743e73634faa3ff6014818f64\"\n\"metric_version\":\"br02-summary-v1\"\n\"rule_version\":NULL\n\"tariff_version\":NULL\n\"scenario_version\":NULL\n}\n\"committed_at\":\"2026-11-05T09:15:34.598144+00:00\"\n\"finality_status\":\"provisional\"\n\"time_basis\":\"source_naive\"\n}\n\"revision_id\":\"db6a9494ac05f4566d0661b1905c5bcf\"\n\"record_type\":\"resource\"\n\"units\":[\n0:{\n\"measure_code\":\"CO2_cons\"\n\"unit\":\"kg/m²/day\"\n}\n1:{\n\"measure_code\":\"Drain\"\n\"unit\":\"L/m²/day\"\n}\n2:{\n\"measure_code\":\"ElecHigh\"\n\"unit\":\"kWh/m²/day\"\n}\n3:{\n\"measure_code\":\"ElecLow\"\n\"unit\":\"kWh/m²/day\"\n}\n4:{\n\"measure_code\":\"Heat_cons\"\n\"unit\":\"MJ/m²/day\"\n}\n5:{\n\"measure_code\":\"Irr\"\n\"unit\":\"L/m²/day\"\n}\n]\n\"logical_record_key\":\"agc-cycle-AICU:2019-12-16\"\n\"cycle_id\":\"agc-cycle-AICU\"\n\"compartment_id\":\"AICU\"\n\"revision_number\":1\n\"source_record_id\":\"33d8f40a8a8689418d9e21f5394b691908ccb0b3219e1f48cebd5ec143099c22\"\n\"first_run_id\":\"2cd94424d938493086bc76bd9a6f9a37\"\n\"relative_path\":\"AICU/Resources.csv\"\n\"file_checksum\":\"740c5a16bcd7d2f5cff301020a9e0cc6535513a6b98bac6210c7e985d7ad16b4\"\n\"archive_sha256\":\"c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68\"\n\"line_number\":2\n\"line_end\":2\n\"raw_reference\":\"AICU/Resources.csv:2\"\n\"raw_hash\":\"f249e5bd818ce3a05465ecbe470180ac37b8b49afe44ea0dc50b61bceace7e5d\"\n\"raw_hash_verified\":true\n\"source_time_serial\":\"43815\"\n\"source_timestamp\":\"2019-12-16T00:00:00\"\n\"correction_id\":NULL\n\"correction_version\":NULL\n\"reason_codes\":[]\n}\nXuất đúng kết quả đã pin\n\nCSV summary năng lượng\n\nCSV quantities năng lượng\n\nCSV harvest A contributions\n\nCSV portfolio (gồm excluded)\n\nJSON intensity (typed)\n\nJSON portfolio (typed)",
+      "metrics": [
+        "Năng lượng (kWh)\n\n19,396.146",
+        "Sản lượng A (kg)\n\n853.750",
+        "kWh/kg A\n\n22.719",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 892b4cd58cdf4d099510974d91fa64ab",
+        "AICU — agc-cycle-AICU",
+        "db6a9494ac05f4566d0661b1905c5bcf"
+      ],
+      "exceptions": [],
+      "charts": 1
+    },
+    {
+      "name": "Harvest A independent revision lineage verified",
+      "text": "Skip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\n⚡ Năng lượng (BR-04)\n\nNĂNG LƯỢNG · BR-04\n\nPublication năng lượng\n\nKhoang · vụ năng lượng\n\nKhoảng năng lượng (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\nNăng lượng trên sản lượng loại A\n\nPublication 892b4cd58cdf4d099510974d91fa64ab · snapshot agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68 · AICU · [2019-12-16, 2020-05-30) · ngày nguồn naive\n\nenergy-intensity-v1 · energy-quantity-v1 · quality AGC_QUALITY_V1 · pipeline pipeline-v6-energy\n\ngiả định chưa xác minh · AGC_SHARED_BASIS_V1:v1. Resources/Production primary62.5m² là giả định phân tích; không phải xác minh nguồn. Sensitivity riêng: Resources96m², Production giữ62.5m², hệ số96/62.5=1.536.\n\nNăng lượng (kWh)\n\n19,396.146\n\nSản lượng A (kg)\n\n853.750\n\nkWh/kg A\n\n22.719\n\nCoverage năng lượng (%)\n\n100.000\n\nMẫu số CHỈ ProdA; ProdB vẫn xem được nhưng không cộng vào mẫu số. Tổng năng lượng gồm mọi ngày trong kỳ, kể cả trước thu hoạch đầu; không ngoại suy phần thiếu.\n\nNhiệt kWh/kg A: 5.130 · Điện chiếu sáng kWh/kg A: 17.588\n\nSensitivity Resources96 / Production62.5 (kWh/kg A): 34.896\n\nTổng quan sát (kWh): 19,396.146 · A quan sát (kg): 853.750\n\nThành phần và độ đầy đủ\n\nNgày thiếu: Không có\n\nHarvest snapshot complete: True · unresolved: 0 · paired: 24\n\nSo sánh toàn vụ · tập đủ điều kiện\n\nMột dòng mỗi khoang/vụ; chỉ xếp hạng tập đủ điều kiện cùng cửa sổ, quality và assumption version. Số hạng là trên tập được bao gồm, không phải toàn bộ sáu khoang.\n\nPortfolio kWh/kg A · ΣE / ΣA\n\n24.867\n\nBao gồm: agc-cycle-AICU, agc-cycle-Automatoes, agc-cycle-Digilog, agc-cycle-IUACAAS, agc-cycle-TheAutomators\n\nLoại: agc-cycle-Reference\n\n0\n5\n10\n15\n20\n25\n1/5 · Automatoes\n2/5 · AICU\n3/5 · IUACAAS\n4/5 · TheAutomators\n5/5 · Digilog\nkWh/kg A · giả định được ghi trong bảng\nTập đủ điều kiện\nkeyboard_arrow_right\n\nCông thức, basis và đóng góp\n\nTruy nguồn đóng góp\n\nRevision nguồn energy / harvest A\n\nXác minh lineage raw\n\nFile AICU/Production.csv · dòng 2–2\n\nRaw hash verified: True\n\n{\n\"publication\":{\n\"publication_id\":\"892b4cd58cdf4d099510974d91fa64ab\"\n\"scope_id\":\"agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical\"\n\"snapshot_id\":\"agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68\"\n\"versions\":{\n\"pipeline_run_id\":\"8bb40faa886a4beeaf5fa08ad3e672aa\"\n\"quality_policy_version\":\"AGC_QUALITY_V1\"\n\"parser_version\":\"agc-parser-v1\"\n\"code_version\":\"pipeline-v6-energy\"\n\"config_bundle_hash\":\"031905aef0322a2cecef859f70667662c397ce3743e73634faa3ff6014818f64\"\n\"metric_version\":\"br02-summary-v1\"\n\"rule_version\":NULL\n\"tariff_version\":NULL\n\"scenario_version\":NULL\n}\n\"committed_at\":\"2026-11-05T09:15:34.598144+00:00\"\n\"finality_status\":\"provisional\"\n\"time_basis\":\"source_naive\"\n}\n\"revision_id\":\"fc495eb585b12865796c9fa8199e10f7\"\n\"record_type\":\"harvest\"\n\"units\":[\n0:{\n\"measure_code\":\"ProdA\"\n\"unit\":\"kg/m²/harvest\"\n}\n1:{\n\"measure_code\":\"ProdB\"\n\"unit\":\"kg/m²/harvest\"\n}\n]\n\"logical_record_key\":\"agc-cycle-AICU:4bcabe337cf3c7009b605ec9d0411ba0b3bf7045569d06370cb2a9a8f8b11ef4\"\n\"cycle_id\":\"agc-cycle-AICU\"\n\"compartment_id\":\"AICU\"\n\"revision_number\":1\n\"source_record_id\":\"4bcabe337cf3c7009b605ec9d0411ba0b3bf7045569d06370cb2a9a8f8b11ef4\"\n\"first_run_id\":\"2cd94424d938493086bc76bd9a6f9a37\"\n\"relative_path\":\"AICU/Production.csv\"\n\"file_checksum\":\"aa5a8bd3ea9d001c309c2670bc57cb4aa5e2171cb081b9ec5c40112453ae8c5b\"\n\"archive_sha256\":\"c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68\"\n\"line_number\":2\n\"line_end\":2\n\"raw_reference\":\"AICU/Production.csv:2\"\n\"raw_hash\":\"cd3f202bd75a248dcc77d3f61b188fcf024cb9ff100043dcd65858568033f4c6\"\n\"raw_hash_verified\":true\n\"source_time_serial\":\"43875\"\n\"source_timestamp\":\"2020-02-14T00:00:00\"\n\"correction_id\":NULL\n\"correction_version\":NULL\n\"reason_codes\":[]\n}\nXuất đúng kết quả đã pin\n\nCSV summary năng lượng\n\nCSV quantities năng lượng\n\nCSV harvest A contributions\n\nCSV portfolio (gồm excluded)\n\nJSON intensity (typed)\n\nJSON portfolio (typed)",
+      "metrics": [
+        "Năng lượng (kWh)\n\n19,396.146",
+        "Sản lượng A (kg)\n\n853.750",
+        "kWh/kg A\n\n22.719",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 892b4cd58cdf4d099510974d91fa64ab",
+        "AICU — agc-cycle-AICU",
+        "fc495eb585b12865796c9fa8199e10f7"
+      ],
+      "exceptions": [],
+      "charts": 1
+    },
+    {
+      "name": "Reference unresolved excluded but energy retained",
+      "text": "6 options available.\n2 options available.\n1 option available.\n6 options available.\nSkip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\n⚡ Năng lượng (BR-04)\n\nNĂNG LƯỢNG · BR-04\n\nPublication năng lượng\n\nKhoang · vụ năng lượng\n\nKhoảng năng lượng (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\nNăng lượng trên sản lượng loại A\n\nPublication 892b4cd58cdf4d099510974d91fa64ab · snapshot agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68 · Reference · [2019-12-16, 2020-05-30) · ngày nguồn naive\n\nenergy-intensity-v1 · energy-quantity-v1 · quality AGC_QUALITY_V1 · pipeline pipeline-v6-energy\n\ngiả định chưa xác minh · AGC_SHARED_BASIS_V1:v1. Resources/Production primary62.5m² là giả định phân tích; không phải xác minh nguồn. Sensitivity riêng: Resources96m², Production giữ62.5m², hệ số96/62.5=1.536.\n\nNăng lượng (kWh)\n\n24,886.806\n\nSản lượng A (kg)\n\nNULL\n\nkWh/kg A\n\nNULL\n\nCoverage năng lượng (%)\n\n100.000\n\nMẫu số CHỈ ProdA; ProdB vẫn xem được nhưng không cộng vào mẫu số. Tổng năng lượng gồm mọi ngày trong kỳ, kể cả trước thu hoạch đầu; không ngoại suy phần thiếu.\n\nNhiệt kWh/kg A: NULL · Điện chiếu sáng kWh/kg A: NULL\n\nSensitivity Resources96 / Production62.5 (kWh/kg A): NULL\n\nTổng quan sát (kWh): 24,886.806 · A quan sát (kg): 873.750\n\nLý do / điều kiện: harvest_snapshot_incomplete · unresolved_quarantine_records\n\nKhông đủ điều kiện xếp hạng toàn vụ. Khoảng con chỉ mô tả lượng ghi nhận trong kỳ; không suy luận năng lượng kỳ này tạo ra quả kỳ này.\n\nThành phần và độ đầy đủ\n\nNgày thiếu: Không có\n\nHarvest snapshot complete: False · unresolved: 1 · paired: 23\n\nSo sánh toàn vụ · tập đủ điều kiện\n\nMột dòng mỗi khoang/vụ; chỉ xếp hạng tập đủ điều kiện cùng cửa sổ, quality và assumption version. Số hạng là trên tập được bao gồm, không phải toàn bộ sáu khoang.\n\nPortfolio kWh/kg A · ΣE / ΣA\n\n24.867\n\nBao gồm: agc-cycle-AICU, agc-cycle-Automatoes, agc-cycle-Digilog, agc-cycle-IUACAAS, agc-cycle-TheAutomators\n\nLoại: agc-cycle-Reference\n\n0\n5\n10\n15\n20\n25\n1/5 · Automatoes\n2/5 · AICU\n3/5 · IUACAAS\n4/5 · TheAutomators\n5/5 · Digilog\nkWh/kg A · giả định được ghi trong bảng\nTập đủ điều kiện\nkeyboard_arrow_right\n\nCông thức, basis và đóng góp\n\nTruy nguồn đóng góp\n\nRevision nguồn energy / harvest A\n\nXác minh lineage raw\n\nXuất đúng kết quả đã pin\n\nCSV summary năng lượng\n\nCSV quantities năng lượng\n\nCSV harvest A contributions\n\nCSV portfolio (gồm excluded)\n\nJSON intensity (typed)\n\nJSON portfolio (typed)",
+      "metrics": [
+        "Năng lượng (kWh)\n\n24,886.806",
+        "Sản lượng A (kg)\n\nNULL",
+        "kWh/kg A\n\nNULL",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 892b4cd58cdf4d099510974d91fa64ab",
+        "Reference — agc-cycle-Reference",
+        "fc495eb585b12865796c9fa8199e10f7"
+      ],
+      "exceptions": [],
+      "charts": 1
+    },
+    {
+      "name": "AICU replay stable after compartment change",
+      "text": "6 options available.\n3 options available.\n2 options available.\n1 option available.\nSkip to main content\n\nMàn hình\n\n💧 Nước (BR-02)\n\n🍅 Thu hoạch (BR-05)\n\n🌡️ Khí hậu (BR-01)\n\n🧪 EC/pH drain (BR-03)\n\n⚡ Năng lượng (BR-04)\n\nNĂNG LƯỢNG · BR-04\n\nPublication năng lượng\n\nKhoang · vụ năng lượng\n\nKhoảng năng lượng (cả hai đầu)\n\n16\n/\n12\n/\n2019\n–\n29\n/\n05\n/\n2020\nNăng lượng trên sản lượng loại A\n\nPublication 892b4cd58cdf4d099510974d91fa64ab · snapshot agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68 · AICU · [2019-12-16, 2020-05-30) · ngày nguồn naive\n\nenergy-intensity-v1 · energy-quantity-v1 · quality AGC_QUALITY_V1 · pipeline pipeline-v6-energy\n\ngiả định chưa xác minh · AGC_SHARED_BASIS_V1:v1. Resources/Production primary62.5m² là giả định phân tích; không phải xác minh nguồn. Sensitivity riêng: Resources96m², Production giữ62.5m², hệ số96/62.5=1.536.\n\nNăng lượng (kWh)\n\n19,396.146\n\nSản lượng A (kg)\n\n853.750\n\nkWh/kg A\n\n22.719\n\nCoverage năng lượng (%)\n\n100.000\n\nMẫu số CHỈ ProdA; ProdB vẫn xem được nhưng không cộng vào mẫu số. Tổng năng lượng gồm mọi ngày trong kỳ, kể cả trước thu hoạch đầu; không ngoại suy phần thiếu.\n\nNhiệt kWh/kg A: 5.130 · Điện chiếu sáng kWh/kg A: 17.588\n\nSensitivity Resources96 / Production62.5 (kWh/kg A): 34.896\n\nTổng quan sát (kWh): 19,396.146 · A quan sát (kg): 853.750\n\nThành phần và độ đầy đủ\n\nNgày thiếu: Không có\n\nHarvest snapshot complete: True · unresolved: 0 · paired: 24\n\nSo sánh toàn vụ · tập đủ điều kiện\n\nMột dòng mỗi khoang/vụ; chỉ xếp hạng tập đủ điều kiện cùng cửa sổ, quality và assumption version. Số hạng là trên tập được bao gồm, không phải toàn bộ sáu khoang.\n\nPortfolio kWh/kg A · ΣE / ΣA\n\n24.867\n\nBao gồm: agc-cycle-AICU, agc-cycle-Automatoes, agc-cycle-Digilog, agc-cycle-IUACAAS, agc-cycle-TheAutomators\n\nLoại: agc-cycle-Reference\n\n0\n5\n10\n15\n20\n25\n1/5 · Automatoes\n2/5 · AICU\n3/5 · IUACAAS\n4/5 · TheAutomators\n5/5 · Digilog\nkWh/kg A · giả định được ghi trong bảng\nTập đủ điều kiện\nkeyboard_arrow_right\n\nCông thức, basis và đóng góp\n\nTruy nguồn đóng góp\n\nRevision nguồn energy / harvest A\n\nXác minh lineage raw\n\nXuất đúng kết quả đã pin\n\nCSV summary năng lượng\n\nCSV quantities năng lượng\n\nCSV harvest A contributions\n\nCSV portfolio (gồm excluded)\n\nJSON intensity (typed)\n\nJSON portfolio (typed)",
+      "metrics": [
+        "Năng lượng (kWh)\n\n19,396.146",
+        "Sản lượng A (kg)\n\n853.750",
+        "kWh/kg A\n\n22.719",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ],
+      "selections": [
+        "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical · 892b4cd58cdf4d099510974d91fa64ab",
+        "AICU — agc-cycle-AICU",
+        "1c42b5d8497d8f16cc33b1afab9b3efd"
+      ],
+      "exceptions": [],
+      "charts": 1
+    }
+  ],
+  "downloads": {
+    "energy-AICU-2019-12-16-2020-05-30-summary.csv": {
+      "bytes": 1980,
+      "sha256": "22487bb985cff0bde8613f01e20f0d188d78eba462c26b8645bd0ff7985f8311"
+    },
+    "energy-AICU-2019-12-16-2020-05-30-quantities.csv": {
+      "bytes": 358430,
+      "sha256": "3f737e0817d49a7913e89431d8941ed5327c191a2e4afdabeb7f76fd4ae803e6"
+    },
+    "energy-AICU-2019-12-16-2020-05-30-harvest.csv": {
+      "bytes": 18048,
+      "sha256": "431d1ee64a7e355f202c3f751cd514f028391800d6fabc388b7e38b940244887"
+    },
+    "energy-AICU-2019-12-16-2020-05-30-portfolio.csv": {
+      "bytes": 5265,
+      "sha256": "6d2ea185976052bc6edddea40f733fe5dfd43e2467387928d591a4a4b83fbcdb"
+    },
+    "energy-AICU-2019-12-16-2020-05-30-result.json": {
+      "bytes": 74840,
+      "sha256": "8ded136e7c25f814b44ecdf72c06804b02656197d89939947a1dd1353e8088db"
+    },
+    "energy-AICU-2019-12-16-2020-05-30-portfolio.json": {
+      "bytes": 440786,
+      "sha256": "b0541cff1052ae27bc0d2e0a242d703a919a12117df2d734fef16d93cca15f5a"
+    },
+    "energy-Reference-2019-12-16-2020-05-30-result.json": {
+      "bytes": 73016,
+      "sha256": "e33ea4a48fa4dd11e016cd9c576196d07d388e32d62d0cafaafa9435e9ea93d7"
+    }
+  }
+}

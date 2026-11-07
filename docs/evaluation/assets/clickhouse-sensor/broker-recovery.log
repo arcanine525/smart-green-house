@@ -1,0 +1,32 @@
+ Container gh-ch-sensor-20261106213039-6648-ch-stream-run-7809883bd316 Creating 
+ Container gh-ch-sensor-20261106213039-6648-ch-stream-run-7809883bd316 Created 
+test_real_mqtt_sqlite_spool_and_spark_match_batch_and_hand_oracle (test_mqtt_stream.MqttStreamTest.test_real_mqtt_sqlite_spool_and_spark_match_batch_and_hand_oracle) ... WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/06 21:31:04 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/06 21:31:06 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=9, family=2, type=1, proto=6, laddr=('127.0.0.1', 51390), raddr=('127.0.0.1', 44875)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=19, family=2, type=1, proto=6, laddr=('127.0.0.1', 43238), raddr=('127.0.0.1', 38775)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=21, family=2, type=1, proto=6, laddr=('127.0.0.1', 37988), raddr=('127.0.0.1', 34111)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=6, laddr=('127.0.0.1', 35546), raddr=('127.0.0.1', 35509)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=6, laddr=('127.0.0.1', 50914), raddr=('127.0.0.1', 45203)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"status": "passed", "source_events": 30, "raw_ready_files": 8, "replay_publication": "4ad8b1de67b83f6d6acfef56ee6f46674de2d26ddb6bead35e9ff5a7f07377b8", "batch_publication": "cd03fb6154d64e28bd235bb8582e36a5", "expected_minutes": "150", "temperature_out_minutes": "50", "ec_out_minutes": "50", "ph_suspect_minutes": "5", "joint_out_minutes": "45", "expected_old_process_disconnects": 1, "broker_restart": true, "collector_publisher_restart": true, "ready_files_preserved": true, "pending_before_restart": 25, "complete": true, "checksum_verified": true, "batch_stream_metrics_episodes_quality_match": true, "postgres_env_present": false}
+26/11/06 21:31:16 WARN DAGScheduler: Failed to cancel job group 5b482fb8-c4f2-44fd-a885-89ee5d05a2b3. Cannot find active jobs for it.
+26/11/06 21:31:16 WARN DAGScheduler: Failed to cancel job group 5b482fb8-c4f2-44fd-a885-89ee5d05a2b3. Cannot find active jobs for it.
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 14.538s
+
+OK

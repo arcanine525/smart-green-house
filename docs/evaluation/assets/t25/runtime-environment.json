@@ -1,0 +1,64 @@
+{
+  "containers": [
+    {
+      "name": "/greenhouse-main-t25-benchmark",
+      "image_reference": "smart-greenhouse-processing:local",
+      "image_id": "sha256:aea40a7d129fd076fe03eaf7e2ce1844a97c8c32a7515a44c1cc927439be202e",
+      "memory_bytes": 2147483648,
+      "nano_cpus": 1500000000,
+      "started_at": "2026-11-06T10:48:14.322043881Z"
+    },
+    {
+      "name": "/smart-greenhouse-db-1",
+      "image_reference": "postgres:17.10-bookworm@sha256:9b18b78397054fce88a9552e9d5a3ad5bb7fd258c5b3cc1c5028e46373d6ea8f",
+      "image_id": "sha256:6878867d6da44d8c000a91f9ce8d31a613bdc3e26b4ae4dde11bc2e22d270458",
+      "memory_bytes": 536870912,
+      "nano_cpus": 500000000,
+      "started_at": "2026-11-06T02:43:15.740293041Z"
+    },
+    {
+      "name": "/smart-greenhouse-app-1",
+      "image_reference": "smart-greenhouse-ui:local",
+      "image_id": "sha256:bd19763aafb29ae7d11ce62feea589dc4a9b11d32f81c72bad3084f632160242",
+      "memory_bytes": 805306368,
+      "nano_cpus": 500000000,
+      "started_at": "2026-11-06T02:43:26.118469463Z"
+    },
+    {
+      "name": "/smart-greenhouse-broker-1",
+      "image_reference": "eclipse-mosquitto:2.0.22@sha256:09b62ff32c2e7b64d4b431b9a89236073289b68db273de2b089edeb9b0d92b5c",
+      "image_id": "sha256:c2cf757f19a94f094ef2a2e56471a819551d4755e63d0b3ade470d697c072595",
+      "memory_bytes": 134217728,
+      "nano_cpus": 100000000,
+      "started_at": "2026-11-06T02:43:15.961988708Z"
+    }
+  ],
+  "concurrency": "Only benchmark processing workload; persistent app/broker remain running, unrelated spiral-db preserved. No host or shared-buffer cache flush.",
+  "docker_engine": {
+    "cpus": 4,
+    "memory_bytes": 8186281984,
+    "version": "29.9.2",
+    "operating_system": "Docker Desktop"
+  },
+  "failed_first_attempt": {
+    "started_at": "2026-11-06T10:35:41UTC",
+    "failure": "DiskFull during Hybrid core load",
+    "evidence": "failed-diskfull.json"
+  },
+  "cleanup_before_retry": {
+    "user_authorized": "unused build cache only",
+    "command": "docker builder prune --force",
+    "reported_reclaimed": "8.267GB",
+    "observed_docker_free_after": "12GiB",
+    "observed_host_free_after": "16GiB",
+    "databases_images_volumes_deleted": false
+  },
+  "physical_host": {
+    "model": "Mac16,12",
+    "cpu": "Apple M4",
+    "logical_cpus": 10,
+    "memory_bytes": 17179869184
+  },
+  "application_source_base_commit": "96164a92255f4bec2a78dffa49e5c2b7abc65990",
+  "measurement_code_note": "Application source unchanged in this benchmark task; benchmark script SHA is recorded by every completed stage."
+}

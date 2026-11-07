@@ -1,0 +1,10 @@
+test_corrections_require_an_explicit_supported_replay (__main__.ArchiveGuardTest.test_corrections_require_an_explicit_supported_replay) ... ok
+test_inner_payload_or_schema_corruption_is_rejected (__main__.ArchiveGuardTest.test_inner_payload_or_schema_corruption_is_rejected) ... ok
+test_intact_native_archive_is_readable (__main__.ArchiveGuardTest.test_intact_native_archive_is_readable) ... ok
+test_outer_checksum_and_backend_cannot_be_relabelled (__main__.ArchiveGuardTest.test_outer_checksum_and_backend_cannot_be_relabelled) ... ok
+test_unknown_kind_is_rejected_even_with_valid_outer_checksums (__main__.ArchiveGuardTest.test_unknown_kind_is_rejected_even_with_valid_outer_checksums) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK

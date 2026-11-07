@@ -1,0 +1,54 @@
+ Container smart-greenhouse-ui-test-run-8c4ebe019e37 Creating
+ Container smart-greenhouse-ui-test-run-8c4ebe019e37 Created
+.....UI fixture database created: test_ui_contracts_4e5042b78b5a
+...........2026-11-05 07:22:15.968 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:16.637 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:16.825 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:17.079 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:17.215 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:17.334 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:17.442 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:17.624 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:17.737 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:17.967 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:18.223 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:18.493 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:18.610 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.UI fixture database created: test_ui_empty_672b3dec2879
+2026-11-05 07:22:18.789 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.UI fixture database created: test_ui_legacy_bcbc6dcc1fba
+2026-11-05 07:22:18.986 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.......2026-11-05 07:22:21.788 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:26.077 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:27.130 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:28.391 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:29.493 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:31.104 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:32.311 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:33.923 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:35.404 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:37.103 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:39.177 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+...2026-11-05 07:22:43.908 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:44.913 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:46.425 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:47.095 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:47.480 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:47.688 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:48.019 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:48.293 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:48.586 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:48.884 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:49.282 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:49.778 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:50.087 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:50.386 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:50.609 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:50.887 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:51.197 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.2026-11-05 07:22:51.604 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+.UI fixture database dropped: test_ui_legacy_bcbc6dcc1fba
+UI fixture database dropped: test_ui_empty_672b3dec2879
+UI fixture database dropped: test_ui_contracts_4e5042b78b5a
+
+68 passed in 37.84s

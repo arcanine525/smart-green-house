@@ -1,0 +1,9 @@
+{
+  "status": "failed",
+  "exit_code": 1,
+  "error_type": "WarehouseChanged",
+  "source_proof_passes": 2,
+  "measured_warm_samples": 0,
+  "guard_preserved": true,
+  "source_measure_merge_seen_during_second_proof": "2026-11-07 02:38:10"
+}

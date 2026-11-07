@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "all_tables_exact": true,
+  "physical_copies_counted": true,
+  "logical_inventory_sha256": "7953c9ae504f8c6c9ce838aa1c6904d1df615f35090732595463e593dc6cd177",
+  "tables": 28,
+  "total_rows": 17513148,
+  "before_sensor_resume": true
+}

@@ -1,56 +1,42 @@
-# 02 — Services và lưu trữ local
+# 02 — Deployment local
 
-Một máy chạy Docker Compose. Spark dùng local mode trong container; không dựng master/worker cluster cho bản đầu. Tên service/volume dưới đây là thiết kế để hiện thực ở T04.
+`compose.yaml` include `compose.clickhouse.yaml`. App mặc định không có dependency
+PostgreSQL. `compose.postgres.yaml` là cấu hình riêng; dùng project khác khi chạy.
 
 ```mermaid
-flowchart TB
-    BROWSER["Browser<br/>localhost:8501"]
-    CLI["Makefile / Python CLI<br/>setup, batch, replay, test, backup"]
-    subgraph HOST["Máy local — Docker Compose network"]
-        APP["app<br/>Streamlit + query services"]
-        DB["db<br/>PostgreSQL :5432 nội bộ"]
-        JOB["batch-job<br/>PySpark + coordinator"]
-        STREAM["stream-worker<br/>PySpark + coordinator"]
-        SIM["simulator<br/>Python + MQTT client"]
-        BROKER["broker<br/>Mosquitto :1883 nội bộ"]
-        COL["collector<br/>Python + durable writer"]
-        TEST["test-runner<br/>fixture + fault suite"]
-        PGV[("pg_data volume")]
-        RAW[("raw snapshot / raw-ready<br/>host bind mount")]
-        SPOOL[("collector_spool volume")]
-        CP[("spark_checkpoints volume")]
-        BV[("broker_state volume")]
-        OUT[("simulator_outbox volume")]
+flowchart LR
+    B["Browser localhost"] --> R["ch-web: fixed target relay<br/>127.0.0.1:18581 mặc định"]
+    subgraph INTERNAL["Docker backend internal"]
+      UI["ch-app: Streamlit<br/>1 CPU / 1536 MiB"]
+      DB["clickhouse<br/>1 CPU / 2 GiB"]
+      JOB["ch-job: native batch tools<br/>1 CPU / 1536 MiB"]
+      MQ["ch-broker: Mosquitto<br/>128 MiB"]
+      STREAM["ch-stream: Spark + native sink<br/>1 CPU / 1536 MiB"]
+      UI --> DB
+      JOB --> DB
+      MQ --> STREAM --> DB
     end
-    BROWSER --> APP --> DB
-    CLI --> JOB
-    CLI --> SIM
-    CLI --> TEST
-    JOB --> DB
-    STREAM --> DB
-    SIM --> BROKER --> COL
-    SIM --- OUT
-    BROKER --- BV
-    COL --- SPOOL
-    COL -->|"publish file hoàn chỉnh"| RAW
-    RAW -->|"read only"| JOB
-    RAW -->|"read only"| STREAM
-    RAW -->|"snapshot read only"| SIM
-    STREAM --- CP
-    DB --- PGV
-    TEST -.->|"test scope riêng"| DB
-    TEST -.-> BROKER
+    R --> UI
+    RAW["Read-only raw bind"] --> UI
+    RAW --> JOB
+    STATE["Shared state / coordinator bind"] --> UI
+    STATE --> JOB
+    STATE --> STREAM
+    VOL["ch_data / ch_logs / ch_broker volumes"] --- DB
+    PG["Optional PG project / volume"] -. "explicit rollback configuration" .-> UI
 ```
 
-| Profile/lệnh dự kiến | Thành phần cần chạy |
-|---|---|
-| Batch | db, app; batch-job chạy theo lệnh |
-| Sensor | db, app, broker, collector, stream-worker; simulator theo lệnh |
-| Test | Dịch vụ tùy test, database/scope/volume kiểm thử riêng |
+Chỉ relay join frontend bridge; app/DB/job/stream không có runtime Internet.
+Snapshot preparation có writable raw mount riêng. `.env` chọn paths, project,
+port và credential local; không commit. Không đổi project/volume như cách
+chuyển backend vì có thể nhìn vào một warehouse rỗng.
 
-- Chỉ app cần expose mặc định trên `127.0.0.1`; cổng DB/MQTT cho debug nếu bật cũng bind localhost. Giao tiếp container dùng service name, không dùng localhost của host.
-- Healthcheck và retry giới hạn xử lý thứ tự khởi động; `depends_on` đơn thuần không phải cơ chế phục hồi.
-- Image chứa sẵn Python/Java, JDBC và MQTT dependencies tương thích; không tải package lúc demo. Credentials qua cấu hình local không commit.
-- Raw-ready và thư mục file tạm dùng cùng filesystem để atomic rename. File đã công bố không append/sửa tiếp.
-- Backup nhất quán dùng điểm dừng/drain; giữ raw + manifests + cấu hình để có thể dựng lại DB. Không phục hồi checkpoint tiến xa hơn DB nếu chưa replay/đối soát phần thiếu.
-- Hạn mức CPU/RAM, kích thước batch, disk budget và backpressure được cấu hình và đo tại T25/T36; chưa khẳng định cấu hình tối thiểu.
+Images và apt/pip/JDBC/browser dependencies được chuẩn bị trước runtime offline.
+Processing image chung giữ PostgreSQL compatibility; native sink dùng HTTP
+stdlib, không gọi PostgreSQL/JDBC. CH server/config và resource caps được pin
+trong Compose; benchmark ghi caps thực tế riêng.
+
+Sau cutover, app/job/stream cần cùng coordinator và
+`GREENHOUSE_CH_REQUIRE_CUTOVER_JOURNAL=1`. Host filesystem phải hỗ trợ flock;
+không dùng cơ chế này như distributed lock. Không prune data volumes khi thiếu
+storage; kiểm cache và headroom trước các read/rebuild lớn.

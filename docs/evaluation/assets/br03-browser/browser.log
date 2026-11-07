@@ -1,0 +1,112 @@
+2026-11-05T08:01:27.470Z LAUNCH_START
+2026-11-05T08:01:29.444Z LAUNCH_DONE
+2026-11-05T08:01:29.444Z NEW_PAGE_START
+2026-11-05T08:01:29.741Z NEW_PAGE_DONE
+2026-11-05T08:01:29.741Z VIEWPORT_START
+2026-11-05T08:01:29.742Z VIEWPORT_DONE
+2026-11-05T08:01:29.742Z DOWNLOAD_SESSION_START
+2026-11-05T08:01:29.744Z DOWNLOAD_SESSION_DONE
+2026-11-05T08:01:29.744Z GOTO_START http://172.25.0.2:8501/
+2026-11-05T08:01:37.860Z GOTO_DONE
+2026-11-05T08:01:37.860Z RADIO_SELECTOR_START
+2026-11-05T08:01:37.874Z RADIO_SELECTOR_DONE
+2026-11-05T08:01:37.874Z RADIO_START 🧪 EC/pH
+2026-11-05T08:01:40.084Z RADIO_DONE 🧪 EC/pH
+2026-11-05T08:01:40.084Z WAIT_START EC/pH dung dịch drain
+2026-11-05T08:01:43.646Z WAIT_DONE EC/pH dung dịch drain
+2026-11-05T08:01:43.646Z SELECT_START Khoang · vụ drain Reference
+2026-11-05T08:01:46.959Z SELECT_DONE Khoang · vụ drain Reference
+2026-11-05T08:01:46.959Z WAIT_START agc-cycle-Reference
+2026-11-05T08:01:48.766Z WAIT_DONE agc-cycle-Reference
+2026-11-05T08:01:48.766Z WAIT_START rule_not_configured
+2026-11-05T08:01:50.599Z WAIT_DONE rule_not_configured
+STATE Reference no-rule raw browsing ["EC ngoài dải (phút)\nNULL","EC ngoài dải %\nNULL","EC coverage %\n0,00","EC suspect (phút)\n0,00","PH ngoài dải (phút)\nNULL","PH ngoài dải %\nNULL","PH coverage %\n0,00","PH suspect (phút)\n0,00","OR ngoài dải (phút, hợp lệ chung)\nNULL","OR ngoài dải %\nNULL","Coverage giao chung %\n0,00","Tưới nguồn (L/m², ngày tính một lần)\n788,60","Drain nguồn (L/m², ngày tính một lần)\n350,30","Coverage nước ghép ngày %\n100,00"]
+2026-11-05T08:01:50.618Z SELECT_START Profile EC/pH drain-demo-b03:Reference:v1
+2026-11-05T08:01:53.962Z SELECT_DONE Profile EC/pH drain-demo-b03:Reference:v1
+2026-11-05T08:01:53.962Z WAIT_START 80400 phút gốc
+2026-11-05T08:01:56.847Z WAIT_DONE 80400 phút gốc
+2026-11-05T08:01:56.847Z WAIT_START 2019-12-31T12:35:00
+2026-11-05T08:01:58.652Z WAIT_DONE 2019-12-31T12:35:00
+2026-11-05T08:01:58.652Z WAIT_START 2020-02-25T08:35:00
+2026-11-05T08:02:00.459Z WAIT_DONE 2020-02-25T08:35:00
+STATE Reference demo global longest EC ["EC ngoài dải (phút)\n218465,00","EC ngoài dải %\n91,53","EC coverage %\n99,85","EC suspect (phút)\n0,00","PH ngoài dải (phút)\n132435,00","PH ngoài dải %\n55,49","PH coverage %\n99,84","PH suspect (phút)\n25,00","OR ngoài dải (phút, hợp lệ chung)\n221250,00","OR ngoài dải %\n92,70","Coverage giao chung %\n99,84","Tưới nguồn (L/m², ngày tính một lần)\n212,40","Drain nguồn (L/m², ngày tính một lần)\n85,60","Coverage nước ghép ngày %\n100,00"]
+2026-11-05T08:02:00.463Z CLICK_START Trace sau ▶
+2026-11-05T08:02:02.967Z CLICK_DONE Trace sau ▶
+2026-11-05T08:02:02.967Z WAIT_START offset 144
+2026-11-05T08:02:04.776Z WAIT_DONE offset 144
+STATE Long event bounded trace second page ["EC ngoài dải (phút)\n218465,00","EC ngoài dải %\n91,53","EC coverage %\n99,85","EC suspect (phút)\n0,00","PH ngoài dải (phút)\n132435,00","PH ngoài dải %\n55,49","PH coverage %\n99,84","PH suspect (phút)\n25,00","OR ngoài dải (phút, hợp lệ chung)\n221250,00","OR ngoài dải %\n92,70","Coverage giao chung %\n99,84","Tưới nguồn (L/m², ngày tính một lần)\n212,40","Drain nguồn (L/m², ngày tính một lần)\n85,60","Coverage nước ghép ngày %\n100,00"]
+2026-11-05T08:02:04.784Z CLICK_START ◀ Trace trước
+2026-11-05T08:02:07.290Z CLICK_DONE ◀ Trace trước
+2026-11-05T08:02:07.290Z WAIT_START offset 0
+2026-11-05T08:02:09.095Z WAIT_DONE offset 0
+2026-11-05T08:02:09.097Z INPUT_START Ngày nguồn
+2026-11-05T08:02:09.102Z INPUT_CONTROL {"type":"date","value":"2019-12-16","isTime":false,"inForm":false}
+2026-11-05T08:02:09.679Z WAIT_START Nguồn [2019-12-30T00:00:00
+2026-11-05T08:02:12.050Z WAIT_DONE Nguồn [2019-12-30T00:00:00
+2026-11-05T08:02:14.557Z INPUT_DONE Ngày nguồn 2019-12-30
+2026-11-05T08:02:14.557Z WAIT_START Nguồn [2019-12-30T00:00:00
+2026-11-05T08:02:16.360Z WAIT_DONE Nguồn [2019-12-30T00:00:00
+2026-11-05T08:02:16.360Z INPUT_START Giờ nguồn
+2026-11-05T08:02:16.364Z INPUT_CONTROL {"type":"text","value":"00:00:00","isTime":true,"inForm":false}
+2026-11-05T08:02:16.458Z WAIT_START Nguồn [2019-12-30T13:55:00
+2026-11-05T08:02:18.774Z WAIT_DONE Nguồn [2019-12-30T13:55:00
+2026-11-05T08:02:21.284Z INPUT_DONE Giờ nguồn 13:55:00
+2026-11-05T08:02:21.284Z WAIT_START 2019-12-30T13:55:00
+2026-11-05T08:02:23.093Z WAIT_DONE 2019-12-30T13:55:00
+2026-11-05T08:02:23.093Z CLICK_START Xác minh lineage về raw
+2026-11-05T08:02:25.602Z CLICK_DONE Xác minh lineage về raw
+2026-11-05T08:02:25.602Z WAIT_START Raw hash xác minh khớp
+2026-11-05T08:02:27.410Z WAIT_DONE Raw hash xác minh khớp
+2026-11-05T08:02:27.410Z WAIT_START dòng 4201
+2026-11-05T08:02:29.219Z WAIT_DONE dòng 4201
+STATE Reference pH-zero own quality and verified raw line 4201 ["EC ngoài dải (phút)\n218465,00","EC ngoài dải %\n91,53","EC coverage %\n99,85","EC suspect (phút)\n0,00","PH ngoài dải (phút)\n132435,00","PH ngoài dải %\n55,49","PH coverage %\n99,84","PH suspect (phút)\n25,00","OR ngoài dải (phút, hợp lệ chung)\n221250,00","OR ngoài dải %\n92,70","Coverage giao chung %\n99,84","Tưới nguồn (L/m², ngày tính một lần)\n212,40","Drain nguồn (L/m², ngày tính một lần)\n85,60","Coverage nước ghép ngày %\n100,00"]
+DOWNLOAD drain-Reference-2019-12-16-2020-05-30-summary.csv
+DOWNLOAD drain-Reference-2019-12-16-2020-05-30-joint.csv
+DOWNLOAD drain-Reference-2019-12-16-2020-05-30-episodes.csv
+DOWNLOAD drain-Reference-2019-12-16-2020-05-30-result.json
+DOWNLOAD drain-Reference-2019-12-16-2020-05-30-water.csv
+DOWNLOAD drain-Reference-2019-12-16-2020-05-30-source.csv
+DOWNLOAD drain-Reference-2019-12-16-2020-05-30-detail.csv
+2026-11-05T08:02:32.794Z RADIO_START ph
+2026-11-05T08:02:35.003Z RADIO_DONE ph
+STATE pH-only list preserves summary totals ["EC ngoài dải (phút)\n218465,00","EC ngoài dải %\n91,53","EC coverage %\n99,85","EC suspect (phút)\n0,00","PH ngoài dải (phút)\n132435,00","PH ngoài dải %\n55,49","PH coverage %\n99,84","PH suspect (phút)\n25,00","OR ngoài dải (phút, hợp lệ chung)\n221250,00","OR ngoài dải %\n92,70","Coverage giao chung %\n99,84","Tưới nguồn (L/m², ngày tính một lần)\n219,20","Drain nguồn (L/m², ngày tính một lần)\n88,20","Coverage nước ghép ngày %\n100,00"]
+STATE Minimum-duration list filter preserves summary totals ["EC ngoài dải (phút)\n218465,00","EC ngoài dải %\n91,53","EC coverage %\n99,85","EC suspect (phút)\n0,00","PH ngoài dải (phút)\n132435,00","PH ngoài dải %\n55,49","PH coverage %\n99,84","PH suspect (phút)\n25,00","OR ngoài dải (phút, hợp lệ chung)\n221250,00","OR ngoài dải %\n92,70","Coverage giao chung %\n99,84","Tưới nguồn (L/m², ngày tính một lần)\n219,20","Drain nguồn (L/m², ngày tính một lần)\n88,20","Coverage nước ghép ngày %\n100,00"]
+2026-11-05T08:02:41.054Z SELECT_START Profile EC/pH (không chọn
+2026-11-05T08:02:44.158Z SELECT_DONE Profile EC/pH (không chọn
+2026-11-05T08:02:44.158Z WAIT_START KPI ngoài dải là NULL
+2026-11-05T08:02:45.967Z WAIT_DONE KPI ngoài dải là NULL
+STATE Cleared profile removes event detail, raw browsing remains ["EC ngoài dải (phút)\nNULL","EC ngoài dải %\nNULL","EC coverage %\n0,00","EC suspect (phút)\n0,00","PH ngoài dải (phút)\nNULL","PH ngoài dải %\nNULL","PH coverage %\n0,00","PH suspect (phút)\n0,00","OR ngoài dải (phút, hợp lệ chung)\nNULL","OR ngoài dải %\nNULL","Coverage giao chung %\n0,00","Tưới nguồn (L/m², ngày tính một lần)\n788,60","Drain nguồn (L/m², ngày tính một lần)\n350,30","Coverage nước ghép ngày %\n100,00"]
+2026-11-05T08:02:45.975Z RADIO_START Cả hai
+2026-11-05T08:02:48.191Z RADIO_DONE Cả hai
+2026-11-05T08:02:48.204Z INPUT_START Tên profile
+2026-11-05T08:02:48.215Z INPUT_CONTROL {"type":"text","value":"engineer","isTime":false,"inForm":true}
+2026-11-05T08:02:51.207Z INPUT_DONE Tên profile browser_br03
+2026-11-05T08:02:51.207Z INPUT_START Nguồn / lý do
+2026-11-05T08:02:51.209Z INPUT_CONTROL {"type":"text","value":"","isTime":false,"inForm":true}
+2026-11-05T08:02:54.557Z INPUT_DONE Nguồn / lý do Browser acceptance experiment; unverified bounds, no agricultural claim
+2026-11-05T08:02:54.557Z CLICK_START Lưu version bất biến
+2026-11-05T08:02:57.091Z CLICK_DONE Lưu version bất biến
+2026-11-05T08:02:57.091Z WAIT_START browser_br03:v1
+2026-11-05T08:02:58.898Z WAIT_DONE browser_br03:v1
+STATE Engineer profile v1 saved ["EC ngoài dải (phút)\n218465,00","EC ngoài dải %\n91,53","EC coverage %\n99,85","EC suspect (phút)\n0,00","PH ngoài dải (phút)\n132435,00","PH ngoài dải %\n55,49","PH coverage %\n99,84","PH suspect (phút)\n25,00","OR ngoài dải (phút, hợp lệ chung)\n221250,00","OR ngoài dải %\n92,70","Coverage giao chung %\n99,84","Tưới nguồn (L/m², ngày tính một lần)\n212,40","Drain nguồn (L/m², ngày tính một lần)\n85,60","Coverage nước ghép ngày %\n100,00"]
+2026-11-05T08:02:59.052Z INPUT_START Version mới
+2026-11-05T08:02:59.067Z INPUT_CONTROL {"type":"number","value":"1","isTime":false,"inForm":true}
+2026-11-05T08:03:01.677Z INPUT_DONE Version mới 2
+2026-11-05T08:03:01.677Z INPUT_START EC cận trên
+2026-11-05T08:03:01.680Z INPUT_CONTROL {"type":"text","value":"5","isTime":false,"inForm":true}
+2026-11-05T08:03:04.367Z INPUT_DONE EC cận trên 10
+2026-11-05T08:03:04.367Z CLICK_START Lưu version bất biến
+2026-11-05T08:03:06.944Z CLICK_DONE Lưu version bất biến
+2026-11-05T08:03:06.944Z WAIT_START browser_br03:v2
+2026-11-05T08:03:08.745Z WAIT_DONE browser_br03:v2
+STATE Engineer profile v2 changes EC out total ["EC ngoài dải (phút)\n14505,00","EC ngoài dải %\n6,08","EC coverage %\n99,85","EC suspect (phút)\n0,00","PH ngoài dải (phút)\n132435,00","PH ngoài dải %\n55,49","PH coverage %\n99,84","PH suspect (phút)\n25,00","OR ngoài dải (phút, hợp lệ chung)\n135430,00","OR ngoài dải %\n56,74","Coverage giao chung %\n99,84","Tưới nguồn (L/m², ngày tính một lần)\n219,20","Drain nguồn (L/m², ngày tính một lần)\n88,20","Coverage nước ghép ngày %\n100,00"]
+2026-11-05T08:03:08.754Z SELECT_START Profile EC/pH browser_br03:v1
+2026-11-05T08:03:12.345Z SELECT_DONE Profile EC/pH browser_br03:v1
+STATE Engineer profile v1 reopened exactly ["EC ngoài dải (phút)\n218465,00","EC ngoài dải %\n91,53","EC coverage %\n99,85","EC suspect (phút)\n0,00","PH ngoài dải (phút)\n132435,00","PH ngoài dải %\n55,49","PH coverage %\n99,84","PH suspect (phút)\n25,00","OR ngoài dải (phút, hợp lệ chung)\n221250,00","OR ngoài dải %\n92,70","Coverage giao chung %\n99,84","Tưới nguồn (L/m², ngày tính một lần)\n212,40","Drain nguồn (L/m², ngày tính một lần)\n85,60","Coverage nước ghép ngày %\n100,00"]
+2026-11-05T08:03:15.352Z SELECT_START Profile EC/pH drain-demo-b03:Reference:v1
+2026-11-05T08:03:18.560Z SELECT_DONE Profile EC/pH drain-demo-b03:Reference:v1
+2026-11-05T08:03:18.560Z WAIT_START 80400 phút gốc
+2026-11-05T08:03:20.362Z WAIT_DONE 80400 phút gốc
+BROWSER_PASS {"drain-Reference-2019-12-16-2020-05-30-summary.csv":{"bytes":2563,"sha256":"0e81694d2ca55a11d1ac5c68f2bf05e45a0d1c71311c47208fefb106e84cce3e"},"drain-Reference-2019-12-16-2020-05-30-joint.csv":{"bytes":2159,"sha256":"7cf227c6c79eab12d939f75599d5d077edf6ec4ea13d7a7237f9551d3a61578f"},"drain-Reference-2019-12-16-2020-05-30-episodes.csv":{"bytes":29061,"sha256":"8acefbf0619a36be81d785fee920abe05a1b79625148d9c543140df8b9504fc0"},"drain-Reference-2019-12-16-2020-05-30-result.json":{"bytes":4893337,"sha256":"af6f803d38000b34744f3926e3c20786b61cb7a1471115e087348f572ba663ee"},"drain-Reference-2019-12-16-2020-05-30-water.csv":{"bytes":30490,"sha256":"8607ade7cf51483d401d04b58548a0565fe038b7feccae6e10fc6ffdffe1ccd2"},"drain-Reference-2019-12-16-2020-05-30-source.csv":{"bytes":4201,"sha256":"ff264d9b9f5fcf0320eb64bea356cbadb457c787b2d2a05c4d5c12672f961375"},"drain-Reference-2019-12-16-2020-05-30-detail.csv":{"bytes":44685,"sha256":"7bcdf903640d458f16de2cad08ef13e20fe88de34edd7ebde10445faf3f8dffe"}}
+2026-11-05T08:03:20.379Z CLOSE_START
+2026-11-05T08:03:20.836Z CLOSE_DONE

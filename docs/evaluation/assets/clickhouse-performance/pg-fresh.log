@@ -1,0 +1,15 @@
+ Container gh-engine-benchmark-20261107-pg-lifecycle-v3 Creating
+ Container gh-engine-benchmark-20261107-pg-lifecycle-v3 Created
+{"stage": "lifecycle_started", "backend": "postgres", "mode": "fresh"}
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/07 01:42:26 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+[Stage 0:>                                                          (0 + 1) / 2]
+
+[Stage 0:=============================>                             (1 + 1) / 2]
+
+
+{"status": "measured", "backend": "postgres", "pipeline_seconds": 360.290018663, "publication_id": "2885df0b86344eed9af39ce9676eb7c0"}

@@ -1,0 +1,8 @@
+ Container gh-engine-benchmark-20261107-ch-settle-parts Creating
+ Container gh-engine-benchmark-20261107-ch-settle-parts Created
+{"table": "source_measure", "seconds": 2.9594775010000376}
+{"table": "source_revision", "seconds": 1.1867900839997674}
+{"table": "threshold_cycle", "seconds": 0.0043554589992709225}
+{"table": "threshold_header", "seconds": 0.0022224159993129433}
+{"table": "threshold_measure", "seconds": 0.9899710419995245}
+{"status": "completed", "seconds": 25.21785072000057, "tables_compacted": 5}

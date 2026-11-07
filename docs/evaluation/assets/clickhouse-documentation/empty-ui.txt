@@ -1,0 +1,6 @@
+Skip to main content
+Deploy
+
+Chưa có publication nào được publish — ứng dụng không có dữ liệu fixture thay thế.
+
+Chạy migration và pipeline cho backend đã chọn. Xem lệnh và configuration pins trong docs/implementation/clickhouse-ui-cli.md hoặc docs/implementation/local-environment.md.

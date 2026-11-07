@@ -1,0 +1,4 @@
+{
+  "headroom_refused_before_any_docker_call": true,
+  "parallel_stage_refused_before_launch": true
+}

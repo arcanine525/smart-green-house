@@ -1,0 +1,43 @@
+﻿# export=greenhouse-water-csv-v1
+# quantity_unit=L/m²
+# ratio_unit=%
+# coverage_unit=%
+# decimal=exact source scale (no rounding)
+# null=empty field
+# bool=true/false
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# publication=3459db897ead45a28177c60000bd0561
+# finality=provisional
+# committed_at=2026-11-04T06:32:36.212267+00:00
+# cycle=agc-cycle-AICU
+# compartment=AICU
+# requested_window=[2020-03-02,2020-03-09)
+# effective_window=[2020-03-02,2020-03-09)
+# time_basis=source_naive (source timezone unresolved)
+# status=complete
+# expected_days=7
+# accepted_days: irrigation=7,drain=7,paired=7
+# coverage_pct: irrigation=100,drain=100,paired=100
+# paired_l_m2: numerator(drain)=7.8,denominator(irrigation)=22.3
+# day_counts: unknown=0,suspect=0,drain_exceeds_irrigation=0
+# pipeline_run=2cd94424d938493086bc76bd9a6f9a37
+# quality_policy=AGC_QUALITY_V1
+# parser_version=agc-parser-v1
+# code_version=pipeline-v2-irrigation
+# config_bundle_hash=5c4e0ceff12091ef9b674d22ddfc8adea8bdf7780dea87c1669c3fdf47a7b9a0
+# metric_version=br02-summary-v1
+# basis_status=assumed_unverified
+# basis_label=giả định chưa xác minh
+# basis_version_ids=AGC_SHARED_BASIS_V1:AICU:Drain;AGC_SHARED_BASIS_V1:AICU:Irr
+# assumptions=AGC_SHARED_BASIS_V1 v1
+# rule_status=not_configured
+# rule_version=
+resource_date,irrigation_l_m2,drain_l_m2,irrigation_quality,irrigation_applicability,irrigation_reason_code,irrigation_source_unit,irrigation_basis_status,irrigation_basis_version_id,irrigation_area_m2,irrigation_basis_kind,irrigation_assumption_id,irrigation_assumption_version,irrigation_basis_label,drain_quality,drain_applicability,drain_reason_code,drain_source_unit,drain_basis_status,drain_basis_version_id,drain_area_m2,drain_basis_kind,drain_assumption_id,drain_assumption_version,drain_basis_label,paired,drain_fraction_pct,drain_exceeds_irrigation,rule_status,rule_version,revision_id,logical_record_key,correction_id,correction_version,reason_codes
+2020-03-02,2.9,1.0,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Irr,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Drain,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,true,34.482758620689655172413793103448275862068965517241,false,not_configured,,b99b45d8ab9b5001cdc3df4addc6f3f7,agc-cycle-AICU:2020-03-02,,,
+2020-03-03,3.4,1.3,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Irr,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Drain,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,true,38.235294117647058823529411764705882352941176470588,false,not_configured,,ba1357f4fee181789d33d7b641e61711,agc-cycle-AICU:2020-03-03,,,
+2020-03-04,3.4,1.6,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Irr,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Drain,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,true,47.058823529411764705882352941176470588235294117647,false,not_configured,,57adf9e9f157b7e2664fac16dc491ea0,agc-cycle-AICU:2020-03-04,,,
+2020-03-05,3.4,1.9,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Irr,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Drain,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,true,55.882352941176470588235294117647058823529411764706,false,not_configured,,35aa7bba4ba19dcb0bf298ae2ff8adf0,agc-cycle-AICU:2020-03-05,,,
+2020-03-06,2.9,0.8,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Irr,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Drain,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,true,27.586206896551724137931034482758620689655172413793,false,not_configured,,14ab6543b8c5ee632823380dad433a3b,agc-cycle-AICU:2020-03-06,,,
+2020-03-07,3.4,0.1,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Irr,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Drain,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,true,2.9411764705882352941176470588235294117647058823529,false,not_configured,,0c5682174b873464a35c1335aa6dfafd,agc-cycle-AICU:2020-03-07,,,
+2020-03-08,2.9,1.1,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Irr,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:AICU:Drain,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,true,37.931034482758620689655172413793103448275862068966,false,not_configured,,035ba6af908f7136e1dc40448a4da7b9,agc-cycle-AICU:2020-03-08,,,

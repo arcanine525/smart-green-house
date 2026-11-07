@@ -1,0 +1,6 @@
+{
+  "workflow_id": "cutover_rollback_20261107",
+  "status": "completed",
+  "publication_id": "c51402d9d25f45c182140b072397de78",
+  "output": "/cutover/postgres-output/pipeline/cutover_rollback_20261107"
+}

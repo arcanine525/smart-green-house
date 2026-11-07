@@ -1,0 +1,9 @@
+{
+  "removed_project": "gh-ch-repro-20261107032510-restored",
+  "all_physical_restore_gates_passed": true,
+  "completed_replay_native_audit_sha256": "f25d812f6f6db93d931f1ca3281173c82b76e35dd3edefa2724c4bee045c1c5b",
+  "pre_resume_full_backup_retained": true,
+  "all_host_state_checkpoint_outbox_ready_retained": true,
+  "reason": "Sequential recovery on limited disk; disposable verified test DB only",
+  "original_data_volumes_untouched": true
+}

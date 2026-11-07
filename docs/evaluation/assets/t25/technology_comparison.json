@@ -1,0 +1,36 @@
+{
+  "evaluated_rows": 47809,
+  "requested_row_limit": 48000,
+  "source_content_digest": "4dfd52e9f4d5208ee5b588c44ed7e75f13ce1e53043195f0552dd0afede7afb4",
+  "run_count_per_method": 1,
+  "timer_boundary": "Load plus commit; excludes DDL, source read/preparation and content verification.",
+  "table_kind": "Temporary tables with identical schema and primary key; not a WAL/replication durability throughput benchmark.",
+  "copy_from_stdin": {
+    "duration_ms": 722.581,
+    "throughput_rows_per_sec": 66164.2,
+    "inserted_rows": 47809,
+    "content_digest": "4dfd52e9f4d5208ee5b588c44ed7e75f13ce1e53043195f0552dd0afede7afb4",
+    "content_matches_source": true
+  },
+  "batch_insert_500": {
+    "duration_ms": 4777.61,
+    "throughput_rows_per_sec": 10006.9,
+    "inserted_rows": 47809,
+    "content_digest": "4dfd52e9f4d5208ee5b588c44ed7e75f13ce1e53043195f0552dd0afede7afb4",
+    "content_matches_source": true
+  },
+  "batch_insert_1000": {
+    "duration_ms": 5737.134,
+    "throughput_rows_per_sec": 8333.3,
+    "inserted_rows": 47809,
+    "content_digest": "4dfd52e9f4d5208ee5b588c44ed7e75f13ce1e53043195f0552dd0afede7afb4",
+    "content_matches_source": true
+  },
+  "empirical_speedup_copy_vs_batch_500": 6.61,
+  "empirical_speedup_copy_vs_batch_1000": 7.94,
+  "transaction_and_error_handling_analysis": {
+    "single_transaction_reality": "When multiple batches/chunks execute within a single PostgreSQL transaction, any constraint violation or syntax error rolls back the entire transaction. Chunk-level isolation is not inherent to batch INSERT unless SAVEPOINTs or independent transactions are explicitly committed per chunk.",
+    "copy_tradeoffs": "COPY FROM STDIN bypasses statement parsing and query tree creation in the PostgreSQL backend, delivering peak streaming throughput. However, COPY is all-or-nothing: a single malformed row aborts the entire stream.",
+    "batch_insert_tradeoffs": "Batch INSERT allows selective chunk commits or savepoint-based retries if wrapped in per-batch error handlers, but incurs significant SQL statement parsing, parameter binding, and AST generation overhead for every batch."
+  }
+}

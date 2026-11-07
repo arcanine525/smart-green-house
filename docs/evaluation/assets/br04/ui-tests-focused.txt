@@ -1,0 +1,19 @@
+TESTED_STATE 232a7339eef249167bbfbd31cf55885aa0bd624d573b5c2e1916320ee5bf31d1 files 258
+============================= test session starts ==============================
+platform linux -- Python 3.12.12, pytest-8.4.2, pluggy-1.6.0 -- /usr/local/bin/python
+rootdir: /workspace
+configfile: pyproject.toml
+plugins: anyio-4.16.0
+collecting ... collected 8 items
+
+tests/ui/test_energy_ui.py::test_energy_screen_500_over_100_not_per_area_or_ab PASSED [ 12%]
+tests/ui/test_energy_ui.py::test_energy_null_retains_quantities_and_excluded[options0-incomplete_energy_quantity] PASSED [ 25%]
+tests/ui/test_energy_ui.py::test_energy_null_retains_quantities_and_excluded[options1-harvest_snapshot_incomplete] PASSED [ 37%]
+tests/ui/test_energy_ui.py::test_energy_null_retains_quantities_and_excluded[options2-incompatible_or_unknown_basis] PASSED [ 50%]
+tests/ui/test_energy_ui.py::test_energy_assumption_sensitivity_and_exact_export PASSED [ 62%]
+tests/ui/test_energy_ui.py::test_unknown_basis_exposes_aggregated_source_per_area_and_table_presentation PASSED [ 75%]
+tests/ui/test_energy_ui.py::test_mixed_comparability_portfolio_surfaces_reasons_in_ui_and_csv PASSED [ 87%]
+tests/ui/test_energy_ui.py::test_nonterminating_heat_table_cells_render_formatted_strings PASSED [100%]
+
+============================== 8 passed in 4.30s ===============================
+FINAL_TESTED_STATE 232a7339eef249167bbfbd31cf55885aa0bd624d573b5c2e1916320ee5bf31d1 unchanged True

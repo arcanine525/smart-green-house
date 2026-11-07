@@ -1,0 +1,611 @@
+{
+  "status": "passed",
+  "publication": "d5752d5a3cf74458b67a4a47e12df23a",
+  "postgres_publication": "892b4cd58cdf4d099510974d91fa64ab",
+  "scope": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+  "window": [
+    "2020-03-02T00:00:00",
+    "2020-03-04T00:00:00"
+  ],
+  "checks": [
+    {
+      "compartment": "AICU",
+      "kind": "climate",
+      "basis": "requested",
+      "rows": 576,
+      "slot_fingerprint": "7d87b9662a0c81403ba18392f2c994aa488345bce5bc52abc5806fe01d62d1a8",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "2880",
+          "valid_minutes": "790",
+          "unknown_minutes": "2090",
+          "out_minutes": "95",
+          "suspect_minutes": "0",
+          "out_low_minutes": "50",
+          "out_high_minutes": "45"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "2880",
+          "valid_minutes": "450",
+          "unknown_minutes": "2430",
+          "out_minutes": "305",
+          "suspect_minutes": "0",
+          "out_low_minutes": "0",
+          "out_high_minutes": "305"
+        }
+      ],
+      "interior_episodes_compared": 17,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "AICU",
+      "kind": "climate",
+      "basis": "realized",
+      "rows": 576,
+      "slot_fingerprint": "7d87b9662a0c81403ba18392f2c994aa488345bce5bc52abc5806fe01d62d1a8",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "220",
+          "suspect_minutes": "0",
+          "out_low_minutes": "165",
+          "out_high_minutes": "55"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "1790",
+          "suspect_minutes": "0",
+          "out_low_minutes": "65",
+          "out_high_minutes": "1725"
+        }
+      ],
+      "interior_episodes_compared": 70,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "AICU",
+      "kind": "drain",
+      "basis": "measured",
+      "rows": 576,
+      "slot_fingerprint": "93fa69af71a97f3201780fba06e9bb652a47e5f890bf40148110ac89f7f5ebd2",
+      "metrics": [
+        {
+          "metric": "ec",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "2880",
+          "suspect_minutes": "0",
+          "out_low_minutes": "0",
+          "out_high_minutes": "2880"
+        },
+        {
+          "metric": "ph",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "2880",
+          "suspect_minutes": "0",
+          "out_low_minutes": "2880",
+          "out_high_minutes": "0"
+        }
+      ],
+      "interior_episodes_compared": 0,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "Automatoes",
+      "kind": "climate",
+      "basis": "requested",
+      "rows": 576,
+      "slot_fingerprint": "afdd1de9340b916342cefa85b83f21e78455717256d63f2fa1c2a290082ecb87",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "75",
+          "suspect_minutes": "0",
+          "out_low_minutes": "75",
+          "out_high_minutes": "0"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "2880",
+          "valid_minutes": "2005",
+          "unknown_minutes": "875",
+          "out_minutes": "1325",
+          "suspect_minutes": "0",
+          "out_low_minutes": "25",
+          "out_high_minutes": "1300"
+        }
+      ],
+      "interior_episodes_compared": 41,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "Automatoes",
+      "kind": "climate",
+      "basis": "realized",
+      "rows": 576,
+      "slot_fingerprint": "afdd1de9340b916342cefa85b83f21e78455717256d63f2fa1c2a290082ecb87",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "75",
+          "suspect_minutes": "0",
+          "out_low_minutes": "75",
+          "out_high_minutes": "0"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "2880",
+          "valid_minutes": "2005",
+          "unknown_minutes": "875",
+          "out_minutes": "1330",
+          "suspect_minutes": "0",
+          "out_low_minutes": "30",
+          "out_high_minutes": "1300"
+        }
+      ],
+      "interior_episodes_compared": 41,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "Automatoes",
+      "kind": "drain",
+      "basis": "measured",
+      "rows": 576,
+      "slot_fingerprint": "66d8741964426bb64b204c6167c97e1d4bd6ac58114ea18daf4d277121719d49",
+      "metrics": [
+        {
+          "metric": "ec",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "2880",
+          "suspect_minutes": "0",
+          "out_low_minutes": "0",
+          "out_high_minutes": "2880"
+        },
+        {
+          "metric": "ph",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "2880",
+          "suspect_minutes": "0",
+          "out_low_minutes": "2880",
+          "out_high_minutes": "0"
+        }
+      ],
+      "interior_episodes_compared": 0,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "Digilog",
+      "kind": "climate",
+      "basis": "requested",
+      "rows": 576,
+      "slot_fingerprint": "47d7f98131ff827b7f258370825d8cf32bc759c5ac6124ad092ed98d60aae3a1",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "540",
+          "suspect_minutes": "0",
+          "out_low_minutes": "10",
+          "out_high_minutes": "530"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "2880",
+          "valid_minutes": "2370",
+          "unknown_minutes": "510",
+          "out_minutes": "1150",
+          "suspect_minutes": "0",
+          "out_low_minutes": "350",
+          "out_high_minutes": "800"
+        }
+      ],
+      "interior_episodes_compared": 91,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "Digilog",
+      "kind": "climate",
+      "basis": "realized",
+      "rows": 576,
+      "slot_fingerprint": "47d7f98131ff827b7f258370825d8cf32bc759c5ac6124ad092ed98d60aae3a1",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "530",
+          "suspect_minutes": "0",
+          "out_low_minutes": "10",
+          "out_high_minutes": "520"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "2880",
+          "valid_minutes": "2360",
+          "unknown_minutes": "520",
+          "out_minutes": "1120",
+          "suspect_minutes": "0",
+          "out_low_minutes": "350",
+          "out_high_minutes": "770"
+        }
+      ],
+      "interior_episodes_compared": 93,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "Digilog",
+      "kind": "drain",
+      "basis": "measured",
+      "rows": 576,
+      "slot_fingerprint": "151c2f9aa5fa2dd96bd78b67dabe7a72c632a4aedf58eb8e184d2af36f5b50f2",
+      "metrics": [
+        {
+          "metric": "ec",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "2880",
+          "suspect_minutes": "0",
+          "out_low_minutes": "0",
+          "out_high_minutes": "2880"
+        },
+        {
+          "metric": "ph",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "0",
+          "suspect_minutes": "0",
+          "out_low_minutes": "0",
+          "out_high_minutes": "0"
+        }
+      ],
+      "interior_episodes_compared": 0,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "IUACAAS",
+      "kind": "climate",
+      "basis": "requested",
+      "rows": 576,
+      "slot_fingerprint": "3ff61c02934647213c290f73fb898ce619c41397017d03bf714cc0c8dfd42c82",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "275",
+          "suspect_minutes": "0",
+          "out_low_minutes": "200",
+          "out_high_minutes": "75"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "2880",
+          "valid_minutes": "1870",
+          "unknown_minutes": "1010",
+          "out_minutes": "650",
+          "suspect_minutes": "0",
+          "out_low_minutes": "415",
+          "out_high_minutes": "235"
+        }
+      ],
+      "interior_episodes_compared": 63,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "IUACAAS",
+      "kind": "climate",
+      "basis": "realized",
+      "rows": 576,
+      "slot_fingerprint": "3ff61c02934647213c290f73fb898ce619c41397017d03bf714cc0c8dfd42c82",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "260",
+          "suspect_minutes": "0",
+          "out_low_minutes": "195",
+          "out_high_minutes": "65"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "2880",
+          "valid_minutes": "1860",
+          "unknown_minutes": "1020",
+          "out_minutes": "635",
+          "suspect_minutes": "0",
+          "out_low_minutes": "415",
+          "out_high_minutes": "220"
+        }
+      ],
+      "interior_episodes_compared": 62,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "IUACAAS",
+      "kind": "drain",
+      "basis": "measured",
+      "rows": 576,
+      "slot_fingerprint": "a7d293e47b854b77f6721fa6cba8ba6de47d85c582f59794601409669fea7413",
+      "metrics": [
+        {
+          "metric": "ec",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "2170",
+          "suspect_minutes": "0",
+          "out_low_minutes": "0",
+          "out_high_minutes": "2170"
+        },
+        {
+          "metric": "ph",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "2880",
+          "suspect_minutes": "0",
+          "out_low_minutes": "2880",
+          "out_high_minutes": "0"
+        }
+      ],
+      "interior_episodes_compared": 24,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "Reference",
+      "kind": "climate",
+      "basis": "requested",
+      "rows": 576,
+      "slot_fingerprint": "62309944fd71f1412e1f620cf22cbebf6dce5aa5cee12476bda90cd1458ba3ce",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "650",
+          "suspect_minutes": "0",
+          "out_low_minutes": "475",
+          "out_high_minutes": "175"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "1440",
+          "suspect_minutes": "0",
+          "out_low_minutes": "35",
+          "out_high_minutes": "1405"
+        }
+      ],
+      "interior_episodes_compared": 68,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "Reference",
+      "kind": "climate",
+      "basis": "realized",
+      "rows": 576,
+      "slot_fingerprint": "62309944fd71f1412e1f620cf22cbebf6dce5aa5cee12476bda90cd1458ba3ce",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "960",
+          "suspect_minutes": "0",
+          "out_low_minutes": "795",
+          "out_high_minutes": "165"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "1430",
+          "suspect_minutes": "0",
+          "out_low_minutes": "40",
+          "out_high_minutes": "1390"
+        }
+      ],
+      "interior_episodes_compared": 72,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "Reference",
+      "kind": "drain",
+      "basis": "measured",
+      "rows": 576,
+      "slot_fingerprint": "7a0c75dfdb5ea7f0eceb788d93b6938d820061fbb6617f4191be3744f058d846",
+      "metrics": [
+        {
+          "metric": "ec",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "2880",
+          "suspect_minutes": "0",
+          "out_low_minutes": "0",
+          "out_high_minutes": "2880"
+        },
+        {
+          "metric": "ph",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "1045",
+          "suspect_minutes": "0",
+          "out_low_minutes": "1045",
+          "out_high_minutes": "0"
+        }
+      ],
+      "interior_episodes_compared": 10,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "TheAutomators",
+      "kind": "climate",
+      "basis": "requested",
+      "rows": 576,
+      "slot_fingerprint": "b70e7a6d5303169ee7a7b677d7c3ef020a1fa312fad2c298f6417b6e613e228f",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "740",
+          "suspect_minutes": "0",
+          "out_low_minutes": "95",
+          "out_high_minutes": "645"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "1495",
+          "suspect_minutes": "0",
+          "out_low_minutes": "380",
+          "out_high_minutes": "1115"
+        }
+      ],
+      "interior_episodes_compared": 120,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "TheAutomators",
+      "kind": "climate",
+      "basis": "realized",
+      "rows": 576,
+      "slot_fingerprint": "b70e7a6d5303169ee7a7b677d7c3ef020a1fa312fad2c298f6417b6e613e228f",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "740",
+          "suspect_minutes": "0",
+          "out_low_minutes": "95",
+          "out_high_minutes": "645"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "1495",
+          "suspect_minutes": "0",
+          "out_low_minutes": "380",
+          "out_high_minutes": "1115"
+        }
+      ],
+      "interior_episodes_compared": 120,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    },
+    {
+      "compartment": "TheAutomators",
+      "kind": "drain",
+      "basis": "measured",
+      "rows": 576,
+      "slot_fingerprint": "541e43e3335798fc87e5a9a69908280290b5c2dbd08b3162d552e03a49e024bb",
+      "metrics": [
+        {
+          "metric": "ec",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "2310",
+          "suspect_minutes": "0",
+          "out_low_minutes": "0",
+          "out_high_minutes": "2310"
+        },
+        {
+          "metric": "ph",
+          "expected_minutes": "2880",
+          "valid_minutes": "2880",
+          "unknown_minutes": "0",
+          "out_minutes": "485",
+          "suspect_minutes": "0",
+          "out_low_minutes": "485",
+          "out_high_minutes": "0"
+        }
+      ],
+      "interior_episodes_compared": 10,
+      "lineage_verified": true,
+      "raw_oracle_match": true,
+      "postgres_match": true
+    }
+  ],
+  "limits": [
+    "Source-window rehearsal only, not full backfill",
+    "Only episodes strictly inside the selected source window are compared on AGC; complete original spans across the window are covered by hand-calculated fixtures, full AGC spans deferred to T38",
+    "Explicit demo deltas/bounds are validation assumptions, not agronomic calibration"
+  ]
+}

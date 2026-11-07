@@ -1,0 +1,82 @@
+[
+  {
+    "file": "tests.log",
+    "original_bytes": 119919,
+    "original_sha256": "84161d045eae923148655c046950555f1838e6e2617ac0fa5f0121d6bb9ff379"
+  },
+  {
+    "file": "build.log",
+    "original_bytes": 36262,
+    "original_sha256": "020d29e4a2236bd227e951a31532a9f03dcb9f564aeee0eebdaaf68fe86da8de"
+  },
+  {
+    "file": "projection-conflict-before.log",
+    "original_bytes": 1065,
+    "original_sha256": "53fe7c4bb641a2432287259a0c3f9b50ada3f7da8bc69c0072089cecbb4b671b"
+  },
+  {
+    "file": "projection-conflict-after.log",
+    "original_bytes": 1065,
+    "original_sha256": "5014dabc03f35a688b5aa0a0615e4b4ba8422d345230eb37556a00449f561572"
+  },
+  {
+    "file": "transport-diagnostic.log",
+    "original_bytes": 674,
+    "original_sha256": "b8b188887f90772c6a9979c0c89fb8deb3d319d15e951bd2f1d483dabd6948cf"
+  },
+  {
+    "file": "server-pause-diagnostic.log",
+    "original_bytes": 11288,
+    "original_sha256": "330f34872517cf017aafc5c4f0eda1315301155f391a4f61eb580dc5b44e3fa3"
+  },
+  {
+    "file": "cold-layout-change-failure.log",
+    "original_bytes": 2181,
+    "original_sha256": "fe4879ae132e799e51103573405668d19cf682d45ba565e07368b1def6ce8fe3"
+  },
+  {
+    "file": "part-history-diagnostic.log",
+    "original_bytes": 4399,
+    "original_sha256": "a50853d2d1dee6921062b3b06792b76bf15664342a23109b6ca5ba3e1e0aa468"
+  },
+  {
+    "file": "part-maintenance.log",
+    "original_bytes": 516,
+    "original_sha256": "f5d82e6d1154a2aa3049dd8cb7379e860902fa29c5e13a47dde5163531fa60c6"
+  },
+  {
+    "file": "pg-fresh.log",
+    "original_bytes": 992,
+    "original_sha256": "f73e7d1d66dc2e506f9cc74bb234d5257a29f3af3526ac9c4de5e709afe7bebe"
+  },
+  {
+    "file": "ch-fresh.log",
+    "original_bytes": 3265,
+    "original_sha256": "64eeaa122fc87a040ae0933b0d859d49a467cf16751a7e7d1225fe523e0812e8"
+  },
+  {
+    "file": "ch-queries-after.log",
+    "original_bytes": 853,
+    "original_sha256": "c90ac1e40e428e0c73549247a303c5d9f486fd7a4d5204b9ae4a2e84eeea3bd9"
+  },
+  {
+    "file": "ch-scenarios.log",
+    "original_bytes": 400,
+    "original_sha256": "ff09d002bba651ff2463126444b9386bd59d843153c38e853c13112bf07d87eb"
+  },
+  {
+    "file": "ch-sensor.log",
+    "original_bytes": 1149,
+    "original_sha256": "47e71ad9fd4ba8337537a140f0951dff3733809ff4b6ff28f9fc1d38ae1e7ff1"
+  },
+  {
+    "file": "ch-resume.log",
+    "original_bytes": 2882,
+    "original_sha256": "762caa6bda342673cfcaf1fb11f5e6af4ef480b7a4d21496b6714654f76559a1"
+  },
+  {
+    "file": "diagnostic-cpu-profile.txt",
+    "original_bytes": 5433,
+    "original_sha256": "0d8891305736c26058af65985dd4d0391e760971000f07fd66d235540913c290"
+  }
+]

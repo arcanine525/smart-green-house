@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "comparisons": [
+    {
+      "window": "two-day",
+      "compartment": "AICU",
+      "match": true
+    },
+    {
+      "window": "two-day",
+      "compartment": "Automatoes",
+      "match": true
+    },
+    {
+      "window": "two-day",
+      "compartment": "Digilog",
+      "match": true
+    },
+    {
+      "window": "two-day",
+      "compartment": "IUACAAS",
+      "match": true
+    },
+    {
+      "window": "two-day",
+      "compartment": "Reference",
+      "match": true
+    },
+    {
+      "window": "two-day",
+      "compartment": "TheAutomators",
+      "match": true
+    },
+    {
+      "window": "full-cycle",
+      "compartment": "AICU",
+      "match": true
+    },
+    {
+      "window": "full-cycle",
+      "compartment": "Automatoes",
+      "match": true
+    },
+    {
+      "window": "full-cycle",
+      "compartment": "Digilog",
+      "match": true
+    },
+    {
+      "window": "full-cycle",
+      "compartment": "IUACAAS",
+      "match": true
+    },
+    {
+      "window": "full-cycle",
+      "compartment": "Reference",
+      "match": true
+    },
+    {
+      "window": "full-cycle",
+      "compartment": "TheAutomators",
+      "match": true
+    }
+  ],
+  "postgres_publication": "892b4cd58cdf4d099510974d91fa64ab",
+  "clickhouse_publication": "27b0fc649a8d46a3a1a6990435c59b25",
+  "postgres_read_only": true,
+  "snapshot": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "tolerance": "Exact Decimal equality for all compared values; no binary floats"
+}

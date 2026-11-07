@@ -1,0 +1,32 @@
+[
+  {
+    "path": "control_outbox.jsonl",
+    "bytes": 5412,
+    "sha256": "f89f3a21e753aa078d841ff506537f89445e969ef4b36bc69b117c32b1a9bdf0"
+  },
+  {
+    "path": "outbox.db",
+    "bytes": 45056,
+    "sha256": "424027dbd7800eee490c02711622c2f1b84f6da14a44cc0d900dc665b1beff8a"
+  },
+  {
+    "path": "outbox.db-shm",
+    "bytes": 32768,
+    "sha256": "dd2a1d90940f86a250acfda431224a02e4ce01eb8b913052210258dee1e3abdd"
+  },
+  {
+    "path": "outbox.db-wal",
+    "bytes": 1400832,
+    "sha256": "0e3144ed4028b4475b6bd22ab5311fbcc077a02c3c62215bbd2ebc6a5919ecf1"
+  },
+  {
+    "path": "replay_state.json",
+    "bytes": 310,
+    "sha256": "1fa39e055e87580bdfc937472f2df49fc79ec23e91e4e8c74eafd4ea775f8fb9"
+  },
+  {
+    "path": "telemetry_outbox.jsonl",
+    "bytes": 189313,
+    "sha256": "66a41bc230656fdbb421806c5cdd6a25986726d83fb8b7660ff44f17f43d16cb"
+  }
+]

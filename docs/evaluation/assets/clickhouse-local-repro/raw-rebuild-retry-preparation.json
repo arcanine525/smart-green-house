@@ -1,0 +1,7 @@
+{
+  "failed_state_retained": "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/rebuilt/state-failed-attempt1",
+  "fresh_coordinator": true,
+  "old_sqlite_or_checkpoints_copied": false,
+  "completed_restored_ready_files_copied": true,
+  "native_archive_sha256": "ad4c5cb93978313a4f3b690676709156fb85e91d19be6d23c83ac4c842b88836"
+}

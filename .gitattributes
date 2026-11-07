@@ -1,0 +1,11 @@
+tests/fixtures/agc_synthetic/**/*.csv -text
+# Preserve raw command-output bytes, including Compose progress whitespace.
+/docs/evaluation/assets/clickhouse-local-repro/*.log -whitespace
+/docs/evaluation/assets/clickhouse-walkthrough/*.log -whitespace
+
+/docs/evaluation/assets/clickhouse-walkthrough/cold-fix/*.log -whitespace
+/docs/evaluation/assets/clickhouse-walkthrough/cold-browser-startup/*.log -whitespace
+/docs/evaluation/assets/clickhouse-walkthrough/cold-browser-startup-failed-01/*.log -whitespace
+/docs/evaluation/assets/clickhouse-walkthrough/cold-browser-startup-first-fixed/*.log -whitespace
+# Preserve the captured server JSON response, including its terminal blank line.
+/docs/evaluation/assets/clickhouse-walkthrough/cold-fix/ui-errors-memory-peaks.json -whitespace

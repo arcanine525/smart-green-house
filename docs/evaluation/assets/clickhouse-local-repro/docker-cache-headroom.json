@@ -1,0 +1,6 @@
+{
+  "reason": "Low host headroom during raw rebuild; user authorized Docker cache cleanup",
+  "free_before_bytes": 1634963456,
+  "free_immediately_after_bytes": 1634439168,
+  "scope": "Docker build cache only; no image or volume prune"
+}

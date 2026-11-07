@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "native_database_reachable": true,
+  "external_tcp_denied": [
+    {
+      "host": "1.1.1.1",
+      "port": 443,
+      "exception": "OSError"
+    },
+    {
+      "host": "8.8.8.8",
+      "port": 53,
+      "exception": "OSError"
+    }
+  ],
+  "readonly_mounts": {
+    "/data/raw": true,
+    "/data/import": true
+  },
+  "live_postgres_environment": false,
+  "scope": "Prepared container runtime; image/dependency preparation precedes isolation"
+}

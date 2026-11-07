@@ -1,0 +1,116 @@
+{
+  "engine": "postgres",
+  "read_only": true,
+  "publication": "892b4cd58cdf4d099510974d91fa64ab",
+  "snapshot": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "summaries": [
+    {
+      "window": "two-day",
+      "compartment": "AICU",
+      "irrigation": "6.3",
+      "drain": "2.3",
+      "ratio": "36.507936507936507936507936507936507936507936507937",
+      "paired_days": 2,
+      "expected_days": 2
+    },
+    {
+      "window": "two-day",
+      "compartment": "Automatoes",
+      "irrigation": "9.36",
+      "drain": "3.89",
+      "ratio": "41.559829059829059829059829059829059829059829059829",
+      "paired_days": 2,
+      "expected_days": 2
+    },
+    {
+      "window": "two-day",
+      "compartment": "Digilog",
+      "irrigation": "6.7626",
+      "drain": "1.16",
+      "ratio": "17.153165942093277733416141720639990536184307810605",
+      "paired_days": 2,
+      "expected_days": 2
+    },
+    {
+      "window": "two-day",
+      "compartment": "IUACAAS",
+      "irrigation": "11.8170",
+      "drain": "4.26",
+      "ratio": "36.049758822036049758822036049758822036049758822036",
+      "paired_days": 2,
+      "expected_days": 2
+    },
+    {
+      "window": "two-day",
+      "compartment": "Reference",
+      "irrigation": "13.3",
+      "drain": "8.6",
+      "ratio": "64.661654135338345864661654135338345864661654135338",
+      "paired_days": 2,
+      "expected_days": 2
+    },
+    {
+      "window": "two-day",
+      "compartment": "TheAutomators",
+      "irrigation": "8.64",
+      "drain": "1.74",
+      "ratio": "20.138888888888888888888888888888888888888888888889",
+      "paired_days": 2,
+      "expected_days": 2
+    },
+    {
+      "window": "full-cycle",
+      "compartment": "AICU",
+      "irrigation": "553.5",
+      "drain": "211.4",
+      "ratio": "38.193315266485998193315266485998193315266485998193",
+      "paired_days": 166,
+      "expected_days": 166
+    },
+    {
+      "window": "full-cycle",
+      "compartment": "Automatoes",
+      "irrigation": "788.851818181",
+      "drain": "324.08",
+      "ratio": "41.082493889320121470561227779066128452516326393374",
+      "paired_days": 166,
+      "expected_days": 166
+    },
+    {
+      "window": "full-cycle",
+      "compartment": "Digilog",
+      "irrigation": "741.05642727",
+      "drain": "182.902727272",
+      "ratio": "24.681349562785770992372544165330358946284131052416",
+      "paired_days": 166,
+      "expected_days": 166
+    },
+    {
+      "window": "full-cycle",
+      "compartment": "IUACAAS",
+      "irrigation": "866.5800",
+      "drain": "296.206363636",
+      "ratio": "34.181075450160400655450160400655450160400655450160",
+      "paired_days": 166,
+      "expected_days": 166
+    },
+    {
+      "window": "full-cycle",
+      "compartment": "Reference",
+      "irrigation": "788.6",
+      "drain": "350.3",
+      "ratio": "44.420492011159015977681968044636063910727872178544",
+      "paired_days": 166,
+      "expected_days": 166
+    },
+    {
+      "window": "full-cycle",
+      "compartment": "TheAutomators",
+      "irrigation": "723.24",
+      "drain": "267.70",
+      "ratio": "37.013992588905480891543609313644156849731762623749",
+      "paired_days": 166,
+      "expected_days": 166
+    }
+  ]
+}

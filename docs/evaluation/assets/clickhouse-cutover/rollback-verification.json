@@ -1,0 +1,1655 @@
+{
+  "status": "passed",
+  "archive_sha256": "c31c588cc87edf265e22c2f58c05f22568abbf4818d6803fe8202f5cfe0ce1bd",
+  "six_brs_business_exact": true,
+  "old_publication_unchanged": true,
+  "scenario_versions": 178,
+  "scenario_retry_exact": true,
+  "post_cutover_scenario_cost_exact": true,
+  "scenarios": [
+    {
+      "source_scenario_version": "scenario:bench-seed-362e0d74dfb640b0803bf1c774aabc65:v1",
+      "scenario_version": "scenario:bench-seed-362e0d74dfb640b0803bf1c774aabc65:v1",
+      "request_id": "bench-seed-362e0d74dfb640b0803bf1c774aabc65",
+      "original_request_id": "bench-seed-362e0d74dfb640b0803bf1c774aabc65",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-seed-3f93f797c59a4e75894b13d3ff049d03:v1",
+      "scenario_version": "scenario:bench-seed-3f93f797c59a4e75894b13d3ff049d03:v1",
+      "request_id": "bench-seed-3f93f797c59a4e75894b13d3ff049d03",
+      "original_request_id": "bench-seed-3f93f797c59a4e75894b13d3ff049d03",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-seed-5bc299bc0cf0489dadd710a5dd752118:v1",
+      "scenario_version": "scenario:bench-seed-5bc299bc0cf0489dadd710a5dd752118:v1",
+      "request_id": "bench-seed-5bc299bc0cf0489dadd710a5dd752118",
+      "original_request_id": "bench-seed-5bc299bc0cf0489dadd710a5dd752118",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-seed-a15b4befe29140d8ace3b29015d03da2:v1",
+      "scenario_version": "scenario:bench-seed-a15b4befe29140d8ace3b29015d03da2:v1",
+      "request_id": "bench-seed-a15b4befe29140d8ace3b29015d03da2",
+      "original_request_id": "bench-seed-a15b4befe29140d8ace3b29015d03da2",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-09c730680a804af3b962f44981ded2cd:v1",
+      "scenario_version": "scenario:bench-warmup-09c730680a804af3b962f44981ded2cd:v1",
+      "request_id": "bench-warmup-09c730680a804af3b962f44981ded2cd",
+      "original_request_id": "bench-warmup-09c730680a804af3b962f44981ded2cd",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-115fcac2897b4509862e42b005056982:v1",
+      "scenario_version": "scenario:bench-warmup-115fcac2897b4509862e42b005056982:v1",
+      "request_id": "bench-warmup-115fcac2897b4509862e42b005056982",
+      "original_request_id": "bench-warmup-115fcac2897b4509862e42b005056982",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-16353f58479d4d488b3834b46b1eaeba:v1",
+      "scenario_version": "scenario:bench-warmup-16353f58479d4d488b3834b46b1eaeba:v1",
+      "request_id": "bench-warmup-16353f58479d4d488b3834b46b1eaeba",
+      "original_request_id": "bench-warmup-16353f58479d4d488b3834b46b1eaeba",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-3b4f7259ce924633bd9f0f447ab85565:v1",
+      "scenario_version": "scenario:bench-warmup-3b4f7259ce924633bd9f0f447ab85565:v1",
+      "request_id": "bench-warmup-3b4f7259ce924633bd9f0f447ab85565",
+      "original_request_id": "bench-warmup-3b4f7259ce924633bd9f0f447ab85565",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-3f38c98fd4d4471f940ef448b2b16deb:v1",
+      "scenario_version": "scenario:bench-warmup-3f38c98fd4d4471f940ef448b2b16deb:v1",
+      "request_id": "bench-warmup-3f38c98fd4d4471f940ef448b2b16deb",
+      "original_request_id": "bench-warmup-3f38c98fd4d4471f940ef448b2b16deb",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-3f8b21517f074f77ac93754a57ad87b2:v1",
+      "scenario_version": "scenario:bench-warmup-3f8b21517f074f77ac93754a57ad87b2:v1",
+      "request_id": "bench-warmup-3f8b21517f074f77ac93754a57ad87b2",
+      "original_request_id": "bench-warmup-3f8b21517f074f77ac93754a57ad87b2",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-41cfab6ba7fa4e83ad77e9367ee7bb99:v1",
+      "scenario_version": "scenario:bench-warmup-41cfab6ba7fa4e83ad77e9367ee7bb99:v1",
+      "request_id": "bench-warmup-41cfab6ba7fa4e83ad77e9367ee7bb99",
+      "original_request_id": "bench-warmup-41cfab6ba7fa4e83ad77e9367ee7bb99",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-441da33854fb4844bff565218cb4ed98:v1",
+      "scenario_version": "scenario:bench-warmup-441da33854fb4844bff565218cb4ed98:v1",
+      "request_id": "bench-warmup-441da33854fb4844bff565218cb4ed98",
+      "original_request_id": "bench-warmup-441da33854fb4844bff565218cb4ed98",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-4ee2ae0b9842404b87f8cc84dd71b68a:v1",
+      "scenario_version": "scenario:bench-warmup-4ee2ae0b9842404b87f8cc84dd71b68a:v1",
+      "request_id": "bench-warmup-4ee2ae0b9842404b87f8cc84dd71b68a",
+      "original_request_id": "bench-warmup-4ee2ae0b9842404b87f8cc84dd71b68a",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-6c5d6251c96a46cba59ef8616b3316ac:v1",
+      "scenario_version": "scenario:bench-warmup-6c5d6251c96a46cba59ef8616b3316ac:v1",
+      "request_id": "bench-warmup-6c5d6251c96a46cba59ef8616b3316ac",
+      "original_request_id": "bench-warmup-6c5d6251c96a46cba59ef8616b3316ac",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-715ed1ada5fd4dffa368a477d71745a5:v1",
+      "scenario_version": "scenario:bench-warmup-715ed1ada5fd4dffa368a477d71745a5:v1",
+      "request_id": "bench-warmup-715ed1ada5fd4dffa368a477d71745a5",
+      "original_request_id": "bench-warmup-715ed1ada5fd4dffa368a477d71745a5",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-72d8550c9d38442d8cda55eac2339b34:v1",
+      "scenario_version": "scenario:bench-warmup-72d8550c9d38442d8cda55eac2339b34:v1",
+      "request_id": "bench-warmup-72d8550c9d38442d8cda55eac2339b34",
+      "original_request_id": "bench-warmup-72d8550c9d38442d8cda55eac2339b34",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-755542bfbcb540b980c195a7fda56bd2:v1",
+      "scenario_version": "scenario:bench-warmup-755542bfbcb540b980c195a7fda56bd2:v1",
+      "request_id": "bench-warmup-755542bfbcb540b980c195a7fda56bd2",
+      "original_request_id": "bench-warmup-755542bfbcb540b980c195a7fda56bd2",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-943ca3ea21254bf28e62e157f890cff4:v1",
+      "scenario_version": "scenario:bench-warmup-943ca3ea21254bf28e62e157f890cff4:v1",
+      "request_id": "bench-warmup-943ca3ea21254bf28e62e157f890cff4",
+      "original_request_id": "bench-warmup-943ca3ea21254bf28e62e157f890cff4",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-a3046f4c68f84da287e45baa4a03995b:v1",
+      "scenario_version": "scenario:bench-warmup-a3046f4c68f84da287e45baa4a03995b:v1",
+      "request_id": "bench-warmup-a3046f4c68f84da287e45baa4a03995b",
+      "original_request_id": "bench-warmup-a3046f4c68f84da287e45baa4a03995b",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-af020fd2f0e044f8aba98290e8cf978b:v1",
+      "scenario_version": "scenario:bench-warmup-af020fd2f0e044f8aba98290e8cf978b:v1",
+      "request_id": "bench-warmup-af020fd2f0e044f8aba98290e8cf978b",
+      "original_request_id": "bench-warmup-af020fd2f0e044f8aba98290e8cf978b",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-d0d364e64f344db68e408134ac9857b4:v1",
+      "scenario_version": "scenario:bench-warmup-d0d364e64f344db68e408134ac9857b4:v1",
+      "request_id": "bench-warmup-d0d364e64f344db68e408134ac9857b4",
+      "original_request_id": "bench-warmup-d0d364e64f344db68e408134ac9857b4",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-dc0fb56695d048199e4e0c458308cf8f:v1",
+      "scenario_version": "scenario:bench-warmup-dc0fb56695d048199e4e0c458308cf8f:v1",
+      "request_id": "bench-warmup-dc0fb56695d048199e4e0c458308cf8f",
+      "original_request_id": "bench-warmup-dc0fb56695d048199e4e0c458308cf8f",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-e1e07e73ffe245c4ba79867fec2f0061:v1",
+      "scenario_version": "scenario:bench-warmup-e1e07e73ffe245c4ba79867fec2f0061:v1",
+      "request_id": "bench-warmup-e1e07e73ffe245c4ba79867fec2f0061",
+      "original_request_id": "bench-warmup-e1e07e73ffe245c4ba79867fec2f0061",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-warmup-f3de230d959644498add953a9ab8ee34:v1",
+      "scenario_version": "scenario:bench-warmup-f3de230d959644498add953a9ab8ee34:v1",
+      "request_id": "bench-warmup-f3de230d959644498add953a9ab8ee34",
+      "original_request_id": "bench-warmup-f3de230d959644498add953a9ab8ee34",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-01adb1f4cdb4452dbf7b8b3a0e44882d:v1",
+      "scenario_version": "scenario:bench-write-01adb1f4cdb4452dbf7b8b3a0e44882d:v1",
+      "request_id": "bench-write-01adb1f4cdb4452dbf7b8b3a0e44882d",
+      "original_request_id": "bench-write-01adb1f4cdb4452dbf7b8b3a0e44882d",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-02318b6a736248d7a5ccdc55a2c6da95:v1",
+      "scenario_version": "scenario:bench-write-02318b6a736248d7a5ccdc55a2c6da95:v1",
+      "request_id": "bench-write-02318b6a736248d7a5ccdc55a2c6da95",
+      "original_request_id": "bench-write-02318b6a736248d7a5ccdc55a2c6da95",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-02c7ac9d7a084d2ca1f21a43da8a0887:v1",
+      "scenario_version": "scenario:bench-write-02c7ac9d7a084d2ca1f21a43da8a0887:v1",
+      "request_id": "bench-write-02c7ac9d7a084d2ca1f21a43da8a0887",
+      "original_request_id": "bench-write-02c7ac9d7a084d2ca1f21a43da8a0887",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-059f740f9ef24072bbaf1d151ab2d97a:v1",
+      "scenario_version": "scenario:bench-write-059f740f9ef24072bbaf1d151ab2d97a:v1",
+      "request_id": "bench-write-059f740f9ef24072bbaf1d151ab2d97a",
+      "original_request_id": "bench-write-059f740f9ef24072bbaf1d151ab2d97a",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-073d42c179f14d909b632a3d50227006:v1",
+      "scenario_version": "scenario:bench-write-073d42c179f14d909b632a3d50227006:v1",
+      "request_id": "bench-write-073d42c179f14d909b632a3d50227006",
+      "original_request_id": "bench-write-073d42c179f14d909b632a3d50227006",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-0759203655ee49fca384d3ae3a740d8d:v1",
+      "scenario_version": "scenario:bench-write-0759203655ee49fca384d3ae3a740d8d:v1",
+      "request_id": "bench-write-0759203655ee49fca384d3ae3a740d8d",
+      "original_request_id": "bench-write-0759203655ee49fca384d3ae3a740d8d",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-07bdfa4ae7ec4c4a9615f08c2b7f2ee0:v1",
+      "scenario_version": "scenario:bench-write-07bdfa4ae7ec4c4a9615f08c2b7f2ee0:v1",
+      "request_id": "bench-write-07bdfa4ae7ec4c4a9615f08c2b7f2ee0",
+      "original_request_id": "bench-write-07bdfa4ae7ec4c4a9615f08c2b7f2ee0",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-0a0ffc5741324a29bf9e34807b5b32f4:v1",
+      "scenario_version": "scenario:bench-write-0a0ffc5741324a29bf9e34807b5b32f4:v1",
+      "request_id": "bench-write-0a0ffc5741324a29bf9e34807b5b32f4",
+      "original_request_id": "bench-write-0a0ffc5741324a29bf9e34807b5b32f4",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-0a32cc53b407454cbbea0fcb54f2f765:v1",
+      "scenario_version": "scenario:bench-write-0a32cc53b407454cbbea0fcb54f2f765:v1",
+      "request_id": "bench-write-0a32cc53b407454cbbea0fcb54f2f765",
+      "original_request_id": "bench-write-0a32cc53b407454cbbea0fcb54f2f765",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-0afff26e5443481bb4b688bf8aac950d:v1",
+      "scenario_version": "scenario:bench-write-0afff26e5443481bb4b688bf8aac950d:v1",
+      "request_id": "bench-write-0afff26e5443481bb4b688bf8aac950d",
+      "original_request_id": "bench-write-0afff26e5443481bb4b688bf8aac950d",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-0b25edecfd644ea598d5f657d547ddd8:v1",
+      "scenario_version": "scenario:bench-write-0b25edecfd644ea598d5f657d547ddd8:v1",
+      "request_id": "bench-write-0b25edecfd644ea598d5f657d547ddd8",
+      "original_request_id": "bench-write-0b25edecfd644ea598d5f657d547ddd8",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-0b6401288ef4498eb028efbdb29f1bab:v1",
+      "scenario_version": "scenario:bench-write-0b6401288ef4498eb028efbdb29f1bab:v1",
+      "request_id": "bench-write-0b6401288ef4498eb028efbdb29f1bab",
+      "original_request_id": "bench-write-0b6401288ef4498eb028efbdb29f1bab",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-0ba62b86b44b454192304c976e3587e9:v1",
+      "scenario_version": "scenario:bench-write-0ba62b86b44b454192304c976e3587e9:v1",
+      "request_id": "bench-write-0ba62b86b44b454192304c976e3587e9",
+      "original_request_id": "bench-write-0ba62b86b44b454192304c976e3587e9",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-13a6480b12d84c8ea5d7ff5969e8c160:v1",
+      "scenario_version": "scenario:bench-write-13a6480b12d84c8ea5d7ff5969e8c160:v1",
+      "request_id": "bench-write-13a6480b12d84c8ea5d7ff5969e8c160",
+      "original_request_id": "bench-write-13a6480b12d84c8ea5d7ff5969e8c160",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-15d9ca20c4a441af9b3f052cbd1005e5:v1",
+      "scenario_version": "scenario:bench-write-15d9ca20c4a441af9b3f052cbd1005e5:v1",
+      "request_id": "bench-write-15d9ca20c4a441af9b3f052cbd1005e5",
+      "original_request_id": "bench-write-15d9ca20c4a441af9b3f052cbd1005e5",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-18e5d8a20b9b400ba58a812939724192:v1",
+      "scenario_version": "scenario:bench-write-18e5d8a20b9b400ba58a812939724192:v1",
+      "request_id": "bench-write-18e5d8a20b9b400ba58a812939724192",
+      "original_request_id": "bench-write-18e5d8a20b9b400ba58a812939724192",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-199dfef6bbd34a17b4c7614f8a3c166f:v1",
+      "scenario_version": "scenario:bench-write-199dfef6bbd34a17b4c7614f8a3c166f:v1",
+      "request_id": "bench-write-199dfef6bbd34a17b4c7614f8a3c166f",
+      "original_request_id": "bench-write-199dfef6bbd34a17b4c7614f8a3c166f",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-1c32fed5549048618b344ad791998d9c:v1",
+      "scenario_version": "scenario:bench-write-1c32fed5549048618b344ad791998d9c:v1",
+      "request_id": "bench-write-1c32fed5549048618b344ad791998d9c",
+      "original_request_id": "bench-write-1c32fed5549048618b344ad791998d9c",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-1cd171a92ec044af9a0369eb8790f123:v1",
+      "scenario_version": "scenario:bench-write-1cd171a92ec044af9a0369eb8790f123:v1",
+      "request_id": "bench-write-1cd171a92ec044af9a0369eb8790f123",
+      "original_request_id": "bench-write-1cd171a92ec044af9a0369eb8790f123",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-20e8047d812d49e98af6c3868d5afde6:v1",
+      "scenario_version": "scenario:bench-write-20e8047d812d49e98af6c3868d5afde6:v1",
+      "request_id": "bench-write-20e8047d812d49e98af6c3868d5afde6",
+      "original_request_id": "bench-write-20e8047d812d49e98af6c3868d5afde6",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-266a1680a6f446ad9cbb357a6813afe7:v1",
+      "scenario_version": "scenario:bench-write-266a1680a6f446ad9cbb357a6813afe7:v1",
+      "request_id": "bench-write-266a1680a6f446ad9cbb357a6813afe7",
+      "original_request_id": "bench-write-266a1680a6f446ad9cbb357a6813afe7",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-284e3cfc323e4679a8f18c55b3e452bb:v1",
+      "scenario_version": "scenario:bench-write-284e3cfc323e4679a8f18c55b3e452bb:v1",
+      "request_id": "bench-write-284e3cfc323e4679a8f18c55b3e452bb",
+      "original_request_id": "bench-write-284e3cfc323e4679a8f18c55b3e452bb",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-2a271503f1c24a40beb0514d48aecd84:v1",
+      "scenario_version": "scenario:bench-write-2a271503f1c24a40beb0514d48aecd84:v1",
+      "request_id": "bench-write-2a271503f1c24a40beb0514d48aecd84",
+      "original_request_id": "bench-write-2a271503f1c24a40beb0514d48aecd84",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-2ceb75a45efd4ec8a5e903fc15c03eb8:v1",
+      "scenario_version": "scenario:bench-write-2ceb75a45efd4ec8a5e903fc15c03eb8:v1",
+      "request_id": "bench-write-2ceb75a45efd4ec8a5e903fc15c03eb8",
+      "original_request_id": "bench-write-2ceb75a45efd4ec8a5e903fc15c03eb8",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-33d24c29dec24c338b620be6fbbbf3c2:v1",
+      "scenario_version": "scenario:bench-write-33d24c29dec24c338b620be6fbbbf3c2:v1",
+      "request_id": "bench-write-33d24c29dec24c338b620be6fbbbf3c2",
+      "original_request_id": "bench-write-33d24c29dec24c338b620be6fbbbf3c2",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-34fc195d6e9143338828eefbb6b3c865:v1",
+      "scenario_version": "scenario:bench-write-34fc195d6e9143338828eefbb6b3c865:v1",
+      "request_id": "bench-write-34fc195d6e9143338828eefbb6b3c865",
+      "original_request_id": "bench-write-34fc195d6e9143338828eefbb6b3c865",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-39982db6165d42449dd71c4476a6c68c:v1",
+      "scenario_version": "scenario:bench-write-39982db6165d42449dd71c4476a6c68c:v1",
+      "request_id": "bench-write-39982db6165d42449dd71c4476a6c68c",
+      "original_request_id": "bench-write-39982db6165d42449dd71c4476a6c68c",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-39d8e9f7ca934e4782331775b446cadd:v1",
+      "scenario_version": "scenario:bench-write-39d8e9f7ca934e4782331775b446cadd:v1",
+      "request_id": "bench-write-39d8e9f7ca934e4782331775b446cadd",
+      "original_request_id": "bench-write-39d8e9f7ca934e4782331775b446cadd",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-3e5a3e82d5504db1bb5166e9c951e06d:v1",
+      "scenario_version": "scenario:bench-write-3e5a3e82d5504db1bb5166e9c951e06d:v1",
+      "request_id": "bench-write-3e5a3e82d5504db1bb5166e9c951e06d",
+      "original_request_id": "bench-write-3e5a3e82d5504db1bb5166e9c951e06d",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-3f1ec8e2244648d6873a33e4b906bd76:v1",
+      "scenario_version": "scenario:bench-write-3f1ec8e2244648d6873a33e4b906bd76:v1",
+      "request_id": "bench-write-3f1ec8e2244648d6873a33e4b906bd76",
+      "original_request_id": "bench-write-3f1ec8e2244648d6873a33e4b906bd76",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-41fcadc120d443269ef74d1543a87f08:v1",
+      "scenario_version": "scenario:bench-write-41fcadc120d443269ef74d1543a87f08:v1",
+      "request_id": "bench-write-41fcadc120d443269ef74d1543a87f08",
+      "original_request_id": "bench-write-41fcadc120d443269ef74d1543a87f08",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-486ac33845134301b3bfe873a160fd4d:v1",
+      "scenario_version": "scenario:bench-write-486ac33845134301b3bfe873a160fd4d:v1",
+      "request_id": "bench-write-486ac33845134301b3bfe873a160fd4d",
+      "original_request_id": "bench-write-486ac33845134301b3bfe873a160fd4d",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-4ad490592c8f475f843222a39ce39341:v1",
+      "scenario_version": "scenario:bench-write-4ad490592c8f475f843222a39ce39341:v1",
+      "request_id": "bench-write-4ad490592c8f475f843222a39ce39341",
+      "original_request_id": "bench-write-4ad490592c8f475f843222a39ce39341",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-4df1008eb301493abfd489e73652799d:v1",
+      "scenario_version": "scenario:bench-write-4df1008eb301493abfd489e73652799d:v1",
+      "request_id": "bench-write-4df1008eb301493abfd489e73652799d",
+      "original_request_id": "bench-write-4df1008eb301493abfd489e73652799d",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-50739f10bae24fe881d1ff4faaad6cfa:v1",
+      "scenario_version": "scenario:bench-write-50739f10bae24fe881d1ff4faaad6cfa:v1",
+      "request_id": "bench-write-50739f10bae24fe881d1ff4faaad6cfa",
+      "original_request_id": "bench-write-50739f10bae24fe881d1ff4faaad6cfa",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-50fec46cc7b4470c834ed530aa863dcf:v1",
+      "scenario_version": "scenario:bench-write-50fec46cc7b4470c834ed530aa863dcf:v1",
+      "request_id": "bench-write-50fec46cc7b4470c834ed530aa863dcf",
+      "original_request_id": "bench-write-50fec46cc7b4470c834ed530aa863dcf",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-520bc39d14c1408da624b92ebd98fb28:v1",
+      "scenario_version": "scenario:bench-write-520bc39d14c1408da624b92ebd98fb28:v1",
+      "request_id": "bench-write-520bc39d14c1408da624b92ebd98fb28",
+      "original_request_id": "bench-write-520bc39d14c1408da624b92ebd98fb28",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-541af2b1165942c084fa3f1f51f01f5e:v1",
+      "scenario_version": "scenario:bench-write-541af2b1165942c084fa3f1f51f01f5e:v1",
+      "request_id": "bench-write-541af2b1165942c084fa3f1f51f01f5e",
+      "original_request_id": "bench-write-541af2b1165942c084fa3f1f51f01f5e",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-580d0ba0f69c4bdca78bd09da284f3a4:v1",
+      "scenario_version": "scenario:bench-write-580d0ba0f69c4bdca78bd09da284f3a4:v1",
+      "request_id": "bench-write-580d0ba0f69c4bdca78bd09da284f3a4",
+      "original_request_id": "bench-write-580d0ba0f69c4bdca78bd09da284f3a4",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-5a64c7c0774b49d3ab90c751a74bedf3:v1",
+      "scenario_version": "scenario:bench-write-5a64c7c0774b49d3ab90c751a74bedf3:v1",
+      "request_id": "bench-write-5a64c7c0774b49d3ab90c751a74bedf3",
+      "original_request_id": "bench-write-5a64c7c0774b49d3ab90c751a74bedf3",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-5a95dfc74db148ea8a36b3ff959700d5:v1",
+      "scenario_version": "scenario:bench-write-5a95dfc74db148ea8a36b3ff959700d5:v1",
+      "request_id": "bench-write-5a95dfc74db148ea8a36b3ff959700d5",
+      "original_request_id": "bench-write-5a95dfc74db148ea8a36b3ff959700d5",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-5b78805a9ac144258cf87643693e5e0b:v1",
+      "scenario_version": "scenario:bench-write-5b78805a9ac144258cf87643693e5e0b:v1",
+      "request_id": "bench-write-5b78805a9ac144258cf87643693e5e0b",
+      "original_request_id": "bench-write-5b78805a9ac144258cf87643693e5e0b",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-61b5c863c964449eb00ac6599922d827:v1",
+      "scenario_version": "scenario:bench-write-61b5c863c964449eb00ac6599922d827:v1",
+      "request_id": "bench-write-61b5c863c964449eb00ac6599922d827",
+      "original_request_id": "bench-write-61b5c863c964449eb00ac6599922d827",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-65a9cbd5be7f4ff486c3c541000d1b63:v1",
+      "scenario_version": "scenario:bench-write-65a9cbd5be7f4ff486c3c541000d1b63:v1",
+      "request_id": "bench-write-65a9cbd5be7f4ff486c3c541000d1b63",
+      "original_request_id": "bench-write-65a9cbd5be7f4ff486c3c541000d1b63",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-666537c743684d4fb6a5c8cc4d6fbd93:v1",
+      "scenario_version": "scenario:bench-write-666537c743684d4fb6a5c8cc4d6fbd93:v1",
+      "request_id": "bench-write-666537c743684d4fb6a5c8cc4d6fbd93",
+      "original_request_id": "bench-write-666537c743684d4fb6a5c8cc4d6fbd93",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-66af5de3ff05483f93bb8225b99936a7:v1",
+      "scenario_version": "scenario:bench-write-66af5de3ff05483f93bb8225b99936a7:v1",
+      "request_id": "bench-write-66af5de3ff05483f93bb8225b99936a7",
+      "original_request_id": "bench-write-66af5de3ff05483f93bb8225b99936a7",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-6721351257cc46e6b2bb6b1200152573:v1",
+      "scenario_version": "scenario:bench-write-6721351257cc46e6b2bb6b1200152573:v1",
+      "request_id": "bench-write-6721351257cc46e6b2bb6b1200152573",
+      "original_request_id": "bench-write-6721351257cc46e6b2bb6b1200152573",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-6740856cd0e74f048b36ea446d806ff2:v1",
+      "scenario_version": "scenario:bench-write-6740856cd0e74f048b36ea446d806ff2:v1",
+      "request_id": "bench-write-6740856cd0e74f048b36ea446d806ff2",
+      "original_request_id": "bench-write-6740856cd0e74f048b36ea446d806ff2",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-676a357674624b119f13ae46d63e2c04:v1",
+      "scenario_version": "scenario:bench-write-676a357674624b119f13ae46d63e2c04:v1",
+      "request_id": "bench-write-676a357674624b119f13ae46d63e2c04",
+      "original_request_id": "bench-write-676a357674624b119f13ae46d63e2c04",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-678411d34df44bde8a973dc31cf72e23:v1",
+      "scenario_version": "scenario:bench-write-678411d34df44bde8a973dc31cf72e23:v1",
+      "request_id": "bench-write-678411d34df44bde8a973dc31cf72e23",
+      "original_request_id": "bench-write-678411d34df44bde8a973dc31cf72e23",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-6b103427f583494d8fb3a0b19f7119aa:v1",
+      "scenario_version": "scenario:bench-write-6b103427f583494d8fb3a0b19f7119aa:v1",
+      "request_id": "bench-write-6b103427f583494d8fb3a0b19f7119aa",
+      "original_request_id": "bench-write-6b103427f583494d8fb3a0b19f7119aa",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-6d30005151f7442f91b7a7dd02872679:v1",
+      "scenario_version": "scenario:bench-write-6d30005151f7442f91b7a7dd02872679:v1",
+      "request_id": "bench-write-6d30005151f7442f91b7a7dd02872679",
+      "original_request_id": "bench-write-6d30005151f7442f91b7a7dd02872679",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-6db5152f9d3d4fa9b8d1484ed8be6ae0:v1",
+      "scenario_version": "scenario:bench-write-6db5152f9d3d4fa9b8d1484ed8be6ae0:v1",
+      "request_id": "bench-write-6db5152f9d3d4fa9b8d1484ed8be6ae0",
+      "original_request_id": "bench-write-6db5152f9d3d4fa9b8d1484ed8be6ae0",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-6f929100ba9445f8b09b7d56cd5f660c:v1",
+      "scenario_version": "scenario:bench-write-6f929100ba9445f8b09b7d56cd5f660c:v1",
+      "request_id": "bench-write-6f929100ba9445f8b09b7d56cd5f660c",
+      "original_request_id": "bench-write-6f929100ba9445f8b09b7d56cd5f660c",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-7069f47efa894abb949c62d28fa6bd88:v1",
+      "scenario_version": "scenario:bench-write-7069f47efa894abb949c62d28fa6bd88:v1",
+      "request_id": "bench-write-7069f47efa894abb949c62d28fa6bd88",
+      "original_request_id": "bench-write-7069f47efa894abb949c62d28fa6bd88",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-7116fdbc02a5414096b9363ba5d60212:v1",
+      "scenario_version": "scenario:bench-write-7116fdbc02a5414096b9363ba5d60212:v1",
+      "request_id": "bench-write-7116fdbc02a5414096b9363ba5d60212",
+      "original_request_id": "bench-write-7116fdbc02a5414096b9363ba5d60212",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-71af602ee3024b2b89113ea559e5db41:v1",
+      "scenario_version": "scenario:bench-write-71af602ee3024b2b89113ea559e5db41:v1",
+      "request_id": "bench-write-71af602ee3024b2b89113ea559e5db41",
+      "original_request_id": "bench-write-71af602ee3024b2b89113ea559e5db41",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-732b41b27a8c409f9b057ca72ca6021a:v1",
+      "scenario_version": "scenario:bench-write-732b41b27a8c409f9b057ca72ca6021a:v1",
+      "request_id": "bench-write-732b41b27a8c409f9b057ca72ca6021a",
+      "original_request_id": "bench-write-732b41b27a8c409f9b057ca72ca6021a",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-7444529c641144a4a6e1ac31427509e8:v1",
+      "scenario_version": "scenario:bench-write-7444529c641144a4a6e1ac31427509e8:v1",
+      "request_id": "bench-write-7444529c641144a4a6e1ac31427509e8",
+      "original_request_id": "bench-write-7444529c641144a4a6e1ac31427509e8",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-7566add89eaf41b380a78e7edf19ecd5:v1",
+      "scenario_version": "scenario:bench-write-7566add89eaf41b380a78e7edf19ecd5:v1",
+      "request_id": "bench-write-7566add89eaf41b380a78e7edf19ecd5",
+      "original_request_id": "bench-write-7566add89eaf41b380a78e7edf19ecd5",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-757e558c770c4d8b828874a93e83dc6c:v1",
+      "scenario_version": "scenario:bench-write-757e558c770c4d8b828874a93e83dc6c:v1",
+      "request_id": "bench-write-757e558c770c4d8b828874a93e83dc6c",
+      "original_request_id": "bench-write-757e558c770c4d8b828874a93e83dc6c",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-77fefdf23a4949feb972f0948004ad78:v1",
+      "scenario_version": "scenario:bench-write-77fefdf23a4949feb972f0948004ad78:v1",
+      "request_id": "bench-write-77fefdf23a4949feb972f0948004ad78",
+      "original_request_id": "bench-write-77fefdf23a4949feb972f0948004ad78",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-7a3134f4e54f4938b9a6793b64478510:v1",
+      "scenario_version": "scenario:bench-write-7a3134f4e54f4938b9a6793b64478510:v1",
+      "request_id": "bench-write-7a3134f4e54f4938b9a6793b64478510",
+      "original_request_id": "bench-write-7a3134f4e54f4938b9a6793b64478510",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-7a3bf1e6262c4195b7cfd350bb7a10dc:v1",
+      "scenario_version": "scenario:bench-write-7a3bf1e6262c4195b7cfd350bb7a10dc:v1",
+      "request_id": "bench-write-7a3bf1e6262c4195b7cfd350bb7a10dc",
+      "original_request_id": "bench-write-7a3bf1e6262c4195b7cfd350bb7a10dc",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-7d057c41546a4023b7e1dffb6d8d03de:v1",
+      "scenario_version": "scenario:bench-write-7d057c41546a4023b7e1dffb6d8d03de:v1",
+      "request_id": "bench-write-7d057c41546a4023b7e1dffb6d8d03de",
+      "original_request_id": "bench-write-7d057c41546a4023b7e1dffb6d8d03de",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-7d1194d1c51344c493a4359492f262ec:v1",
+      "scenario_version": "scenario:bench-write-7d1194d1c51344c493a4359492f262ec:v1",
+      "request_id": "bench-write-7d1194d1c51344c493a4359492f262ec",
+      "original_request_id": "bench-write-7d1194d1c51344c493a4359492f262ec",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-7d44866f731b4f68afbc4e4fb1121db2:v1",
+      "scenario_version": "scenario:bench-write-7d44866f731b4f68afbc4e4fb1121db2:v1",
+      "request_id": "bench-write-7d44866f731b4f68afbc4e4fb1121db2",
+      "original_request_id": "bench-write-7d44866f731b4f68afbc4e4fb1121db2",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-7d5fdedad3554711ac04d46c23dc546c:v1",
+      "scenario_version": "scenario:bench-write-7d5fdedad3554711ac04d46c23dc546c:v1",
+      "request_id": "bench-write-7d5fdedad3554711ac04d46c23dc546c",
+      "original_request_id": "bench-write-7d5fdedad3554711ac04d46c23dc546c",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-805d011ed809406180b6a839541ffbdd:v1",
+      "scenario_version": "scenario:bench-write-805d011ed809406180b6a839541ffbdd:v1",
+      "request_id": "bench-write-805d011ed809406180b6a839541ffbdd",
+      "original_request_id": "bench-write-805d011ed809406180b6a839541ffbdd",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-86711ba306fd43f8b6b7bf4f9e7bb552:v1",
+      "scenario_version": "scenario:bench-write-86711ba306fd43f8b6b7bf4f9e7bb552:v1",
+      "request_id": "bench-write-86711ba306fd43f8b6b7bf4f9e7bb552",
+      "original_request_id": "bench-write-86711ba306fd43f8b6b7bf4f9e7bb552",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-8d69064f0dd94f588c5bc255ed4d8931:v1",
+      "scenario_version": "scenario:bench-write-8d69064f0dd94f588c5bc255ed4d8931:v1",
+      "request_id": "bench-write-8d69064f0dd94f588c5bc255ed4d8931",
+      "original_request_id": "bench-write-8d69064f0dd94f588c5bc255ed4d8931",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-901854dc582440838e2cb373177631e7:v1",
+      "scenario_version": "scenario:bench-write-901854dc582440838e2cb373177631e7:v1",
+      "request_id": "bench-write-901854dc582440838e2cb373177631e7",
+      "original_request_id": "bench-write-901854dc582440838e2cb373177631e7",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-9056fd94edd34d2db13eb5c50f660876:v1",
+      "scenario_version": "scenario:bench-write-9056fd94edd34d2db13eb5c50f660876:v1",
+      "request_id": "bench-write-9056fd94edd34d2db13eb5c50f660876",
+      "original_request_id": "bench-write-9056fd94edd34d2db13eb5c50f660876",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-91028ee3d0c64b4aa54c06271a49fbfe:v1",
+      "scenario_version": "scenario:bench-write-91028ee3d0c64b4aa54c06271a49fbfe:v1",
+      "request_id": "bench-write-91028ee3d0c64b4aa54c06271a49fbfe",
+      "original_request_id": "bench-write-91028ee3d0c64b4aa54c06271a49fbfe",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-9494962462cc49bdae297abf3fafebf8:v1",
+      "scenario_version": "scenario:bench-write-9494962462cc49bdae297abf3fafebf8:v1",
+      "request_id": "bench-write-9494962462cc49bdae297abf3fafebf8",
+      "original_request_id": "bench-write-9494962462cc49bdae297abf3fafebf8",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-94b00775e6824800a1dd40dd52aebfa4:v1",
+      "scenario_version": "scenario:bench-write-94b00775e6824800a1dd40dd52aebfa4:v1",
+      "request_id": "bench-write-94b00775e6824800a1dd40dd52aebfa4",
+      "original_request_id": "bench-write-94b00775e6824800a1dd40dd52aebfa4",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-967522526b394b7cba342fe61e9e0261:v1",
+      "scenario_version": "scenario:bench-write-967522526b394b7cba342fe61e9e0261:v1",
+      "request_id": "bench-write-967522526b394b7cba342fe61e9e0261",
+      "original_request_id": "bench-write-967522526b394b7cba342fe61e9e0261",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-96a3e04361184abcb6b68a55c2f19872:v1",
+      "scenario_version": "scenario:bench-write-96a3e04361184abcb6b68a55c2f19872:v1",
+      "request_id": "bench-write-96a3e04361184abcb6b68a55c2f19872",
+      "original_request_id": "bench-write-96a3e04361184abcb6b68a55c2f19872",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-994f2926dd4c40cba03ee6d88371a4f1:v1",
+      "scenario_version": "scenario:bench-write-994f2926dd4c40cba03ee6d88371a4f1:v1",
+      "request_id": "bench-write-994f2926dd4c40cba03ee6d88371a4f1",
+      "original_request_id": "bench-write-994f2926dd4c40cba03ee6d88371a4f1",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-995ed1beab54475e92252d8b1b9bbae9:v1",
+      "scenario_version": "scenario:bench-write-995ed1beab54475e92252d8b1b9bbae9:v1",
+      "request_id": "bench-write-995ed1beab54475e92252d8b1b9bbae9",
+      "original_request_id": "bench-write-995ed1beab54475e92252d8b1b9bbae9",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-9b856fd4cf5241aaa814597aa3b53791:v1",
+      "scenario_version": "scenario:bench-write-9b856fd4cf5241aaa814597aa3b53791:v1",
+      "request_id": "bench-write-9b856fd4cf5241aaa814597aa3b53791",
+      "original_request_id": "bench-write-9b856fd4cf5241aaa814597aa3b53791",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-9bc704c56b854e9eb3a3f1022701ebdd:v1",
+      "scenario_version": "scenario:bench-write-9bc704c56b854e9eb3a3f1022701ebdd:v1",
+      "request_id": "bench-write-9bc704c56b854e9eb3a3f1022701ebdd",
+      "original_request_id": "bench-write-9bc704c56b854e9eb3a3f1022701ebdd",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-9ecc85c2c3494a2987cc7fca4c70a3a5:v1",
+      "scenario_version": "scenario:bench-write-9ecc85c2c3494a2987cc7fca4c70a3a5:v1",
+      "request_id": "bench-write-9ecc85c2c3494a2987cc7fca4c70a3a5",
+      "original_request_id": "bench-write-9ecc85c2c3494a2987cc7fca4c70a3a5",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-9ed43efe6ceb428aa64246bef8edc5dd:v1",
+      "scenario_version": "scenario:bench-write-9ed43efe6ceb428aa64246bef8edc5dd:v1",
+      "request_id": "bench-write-9ed43efe6ceb428aa64246bef8edc5dd",
+      "original_request_id": "bench-write-9ed43efe6ceb428aa64246bef8edc5dd",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-a001c693b08f4d72b55d52ba06153fd5:v1",
+      "scenario_version": "scenario:bench-write-a001c693b08f4d72b55d52ba06153fd5:v1",
+      "request_id": "bench-write-a001c693b08f4d72b55d52ba06153fd5",
+      "original_request_id": "bench-write-a001c693b08f4d72b55d52ba06153fd5",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-a10dc4a8a28d4231bdb863d138d89b88:v1",
+      "scenario_version": "scenario:bench-write-a10dc4a8a28d4231bdb863d138d89b88:v1",
+      "request_id": "bench-write-a10dc4a8a28d4231bdb863d138d89b88",
+      "original_request_id": "bench-write-a10dc4a8a28d4231bdb863d138d89b88",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-a26cdd07bd164490983fba525347241a:v1",
+      "scenario_version": "scenario:bench-write-a26cdd07bd164490983fba525347241a:v1",
+      "request_id": "bench-write-a26cdd07bd164490983fba525347241a",
+      "original_request_id": "bench-write-a26cdd07bd164490983fba525347241a",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-a3dacdf269084cadb41cb2f949f1c8ad:v1",
+      "scenario_version": "scenario:bench-write-a3dacdf269084cadb41cb2f949f1c8ad:v1",
+      "request_id": "bench-write-a3dacdf269084cadb41cb2f949f1c8ad",
+      "original_request_id": "bench-write-a3dacdf269084cadb41cb2f949f1c8ad",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-a700e81dbf9945dc85ec24d04957a8bf:v1",
+      "scenario_version": "scenario:bench-write-a700e81dbf9945dc85ec24d04957a8bf:v1",
+      "request_id": "bench-write-a700e81dbf9945dc85ec24d04957a8bf",
+      "original_request_id": "bench-write-a700e81dbf9945dc85ec24d04957a8bf",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-a7ab577aa81847b19b43ab060dd064aa:v1",
+      "scenario_version": "scenario:bench-write-a7ab577aa81847b19b43ab060dd064aa:v1",
+      "request_id": "bench-write-a7ab577aa81847b19b43ab060dd064aa",
+      "original_request_id": "bench-write-a7ab577aa81847b19b43ab060dd064aa",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-ab89fff402e84822909718923702ba2a:v1",
+      "scenario_version": "scenario:bench-write-ab89fff402e84822909718923702ba2a:v1",
+      "request_id": "bench-write-ab89fff402e84822909718923702ba2a",
+      "original_request_id": "bench-write-ab89fff402e84822909718923702ba2a",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-acd3f7bbea2c4c9f960ff464a728102d:v1",
+      "scenario_version": "scenario:bench-write-acd3f7bbea2c4c9f960ff464a728102d:v1",
+      "request_id": "bench-write-acd3f7bbea2c4c9f960ff464a728102d",
+      "original_request_id": "bench-write-acd3f7bbea2c4c9f960ff464a728102d",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-af33bd5fd0b74314bae136ff3195a59a:v1",
+      "scenario_version": "scenario:bench-write-af33bd5fd0b74314bae136ff3195a59a:v1",
+      "request_id": "bench-write-af33bd5fd0b74314bae136ff3195a59a",
+      "original_request_id": "bench-write-af33bd5fd0b74314bae136ff3195a59a",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-b0532d3a05fb4bacbf8ce6a6234b0b61:v1",
+      "scenario_version": "scenario:bench-write-b0532d3a05fb4bacbf8ce6a6234b0b61:v1",
+      "request_id": "bench-write-b0532d3a05fb4bacbf8ce6a6234b0b61",
+      "original_request_id": "bench-write-b0532d3a05fb4bacbf8ce6a6234b0b61",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-b9432e76f3934f07ab0bcafbdb8d7e96:v1",
+      "scenario_version": "scenario:bench-write-b9432e76f3934f07ab0bcafbdb8d7e96:v1",
+      "request_id": "bench-write-b9432e76f3934f07ab0bcafbdb8d7e96",
+      "original_request_id": "bench-write-b9432e76f3934f07ab0bcafbdb8d7e96",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-b9ec4b1388154f2ab774c75b035f4a37:v1",
+      "scenario_version": "scenario:bench-write-b9ec4b1388154f2ab774c75b035f4a37:v1",
+      "request_id": "bench-write-b9ec4b1388154f2ab774c75b035f4a37",
+      "original_request_id": "bench-write-b9ec4b1388154f2ab774c75b035f4a37",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-bd627934e8584feaa6b63ad56a006306:v1",
+      "scenario_version": "scenario:bench-write-bd627934e8584feaa6b63ad56a006306:v1",
+      "request_id": "bench-write-bd627934e8584feaa6b63ad56a006306",
+      "original_request_id": "bench-write-bd627934e8584feaa6b63ad56a006306",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-c3b99a102cfa4640aa4d0ecb7cbd7602:v1",
+      "scenario_version": "scenario:bench-write-c3b99a102cfa4640aa4d0ecb7cbd7602:v1",
+      "request_id": "bench-write-c3b99a102cfa4640aa4d0ecb7cbd7602",
+      "original_request_id": "bench-write-c3b99a102cfa4640aa4d0ecb7cbd7602",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-c505070ec73a4d23933898cf96ecfee2:v1",
+      "scenario_version": "scenario:bench-write-c505070ec73a4d23933898cf96ecfee2:v1",
+      "request_id": "bench-write-c505070ec73a4d23933898cf96ecfee2",
+      "original_request_id": "bench-write-c505070ec73a4d23933898cf96ecfee2",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-cb508b94ccba407b943019f8fa3bcd2d:v1",
+      "scenario_version": "scenario:bench-write-cb508b94ccba407b943019f8fa3bcd2d:v1",
+      "request_id": "bench-write-cb508b94ccba407b943019f8fa3bcd2d",
+      "original_request_id": "bench-write-cb508b94ccba407b943019f8fa3bcd2d",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-ce579b90ccdb4cf18b133cf679165791:v1",
+      "scenario_version": "scenario:bench-write-ce579b90ccdb4cf18b133cf679165791:v1",
+      "request_id": "bench-write-ce579b90ccdb4cf18b133cf679165791",
+      "original_request_id": "bench-write-ce579b90ccdb4cf18b133cf679165791",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-d490db92e15648569832db8ef09c0483:v1",
+      "scenario_version": "scenario:bench-write-d490db92e15648569832db8ef09c0483:v1",
+      "request_id": "bench-write-d490db92e15648569832db8ef09c0483",
+      "original_request_id": "bench-write-d490db92e15648569832db8ef09c0483",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-d8ed3fcd2e53415081adb38e36191e40:v1",
+      "scenario_version": "scenario:bench-write-d8ed3fcd2e53415081adb38e36191e40:v1",
+      "request_id": "bench-write-d8ed3fcd2e53415081adb38e36191e40",
+      "original_request_id": "bench-write-d8ed3fcd2e53415081adb38e36191e40",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-dc8e3d2f721e4f8798808757f8f9fd24:v1",
+      "scenario_version": "scenario:bench-write-dc8e3d2f721e4f8798808757f8f9fd24:v1",
+      "request_id": "bench-write-dc8e3d2f721e4f8798808757f8f9fd24",
+      "original_request_id": "bench-write-dc8e3d2f721e4f8798808757f8f9fd24",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-dd4ed32be29e4e7c8525a071452a6583:v1",
+      "scenario_version": "scenario:bench-write-dd4ed32be29e4e7c8525a071452a6583:v1",
+      "request_id": "bench-write-dd4ed32be29e4e7c8525a071452a6583",
+      "original_request_id": "bench-write-dd4ed32be29e4e7c8525a071452a6583",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-e5320d90d02a4322ac74c439db984421:v1",
+      "scenario_version": "scenario:bench-write-e5320d90d02a4322ac74c439db984421:v1",
+      "request_id": "bench-write-e5320d90d02a4322ac74c439db984421",
+      "original_request_id": "bench-write-e5320d90d02a4322ac74c439db984421",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-e537bfc4aa094d389e05103ae31742d3:v1",
+      "scenario_version": "scenario:bench-write-e537bfc4aa094d389e05103ae31742d3:v1",
+      "request_id": "bench-write-e537bfc4aa094d389e05103ae31742d3",
+      "original_request_id": "bench-write-e537bfc4aa094d389e05103ae31742d3",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-e77eb277bd8442f197cfef02ce28bfb4:v1",
+      "scenario_version": "scenario:bench-write-e77eb277bd8442f197cfef02ce28bfb4:v1",
+      "request_id": "bench-write-e77eb277bd8442f197cfef02ce28bfb4",
+      "original_request_id": "bench-write-e77eb277bd8442f197cfef02ce28bfb4",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-e7c258725c4f48699588cd19686860c1:v1",
+      "scenario_version": "scenario:bench-write-e7c258725c4f48699588cd19686860c1:v1",
+      "request_id": "bench-write-e7c258725c4f48699588cd19686860c1",
+      "original_request_id": "bench-write-e7c258725c4f48699588cd19686860c1",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-e7d728b76e6d4125a60338e9afbddba8:v1",
+      "scenario_version": "scenario:bench-write-e7d728b76e6d4125a60338e9afbddba8:v1",
+      "request_id": "bench-write-e7d728b76e6d4125a60338e9afbddba8",
+      "original_request_id": "bench-write-e7d728b76e6d4125a60338e9afbddba8",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-e889fe2c18b84d1ebb76d52f6276625c:v1",
+      "scenario_version": "scenario:bench-write-e889fe2c18b84d1ebb76d52f6276625c:v1",
+      "request_id": "bench-write-e889fe2c18b84d1ebb76d52f6276625c",
+      "original_request_id": "bench-write-e889fe2c18b84d1ebb76d52f6276625c",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-ea348898504840d79c7c66e178c9d70f:v1",
+      "scenario_version": "scenario:bench-write-ea348898504840d79c7c66e178c9d70f:v1",
+      "request_id": "bench-write-ea348898504840d79c7c66e178c9d70f",
+      "original_request_id": "bench-write-ea348898504840d79c7c66e178c9d70f",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-eb58747140ea463290594913af0e065c:v1",
+      "scenario_version": "scenario:bench-write-eb58747140ea463290594913af0e065c:v1",
+      "request_id": "bench-write-eb58747140ea463290594913af0e065c",
+      "original_request_id": "bench-write-eb58747140ea463290594913af0e065c",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-ec2f1ccaf7ee4749b00157d8b6d6e676:v1",
+      "scenario_version": "scenario:bench-write-ec2f1ccaf7ee4749b00157d8b6d6e676:v1",
+      "request_id": "bench-write-ec2f1ccaf7ee4749b00157d8b6d6e676",
+      "original_request_id": "bench-write-ec2f1ccaf7ee4749b00157d8b6d6e676",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-f12efddd120b48a59b8cdcf5fb0aeffc:v1",
+      "scenario_version": "scenario:bench-write-f12efddd120b48a59b8cdcf5fb0aeffc:v1",
+      "request_id": "bench-write-f12efddd120b48a59b8cdcf5fb0aeffc",
+      "original_request_id": "bench-write-f12efddd120b48a59b8cdcf5fb0aeffc",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-f1f7c318688244dd982686de4a1cdae8:v1",
+      "scenario_version": "scenario:bench-write-f1f7c318688244dd982686de4a1cdae8:v1",
+      "request_id": "bench-write-f1f7c318688244dd982686de4a1cdae8",
+      "original_request_id": "bench-write-f1f7c318688244dd982686de4a1cdae8",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-f39230a9eedc4ffaa52b3d98fe7b05a7:v1",
+      "scenario_version": "scenario:bench-write-f39230a9eedc4ffaa52b3d98fe7b05a7:v1",
+      "request_id": "bench-write-f39230a9eedc4ffaa52b3d98fe7b05a7",
+      "original_request_id": "bench-write-f39230a9eedc4ffaa52b3d98fe7b05a7",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-fd077923c1aa4f88afb961fef60bdb5f:v1",
+      "scenario_version": "scenario:bench-write-fd077923c1aa4f88afb961fef60bdb5f:v1",
+      "request_id": "bench-write-fd077923c1aa4f88afb961fef60bdb5f",
+      "original_request_id": "bench-write-fd077923c1aa4f88afb961fef60bdb5f",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-fe58e125d7bf48eaa6993f52c29d12f3:v1",
+      "scenario_version": "scenario:bench-write-fe58e125d7bf48eaa6993f52c29d12f3:v1",
+      "request_id": "bench-write-fe58e125d7bf48eaa6993f52c29d12f3",
+      "original_request_id": "bench-write-fe58e125d7bf48eaa6993f52c29d12f3",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:bench-write-fe7b743fc8ac42f4bae4e5bfbfc4a506:v1",
+      "scenario_version": "scenario:bench-write-fe7b743fc8ac42f4bae4e5bfbfc4a506:v1",
+      "request_id": "bench-write-fe7b743fc8ac42f4bae4e5bfbfc4a506",
+      "original_request_id": "bench-write-fe7b743fc8ac42f4bae4e5bfbfc4a506",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:cutover-rollback-20261107:v1",
+      "scenario_version": "scenario:cutover-rollback-20261107:v1",
+      "request_id": "cutover-rollback-20261107",
+      "original_request_id": "cutover-rollback-20261107",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:offline-restore-electricity-plus20:v1",
+      "scenario_version": "native:d75b8a9986d4:scenario:offline-restore-electricity-plus20:v1",
+      "request_id": "native:d75b8a9986d4:offline-restore-electricity-plus20",
+      "original_request_id": "offline-restore-electricity-plus20",
+      "collision_namespaced": true,
+      "native_created_at_known": false,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:oracle-req-AICU-elec20:v1",
+      "scenario_version": "scenario:oracle-req-AICU-elec20:v1",
+      "request_id": "oracle-req-AICU-elec20",
+      "original_request_id": "oracle-req-AICU-elec20",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:oracle-req-Automatoes-elec20:v1",
+      "scenario_version": "scenario:oracle-req-Automatoes-elec20:v1",
+      "request_id": "oracle-req-Automatoes-elec20",
+      "original_request_id": "oracle-req-Automatoes-elec20",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:oracle-req-Digilog-elec20:v1",
+      "scenario_version": "scenario:oracle-req-Digilog-elec20:v1",
+      "request_id": "oracle-req-Digilog-elec20",
+      "original_request_id": "oracle-req-Digilog-elec20",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:oracle-req-IUACAAS-elec20:v1",
+      "scenario_version": "scenario:oracle-req-IUACAAS-elec20:v1",
+      "request_id": "oracle-req-IUACAAS-elec20",
+      "original_request_id": "oracle-req-IUACAAS-elec20",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:oracle-req-Reference-elec20:v1",
+      "scenario_version": "scenario:oracle-req-Reference-elec20:v1",
+      "request_id": "oracle-req-Reference-elec20",
+      "original_request_id": "oracle-req-Reference-elec20",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:oracle-req-TheAutomators-elec20:v1",
+      "scenario_version": "scenario:oracle-req-TheAutomators-elec20:v1",
+      "request_id": "oracle-req-TheAutomators-elec20",
+      "original_request_id": "oracle-req-TheAutomators-elec20",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-45fd5c5ac26047419fe284657e995136:v1",
+      "scenario_version": "scenario:req-45fd5c5ac26047419fe284657e995136:v1",
+      "request_id": "req-45fd5c5ac26047419fe284657e995136",
+      "original_request_id": "req-45fd5c5ac26047419fe284657e995136",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-45fd5c5ac26047419fe284657e995136:v2",
+      "scenario_version": "scenario:req-45fd5c5ac26047419fe284657e995136:v2",
+      "request_id": "req-bd8e7a2c41624672a46d41cda6fe28cb",
+      "original_request_id": "req-bd8e7a2c41624672a46d41cda6fe28cb",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-5626c2f01d764d7d90418c671700bc3c:v1",
+      "scenario_version": "scenario:req-5626c2f01d764d7d90418c671700bc3c:v1",
+      "request_id": "req-5626c2f01d764d7d90418c671700bc3c",
+      "original_request_id": "req-5626c2f01d764d7d90418c671700bc3c",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-5a99093925c74661bd2f50d12ee5125d:v1",
+      "scenario_version": "scenario:req-5a99093925c74661bd2f50d12ee5125d:v1",
+      "request_id": "req-5a99093925c74661bd2f50d12ee5125d",
+      "original_request_id": "req-5a99093925c74661bd2f50d12ee5125d",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-5a99093925c74661bd2f50d12ee5125d:v2",
+      "scenario_version": "scenario:req-5a99093925c74661bd2f50d12ee5125d:v2",
+      "request_id": "req-8f906373acf24126a904352b26f44dcc",
+      "original_request_id": "req-8f906373acf24126a904352b26f44dcc",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-61d6e548059842018a1077f7d97ed4e4:v1",
+      "scenario_version": "scenario:req-61d6e548059842018a1077f7d97ed4e4:v1",
+      "request_id": "req-61d6e548059842018a1077f7d97ed4e4",
+      "original_request_id": "req-61d6e548059842018a1077f7d97ed4e4",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-61d6e548059842018a1077f7d97ed4e4:v2",
+      "scenario_version": "scenario:req-61d6e548059842018a1077f7d97ed4e4:v2",
+      "request_id": "req-9220aa3d7ed34af0bed05605793fc623",
+      "original_request_id": "req-9220aa3d7ed34af0bed05605793fc623",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-7099bdf9be014e6cbc47bcf7c6bc1142:v1",
+      "scenario_version": "scenario:req-7099bdf9be014e6cbc47bcf7c6bc1142:v1",
+      "request_id": "req-7099bdf9be014e6cbc47bcf7c6bc1142",
+      "original_request_id": "req-7099bdf9be014e6cbc47bcf7c6bc1142",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-804bc2c5774c4f468a574a9575085d60:v1",
+      "scenario_version": "scenario:req-804bc2c5774c4f468a574a9575085d60:v1",
+      "request_id": "req-804bc2c5774c4f468a574a9575085d60",
+      "original_request_id": "req-804bc2c5774c4f468a574a9575085d60",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-9798dde804934ccd88a869cfc269e879:v1",
+      "scenario_version": "scenario:req-9798dde804934ccd88a869cfc269e879:v1",
+      "request_id": "req-9798dde804934ccd88a869cfc269e879",
+      "original_request_id": "req-9798dde804934ccd88a869cfc269e879",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-9798dde804934ccd88a869cfc269e879:v2",
+      "scenario_version": "scenario:req-9798dde804934ccd88a869cfc269e879:v2",
+      "request_id": "req-5a7ccb4dd3874a9a80ba5433c024b733",
+      "original_request_id": "req-5a7ccb4dd3874a9a80ba5433c024b733",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-9ea51bd854f84191aec268ddc691846d:v1",
+      "scenario_version": "scenario:req-9ea51bd854f84191aec268ddc691846d:v1",
+      "request_id": "req-9ea51bd854f84191aec268ddc691846d",
+      "original_request_id": "req-9ea51bd854f84191aec268ddc691846d",
+      "collision_namespaced": false,
+      "native_created_at_known": false,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-a7f9881e59254709b6b888c9bf93cce9:v1",
+      "scenario_version": "scenario:req-a7f9881e59254709b6b888c9bf93cce9:v1",
+      "request_id": "req-a7f9881e59254709b6b888c9bf93cce9",
+      "original_request_id": "req-a7f9881e59254709b6b888c9bf93cce9",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-a7f9881e59254709b6b888c9bf93cce9:v2",
+      "scenario_version": "scenario:req-a7f9881e59254709b6b888c9bf93cce9:v2",
+      "request_id": "req-4777dc1841c04f038d6591e319b62a64",
+      "original_request_id": "req-4777dc1841c04f038d6591e319b62a64",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-b565242689e34cbc9eebdb391138eab6:v1",
+      "scenario_version": "scenario:req-b565242689e34cbc9eebdb391138eab6:v1",
+      "request_id": "req-b565242689e34cbc9eebdb391138eab6",
+      "original_request_id": "req-b565242689e34cbc9eebdb391138eab6",
+      "collision_namespaced": false,
+      "native_created_at_known": false,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-cfa5e884d16f437488d05dc2469875b0:v1",
+      "scenario_version": "scenario:req-cfa5e884d16f437488d05dc2469875b0:v1",
+      "request_id": "req-cfa5e884d16f437488d05dc2469875b0",
+      "original_request_id": "req-cfa5e884d16f437488d05dc2469875b0",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-cfa5e884d16f437488d05dc2469875b0:v2",
+      "scenario_version": "scenario:req-cfa5e884d16f437488d05dc2469875b0:v2",
+      "request_id": "req-7c6c612ec3294c5dbd3db1faadcc0e20",
+      "original_request_id": "req-7c6c612ec3294c5dbd3db1faadcc0e20",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-d6d6781a81ab43d68d5d9afd2a52c0c1:v1",
+      "scenario_version": "scenario:req-d6d6781a81ab43d68d5d9afd2a52c0c1:v1",
+      "request_id": "req-d6d6781a81ab43d68d5d9afd2a52c0c1",
+      "original_request_id": "req-d6d6781a81ab43d68d5d9afd2a52c0c1",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-d6d6781a81ab43d68d5d9afd2a52c0c1:v2",
+      "scenario_version": "scenario:req-d6d6781a81ab43d68d5d9afd2a52c0c1:v2",
+      "request_id": "req-8f2e0d8c3d5d40a19c4fada0be9b022d",
+      "original_request_id": "req-8f2e0d8c3d5d40a19c4fada0be9b022d",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-dbb676e5b22442b3b435f0d3e787124c:v1",
+      "scenario_version": "scenario:req-dbb676e5b22442b3b435f0d3e787124c:v1",
+      "request_id": "req-dbb676e5b22442b3b435f0d3e787124c",
+      "original_request_id": "req-dbb676e5b22442b3b435f0d3e787124c",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-parity-canonical-AICU:v1",
+      "scenario_version": "scenario:req-parity-canonical-AICU:v1",
+      "request_id": "req-parity-canonical-AICU",
+      "original_request_id": "req-parity-canonical-AICU",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-parity-canonical-Automatoes:v1",
+      "scenario_version": "scenario:req-parity-canonical-Automatoes:v1",
+      "request_id": "req-parity-canonical-Automatoes",
+      "original_request_id": "req-parity-canonical-Automatoes",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-parity-canonical-Digilog:v1",
+      "scenario_version": "scenario:req-parity-canonical-Digilog:v1",
+      "request_id": "req-parity-canonical-Digilog",
+      "original_request_id": "req-parity-canonical-Digilog",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-parity-canonical-IUACAAS:v1",
+      "scenario_version": "scenario:req-parity-canonical-IUACAAS:v1",
+      "request_id": "req-parity-canonical-IUACAAS",
+      "original_request_id": "req-parity-canonical-IUACAAS",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-parity-canonical-Reference:v1",
+      "scenario_version": "scenario:req-parity-canonical-Reference:v1",
+      "request_id": "req-parity-canonical-Reference",
+      "original_request_id": "req-parity-canonical-Reference",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    },
+    {
+      "source_scenario_version": "scenario:req-parity-canonical-TheAutomators:v1",
+      "scenario_version": "scenario:req-parity-canonical-TheAutomators:v1",
+      "request_id": "req-parity-canonical-TheAutomators",
+      "original_request_id": "req-parity-canonical-TheAutomators",
+      "collision_namespaced": false,
+      "native_created_at_known": true,
+      "author_preserved": true
+    }
+  ],
+  "collision_families": [
+    "scenario:offline-restore-electricity-plus20"
+  ],
+  "preexisting_scenarios_unchanged": true,
+  "source_publication": {
+    "publication_id": "5d455686a06649e789908b9708a9d436",
+    "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+    "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+    "versions": {
+      "pipeline_run_id": "a34cccc109772f02c4d8dec4f695d327f52da7f48a5b233c5daa8b747da6e0a2",
+      "quality_policy_version": "AGC_QUALITY_V1",
+      "parser_version": "agc-parser-v1",
+      "code_version": "clickhouse-warehouse-v1",
+      "config_bundle_hash": "983e64e920efe12a94477ae0b34229498e942fe131806d5bdba80ad319a4ee69",
+      "metric_version": "br02-summary-v1",
+      "rule_version": null,
+      "tariff_version": null,
+      "scenario_version": null
+    },
+    "committed_at": "2026-11-07T10:18:18.898319+00:00",
+    "finality_status": "complete",
+    "time_basis": "source_naive"
+  },
+  "target_publication": {
+    "publication_id": "c51402d9d25f45c182140b072397de78",
+    "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+    "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+    "versions": {
+      "pipeline_run_id": "b46b4d1fa95641b891c447faed0c07dc",
+      "quality_policy_version": "AGC_QUALITY_V1",
+      "parser_version": "agc-parser-v1",
+      "code_version": "pipeline-v6-energy",
+      "config_bundle_hash": "031905aef0322a2cecef859f70667662c397ce3743e73634faa3ff6014818f64",
+      "metric_version": "br02-summary-v1",
+      "rule_version": null,
+      "tariff_version": null,
+      "scenario_version": null
+    },
+    "committed_at": "2026-11-07T11:10:45.071079+00:00",
+    "finality_status": "provisional",
+    "time_basis": "source_naive"
+  }
+}

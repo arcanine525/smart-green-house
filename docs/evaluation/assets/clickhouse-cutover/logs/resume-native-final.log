@@ -1,0 +1,2 @@
+{"label": "resume-native-final", "image": "greenhouse-cutover-processing:20261107", "image_id": "sha256:4e99a12aa61d1c176aa96a3ce1eb0c5ccfe61255bf0c083b0142f31108726f5e", "source_head": "f5ccd38f1ee536f6e66e906cf44d69170cb5c6e7", "manifest_sha256": "f1223a1a0c6369fdd315088ed1cce510d236e934af0a1ed3f600c28cb6eb4ffb"}
+{"status": "passed", "mode": "active", "cursor": 62, "head": "bbfd7017ae3b8c72ca4445544b2ee8012eb0ac48576f579408ba11320fce7a03"}

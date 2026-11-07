@@ -1,0 +1,35 @@
+{
+  "name": "/gh-engine-benchmark-20261107-postgres-1",
+  "image_id": "sha256:6878867d6da44d8c000a91f9ce8d31a613bdc3e26b4ae4dde11bc2e22d270458",
+  "configured_image": "postgres:17.10-bookworm@sha256:9b18b78397054fce88a9552e9d5a3ad5bb7fd258c5b3cc1c5028e46373d6ea8f",
+  "nano_cpus": 1000000000,
+  "memory_bytes": 2147483648,
+  "oom_killed": false,
+  "restart_count": 0,
+  "networks": {
+    "gh-engine-benchmark-20261107_backend": {
+      "Aliases": [
+        "gh-engine-benchmark-20261107-postgres-1",
+        "postgres"
+      ],
+      "DNSNames": [
+        "gh-engine-benchmark-20261107-postgres-1",
+        "postgres",
+        "4c52d428b3b9"
+      ],
+      "DriverOpts": null,
+      "EndpointID": "8990c374aa45ab398932d00286a2e323542829a67f143ec6b7304ff581faeb74",
+      "Gateway": "",
+      "GlobalIPv6Address": "",
+      "GlobalIPv6PrefixLen": 0,
+      "GwPriority": 0,
+      "IPAMConfig": null,
+      "IPAddress": "192.168.0.2",
+      "IPPrefixLen": 20,
+      "IPv6Gateway": "",
+      "Links": null,
+      "MacAddress": "e6:90:21:4e:6b:82",
+      "NetworkID": "7f70c47d661f39ee64cf38410db4a9c5b3a562e637a55ba2ecb45f04ba3e656d"
+    }
+  }
+}

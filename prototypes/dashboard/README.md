@@ -10,17 +10,15 @@ HTML là bản preview được dựng riêng từ cùng fixtures và Plotly fig
 
 ## Chạy ứng dụng Streamlit + Plotly
 
-Từ root repository, dùng Python 3.12:
+Từ root repository, chỉ cần Docker Engine + Compose v2:
 
 ```bash
-python3 -m venv .venv-ui
-.venv-ui/bin/python -m pip install -r prototypes/dashboard/requirements.txt
-.venv-ui/bin/python -m streamlit run prototypes/dashboard/app.py --server.address 127.0.0.1 --server.port 8501 --browser.gatherUsageStats false
+cp .env.example .env
+docker compose --profile batch build app
+docker compose --profile batch up -d --wait db app
 ```
 
-Mở `http://127.0.0.1:8501`. Streamlit cần Python server; sau khi cài dependencies app không cần cloud. Môi trường `.venv-ui` được Git ignore. Nếu tạo venv bằng `uv`, dùng `uv pip install --python .venv-ui/bin/python -r prototypes/dashboard/requirements.txt`.
-
-Chạy lệnh từ root để Streamlit đọc theme sáng/xanh trong `.streamlit/config.toml`. File này cũng tắt usage telemetry và mặc định bind server vào loopback.
+Mở `http://127.0.0.1:8501`. Image UI chứa sẵn dependencies khóa trong [requirements-ui.lock](../../requirements-ui.lock); không dùng `.venv-ui`. Bind server trong container là `0.0.0.0`; chỉ publish trên `127.0.0.1` của host. Theme từ `.streamlit/config.toml` được đóng gói trong image, telemetry tắt. Prototype không đọc DB; dependency db là scaffold cho app T10 sau này.
 
 ## Dữ liệu và phạm vi demo
 
@@ -35,8 +33,10 @@ Chạy lệnh từ root để Streamlit đọc theme sáng/xanh trong `.streamli
 ## Sửa và build lại HTML
 
 ```bash
-.venv-ui/bin/python prototypes/dashboard/build_preview.py
+docker compose --profile tools run --rm preview-build
 ```
+
+Mặc định ghi `data/output/preview/preview.html` (Git ignore). Dùng `GREENHOUSE_PREVIEW_PATH=./prototypes/dashboard` trước lệnh Compose khi chủ đích cập nhật [preview.html](preview.html) tracked. Tham số `--output` của builder cho phép xuất vào mount riêng, không sửa source chỉ để chạy app.
 
 | File | Vai trò |
 |---|---|

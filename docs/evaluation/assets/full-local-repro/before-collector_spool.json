@@ -1,0 +1,17 @@
+[
+  {
+    "path": "spool.db",
+    "bytes": 40960,
+    "sha256": "8a083d0059d780b0c614024b44444eb5fec07188c0f4a7439ef8b9e37059513f"
+  },
+  {
+    "path": "spool.db-shm",
+    "bytes": 32768,
+    "sha256": "2079d496bbd961f5d56736d54cedd7ac57884b1484d254a5a6b90ca8025f2c4d"
+  },
+  {
+    "path": "spool.db-wal",
+    "bytes": 416152,
+    "sha256": "8b544cc0b15d1c8991fd1860a86ac71cf461926334e1db6c761bb808bf824534"
+  }
+]

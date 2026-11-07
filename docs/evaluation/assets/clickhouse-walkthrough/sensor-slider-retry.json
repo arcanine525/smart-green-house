@@ -1,0 +1,8 @@
+{
+  "status": "failed_attempt_preserved",
+  "cause": "Hidden range input and accessible name make direct role/visibility selector unsuitable. Use visible slider container and actual keyboard input, verified separately.",
+  "failed_artifact_root": "project-submit/demo-videos/failed/sensor-slider",
+  "completed_replay_retained": true,
+  "new_run_required": true,
+  "historical_publication_unchanged": true
+}

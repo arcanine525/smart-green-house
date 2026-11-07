@@ -1,0 +1,14 @@
+{
+  "packaged-ui-tests-runtimefix": {
+    "exit_code": 0,
+    "elapsed_seconds": 101.6309940000001,
+    "log": "diagnostics/packaged-ui-tests-runtimefix.log",
+    "sha256": "ce7805eef86d1dd076b5163fe6126bf13fffb9ad6a448600d0b4a03721a797f7"
+  },
+  "fixed-full-parity-runtimefix": {
+    "exit_code": 1,
+    "elapsed_seconds": 386.6718433750002,
+    "log": "diagnostics/fixed-full-parity-runtimefix.log",
+    "sha256": "20525ed5cf7f3c44f078bb3ebf414cafe14f243fe5442b7bb9408f956c67e9c2"
+  }
+}

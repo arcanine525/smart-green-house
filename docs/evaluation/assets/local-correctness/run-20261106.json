@@ -1,0 +1,19 @@
+{
+  "started_utc": "2026-11-06T14:59:19Z",
+  "source_head": "5c74d81cce9b316a144b67281a9d2d5f875cca06",
+  "working_tree_note": "test_local.sh and scripts/README.md uncommitted; code and tests at source_head",
+  "docker_client_server": "29.9.2",
+  "compose": "5.6.1",
+  "suite_results": {
+    "unit": "419 passed in 86.43s (0:01:26)",
+    "ui": "97 passed in 64.22s (0:01:04)",
+    "sensor_live": "1 passed in 10.30s",
+    "sensor_spark-restart": "1 passed in 13.08s",
+    "sensor_fault-matrix": "7 passed in 35.59s",
+    "sensor_mqtt-faults": "8 passed in 21.81s",
+    "sensor_db": "1 passed in 8.65s",
+    "sensor_broker": "1 passed in 12.38s"
+  },
+  "sensor_acceptance_summary": "Sensor acceptance passed. Evidence: /Users/hiep.le/Downloads/project/internal/data-eng/tmp/sensor-recovery/20261106150157-16456",
+  "limitations": "Single local run; test durations include fixture/setup; sensor uses isolated broker/database; AGC historical source reconciliation is separately documented."
+}

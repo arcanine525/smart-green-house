@@ -1,0 +1,9 @@
+ Container gh-agc-20261106182240-7578-restored-job-run-bd0d45234353 Creating 
+ Container gh-agc-20261106182240-7578-restored-job-run-bd0d45234353 Created 
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/06 18:48:04 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/06 18:48:06 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+{"real_agc": true, "scope": "30 Automatoes source rows through MQTT and Spark", "source_sha256": "3415b31b7958c735f836c7fa8f890a93020786be5c86dc2e7c42771fb0a02cd3", "replay_id": "agc-restore-89ea2cf29f75", "publication_id": "a8289b01f8c8aae54143198087d817d27d6475cdab7be328f0ad7b13dd8dd7c5", "unique_events": 30, "deliveries": 66, "batches": 2, "complete": true, "checksum_verified": true, "original_envelopes_exact": true, "queued_rows_received_before_retry": 28, "wal_integrity": ["outbox", "spool"], "base_rows_without_wal": 0, "seed_progress": [[0, 10]], "restored_progress": [[1, 56]]}

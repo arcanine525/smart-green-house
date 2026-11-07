@@ -1,0 +1,89 @@
+{
+  "status": "passed",
+  "read_only": true,
+  "rebuild_parity": {
+    "BR-01": {
+      "digest": "3929da6567812904bf5a8c9270d3f34c325699794d75f656bc4c37b5435a35e2",
+      "slot_count": 47808,
+      "episodes_count": 3959,
+      "metrics_count": 2,
+      "joint_count": 1,
+      "parity_verified": true
+    },
+    "BR-02": {
+      "digest": "4f706845e32824cfc1f7da35088191e1bc2bd67021f559559fdd055cba4c4cc3",
+      "day_count": 166,
+      "irrigation_total": "788.851818181",
+      "drain_total": "324.08",
+      "parity_verified": true
+    },
+    "BR-03": {
+      "digest": "9bd61e7d27d94c7f8a8871c14443ceb8b5dee163c751a2e8fc9851f1c8358db9",
+      "slot_count": 47808,
+      "episodes_count": 447,
+      "metrics_count": 2,
+      "joint_count": 1,
+      "parity_verified": true
+    },
+    "BR-04": {
+      "digest": "a0f1c670a895ad61dfec6e46dbd3cca2babb349b0286a2f35e80df117b0f7c3f",
+      "quantities_count": 498,
+      "intensity_kwh_kg_a": "22.418082637140204271123491179201485608170844939647",
+      "parity_verified": true
+    },
+    "BR-05": {
+      "digest": "85571cf11a2baaf47a22abcd242ee9badcda099a19304a527dc7896d3ca23887",
+      "records_count": 23,
+      "paired_total_kg": "14.9188",
+      "parity_verified": true
+    },
+    "BR-06": {
+      "digest": "e96c2f14ed753e5e8512576f8c84634fa9d55e828ea485c07d76b3097cd3c7b9",
+      "baseline_cost_eur": "1161.250543965",
+      "priced_days": 166,
+      "parity_verified": true
+    }
+  },
+  "fresh_equals_rebuild_counts": {
+    "hybrid": {
+      "core.record_revision": 574843,
+      "core.climate_observation": 286854,
+      "core.drain_observation": 286854,
+      "core.resource_day": 996,
+      "core.harvest": 139,
+      "core.measure_quality": 2874794
+    },
+    "kimball": {
+      "kimball.fact_climate_slot": 286854,
+      "kimball.fact_drain_slot": 286854,
+      "kimball.fact_irrigation_day": 996,
+      "kimball.fact_energy_day": 2988,
+      "kimball.fact_harvest_record": 139
+    }
+  },
+  "histories": {
+    "hybrid": {
+      "fresh_database": {
+        "publications": 1,
+        "database_bytes": 3563222707,
+        "workflows": 2
+      },
+      "rebuild_database": {
+        "publications": 1,
+        "database_bytes": 3433133747,
+        "workflows": 1
+      }
+    },
+    "kimball": {
+      "fresh_database": {
+        "publications": 1,
+        "database_bytes": 668915379
+      },
+      "rebuild_database": {
+        "publications": 1,
+        "database_bytes": 668473011
+      }
+    }
+  },
+  "br06_digest_note": "Fresh run includes a saved scenario; rebuild read-only validation compares baseline cost and priced days, alongside full Hybrid/Kimball baseline parity."
+}

@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "phase": "partial",
+  "backend": "clickhouse",
+  "replay_id": "walkthrough-live-c4b35d584519",
+  "publication_id": "e5eb431e6d9666051a55a1b86974e15b70be1b864c42b1c0532d5894da0f7351",
+  "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:sim-walkthrough-live-c4b35d584519",
+  "accepted_events": 10,
+  "complete": false,
+  "source_sha256": "3415b31b7958c735f836c7fa8f890a93020786be5c86dc2e7c42771fb0a02cd3",
+  "spark_progress": [
+    [
+      0,
+      18
+    ]
+  ],
+  "transport": "Actual AGC -> SQLite outbox -> MQTT -> collector -> ready files -> Spark -> native publication",
+  "complete_result_host_path": "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/rebuilt/state/walkthrough/live-replay-v3/complete-result.json",
+  "completion_command": [
+    "python3",
+    "/Users/hiep.le/Downloads/project/internal/data-eng/scripts/run_walkthrough_replay.py",
+    "--setup",
+    "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/current.json",
+    "--preparation",
+    "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-walkthrough/20261107T0517",
+    "--run-name",
+    "live-replay-v3",
+    "complete"
+  ]
+}

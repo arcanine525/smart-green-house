@@ -1,0 +1,1163 @@
+{
+  "status": "passed",
+  "backend": "clickhouse",
+  "artifact_root": "/Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse",
+  "all_mp4s_fully_decoded": true,
+  "main_visual_review": "passed",
+  "sensor_publications": {
+    "historical_source": "4b08bd51c092465783304f887d766d47",
+    "provisional": "e5eb431e6d9666051a55a1b86974e15b70be1b864c42b1c0532d5894da0f7351",
+    "complete": "a17563ff87c9589ddba705457a98654ab359d28bc0d7d274837463b67616e902",
+    "same_scope": true,
+    "csv_metadata_exact": true
+  },
+  "videos": [
+    {
+      "folder": "br-01",
+      "json_exports_with_native_configuration": [
+        "downloads/climate-IUACAAS-2020-05-21_2020-05-22-requested-result.json"
+      ],
+      "video_sha256": "af0ac3bd522ee60a0b0e21feeaa48b8511e8ddcb6414900ff2046fc4e2f0fa17",
+      "full_decode": "passed",
+      "frame": "br-01-frame.png",
+      "frame_seconds": 92.2,
+      "frame_sha256": "2e82cc2c22f7413b3677382d249f2d61492042824b4afd55fc9a5333d6f6bc54",
+      "raw_webm_sha256": "b2632551d5dfb7c31576d8cd0718933edf85327099ba313aba5ddeb3a8b9ab7e",
+      "trace_sha256": "5f93ec6fbaa878f4aa60b70866b314b1f7afae2515f6fff9e8f78f9d975c93c2",
+      "screenshot_inventory": [
+        {
+          "file": "step-01.png",
+          "sha256": "09207bc71076ec20490872aa83cbe0ae11090607508e18d18268e0a86e98e12d"
+        },
+        {
+          "file": "step-02.png",
+          "sha256": "b11ceb9c881339fb61aa97208e173400eec8ec4bde18a62a9b7213675b6af1df"
+        },
+        {
+          "file": "step-03.png",
+          "sha256": "c13387af0a62ad308bc310ef60174e4786b99f9bd5450f282e59cfe60b34ca5e"
+        },
+        {
+          "file": "step-04.png",
+          "sha256": "27bedf354a8e190370f8240596f53674b102820d8cb07afb9a4a01abb6293be6"
+        },
+        {
+          "file": "step-05.png",
+          "sha256": "b1eb2a0e327235685c80173c795877475c3e21d5e6d758b2204ff555f793f3b5"
+        },
+        {
+          "file": "step-06.png",
+          "sha256": "daf88294048c8e26fbe221df0a2228b7e76437baf3257679a397a30c960351ff"
+        },
+        {
+          "file": "step-07.png",
+          "sha256": "b62ad2e8eb6e557b19ae6772bf2a4bbec839790d7948531c8aa33e25331cfd82"
+        },
+        {
+          "file": "step-08.png",
+          "sha256": "f710e0aa8c96aa7db39ebde2eb97d10934dc735a7662e1fd0e423e47eab082de"
+        },
+        {
+          "file": "step-09.png",
+          "sha256": "3463a95a20ae144101795ae9e62b7e5ee5906e85ffe4fd212845529f39fef768"
+        },
+        {
+          "file": "step-10.png",
+          "sha256": "3791ca8eeab80f5893fa5ef9cd7ee01cd4df2d490efdf272c68cf7b81f9f6e35"
+        },
+        {
+          "file": "step-11.png",
+          "sha256": "d919b1b0fa9967a93dd1fab369382e8c674a5ab36248dd76edeba049fd63e8e8"
+        },
+        {
+          "file": "step-12.png",
+          "sha256": "65a87dd81e336e25d32ba8d7020d1a49abb451ba3d45c8c598be7cac09d1d6c3"
+        },
+        {
+          "file": "step-13.png",
+          "sha256": "83ea6db49fc6967c45c5fbd7a56c51005b344bc3c14645e83f1cef089ed0cfd3"
+        },
+        {
+          "file": "step-14.png",
+          "sha256": "d6b5f1a25cfb3d5f9e69e68b827ab5151d14d6cde451e010672a9c1848307f9b"
+        },
+        {
+          "file": "step-15.png",
+          "sha256": "4e97b708b2f410c83ec3c55e9cc25aa0ef0f9a80c1c5f4b37171f1f41e478323"
+        },
+        {
+          "file": "step-16.png",
+          "sha256": "b5f015b4cfa5199920d7e1332e7cafe9853299dd571b102bb6457ac4a0cf79fa"
+        }
+      ],
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "avc1",
+            "codec_tag": "0x31637661",
+            "width": 1920,
+            "height": 1080,
+            "coded_width": 1920,
+            "coded_height": 1080,
+            "has_b_frames": 2,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 40,
+            "chroma_location": "center",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "true",
+            "nal_length_size": "4",
+            "id": "0x1",
+            "r_frame_rate": "25/1",
+            "avg_frame_rate": "25/1",
+            "time_base": "1/12800",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 2798592,
+            "duration": "218.640000",
+            "bit_rate": "526024",
+            "bits_per_raw_sample": "8",
+            "nb_frames": "5466",
+            "extradata_size": 49,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "eng",
+              "handler_name": "VideoHandler",
+              "vendor_id": "[0][0][0][0]",
+              "encoder": "Lavc62.11.100 libx264"
+            }
+          }
+        ],
+        "format": {
+          "filename": "/Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/br-01/br-01.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "218.640000",
+          "size": "14441002",
+          "bit_rate": "528393",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf62.3.100"
+          }
+        }
+      }
+    },
+    {
+      "folder": "br-02",
+      "json_exports_with_native_configuration": [
+        "downloads/water-Automatoes-2020-03-02_2020-03-03-summary.json"
+      ],
+      "video_sha256": "59605d5fef894e5264ab0ae8751c1e4c7a07d7dfe9dda6cd7fa4382295a38df5",
+      "full_decode": "passed",
+      "frame": "br-02-frame.png",
+      "frame_seconds": 81.258,
+      "frame_sha256": "bf6191197758aad15fb7b954f1124ce8c5888be62c3d8f90facebcc7707102d1",
+      "raw_webm_sha256": "f4cc70f41cd7e78f7afba37433b959b73d5adf491d8240f75893291129a80068",
+      "trace_sha256": "276eb64564ad4c73396635e37f26486ce81bd6d95d1edc235d6fc49151c29d6f",
+      "screenshot_inventory": [
+        {
+          "file": "step-01.png",
+          "sha256": "3abc7f6cb46ed2745772833729bb3668b2f5e62d735ddf49e1e6448aff2111e0"
+        },
+        {
+          "file": "step-02.png",
+          "sha256": "48a0ff73756c34064c8750f38133b4d68d558f12aa9f66d9f2398a5c7fa90454"
+        },
+        {
+          "file": "step-03.png",
+          "sha256": "57a120cc1eba39b911910bceb5a82f9d712f34670a7336d0b08d92fde7a3796a"
+        },
+        {
+          "file": "step-04.png",
+          "sha256": "c50fb2efbc61a8b8c90ebbcfa92ceef0dd68587204ea7ecf6cf063385b8e37af"
+        },
+        {
+          "file": "step-05.png",
+          "sha256": "78162729151f026ad4d4754d43a5ea7708545c98bf372622cd2470b5418a5200"
+        },
+        {
+          "file": "step-06.png",
+          "sha256": "b634d788a5ab0fdcdbceddf2046bf7b0dbab19fe9a63ad9284ef324e49e1b0cc"
+        },
+        {
+          "file": "step-07.png",
+          "sha256": "67b2db299a5aeec6b7bf8197393440e32e8dd06041bd93562aa2e74d21f3cf7c"
+        },
+        {
+          "file": "step-08.png",
+          "sha256": "8583836777fa23d4dc0917b723483d0364c776c7703c724d85b320c287f76970"
+        },
+        {
+          "file": "step-09.png",
+          "sha256": "b8f78387283ecee5812b524f44fbc9915c83201098ca1eb843ec67aaa30b86d6"
+        },
+        {
+          "file": "step-10.png",
+          "sha256": "d5f193164a74192c5f40bcea897af019c307e9c57dd9daa3d3f48211726a1fc4"
+        },
+        {
+          "file": "step-11.png",
+          "sha256": "0b2f026c51be41c0bc457c796fc3e2aaa7bf431105d058fe8da87d8e06bf07bc"
+        },
+        {
+          "file": "step-12.png",
+          "sha256": "0859d546cd7118eef502784a96639956291d0c08c4f1905f64c97d709ae53f59"
+        },
+        {
+          "file": "step-13.png",
+          "sha256": "77bbf08ab499f4ce4ce1248b98adcdeee47f15fcb3d6c9325bbcf40a033b7ebf"
+        },
+        {
+          "file": "step-14.png",
+          "sha256": "184d00684ce5f63c1d8871aae8cd8603b63b82d7a44e274622a2e27a7d7ea598"
+        }
+      ],
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "avc1",
+            "codec_tag": "0x31637661",
+            "width": 1920,
+            "height": 1080,
+            "coded_width": 1920,
+            "coded_height": 1080,
+            "has_b_frames": 2,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 40,
+            "chroma_location": "center",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "true",
+            "nal_length_size": "4",
+            "id": "0x1",
+            "r_frame_rate": "25/1",
+            "avg_frame_rate": "25/1",
+            "time_base": "1/12800",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 2114560,
+            "duration": "165.200000",
+            "bit_rate": "435297",
+            "bits_per_raw_sample": "8",
+            "nb_frames": "4130",
+            "extradata_size": 49,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "eng",
+              "handler_name": "VideoHandler",
+              "vendor_id": "[0][0][0][0]",
+              "encoder": "Lavc62.11.100 libx264"
+            }
+          }
+        ],
+        "format": {
+          "filename": "/Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/br-02/br-02.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "165.200000",
+          "size": "9038051",
+          "bit_rate": "437678",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf62.3.100"
+          }
+        }
+      }
+    },
+    {
+      "folder": "br-03",
+      "json_exports_with_native_configuration": [
+        "downloads/drain-Reference-2020-03-02-2020-03-04-result.json"
+      ],
+      "video_sha256": "91b975e18629d533103b3cf1f66990f4af041ba42c11a39349b07e7c8cfaa801",
+      "full_decode": "passed",
+      "frame": "br-03-frame.png",
+      "frame_seconds": 82.983,
+      "frame_sha256": "717915a31e50bfd0516795225ddca401429109f4fcd1dfe8529f4cd70186b48d",
+      "raw_webm_sha256": "d17b771957d6a108ce2fbbee87fadfb1d3175452f85f8dedd51ff316792b306d",
+      "trace_sha256": "8fdc2c49d053f49403072a74f0160d94b66297ef534b535f1642cf00def453e8",
+      "screenshot_inventory": [
+        {
+          "file": "step-01.png",
+          "sha256": "0e6cb94f3166cce4b7ba8752eda3e82ebb22876f7df994c515d86e1b923dd4ae"
+        },
+        {
+          "file": "step-02.png",
+          "sha256": "7294d7dec12059a6c1d360f9c6ab5834545c30e3c3ae61d3deb4711da07f90e8"
+        },
+        {
+          "file": "step-03.png",
+          "sha256": "27f46b5919d789d492c55aa0e95003a150ab965240ef54dab5ec264e2aabfc92"
+        },
+        {
+          "file": "step-04.png",
+          "sha256": "c2c0a0130c23e2db2cdd069083e4bba9d1ceecb89c1e22e18272c3068dc7a2ea"
+        },
+        {
+          "file": "step-05.png",
+          "sha256": "9b892441d323ea33aa763527ab5ae10bbb58716f66823d1a9bba237cc41b0ef4"
+        },
+        {
+          "file": "step-06.png",
+          "sha256": "527a987f61b86afeb1c8eda74e0ae41bef0551f17c5b55e7943d1803eb6729d7"
+        },
+        {
+          "file": "step-07.png",
+          "sha256": "b2a864b4c1b2f14e242a9de5236ddd27bcd3eea9c69b6ed1952c92dcc4911755"
+        },
+        {
+          "file": "step-08.png",
+          "sha256": "d3209d42e4cf6f478ea81033883ae5cb216cb4c362042a598e93c45635f200a0"
+        },
+        {
+          "file": "step-09.png",
+          "sha256": "7391828394c28f682d3307fe1945cf2ec39ad64b2a9eb86826283475f0b26e74"
+        },
+        {
+          "file": "step-10.png",
+          "sha256": "58a3104a09e5837387b20c930e1f31357fbc219f5ec03d64b3041be3ff79b73e"
+        },
+        {
+          "file": "step-11.png",
+          "sha256": "3feb5ed8bbb0df210d2ec981338c47cb2d7fb7e4a6dde7bd5ed51db6f91576d1"
+        },
+        {
+          "file": "step-12.png",
+          "sha256": "efba24c46466104640881aa6de9e831cafe798903bb7e43fbd0f66b74b698729"
+        },
+        {
+          "file": "step-13.png",
+          "sha256": "3b9310e9c06963e941ccfd851589339beb537bf71bceb873b42c5d77296d7eac"
+        },
+        {
+          "file": "step-14.png",
+          "sha256": "8e04daef1534d9a73728fb6933c5cba9d3462df57e2433b398af93e1487866bd"
+        },
+        {
+          "file": "step-15.png",
+          "sha256": "249c3836325533db9f8ec8f25e7dc09e74fd324d28a2d9a1aaebf632a68e8c84"
+        }
+      ],
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "avc1",
+            "codec_tag": "0x31637661",
+            "width": 1920,
+            "height": 1080,
+            "coded_width": 1920,
+            "coded_height": 1080,
+            "has_b_frames": 2,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 40,
+            "chroma_location": "center",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "true",
+            "nal_length_size": "4",
+            "id": "0x1",
+            "r_frame_rate": "25/1",
+            "avg_frame_rate": "25/1",
+            "time_base": "1/12800",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 2476032,
+            "duration": "193.440000",
+            "bit_rate": "457986",
+            "bits_per_raw_sample": "8",
+            "nb_frames": "4836",
+            "extradata_size": 49,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "eng",
+              "handler_name": "VideoHandler",
+              "vendor_id": "[0][0][0][0]",
+              "encoder": "Lavc62.11.100 libx264"
+            }
+          }
+        ],
+        "format": {
+          "filename": "/Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/br-03/br-03.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "193.440000",
+          "size": "11131216",
+          "bit_rate": "460348",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf62.3.100"
+          }
+        }
+      }
+    },
+    {
+      "folder": "br-04",
+      "json_exports_with_native_configuration": [
+        "downloads/energy-Automatoes-2020-03-02-2020-03-04-result.json",
+        "downloads/energy-Automatoes-2020-03-02-2020-03-04-portfolio.json"
+      ],
+      "video_sha256": "1b50686dbc03193eb2472691fe76e355db7d10e82c2422588d0a878fb14a58fc",
+      "full_decode": "passed",
+      "frame": "br-04-frame.png",
+      "frame_seconds": 90.58,
+      "frame_sha256": "5212c9edfae23bb71129f116d009436fb9a109dabfe03d04affff65ea6aef5be",
+      "raw_webm_sha256": "57926433be2fa036f9f3da21b9140ac3523f738226cbd5c0278c81865542947d",
+      "trace_sha256": "8537c7ce3fa6d6dd0b03efc6ff1bee04358fa1eeb2c406fdb002f5cd86d31bfa",
+      "screenshot_inventory": [
+        {
+          "file": "step-01.png",
+          "sha256": "d94cf8c8f6b41eaa36733a08a19d6da629891a24dc3178e86a2b6b966fdd7691"
+        },
+        {
+          "file": "step-02.png",
+          "sha256": "4af92a857b8d2647a8d2548e7674bd8fabb6773f2e412e0b4499d2c2f3ab55ab"
+        },
+        {
+          "file": "step-03.png",
+          "sha256": "52c295e3962b0dfca87fd04f1f807ad94dd6b372a68a881a5060edb077c50bcc"
+        },
+        {
+          "file": "step-04.png",
+          "sha256": "5bc070377fef96991653c2edde36cd9e680918da90e3ed892f37149ffd972fff"
+        },
+        {
+          "file": "step-05.png",
+          "sha256": "a75a75e701df03bc5f2c91e81406e303e6222a0197306504a46d295e7c57476d"
+        },
+        {
+          "file": "step-06.png",
+          "sha256": "ff1c5159dff3e967bcdc48599e24c09412b8e40a5cef39f6482e040fe7bc372b"
+        },
+        {
+          "file": "step-07.png",
+          "sha256": "9092d27c0b37945af7db754aa6e52f3580138d8d226b8e2f8e5e8b1d7ea920e4"
+        },
+        {
+          "file": "step-08.png",
+          "sha256": "84930a82eb3298f0ca5cad1085972b0f7dddae38af012c4c503aa3f302b8230a"
+        },
+        {
+          "file": "step-09.png",
+          "sha256": "d88f41462f7317186d0f90eb324c5e2e386a0b7d80582c3b9a4548321402a538"
+        },
+        {
+          "file": "step-10.png",
+          "sha256": "c522a39c4ef03f189c5c2e9c603e765266af6c19e73cede5344568fd8aa48b7b"
+        },
+        {
+          "file": "step-11.png",
+          "sha256": "524ad39eb4885407b8394fc5d5357e73eab9ec821ab4ddea4a43ab85303e1dd5"
+        },
+        {
+          "file": "step-12.png",
+          "sha256": "ebe76a3e019ecdf07a9e02fb71b4857a113a280170dee3472ddf16c55e8fbff0"
+        },
+        {
+          "file": "step-13.png",
+          "sha256": "bf2d9473d839666c5ac94615b7ce636195e77f70e42756984f4c9af7723eb1f4"
+        }
+      ],
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "avc1",
+            "codec_tag": "0x31637661",
+            "width": 1920,
+            "height": 1080,
+            "coded_width": 1920,
+            "coded_height": 1080,
+            "has_b_frames": 2,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 40,
+            "chroma_location": "center",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "true",
+            "nal_length_size": "4",
+            "id": "0x1",
+            "r_frame_rate": "25/1",
+            "avg_frame_rate": "25/1",
+            "time_base": "1/12800",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 1922048,
+            "duration": "150.160000",
+            "bit_rate": "387816",
+            "bits_per_raw_sample": "8",
+            "nb_frames": "3754",
+            "extradata_size": 49,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "eng",
+              "handler_name": "VideoHandler",
+              "vendor_id": "[0][0][0][0]",
+              "encoder": "Lavc62.11.100 libx264"
+            }
+          }
+        ],
+        "format": {
+          "filename": "/Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/br-04/br-04.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "150.160000",
+          "size": "7323799",
+          "bit_rate": "390186",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf62.3.100"
+          }
+        }
+      }
+    },
+    {
+      "folder": "br-05",
+      "json_exports_with_native_configuration": [
+        "downloads/harvest-Digilog-2020-02-19_2020-02-19-summary.json"
+      ],
+      "video_sha256": "651d22ef1090cf2f850b22fc7cbe2c27016d5c63f35fa15d5a1bda1e91ef9c74",
+      "full_decode": "passed",
+      "frame": "br-05-frame.png",
+      "frame_seconds": 106.774,
+      "frame_sha256": "5d3ac9ffc467e16a2dec07d2d5da46e7c25b8e57d7a5bfa31524c80fdf7b83a3",
+      "raw_webm_sha256": "e35719f51ebfc883e7979b478ec336b16d43e9fa68c46765c4ea0f9448497d30",
+      "trace_sha256": "8fc3500804d128281b6f9815cc4d4faa58aa18960fd2c154bfa9ded74156e009",
+      "screenshot_inventory": [
+        {
+          "file": "step-01.png",
+          "sha256": "b667d37d4145af9b5797d51e8a96588ee5595b5b7a6d00892ee49643a224ffdb"
+        },
+        {
+          "file": "step-02.png",
+          "sha256": "d8f13903a2c47d475456e3698e1fe291e855573019eb0b58f21e55d101e53c24"
+        },
+        {
+          "file": "step-03.png",
+          "sha256": "e31524e109ae5824393b4bbedbb83dbd15a05000fe6a7d6f0593d67d91d03e16"
+        },
+        {
+          "file": "step-04.png",
+          "sha256": "ef433b957af5db35aea572daf78075ce6962e79e103acd78628bc45d3de800ac"
+        },
+        {
+          "file": "step-05.png",
+          "sha256": "9d923874ba533535320cf6ad5d4eb8ae154191cc63ce21e2bbdeceb2adce3aa7"
+        },
+        {
+          "file": "step-06.png",
+          "sha256": "6d9c88524774bc7c25342a6440c21a9ab900af86e12147dc4f58d61778d33584"
+        },
+        {
+          "file": "step-07.png",
+          "sha256": "2e37ed50082ae09f6ec15fdb4e5fc3fe4d2305b04ac604e85e77d2cd01a507c5"
+        },
+        {
+          "file": "step-08.png",
+          "sha256": "1004201763bf8343b99205d3895b4794e4eb8d8f74f7a7ce57cf9bfa70b1db3e"
+        },
+        {
+          "file": "step-09.png",
+          "sha256": "55d5a5b0d26f8e024dee1fef0bd8e6af1dde5a710b32545589e96772219543ea"
+        },
+        {
+          "file": "step-10.png",
+          "sha256": "860085b29207ce312c772959f645f3677dc9411f0d35076e596de778a323db42"
+        },
+        {
+          "file": "step-11.png",
+          "sha256": "6af990c739ca559bf03c6c08f98400488d664a2ba552bae74a6d19b46f5ea63b"
+        },
+        {
+          "file": "step-12.png",
+          "sha256": "2cf07103689e368008ab0e2e562199b22a18ed88a9e1eed73aa0d1438591fdaa"
+        },
+        {
+          "file": "step-13.png",
+          "sha256": "d1bccf925c9c66ded33046b02972649cd524acd11533229a15b0a994b37ffd33"
+        },
+        {
+          "file": "step-14.png",
+          "sha256": "f48c81c467e5cb3f47a1fa4a3ca6d3fea283758333ec25eba73665b1da39deb7"
+        },
+        {
+          "file": "step-15.png",
+          "sha256": "4b68993596bece6718fe71e7f500ca41ff8b521204e2e6d62060ecca6375f908"
+        }
+      ],
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "avc1",
+            "codec_tag": "0x31637661",
+            "width": 1920,
+            "height": 1080,
+            "coded_width": 1920,
+            "coded_height": 1080,
+            "has_b_frames": 2,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 40,
+            "chroma_location": "center",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "true",
+            "nal_length_size": "4",
+            "id": "0x1",
+            "r_frame_rate": "25/1",
+            "avg_frame_rate": "25/1",
+            "time_base": "1/12800",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 2627072,
+            "duration": "205.240000",
+            "bit_rate": "522528",
+            "bits_per_raw_sample": "8",
+            "nb_frames": "5131",
+            "extradata_size": 49,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "eng",
+              "handler_name": "VideoHandler",
+              "vendor_id": "[0][0][0][0]",
+              "encoder": "Lavc62.11.100 libx264"
+            }
+          }
+        ],
+        "format": {
+          "filename": "/Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/br-05/br-05.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "205.240000",
+          "size": "13465986",
+          "bit_rate": "524887",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf62.3.100"
+          }
+        }
+      }
+    },
+    {
+      "folder": "br-06",
+      "json_exports_with_native_configuration": [
+        "downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-9ea51bd854f84191aec268ddc691846d_v1-comparison.json",
+        "downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-9ea51bd854f84191aec268ddc691846d_v1-scenario.json"
+      ],
+      "video_sha256": "6b96a54e9a1a2a27e4461b54b7d7701b049b6ef3770afd897b40b66971b18a50",
+      "full_decode": "passed",
+      "frame": "br-06-frame.png",
+      "frame_seconds": 241.31,
+      "frame_sha256": "59c19540468cb82fe6a8f2bd94f6f7f84610eac0d06afd4ac8522b41d14c9301",
+      "raw_webm_sha256": "2082105a706a3fe4847fbd1de928158b6a3bbe9678d019af54cd514f70f25c01",
+      "trace_sha256": "0788cb8d0892c237ee9d49994b35e59fda0a80fc44e170b3441ab3ceca522470",
+      "screenshot_inventory": [
+        {
+          "file": "step-01.png",
+          "sha256": "836619fe75c8ce2288b8f9d91779728ff6e74fe88e03ec7c093d6257c6bd5a7f"
+        },
+        {
+          "file": "step-02.png",
+          "sha256": "df4faeafa7bbce2e562c7aab2bd7fae457bc7e26de00d867b904bd1814fd33f3"
+        },
+        {
+          "file": "step-03.png",
+          "sha256": "86aad38e0013feeeed140b3935aff26250cea0749e10ac8b5edd5ae1ebbe2693"
+        },
+        {
+          "file": "step-04.png",
+          "sha256": "271aa2eeff7c80ccd9e1f3c2314a210f0b12e1ae82fba771b829d6dd6dcb8de6"
+        },
+        {
+          "file": "step-05.png",
+          "sha256": "26c501b504f1138be8e4cfad8e589f8cfca6f0dd3d66cac5d9bcdafa8613009d"
+        },
+        {
+          "file": "step-06.png",
+          "sha256": "7f5599f978ab0643c1e61bbad43a92c46f89173476f555b01a4479980eb1c62d"
+        },
+        {
+          "file": "step-07.png",
+          "sha256": "d587c5ad6d822798a44ec793c236b9ac765bbdf5818dbef546dd3d0adc66fd9d"
+        },
+        {
+          "file": "step-08.png",
+          "sha256": "e14dc94e2e8dc42f71fbfb9a230549a1e222a368c4504b6553b94c140cd26a5d"
+        },
+        {
+          "file": "step-09.png",
+          "sha256": "cc910379f83d7190ef13bf0ada22ba2692ff5b1d2b54daae188a0f8eb7c9923c"
+        },
+        {
+          "file": "step-10.png",
+          "sha256": "2dcd65cda5117de89c79b5ac0f542cb4e38b14a82f9ab00fa5b444881f82b9f0"
+        },
+        {
+          "file": "step-11.png",
+          "sha256": "c73ca8e9ca3ffa2793e6d4bcb0d1ce5b7b7a1d83a21da023d86e33d2a8a29007"
+        },
+        {
+          "file": "step-12.png",
+          "sha256": "f4b125faa21830c891f32ca143f7677f42fe01cc2838f1e9681d8849ff7478f6"
+        },
+        {
+          "file": "step-13.png",
+          "sha256": "ccaef1110cb12eb4d05aa54f0a4976650f80bddfb6307048e4c71feebe6bc9fb"
+        },
+        {
+          "file": "step-14.png",
+          "sha256": "61dd8d590fdb4d8ad55ab204abf46a9ee7982a90201ab15d598e319a08ae623d"
+        },
+        {
+          "file": "step-15.png",
+          "sha256": "dbcd295cf5c20471766d272834ede94d14e0d7e30a67d5cfd57266247b4c90ab"
+        },
+        {
+          "file": "step-16.png",
+          "sha256": "47fadf1c06243f1e7524d5cdc76b412124835bd8130f12c6ff38e32f64797d61"
+        },
+        {
+          "file": "step-17.png",
+          "sha256": "9d451d772c1e8063e641153c812454b08db80482364c01f5b0a17ec0ad88d39f"
+        },
+        {
+          "file": "step-18.png",
+          "sha256": "8c8bf2f86f11bdca2ed419ceaed707adce61c66487822944c45e7b772d4aa449"
+        },
+        {
+          "file": "step-19.png",
+          "sha256": "c74d7e65cb2f0a6e558fec06668e1a480e4ba9317faf59e44b7e5549c6f9e05f"
+        },
+        {
+          "file": "step-20.png",
+          "sha256": "699976045746538119220177698aebb1d318c709c486b4048c39611d64bfc70f"
+        }
+      ],
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "avc1",
+            "codec_tag": "0x31637661",
+            "width": 1920,
+            "height": 1080,
+            "coded_width": 1920,
+            "coded_height": 1080,
+            "has_b_frames": 2,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 40,
+            "chroma_location": "center",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "true",
+            "nal_length_size": "4",
+            "id": "0x1",
+            "r_frame_rate": "25/1",
+            "avg_frame_rate": "25/1",
+            "time_base": "1/12800",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 4341760,
+            "duration": "339.200000",
+            "bit_rate": "384944",
+            "bits_per_raw_sample": "8",
+            "nb_frames": "8480",
+            "extradata_size": 49,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "eng",
+              "handler_name": "VideoHandler",
+              "vendor_id": "[0][0][0][0]",
+              "encoder": "Lavc62.11.100 libx264"
+            }
+          }
+        ],
+        "format": {
+          "filename": "/Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/br-06/br-06.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "339.200000",
+          "size": "16422243",
+          "bit_rate": "387317",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf62.3.100"
+          }
+        }
+      }
+    },
+    {
+      "folder": "sensor-replay",
+      "json_exports_with_native_configuration": [],
+      "video_sha256": "778b207368f1209055b0605dd00df2277cbfb9f86578a1c4ccd7d567745c409c",
+      "full_decode": "passed",
+      "frame": "sensor-replay-frame.png",
+      "frame_seconds": 259.427,
+      "frame_sha256": "12e8d802ef9a63233db228213765e86b7ebf066806e2ccf7c2bf18058489a27c",
+      "raw_webm_sha256": "dc957c851e5b54ab49de6843287cc07b4c03e97114898dd935a852366c362369",
+      "trace_sha256": "3982ffe5f41e1d0e0f12e99b65d685e305a5f05295ef60416d91c90c1dbfe02f",
+      "screenshot_inventory": [
+        {
+          "file": "step-01.png",
+          "sha256": "99501bf8e3b8e28168f0df63d461c1800d95a642b3e3fbb5f21147b63f373e7f"
+        },
+        {
+          "file": "step-02.png",
+          "sha256": "f9787e323ad2cc6253eaa7a033c4d99ab03a31b14baa3092fd921d919a5dcae6"
+        },
+        {
+          "file": "step-03.png",
+          "sha256": "7879b79cda025b9e6341f1ab89890b56191e76b7aa24e9e3468fd2822eae8525"
+        },
+        {
+          "file": "step-04.png",
+          "sha256": "9d9a140ef2b9965ed3f1e466422cf7c35c702f675eac04924948da128b999791"
+        },
+        {
+          "file": "step-05.png",
+          "sha256": "2b257ee8231f97d1cf7215fd419b5ab2aaaa70492c6f68545b68b9b90618fb67"
+        },
+        {
+          "file": "step-06.png",
+          "sha256": "7929581941efceb9ab5af5bbc0ae8c4496b05fde5442136bf9c73ccafe76b1c3"
+        },
+        {
+          "file": "step-07.png",
+          "sha256": "afa2daa27d2edcaf13084e9f454b90a9315f9606a7e4aa9f35ec39f911aa161f"
+        },
+        {
+          "file": "step-08.png",
+          "sha256": "7b36ab6c0cd79a6a88ea4d9865858de16e52269a437fc6fda376068c64e9f24b"
+        },
+        {
+          "file": "step-09.png",
+          "sha256": "9e55a94319eb23d18c448c78088b6a269ecf0e983d699cbb0dc84dcc1c1101fd"
+        },
+        {
+          "file": "step-10.png",
+          "sha256": "f6fd8fba2c304a9c427493acf3342936ccfcedd88eef471a50b3da489c01003e"
+        },
+        {
+          "file": "step-11.png",
+          "sha256": "882324254e6ae620558d8ee3b35bfb9f974265a140081cbd25e2e25a38da1bbd"
+        },
+        {
+          "file": "step-12.png",
+          "sha256": "033be45d82aa5988b4abc031ff20d31441000a296cbbd671286a6b8d25ee8264"
+        },
+        {
+          "file": "step-13.png",
+          "sha256": "024765d3625e4e3da8de5970787b435591d7d7407b3db9ed97c661dccb67e7f6"
+        },
+        {
+          "file": "step-14.png",
+          "sha256": "453834c6acb0f14e3854fed448e6c62e7abdf25e285acddf56de8a4a08d89e7e"
+        },
+        {
+          "file": "step-15.png",
+          "sha256": "495ea8f495d00b5c16e0fbf4e8df42dcd8dc687bcb29c9d3a25c7e8c540082f8"
+        },
+        {
+          "file": "step-16.png",
+          "sha256": "015f81e7fed4f67121eee6b099908d5161ea0b5309baf87d7f50838dfa5c2f62"
+        }
+      ],
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "avc1",
+            "codec_tag": "0x31637661",
+            "width": 1920,
+            "height": 1080,
+            "coded_width": 1920,
+            "coded_height": 1080,
+            "has_b_frames": 2,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 40,
+            "chroma_location": "center",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "true",
+            "nal_length_size": "4",
+            "id": "0x1",
+            "r_frame_rate": "25/1",
+            "avg_frame_rate": "25/1",
+            "time_base": "1/12800",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 4744704,
+            "duration": "370.680000",
+            "bit_rate": "318892",
+            "bits_per_raw_sample": "8",
+            "nb_frames": "9267",
+            "extradata_size": 49,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "eng",
+              "handler_name": "VideoHandler",
+              "vendor_id": "[0][0][0][0]",
+              "encoder": "Lavc62.11.100 libx264"
+            }
+          }
+        ],
+        "format": {
+          "filename": "/Users/hiep.le/Downloads/project/internal/data-eng/project-submit/demo-videos/clickhouse/sensor-replay/sensor-replay.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "370.680000",
+          "size": "14884095",
+          "bit_rate": "321227",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf62.3.100"
+          }
+        }
+      }
+    }
+  ],
+  "reviewed_at": "2026-11-07T09:26:55.244995+00:00",
+  "visual_review_scope": "Seven representative frames decoded from MP4, with readable key values and Vietnamese captions; automated assertions/screenshots cover all steps. No human-participant usability claim.",
+  "visual_observations": [
+    "BR01: selected 1180-minute climate episode and original dates visible",
+    "BR02: 9.36 irrigation / 3.89 drain / 41.56 percent / 100 percent coverage visible",
+    "BR03: selected 80400-minute EC episode and original dates visible",
+    "BR04: 308.078 kWh, zero kg A and NULL intensity visible",
+    "BR05: A0.05/B0.10 kg per m2 and share B66.67 percent visible",
+    "BR06: saved scenario, baseline17.60/scenario20.84/delta3.24 EUR visible",
+    "Sensor: completed30/30, zero missing sequences and checksum success visible; stale collector age is a separate received-clock status"
+  ]
+}

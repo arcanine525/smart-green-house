@@ -1,0 +1,1442 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smart-greenhouse.local/schemas/greenhouse-telemetry-envelope-v1.json",
+  "title": "GreenhouseTelemetryEnvelopeV1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "event_id",
+    "data_scope_id",
+    "replay_id",
+    "device_id",
+    "compartment_id",
+    "cycle_id",
+    "source_record_id",
+    "source_provenance",
+    "sequence",
+    "source_observed_at",
+    "published_at",
+    "payload",
+    "units",
+    "fault_tags"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "greenhouse-telemetry-envelope-v1"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "data_scope_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "replay_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "device_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "compartment_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_record_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_provenance": {
+      "type": "object",
+      "required": [
+        "snapshot_id",
+        "snapshot_sha",
+        "source_file",
+        "file_checksum",
+        "line_number",
+        "line_end",
+        "raw_hash",
+        "source_time_serial",
+        "adapter_id",
+        "parser_version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "snapshot_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "snapshot_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "file_checksum": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "line_number": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "line_end": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "raw_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_time_serial": {
+          "type": "string",
+          "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+        },
+        "adapter_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parser_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "raw_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "time_policy_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "slot_start": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "slot_residual_seconds": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_issues": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source_observed_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?$"
+    },
+    "published_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "actual_measurements",
+        "drain_measurements",
+        "actuators",
+        "controller_context",
+        "null_reasons",
+        "category_tags"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "actual_measurements": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "CO2air": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "HumDef": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "PipeGrow": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "PipeLow": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "Rhair": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "Tair": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "Tot_PAR": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "Tot_PAR_Lamps": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            }
+          }
+        },
+        "drain_measurements": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Cum_irr": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "EC_drain_PC": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "pH_drain_PC": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "water_sup": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            }
+          }
+        },
+        "actuators": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "AssimLight": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "BlackScr": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "EnScr": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "VentLee": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "Ventwind": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "co2_dos": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            }
+          }
+        },
+        "controller_context": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "assim_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "assim_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "co2_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "co2_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "dx_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "dx_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "int_blue_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "int_blue_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "int_farred_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "int_farred_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "int_red_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "int_red_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "int_white_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "int_white_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "scr_blck_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "scr_blck_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "scr_enrg_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "scr_enrg_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "t_grow_min_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "t_grow_min_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "t_heat_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "t_heat_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "t_rail_min_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "t_rail_min_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "t_vent_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "t_ventlee_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "t_ventwind_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "water_sup_intervals_sp_min": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "water_sup_intervals_vip_min": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "window_pos_lee_sp": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            },
+            "window_pos_lee_vip": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+            }
+          }
+        },
+        "null_reasons": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "AssimLight": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "BlackScr": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "CO2air": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "Cum_irr": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "EC_drain_PC": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "EnScr": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "HumDef": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "PipeGrow": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "PipeLow": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "Rhair": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "Tair": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "Tot_PAR": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "Tot_PAR_Lamps": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "VentLee": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "Ventwind": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "assim_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "assim_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "co2_dos": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "co2_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "co2_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "dx_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "dx_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "int_blue_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "int_blue_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "int_farred_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "int_farred_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "int_red_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "int_red_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "int_white_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "int_white_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "pH_drain_PC": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "scr_blck_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "scr_blck_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "scr_enrg_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "scr_enrg_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "t_grow_min_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "t_grow_min_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "t_heat_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "t_heat_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "t_rail_min_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "t_rail_min_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "t_vent_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "t_ventlee_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "t_ventwind_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "water_sup": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "water_sup_intervals_sp_min": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "water_sup_intervals_vip_min": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "window_pos_lee_sp": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            },
+            "window_pos_lee_vip": {
+              "type": "string",
+              "enum": [
+                "empty",
+                "nan_token",
+                "na_token",
+                "n_a_token",
+                "invalid_numeric",
+                "missing_column",
+                "nonfinite"
+              ]
+            }
+          }
+        },
+        "category_tags": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "AssimLight": {
+              "const": "actuator"
+            },
+            "BlackScr": {
+              "const": "actuator"
+            },
+            "CO2air": {
+              "const": "actual_climate"
+            },
+            "Cum_irr": {
+              "const": "computed_drain"
+            },
+            "EC_drain_PC": {
+              "const": "actual_drain"
+            },
+            "EnScr": {
+              "const": "actuator"
+            },
+            "HumDef": {
+              "const": "actual_climate"
+            },
+            "PipeGrow": {
+              "const": "actual_climate"
+            },
+            "PipeLow": {
+              "const": "actual_climate"
+            },
+            "Rhair": {
+              "const": "actual_climate"
+            },
+            "Tair": {
+              "const": "actual_climate"
+            },
+            "Tot_PAR": {
+              "const": "computed_climate"
+            },
+            "Tot_PAR_Lamps": {
+              "const": "computed_climate"
+            },
+            "VentLee": {
+              "const": "actuator"
+            },
+            "Ventwind": {
+              "const": "actuator"
+            },
+            "assim_sp": {
+              "const": "controller_requested"
+            },
+            "assim_vip": {
+              "const": "controller_realized"
+            },
+            "co2_dos": {
+              "const": "computed_actuator"
+            },
+            "co2_sp": {
+              "const": "controller_requested"
+            },
+            "co2_vip": {
+              "const": "controller_realized"
+            },
+            "dx_sp": {
+              "const": "controller_requested"
+            },
+            "dx_vip": {
+              "const": "controller_realized"
+            },
+            "int_blue_sp": {
+              "const": "controller_requested"
+            },
+            "int_blue_vip": {
+              "const": "controller_realized"
+            },
+            "int_farred_sp": {
+              "const": "controller_requested"
+            },
+            "int_farred_vip": {
+              "const": "controller_realized"
+            },
+            "int_red_sp": {
+              "const": "controller_requested"
+            },
+            "int_red_vip": {
+              "const": "controller_realized"
+            },
+            "int_white_sp": {
+              "const": "controller_requested"
+            },
+            "int_white_vip": {
+              "const": "controller_realized"
+            },
+            "pH_drain_PC": {
+              "const": "actual_drain"
+            },
+            "scr_blck_sp": {
+              "const": "controller_requested"
+            },
+            "scr_blck_vip": {
+              "const": "controller_realized"
+            },
+            "scr_enrg_sp": {
+              "const": "controller_requested"
+            },
+            "scr_enrg_vip": {
+              "const": "controller_realized"
+            },
+            "t_grow_min_sp": {
+              "const": "controller_requested"
+            },
+            "t_grow_min_vip": {
+              "const": "controller_realized"
+            },
+            "t_heat_sp": {
+              "const": "controller_requested"
+            },
+            "t_heat_vip": {
+              "const": "controller_realized"
+            },
+            "t_rail_min_sp": {
+              "const": "controller_requested"
+            },
+            "t_rail_min_vip": {
+              "const": "controller_realized"
+            },
+            "t_vent_sp": {
+              "const": "controller_requested"
+            },
+            "t_ventlee_vip": {
+              "const": "controller_realized"
+            },
+            "t_ventwind_vip": {
+              "const": "controller_realized"
+            },
+            "water_sup": {
+              "const": "actual_drain"
+            },
+            "water_sup_intervals_sp_min": {
+              "const": "controller_requested"
+            },
+            "water_sup_intervals_vip_min": {
+              "const": "controller_realized"
+            },
+            "window_pos_lee_sp": {
+              "const": "controller_requested"
+            },
+            "window_pos_lee_vip": {
+              "const": "controller_realized"
+            }
+          }
+        }
+      }
+    },
+    "units": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "AssimLight": {
+          "const": "%"
+        },
+        "BlackScr": {
+          "const": "%"
+        },
+        "CO2air": {
+          "const": "ppm"
+        },
+        "Cum_irr": {
+          "const": "L/m²"
+        },
+        "EC_drain_PC": {
+          "const": "dS/m"
+        },
+        "EnScr": {
+          "const": "%"
+        },
+        "HumDef": {
+          "const": "g/m³"
+        },
+        "PipeGrow": {
+          "const": "°C"
+        },
+        "PipeLow": {
+          "const": "°C"
+        },
+        "Rhair": {
+          "const": "%"
+        },
+        "Tair": {
+          "const": "°C"
+        },
+        "Tot_PAR": {
+          "const": "µmol/m² s"
+        },
+        "Tot_PAR_Lamps": {
+          "const": "µmol/m² s"
+        },
+        "VentLee": {
+          "const": "%"
+        },
+        "Ventwind": {
+          "const": "%"
+        },
+        "assim_sp": {
+          "const": "%"
+        },
+        "assim_vip": {
+          "const": "%"
+        },
+        "co2_dos": {
+          "const": "kg/ha hour"
+        },
+        "co2_sp": {
+          "const": "ppm"
+        },
+        "co2_vip": {
+          "const": "ppm"
+        },
+        "dx_sp": {
+          "const": "g/m³"
+        },
+        "dx_vip": {
+          "const": "g/m³"
+        },
+        "int_blue_sp": {
+          "const": "1"
+        },
+        "int_blue_vip": {
+          "const": "1"
+        },
+        "int_farred_sp": {
+          "const": "1"
+        },
+        "int_farred_vip": {
+          "const": "1"
+        },
+        "int_red_sp": {
+          "const": "1"
+        },
+        "int_red_vip": {
+          "const": "1"
+        },
+        "int_white_sp": {
+          "const": "1"
+        },
+        "int_white_vip": {
+          "const": "1"
+        },
+        "pH_drain_PC": {
+          "const": "1"
+        },
+        "scr_blck_sp": {
+          "const": "%"
+        },
+        "scr_blck_vip": {
+          "const": "%"
+        },
+        "scr_enrg_sp": {
+          "const": "%"
+        },
+        "scr_enrg_vip": {
+          "const": "%"
+        },
+        "t_grow_min_sp": {
+          "const": "°C"
+        },
+        "t_grow_min_vip": {
+          "const": "°C"
+        },
+        "t_heat_sp": {
+          "const": "°C"
+        },
+        "t_heat_vip": {
+          "const": "°C"
+        },
+        "t_rail_min_sp": {
+          "const": "°C"
+        },
+        "t_rail_min_vip": {
+          "const": "°C"
+        },
+        "t_vent_sp": {
+          "const": "°C"
+        },
+        "t_ventlee_vip": {
+          "const": "°C"
+        },
+        "t_ventwind_vip": {
+          "const": "°C"
+        },
+        "water_sup": {
+          "const": "minutes"
+        },
+        "water_sup_intervals_sp_min": {
+          "const": "minutes"
+        },
+        "water_sup_intervals_vip_min": {
+          "const": "minutes"
+        },
+        "window_pos_lee_sp": {
+          "const": "%"
+        },
+        "window_pos_lee_vip": {
+          "const": "%"
+        }
+      }
+    },
+    "fault_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

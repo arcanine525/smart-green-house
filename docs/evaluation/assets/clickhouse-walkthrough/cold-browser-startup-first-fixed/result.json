@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "backend": "clickhouse",
+  "project": "gh-ch-repro-20261107032510-rebuilt",
+  "app": "gh-ch-repro-20261107032510-rebuilt-ch-app-1",
+  "started_at": "2026-11-07T07:50:28.451566+00:00",
+  "mode": "before_sensor_recording",
+  "script_sha256": "d368e9345b01a3c7778a59f10f306581cd7e8a80ba03f175590c5fcf23ac1669",
+  "warm_script_sha256": "fbf3a81d91b1a97335ec4bc93a162d5fb8bb4731d5d4fe48cc406e1c9b5fddfc",
+  "previous_app_started_at": "2026-11-07T07:50:05.483791965Z",
+  "no_parallel_browser": true,
+  "source_or_database_restarted": false,
+  "app_started_at": "2026-11-07T07:50:28.735410129Z",
+  "note": "One fresh app process; cold process/proof probe, not a warm summary benchmark or cold disk claim",
+  "restart_to_browser_seconds": 189.9084710419993
+}

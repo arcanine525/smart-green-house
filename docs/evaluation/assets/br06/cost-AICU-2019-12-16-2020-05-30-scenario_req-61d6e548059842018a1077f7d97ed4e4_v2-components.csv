@@ -1,0 +1,30 @@
+﻿# export_version=greenhouse-energy-cost-v1
+# publication_id=892b4cd58cdf4d099510974d91fa64ab
+# scope_id=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot_id=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# cycle_id=agc-cycle-AICU
+# compartment_ids=AICU
+# window=[2019-12-16,2020-05-30)
+# metric_version=energy-cost-v1
+# tariff_version=tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1
+# scenario_version=scenario:req-61d6e548059842018a1077f7d97ed4e4:v2
+# currency=EUR
+# basis_status=assumed_unverified
+# basis_label=giả định chưa xác minh
+# sensitivity_factor=1.536
+# quantity_coverage_pct=100
+# pricing_coverage_pct=100
+# expected_days=166
+# priced_days=166
+# quantity_complete_days=166
+# evaluation_grain=component
+# notice=Price-only scenario analysis; unchanged physical consumption; historical EUR only
+# NULL is empty; accepted zero stays 0; no extrapolation; display 2dp differs from exact exports
+# scenario_name=Kịch bản tăng giá điện 20%
+# scenario_id=scenario:req-61d6e548059842018a1077f7d97ed4e4
+# scenario_version_num=2
+# baseline_tariff_version=tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1
+component,price_unit,expected_days,baseline_priced_days,scenario_priced_days,baseline_pricing_coverage_pct,scenario_pricing_coverage_pct,quantity_accepted_days,quantity_coverage_pct,baseline_official_cost_per_m2,scenario_official_cost_per_m2,delta_cost_per_m2,delta_cost_pct,baseline_official_cost_eur,scenario_official_cost_eur,delta_cost_eur,baseline_observed_cost_per_m2,scenario_observed_cost_per_m2,baseline_observed_cost_eur,scenario_observed_cost_eur,baseline_share_pct,scenario_share_pct,baseline_reasons,scenario_reasons
+heat,EUR/MJ,166,166,166,100,100,166,100,2.09405016,2.09405016,0E-8,0,130.878135000,130.878135000,0E-9,2.09405016,2.09405016,130.878135000,130.878135000,11.334895423531258649939548480310144704479186424893,9.6276264173043347954217318376857015348760219363887,,
+elec_high,EUR/kWh,166,166,166,100,100,166,100,13.54012666704,16.248152000448,2.708025333408,20.0,846.257916690000,1015.5095000280000,169.2515833380000,13.54012666704,16.248152000448,846.257916690000,1015.5095000280000,73.291424782425102162338913917030667824575831672696,74.702669697219401205677682997959104584477622955031,,
+elec_low,EUR/kWh,166,166,166,100,100,166,100,2.84018999996,3.408227999952,0.568037999992,20.0,177.511874997500,213.0142499970000,35.5023749995000,2.84018999996,3.408227999952,177.511874997500,213.0142499970000,15.373679794043639187721537602659187470944981902410,15.669703885476263998900585164355193880646355108581,,

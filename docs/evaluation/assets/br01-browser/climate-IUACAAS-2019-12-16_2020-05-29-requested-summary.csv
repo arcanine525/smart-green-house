@@ -1,0 +1,33 @@
+﻿# export=greenhouse-water-csv-v1
+# quantity units: temperature=°C, co2=ppm
+# percent_unit=%
+# decimal=exact source scale (no rounding)
+# null=empty field
+# bool=true/false
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# publication=804770b6ac534b308ad4e449487db50a
+# finality=provisional
+# committed_at=2026-11-04T20:43:08.255736+00:00
+# cycle=agc-cycle-IUACAAS
+# compartment=IUACAAS
+# requested_window=[2019-12-16,2020-05-30)
+# effective_window=[2019-12-16T00:00:00,2020-05-30T00:00:00)
+# time_basis=source_naive (source timezone unresolved)
+# declared_context=climate
+# declared_basis=requested
+# quality_policy=AGC_QUALITY_V1
+# pipeline_run=fb0e4d21d90f4125a3889f5b82f8ea65
+# parser_version=agc-parser-v1
+# code_version=pipeline-v4-climate
+# config_bundle_hash=0bb342e61a0f2de9998b0a67a1a6f3133365e249f3d2a37cd7980350801e5b06
+# requested_rule_version=climate-demo-b01:IUACAAS:v1
+# rule_identities=temperature:climate-demo-b01:IUACAAS:v1;co2:climate-demo-b01:IUACAAS:v1
+# rule_id=climate-demo-b01:IUACAAS
+# rule_label=demo_rule
+# rule_is_demo=true
+# rule_evidence=Synthetic demo per docs/br/br_01_climate-condition-monitoring.md §4.1/§7: delta_temp 0.5 °C and delta_co2 50 ppm applied to BOTH the requested and realized bases; explicitly NOT an agronomic-standard AGC threshold and not derived from the setpoint dictionary. Registration boundary follows the approved T14 schedule semantics (one segment mode, at most one revision per requested metric key; historic
+# episode_filter=list-only (summary totals never filtered); episode windows carry ORIGINAL and CLIPPED facts
+metric,measurement_context,basis,rule_version,unit,expected_minutes,valid_minutes,out_minutes,out_low_minutes,out_high_minutes,suspect_minutes,unknown_minutes,out_hours,out_percent,coverage_pct,unknown_reasons
+temperature,climate,requested,climate-demo-b01:IUACAAS:v1,°C,239040,227735,52595,15545,37050,0,11305,876.58333333333333333333333333333333333333333333333,23.094825125694337717083452258107010340966474191495,95.270665997322623828647925033467202141900937081660,missing_input:11295;inverted_bounds:10
+co2,climate,requested,climate-demo-b01:IUACAAS:v1,ppm,239040,140635,78580,28490,50090,0,98405,1309.6666666666666666666666666666666666666666666667,55.875137767980943577345610978774842677854019269741,58.833249665327978580990629183400267737617135207497,missing_input:12480;sp0_off_mode:85925

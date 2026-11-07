@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "replay_id": "agc-restore-ff62a380f978",
+  "publication_id": "d79e77c34cdb89077a9668e3da540c5e498e776ed21671375cbda73439894f44",
+  "accepted_events": 30,
+  "complete": true,
+  "climate_rule": "climate-demo-b01:Automatoes:v1",
+  "drain_rule": "drain-demo-b03:Automatoes:v1",
+  "charts": 4,
+  "csv_export_available": true
+}

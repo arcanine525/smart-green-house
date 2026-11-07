@@ -1,0 +1,15 @@
+ Container gh-ch-full-20261107-ch-stream-run-347687452448 Creating
+ Container gh-ch-full-20261107-ch-stream-run-347687452448 Created
+Traceback (most recent call last):
+  File "/workspace/tests/clickhouse/check_agc_sensor.py", line 140, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/tests/clickhouse/check_agc_sensor.py", line 52, in main
+    simulation=simulator.run(resume=resumed)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/sensor/simulator.py", line 233, in run
+    checkpoint = self.outbox.initialize_run(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/sensor/outbox.py", line 238, in initialize_run
+    raise OutboxError("Replay is already completed; new replay requires new replay_id")
+greenhouse.sensor.outbox.OutboxError: Replay is already completed; new replay requires new replay_id

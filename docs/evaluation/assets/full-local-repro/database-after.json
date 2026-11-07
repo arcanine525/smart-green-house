@@ -1,0 +1,357 @@
+[
+  {
+    "table": "config.area_basis_version",
+    "rows": 84,
+    "sha256": "102fda9e64744e415a2e889b3478cf92d2aa3084bacdffbae39a5684ceed394c"
+  },
+  {
+    "table": "config.assumption_application",
+    "rows": 2,
+    "sha256": "d0b4ff89840663c69c73042cf6e472c2e34e63b9f5b3708e05a195a0282dbbf2"
+  },
+  {
+    "table": "config.basis_application",
+    "rows": 96,
+    "sha256": "6aa4a5ce172a2a2cf948625bfb1528d233c03bc181601eaf273accd2078bd925"
+  },
+  {
+    "table": "config.basis_assumption_version",
+    "rows": 2,
+    "sha256": "42a64279f8613b081911f9195c84b29c9988a211ba0753262bc1e6dfe8a9fd51"
+  },
+  {
+    "table": "config.cost_scenario",
+    "rows": 1,
+    "sha256": "8bddd3a2ef8ddec5c7bc2ec653c91ce5fdbdafd84c4ff60763c2a2c60b5017bc"
+  },
+  {
+    "table": "config.cost_scenario_rate",
+    "rows": 3,
+    "sha256": "791dfbf3eb6a90aea7fed9c94ea53d1c0a2f2602e41b7700f86dbe1dfd7c2e18"
+  },
+  {
+    "table": "config.harvest_rule_profile",
+    "rows": 6,
+    "sha256": "2d9ca77b8ba9f705f701d39e1aa1c07d76c56251731f34c2d41ef689924dc38a"
+  },
+  {
+    "table": "config.irrigation_rule_profile",
+    "rows": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "table": "config.measure_definition",
+    "rows": 18,
+    "sha256": "cf86deec9525e669aa9748f7bef9e21f923dabec30a29e5ddeba5b29a09cbf13"
+  },
+  {
+    "table": "config.quality_policy_version",
+    "rows": 1,
+    "sha256": "12a66f51b61fb9bd515462838116804db6af9e8f650df0d0f6fb0805a153cf1c"
+  },
+  {
+    "table": "config.rule_schedule_revision",
+    "rows": 12,
+    "sha256": "d47a5624b61dc8e6764ae67fb25d2fa8bac37d33ba5b950e1f24c9a780f71d41"
+  },
+  {
+    "table": "config.rule_schedule_segment",
+    "rows": 36,
+    "sha256": "fbbcff40c21deb026762d772534bf297652fd1308caa37492e110bd4bb8ffc89"
+  },
+  {
+    "table": "config.tariff_profile",
+    "rows": 1,
+    "sha256": "09e72d33e0bfe4adf63d2a8c2ce58da32e597dbf4470bdf968fafcd33f89b444"
+  },
+  {
+    "table": "config.tariff_rate",
+    "rows": 3,
+    "sha256": "2a470ef59f34563d2d5ffc0a65792e9a553c1a55e3845f5011ca95086edfc566"
+  },
+  {
+    "table": "core.climate_observation",
+    "rows": 286854,
+    "sha256": "f116ade63fdfc5cb05f81a5f1c355d62596b567cf33d723554d60e67f17fbce0"
+  },
+  {
+    "table": "core.compartment",
+    "rows": 6,
+    "sha256": "01390a47ccd2eafa4d1f3856c4a88295274fc8691b5ef2b3a0c9d3201d6864b3"
+  },
+  {
+    "table": "core.crop",
+    "rows": 1,
+    "sha256": "7a74a74418e6ec3b6b879945cbbf8ae0d45dbd5bab0dad515f6acfe3799d1692"
+  },
+  {
+    "table": "core.drain_observation",
+    "rows": 286854,
+    "sha256": "70e04a303f42e6d9719c69ad36119b5f7567f3379a463b87fee80202ee595d10"
+  },
+  {
+    "table": "core.growing_cycle",
+    "rows": 6,
+    "sha256": "77c0ce27d28639bc9abb9152083488649689d530a83377bbef8f9571c92f8761"
+  },
+  {
+    "table": "core.harvest",
+    "rows": 139,
+    "sha256": "7729a276eb43061f2b22a278dcc5a037900c0f3222be9c3c5316864130c0ab9b"
+  },
+  {
+    "table": "core.measure_quality",
+    "rows": 2874794,
+    "sha256": "fbba1c30c0763e4290f8c49eb6ee3d976f9270248ae03e320fdee1579594b998"
+  },
+  {
+    "table": "core.record_revision",
+    "rows": 574843,
+    "sha256": "96d8234e0c69aef2d449ca86e173e7276691b3934d082733b9884a4f99f2e706"
+  },
+  {
+    "table": "core.resource_day",
+    "rows": 996,
+    "sha256": "fe291f2149a30c99427c161641107306f039d8e5827dcbf36ba751d094dd9c2d"
+  },
+  {
+    "table": "core.site",
+    "rows": 1,
+    "sha256": "a18a7c69b1dde4af71e5b4188177327c6430f50826220eed1cc352a8a48825e4"
+  },
+  {
+    "table": "core.team",
+    "rows": 6,
+    "sha256": "a070ae809453010bae10104ac77b03fcc4734e3d123c6484d2637ed54e9a6e63"
+  },
+  {
+    "table": "mart.climate_publication",
+    "rows": 1,
+    "sha256": "a7cf9d450b0df33533b54cb53e2f5c554fd23d4e5356a99608245a8aa007ab69"
+  },
+  {
+    "table": "mart.dim_climate_cycle",
+    "rows": 6,
+    "sha256": "13d3f02a0e0fe54cfc79b2a3de01f0eb9506a1356c886836a67a73aa89ff0b61"
+  },
+  {
+    "table": "mart.dim_date",
+    "rows": 166,
+    "sha256": "4ccde4c2f90a98601c665a2fb8044f5501d0c3f3ad271099be1a7063562f5666"
+  },
+  {
+    "table": "mart.dim_drain_cycle",
+    "rows": 6,
+    "sha256": "13d3f02a0e0fe54cfc79b2a3de01f0eb9506a1356c886836a67a73aa89ff0b61"
+  },
+  {
+    "table": "mart.dim_energy_cycle",
+    "rows": 6,
+    "sha256": "2aee8e4e0a98b2904ac93232d02fac3d9ef5c1b9a94bf36f41acf6c74ed14dcc"
+  },
+  {
+    "table": "mart.dim_harvest_cycle",
+    "rows": 6,
+    "sha256": "2aee8e4e0a98b2904ac93232d02fac3d9ef5c1b9a94bf36f41acf6c74ed14dcc"
+  },
+  {
+    "table": "mart.dim_irrigation_cycle",
+    "rows": 6,
+    "sha256": "2aee8e4e0a98b2904ac93232d02fac3d9ef5c1b9a94bf36f41acf6c74ed14dcc"
+  },
+  {
+    "table": "mart.drain_publication",
+    "rows": 1,
+    "sha256": "edfcb544eb936121dc527cb6da76714d27c082ca9abe0c44b1d56fea05192f7d"
+  },
+  {
+    "table": "mart.energy_publication",
+    "rows": 1,
+    "sha256": "16ba8d7afdaf4763cbf1ad23eebc06a44e4540577d159947bd025530d656e45d"
+  },
+  {
+    "table": "mart.fact_climate_slot",
+    "rows": 286854,
+    "sha256": "3cd5b21aa3f387a847a7c3f37ce563f6df63f3e9de80114b27496f1e66c61bf0"
+  },
+  {
+    "table": "mart.fact_drain_slot",
+    "rows": 286854,
+    "sha256": "051d109fbeef96e9988ff7215895c558f451f3e66418d1bb7778c82eb45092df"
+  },
+  {
+    "table": "mart.fact_energy_day",
+    "rows": 2988,
+    "sha256": "a93752824d1d7c3717ffffb60c13f117f4e2f8103b6bdf227b21272fe22ebf6f"
+  },
+  {
+    "table": "mart.fact_harvest_record",
+    "rows": 139,
+    "sha256": "4e260627873066749ab551067069bd07d538ca7099d62aa765b9bee46edc7ba5"
+  },
+  {
+    "table": "mart.fact_irrigation_day",
+    "rows": 996,
+    "sha256": "1fd9ce5b98614e40ed2edb1fa5c22ef499178d23926f2bdcb2ce26256243dce0"
+  },
+  {
+    "table": "mart.harvest_cycle_state",
+    "rows": 6,
+    "sha256": "5ba40c48fee4fe269e52138fa8499e3a83ad0976e37fc83e14f48e7a462e1f44"
+  },
+  {
+    "table": "mart.harvest_publication",
+    "rows": 1,
+    "sha256": "0eb46ac515470efbfc956125d232db8574e07dd4f18cfeed6df061fe719a2026"
+  },
+  {
+    "table": "mart.irrigation_publication",
+    "rows": 1,
+    "sha256": "44a6c0229f20a56336e9d3131bf9a84b721dff50117939eda33e4f8d78821d97"
+  },
+  {
+    "table": "meta.core_baseline_receipt",
+    "rows": 1,
+    "sha256": "fadaae89426eab1463ea581d2695fd923c2357a688750c157a5916bb34c6c92b"
+  },
+  {
+    "table": "meta.correction",
+    "rows": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "table": "meta.current_publication",
+    "rows": 1,
+    "sha256": "4ffb8d91a7d404d41afea0cc0a75ad3c757f78ee1aaa2f08c5ef63095eafcea8"
+  },
+  {
+    "table": "meta.data_scope",
+    "rows": 1,
+    "sha256": "2af124e98215d51d43951355c5d3a604abd31b487d7dc2078b7fadc61e17c8f6"
+  },
+  {
+    "table": "meta.dataset_snapshot",
+    "rows": 1,
+    "sha256": "2a456ff389df847a5716d5e8a1e8713090427c288b79f7ba0b66f8e1aabf309e"
+  },
+  {
+    "table": "meta.dq_issue",
+    "rows": 232519,
+    "sha256": "6f5b1278d493a626fcf3721d9114a8061489c7da132bc8444d28756ed2aa9055"
+  },
+  {
+    "table": "meta.file_ingestion",
+    "rows": 45,
+    "sha256": "ae47fa33825f5c4b1fe89dfd94801d2196ce9b1fdf426a50f386eb9eed5a8d20"
+  },
+  {
+    "table": "meta.pipeline_run",
+    "rows": 1,
+    "sha256": "5835da53256ca0151ccf0dcf3e64fcad33e421b83580a8f8d4631526443fd5ed"
+  },
+  {
+    "table": "meta.publication",
+    "rows": 1,
+    "sha256": "9b0323a04f86be9328bf096ac3d33a3ca9a1bb65a08aeb9639491f7b73a64e0f"
+  },
+  {
+    "table": "meta.publication_basis",
+    "rows": 54,
+    "sha256": "e8390d2de465b56784d5023d207c7e10cd16ce98a01695c3b4fa5a5f5db9401a"
+  },
+  {
+    "table": "meta.publication_member",
+    "rows": 574843,
+    "sha256": "7fe207b0a84b3b1ba20cbb0cc9a01e27c2239d0775382ebd9009eeade35bf7a9"
+  },
+  {
+    "table": "meta.publication_seal",
+    "rows": 1,
+    "sha256": "f6d4be9a6fe4943dbc0d5e59046b2805a79e1969d4017e5419a06631c578bd94"
+  },
+  {
+    "table": "meta.quarantine_record",
+    "rows": 1,
+    "sha256": "63ee1f61514a05e29f50fc3b0104af5908debceeec3f4a40304c0d943f242820"
+  },
+  {
+    "table": "meta.schema_migration",
+    "rows": 16,
+    "sha256": "f870fd386ecb8e8f9ff5ab9273a2acef0064d46443064c4233ac9567ca2d2954"
+  },
+  {
+    "table": "meta.sensor_event",
+    "rows": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "table": "meta.source_file",
+    "rows": 45,
+    "sha256": "ed6557ad6555b3f7f89ba6bcf5b1e21a82406a3b14341b93d4e8552bf33399e4"
+  },
+  {
+    "table": "meta.source_folder_mapping",
+    "rows": 6,
+    "sha256": "96be85dae1748e9544d4c41bf13d0473b79383dc769f6afbc345c314ab353856"
+  },
+  {
+    "table": "meta.source_record",
+    "rows": 287990,
+    "sha256": "d477c827adf0c26be4c369a7d0e23424a4ad950f8489c9afb267de24f7dd8779"
+  },
+  {
+    "table": "meta.workflow_basis",
+    "rows": 54,
+    "sha256": "6dd86014321762112e8c38aaef801568f308e91e41507187051d08138828f52d"
+  },
+  {
+    "table": "meta.workflow_candidate",
+    "rows": 574843,
+    "sha256": "cfab4eb3e4f3a897fb169221859f0953c4b676b8b51b1865d15e63d1bd4b8880"
+  },
+  {
+    "table": "meta.workflow_run",
+    "rows": 1,
+    "sha256": "41d2751515962f17c95a3788025965b905f8bc447587d7620dc4885eff29f556"
+  },
+  {
+    "table": "meta.workflow_step",
+    "rows": 4,
+    "sha256": "b54f4e8831c86318d2d0d23327b3b872514df14b93bd22ccf1bbedec13d8cd08"
+  },
+  {
+    "table": "sensor_stream.current_publication",
+    "rows": 1,
+    "sha256": "e9710ef9625cf26092275365359e9429473fb45c9d39be5750866096079ab665"
+  },
+  {
+    "table": "sensor_stream.delivery",
+    "rows": 10,
+    "sha256": "18c6c5c603578b70d28dcd42b978cf1a193551116c8521585ffcff8176ec907b"
+  },
+  {
+    "table": "sensor_stream.event_variant",
+    "rows": 10,
+    "sha256": "dfede4c5bc9cfce604bfe02466c3538c0e1001c86497a17214a69b7006382207"
+  },
+  {
+    "table": "sensor_stream.processed_batch",
+    "rows": 1,
+    "sha256": "3915e786b76dc0e05d75b52b2e264c64bd138126ae8297979a6f86c4e32032a3"
+  },
+  {
+    "table": "sensor_stream.publication",
+    "rows": 1,
+    "sha256": "d1314c18616c2fc66173cf0ff889721e7e7098bbfe2497f186293f623fe3fec8"
+  },
+  {
+    "table": "sensor_stream.publication_event",
+    "rows": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "table": "sensor_stream.publication_seal",
+    "rows": 1,
+    "sha256": "b80adb9d5e73488c30c546990ea7b9a5012b49368fe2a99f7b2ac1124e320147"
+  }
+]

@@ -1,0 +1,177 @@
+{
+  "status": "passed",
+  "kind": "unrecorded_read_only_rehearsal",
+  "config": {
+    "url": "http://127.0.0.1:18584",
+    "publication": "5d455686a06649e789908b9708a9d436",
+    "replay": "walkthrough-live-b3efff6ba5c5",
+    "scenario": {
+      "name": "Walkthrough điện +20% 2026-11-07T09:05:08",
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "version": "scenario:req-9ea51bd854f84191aec268ddc691846d:v1"
+    }
+  },
+  "script_sha256": "55bd5b38a7b1334c751272cfe20b5c1bdd98934989a1ddf03713605566299184",
+  "external_http_blocked": true,
+  "no_database_writes": true,
+  "recorded_video": false,
+  "elapsed_seconds": 381.805,
+  "steps": [
+    {
+      "title": "BR-02: current publication and corrected two-day water",
+      "seconds": 17.622,
+      "screenshot": "step-01.png",
+      "metrics": [
+        "Irrigation observed\n\n10,36 L/m²",
+        "Drain observed\n\n3,89 L/m²",
+        "Tỷ lệ drain (paired)\n\n37,55 %",
+        "Độ phủ paired\n\n100,00 %"
+      ]
+    },
+    {
+      "title": "BR-01: climate rule and episode over boundary",
+      "seconds": 43.464,
+      "screenshot": "step-02.png",
+      "metrics": [
+        "Nhiệt độ out (giờ quan sát được)\n\n30,75",
+        "Nhiệt độ coverage\n\n100,00 %",
+        "CO₂ out (giờ quan sát được)\n\n10,00",
+        "CO₂ coverage\n\n49,65 %",
+        "OR lệch (giờ, hợp lệ chung)\n\n20,08",
+        "OR lệch %\n\n84,27",
+        "Coverage giao chung\n\n49,65 %"
+      ]
+    },
+    {
+      "title": "BR-03: drain rule, EC/pH and export",
+      "seconds": 27.541,
+      "screenshot": "step-03.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n2880,00",
+        "EC ngoài dải %\n\n100,00",
+        "EC coverage %\n\n100,00",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n1045,00",
+        "PH ngoài dải %\n\n36,28",
+        "PH coverage %\n\n100,00",
+        "PH suspect (phút)\n\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n2880,00",
+        "OR ngoài dải %\n\n100,00",
+        "Coverage giao chung %\n\n100,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n13,30",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n8,60",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "title": "BR-05: harvest source day and paired share",
+      "seconds": 19.178,
+      "screenshot": "step-04.png",
+      "metrics": [
+        "A observed\n\n0,05 kg/m²",
+        "B observed\n\n0,10 kg/m²",
+        "Tổng paired A+B\n\n0,15 kg/m²",
+        "Share B (paired)\n\n66,67 %",
+        "Paired A (kg/m²)\n\n0,05",
+        "Paired B (kg/m²)\n\n0,10",
+        "Share A (paired)\n\n33,33 %"
+      ]
+    },
+    {
+      "title": "BR-04: energy and zero A denominator",
+      "seconds": 18.218,
+      "screenshot": "step-05.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n308.078",
+        "Sản lượng A (kg)\n\n0.000",
+        "kWh/kg A\n\nNULL",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "title": "BR-06: baseline quantities and historical tariff",
+      "seconds": 204.892,
+      "screenshot": "step-06.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "title": "BR-06: reopen saved scenario with explicit original frozen context",
+      "seconds": 24.228,
+      "screenshot": "step-07.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "title": "Overview and quality on current publication",
+      "seconds": 11.411,
+      "screenshot": "step-08.png",
+      "metrics": []
+    },
+    {
+      "title": "Sensor: complete 30-event pin and source clock",
+      "seconds": 8.108,
+      "screenshot": "step-09.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n8267 s"
+      ]
+    }
+  ],
+  "downloads": [
+    {
+      "file": "downloads/1-water-Automatoes-2020-03-02_2020-03-03-days.csv",
+      "sha256": "bc41e4fbea07739e4e17c5d6566187e6801d5566b1a8744173a5fb1ec1069ca0",
+      "bytes": 3269,
+      "publication": "5d455686a06649e789908b9708a9d436"
+    },
+    {
+      "file": "downloads/2-water-Automatoes-2020-03-02_2020-03-03-summary.json",
+      "sha256": "72a87dc3703ec54e18cfb4c5ee705f5eb500e30954dc8ece085c2a4acbff9cce",
+      "bytes": 2258,
+      "publication": "5d455686a06649e789908b9708a9d436"
+    },
+    {
+      "file": "downloads/3-climate-IUACAAS-2020-05-21_2020-05-22-requested-result.json",
+      "sha256": "25510249b63d986c27cae61d0803d48405d5c209afbe3505c5b7b358d8ed5ae1",
+      "bytes": 64671,
+      "publication": "5d455686a06649e789908b9708a9d436"
+    },
+    {
+      "file": "downloads/4-drain-Reference-2020-03-02-2020-03-04-result.json",
+      "sha256": "b098f2d60639a14b005cf834ec5232d555686e92b77c9756e93c8d10fa987b49",
+      "bytes": 333709,
+      "publication": "5d455686a06649e789908b9708a9d436"
+    },
+    {
+      "file": "downloads/5-harvest-Digilog-2020-02-19_2020-02-19-summary.json",
+      "sha256": "54899f06b9aa662721420f64fdcdcbe2325f8bb324987dcb2c8b7bf028f54e50",
+      "bytes": 3911,
+      "publication": "5d455686a06649e789908b9708a9d436"
+    },
+    {
+      "file": "downloads/6-energy-Automatoes-2020-03-02-2020-03-04-result.json",
+      "sha256": "de80a00fec7bdded4bf762db8ac925f2f2ab1391e88af8ef73b6035da8aa4ab4",
+      "bytes": 8304,
+      "publication": "5d455686a06649e789908b9708a9d436"
+    },
+    {
+      "file": "downloads/7-cost-Automatoes-2020-03-02-2020-03-04-scenario_req-9ea51bd854f84191aec268ddc691846d_v1-comparison.json",
+      "sha256": "563946bdb7fdd0f4ed92b3d4a79d0791b6ade4bef2a6d23d4b2afbabb1beb333",
+      "bytes": 38067,
+      "publication": "4b08bd51c092465783304f887d766d47"
+    }
+  ],
+  "script_target_minutes": 24,
+  "spoken_presentation_timing": "estimated, user records offline"
+}

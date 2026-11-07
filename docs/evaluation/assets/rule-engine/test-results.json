@@ -1,0 +1,16 @@
+{
+  "started_utc": "2026-11-06T16:26:37Z",
+  "head_before_change": "c902107c08f5cf0e16337361a07bf1ed66a14626",
+  "working_tree_note": "optimized rule_duration.py and its new regression test uncommitted; follow-up docs uncommitted",
+  "results": {
+    "unit": "420 passed in 89.22s (0:01:29)",
+    "ui": "97 passed in 62.25s (0:01:02)",
+    "usability_recorder": "2 unittest tests passed",
+    "sensor_live": "1 passed in 10.28s",
+    "sensor_spark-restart": "1 passed in 13.65s",
+    "sensor_fault-matrix": "7 passed in 33.87s",
+    "sensor_mqtt-faults": "8 passed in 20.91s",
+    "sensor_db": "1 passed in 8.49s",
+    "sensor_broker": "1 passed in 13.15s"
+  }
+}

@@ -1,0 +1,9 @@
+ Container gh-ch-full-20261107-ch-stream-run-fbcd8fdeca84 Creating
+ Container gh-ch-full-20261107-ch-stream-run-fbcd8fdeca84 Created
+Traceback (most recent call last):
+  File "/workspace/tests/clickhouse/check_agc_sensor.py", line 145, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/tests/clickhouse/check_agc_sensor.py", line 48, in main
+    raise ValueError('Proof selection already completed; use a new --replay-id and --state for another fresh MQTT run')
+ValueError: Proof selection already completed; use a new --replay-id and --state for another fresh MQTT run

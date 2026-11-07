@@ -1,0 +1,7 @@
+{
+  "name": "greenhouse-walkthrough",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {"record": "node record.cjs"},
+  "dependencies": {"playwright": "1.65.0"}
+}

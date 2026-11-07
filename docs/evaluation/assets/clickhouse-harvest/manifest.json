@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "source_head": "b545578",
+  "candidate_code": "T44 working tree during execution; final 33-test suite and real AGC resume/browser verified",
+  "snapshot": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "tests": 33,
+  "accepted_production_records": 139,
+  "production_quarantine": 1,
+  "reused_resource_records": 996,
+  "cycles": 6,
+  "engine_parity_comparisons": 12,
+  "tolerance": "exact Decimal equality",
+  "postgres_read_only": true,
+  "browser_csv": {
+    "status": "passed",
+    "local_path": "tmp/clickhouse-harvest-browser/harvest-records.csv",
+    "sha256": "1ec2e7ee522e4324eb6762b75b7cc87f9d04fa0125c0a24c936ce0aff0c3dd20",
+    "rows": 23,
+    "prod_a": "13.51",
+    "prod_b": "0.70322",
+    "publication": "8d448a47e05743988de086f2da465a4f"
+  },
+  "provenance": "AGC pipeline initially executed during candidate development. Final image passed 33 tests and stable workflow resume; Chromium checked same combined publication. Startup-only browser retry required HTTP readiness healthchecks. Raw oracle UI date is the actual first-harvest day (2020-02-19), separate from the two parity windows.",
+  "limits": [
+    "BR02 and BR05 only; remaining BR migration tasks open",
+    "Chromium smoke is not T51 video set",
+    "No full backfill, performance or backup/restore claim",
+    "PostgreSQL UI100 regression result is from T43, not rerun for T44"
+  ],
+  "files": [
+    {
+      "file": "agc-check.json",
+      "bytes": 4863,
+      "sha256": "b0077450b533fab1ef5649e508fc338cfad39890a49e9cd3c8275d44777c161e"
+    },
+    {
+      "file": "browser-check.json",
+      "bytes": 482,
+      "sha256": "a1cdf1c9675c297fa9da8c3a3c4b53c342b849678bf2d6e5e28b0439ac71f7a1"
+    },
+    {
+      "file": "browser-csv.json",
+      "bytes": 286,
+      "sha256": "ad7700a1b684482aff4ee112ce5238f1a24800f4a1498d4d488c69387a298792"
+    },
+    {
+      "file": "engine-parity.json",
+      "bytes": 1383,
+      "sha256": "c1852f8e4bcd37791bd9e6ef0b24475f82d5faaca0a79c362851562dd253b53e"
+    },
+    {
+      "file": "harvest-digilog.png",
+      "bytes": 259737,
+      "sha256": "78a61cad108d54d75c93a63b18772c51faf5a67a7a67c6b9848295572d9f5424"
+    },
+    {
+      "file": "harvest-reference.png",
+      "bytes": 262771,
+      "sha256": "13c98e07444b3f592fa2452ff10200077e8a491214bd446e41c838ac0358ddf7"
+    },
+    {
+      "file": "old-water-pin.json",
+      "bytes": 121,
+      "sha256": "ae8a65f73b09957433a1e189d14b148a671825c896ec104a70a2dfdab24a6739"
+    },
+    {
+      "file": "pipeline.json",
+      "bytes": 1477,
+      "sha256": "494b9de58daf3641a86a4bacc3bbd0ba6fb11f3678ce2bd211481c229b55a0fa"
+    },
+    {
+      "file": "postgres-reference.json",
+      "bytes": 3938,
+      "sha256": "f6070c75822aacf356039e00a592d4f9ccb76400d26b2ed4894fe3748167c0d2"
+    },
+    {
+      "file": "resume.json",
+      "bytes": 1074,
+      "sha256": "077e58e59316aa9ac33ee0e3b86bb4449648caf05d85aa43f9ea26531cccca40"
+    },
+    {
+      "file": "tests.log",
+      "bytes": 115627,
+      "sha256": "4a3def07029b3e6e383c1d9c02bac12b4d77e907a4b01a8a782d4729a8dc65cd"
+    }
+  ]
+}

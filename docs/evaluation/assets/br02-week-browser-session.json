@@ -1,0 +1,28 @@
+{
+  "lineageText": "keyboard_arrow_down\n\nLineage về raw\n\nFile: AICU/Resources.csv · dòng 79–79\n\nSerial nguồn: 43892 · timestamp nguồn: 2020-03-02T00:00:00 (naive)\n\nLogical key: agc-cycle-AICU:2020-03-02 · revision: b99b45d8ab9b5001cdc3df4addc6f3f7 (#1)\n\nCorrection: —\n\nRaw hash xác minh khớp với file đã mount.",
+  "url": "http://127.0.0.1:8501/",
+  "windowInclusive": [
+    "2020-03-02",
+    "2020-03-08"
+  ],
+  "metrics": [
+    "Irrigation observed\n\n22,30 L/m²",
+    "Drain observed\n\n7,80 L/m²",
+    "Tỷ lệ drain (paired)\n\n34,98 %",
+    "Độ phủ paired\n\n100,00 %"
+  ],
+  "downloads": [
+    "./br02-week-days-download.csv",
+    "./br02-week-summary-download.json",
+    "./br02-week-weekly-download.csv"
+  ],
+  "screenshot": "./br02-week-20200302-aicu.png",
+  "expectedPublication": "3459db897ead45a28177c60000bd0561",
+  "lineage_screenshot": "./br02-week-lineage-aicu.png",
+  "downloaded_as": [
+    "water-AICU-2020-03-02_2020-03-08-days.csv",
+    "water-AICU-2020-03-02_2020-03-08-summary.json",
+    "water-AICU-2020-03-02_2020-03-08-weekly.csv"
+  ],
+  "assets_note": "paths relative to this JSON in docs/evaluation/assets/; window, metrics, lineage text and publication are the original browser session facts"
+}

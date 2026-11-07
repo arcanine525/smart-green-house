@@ -1,0 +1,49 @@
+﻿# export=greenhouse-drain-csv-v1
+# quantity units: ec=dS/m, ph=pH
+# percent_unit=%
+# decimal=exact source scale (no rounding)
+# null=empty field
+# bool=true/false
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# publication=518aafbbff244e3f96b61a15252aa96a
+# finality=provisional
+# committed_at=2026-11-05T07:05:51.233515+00:00
+# cycle=agc-cycle-Reference
+# compartment=Reference
+# requested_window=[2019-12-16,2020-05-30)
+# effective_window=[2019-12-16T00:00:00,2020-05-30T00:00:00)
+# time_basis=source_naive (source timezone unresolved)
+# declared_context=drain_process_computer
+# declared_basis=measured
+# quality_policy=AGC_QUALITY_V1
+# pipeline_run=8bb40faa886a4beeaf5fa08ad3e672aa
+# parser_version=agc-parser-v1
+# code_version=pipeline-v5-drain
+# config_bundle_hash=17cd5654ca2395e3845097f39f77d3fedb44f1f27a2db175604ceddcd3eefaf8
+# requested_rule_version=drain-demo-b03:Reference:v1
+# rule_identities=ec:drain-demo-b03:Reference:v1;ph:drain-demo-b03:Reference:v1
+# rule_id=drain-demo-b03:Reference
+# rule_label=demo_rule
+# rule_is_demo=true
+# rule_evidence=Synthetic demo per docs/br/br_03_drain-nutrition-monitoring.md §3/§7: fixed target bands EC [2, 5] dS/m and pH [5.5, 6.5] on the measured drain_process_computer basis; explicitly NOT a verified agronomic standard for any variety/growth stage. Registration boundary follows the T14 schedule semantics (one revision per compartment; segment fixed bounds; historical revisions stay replayable).
+# episode_filter=list-only (summary totals never filtered); episode windows carry ORIGINAL and CLIPPED facts
+# profile_status=demo_unverified
+# demo bounds and engineer-entered bounds are not agronomically validated
+# source_scope=[2019-12-30T13:55:00,2019-12-30T14:55:00)
+# wanted_end=2020-05-30T00:00:00
+# truncated=true
+# raw values and frozen own-measure quality; independent of rule and episode filters
+slot_start,ec,ph,ec_status,ec_applicability,ec_reason,ph_status,ph_applicability,ph_reason,revision_id,logical_record_key,quality_policy_version,correction_id,correction_version
+2019-12-30T13:55:00,0.1,0.0,accepted,applicable,,suspect,applicable,demo_zero_ph_suspect,ab0902bf6d2f2e77a63917874df62d32,agc-cycle-Reference:2019-12-30T13:55:00,AGC_QUALITY_V1,,
+2019-12-30T14:00:00,0.1,0.0,accepted,applicable,,suspect,applicable,demo_zero_ph_suspect,152497a9b823fe5cdfa3d82841feb390,agc-cycle-Reference:2019-12-30T14:00:00,AGC_QUALITY_V1,,
+2019-12-30T14:05:00,0.1,0.0,accepted,applicable,,suspect,applicable,demo_zero_ph_suspect,1781fa821e99e88b8caed803e17cdd7f,agc-cycle-Reference:2019-12-30T14:05:00,AGC_QUALITY_V1,,
+2019-12-30T14:10:00,0.1,0.0,accepted,applicable,,suspect,applicable,demo_zero_ph_suspect,0025812b5d6a7dcee4997400b8f0e54f,agc-cycle-Reference:2019-12-30T14:10:00,AGC_QUALITY_V1,,
+2019-12-30T14:15:00,0.1,0.0,accepted,applicable,,suspect,applicable,demo_zero_ph_suspect,4f8d70ed43ad4952c8d0f914157b8074,agc-cycle-Reference:2019-12-30T14:15:00,AGC_QUALITY_V1,,
+2019-12-30T14:20:00,0.1,6.4,accepted,applicable,,accepted,applicable,,4a54c619c930edd15c0fdf2c4c962db8,agc-cycle-Reference:2019-12-30T14:20:00,AGC_QUALITY_V1,,
+2019-12-30T14:25:00,1.9,6.5,accepted,applicable,,accepted,applicable,,52a534809ed564c5feea45e9682ad642,agc-cycle-Reference:2019-12-30T14:25:00,AGC_QUALITY_V1,,
+2019-12-30T14:30:00,0.2,6.2,accepted,applicable,,accepted,applicable,,fc655b598567da0f68b0a079eeca0a90,agc-cycle-Reference:2019-12-30T14:30:00,AGC_QUALITY_V1,,
+2019-12-30T14:35:00,0.2,6.1,accepted,applicable,,accepted,applicable,,c0c14b9a7e7cf6372adc07a13427fc10,agc-cycle-Reference:2019-12-30T14:35:00,AGC_QUALITY_V1,,
+2019-12-30T14:40:00,0.2,6.1,accepted,applicable,,accepted,applicable,,3c86966805858321b5e19d50fb5677a0,agc-cycle-Reference:2019-12-30T14:40:00,AGC_QUALITY_V1,,
+2019-12-30T14:45:00,0.2,6.1,accepted,applicable,,accepted,applicable,,576618bf464e5eeb6cfdcec253cdc130,agc-cycle-Reference:2019-12-30T14:45:00,AGC_QUALITY_V1,,
+2019-12-30T14:50:00,0.2,6.2,accepted,applicable,,accepted,applicable,,ff4b9fc352372db3538621ddcb26c7eb,agc-cycle-Reference:2019-12-30T14:50:00,AGC_QUALITY_V1,,

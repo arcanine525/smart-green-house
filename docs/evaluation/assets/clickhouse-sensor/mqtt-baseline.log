@@ -1,0 +1,23 @@
+ Container gh-ch-stream-tests-20261107-ch-stream-run-d4a6ae541ef9 Creating 
+ Container gh-ch-stream-tests-20261107-ch-stream-run-d4a6ae541ef9 Created 
+test_real_mqtt_sqlite_spool_and_spark_match_batch_and_hand_oracle (test_mqtt_stream.MqttStreamTest.test_real_mqtt_sqlite_spool_and_spark_match_batch_and_hand_oracle) ... WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/06 21:24:05 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/06 21:24:08 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=15, family=2, type=1, proto=6, laddr=('127.0.0.1', 46446), raddr=('127.0.0.1', 41497)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=15, family=2, type=1, proto=6, laddr=('127.0.0.1', 38604), raddr=('127.0.0.1', 39163)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"status": "passed", "source_events": 30, "raw_ready_files": 8, "replay_publication": "7a94c890d0772377b1ff3e36bc42386eb492894507abafa026b2ece0db53f07a", "batch_publication": "67c211cea2884b028807cd491c14383b", "expected_minutes": "150", "temperature_out_minutes": "50", "ec_out_minutes": "50", "ph_suspect_minutes": "5", "joint_out_minutes": "45", "complete": true, "checksum_verified": true, "batch_stream_metrics_episodes_quality_match": true, "postgres_env_present": false}
+26/11/06 21:24:12 WARN DAGScheduler: Failed to cancel job group 33ebefe5-abcc-4621-aede-7add58649cbe. Cannot find active jobs for it.
+26/11/06 21:24:12 WARN DAGScheduler: Failed to cancel job group 33ebefe5-abcc-4621-aede-7add58649cbe. Cannot find active jobs for it.
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 9.246s
+
+OK

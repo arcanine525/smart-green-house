@@ -1,0 +1,36 @@
+﻿# publication=adf2a02900864da2bf0e41b86516f6ef
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# cycle=agc-cycle-Reference
+# compartment=Reference
+# requested_window=[2019-12-16,2020-05-30)
+# pipeline_run=2a24bf110e8e490c857a54595812a4db
+# quality_policy=AGC_QUALITY_V1
+# parser_version=agc-parser-v1
+# code_version=pipeline-v3-harvest
+# config_bundle_hash=0e59b30767915583370c4d9fc896120a321188bf41cf837f09f32c075b436c96
+# committed_at=2026-11-04T11:40:53.756005+00:00
+# export=greenhouse-harvest-unresolved-audit-v2
+# source=5aa9041a5460d30abb010923cb4d20ca22625a7fb897186a541e3f57919ab8d3
+# disposition=quarantine
+# reason_code=out_of_cycle_unresolved
+# issue_column=
+# rule_version=
+# rule_grain=record
+# relative_path=Reference/Production.csv
+# line_number=2
+# source_time_serial=43510
+# file_verified=true
+# record_verified=true
+# note=
+# verified raw explanation only; rule/grain context is traceability, these values never recompute a KPI
+column,raw_token
+time,43510
+ProdA, 0.32
+ProdB,0.0000
+avg_nr_harvested_trusses,NaN
+Truss development time,45
+Nr_fruits_ClassA,NaN
+Weight_fruits_ClassA,717
+Nr_fruits_ClassB,0
+Weight_fruits_ClassB,0

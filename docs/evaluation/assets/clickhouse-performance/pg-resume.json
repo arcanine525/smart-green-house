@@ -1,0 +1,54 @@
+{
+  "status": "measured",
+  "backend": "postgres",
+  "mode": "rerun",
+  "started_at_utc": "2026-11-07T01:48:44.133018+00:00",
+  "workflow_id": "engine-benchmark-pg-fresh-v3",
+  "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+  "independent_runs": 1,
+  "database_os_caches_flushed": false,
+  "phases_seconds": {},
+  "stage_timings_overlap": true,
+  "pipeline_result": {
+    "workflow_id": "engine-benchmark-pg-fresh-v3",
+    "status": "completed",
+    "publication_id": "2885df0b86344eed9af39ce9676eb7c0",
+    "output": "/bench/pg/output/pipeline/engine-benchmark-pg-fresh-v3"
+  },
+  "source_validation_seconds": 3.5452567929999077,
+  "pipeline_seconds": 4.449324960000013,
+  "workflow_steps": [
+    {
+      "step": "ingest",
+      "seconds": "16.796729",
+      "rows_in": 288050,
+      "rows_out": 288049
+    },
+    {
+      "step": "load-core",
+      "seconds": "228.354289",
+      "rows_in": 288050,
+      "rows_out": 574843
+    },
+    {
+      "step": "spark",
+      "seconds": "29.383937",
+      "rows_in": 574843,
+      "rows_out": 574843
+    },
+    {
+      "step": "publish",
+      "seconds": "82.341016",
+      "rows_in": 574843,
+      "rows_out": 574843
+    }
+  ],
+  "finished_at_utc": "2026-11-07T01:48:48.588638+00:00",
+  "total_with_query_metadata_seconds": 4.455209459999992,
+  "processing_cgroup": {
+    "cpu.max": "150000 100000",
+    "memory.max": "2147483648",
+    "memory.peak": "565854208"
+  }
+}

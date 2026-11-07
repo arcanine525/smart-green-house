@@ -1,0 +1,104 @@
+{
+  "harvest_export_version": 1,
+  "export_kind": "window_summary",
+  "grain_note": "the summary is the verdict of the effective window; per-week/per-day/per-record verdicts and counters are in the weekly/days/records CSVs of the same action; the UI rule/grain choice stays UI context (the audit CSV records it when an audit runs)",
+  "summary": {
+    "contract_version": 2,
+    "data": {
+      "accepted_records": 1,
+      "class_a_share_pct": "33.333333333333333333333333333333333333333333333333",
+      "class_b_share_pct": "66.666666666666666666666666666666666666666666666667",
+      "completeness": {
+        "accepted_records": 23,
+        "conflicted_records": 0,
+        "event_a_dates": 23,
+        "event_b_dates": 23,
+        "expected_files": 1,
+        "expected_relative_path": "Digilog/Production.csv",
+        "files_failed": 0,
+        "files_loaded": 1,
+        "files_present": 1,
+        "paired_records": 23,
+        "prod_a_usable_records": 23,
+        "prod_b_usable_records": 23,
+        "reasons": [],
+        "records_accepted": 23,
+        "records_conflict": 0,
+        "records_duplicate": 0,
+        "records_quarantine": 0,
+        "records_read": 23,
+        "snapshot_complete": true,
+        "source_resolved": true,
+        "unresolved_items": [],
+        "unresolved_records": 0
+      },
+      "context": {
+        "compartment_ids": [
+          "Digilog"
+        ],
+        "cycle_id": "agc-cycle-Digilog",
+        "end": "2020-02-20",
+        "publication_id": "5d455686a06649e789908b9708a9d436",
+        "rule_version": null,
+        "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+        "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+        "start": "2020-02-19"
+      },
+      "cumulative_a": "0.05",
+      "cumulative_basis_label": "giả định chưa xác minh",
+      "cumulative_origin": "2019-12-16",
+      "cumulative_total": "0.15",
+      "iso_week": null,
+      "iso_year": null,
+      "metric_version": "br05-summary-v1",
+      "outside_rule_records": null,
+      "paired_prod_a": "0.05",
+      "paired_prod_b": "0.1",
+      "paired_records": 1,
+      "paired_total": "0.15",
+      "prod_a_observed": "0.05",
+      "prod_b_observed": "0.1",
+      "publication": {
+        "committed_at": "2026-11-07T10:18:18.898319+00:00",
+        "finality_status": "complete",
+        "publication_id": "5d455686a06649e789908b9708a9d436",
+        "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+        "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+        "time_basis": "source_naive",
+        "versions": {
+          "code_version": "clickhouse-warehouse-v1",
+          "config_bundle_hash": "983e64e920efe12a94477ae0b34229498e942fe131806d5bdba80ad319a4ee69",
+          "metric_version": "br02-summary-v1",
+          "parser_version": "agc-parser-v1",
+          "pipeline_run_id": "a34cccc109772f02c4d8dec4f695d327f52da7f48a5b233c5daa8b747da6e0a2",
+          "quality_policy_version": "AGC_QUALITY_V1",
+          "rule_version": null,
+          "scenario_version": null,
+          "tariff_version": null
+        }
+      },
+      "reason_codes": [
+        "cumulative_from_cycle_start"
+      ],
+      "record_quality": {
+        "population_records": 1,
+        "prod_a_accepted": 1,
+        "prod_a_invalid": 0,
+        "prod_a_missing": 0,
+        "prod_a_suspect": 0,
+        "prod_b_accepted": 1,
+        "prod_b_invalid": 0,
+        "prod_b_missing": 0,
+        "prod_b_suspect": 0
+      },
+      "rule_profile": null,
+      "rule_status": "not_configured",
+      "rule_unknown_records": null,
+      "rule_version": null,
+      "status": "complete",
+      "unit": "kg/m²",
+      "window_end": "2020-02-20",
+      "window_start": "2020-02-19"
+    }
+  }
+}

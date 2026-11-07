@@ -1,0 +1,4 @@
+# Default local warehouse. PostgreSQL is an explicit optional configuration.
+name: greenhouse-clickhouse
+include:
+  - path: compose.clickhouse.yaml

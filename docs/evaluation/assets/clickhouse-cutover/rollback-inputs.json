@@ -1,0 +1,120 @@
+{
+  "status": "passed",
+  "archive_sha256": "c31c588cc87edf265e22c2f58c05f22568abbf4818d6803fe8202f5cfe0ce1bd",
+  "configuration_kinds": {
+    "area_basis": 84,
+    "cost_scenario": 178,
+    "energy": 1,
+    "energy_workflow": 3,
+    "harvest": 1,
+    "harvest_rule": 12,
+    "irrigation_rule": 1,
+    "migration_publication_map": 1,
+    "migration_source": 1,
+    "native_rebuild_archive": 1,
+    "native_rebuild_map": 1,
+    "replay": 4,
+    "rule_schedule": 16,
+    "snapshot": 1,
+    "tariff": 8,
+    "threshold": 1,
+    "water": 1
+  },
+  "native_configurations_preserved": 315,
+  "corrections": [
+    {
+      "correction_id": "cutover-resource-20261107",
+      "revision_id": "860fbc36505ae95404d3d0e165b98513e56a334a9dad6cc3e7e2d0a34f9cea4b",
+      "revision_number": 2,
+      "reused": false
+    }
+  ],
+  "replays": [
+    {
+      "replay_id": "walkthrough-live-b3efff6ba5c5",
+      "clickhouse_publication": "601515f8c314284a5fb60768dbcf502a403f87d703cf98cddbfe5631bbb9c5a2",
+      "postgres_publication": "b6e4d3f2dac4e731d7e119f5facfbb637efc2a9aa564fd624731110089cc9a03",
+      "events": 10,
+      "original_envelopes_exact": true,
+      "state_exact": true,
+      "business_fingerprint": "54f1e10ac94071279a101ed029dc64e4d41c4d60a4e40228503a0b73b16430f5",
+      "all_metadata_fields_exact": true,
+      "current": false,
+      "new_pg_checkpoint_generation": true
+    },
+    {
+      "replay_id": "walkthrough-live-e4405c8d5205",
+      "clickhouse_publication": "75166dbe9bee2824c37bad3bf8967cc6cecf6a87c8a6c3e90bde7bc1296fa6a1",
+      "postgres_publication": "f471efe774b1ff7d827d65d10c35e773ae21ed6500ae1b8829380eb77e540503",
+      "events": 10,
+      "original_envelopes_exact": true,
+      "state_exact": true,
+      "business_fingerprint": "54f1e10ac94071279a101ed029dc64e4d41c4d60a4e40228503a0b73b16430f5",
+      "all_metadata_fields_exact": true,
+      "current": false,
+      "new_pg_checkpoint_generation": true
+    },
+    {
+      "replay_id": "walkthrough-live-c4b35d584519",
+      "clickhouse_publication": "e5eb431e6d9666051a55a1b86974e15b70be1b864c42b1c0532d5894da0f7351",
+      "postgres_publication": "3eba506cbf5b82d58a9d9a9b0fefdfa83f5abb71490f35786c1ebc27cc2dfa28",
+      "events": 10,
+      "original_envelopes_exact": true,
+      "state_exact": true,
+      "business_fingerprint": "54f1e10ac94071279a101ed029dc64e4d41c4d60a4e40228503a0b73b16430f5",
+      "all_metadata_fields_exact": true,
+      "current": false,
+      "new_pg_checkpoint_generation": true
+    },
+    {
+      "replay_id": "agc-restore-ff62a380f978",
+      "clickhouse_publication": "33415da46b0acfd5dc87d1ed9b2eb8024eed032c81d3d62e3529197d8417171f",
+      "postgres_publication": "29ee4bb1804efd5820455c2cb2a5c9615dee7bd327d4c44e5bf9738b02ae3e44",
+      "events": 30,
+      "original_envelopes_exact": true,
+      "state_exact": true,
+      "business_fingerprint": "7783fdfa2f63909171709dea99b43bb5e6956af13fde3dca15ce4d1030d1f675",
+      "all_metadata_fields_exact": true,
+      "current": true,
+      "new_pg_checkpoint_generation": true
+    },
+    {
+      "replay_id": "walkthrough-live-c4b35d584519",
+      "clickhouse_publication": "a17563ff87c9589ddba705457a98654ab359d28bc0d7d274837463b67616e902",
+      "postgres_publication": "ef505b2170389219104a530e98edd87971701ba4615f17a27ef8251defbeaff7",
+      "events": 30,
+      "original_envelopes_exact": true,
+      "state_exact": true,
+      "business_fingerprint": "7783fdfa2f63909171709dea99b43bb5e6956af13fde3dca15ce4d1030d1f675",
+      "all_metadata_fields_exact": true,
+      "current": true,
+      "new_pg_checkpoint_generation": true
+    },
+    {
+      "replay_id": "walkthrough-live-e4405c8d5205",
+      "clickhouse_publication": "c7aeae8e3178c8a529ba21f1ac8fc104bbfb13266a14db7621cebdcf7a77c6e6",
+      "postgres_publication": "64a2be68e46163c8c391055a64ad9fb801bd563a83a0f23705aba770749be87d",
+      "events": 30,
+      "original_envelopes_exact": true,
+      "state_exact": true,
+      "business_fingerprint": "7783fdfa2f63909171709dea99b43bb5e6956af13fde3dca15ce4d1030d1f675",
+      "all_metadata_fields_exact": true,
+      "current": true,
+      "new_pg_checkpoint_generation": true
+    },
+    {
+      "replay_id": "walkthrough-live-b3efff6ba5c5",
+      "clickhouse_publication": "ffee5e155eaad6d7b3b999d0c19db80a181a981660674ae16de8b7966a946ec6",
+      "postgres_publication": "81c73636ce31bc4cd2dd56ab2592cb611cbe97abd1f7f272a50b4dd9fc9a95cd",
+      "events": 30,
+      "original_envelopes_exact": true,
+      "state_exact": true,
+      "business_fingerprint": "7783fdfa2f63909171709dea99b43bb5e6956af13fde3dca15ce4d1030d1f675",
+      "all_metadata_fields_exact": true,
+      "current": true,
+      "new_pg_checkpoint_generation": true
+    }
+  ],
+  "journal_head": "bbfd7017ae3b8c72ca4445544b2ee8012eb0ac48576f579408ba11320fce7a03",
+  "journal_cursor": 62
+}

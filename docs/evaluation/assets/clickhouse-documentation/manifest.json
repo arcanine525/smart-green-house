@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "source_head": "82c5a987a37af3ace886d627abaa7cb8f60364f3",
+  "source_sha256": {
+    "readme.md": "9361d095d106a3e9089e851f6ad353342fae1b270f667aaa882c9fc7d0e45dc0",
+    "docs/architecture/04-processing-publication.md": "bf9e9414d9a8e2e1b7826eb5e1e2e03649d69e4cf43375a6d813ee4d960a77b2",
+    "docs/architecture/02-local-deployment.md": "c53453453d917223463c4f1c4de7734fb4145d4e0cda5e3de7544eb3bd7f1b03",
+    "docs/architecture/08-application-contracts.md": "b6e466ddceeca2da4dae28ac37c715afb0b8dcab7f47d5d9c85d23b689800c3b",
+    "docs/architecture/03-sensor-ingestion.md": "5d04b996657a5ef1a51225cdce84346e2d80734b676e5e2e927c9e4b31d38676",
+    "docs/architecture/README.md": "0d5d4f521deab22fbd1604a9c7b8a0f6274ad0abe89299b1751c42222ce9d7e4",
+    "docs/architecture/06-metadata-schema.md": "c647f6c49b7e3b5890bfbaf44a0601c4ed40ca4a7b71cf0dddd1f39879c2f953",
+    "docs/architecture/10-durable-recovery.md": "5bce54e415f434591dbe8c0e40908d0d51392d80fab8689f86c73ebd4665a6cb",
+    "docs/architecture/05-core-schema.md": "e16753cf4fd123bf23b8d3e2331d392672b0b6e39925b83236b23540013c3763",
+    "docs/architecture/09-clickhouse-migration.md": "cba70cbe474cb0b284e986c2f0739a51da0ccec57b8fe39f17319994d4c4ffe3",
+    "docs/architecture/01-overview.md": "d7e0933d580c9fcafb06242e14ce8c7a4543c3b951318166f4185f59c9a492d1",
+    "docs/architecture/07-data-marts.md": "5c50ed8aa6b7d3d880e9568f9b4bdeba9411db528655f5fe827ef9ca6ae4c0e4",
+    "docs/submission/slides.md": "699e1a1064eb4661c50e3b70ddaf62c47e034aee81016ef9cfdde124c9ac9098",
+    "docs/submission/report.md": "31e9047fbcb3f798dc229271b8f70720afd4f7441e31b0bdefd6d739d8fa2982",
+    "docs/submission/README.md": "0b365f067096d0b8f51b1ed698b70c3a2f7e9c139e37b9aa3b47c871121367af",
+    "docs/submission/video-script.md": "9501aa9ae80f0fdc0c0fe9969b3674017ea61d16102c8f0e6335cc9764575c9a"
+  },
+  "files": {
+    "README.md": "fe27282b748003d95cf560e78d3b2da5fc4104a7ab5bcd0d2096d53589a76aa8",
+    "browser.log": "e5667265a13d9b301344021cfd09003f017d66e7f979a463a046f02c3c661107",
+    "cli-help.log": "86842abf1715b59e2f71b6d83d8412a2d3bfd87de4565e22b0aeca1058e90034",
+    "clone-check.py": "a0fd9193504126a69c289d91d89f9abd994b71ed8c868c8dafb2ed39af318f8c",
+    "database-probe.log": "3b8e3d0766fa74e3aa84541507be92363b54f67d4c02cefa91e7f890d17223dc",
+    "empty-ui.png": "904edaa7849825d15a0cdbf8edfb2ee9f8beaf331e2ab207553b3051acf00f45",
+    "empty-ui.txt": "ac0c0fa29753c9a99380050679de74074aaaf1e22877a00fb44f1586b5683d44",
+    "links.json": "db9384ca76dffe07de40d4c07478b4f1f0b8966609626db34a0af50bf93090d4",
+    "mermaid.json": "1dab8e92fe25b36475a06afdbb45284fe9c6ab1dbb00b92c0ac4edbcadf010c4",
+    "migrate.log": "fad6634b881f5c0c1dd3efcc1dd9776e8d089f5c742c60202c4ee55b0695bca1",
+    "pdf.json": "23ff2bb547b7944eee8138f4f967ae93b76e2ab54b2505d0f2f9ec64e44f1a19",
+    "result.json": "fc954985080f413ef06af5b4b29b5bf6fd861f092a15c88ee154146188f33700"
+  },
+  "original_log_sha256": {
+    "browser.log": "e5667265a13d9b301344021cfd09003f017d66e7f979a463a046f02c3c661107",
+    "cli-help.log": "0eb27e4f9805ca938946489751336775ab196842315d55078d20643e7780b0c7",
+    "database-probe.log": "04d79530ebc6109030cfe35d09f9668f1f7dcc0fb8ed50bf8133a6c212fce661",
+    "migrate.log": "231356e65fbddbcd9cbbf3b9f3df4dcb475dcef591e1ed50f695b8e5abcbde68"
+  },
+  "archived_logs_normalized": "CR/LF and trailing whitespace only; originals remain local"
+}

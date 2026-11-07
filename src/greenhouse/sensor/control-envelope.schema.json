@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smart-greenhouse.local/schemas/greenhouse-control-envelope-v1.json",
+  "title": "GreenhouseControlEnvelopeV1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "control_message_id",
+    "replay_id",
+    "control_sequence",
+    "control_type",
+    "published_at",
+    "payload"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "greenhouse-control-envelope-v1"
+    },
+    "control_message_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "replay_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "control_sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "control_type": {
+      "type": "string",
+      "enum": ["replay_cursor", "pause_state", "completion_manifest"]
+    },
+    "published_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "control_type": { "const": "replay_cursor" },
+        "payload": {
+          "type": "object",
+          "required": [
+            "logical_cursor_line",
+            "logical_cursor_sequence",
+            "source_observed_at",
+            "status"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "logical_cursor_line": { "type": "integer", "minimum": 1 },
+            "logical_cursor_sequence": { "type": "integer", "minimum": 0 },
+            "source_observed_at": {
+              "type": ["string", "null"],
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?$"
+            },
+            "status": {
+              "type": "string",
+              "enum": ["running", "paused", "completed"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "control_type": { "const": "pause_state" },
+        "payload": {
+          "type": "object",
+          "required": [
+            "paused_at_line",
+            "paused_at_sequence",
+            "reason"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "paused_at_line": { "type": "integer", "minimum": 1 },
+            "paused_at_sequence": { "type": "integer", "minimum": 0 },
+            "reason": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "control_type": { "const": "completion_manifest" },
+        "payload": {
+          "type": "object",
+          "required": [
+            "expected_unique_events",
+            "emitted_unique_events",
+            "emitted_total_messages",
+            "payload_checksum",
+            "fault_summary",
+            "reconciliation_requested"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "expected_unique_events": { "type": "integer", "minimum": 0 },
+            "emitted_unique_events": { "type": "integer", "minimum": 0 },
+            "emitted_total_messages": { "type": "integer", "minimum": 0 },
+            "rejected_source_rows": { "type": "integer", "minimum": 0 },
+            "payload_checksum": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "fault_summary": {
+              "type": "object",
+              "required": ["duplicates", "conflicts", "delays", "drops"],
+              "additionalProperties": false,
+              "properties": {
+                "duplicates": { "type": "integer", "minimum": 0 },
+                "conflicts": { "type": "integer", "minimum": 0 },
+                "delays": { "type": "integer", "minimum": 0 },
+                "drops": { "type": "integer", "minimum": 0 }
+              }
+            },
+            "reconciliation_requested": {
+              "type": "boolean",
+              "const": true
+            }
+          }
+        }
+      }
+    }
+  ]
+}

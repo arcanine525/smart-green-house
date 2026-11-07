@@ -1,0 +1,415 @@
+{
+  "tool": "greenhouse.evaluation.br02",
+  "generated_at": "2026-11-04T08:30:02.832531+00:00",
+  "database": "greenhouse",
+  "fixture": {
+    "mode": "fixture",
+    "spark_stage": "replaced_with_prepared_artifact",
+    "real_components": [
+      "parser",
+      "staging",
+      "loader",
+      "publication",
+      "water mart",
+      "query adapter",
+      "service oracle",
+      "exports"
+    ],
+    "cases": [
+      {
+        "ac": "AC-01",
+        "title": "Hai ngày 10/2, 30/12 → tổng 40/14, tỷ lệ kỳ 35% (không phải trung bình ngày 30%)",
+        "expected": {
+          "irrigation_observed": "40",
+          "drain_observed": "14",
+          "ratio_pct": "35",
+          "paired_irrigation": "40",
+          "paired_drain": "14",
+          "irrigation_coverage_pct": "100",
+          "drain_coverage_pct": "100",
+          "paired_coverage_pct": "100",
+          "status": "complete"
+        },
+        "observed": {
+          "irrigation_observed": "40",
+          "drain_observed": "14",
+          "paired_irrigation": "40",
+          "paired_drain": "14",
+          "ratio_pct": "35",
+          "irrigation_coverage_pct": "100",
+          "drain_coverage_pct": "100",
+          "paired_coverage_pct": "100",
+          "expected_days": 2,
+          "status": "complete",
+          "basis_status": "verified",
+          "basis_label": "verified",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_days": null,
+          "unknown_days": 0,
+          "suspect_days": 0,
+          "drain_exceeds_irrigation_days": 0,
+          "reason_codes": [],
+          "day_ratios": [
+            "20",
+            "40"
+          ],
+          "day_rule_status": [
+            "not_configured",
+            "not_configured"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-02",
+        "title": "Irr=Drain=0 → tổng 0, coverage 100%, tỷ lệ NULL (mẫu số 0)",
+        "expected": {
+          "irrigation_observed": "0",
+          "drain_observed": "0",
+          "ratio_pct": null,
+          "irrigation_coverage_pct": "100",
+          "paired_coverage_pct": "100",
+          "reason_codes": [
+            "no_irrigation_quantity"
+          ]
+        },
+        "observed": {
+          "irrigation_observed": "0",
+          "drain_observed": "0",
+          "paired_irrigation": "0",
+          "paired_drain": "0",
+          "ratio_pct": null,
+          "irrigation_coverage_pct": "100",
+          "drain_coverage_pct": "100",
+          "paired_coverage_pct": "100",
+          "expected_days": 2,
+          "status": "complete",
+          "basis_status": "verified",
+          "basis_label": "verified",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_days": null,
+          "unknown_days": 0,
+          "suspect_days": 0,
+          "drain_exceeds_irrigation_days": 0,
+          "reason_codes": [
+            "no_irrigation_quantity"
+          ],
+          "day_ratios": [
+            null,
+            null
+          ],
+          "day_rule_status": [
+            "not_configured",
+            "not_configured"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-03",
+        "title": "Ngày 2 thiếu Drain → Irr 40/Drain 2, paired 10/2, tỷ lệ 20%, paired coverage 50%",
+        "expected": {
+          "irrigation_observed": "40",
+          "drain_observed": "2",
+          "paired_irrigation": "10",
+          "paired_drain": "2",
+          "ratio_pct": "20",
+          "paired_coverage_pct": "50",
+          "status": "partial"
+        },
+        "observed": {
+          "irrigation_observed": "40",
+          "drain_observed": "2",
+          "paired_irrigation": "10",
+          "paired_drain": "2",
+          "ratio_pct": "20",
+          "irrigation_coverage_pct": "100",
+          "drain_coverage_pct": "50",
+          "paired_coverage_pct": "50",
+          "expected_days": 2,
+          "status": "partial",
+          "basis_status": "verified",
+          "basis_label": "verified",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_days": null,
+          "unknown_days": 1,
+          "suspect_days": 0,
+          "drain_exceeds_irrigation_days": 0,
+          "reason_codes": [
+            "empty",
+            "partial_coverage"
+          ],
+          "day_ratios": [
+            "20",
+            null
+          ],
+          "day_rule_status": [
+            "not_configured",
+            "not_configured"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-04",
+        "title": "Drain>Irr (5/6) → tỷ lệ 120% giữ nguyên kèm cờ rà soát",
+        "expected": {
+          "ratio_pct": "120",
+          "drain_exceeds_irrigation_days": 2
+        },
+        "observed": {
+          "irrigation_observed": "10",
+          "drain_observed": "12",
+          "paired_irrigation": "10",
+          "paired_drain": "12",
+          "ratio_pct": "120",
+          "irrigation_coverage_pct": "100",
+          "drain_coverage_pct": "100",
+          "paired_coverage_pct": "100",
+          "expected_days": 2,
+          "status": "complete",
+          "basis_status": "verified",
+          "basis_label": "verified",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_days": null,
+          "unknown_days": 0,
+          "suspect_days": 0,
+          "drain_exceeds_irrigation_days": 2,
+          "reason_codes": [
+            "drain_exceeds_irrigation"
+          ],
+          "day_ratios": [
+            "120",
+            "120"
+          ],
+          "day_rule_status": [
+            "not_configured",
+            "not_configured"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-05",
+        "title": "Không có số dùng được → tổng NULL, coverage 0%, không hiển thị 0",
+        "expected": {
+          "irrigation_observed": null,
+          "drain_observed": null,
+          "ratio_pct": null,
+          "irrigation_coverage_pct": "0",
+          "status": "unknown"
+        },
+        "observed": {
+          "irrigation_observed": null,
+          "drain_observed": null,
+          "paired_irrigation": null,
+          "paired_drain": null,
+          "ratio_pct": null,
+          "irrigation_coverage_pct": "0",
+          "drain_coverage_pct": "0",
+          "paired_coverage_pct": "0",
+          "expected_days": 2,
+          "status": "unknown",
+          "basis_status": "verified",
+          "basis_label": "verified",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_days": null,
+          "unknown_days": 2,
+          "suspect_days": 0,
+          "drain_exceeds_irrigation_days": 0,
+          "reason_codes": [
+            "empty",
+            "no_accepted_drain",
+            "no_accepted_irrigation",
+            "no_paired_days",
+            "partial_coverage"
+          ],
+          "day_ratios": [
+            null,
+            null
+          ],
+          "day_rule_status": [
+            "not_configured",
+            "not_configured"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-06",
+        "title": "Rule demo [20,40]%: ngày 20% trong dải (biên = trong), ngày 50% ngoài, giữ rule version",
+        "expected": {
+          "day_ratios": [
+            "20",
+            "50"
+          ],
+          "day_rule_status": [
+            "within_range",
+            "outside_range"
+          ],
+          "rule_status": "configured",
+          "outside_rule_days": 1,
+          "rule_version": "rule-version:ceb6368ee21c46898c554a1247237736"
+        },
+        "observed": {
+          "irrigation_observed": "20",
+          "drain_observed": "7",
+          "paired_irrigation": "20",
+          "paired_drain": "7",
+          "ratio_pct": "35",
+          "irrigation_coverage_pct": "100",
+          "drain_coverage_pct": "100",
+          "paired_coverage_pct": "100",
+          "expected_days": 2,
+          "status": "complete",
+          "basis_status": "verified",
+          "basis_label": "verified",
+          "rule_status": "configured",
+          "rule_version": "rule-version:ceb6368ee21c46898c554a1247237736",
+          "outside_rule_days": 1,
+          "unknown_days": 0,
+          "suspect_days": 0,
+          "drain_exceeds_irrigation_days": 0,
+          "reason_codes": [
+            "outside_irrigation_rule"
+          ],
+          "day_ratios": [
+            "20",
+            "50"
+          ],
+          "day_rule_status": [
+            "within_range",
+            "outside_range"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-07",
+        "title": "Chưa chọn rule → not_configured, không có kết luận đạt/không đạt",
+        "expected": {
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_days": null
+        },
+        "observed": {
+          "irrigation_observed": "20",
+          "drain_observed": "7",
+          "paired_irrigation": "20",
+          "paired_drain": "7",
+          "ratio_pct": "35",
+          "irrigation_coverage_pct": "100",
+          "drain_coverage_pct": "100",
+          "paired_coverage_pct": "100",
+          "expected_days": 2,
+          "status": "complete",
+          "basis_status": "verified",
+          "basis_label": "verified",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_days": null,
+          "unknown_days": 0,
+          "suspect_days": 0,
+          "drain_exceeds_irrigation_days": 0,
+          "reason_codes": [],
+          "day_ratios": [
+            "20",
+            "50"
+          ],
+          "day_rule_status": [
+            "not_configured",
+            "not_configured"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-08",
+        "title": "Chạy lại cùng snapshot → cùng publication (không tạo bản mới), không nhân dữ liệu (duplicate/conflict chi tiết ở test unit được dẫn nguồn)",
+        "expected": {
+          "pass": true
+        },
+        "observed": {
+          "pass": true,
+          "second_status": "completed",
+          "publication_id_stable": true,
+          "scope_publication_count": 1,
+          "mart_day_count": 2
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-09",
+        "title": "Basis chưa xác minh → giữ tổng riêng, tỷ lệ NULL với reason basis",
+        "expected": {
+          "irrigation_observed": "40",
+          "drain_observed": "14",
+          "ratio_pct": null,
+          "reason_codes": [
+            "incompatible_or_unknown_basis",
+            "no_paired_days",
+            "partial_coverage"
+          ]
+        },
+        "observed": {
+          "irrigation_observed": "40",
+          "drain_observed": "14",
+          "paired_irrigation": null,
+          "paired_drain": null,
+          "ratio_pct": null,
+          "irrigation_coverage_pct": "100",
+          "drain_coverage_pct": "100",
+          "paired_coverage_pct": "0",
+          "expected_days": 2,
+          "status": "partial",
+          "basis_status": "unknown",
+          "basis_label": null,
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_days": null,
+          "unknown_days": 0,
+          "suspect_days": 0,
+          "drain_exceeds_irrigation_days": 0,
+          "reason_codes": [
+            "incompatible_or_unknown_basis",
+            "no_paired_days",
+            "partial_coverage"
+          ],
+          "day_ratios": [
+            null,
+            null
+          ],
+          "day_rule_status": [
+            "not_configured",
+            "not_configured"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-10",
+        "title": "Xuất CSV đúng bộ lọc/DTO/metadata (chỉ ngày trong cửa sổ, giá trị exact, metadata đầy đủ)",
+        "expected": {
+          "pass": true
+        },
+        "observed": {
+          "pass": true,
+          "exported_dates": [
+            "2020-01-02",
+            "2020-01-03"
+          ],
+          "first_row_irrigation": "30",
+          "second_row_drain": "1",
+          "scope_header_found": true,
+          "window_header_found": true
+        },
+        "pass": true
+      }
+    ]
+  }
+}

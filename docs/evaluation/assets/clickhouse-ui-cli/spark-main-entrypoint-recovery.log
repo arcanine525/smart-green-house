@@ -1,0 +1,12 @@
+ Volume gh-ch-ui-release-20261107_ch_broker Creating 
+ Volume gh-ch-ui-release-20261107_ch_broker Creating 
+ Volume gh-ch-ui-release-20261107_ch_broker Created 
+ Volume gh-ch-ui-release-20261107_ch_broker Created 
+ Container gh-ch-ui-release-20261107-ch-stream-run-646464aed429 Creating 
+ Container gh-ch-ui-release-20261107-ch-stream-run-646464aed429 Created 
+test_real_spark_death_after_database_publication_before_checkpoint_and_process_restart (test_stream_integration.StreamIntegrationTest.test_real_spark_death_after_database_publication_before_checkpoint_and_process_restart) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 23.438s
+
+OK

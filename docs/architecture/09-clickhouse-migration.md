@@ -1,42 +1,38 @@
-# 09 — Roadmap chuyển PostgreSQL sang ClickHouse
+# 09 — Chuyển ClickHouse và rollback
 
-> T37–T39 tùy chọn sau MVP. Sơ đồ này không đưa ClickHouse vào deployment bắt buộc hiện tại.
-
-Không đổi simulator, MQTT, raw format, source identity hoặc định nghĩa sáu BR chỉ để chuyển engine. Thiết kế vật lý, SQL marts, dedup, publication và cách lưu scenario cần adapter riêng; đây không phải thao tác thay connection string.
+ClickHouse là deployment mặc định sau các gate backfill, parity, benchmark,
+offline restore, walkthrough và cutover. PostgreSQL tiếp tục là adapter đối
+chứng/rollback. Shared semantic code và query contracts giữ nguyên; physical
+publication/config references được map có kiểm chứng.
 
 ```mermaid
 flowchart TB
-    RAW[("Raw snapshot / events<br/>stable source identity")]
-    CONF[("Export rule, tariff, scenario<br/>basis, correction, metadata versions")]
-    SEM["Shared semantic transforms"]
-    RAW --> SEM
-    SEM --> PG["PostgreSQL adapter<br/>baseline MVP"]
-    SEM --> CH["ClickHouse adapter<br/>ứng viên sau MVP"]
-    CONF --> PG
-    CONF --> CH
-    PG --> PGR["6 BR + fault suite results"]
-    CH --> CHR["6 BR + fault suite results"]
-    PGR --> CHECK{"Parity, lineage, recovery<br/>và benchmark đạt?"}
-    CHR --> CHECK
-    CHECK -->|"Chưa đạt"| KEEP["Giữ PostgreSQL<br/>sửa ứng viên"]
-    CHECK -->|"Đạt"| FREEZE["Dừng producer và config writes<br/>drain, khóa cutoff manifest"]
-    FREEZE --> DELTA["Nạp phần cuối<br/>đối soát publication"]
-    DELTA --> SWITCH["Đổi app query / command adapter<br/>sang ClickHouse"]
-    SWITCH --> OBS["Theo dõi correctness và latency"]
-    OBS -->|"Cần quay lại"| REPLAY["Nạp raw và config versions mới<br/>về PostgreSQL, kiểm chứng"]
-    REPLAY --> BACK["Đổi adapter về PostgreSQL"]
+    PG["Read-only PostgreSQL baseline + backup"] --> CFG["Export all immutable metadata / configs"]
+    RAW["Locked raw snapshot"] --> LOAD["Native canonical backfill"]
+    CFG --> LOAD
+    LOAD --> PARITY["6 BR, 96 CSV, 30 lineage, 18 threshold groups"]
+    PARITY --> GATES["Benchmark tradeoffs, offline recovery, 7 walkthroughs"]
+    GATES --> CUTOFF["Stop/drain writers and producers, lock cutoff"]
+    CUTOFF --> JOURNAL["Enable durable rollback journal before opening writes"]
+    JOURNAL --> CH["Default ClickHouse"]
+    CH --> DELTA["Pause, reconcile, export all acknowledged delta"]
+    DELTA --> REVERSE["Restore own PG target; config, correction, replay, scenario mapping"]
+    REVERSE --> VERIFY["Old/new pins, complete replay metadata, 6 BR parity"]
+    VERIFY --> PGAPP["Open explicit PG app only after gates"]
+    PGAPP --> RETURN["Read-only rehearsal ends; return default to CH"]
 ```
 
-| Giữ nguyên | Thiết kế lại / kiểm chứng |
-|---|---|
-| Raw và event contracts | DDL/types, sorting key, partition và compression |
-| PySpark transforms thuần nghiệp vụ | Sink batch, retry/dedup và query SQL theo engine |
-| BR formulas, fixtures và expected outputs | Correction/version selection trước tổng hợp |
-| UI và DTO contracts | Publication nhất quán khi không có cùng transaction model |
-| Rule/tariff/scenario definitions | Command persistence, idempotency và khôi phục cấu hình |
+Không dual-write ở runtime. Raw sensor một mình không đủ rollback: cần cả
+corrections, configuration/scenario versions, memberships, receipts và journal.
+Scenario/request ID collision giữa các lineage được namespace có mapping, giữ
+bản cũ và original IDs. Không dùng snapshot cũ như thể đã chứa mọi thao tác mới.
 
-Không dựa vào background merge để bảo đảm KPI hết duplicate ngay. Không cộng incremental aggregate từ một nguồn còn có thể phát duplicate/correction mà chưa có cơ chế sửa tổng. Bản đầu của adapter có thể tái tính marts từ tập revision canonical theo publication, sau đó tối ưu bằng bằng chứng benchmark.
+Đối chiếu engine ở [benchmark](../evaluation/clickhouse-performance.md) giữ
+workload/caps và engine label. PostgreSQL nhanh hơn các workload đã đo; CH có
+active footprint thấp hơn. Cold verification và scenario writes có chi phí lớn.
+Hybrid/Kimball là thí nghiệm riêng trên PG, không phải bằng chứng CH nhanh hơn.
 
-Khi so PostgreSQL/ClickHouse, giữ Hybrid và workload giống nhau; khi so Hybrid/Kimball ở T24, giữ engine giống nhau. Công bố riêng hai thí nghiệm để không quy sai nguyên nhân cải thiện.
-
-Chuyển đổi ban đầu dùng backfill từ raw và khoảng dừng có kiểm soát, không cần CDC/dual-write. Mọi lần quay lại sau cutover phải mang theo events và configuration versions mới; PostgreSQL snapshot cũ một mình không đủ. Không xóa nguồn hoặc DB đối chứng trước khi nghiệm thu.
+[Runbook cutover/rollback](../implementation/clickhouse-cutover-rollback.md) ghi
+stop/drain, cursor/checksum, journal fence, restore và điều kiện mở app.
+[Local recovery](../evaluation/clickhouse-local-repro.md) và
+[acceptance](../evaluation/clickhouse-acceptance.md) dẫn evidence version cụ thể.

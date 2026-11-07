@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "source_head": "2fdcf62",
+  "candidate_code": "T46 working tree; release image passed 46 isolated CH/UI tests, final AGC config-v2 workflow, numeric parity and retry",
+  "tests": 46,
+  "postgres_energy_cost_ui_tests": 24,
+  "numeric_parity_windows": 12,
+  "scope": "six compartments \u00d7 two-day/full 166-day Resources/Production windows",
+  "tolerance": "exact Decimal numeric equality; no tolerance relaxation",
+  "publication": "ad97cc7537ca4b29aa7df18bb84ad8c2",
+  "postgres_read_only": true,
+  "fixture_oracle": {
+    "energy_kwh": "4687.5",
+    "production_a_kg": "187.5",
+    "kwh_per_kg_a": "25",
+    "baseline_eur": "180.875",
+    "electricity_plus_20_eur": "198.375"
+  },
+  "provenance": "AGC loaded from explicit frozen T45 load. Initial development energy config retained; v2 corrects documentary provenance with a new workflow rather than overwriting v1. Final 46-test run used a fresh isolated DB. 24 PostgreSQL UI regression tests cover unchanged PG energy/cost paths after app backend wiring; PG reference uses enforced read-only transactions and ephemeral query-only price scenarios.",
+  "limits": [
+    "Full Resources/Production slice; climate/drain still two-day selection, full six-BR backfill remains T38",
+    "+20% scenario changes source tariffs only, not modeled energy consumption or an invoice",
+    "Browser video set still T51",
+    "Parity is numeric for the disclosed energy/price analysis; full configuration-version migration remains T38",
+    "The 100-test full PG UI suite was last run at T45; T46 ran the 24 affected PG energy/cost UI tests",
+    "Accepted negative energy is refused before seal, not reclassified through a modified AGC_V1 policy"
+  ],
+  "files": [
+    {
+      "file": "agc-check.json",
+      "bytes": 10870,
+      "sha256": "3f8730b40893bef6566ed0477f0cca758d77b5e95b7af50cc2ea16049d62e847"
+    },
+    {
+      "file": "pipeline.json",
+      "bytes": 2163,
+      "sha256": "2daa00324516d6416feef00efa63c097e7f74ccf0787c703172c81f6c2bae03e"
+    },
+    {
+      "file": "postgres-reference.json",
+      "bytes": 7953,
+      "sha256": "c915177bfa41d35ff70a9e8b865f9f01d58908f2cdc9c37ffa22ded2ea2bda82"
+    },
+    {
+      "file": "postgres-ui-tests.log",
+      "bytes": 99,
+      "sha256": "12431c9dfa7b7f13fa137da39f4d4ca04847dbdc4496dbd96b2cbfba19236a7f"
+    },
+    {
+      "file": "resume.json",
+      "bytes": 2159,
+      "sha256": "edb34a567ca9321b324d08defe61bf46deda28d29ee482fc71bac9c4361b2719"
+    },
+    {
+      "file": "tests.log",
+      "bytes": 109472,
+      "sha256": "791209ea7d5b407986d64325053b430d1c323128db9b4052e1179b77a29e0a0c"
+    }
+  ]
+}

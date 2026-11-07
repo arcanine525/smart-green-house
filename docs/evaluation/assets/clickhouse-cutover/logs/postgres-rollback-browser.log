@@ -1,0 +1,14 @@
+ExpectError: expect(received).toBeGreaterThan(expected)
+
+Expected: > 0
+Received:   0
+    at captureRawStack (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/node_modules/playwright-core/lib/coreBundle.js:9551:17)
+    at callMatcherAsStep (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/node_modules/playwright/lib/matchers/expect.js:13342:57)
+    at Object.toBeGreaterThan (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/node_modules/playwright/lib/matchers/expect.js:13334:23)
+    at /Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/smoke_cutover.cjs:42:106 {
+  matcherResult: {
+    message: 'expect(received).toBeGreaterThan(expected)\n\nExpected: > 0\nReceived:   0',
+    pass: false,
+    name: 'toBeGreaterThan'
+  }
+}

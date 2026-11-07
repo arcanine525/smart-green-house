@@ -1,0 +1,12 @@
+ Container gh-ch-repro-20261107032510-rebuilt-ch-broker-1 Running 
+ Container gh-ch-repro-20261107032510-rebuilt-ch-broker-1 Waiting 
+ Container gh-ch-repro-20261107032510-rebuilt-ch-broker-1 Healthy 
+ Container gh-ch-repro-20261107032510-rebuilt-ch-job-run-f74eb2afff8f Creating 
+ Container gh-ch-repro-20261107032510-rebuilt-ch-job-run-f74eb2afff8f Created 
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/07 06:36:32 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/07 06:36:38 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+{"status": "passed", "phase": "partial", "backend": "clickhouse", "replay_id": "walkthrough-live-c4b35d584519", "publication_id": "e5eb431e6d9666051a55a1b86974e15b70be1b864c42b1c0532d5894da0f7351", "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:sim-walkthrough-live-c4b35d584519", "accepted_events": 10, "complete": false, "source_sha256": "3415b31b7958c735f836c7fa8f890a93020786be5c86dc2e7c42771fb0a02cd3", "spark_progress": [[0, 18]], "transport": "Actual AGC -> SQLite outbox -> MQTT -> collector -> ready files -> Spark -> native publication"}

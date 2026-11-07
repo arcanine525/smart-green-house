@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "source_head": "cc636b0",
+  "candidate_code": "T45 working tree; release image ran a fresh isolated 39-test suite and resumed the actual AGC workflow",
+  "tests": 39,
+  "postgres_ui_tests": 100,
+  "snapshot": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "source_window": [
+    "2020-03-02T00:00:00",
+    "2020-03-04T00:00:00"
+  ],
+  "accepted_climate_records": 3456,
+  "reused_water_harvest": 1135,
+  "groups_compared": 18,
+  "metric_duration_comparisons": 36,
+  "interior_episodes_compared": 902,
+  "tolerance": "exact Decimal duration/value equality; source/quality fingerprints and raw lineage match",
+  "publication": "d5752d5a3cf74458b67a4a47e12df23a",
+  "postgres_read_only": true,
+  "provenance": "AGC source-window pipeline and raw/PostgreSQL comparison executed during candidate development. Final release image passed 39 tests in a fresh project and stable same-publication resume. Intermediate UI assertion targeted the wrong Streamlit element; fixed to inspect the rendered demo label. Two redundant suites sharing an accumulated fixture DB were stopped, then the release suite ran alone on a fresh DB. Initial PG harness named a nonexistent admin database from local .env; final suite used postgres admin DB in a disposable project. Original PostgreSQL remained SELECT-only.",
+  "limits": [
+    "Source-window rehearsal only, not full backfill",
+    "Only episodes strictly inside the selected source window are compared on AGC; complete original spans across the window are covered by hand-calculated fixtures, full AGC spans deferred to T38",
+    "Explicit demo deltas/bounds are validation assumptions, not agronomic calibration",
+    "No T51 videos, full six-BR backfill, benchmark, or backup/restore claim",
+    "BR04/06 and sensor sink migration remain separate tasks"
+  ],
+  "files": [
+    {
+      "file": "agc-check.json",
+      "bytes": 18004,
+      "sha256": "28666edf582b8342525b7b3163dbe48883ba0ec8377f3ec928196ea682095aa6"
+    },
+    {
+      "file": "pipeline.json",
+      "bytes": 2113,
+      "sha256": "3941263b2a52a73b76d160444b2af0eb891b0310443d9e87a3e5f3712f16bf2e"
+    },
+    {
+      "file": "postgres-reference.json",
+      "bytes": 128362,
+      "sha256": "5e52903f1eecb97cccbe4439e66ef0ce4e91e9ef759edbcad7e5b220812c92c9"
+    },
+    {
+      "file": "postgres-ui-tests.log",
+      "bytes": 191,
+      "sha256": "a92c9889b3630e4e66fda9c42ca4057a8a857d847f5fee2289fa270379d99116"
+    },
+    {
+      "file": "resume.json",
+      "bytes": 1678,
+      "sha256": "375ed6346cbc5e970629ec859cfef0eab110d582e3d760088e5694f5812cf940"
+    },
+    {
+      "file": "tests.log",
+      "bytes": 116758,
+      "sha256": "a55bb6872d81d4a523af256814559ae03721558e7a20eba4d034ba5b9e364162"
+    }
+  ]
+}

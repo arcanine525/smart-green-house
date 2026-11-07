@@ -1,0 +1,20 @@
+{
+  "status": "failed",
+  "backend": "postgres",
+  "mode": "fresh",
+  "started_at_utc": "2026-11-07T01:18:04.573115+00:00",
+  "workflow_id": "engine-benchmark-pg-fresh-v1",
+  "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+  "independent_runs": 1,
+  "database_os_caches_flushed": false,
+  "phases_seconds": {},
+  "stage_timings_overlap": true,
+  "pipeline_result": null,
+  "source_validation_seconds": 3.5062175010098144,
+  "error_type": "OperationalError",
+  "server_process_exit_code": 2,
+  "memory_peak_bytes": 2147520512,
+  "oom_kill_events": 0,
+  "storage_free_gib_at_inspection": 8.2
+}

@@ -1,0 +1,321 @@
+{
+  "status": "completed",
+  "tables": [
+    {
+      "table": "configuration_envelope",
+      "seconds": 0.004461874999833526
+    },
+    {
+      "table": "publication_state",
+      "seconds": 0.007435249999616644
+    },
+    {
+      "table": "source_measure",
+      "seconds": 2.892204793000019
+    },
+    {
+      "table": "source_revision",
+      "seconds": 1.0599061670000083
+    },
+    {
+      "table": "threshold_cycle",
+      "seconds": 0.0023709999995844555
+    },
+    {
+      "table": "threshold_header",
+      "seconds": 0.0019508329996824614
+    },
+    {
+      "table": "threshold_measure",
+      "seconds": 0.8320628760002364
+    }
+  ],
+  "deduplicate": false,
+  "before": [
+    {
+      "table": "configuration_envelope",
+      "parts": 4,
+      "rows": 124,
+      "bytes": 125622
+    },
+    {
+      "table": "energy_basis",
+      "parts": 1,
+      "rows": 30,
+      "bytes": 3226
+    },
+    {
+      "table": "energy_cycle",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 1297
+    },
+    {
+      "table": "energy_header",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 653
+    },
+    {
+      "table": "energy_measure",
+      "parts": 1,
+      "rows": 2988,
+      "bytes": 151742
+    },
+    {
+      "table": "harvest_cycle",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 1297
+    },
+    {
+      "table": "harvest_header",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 785
+    },
+    {
+      "table": "harvest_measure",
+      "parts": 1,
+      "rows": 278,
+      "bytes": 34444
+    },
+    {
+      "table": "harvest_state",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 2054
+    },
+    {
+      "table": "load_file",
+      "parts": 1,
+      "rows": 45,
+      "bytes": 9512
+    },
+    {
+      "table": "load_issue",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 2086
+    },
+    {
+      "table": "load_member",
+      "parts": 1,
+      "rows": 287989,
+      "bytes": 18493275
+    },
+    {
+      "table": "load_receipt",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 1471
+    },
+    {
+      "table": "publication_state",
+      "parts": 4,
+      "rows": 4,
+      "bytes": 509623
+    },
+    {
+      "table": "source_disposition",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 2425
+    },
+    {
+      "table": "source_measure",
+      "parts": 6,
+      "rows": 14062934,
+      "bytes": 122000430
+    },
+    {
+      "table": "source_revision",
+      "parts": 10,
+      "rows": 287989,
+      "bytes": 200691211
+    },
+    {
+      "table": "threshold_cycle",
+      "parts": 2,
+      "rows": 12,
+      "bytes": 2746
+    },
+    {
+      "table": "threshold_header",
+      "parts": 2,
+      "rows": 2,
+      "bytes": 1480
+    },
+    {
+      "table": "threshold_measure",
+      "parts": 7,
+      "rows": 2868540,
+      "bytes": 69925866
+    },
+    {
+      "table": "water_cycle",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 1297
+    },
+    {
+      "table": "water_header",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 832
+    },
+    {
+      "table": "water_measure",
+      "parts": 1,
+      "rows": 1992,
+      "bytes": 103565
+    }
+  ],
+  "after": [
+    {
+      "table": "configuration_envelope",
+      "parts": 1,
+      "rows": 124,
+      "bytes": 121493
+    },
+    {
+      "table": "energy_basis",
+      "parts": 1,
+      "rows": 30,
+      "bytes": 3226
+    },
+    {
+      "table": "energy_cycle",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 1297
+    },
+    {
+      "table": "energy_header",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 653
+    },
+    {
+      "table": "energy_measure",
+      "parts": 1,
+      "rows": 2988,
+      "bytes": 151742
+    },
+    {
+      "table": "harvest_cycle",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 1297
+    },
+    {
+      "table": "harvest_header",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 785
+    },
+    {
+      "table": "harvest_measure",
+      "parts": 1,
+      "rows": 278,
+      "bytes": 34444
+    },
+    {
+      "table": "harvest_state",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 2054
+    },
+    {
+      "table": "load_file",
+      "parts": 1,
+      "rows": 45,
+      "bytes": 9512
+    },
+    {
+      "table": "load_issue",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 2086
+    },
+    {
+      "table": "load_member",
+      "parts": 1,
+      "rows": 287989,
+      "bytes": 18493275
+    },
+    {
+      "table": "load_receipt",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 1471
+    },
+    {
+      "table": "publication_state",
+      "parts": 1,
+      "rows": 4,
+      "bytes": 506903
+    },
+    {
+      "table": "source_disposition",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 2425
+    },
+    {
+      "table": "source_measure",
+      "parts": 1,
+      "rows": 14062934,
+      "bytes": 122770362
+    },
+    {
+      "table": "source_revision",
+      "parts": 1,
+      "rows": 287989,
+      "bytes": 200652375
+    },
+    {
+      "table": "threshold_cycle",
+      "parts": 1,
+      "rows": 12,
+      "bytes": 1421
+    },
+    {
+      "table": "threshold_header",
+      "parts": 1,
+      "rows": 2,
+      "bytes": 779
+    },
+    {
+      "table": "threshold_measure",
+      "parts": 1,
+      "rows": 2868540,
+      "bytes": 69904189
+    },
+    {
+      "table": "water_cycle",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 1297
+    },
+    {
+      "table": "water_header",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 832
+    },
+    {
+      "table": "water_measure",
+      "parts": 1,
+      "rows": 1992,
+      "bytes": 103565
+    }
+  ],
+  "fingerprint_samples": [
+    "fd0d89661eca1225f26dc69c24c3de3aa95f8501f4919b2ac41e1656503658d1",
+    "fd0d89661eca1225f26dc69c24c3de3aa95f8501f4919b2ac41e1656503658d1",
+    "fd0d89661eca1225f26dc69c24c3de3aa95f8501f4919b2ac41e1656503658d1"
+  ],
+  "physical_rows_unchanged": true,
+  "seconds_including_20s_stability_probe": 24.96931642800064
+}

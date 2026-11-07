@@ -1,0 +1,14 @@
+{
+  "ui": {
+    "tag": "greenhouse-ch-walkthrough-ui:20261107-cold-fix",
+    "id": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b"
+  },
+  "processing": {
+    "tag": "greenhouse-ch-walkthrough-processing:20261107-cold-fix",
+    "id": "sha256:9511c439faba6542f282c4954fe7d64c55702a453f39d4c927aa1fb9301d67c1"
+  },
+  "client": {
+    "tag": "greenhouse-ch-walkthrough-client:20261107-cold-fix",
+    "id": "sha256:dbdca0b36ca689bbc4044896f3f1b5dfdb7ae4cc2c64d838ff3f6d5db48ff045"
+  }
+}

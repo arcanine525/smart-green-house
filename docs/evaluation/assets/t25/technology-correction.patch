@@ -1,0 +1,158 @@
+--- benchmark_suite.py.before
++++ benchmark_suite.py.after
+@@ -15,7 +15,7 @@
+ 4. Specific Kimball rerun rejection assertion:
+    - Asserts f"Publication '{publication_id}' already exists and is immutable; cannot overwrite." in error message
+ 5. Technology loading evaluation:
+-   - 48,000 real climate records matching fact_climate_slot schema
++   - Up to 48,000 real climate records (no padding) matching fact_climate_slot schema
+    - Full content hash verification (unrestricted numeric, naive timestamp, jsonb) against original source
+    - Uniquely named temporary tables
+    - psycopg COPY row API vs Bounded Batch INSERT (500 and 1000)
+@@ -149,6 +149,11 @@
+         self.data["last_updated_at"] = datetime.now(timezone.utc).isoformat()
+         self.persist()
+ 
++    def retain_stage(self, name, prior):
++        self.data["stages"][name] = prior["stages"][name]
++        self.data.setdefault("stage_script_sha256", {})[name] = prior["stage_script_sha256"][name]
++        self.persist()
++
+     def record_error(self, stage_name: str, error: Exception):
+         self.data["status"] = "failed"
+         self.data["failed_stage"] = stage_name
+@@ -202,7 +207,7 @@
+     p95_val = sorted_samples[p95_idx]
+ 
+     return {
+-        "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
++        "cache_state_description": "Separate preparation callback, not a cold database or identical full first request; warm samples use warm buffers and disable climate/drain result caching.",
+         "first_touch_initialization_ms": round(first_touch_ms, 3),
+         "warmup_iterations_count": warmups,
+         "warmup_samples_ms": [round(x, 3) for x in warmup_times],
+@@ -1105,7 +1110,7 @@
+         return len(slots), len(ev.result.episodes)
+ 
+     results["BR-03_Drain"] = {
+-        "description": "5-minute EC/pH slot readings + dry-down and out-of-band episode evaluations (use_cache=False)",
++        "description": "5-minute EC/pH slot readings + out-of-band episode evaluations (use_cache=False)",
+         "compartment": PRIMARY_COMPARTMENT,
+         "hybrid": sample_workload_metrics(lambda: PostgresDrainQueryAdapter(h_conn).read_drain_slots(h_ctx, h_pub), q_br03_h, warmups, samples_count),
+         "kimball": sample_workload_metrics(lambda: KimballQueryAdapter(k_conn).read_drain_slots(k_ctx, k_pub), q_br03_k, warmups, samples_count),
+@@ -1246,6 +1251,7 @@
+ 
+ 
+ def benchmark_technology_loading(kimball_conn) -> dict[str, Any]:
++    kimball_conn.commit()  # Exclude prior metadata/scenario transactions from load timing.
+     select_query = """
+     SELECT 
+         publication_id, data_scope_id, cycle_id, compartment_id, slot_start,
+@@ -1262,7 +1268,7 @@
+         sample_rows = cur.execute(select_query, (PRIMARY_COMPARTMENT,)).fetchall()
+ 
+     row_count = len(sample_rows)
+-    assert row_count == 48000, f"Expected 48,000 sample climate rows, got {row_count}"
++    assert 0 < row_count <= 48000, f"Expected nonempty real source rows, got {row_count}"
+ 
+     columns = [
+         "publication_id", "data_scope_id", "cycle_id", "compartment_id", "slot_start",
+@@ -1309,7 +1315,7 @@
+     );
+     """
+ 
+-    results = {"evaluated_rows": row_count, "source_content_digest": source_content_digest,
++    results = {"evaluated_rows": row_count, "requested_row_limit": 48000, "source_content_digest": source_content_digest,
+                "run_count_per_method": 1, "timer_boundary": "Load plus commit; excludes DDL, source read/preparation and content verification.",
+                "table_kind": "Temporary tables with identical schema and primary key; not a WAL/replication durability throughput benchmark."}
+ 
+@@ -1457,8 +1463,12 @@
+     parser = argparse.ArgumentParser(description="T25 Benchmark Suite")
+     parser.add_argument("--smoke", action="store_true", help="Run bounded smoke test over baseline DBs without pipeline builds")
+     parser.add_argument("--analysis-from", type=Path, help="Reuse a completed lifecycle checkpoint; rerun all parity/query/storage/technology checks without claiming new lifecycle measurements")
++    parser.add_argument("--continue-from", type=Path, help="Retain completed lifecycle and latency samples; revalidate parity, then repeat storage and technology after a later-stage failure")
+     args = parser.parse_args()
+-    prior = json.loads(args.analysis_from.read_text()) if args.analysis_from else None
++    if args.analysis_from and args.continue_from:
++        parser.error("Choose one checkpoint mode")
++    prior_path = args.analysis_from or args.continue_from
++    prior = json.loads(prior_path.read_text()) if prior_path else None
+     if prior:
+         lifecycle = prior["stages"]["pipeline_lifecycle"]
+         assert len(lifecycle["measurement_order"]) == 6
+@@ -1486,7 +1496,18 @@
+         # STAGE 1: System Metadata
+         print("\n[Stage 1/6] Discovering system environment & container cgroup caps...")
+         sys_meta = collect_system_metadata()
+-        recorder.record_stage("system_metadata", sys_meta)
++        if prior:
++            original = prior["stages"]["system_metadata"]
++            for key in ("raw_manifest_sha256", "postgres_version", "python_version", "packages", "quality_policy", "area_basis"):
++                assert sys_meta[key] == original[key], key
++            for key in ("cgroup_memory_max_bytes", "cgroup_cpu_max"):
++                assert sys_meta["cgroup"][key] == original["cgroup"][key], key
++            recorder.data["started_at"] = prior["started_at"]
++            recorder.data["resource_measurement_scope"] = "final_runtime covers continuation process only; peak of original lifecycle process was not captured before failure"
++            recorder.record_stage("continuation_initial_runtime", sys_meta)
++            recorder.retain_stage("system_metadata", prior)
++        else:
++            recorder.record_stage("system_metadata", sys_meta)
+         print("  PostgreSQL: " + sys_meta["postgres_version"].splitlines()[0])
+         print(f"  Python: {sys_meta['python_version']} on {sys_meta['platform']}")
+ 
+@@ -1495,10 +1516,13 @@
+         if prior:
+             assert sys_meta["raw_manifest_sha256"] == prior["stages"]["system_metadata"]["raw_manifest_sha256"]
+             pipeline_meta = prior["stages"]["pipeline_lifecycle"]
+-            recorder.record_stage("lifecycle_reuse", {"original_started_at": prior["started_at"], "original_script_sha256": prior.get("stage_script_sha256", {}).get("pipeline_lifecycle"), "checkpoint_sha256": hashlib.sha256(args.analysis_from.read_bytes()).hexdigest()})
++            recorder.record_stage("lifecycle_reuse", {"original_started_at": prior["started_at"], "original_script_sha256": prior.get("stage_script_sha256", {}).get("pipeline_lifecycle"), "checkpoint_sha256": hashlib.sha256(prior_path.read_bytes()).hexdigest()})
+         else:
+             pipeline_meta = benchmark_pipeline_lifecycle(recorder)
+-        recorder.record_stage("pipeline_lifecycle", pipeline_meta)
++        if prior:
++            recorder.retain_stage("pipeline_lifecycle", prior)
++        else:
++            recorder.record_stage("pipeline_lifecycle", pipeline_meta)
+         print(f"  Hybrid Fresh Pipeline:   {pipeline_meta['hybrid']['fresh_pipeline_duration_seconds']}s")
+         print(f"  Hybrid Rerun Reuse:      {pipeline_meta['hybrid']['rerun_reuse_duration_seconds']}s")
+         print(f"  Hybrid Clean Rebuild:    {pipeline_meta['hybrid']['clean_rebuild_duration_seconds']}s")
+@@ -1520,14 +1544,30 @@
+             # STAGE 3: Workload Full Correctness & Checksums
+             print("\n[Stage 3/6] Verifying full semantic parity and computing canonical checksums across all 6 BRs...")
+             parity_meta = verify_full_workload_correctness_and_parity(h_conn, k_conn)
++            if args.continue_from:
++                for br, value in parity_meta.items():
++                    assert value["digest"] == prior["stages"]["workload_parity_verification"][br]["digest"], br
++            h_conn.commit()
++            k_conn.commit()
+             recorder.record_stage("workload_parity_verification", parity_meta)
+             for br, d in parity_meta.items():
+                 print(f"  {br}: Verified=True (Checksum: {d['digest'][:16]}...)")
+ 
+             # STAGE 4: Workload Latency Benchmarks (6 BRs, 5 warmups, 30 samples)
+             print("\n[Stage 4/6] Sampling 6 BR query workloads (fresh adapter touch, 5 warmups, 30 steady-state samples with use_cache=False)...")
+-            latencies_meta = benchmark_workload_latencies(h_conn, k_conn, warmups=5, samples_count=30)
+-            recorder.record_stage("workload_latencies", latencies_meta)
++            if args.continue_from:
++                latencies_meta = prior["stages"]["workload_latencies"]
++                assert len(latencies_meta) == 6
++                for pair in latencies_meta.values():
++                    for arch in ("hybrid", "kimball"):
++                        assert pair[arch]["measured_count"] == 30
++                        assert len(pair[arch]["measured_samples_ms"]) == 30
++                        assert len(pair[arch]["warmup_samples_ms"]) == 5
++                recorder.retain_stage("workload_latencies", prior)
++                print("  Retained original latency samples after parity revalidation; no new query timing claimed.")
++            else:
++                latencies_meta = benchmark_workload_latencies(h_conn, k_conn, warmups=5, samples_count=30)
++                recorder.record_stage("workload_latencies", latencies_meta)
+             for br, res in latencies_meta.items():
+                 h_p95 = res["hybrid"]["p95_nearest_rank_ms"]
+                 k_p95 = res["kimball"]["p95_nearest_rank_ms"]
+@@ -1575,6 +1615,7 @@
+         print(f"\n[ERROR] Benchmark failed: {e}")
+         import traceback
+         traceback.print_exc()
++        recorder.record_stage("final_runtime", collect_system_metadata())
+         recorder.record_error("execution", e)
+         raise
+ 

@@ -1,0 +1,1294 @@
+{
+  "backend": "postgres",
+  "at_utc": "2026-11-07T01:47:04.268356+00:00",
+  "version": "PostgreSQL 17.10 (Debian 17.10-1.pgdg12+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+  "database_bytes": 3423098547,
+  "server_settings": {
+    "shared_buffers": "512MB",
+    "effective_cache_size": "1536MB",
+    "work_mem": "4MB",
+    "max_parallel_workers_per_gather": "0",
+    "jit": "on"
+  },
+  "tables": [
+    {
+      "schema": "config",
+      "table": "area_basis_version",
+      "heap_bytes": 32768,
+      "index_bytes": 57344,
+      "total_including_toast_bytes": 122880,
+      "estimated_rows": 84
+    },
+    {
+      "schema": "config",
+      "table": "assumption_application",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "config",
+      "table": "basis_application",
+      "heap_bytes": 24576,
+      "index_bytes": 40960,
+      "total_including_toast_bytes": 98304,
+      "estimated_rows": 96
+    },
+    {
+      "schema": "config",
+      "table": "basis_assumption_version",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "config",
+      "table": "cost_scenario",
+      "heap_bytes": 360448,
+      "index_bytes": 122880,
+      "total_including_toast_bytes": 516096,
+      "estimated_rows": 174
+    },
+    {
+      "schema": "config",
+      "table": "cost_scenario_rate",
+      "heap_bytes": 163840,
+      "index_bytes": 212992,
+      "total_including_toast_bytes": 409600,
+      "estimated_rows": 627
+    },
+    {
+      "schema": "config",
+      "table": "harvest_rule_profile",
+      "heap_bytes": 0,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 24576,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "config",
+      "table": "irrigation_rule_profile",
+      "heap_bytes": 0,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 24576,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "config",
+      "table": "measure_definition",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "config",
+      "table": "quality_policy_version",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "config",
+      "table": "rule_schedule_revision",
+      "heap_bytes": 16384,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 81920,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "config",
+      "table": "rule_schedule_segment",
+      "heap_bytes": 8192,
+      "index_bytes": 8192,
+      "total_including_toast_bytes": 24576,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "config",
+      "table": "tariff_profile",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "config",
+      "table": "tariff_rate",
+      "heap_bytes": 8192,
+      "index_bytes": 24576,
+      "total_including_toast_bytes": 40960,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "core",
+      "table": "climate_observation",
+      "heap_bytes": 40796160,
+      "index_bytes": 21684224,
+      "total_including_toast_bytes": 62529536,
+      "estimated_rows": 286854
+    },
+    {
+      "schema": "core",
+      "table": "compartment",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "core",
+      "table": "crop",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "core",
+      "table": "drain_observation",
+      "heap_bytes": 36151296,
+      "index_bytes": 21643264,
+      "total_including_toast_bytes": 57843712,
+      "estimated_rows": 286854
+    },
+    {
+      "schema": "core",
+      "table": "growing_cycle",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "core",
+      "table": "harvest",
+      "heap_bytes": 16384,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 65536,
+      "estimated_rows": 139
+    },
+    {
+      "schema": "core",
+      "table": "measure_quality",
+      "heap_bytes": 342827008,
+      "index_bytes": 312893440,
+      "total_including_toast_bytes": 655851520,
+      "estimated_rows": 2874823
+    },
+    {
+      "schema": "core",
+      "table": "record_revision",
+      "heap_bytes": 294322176,
+      "index_bytes": 799817728,
+      "total_including_toast_bytes": 1094254592,
+      "estimated_rows": 574846
+    },
+    {
+      "schema": "core",
+      "table": "resource_day",
+      "heap_bytes": 139264,
+      "index_bytes": 90112,
+      "total_including_toast_bytes": 262144,
+      "estimated_rows": 996
+    },
+    {
+      "schema": "core",
+      "table": "site",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "core",
+      "table": "team",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "mart",
+      "table": "climate_publication",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "mart",
+      "table": "dim_climate_cycle",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "mart",
+      "table": "dim_date",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 24576,
+      "estimated_rows": 166
+    },
+    {
+      "schema": "mart",
+      "table": "dim_drain_cycle",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "mart",
+      "table": "dim_energy_cycle",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "mart",
+      "table": "dim_harvest_cycle",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "mart",
+      "table": "dim_irrigation_cycle",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "mart",
+      "table": "drain_publication",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "mart",
+      "table": "energy_publication",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "mart",
+      "table": "fact_climate_slot",
+      "heap_bytes": 335708160,
+      "index_bytes": 105242624,
+      "total_including_toast_bytes": 441081856,
+      "estimated_rows": 286860
+    },
+    {
+      "schema": "mart",
+      "table": "fact_drain_slot",
+      "heap_bytes": 148504576,
+      "index_bytes": 105390080,
+      "total_including_toast_bytes": 253968384,
+      "estimated_rows": 286854
+    },
+    {
+      "schema": "mart",
+      "table": "fact_energy_day",
+      "heap_bytes": 2383872,
+      "index_bytes": 294912,
+      "total_including_toast_bytes": 2719744,
+      "estimated_rows": 2988
+    },
+    {
+      "schema": "mart",
+      "table": "fact_harvest_record",
+      "heap_bytes": 90112,
+      "index_bytes": 49152,
+      "total_including_toast_bytes": 172032,
+      "estimated_rows": 139
+    },
+    {
+      "schema": "mart",
+      "table": "fact_irrigation_day",
+      "heap_bytes": 630784,
+      "index_bytes": 131072,
+      "total_including_toast_bytes": 794624,
+      "estimated_rows": 996
+    },
+    {
+      "schema": "mart",
+      "table": "harvest_cycle_state",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "mart",
+      "table": "harvest_publication",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "mart",
+      "table": "irrigation_publication",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "core_baseline_receipt",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "correction",
+      "heap_bytes": 0,
+      "index_bytes": 24576,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "current_publication",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "data_scope",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "dataset_snapshot",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "dq_issue",
+      "heap_bytes": 76193792,
+      "index_bytes": 34275328,
+      "total_including_toast_bytes": 110526464,
+      "estimated_rows": 232519
+    },
+    {
+      "schema": "meta",
+      "table": "file_ingestion",
+      "heap_bytes": 49152,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 98304,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "pipeline_run",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 106496,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "publication",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "publication_basis",
+      "heap_bytes": 16384,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 65536,
+      "estimated_rows": 54
+    },
+    {
+      "schema": "meta",
+      "table": "publication_member",
+      "heap_bytes": 136536064,
+      "index_bytes": 154181632,
+      "total_including_toast_bytes": 290791424,
+      "estimated_rows": 574843
+    },
+    {
+      "schema": "meta",
+      "table": "publication_seal",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "quarantine_record",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "schema_migration",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "sensor_event",
+      "heap_bytes": 0,
+      "index_bytes": 8192,
+      "total_including_toast_bytes": 16384,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "source_file",
+      "heap_bytes": 16384,
+      "index_bytes": 49152,
+      "total_including_toast_bytes": 98304,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "source_folder_mapping",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "source_record",
+      "heap_bytes": 147431424,
+      "index_bytes": 151699456,
+      "total_including_toast_bytes": 299204608,
+      "estimated_rows": 287990
+    },
+    {
+      "schema": "meta",
+      "table": "workflow_basis",
+      "heap_bytes": 8192,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 32768,
+      "estimated_rows": 54
+    },
+    {
+      "schema": "meta",
+      "table": "workflow_candidate",
+      "heap_bytes": 53518336,
+      "index_bytes": 64897024,
+      "total_including_toast_bytes": 118464512,
+      "estimated_rows": 574843
+    },
+    {
+      "schema": "meta",
+      "table": "workflow_run",
+      "heap_bytes": 8192,
+      "index_bytes": 32768,
+      "total_including_toast_bytes": 49152,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "meta",
+      "table": "workflow_step",
+      "heap_bytes": 16384,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 65536,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "current_publication",
+      "heap_bytes": 0,
+      "index_bytes": 8192,
+      "total_including_toast_bytes": 16384,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "delivery",
+      "heap_bytes": 0,
+      "index_bytes": 8192,
+      "total_including_toast_bytes": 16384,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "event_variant",
+      "heap_bytes": 0,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 24576,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "processed_batch",
+      "heap_bytes": 0,
+      "index_bytes": 8192,
+      "total_including_toast_bytes": 16384,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "publication",
+      "heap_bytes": 0,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 24576,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "publication_event",
+      "heap_bytes": 0,
+      "index_bytes": 8192,
+      "total_including_toast_bytes": 16384,
+      "estimated_rows": -1
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "publication_seal",
+      "heap_bytes": 0,
+      "index_bytes": 16384,
+      "total_including_toast_bytes": 24576,
+      "estimated_rows": -1
+    }
+  ],
+  "indexes": [
+    {
+      "schema": "config",
+      "table": "area_basis_version",
+      "index": "area_basis_version_basis_version_id_data_scope_id_compartme_key",
+      "definition": "CREATE UNIQUE INDEX area_basis_version_basis_version_id_data_scope_id_compartme_key ON config.area_basis_version USING btree (basis_version_id, data_scope_id, compartment_id, measure_code)"
+    },
+    {
+      "schema": "config",
+      "table": "area_basis_version",
+      "index": "area_basis_version_pkey",
+      "definition": "CREATE UNIQUE INDEX area_basis_version_pkey ON config.area_basis_version USING btree (basis_version_id)"
+    },
+    {
+      "schema": "config",
+      "table": "assumption_application",
+      "index": "assumption_application_pkey",
+      "definition": "CREATE UNIQUE INDEX assumption_application_pkey ON config.assumption_application USING btree (data_scope_id, assumption_id, assumption_version)"
+    },
+    {
+      "schema": "config",
+      "table": "basis_application",
+      "index": "basis_application_pkey",
+      "definition": "CREATE UNIQUE INDEX basis_application_pkey ON config.basis_application USING btree (data_scope_id, compartment_id, measure_code, analysis_context, basis_version_id)"
+    },
+    {
+      "schema": "config",
+      "table": "basis_assumption_version",
+      "index": "basis_assumption_version_pkey",
+      "definition": "CREATE UNIQUE INDEX basis_assumption_version_pkey ON config.basis_assumption_version USING btree (assumption_id, version)"
+    },
+    {
+      "schema": "config",
+      "table": "cost_scenario",
+      "index": "cost_scenario_pkey",
+      "definition": "CREATE UNIQUE INDEX cost_scenario_pkey ON config.cost_scenario USING btree (scenario_version)"
+    },
+    {
+      "schema": "config",
+      "table": "cost_scenario",
+      "index": "cost_scenario_request_id_key",
+      "definition": "CREATE UNIQUE INDEX cost_scenario_request_id_key ON config.cost_scenario USING btree (request_id)"
+    },
+    {
+      "schema": "config",
+      "table": "cost_scenario",
+      "index": "cost_scenario_scenario_id_version_key",
+      "definition": "CREATE UNIQUE INDEX cost_scenario_scenario_id_version_key ON config.cost_scenario USING btree (scenario_id, version)"
+    },
+    {
+      "schema": "config",
+      "table": "cost_scenario_rate",
+      "index": "cost_scenario_rate_pkey",
+      "definition": "CREATE UNIQUE INDEX cost_scenario_rate_pkey ON config.cost_scenario_rate USING btree (scenario_rate_id)"
+    },
+    {
+      "schema": "config",
+      "table": "cost_scenario_rate",
+      "index": "cost_scenario_rate_scenario_version_component_daterange_excl",
+      "definition": "CREATE INDEX cost_scenario_rate_scenario_version_component_daterange_excl ON config.cost_scenario_rate USING gist (scenario_version, component, daterange(valid_from, valid_to_exclusive, '[)'::text))"
+    },
+    {
+      "schema": "config",
+      "table": "harvest_rule_profile",
+      "index": "harvest_rule_profile_pkey",
+      "definition": "CREATE UNIQUE INDEX harvest_rule_profile_pkey ON config.harvest_rule_profile USING btree (rule_version)"
+    },
+    {
+      "schema": "config",
+      "table": "harvest_rule_profile",
+      "index": "harvest_rule_profile_rule_id_version_data_scope_id_compartm_key",
+      "definition": "CREATE UNIQUE INDEX harvest_rule_profile_rule_id_version_data_scope_id_compartm_key ON config.harvest_rule_profile USING btree (rule_id, version, data_scope_id, compartment_id)"
+    },
+    {
+      "schema": "config",
+      "table": "irrigation_rule_profile",
+      "index": "irrigation_rule_profile_pkey",
+      "definition": "CREATE UNIQUE INDEX irrigation_rule_profile_pkey ON config.irrigation_rule_profile USING btree (rule_version)"
+    },
+    {
+      "schema": "config",
+      "table": "irrigation_rule_profile",
+      "index": "irrigation_rule_profile_rule_id_version_data_scope_id_compa_key",
+      "definition": "CREATE UNIQUE INDEX irrigation_rule_profile_rule_id_version_data_scope_id_compa_key ON config.irrigation_rule_profile USING btree (rule_id, version, data_scope_id, compartment_id)"
+    },
+    {
+      "schema": "config",
+      "table": "measure_definition",
+      "index": "measure_definition_measure_code_record_type_key",
+      "definition": "CREATE UNIQUE INDEX measure_definition_measure_code_record_type_key ON config.measure_definition USING btree (measure_code, record_type)"
+    },
+    {
+      "schema": "config",
+      "table": "measure_definition",
+      "index": "measure_definition_pkey",
+      "definition": "CREATE UNIQUE INDEX measure_definition_pkey ON config.measure_definition USING btree (measure_code)"
+    },
+    {
+      "schema": "config",
+      "table": "quality_policy_version",
+      "index": "quality_policy_version_pkey",
+      "definition": "CREATE UNIQUE INDEX quality_policy_version_pkey ON config.quality_policy_version USING btree (policy_version_id)"
+    },
+    {
+      "schema": "config",
+      "table": "rule_schedule_revision",
+      "index": "rule_schedule_revision_pkey",
+      "definition": "CREATE UNIQUE INDEX rule_schedule_revision_pkey ON config.rule_schedule_revision USING btree (rule_version)"
+    },
+    {
+      "schema": "config",
+      "table": "rule_schedule_revision",
+      "index": "rule_schedule_revision_rule_id_version_data_scope_id_compar_key",
+      "definition": "CREATE UNIQUE INDEX rule_schedule_revision_rule_id_version_data_scope_id_compar_key ON config.rule_schedule_revision USING btree (rule_id, version, data_scope_id, compartment_id)"
+    },
+    {
+      "schema": "config",
+      "table": "rule_schedule_segment",
+      "index": "rule_schedule_segment_rule_version_metric_measurement_cont_excl",
+      "definition": "CREATE INDEX rule_schedule_segment_rule_version_metric_measurement_cont_excl ON config.rule_schedule_segment USING gist (rule_version, metric, measurement_context, basis, tsrange(source_start, source_end, '[)'::text))"
+    },
+    {
+      "schema": "config",
+      "table": "tariff_profile",
+      "index": "tariff_profile_pkey",
+      "definition": "CREATE UNIQUE INDEX tariff_profile_pkey ON config.tariff_profile USING btree (tariff_version)"
+    },
+    {
+      "schema": "config",
+      "table": "tariff_profile",
+      "index": "tariff_profile_tariff_id_version_scope_comp_key",
+      "definition": "CREATE UNIQUE INDEX tariff_profile_tariff_id_version_scope_comp_key ON config.tariff_profile USING btree (tariff_id, version, data_scope_id, compartment_id) NULLS NOT DISTINCT"
+    },
+    {
+      "schema": "config",
+      "table": "tariff_rate",
+      "index": "tariff_rate_pkey",
+      "definition": "CREATE UNIQUE INDEX tariff_rate_pkey ON config.tariff_rate USING btree (rate_id)"
+    },
+    {
+      "schema": "config",
+      "table": "tariff_rate",
+      "index": "tariff_rate_tariff_version_component_daterange_excl",
+      "definition": "CREATE INDEX tariff_rate_tariff_version_component_daterange_excl ON config.tariff_rate USING gist (tariff_version, component, daterange(valid_from, valid_to_exclusive, '[)'::text))"
+    },
+    {
+      "schema": "core",
+      "table": "climate_observation",
+      "index": "climate_observation_pkey",
+      "definition": "CREATE UNIQUE INDEX climate_observation_pkey ON core.climate_observation USING btree (revision_id)"
+    },
+    {
+      "schema": "core",
+      "table": "compartment",
+      "index": "compartment_pkey",
+      "definition": "CREATE UNIQUE INDEX compartment_pkey ON core.compartment USING btree (compartment_id)"
+    },
+    {
+      "schema": "core",
+      "table": "crop",
+      "index": "crop_pkey",
+      "definition": "CREATE UNIQUE INDEX crop_pkey ON core.crop USING btree (crop_id)"
+    },
+    {
+      "schema": "core",
+      "table": "drain_observation",
+      "index": "drain_observation_pkey",
+      "definition": "CREATE UNIQUE INDEX drain_observation_pkey ON core.drain_observation USING btree (revision_id)"
+    },
+    {
+      "schema": "core",
+      "table": "growing_cycle",
+      "index": "growing_cycle_cycle_id_compartment_id_team_id_key",
+      "definition": "CREATE UNIQUE INDEX growing_cycle_cycle_id_compartment_id_team_id_key ON core.growing_cycle USING btree (cycle_id, compartment_id, team_id)"
+    },
+    {
+      "schema": "core",
+      "table": "growing_cycle",
+      "index": "growing_cycle_pkey",
+      "definition": "CREATE UNIQUE INDEX growing_cycle_pkey ON core.growing_cycle USING btree (cycle_id)"
+    },
+    {
+      "schema": "core",
+      "table": "harvest",
+      "index": "harvest_pkey",
+      "definition": "CREATE UNIQUE INDEX harvest_pkey ON core.harvest USING btree (revision_id)"
+    },
+    {
+      "schema": "core",
+      "table": "measure_quality",
+      "index": "measure_quality_pkey",
+      "definition": "CREATE UNIQUE INDEX measure_quality_pkey ON core.measure_quality USING btree (revision_id, measure_code, policy_version_id)"
+    },
+    {
+      "schema": "core",
+      "table": "record_revision",
+      "index": "record_revision_data_scope_id_record_type_logical_record_ke_key",
+      "definition": "CREATE UNIQUE INDEX record_revision_data_scope_id_record_type_logical_record_ke_key ON core.record_revision USING btree (data_scope_id, record_type, logical_record_key, revision_number)"
+    },
+    {
+      "schema": "core",
+      "table": "record_revision",
+      "index": "record_revision_data_scope_id_record_type_source_record_id__key",
+      "definition": "CREATE UNIQUE INDEX record_revision_data_scope_id_record_type_source_record_id__key ON core.record_revision USING btree (data_scope_id, record_type, source_record_id, revision_number)"
+    },
+    {
+      "schema": "core",
+      "table": "record_revision",
+      "index": "record_revision_pkey",
+      "definition": "CREATE UNIQUE INDEX record_revision_pkey ON core.record_revision USING btree (revision_id)"
+    },
+    {
+      "schema": "core",
+      "table": "record_revision",
+      "index": "record_revision_revision_id_data_scope_id_record_type_logic_key",
+      "definition": "CREATE UNIQUE INDEX record_revision_revision_id_data_scope_id_record_type_logic_key ON core.record_revision USING btree (revision_id, data_scope_id, record_type, logical_record_key)"
+    },
+    {
+      "schema": "core",
+      "table": "record_revision",
+      "index": "record_revision_revision_id_record_type_key",
+      "definition": "CREATE UNIQUE INDEX record_revision_revision_id_record_type_key ON core.record_revision USING btree (revision_id, record_type)"
+    },
+    {
+      "schema": "core",
+      "table": "record_revision",
+      "index": "record_revision_revision_id_record_type_observed_at_key",
+      "definition": "CREATE UNIQUE INDEX record_revision_revision_id_record_type_observed_at_key ON core.record_revision USING btree (revision_id, record_type, observed_at)"
+    },
+    {
+      "schema": "core",
+      "table": "record_revision",
+      "index": "revision_cycle_time",
+      "definition": "CREATE INDEX revision_cycle_time ON core.record_revision USING btree (cycle_id, observed_at)"
+    },
+    {
+      "schema": "core",
+      "table": "record_revision",
+      "index": "revision_run",
+      "definition": "CREATE INDEX revision_run ON core.record_revision USING btree (run_id)"
+    },
+    {
+      "schema": "core",
+      "table": "record_revision",
+      "index": "revision_time_grain",
+      "definition": "CREATE UNIQUE INDEX revision_time_grain ON core.record_revision USING btree (data_scope_id, cycle_id, record_type, observed_at, revision_number) WHERE (record_type = ANY (ARRAY['climate'::text, 'drain'::text, 'resource'::text]))"
+    },
+    {
+      "schema": "core",
+      "table": "resource_day",
+      "index": "resource_day_pkey",
+      "definition": "CREATE UNIQUE INDEX resource_day_pkey ON core.resource_day USING btree (revision_id)"
+    },
+    {
+      "schema": "core",
+      "table": "site",
+      "index": "site_pkey",
+      "definition": "CREATE UNIQUE INDEX site_pkey ON core.site USING btree (site_id)"
+    },
+    {
+      "schema": "core",
+      "table": "team",
+      "index": "team_pkey",
+      "definition": "CREATE UNIQUE INDEX team_pkey ON core.team USING btree (team_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "climate_publication",
+      "index": "climate_publication_pkey",
+      "definition": "CREATE UNIQUE INDEX climate_publication_pkey ON mart.climate_publication USING btree (publication_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "dim_climate_cycle",
+      "index": "dim_climate_cycle_pkey",
+      "definition": "CREATE UNIQUE INDEX dim_climate_cycle_pkey ON mart.dim_climate_cycle USING btree (publication_id, cycle_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "dim_climate_cycle",
+      "index": "dim_climate_cycle_publication_id_cycle_id_compartment_id_key",
+      "definition": "CREATE UNIQUE INDEX dim_climate_cycle_publication_id_cycle_id_compartment_id_key ON mart.dim_climate_cycle USING btree (publication_id, cycle_id, compartment_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "dim_date",
+      "index": "dim_date_pkey",
+      "definition": "CREATE UNIQUE INDEX dim_date_pkey ON mart.dim_date USING btree (resource_date)"
+    },
+    {
+      "schema": "mart",
+      "table": "dim_drain_cycle",
+      "index": "dim_drain_cycle_pkey",
+      "definition": "CREATE UNIQUE INDEX dim_drain_cycle_pkey ON mart.dim_drain_cycle USING btree (publication_id, cycle_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "dim_drain_cycle",
+      "index": "dim_drain_cycle_publication_id_cycle_id_compartment_id_key",
+      "definition": "CREATE UNIQUE INDEX dim_drain_cycle_publication_id_cycle_id_compartment_id_key ON mart.dim_drain_cycle USING btree (publication_id, cycle_id, compartment_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "dim_energy_cycle",
+      "index": "dim_energy_cycle_pkey",
+      "definition": "CREATE UNIQUE INDEX dim_energy_cycle_pkey ON mart.dim_energy_cycle USING btree (publication_id, cycle_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "dim_energy_cycle",
+      "index": "dim_energy_cycle_publication_id_cycle_id_compartment_id_key",
+      "definition": "CREATE UNIQUE INDEX dim_energy_cycle_publication_id_cycle_id_compartment_id_key ON mart.dim_energy_cycle USING btree (publication_id, cycle_id, compartment_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "dim_harvest_cycle",
+      "index": "dim_harvest_cycle_pkey",
+      "definition": "CREATE UNIQUE INDEX dim_harvest_cycle_pkey ON mart.dim_harvest_cycle USING btree (publication_id, cycle_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "dim_harvest_cycle",
+      "index": "dim_harvest_cycle_publication_id_cycle_id_compartment_id_key",
+      "definition": "CREATE UNIQUE INDEX dim_harvest_cycle_publication_id_cycle_id_compartment_id_key ON mart.dim_harvest_cycle USING btree (publication_id, cycle_id, compartment_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "dim_irrigation_cycle",
+      "index": "dim_irrigation_cycle_pkey",
+      "definition": "CREATE UNIQUE INDEX dim_irrigation_cycle_pkey ON mart.dim_irrigation_cycle USING btree (publication_id, cycle_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "dim_irrigation_cycle",
+      "index": "dim_irrigation_cycle_publication_id_cycle_id_compartment_id_key",
+      "definition": "CREATE UNIQUE INDEX dim_irrigation_cycle_publication_id_cycle_id_compartment_id_key ON mart.dim_irrigation_cycle USING btree (publication_id, cycle_id, compartment_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "drain_publication",
+      "index": "drain_publication_pkey",
+      "definition": "CREATE UNIQUE INDEX drain_publication_pkey ON mart.drain_publication USING btree (publication_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "energy_publication",
+      "index": "energy_publication_pkey",
+      "definition": "CREATE UNIQUE INDEX energy_publication_pkey ON mart.energy_publication USING btree (publication_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "fact_climate_slot",
+      "index": "climate_slot_lookup",
+      "definition": "CREATE INDEX climate_slot_lookup ON mart.fact_climate_slot USING btree (publication_id, cycle_id, compartment_id, slot_start)"
+    },
+    {
+      "schema": "mart",
+      "table": "fact_climate_slot",
+      "index": "fact_climate_slot_pkey",
+      "definition": "CREATE UNIQUE INDEX fact_climate_slot_pkey ON mart.fact_climate_slot USING btree (publication_id, revision_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "fact_climate_slot",
+      "index": "fact_climate_slot_publication_id_cycle_id_slot_start_key",
+      "definition": "CREATE UNIQUE INDEX fact_climate_slot_publication_id_cycle_id_slot_start_key ON mart.fact_climate_slot USING btree (publication_id, cycle_id, slot_start)"
+    },
+    {
+      "schema": "mart",
+      "table": "fact_drain_slot",
+      "index": "drain_slot_lookup",
+      "definition": "CREATE INDEX drain_slot_lookup ON mart.fact_drain_slot USING btree (publication_id, cycle_id, compartment_id, slot_start)"
+    },
+    {
+      "schema": "mart",
+      "table": "fact_drain_slot",
+      "index": "fact_drain_slot_pkey",
+      "definition": "CREATE UNIQUE INDEX fact_drain_slot_pkey ON mart.fact_drain_slot USING btree (publication_id, revision_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "fact_drain_slot",
+      "index": "fact_drain_slot_publication_id_cycle_id_slot_start_key",
+      "definition": "CREATE UNIQUE INDEX fact_drain_slot_publication_id_cycle_id_slot_start_key ON mart.fact_drain_slot USING btree (publication_id, cycle_id, slot_start)"
+    },
+    {
+      "schema": "mart",
+      "table": "fact_energy_day",
+      "index": "fact_energy_day_pkey",
+      "definition": "CREATE UNIQUE INDEX fact_energy_day_pkey ON mart.fact_energy_day USING btree (publication_id, cycle_id, resource_date, component)"
+    },
+    {
+      "schema": "mart",
+      "table": "fact_harvest_record",
+      "index": "fact_harvest_record_pkey",
+      "definition": "CREATE UNIQUE INDEX fact_harvest_record_pkey ON mart.fact_harvest_record USING btree (publication_id, logical_record_key)"
+    },
+    {
+      "schema": "mart",
+      "table": "fact_irrigation_day",
+      "index": "fact_irrigation_day_pkey",
+      "definition": "CREATE UNIQUE INDEX fact_irrigation_day_pkey ON mart.fact_irrigation_day USING btree (publication_id, cycle_id, resource_date)"
+    },
+    {
+      "schema": "mart",
+      "table": "harvest_cycle_state",
+      "index": "harvest_cycle_state_pkey",
+      "definition": "CREATE UNIQUE INDEX harvest_cycle_state_pkey ON mart.harvest_cycle_state USING btree (publication_id, cycle_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "harvest_publication",
+      "index": "harvest_publication_pkey",
+      "definition": "CREATE UNIQUE INDEX harvest_publication_pkey ON mart.harvest_publication USING btree (publication_id)"
+    },
+    {
+      "schema": "mart",
+      "table": "irrigation_publication",
+      "index": "irrigation_publication_pkey",
+      "definition": "CREATE UNIQUE INDEX irrigation_publication_pkey ON mart.irrigation_publication USING btree (publication_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "core_baseline_receipt",
+      "index": "core_baseline_receipt_pkey",
+      "definition": "CREATE UNIQUE INDEX core_baseline_receipt_pkey ON meta.core_baseline_receipt USING btree (data_scope_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "correction",
+      "index": "correction_correction_id_source_record_id_key",
+      "definition": "CREATE UNIQUE INDEX correction_correction_id_source_record_id_key ON meta.correction USING btree (correction_id, source_record_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "correction",
+      "index": "correction_pkey",
+      "definition": "CREATE UNIQUE INDEX correction_pkey ON meta.correction USING btree (correction_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "correction",
+      "index": "correction_source_record_id_version_key",
+      "definition": "CREATE UNIQUE INDEX correction_source_record_id_version_key ON meta.correction USING btree (source_record_id, version)"
+    },
+    {
+      "schema": "meta",
+      "table": "current_publication",
+      "index": "current_publication_pkey",
+      "definition": "CREATE UNIQUE INDEX current_publication_pkey ON meta.current_publication USING btree (data_scope_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "data_scope",
+      "index": "data_scope_data_scope_id_snapshot_id_key",
+      "definition": "CREATE UNIQUE INDEX data_scope_data_scope_id_snapshot_id_key ON meta.data_scope USING btree (data_scope_id, snapshot_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "data_scope",
+      "index": "data_scope_pkey",
+      "definition": "CREATE UNIQUE INDEX data_scope_pkey ON meta.data_scope USING btree (data_scope_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "dataset_snapshot",
+      "index": "dataset_snapshot_pkey",
+      "definition": "CREATE UNIQUE INDEX dataset_snapshot_pkey ON meta.dataset_snapshot USING btree (snapshot_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "dq_issue",
+      "index": "dq_issue_pkey",
+      "definition": "CREATE UNIQUE INDEX dq_issue_pkey ON meta.dq_issue USING btree (issue_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "dq_issue",
+      "index": "dq_source",
+      "definition": "CREATE INDEX dq_source ON meta.dq_issue USING btree (source_record_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "file_ingestion",
+      "index": "file_ingestion_pkey",
+      "definition": "CREATE UNIQUE INDEX file_ingestion_pkey ON meta.file_ingestion USING btree (run_id, source_file_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "pipeline_run",
+      "index": "pipeline_run_pkey",
+      "definition": "CREATE UNIQUE INDEX pipeline_run_pkey ON meta.pipeline_run USING btree (run_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "pipeline_run",
+      "index": "pipeline_run_run_id_data_scope_id_key",
+      "definition": "CREATE UNIQUE INDEX pipeline_run_run_id_data_scope_id_key ON meta.pipeline_run USING btree (run_id, data_scope_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "publication",
+      "index": "publication_pkey",
+      "definition": "CREATE UNIQUE INDEX publication_pkey ON meta.publication USING btree (publication_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "publication",
+      "index": "publication_publication_id_data_scope_id_key",
+      "definition": "CREATE UNIQUE INDEX publication_publication_id_data_scope_id_key ON meta.publication USING btree (publication_id, data_scope_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "publication_basis",
+      "index": "publication_basis_pkey",
+      "definition": "CREATE UNIQUE INDEX publication_basis_pkey ON meta.publication_basis USING btree (publication_id, compartment_id, measure_code, analysis_context, basis_version_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "publication_member",
+      "index": "publication_member_pkey",
+      "definition": "CREATE UNIQUE INDEX publication_member_pkey ON meta.publication_member USING btree (publication_id, record_type, logical_record_key)"
+    },
+    {
+      "schema": "meta",
+      "table": "publication_member",
+      "index": "publication_member_selected_revision",
+      "definition": "CREATE UNIQUE INDEX publication_member_selected_revision ON meta.publication_member USING btree (publication_id, revision_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "publication_seal",
+      "index": "publication_seal_pkey",
+      "definition": "CREATE UNIQUE INDEX publication_seal_pkey ON meta.publication_seal USING btree (publication_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "publication_seal",
+      "index": "publication_seal_workflow_id_key",
+      "definition": "CREATE UNIQUE INDEX publication_seal_workflow_id_key ON meta.publication_seal USING btree (workflow_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "quarantine_record",
+      "index": "quarantine_record_pkey",
+      "definition": "CREATE UNIQUE INDEX quarantine_record_pkey ON meta.quarantine_record USING btree (quarantine_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "quarantine_record",
+      "index": "quarantine_record_run_id_source_record_id_key",
+      "definition": "CREATE UNIQUE INDEX quarantine_record_run_id_source_record_id_key ON meta.quarantine_record USING btree (run_id, source_record_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "schema_migration",
+      "index": "schema_migration_pkey",
+      "definition": "CREATE UNIQUE INDEX schema_migration_pkey ON meta.schema_migration USING btree (version)"
+    },
+    {
+      "schema": "meta",
+      "table": "sensor_event",
+      "index": "sensor_event_pkey",
+      "definition": "CREATE UNIQUE INDEX sensor_event_pkey ON meta.sensor_event USING btree (data_scope_id, event_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "source_file",
+      "index": "source_file_pkey",
+      "definition": "CREATE UNIQUE INDEX source_file_pkey ON meta.source_file USING btree (source_file_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "source_file",
+      "index": "source_file_snapshot_id_relative_path_key",
+      "definition": "CREATE UNIQUE INDEX source_file_snapshot_id_relative_path_key ON meta.source_file USING btree (snapshot_id, relative_path)"
+    },
+    {
+      "schema": "meta",
+      "table": "source_file",
+      "index": "source_file_source_file_id_snapshot_id_key",
+      "definition": "CREATE UNIQUE INDEX source_file_source_file_id_snapshot_id_key ON meta.source_file USING btree (source_file_id, snapshot_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "source_folder_mapping",
+      "index": "source_folder_mapping_pkey",
+      "definition": "CREATE UNIQUE INDEX source_folder_mapping_pkey ON meta.source_folder_mapping USING btree (snapshot_id, source_folder)"
+    },
+    {
+      "schema": "meta",
+      "table": "source_folder_mapping",
+      "index": "source_folder_mapping_snapshot_id_source_folder_cycle_id_key",
+      "definition": "CREATE UNIQUE INDEX source_folder_mapping_snapshot_id_source_folder_cycle_id_key ON meta.source_folder_mapping USING btree (snapshot_id, source_folder, cycle_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "source_record",
+      "index": "source_record_file",
+      "definition": "CREATE INDEX source_record_file ON meta.source_record USING btree (source_file_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "source_record",
+      "index": "source_record_pkey",
+      "definition": "CREATE UNIQUE INDEX source_record_pkey ON meta.source_record USING btree (source_record_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "source_record",
+      "index": "source_record_source_file_id_line_number_key",
+      "definition": "CREATE UNIQUE INDEX source_record_source_file_id_line_number_key ON meta.source_record USING btree (source_file_id, line_number)"
+    },
+    {
+      "schema": "meta",
+      "table": "source_record",
+      "index": "source_record_source_record_id_snapshot_id_key",
+      "definition": "CREATE UNIQUE INDEX source_record_source_record_id_snapshot_id_key ON meta.source_record USING btree (source_record_id, snapshot_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "workflow_basis",
+      "index": "workflow_basis_pkey",
+      "definition": "CREATE UNIQUE INDEX workflow_basis_pkey ON meta.workflow_basis USING btree (workflow_id, basis_version_id, analysis_context)"
+    },
+    {
+      "schema": "meta",
+      "table": "workflow_candidate",
+      "index": "workflow_candidate_pkey",
+      "definition": "CREATE UNIQUE INDEX workflow_candidate_pkey ON meta.workflow_candidate USING btree (workflow_id, revision_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "workflow_run",
+      "index": "workflow_run_pkey",
+      "definition": "CREATE UNIQUE INDEX workflow_run_pkey ON meta.workflow_run USING btree (workflow_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "workflow_run",
+      "index": "workflow_scope",
+      "definition": "CREATE INDEX workflow_scope ON meta.workflow_run USING btree (data_scope_id)"
+    },
+    {
+      "schema": "meta",
+      "table": "workflow_step",
+      "index": "workflow_step_pkey",
+      "definition": "CREATE UNIQUE INDEX workflow_step_pkey ON meta.workflow_step USING btree (workflow_id, step)"
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "current_publication",
+      "index": "current_publication_pkey",
+      "definition": "CREATE UNIQUE INDEX current_publication_pkey ON sensor_stream.current_publication USING btree (replay_id)"
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "delivery",
+      "index": "delivery_pkey",
+      "definition": "CREATE UNIQUE INDEX delivery_pkey ON sensor_stream.delivery USING btree (stream_id, checkpoint_generation, batch_id, ordinal)"
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "event_variant",
+      "index": "event_variant_pkey",
+      "definition": "CREATE UNIQUE INDEX event_variant_pkey ON sensor_stream.event_variant USING btree (replay_id, identity, payload_hash)"
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "event_variant",
+      "index": "sensor_event_identity",
+      "definition": "CREATE INDEX sensor_event_identity ON sensor_stream.event_variant USING btree (replay_id, identity)"
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "processed_batch",
+      "index": "processed_batch_pkey",
+      "definition": "CREATE UNIQUE INDEX processed_batch_pkey ON sensor_stream.processed_batch USING btree (stream_id, checkpoint_generation, batch_id)"
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "publication",
+      "index": "publication_pkey",
+      "definition": "CREATE UNIQUE INDEX publication_pkey ON sensor_stream.publication USING btree (publication_id)"
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "publication",
+      "index": "publication_publication_id_replay_id_key",
+      "definition": "CREATE UNIQUE INDEX publication_publication_id_replay_id_key ON sensor_stream.publication USING btree (publication_id, replay_id)"
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "publication_event",
+      "index": "publication_event_pkey",
+      "definition": "CREATE UNIQUE INDEX publication_event_pkey ON sensor_stream.publication_event USING btree (publication_id, identity)"
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "publication_seal",
+      "index": "publication_seal_pkey",
+      "definition": "CREATE UNIQUE INDEX publication_seal_pkey ON sensor_stream.publication_seal USING btree (publication_id)"
+    },
+    {
+      "schema": "sensor_stream",
+      "table": "publication_seal",
+      "index": "publication_seal_publication_id_replay_id_key",
+      "definition": "CREATE UNIQUE INDEX publication_seal_publication_id_replay_id_key ON sensor_stream.publication_seal USING btree (publication_id, replay_id)"
+    }
+  ],
+  "storage_note": "pg_database_size includes indexes, TOAST and database metadata; row estimates are not exact counts; excludes WAL and server logs."
+}

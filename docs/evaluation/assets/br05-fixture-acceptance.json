@@ -1,0 +1,1202 @@
+{
+  "tool": "greenhouse.evaluation.br05",
+  "generated_at": "2026-11-04T18:15:16.564490+00:00",
+  "database": "greenhouse",
+  "fixture": {
+    "mode": "fixture",
+    "spark_stage": "replaced_with_prepared_artifact",
+    "real_components": [
+      "parser",
+      "staging",
+      "loader",
+      "publication",
+      "harvest mart",
+      "water mart",
+      "query adapter",
+      "service oracle",
+      "rule profile",
+      "exports"
+    ],
+    "cases": [
+      {
+        "ac": "AC-01",
+        "title": "Fixture: A=3, B=0.2, tổng 3.2 kg/m²; share A=93.75%, B=6.25% (weighted on the SAME paired records)",
+        "expected": {
+          "a_observed": "3",
+          "b_observed": "0.2",
+          "paired_total": "3.2",
+          "a_share_pct": "93.75",
+          "b_share_pct": "6.25",
+          "accepted_records": 2,
+          "paired_records": 2,
+          "status": "complete",
+          "snapshot_complete": true,
+          "cumulative_a": "3",
+          "cumulative_total": "3.2"
+        },
+        "observed": {
+          "a_observed": "3",
+          "b_observed": "0.2",
+          "paired_a": "3",
+          "paired_b": "0.2",
+          "paired_total": "3.2",
+          "a_share_pct": "93.75",
+          "b_share_pct": "6.25",
+          "mean_of_record_shares_pct": "8.333333333333333333333333335",
+          "accepted_records": 2,
+          "paired_records": 2,
+          "cumulative_a": "3",
+          "cumulative_total": "3.2",
+          "cumulative_origin": "2020-02-01",
+          "cumulative_basis_label": "verified",
+          "status": "complete",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_records": null,
+          "rule_unknown_records": null,
+          "snapshot_complete": true,
+          "unresolved": 0,
+          "conflicted": 0,
+          "state_accepted": 2,
+          "state_paired": 2,
+          "record_shares": [
+            "16.666666666666666666666666666666666666666666666667",
+            "0"
+          ],
+          "record_rule_status": [
+            "not_configured",
+            "not_configured"
+          ],
+          "day_b_share": [
+            "16.666666666666666666666666666666666666666666666667",
+            "0",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "day_present": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "day_a": [
+            "1",
+            "2",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "day_reasons": [
+            [],
+            [],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ]
+          ],
+          "weekly_b_share": [
+            "6.25",
+            null
+          ],
+          "weekly_cumulative_a": [
+            "3",
+            "3"
+          ],
+          "weekly_cumulative_total": [
+            "3.2",
+            "3.2"
+          ],
+          "unresolved_reasons": [],
+          "reason_codes": []
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-02",
+        "title": "Khác trung bình tỷ lệ từng lần thu: mean of record shares 8.33…% ≠ 6.25%",
+        "expected": {
+          "pass": true
+        },
+        "observed": {
+          "pass": true,
+          "mean_of_record_shares_pct": "8.333333333333333333333333335",
+          "b_share_pct": "6.25"
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-03",
+        "title": "Record ngoài vụ (offset 700 → A 0.32 quarantine): tổng accepted không đổi (A=3/B=0.2), completeness=false, không xếp hạng; audit raw đọc đúng dòng và KHÔNG vào tổng",
+        "expected": {
+          "pass": true
+        },
+        "observed": {
+          "pass": true,
+          "observed": {
+            "a_observed": "3",
+            "b_observed": "0.2",
+            "paired_a": "3",
+            "paired_b": "0.2",
+            "paired_total": "3.2",
+            "a_share_pct": "93.75",
+            "b_share_pct": "6.25",
+            "mean_of_record_shares_pct": "8.333333333333333333333333335",
+            "accepted_records": 2,
+            "paired_records": 2,
+            "cumulative_a": "3",
+            "cumulative_total": "3.2",
+            "cumulative_origin": "2020-02-01",
+            "cumulative_basis_label": "verified",
+            "status": "partial",
+            "rule_status": "not_configured",
+            "rule_version": null,
+            "outside_rule_records": null,
+            "rule_unknown_records": null,
+            "snapshot_complete": false,
+            "unresolved": 1,
+            "conflicted": 0,
+            "state_accepted": 2,
+            "state_paired": 2,
+            "record_shares": [
+              "16.666666666666666666666666666666666666666666666667",
+              "0"
+            ],
+            "record_rule_status": [
+              "not_configured",
+              "not_configured"
+            ],
+            "day_b_share": [
+              "16.666666666666666666666666666666666666666666666667",
+              "0",
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "day_present": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "day_a": [
+              "1",
+              "2",
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "day_reasons": [
+              [
+                "unranked_incomplete_compartment",
+                "unresolved_quarantine_records"
+              ],
+              [
+                "unranked_incomplete_compartment",
+                "unresolved_quarantine_records"
+              ],
+              [
+                "unresolved_quarantine_records",
+                "unverified_no_harvest_record"
+              ],
+              [
+                "unresolved_quarantine_records",
+                "unverified_no_harvest_record"
+              ],
+              [
+                "unresolved_quarantine_records",
+                "unverified_no_harvest_record"
+              ],
+              [
+                "unresolved_quarantine_records",
+                "unverified_no_harvest_record"
+              ],
+              [
+                "unresolved_quarantine_records",
+                "unverified_no_harvest_record"
+              ],
+              [
+                "unresolved_quarantine_records",
+                "unverified_no_harvest_record"
+              ]
+            ],
+            "weekly_b_share": [
+              "6.25",
+              null
+            ],
+            "weekly_cumulative_a": [
+              "3",
+              "3"
+            ],
+            "weekly_cumulative_total": [
+              "3.2",
+              "3.2"
+            ],
+            "unresolved_reasons": [
+              "out_of_cycle_unresolved"
+            ],
+            "reason_codes": [
+              "incomplete_snapshot",
+              "unranked_incomplete_compartment",
+              "unresolved_quarantine_records"
+            ],
+            "pass": true,
+            "audit_verified": true,
+            "audit_raw_value": "0.32",
+            "audit_serial": "44562",
+            "audit_line": 4,
+            "audit_reason": "out_of_cycle_unresolved"
+          }
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-04",
+        "title": "Record thiếu B: A observed=8; B observed=0.2; paired 1/0.2; share B 16.66…% trên tập con; snapshot incomplete",
+        "expected": {
+          "a_observed": "8",
+          "b_observed": "0.2",
+          "paired_a": "1",
+          "paired_b": "0.2",
+          "accepted_records": 3,
+          "paired_records": 1,
+          "snapshot_complete": false,
+          "status": "partial"
+        },
+        "observed": {
+          "a_observed": "8",
+          "b_observed": "0.2",
+          "paired_a": "1",
+          "paired_b": "0.2",
+          "paired_total": "1.2",
+          "a_share_pct": "83.333333333333333333333333333333333333333333333333",
+          "b_share_pct": "16.666666666666666666666666666666666666666666666667",
+          "mean_of_record_shares_pct": "16.66666666666666666666666667",
+          "accepted_records": 3,
+          "paired_records": 1,
+          "cumulative_a": "8",
+          "cumulative_total": "1.2",
+          "cumulative_origin": "2020-02-01",
+          "cumulative_basis_label": "verified",
+          "status": "partial",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_records": null,
+          "rule_unknown_records": null,
+          "snapshot_complete": false,
+          "unresolved": 0,
+          "conflicted": 0,
+          "state_accepted": 3,
+          "state_paired": 1,
+          "record_shares": [
+            "16.666666666666666666666666666666666666666666666667",
+            null,
+            null
+          ],
+          "record_rule_status": [
+            "not_configured",
+            "not_configured",
+            "not_configured"
+          ],
+          "day_b_share": [
+            "16.666666666666666666666666666666666666666666666667",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "day_present": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "day_a": [
+            "1",
+            "5",
+            "2",
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "day_reasons": [
+            [
+              "records_without_paired_measures",
+              "unranked_incomplete_compartment"
+            ],
+            [
+              "partial_paired_records",
+              "records_without_paired_measures",
+              "unranked_incomplete_compartment"
+            ],
+            [
+              "partial_paired_records",
+              "records_without_paired_measures",
+              "unranked_incomplete_compartment"
+            ],
+            [
+              "records_without_paired_measures",
+              "unverified_no_harvest_record"
+            ],
+            [
+              "records_without_paired_measures",
+              "unverified_no_harvest_record"
+            ],
+            [
+              "records_without_paired_measures",
+              "unverified_no_harvest_record"
+            ],
+            [
+              "records_without_paired_measures",
+              "unverified_no_harvest_record"
+            ],
+            [
+              "records_without_paired_measures",
+              "unverified_no_harvest_record"
+            ]
+          ],
+          "weekly_b_share": [
+            "16.666666666666666666666666666666666666666666666667",
+            null
+          ],
+          "weekly_cumulative_a": [
+            "6",
+            "8"
+          ],
+          "weekly_cumulative_total": [
+            "1.2",
+            "1.2"
+          ],
+          "unresolved_reasons": [],
+          "reason_codes": [
+            "incomplete_snapshot",
+            "partial_paired_records",
+            "records_without_paired_measures",
+            "unranked_incomplete_compartment"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-04b",
+        "title": "Case hai record đúng spec: (1, 0.2) + (2, NULL) → A observed=3, B observed=0.2, paired 1/0.2, share A 83.33…% trên đúng tập paired (không phải trung bình share từng record)",
+        "expected": {
+          "a_observed": "3",
+          "b_observed": "0.2",
+          "paired_a": "1",
+          "paired_b": "0.2",
+          "paired_total": "1.2",
+          "a_share_pct": "83.333333333333333333333333333333333333333333333333",
+          "accepted_records": 2,
+          "paired_records": 1,
+          "snapshot_complete": false,
+          "status": "partial"
+        },
+        "observed": {
+          "a_observed": "3",
+          "b_observed": "0.2",
+          "paired_a": "1",
+          "paired_b": "0.2",
+          "paired_total": "1.2",
+          "a_share_pct": "83.333333333333333333333333333333333333333333333333",
+          "b_share_pct": "16.666666666666666666666666666666666666666666666667",
+          "mean_of_record_shares_pct": "16.66666666666666666666666667",
+          "accepted_records": 2,
+          "paired_records": 1,
+          "cumulative_a": "3",
+          "cumulative_total": "1.2",
+          "cumulative_origin": "2020-02-01",
+          "cumulative_basis_label": "verified",
+          "status": "partial",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_records": null,
+          "rule_unknown_records": null,
+          "snapshot_complete": false,
+          "unresolved": 0,
+          "conflicted": 0,
+          "state_accepted": 2,
+          "state_paired": 1,
+          "record_shares": [
+            "16.666666666666666666666666666666666666666666666667",
+            null
+          ],
+          "record_rule_status": [
+            "not_configured",
+            "not_configured"
+          ],
+          "day_b_share": [
+            "16.666666666666666666666666666666666666666666666667",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "day_present": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "day_a": [
+            "1",
+            "2",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "day_reasons": [
+            [
+              "records_without_paired_measures",
+              "unranked_incomplete_compartment"
+            ],
+            [
+              "partial_paired_records",
+              "records_without_paired_measures",
+              "unranked_incomplete_compartment"
+            ],
+            [
+              "records_without_paired_measures",
+              "unverified_no_harvest_record"
+            ],
+            [
+              "records_without_paired_measures",
+              "unverified_no_harvest_record"
+            ],
+            [
+              "records_without_paired_measures",
+              "unverified_no_harvest_record"
+            ],
+            [
+              "records_without_paired_measures",
+              "unverified_no_harvest_record"
+            ],
+            [
+              "records_without_paired_measures",
+              "unverified_no_harvest_record"
+            ],
+            [
+              "records_without_paired_measures",
+              "unverified_no_harvest_record"
+            ]
+          ],
+          "weekly_b_share": [
+            "16.666666666666666666666666666666666666666666666667",
+            null
+          ],
+          "weekly_cumulative_a": [
+            "3",
+            "3"
+          ],
+          "weekly_cumulative_total": [
+            "1.2",
+            "1.2"
+          ],
+          "unresolved_reasons": [],
+          "reason_codes": [
+            "incomplete_snapshot",
+            "partial_paired_records",
+            "records_without_paired_measures",
+            "unranked_incomplete_compartment"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-05",
+        "title": "Record A=B=0: tổng 0 (khác dữ liệu thiếu), share NULL (mẫu số 0), snapshot đầy đủ → complete",
+        "expected": {
+          "a_observed": "0",
+          "b_observed": "0",
+          "a_share_pct": null,
+          "b_share_pct": null,
+          "accepted_records": 1,
+          "paired_records": 1,
+          "status": "complete",
+          "snapshot_complete": true
+        },
+        "observed": {
+          "a_observed": "0",
+          "b_observed": "0",
+          "paired_a": "0",
+          "paired_b": "0",
+          "paired_total": "0",
+          "a_share_pct": null,
+          "b_share_pct": null,
+          "mean_of_record_shares_pct": null,
+          "accepted_records": 1,
+          "paired_records": 1,
+          "cumulative_a": "0",
+          "cumulative_total": "0",
+          "cumulative_origin": "2020-02-01",
+          "cumulative_basis_label": "verified",
+          "status": "complete",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_records": null,
+          "rule_unknown_records": null,
+          "snapshot_complete": true,
+          "unresolved": 0,
+          "conflicted": 0,
+          "state_accepted": 1,
+          "state_paired": 1,
+          "record_shares": [
+            null
+          ],
+          "record_rule_status": [
+            "not_configured"
+          ],
+          "day_b_share": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "day_present": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "day_a": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "day_reasons": [
+            [
+              "no_paired_mass"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ]
+          ],
+          "weekly_b_share": [
+            null,
+            null
+          ],
+          "weekly_cumulative_a": [
+            "0",
+            "0"
+          ],
+          "weekly_cumulative_total": [
+            "0",
+            "0"
+          ],
+          "unresolved_reasons": [],
+          "reason_codes": [
+            "no_paired_mass"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-06",
+        "title": "Ngày/cửa sổ không event trong snapshot ĐẦY ĐỦ → known 0 với known_zero_event_window; trong snapshot CHƯA HOÀN CHỈNH → unknown/NULL, không điền 0 như đã biết",
+        "expected": {
+          "pass": true
+        },
+        "observed": {
+          "pass": true,
+          "verified_window_a": "0",
+          "verified_window_status": "complete",
+          "verified_window_reasons": [
+            "cumulative_from_cycle_start",
+            "known_zero_event_window"
+          ],
+          "incomplete_window_a": null,
+          "incomplete_window_status": "unknown",
+          "incomplete_window_reasons": [
+            "cumulative_from_cycle_start",
+            "incomplete_snapshot",
+            "records_without_paired_measures"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-06b",
+        "title": "Ngày không event NẰM GIỮA hai ngày có event (2020-02-02 giữa 2020-02-01 và 2020-02-03): record_present=false, record_count=0, day A=B=0 tường minh trong snapshot đầy đủ, lũy kế chạy tiếp đúng ở ngày 2020-02-03; ngày này KHÔNG được tính là coverage",
+        "expected": {
+          "pass": true
+        },
+        "observed": {
+          "pass": true,
+          "mid_record_present": false,
+          "mid_record_count": 0,
+          "mid_a": "0",
+          "mid_b": "0",
+          "mid_b_share": null,
+          "mid_reasons": [
+            "known_zero_harvest_day"
+          ],
+          "next_day_a": "2",
+          "next_cumulative_a": "3",
+          "next_cumulative_total": "3.2",
+          "day_rows": 8
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-07",
+        "title": "File fail khi ingest (parse fail): file bị đánh failed → pipeline fail-closed tại đường consume với lý do cụ thể (\"Ingestion is incomplete or parser version differs\"); scope này có ĐÚNG 0 publication",
+        "expected": {
+          "pass": true
+        },
+        "observed": {
+          "pass": true,
+          "failure": "ValueError: Ingestion is incomplete or parser version differs",
+          "publication_count": 0
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-07a",
+        "title": "Fail-flow cùng scope có sẵn (coordinator fault before-spark): pointer vẫn trỏ ĐÚNG publication tốt cũ, số publication không đổi, kết quả summary giữ nguyên, trạng thái failed được ghi rõ; hành vi không đổi regardless của việc spark stage lỗi",
+        "expected": {
+          "pass": true
+        },
+        "observed": {
+          "pass": true,
+          "failure_injection": {
+            "type": "RuntimeError",
+            "injected_stage": "before-spark",
+            "message": "Injected failure: before-spark"
+          },
+          "failed_step_rows": [
+            {
+              "step": "spark",
+              "status": "failed",
+              "error": {
+                "type": "RuntimeError",
+                "injected": "before-spark"
+              }
+            }
+          ],
+          "pointer_still": "76150fa848754735ab114117687d8691",
+          "publication_count_after": 1,
+          "summary_a_after": "3",
+          "summary_cumulative_a_after": "3"
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-07b",
+        "title": "Completeness cho file failed (seam tổng hợp bằng adapter bọc: files_failed=1, snapshot_complete=False, GHI NHÃN synthetic): ngày không event qua HarvestService là UNKNOWN/NULL — không điền 0, không tính coverage",
+        "expected": {
+          "pass": true
+        },
+        "observed": {
+          "pass": true,
+          "zoom_status": "unknown",
+          "zoom_reason_codes": [
+            "cumulative_from_cycle_start",
+            "incomplete_snapshot",
+            "synthetic_failed_file_fixture"
+          ],
+          "day_a": null,
+          "day_record_present": false,
+          "day_reason_codes": [
+            "synthetic_failed_file_fixture",
+            "unverified_no_harvest_record"
+          ],
+          "synthetic_label": "injected HarvestCompleteness(files_failed=1, snapshot_complete=False) via typed wrapper; not a real ingestion failure"
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-08",
+        "title": "Rule demo 10%: record 1 share 16.66…% = outside; record 2 0% = within (bằng ngưỡng là trong dải); verdict của CỬA SỔ là share của chính nó 6.25% → WITHIN, bộ đếm record tách riêng (outside=1)",
+        "expected": {
+          "rule_status": "within_range",
+          "outside_rule_records": 1,
+          "record_rule_status": [
+            "outside_range",
+            "within_range"
+          ],
+          "rule_version": "harvest-rule-version:ac07ff96a45a41c58eb9714300268683"
+        },
+        "observed": {
+          "a_observed": "3",
+          "b_observed": "0.2",
+          "paired_a": "3",
+          "paired_b": "0.2",
+          "paired_total": "3.2",
+          "a_share_pct": "93.75",
+          "b_share_pct": "6.25",
+          "mean_of_record_shares_pct": "8.333333333333333333333333335",
+          "accepted_records": 2,
+          "paired_records": 2,
+          "cumulative_a": "3",
+          "cumulative_total": "3.2",
+          "cumulative_origin": "2020-02-01",
+          "cumulative_basis_label": "verified",
+          "status": "complete",
+          "rule_status": "within_range",
+          "rule_version": "harvest-rule-version:ac07ff96a45a41c58eb9714300268683",
+          "outside_rule_records": 1,
+          "rule_unknown_records": 0,
+          "snapshot_complete": true,
+          "unresolved": 0,
+          "conflicted": 0,
+          "state_accepted": 2,
+          "state_paired": 2,
+          "record_shares": [
+            "16.666666666666666666666666666666666666666666666667",
+            "0"
+          ],
+          "record_rule_status": [
+            "outside_range",
+            "within_range"
+          ],
+          "day_b_share": [
+            "16.666666666666666666666666666666666666666666666667",
+            "0",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "day_present": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "day_a": [
+            "1",
+            "2",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "day_reasons": [
+            [
+              "outside_harvest_rule"
+            ],
+            [],
+            [
+              "harvest_rule_unknown",
+              "known_zero_harvest_day"
+            ],
+            [
+              "harvest_rule_unknown",
+              "known_zero_harvest_day"
+            ],
+            [
+              "harvest_rule_unknown",
+              "known_zero_harvest_day"
+            ],
+            [
+              "harvest_rule_unknown",
+              "known_zero_harvest_day"
+            ],
+            [
+              "harvest_rule_unknown",
+              "known_zero_harvest_day"
+            ],
+            [
+              "harvest_rule_unknown",
+              "known_zero_harvest_day"
+            ]
+          ],
+          "weekly_b_share": [
+            "6.25",
+            null
+          ],
+          "weekly_cumulative_a": [
+            "3",
+            "3"
+          ],
+          "weekly_cumulative_total": [
+            "3.2",
+            "3.2"
+          ],
+          "unresolved_reasons": [],
+          "reason_codes": []
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-08b",
+        "title": "Không chọn rule: not_configured, không có kết luận theo ngưỡng nào",
+        "expected": {
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_records": null,
+          "record_rule_status": [
+            "not_configured",
+            "not_configured"
+          ]
+        },
+        "observed": {
+          "a_observed": "3",
+          "b_observed": "0.2",
+          "paired_a": "3",
+          "paired_b": "0.2",
+          "paired_total": "3.2",
+          "a_share_pct": "93.75",
+          "b_share_pct": "6.25",
+          "mean_of_record_shares_pct": "8.333333333333333333333333335",
+          "accepted_records": 2,
+          "paired_records": 2,
+          "cumulative_a": "3",
+          "cumulative_total": "3.2",
+          "cumulative_origin": "2020-02-01",
+          "cumulative_basis_label": "verified",
+          "status": "complete",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_records": null,
+          "rule_unknown_records": null,
+          "snapshot_complete": true,
+          "unresolved": 0,
+          "conflicted": 0,
+          "state_accepted": 2,
+          "state_paired": 2,
+          "record_shares": [
+            "16.666666666666666666666666666666666666666666666667",
+            "0"
+          ],
+          "record_rule_status": [
+            "not_configured",
+            "not_configured"
+          ],
+          "day_b_share": [
+            "16.666666666666666666666666666666666666666666666667",
+            "0",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "day_present": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "day_a": [
+            "1",
+            "2",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "day_reasons": [
+            [],
+            [],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ],
+            [
+              "known_zero_harvest_day"
+            ]
+          ],
+          "weekly_b_share": [
+            "6.25",
+            null
+          ],
+          "weekly_cumulative_a": [
+            "3",
+            "3"
+          ],
+          "weekly_cumulative_total": [
+            "3.2",
+            "3.2"
+          ],
+          "unresolved_reasons": [],
+          "reason_codes": []
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-09",
+        "title": "Zoom ĐÚNG lần thu thứ 2 ([2020-02-02, 2020-02-03)): observed A=2/B=0, lũy kế từ đầu vụ A=3/total=3.2, origin đầu vụ giữ nguyên, không reset âm thầm",
+        "expected": {
+          "a_observed": "2",
+          "b_observed": "0",
+          "accepted_records": 1,
+          "paired_records": 1,
+          "cumulative_a": "3",
+          "cumulative_total": "3.2",
+          "cumulative_origin": "2020-02-01"
+        },
+        "observed": {
+          "a_observed": "2",
+          "b_observed": "0",
+          "paired_a": "2",
+          "paired_b": "0",
+          "paired_total": "2",
+          "a_share_pct": "100",
+          "b_share_pct": "0",
+          "mean_of_record_shares_pct": "0",
+          "accepted_records": 1,
+          "paired_records": 1,
+          "cumulative_a": "3",
+          "cumulative_total": "3.2",
+          "cumulative_origin": "2020-02-01",
+          "cumulative_basis_label": "verified",
+          "status": "complete",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_records": null,
+          "rule_unknown_records": null,
+          "snapshot_complete": true,
+          "unresolved": 0,
+          "conflicted": 0,
+          "state_accepted": 2,
+          "state_paired": 2,
+          "record_shares": [
+            "0"
+          ],
+          "record_rule_status": [
+            "not_configured"
+          ],
+          "day_b_share": [
+            "0"
+          ],
+          "day_present": [
+            true
+          ],
+          "day_a": [
+            "2"
+          ],
+          "day_reasons": [
+            []
+          ],
+          "weekly_b_share": [
+            "0"
+          ],
+          "weekly_cumulative_a": [
+            "3"
+          ],
+          "weekly_cumulative_total": [
+            "3.2"
+          ],
+          "unresolved_reasons": [],
+          "reason_codes": [
+            "cumulative_from_cycle_start"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-09b",
+        "title": "Zoom trống sau cùng record (case thêm, cứ giữ): accepted=0, lũy kế A=3/total=3.2 (contributor dừng ở hết ngày trước cửa sổ), origin không đổi, complete",
+        "expected": {
+          "cumulative_a": "3",
+          "cumulative_total": "3.2",
+          "cumulative_origin": "2020-02-01",
+          "accepted_records": 0,
+          "status": "complete"
+        },
+        "observed": {
+          "a_observed": "0",
+          "b_observed": "0",
+          "paired_a": null,
+          "paired_b": null,
+          "paired_total": null,
+          "a_share_pct": null,
+          "b_share_pct": null,
+          "mean_of_record_shares_pct": null,
+          "accepted_records": 0,
+          "paired_records": 0,
+          "cumulative_a": "3",
+          "cumulative_total": "3.2",
+          "cumulative_origin": "2020-02-01",
+          "cumulative_basis_label": "verified",
+          "status": "complete",
+          "rule_status": "not_configured",
+          "rule_version": null,
+          "outside_rule_records": null,
+          "rule_unknown_records": null,
+          "snapshot_complete": true,
+          "unresolved": 0,
+          "conflicted": 0,
+          "state_accepted": 2,
+          "state_paired": 2,
+          "record_shares": [],
+          "record_rule_status": [],
+          "day_b_share": [
+            null
+          ],
+          "day_present": [
+            false
+          ],
+          "day_a": [
+            "0"
+          ],
+          "day_reasons": [
+            [
+              "known_zero_harvest_day"
+            ]
+          ],
+          "weekly_b_share": [
+            null
+          ],
+          "weekly_cumulative_a": [
+            "3"
+          ],
+          "weekly_cumulative_total": [
+            "3.2"
+          ],
+          "unresolved_reasons": [],
+          "reason_codes": [
+            "cumulative_from_cycle_start",
+            "known_zero_event_window"
+          ]
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-09c",
+        "title": "Toàn-vụ accessor dùng cùng service (canonical BR-04 input): lũy kế A=3 bằng tổng observed của BR-05",
+        "expected": {
+          "pass": true
+        },
+        "observed": {
+          "pass": true,
+          "whole_cycle_a_observed": "3",
+          "whole_cycle_cumulative_a": "3"
+        },
+        "pass": true
+      },
+      {
+        "ac": "AC-10",
+        "title": "Rerun cùng snapshot → cùng publication, record_count không nhân; grain metadata tường minh trong export; CSV record xuất đúng DTO đã hiển thị (exact, NULL trống, 0 giữ 0)",
+        "expected": {
+          "pass": true
+        },
+        "observed": {
+          "pass": true,
+          "publication_id_stable": true,
+          "scope_publication_count": 1,
+          "mart_record_count": 2,
+          "export_rows": 2,
+          "export_first_a": "1",
+          "export_first_b": "0.2",
+          "record_grain_metadata": true,
+          "weekly_grain_metadata": true,
+          "summary_json_kind": "window_summary",
+          "summary_decode_records": 2
+        },
+        "pass": true
+      }
+    ]
+  }
+}

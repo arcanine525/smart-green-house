@@ -1,0 +1,152 @@
+{
+  "engine": "postgres",
+  "read_only": true,
+  "publication": "892b4cd58cdf4d099510974d91fa64ab",
+  "snapshot": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "comparisons": [
+    {
+      "compartment": "AICU",
+      "window": "two-day",
+      "prod_a": "0",
+      "prod_b": "0",
+      "paired_a": "None",
+      "paired_b": "None",
+      "share_b": "None",
+      "cumulative_a": "1.47",
+      "snapshot_complete": true,
+      "unresolved": 0
+    },
+    {
+      "compartment": "Automatoes",
+      "window": "two-day",
+      "prod_a": "0",
+      "prod_b": "0",
+      "paired_a": "None",
+      "paired_b": "None",
+      "share_b": "None",
+      "cumulative_a": "1.43",
+      "snapshot_complete": true,
+      "unresolved": 0
+    },
+    {
+      "compartment": "Digilog",
+      "window": "two-day",
+      "prod_a": "0",
+      "prod_b": "0",
+      "paired_a": "None",
+      "paired_b": "None",
+      "share_b": "None",
+      "cumulative_a": "0.67",
+      "snapshot_complete": true,
+      "unresolved": 0
+    },
+    {
+      "compartment": "IUACAAS",
+      "window": "two-day",
+      "prod_a": "0",
+      "prod_b": "0",
+      "paired_a": "None",
+      "paired_b": "None",
+      "share_b": "None",
+      "cumulative_a": "1.23",
+      "snapshot_complete": true,
+      "unresolved": 0
+    },
+    {
+      "compartment": "Reference",
+      "window": "two-day",
+      "prod_a": "None",
+      "prod_b": "None",
+      "paired_a": "None",
+      "paired_b": "None",
+      "share_b": "None",
+      "cumulative_a": "1.44",
+      "snapshot_complete": false,
+      "unresolved": 1
+    },
+    {
+      "compartment": "TheAutomators",
+      "window": "two-day",
+      "prod_a": "0",
+      "prod_b": "0",
+      "paired_a": "None",
+      "paired_b": "None",
+      "share_b": "None",
+      "cumulative_a": "1.036",
+      "snapshot_complete": true,
+      "unresolved": 0
+    },
+    {
+      "compartment": "AICU",
+      "window": "full-cycle",
+      "prod_a": "13.66",
+      "prod_b": "0.1",
+      "paired_a": "13.66",
+      "paired_b": "0.1",
+      "share_b": "0.72674418604651162790697674418604651162790697674419",
+      "cumulative_a": "13.66",
+      "snapshot_complete": true,
+      "unresolved": 0
+    },
+    {
+      "compartment": "Automatoes",
+      "window": "full-cycle",
+      "prod_a": "14.36",
+      "prod_b": "0.55880",
+      "paired_a": "14.36",
+      "paired_b": "0.55880",
+      "share_b": "3.7456095664530659302356757916186288441429605598305",
+      "cumulative_a": "14.36",
+      "snapshot_complete": true,
+      "unresolved": 0
+    },
+    {
+      "compartment": "Digilog",
+      "window": "full-cycle",
+      "prod_a": "13.51",
+      "prod_b": "0.70322",
+      "paired_a": "13.51",
+      "paired_b": "0.70322",
+      "share_b": "4.9476473311466367227130797947263181742068299794135",
+      "cumulative_a": "13.51",
+      "snapshot_complete": true,
+      "unresolved": 0
+    },
+    {
+      "compartment": "IUACAAS",
+      "window": "full-cycle",
+      "prod_a": "12.89",
+      "prod_b": "0.5872",
+      "paired_a": "12.89",
+      "paired_b": "0.5872",
+      "share_b": "4.3569880984180690351111506841183628646899949544416",
+      "cumulative_a": "12.89",
+      "snapshot_complete": true,
+      "unresolved": 0
+    },
+    {
+      "compartment": "Reference",
+      "window": "full-cycle",
+      "prod_a": "13.98",
+      "prod_b": "0.0030",
+      "paired_a": "13.98",
+      "paired_b": "0.0030",
+      "share_b": "0.021454623471358077665736966316241149967818064792963",
+      "cumulative_a": "13.98",
+      "snapshot_complete": false,
+      "unresolved": 1
+    },
+    {
+      "compartment": "TheAutomators",
+      "window": "full-cycle",
+      "prod_a": "14.348",
+      "prod_b": "0.014",
+      "paired_a": "14.348",
+      "paired_b": "0.014",
+      "share_b": "0.097479459685280601587522629160284082996797103467484",
+      "cumulative_a": "14.348",
+      "snapshot_complete": true,
+      "unresolved": 0
+    }
+  ]
+}

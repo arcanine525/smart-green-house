@@ -1,0 +1,33 @@
+﻿# export_version=greenhouse-energy-cost-v1
+# publication_id=892b4cd58cdf4d099510974d91fa64ab
+# scope_id=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot_id=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# cycle_id=agc-cycle-AICU
+# compartment_ids=AICU
+# window=[2019-12-16,2020-05-30)
+# metric_version=energy-cost-v1
+# tariff_version=tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1
+# scenario_version=scenario:req-61d6e548059842018a1077f7d97ed4e4:v2
+# currency=EUR
+# basis_status=assumed_unverified
+# basis_label=giả định chưa xác minh
+# sensitivity_factor=1.536
+# quantity_coverage_pct=100
+# pricing_coverage_pct=100
+# expected_days=166
+# priced_days=166
+# quantity_complete_days=166
+# evaluation_grain=rates
+# notice=Price-only scenario analysis; unchanged physical consumption; historical EUR only
+# NULL is empty; accepted zero stays 0; no extrapolation; display 2dp differs from exact exports
+# scenario_name=Kịch bản tăng giá điện 20%
+# scenario_id=scenario:req-61d6e548059842018a1077f7d97ed4e4
+# scenario_version_num=2
+# baseline_tariff_version=tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1
+profile_or_scenario,version_id,rate_id,component,currency,price_unit,rate,valid_from,valid_to_exclusive,source_reference
+baseline,tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1,rate:tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1:elec_high,elec_high,EUR,EUR/kWh,0.08,2019-12-16,2020-05-30,Economics.pdf page 1: ElecHigh 0.08 EUR/kWh
+baseline,tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1,rate:tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1:elec_low,elec_low,EUR,EUR/kWh,0.04,2019-12-16,2020-05-30,Economics.pdf page 2: ElecLow 0.04 EUR/kWh
+baseline,tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1,rate:tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:AICU:v1:heat,heat,EUR,EUR/MJ,0.0083,2019-12-16,2020-05-30,Economics.pdf page 2: Heat 0.0083 EUR/MJ
+scenario,scenario:req-61d6e548059842018a1077f7d97ed4e4:v2,rate:scenario:req-61d6e548059842018a1077f7d97ed4e4:v2:elec_high:2019-12-16,elec_high,EUR,EUR/kWh,0.096,2019-12-16,2020-05-30,Economics.pdf page 1: ElecHigh 0.08 EUR/kWh; scenario Kịch bản tăng giá điện 20%
+scenario,scenario:req-61d6e548059842018a1077f7d97ed4e4:v2,rate:scenario:req-61d6e548059842018a1077f7d97ed4e4:v2:elec_low:2019-12-16,elec_low,EUR,EUR/kWh,0.048,2019-12-16,2020-05-30,Economics.pdf page 2: ElecLow 0.04 EUR/kWh; scenario Kịch bản tăng giá điện 20%
+scenario,scenario:req-61d6e548059842018a1077f7d97ed4e4:v2,rate:scenario:req-61d6e548059842018a1077f7d97ed4e4:v2:heat:2019-12-16,heat,EUR,EUR/MJ,0.0083,2019-12-16,2020-05-30,Economics.pdf page 2: Heat 0.0083 EUR/MJ

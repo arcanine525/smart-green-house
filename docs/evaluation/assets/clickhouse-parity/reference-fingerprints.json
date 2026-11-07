@@ -1,0 +1,32 @@
+[
+  {
+    "local_file": "postgres-migration-metadata.json",
+    "bytes": 1775337,
+    "sha256": "767e73b5cf08e39849b51484f1406091d8fcfe3afa6c701a4ea9ff8ce36e60b3"
+  },
+  {
+    "local_file": "postgres-full-cycle-csv-reference.json",
+    "bytes": 8343928,
+    "sha256": "fe30b6dced947690e36b5c25df521f5e8595bccc7d58948a05ad790d17167ae3"
+  },
+  {
+    "local_file": "postgres-business-reference.json",
+    "bytes": 9520638,
+    "sha256": "cfda35a5e4d63f528a15bf8f95026915ee105138a086d1f1444acb90d444557a"
+  },
+  {
+    "local_file": "postgres-lineage-reference.json",
+    "bytes": 46788,
+    "sha256": "c064717b577cf2b207220b98d229f64de8aa9e68c2263326feb47516aadd6aaa"
+  },
+  {
+    "local_file": "postgres-csv-reference.json",
+    "bytes": 72094,
+    "sha256": "ec0811736a3d3c3e37201e29f9461504dfd511bcfb687a5940c6a01577ea513a"
+  },
+  {
+    "local_file": "postgres-energy-reference-full.json",
+    "bytes": 7953,
+    "sha256": "c915177bfa41d35ff70a9e8b865f9f01d58908f2cdc9c37ffa22ded2ea2bda82"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "python": "3.12.12",
+  "packages": {
+    "smart-greenhouse": "0.1.0",
+    "pyspark": "4.0.1",
+    "psycopg": "3.3.7"
+  }
+}

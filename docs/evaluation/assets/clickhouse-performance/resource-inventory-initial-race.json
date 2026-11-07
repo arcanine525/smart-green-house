@@ -1,0 +1,36 @@
+{
+  "status": "failed",
+  "steps": [
+    {
+      "stage": "scenarios",
+      "status": "measured",
+      "started_at_utc": "2026-11-07T02:51:00.151115+00:00",
+      "wall_including_container_seconds": 510.0627401249949,
+      "finished_at_utc": "2026-11-07T02:59:30.218928+00:00"
+    },
+    {
+      "stage": "storage",
+      "status": "measured",
+      "started_at_utc": "2026-11-07T02:59:30.220629+00:00",
+      "wall_including_container_seconds": 0.8057383330015,
+      "finished_at_utc": "2026-11-07T02:59:31.026505+00:00"
+    },
+    {
+      "stage": "sensor",
+      "status": "measured",
+      "started_at_utc": "2026-11-07T02:59:31.027018+00:00",
+      "wall_including_container_seconds": 181.99294679201557,
+      "finished_at_utc": "2026-11-07T03:02:33.022074+00:00"
+    },
+    {
+      "stage": "resume",
+      "status": "measured",
+      "started_at_utc": "2026-11-07T03:02:33.025280+00:00",
+      "wall_including_container_seconds": 171.97859912502463,
+      "finished_at_utc": "2026-11-07T03:05:25.004574+00:00"
+    }
+  ],
+  "all_query_targets_met": true,
+  "error_type": "CalledProcessError",
+  "error": "Command '['docker', 'exec', 'gh-engine-benchmark-20261107-clickhouse-1', 'sh', '-c', 'for item in cpu.max cpu.stat memory.max memory.peak memory.events; do echo \"$item\"; cat \"/sys/fs/cgroup/$item\"; done; du -sk /var/lib/clickhouse']' returned non-zero exit status 1."
+}

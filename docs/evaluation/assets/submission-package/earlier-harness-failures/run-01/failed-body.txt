@@ -1,0 +1,167 @@
+Skip to main content
+keyboard_double_arrow_left
+
+Màn hình
+
+💧 Nước (BR-02)
+
+🍅 Thu hoạch (BR-05)
+
+🌡️ Khí hậu (BR-01)
+
+🧪 EC/pH drain (BR-03)
+
+⚡ Năng lượng (BR-04)
+
+💶 Chi phí & Kịch bản (BR-06)
+
+📡 Sensor replay (BR-01/03)
+
+🏠 Tổng quan vụ
+
+🛡️ Chất lượng dữ liệu
+
+smart greenhouse
+
+MÀN HÌNH KHÍ HẬU · BR-01
+
+Publication (scope đã publish)
+
+Requested/realized là HAI lần đánh giá riêng (không fallback ngầm). Chưa chọn revision rule thì mọi metric là unknown; một revision có thể chỉ phủ một phần metric.
+
+Khoang · vụ
+
+Khoảng ngày (cả hai đầu, theo ngày nguồn)
+
+02
+/
+03
+/
+2020
+–
+03
+/
+03
+/
+2020
+
+Basis điều kiện
+
+Requested (t_heat_sp/t_vent_sp/co2_sp)
+
+Realized (VIP: t_heat_vip/t_ventlee_vip/co2_vip)
+
+Revision rule tường minh (tối đa một revision cho mỗi metric)
+
+Rule kiểm tra: rule_not_configured — chưa chọn revision; mọi slot là unknown, không có kết luận theo ngưỡng nào (không ngầm dùng ngưỡng mặc định).
+
+Metric lọc danh sách đợt
+
+Cả hai (mặc định)
+
+temperature
+
+co2
+
+Thời lượng đợt tối thiểu trong danh sách
+
+15 phút (demo BR-01 §4.3, mặc định)
+
+Tất cả (0 phút — không lọc)
+
+60 phút
+
+Bộ lọc metric/thời lượng CHỈ tác động danh sách/ex đợt này; tổng giờ out và coverage phía trên/lịch tính từ cùng kết quả, chưa qua bộ lọc.
+
+Deploy
+🌡️ Khí hậu · các đợt lệch điều kiện
+
+Actual so với điều kiện đã chọn (requested hoặc realized riêng); điều kiện theo từng metric; độ lệch/thời lượng là ước lượng theo cadence 5 phút trên nguồn chưa xác minh timezone.
+
+scope: agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historicalsnapshot: agc-2nd-2019-c19d385e7f4…publication: 5d455686a06649e7…sealed 07/11/2026 10:18bundle climate-mart-v1basis requestedcode clickhouse-warehouse-v1
+
+basis requested · rule — · cửa sổ hiệu lực [2019-12-16T00:00:00, 2020-05-30T00:00:00) · coverage temperature 0,00%, co2 0,00% · OR 0,00 phút trên 0,00 phút jointly known (0,00% coverage chung)
+
+⚠️ temperature: chưa có slot hợp lệ (valid 0) — out-hours/percent công bố NULL, KHÔNG hiển thị "0 giờ, đạt".
+
+⚠️ co2: chưa có slot hợp lệ (valid 0) — out-hours/percent công bố NULL, KHÔNG hiển thị "0 giờ, đạt".
+
+Nhiệt độ out (giờ quan sát được)
+
+NULL
+
+Nhiệt độ coverage
+
+0,00 %
+
+CO₂ out (giờ quan sát được)
+
+NULL
+
+CO₂ coverage
+
+0,00 %
+
+Coverage ở đây là tỷ lệ thời gian đủ dữ liệu và rule để đánh giá, không phải tỷ lệ dữ liệu nguồn có mặt. Chưa chọn rule thì coverage đánh giá là 0%.
+
+temperature: out 0,00p (low 0,00 / high 0,00) · valid 0,00p · unknown 239040,00pco2: out 0,00p (low 0,00 / high 0,00) · valid 0,00p · unknown 239040,00prule_not_configured: 239040,00p (temperature)rule_not_configured: 239040,00p (co2)
+
+OR lệch (giờ, hợp lệ chung)
+
+NULL
+
+OR lệch %
+
+NULL
+
+Coverage giao chung
+
+0,00 %
+
+metric áp dụng: temperature→rule_not_configured; co2→rule_not_configured
+
+Danh sách đợt lệch (dài nhất trước, phân trang)
+
+Không có đợt nào sau bộ lọc metric/thời lượng hiện chọn — tổng giờ và coverage phía trên vẫn tính đủ mọi đợt, không qua hai bộ lọc này.
+
+◀ Trang trước
+
+Trang sau ▶
+
+Về trang đầu
+
+offset 0/0 đợt sau bộ lọc (min 15p, metric Cả hai).
+
+Biểu đồ & diễn biến của đợt đã chọn
+
+Không có đợt để hiển thị diễn biến.
+
+Tổng giờ out và coverage phía trên KHÔNG qua bộ lọc metric/thời lượng; danh sách đợt theo bộ lọc, export CSV là list đã lọc và có nhãn total/truncated.
+
+Xuất dữ liệu
+
+CSV giữ Decimal exact + metadata phiên bản; CSV đợt ghi rõ thời điểm GỐC và phần clipped, kèm nhãn total_after_filter/truncated; CSV detail GIỚI HẠN trong đợt đã chọn (nhãn scope: episode). JSON là kết quả typed của engine (codec v2).
+
+⬇ CSV summary
+
+⬇ CSV joint OR
+
+⬇ CSV đợt (đã lọc)
+
+Không có đợt để xuất CSV detail; chọn một đợt trong danh sách.
+
+⬇ JSON result (typed)
+
+Tra cứu dữ liệu nguồn trong cửa sổ báo cáo
+
+Giá trị gốc từng measure và trạng thái chất lượng của từng measure trong nguồn, không qua bộ lọc hay ngưỡng nào. Mỗi lượt hiện tối đa 12 hàng 5 phút; đổi lượt bằng hai nút; cửa sổ luôn nằm trong khoảng ngày đã chọn. Cục này dùng để kiểm tra các giờ không có kết luận (thiếu số/chưa chọn rule) mà không cần nạp cả vụ.
+
+◀ Nguồn trước
+
+Nguồn sau ▶
+
+Cửa sổ nguồn: offset 0/47808 slot (5 phút/slot, tối đa 12 hàng/lượt).
+
+12 hàng trong cửa sổ [2019-12-16T00:00:00, 2019-12-16T01:00:00) — giá trị gốc và trạng thái chất lượng từng measure; dùng để kiểm tra các giờ không có kết luận mà không cần nạp cả vụ.
+
+Smart Greenhouse · màn hình khí hậu BR-01 — UI không tính lại công thức, không gộp requested/realized, không cộng CO₂ hoặc nhiệt độ, không tự publish/migrate; slot thiếu là unknown, không bao giờ xanh giả. Chi tiết đợt được đọc theo cửa sổ đợt đã chọn; tổng/danh sách dùng cùng kết quả đã pin.

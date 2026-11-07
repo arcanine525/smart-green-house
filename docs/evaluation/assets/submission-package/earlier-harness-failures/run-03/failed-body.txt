@@ -1,0 +1,132 @@
+Skip to main content
+
+Màn hình
+
+💧 Nước (BR-02)
+
+🍅 Thu hoạch (BR-05)
+
+🌡️ Khí hậu (BR-01)
+
+🧪 EC/pH drain (BR-03)
+
+⚡ Năng lượng (BR-04)
+
+💶 Chi phí & Kịch bản (BR-06)
+
+📡 Sensor replay (BR-01/03)
+
+🏠 Tổng quan vụ
+
+🛡️ Chất lượng dữ liệu
+
+NĂNG LƯỢNG · BR-04
+
+Publication năng lượng
+
+Khoang · vụ năng lượng
+
+Khoảng năng lượng (cả hai đầu)
+
+19
+/
+02
+/
+2020
+–
+03
+/
+03
+/
+2020
+Deploy
+Năng lượng trên sản lượng loại A
+
+Publication 5d455686a06649e789908b9708a9d436 · snapshot agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68 · Automatoes · [2020-02-19, 2020-03-04) · ngày nguồn naive
+
+energy-intensity-v1 · energy-quantity-v1 · quality AGC_QUALITY_V1 · pipeline clickhouse-warehouse-v1
+
+giả định chưa xác minh · AGC_SHARED_BASIS_V1:v1. Resources/Production primary62.5m² là giả định phân tích; không phải xác minh nguồn. Sensitivity riêng: Resources96m², Production giữ62.5m², hệ số96/62.5=1.536.
+
+Năng lượng (kWh)
+
+2,305.911
+
+Sản lượng A (kg)
+
+89.375
+
+kWh/kg A
+
+25.800
+
+Coverage năng lượng (%)
+
+100.000
+
+Mẫu số CHỈ ProdA; ProdB vẫn xem được nhưng không cộng vào mẫu số. Tổng năng lượng gồm mọi ngày trong kỳ, kể cả trước thu hoạch đầu; không ngoại suy phần thiếu.
+
+Nhiệt kWh/kg A: 3.772 · Điện chiếu sáng kWh/kg A: 22.029
+
+Sensitivity Resources96 / Production62.5 (kWh/kg A): 39.629
+
+Tổng quan sát (kWh): 2,305.911 · A quan sát (kg): 89.375
+
+Lý do / điều kiện: descriptive_subwindow_not_cycle_comparable
+
+Không đủ điều kiện xếp hạng toàn vụ. Khoảng con chỉ mô tả lượng ghi nhận trong kỳ; không suy luận năng lượng kỳ này tạo ra quả kỳ này.
+
+Thành phần và độ đầy đủ
+
+Ngày thiếu: Không có
+
+Harvest snapshot complete: True · unresolved: 0 · paired: 23
+
+So sánh toàn vụ · tập đủ điều kiện
+
+Một dòng mỗi khoang/vụ; chỉ xếp hạng tập đủ điều kiện cùng cửa sổ, quality và assumption version. Số hạng là trên tập được bao gồm, không phải toàn bộ sáu khoang.
+
+Portfolio kWh/kg A · ΣE / ΣA
+
+24.867
+
+Bao gồm: agc-cycle-AICU, agc-cycle-Automatoes, agc-cycle-Digilog, agc-cycle-IUACAAS, agc-cycle-TheAutomators
+
+Loại: agc-cycle-Reference
+
+0
+5
+10
+15
+20
+25
+1/5 · Automatoes
+2/5 · AICU
+3/5 · IUACAAS
+4/5 · TheAutomators
+5/5 · Digilog
+kWh/kg A · giả định được ghi trong bảng
+Tập đủ điều kiện
+keyboard_arrow_right
+
+Công thức, basis và đóng góp
+
+Truy nguồn đóng góp
+
+Revision nguồn energy / harvest A
+
+Xác minh lineage raw
+
+Xuất đúng kết quả đã pin
+
+CSV summary năng lượng
+
+CSV quantities năng lượng
+
+CSV harvest A contributions
+
+CSV portfolio (gồm excluded)
+
+JSON intensity (typed)
+
+JSON portfolio (typed)

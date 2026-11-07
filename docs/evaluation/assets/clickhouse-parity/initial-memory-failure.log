@@ -1,0 +1,26 @@
+ Container gh-ch-full-20261107-ch-job-run-77ac9ed959fb Creating
+ Container gh-ch-full-20261107-ch-job-run-77ac9ed959fb Created
+{"stage": "source_verified", "source_publication": "892b4cd58cdf4d099510974d91fa64ab", "metadata_hash": "f0731bf316455b6a8e4c0dbb7bce1f66c262c1946dc43df0273465bd975d72a1"}
+{"stage": "metadata_archived", "basis_versions": 84, "rule_versions": 14, "tariff_versions": 7, "pending_scenario_versions": 174}
+Traceback (most recent call last):
+  File "/backfill.py", line 59, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/backfill.py", line 53, in main
+    result=run(client,args.coordinator,args.raw,args.output,scope,args.workflow_id,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/energy_run.py", line 77, in run
+    complete=publisher.publish(scope,workflow,load,build=build)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/publication.py", line 121, in publish
+    build(scope,publication,self.repository.load_membership(scope,load_id))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/repository.py", line 302, in load_membership
+    result=self.canonical_records(scope,revision_ids=ids)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/repository.py", line 224, in canonical_records
+    for row in rows:
+               ^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/client.py", line 116, in iter_query
+    raise ClickHouseError(f'ClickHouse rejected query (HTTP {status}); inspect server query log by query ID') from None
+greenhouse.clickhouse.client.ClickHouseError: ClickHouse rejected query (HTTP 500); inspect server query log by query ID

@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "fault": "duplicate",
+  "events": 6,
+  "complete": true,
+  "quarantined": 0,
+  "missing_sequences": [],
+  "source_slots": 6,
+  "expected_minutes": "30",
+  "temperature_valid_minutes": "30",
+  "temperature_out_minutes": "20",
+  "raw_quarantine_preserved": false,
+  "publication": "5aad3807e7b61387b547f8017523afba678a3cc0a998ee9404b1438edc285d55"
+}

@@ -1,0 +1,230 @@
+{
+  "dataset": "locked AGC 2nd edition",
+  "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "compartment": "Automatoes",
+  "source_file": "Automatoes/GreenhouseClimate.csv",
+  "source_sha256": "3415b31b7958c735f836c7fa8f890a93020786be5c86dc2e7c42771fb0a02cd3",
+  "window_start": "2019-12-16T00:00:00",
+  "window_end": "2019-12-16T02:30:00",
+  "events": 30,
+  "event_trace": [
+    {
+      "event_id": "47853ada05542d9c6a56e89c0ff19b41853de9925361c9b0c0820ec5d175d090",
+      "source_record_id": "7bffa4751f09b439babf290e38252f34b894af01457aaa2ee426a0679be6f3f0",
+      "line_number": 2,
+      "raw_hash": "8682b28876cbb19a23935f99f8606fa5c0f91cfdeebd399b5f45f2805c38cc56",
+      "source_observed_at": "2019-12-16T00:00:00"
+    },
+    {
+      "event_id": "9802af70e111ae47422bd2f68ed8b8608fae8d20576713bfde62eda303f28e5e",
+      "source_record_id": "83b9538449329504ccee1079810adbaa0e9d5bda3f90377235ffb80503e81f7d",
+      "line_number": 3,
+      "raw_hash": "ed6114ed8e5fd8a615035998025401add3c55005b05d0b573c4f1adbabfb223d",
+      "source_observed_at": "2019-12-16T00:04:59.808000"
+    },
+    {
+      "event_id": "202b49c12e60f506851a07b9043e5c9a39117700d7bfc01356879d0eca3f7496",
+      "source_record_id": "027d46cad4563d00c2051265f30fe6285f534c62b5eaed73b885ae3ee198692a",
+      "line_number": 4,
+      "raw_hash": "63d04ab7b643a13608d66443229c42d6dc07a87c48fa50aba0e7360a2bbf598b",
+      "source_observed_at": "2019-12-16T00:09:59.616000"
+    },
+    {
+      "event_id": "d20fcacc0c1ae7af83028faa03372f50e2662ff1ef46df781540c9addb37b509",
+      "source_record_id": "0b69c646766b33aeaa7ac9c031ef9609b595e5d64bef17f7a80a332eba586289",
+      "line_number": 5,
+      "raw_hash": "edf98a0d2cc9c8a1581546778d9b3bac80748339a01bbda489ef8a801c0e53a0",
+      "source_observed_at": "2019-12-16T00:15:00.288000"
+    },
+    {
+      "event_id": "9b88c42aab15c12a7893978faf13349b30872ff8c6fbbc8fc75965ef02d758e4",
+      "source_record_id": "17e858ab704f0d9dd233e6d798aca6845836e0ca351e2c2b14965ea8a2490511",
+      "line_number": 6,
+      "raw_hash": "6769f4c90f83a95882b1cb86786cd9496ef7a129c8aef9b55896bd27f4b2a509",
+      "source_observed_at": "2019-12-16T00:20:00.096000"
+    },
+    {
+      "event_id": "0affe4ba7cfb576bdf60cc67108bcaa82bd976d1941f6877974b4dd9ffcbea73",
+      "source_record_id": "221ad2fe32998ebe48cb0017bed6958ce1484ef4f144d7c33a1965c3bc36e828",
+      "line_number": 7,
+      "raw_hash": "123fecf98235ee8068c65ff592c8377b21f8b5ce2ea9823ebf8a23feb5466105",
+      "source_observed_at": "2019-12-16T00:24:59.904000"
+    },
+    {
+      "event_id": "bb04d40da1385fc7cc7a1c3c9bedd309016fcdfe3c839d45307810509ddddf87",
+      "source_record_id": "9731b8c332280677c93280e2fa12f5480cb42a5e6960028d89e6173843bb323e",
+      "line_number": 8,
+      "raw_hash": "e52c6999193b4c81ece4cdd5addc1b566412c1772d9709cc8a8fd85b9adedffb",
+      "source_observed_at": "2019-12-16T00:29:59.712000"
+    },
+    {
+      "event_id": "fc66543f60422404fea10040b2bb204459d46eef7dacd175d19281c54aaa61e1",
+      "source_record_id": "7bd6b96f548488fee475f127f235e4b054b568bdf5e80266069125839696284f",
+      "line_number": 9,
+      "raw_hash": "429dcf6d4c8897caf3965821fad05d122e0b4af6c2e74460b6104f233507821d",
+      "source_observed_at": "2019-12-16T00:35:00.384000"
+    },
+    {
+      "event_id": "5fd15683194d7fd27b1e9bfcd4338e77d02998ce9f06acd83adfbaf918db26dc",
+      "source_record_id": "7bff16cae727324666858359f9d8caf1a62a1147991fe9fc8daa4900a2506339",
+      "line_number": 10,
+      "raw_hash": "e1db664311910636d375383426bc100da9090d6603fb93bd34f10ec1229ba016",
+      "source_observed_at": "2019-12-16T00:40:00.192000"
+    },
+    {
+      "event_id": "95c216a72052eb18940bf68264c8d98a96958dcc17e8375110432b33bfa6323b",
+      "source_record_id": "8272236094d66901592d68acfc4dd7e98374c421902ad1f3899407a90be5e748",
+      "line_number": 11,
+      "raw_hash": "2b118e41312eed95a49daacb8294c28fe55bbda1abe206a35116c9b7ec46201c",
+      "source_observed_at": "2019-12-16T00:45:00"
+    },
+    {
+      "event_id": "d456f290e6270831a22880f6264f0db50b09eb75c67c4bb5e18442a0d920b4e6",
+      "source_record_id": "0c745547c810d936a0b363d64f3ab001e49016564c2a7e107e101b2edf9259ce",
+      "line_number": 12,
+      "raw_hash": "eb09addf7c8530f0245ace8ba6dc4382fa03376144e01be4569c8979dc0ca239",
+      "source_observed_at": "2019-12-16T00:49:59.808000"
+    },
+    {
+      "event_id": "61ca588e95dd3a1557e73dc3cdccc737b1e543cf763d9841dd92eb033aa244b3",
+      "source_record_id": "c1d7f2b30085bbc70da6f81e1776303aa8a8b8e43e0dfb41306c634cc1bb4319",
+      "line_number": 13,
+      "raw_hash": "77c6b140f2a0fa0e2cb55dbaef426a94748b893fcc3cf7f78e16767f10897279",
+      "source_observed_at": "2019-12-16T00:54:59.616000"
+    },
+    {
+      "event_id": "960ed259536b1386b8165acc937ac4ea80232f54cf59b06c746380b17171c587",
+      "source_record_id": "bc3ad0a39600131ca09c8a64b57f809cda22bb49cb2a4b4d1d8744ac7d2cf477",
+      "line_number": 14,
+      "raw_hash": "47ea2973506707dfaf0eb5921d2563f052610e4e5b340d30ac5cb19f4896d815",
+      "source_observed_at": "2019-12-16T01:00:00.288000"
+    },
+    {
+      "event_id": "252a329a8090a6868f7295f565634addd9a376c354ad9581d203eb13cf99c22c",
+      "source_record_id": "7e78fb37362fd68907d34faff8dd23b8012fd608ab751cbd4ffb071aee17eb18",
+      "line_number": 15,
+      "raw_hash": "2fe1a7e23f72f3f29a8c2808f4eedfc1d3a7a27557e5d6ee7ff22f0598bf35e0",
+      "source_observed_at": "2019-12-16T01:05:00.096000"
+    },
+    {
+      "event_id": "9877272c92f3cda8c77e71b10a27ad3b8eb333a635492da79ca5de5025f081e8",
+      "source_record_id": "040a858072e704b6556d2721529c44ad3aee7bebaa449d38363e4eb39888e9fb",
+      "line_number": 16,
+      "raw_hash": "e43a5f17312e259425c56b4020685686adc67298d00c1b10ad3f493ce3afd7d7",
+      "source_observed_at": "2019-12-16T01:09:59.904000"
+    },
+    {
+      "event_id": "a299d5ebf4012c3a50715f6609c10fbe6fef092aaf2aa21903b251725080c034",
+      "source_record_id": "a40150da5d155d5869ecdcb5190ebb2802157e0ab9ed629d0d8b218683a544ba",
+      "line_number": 17,
+      "raw_hash": "2b767118a3f7b92f320ce94b69270d47c7fa55df59d2f95feab8391c9b9b52b8",
+      "source_observed_at": "2019-12-16T01:14:59.712000"
+    },
+    {
+      "event_id": "318c96a45d092ae19c8212565ada91dfabe36b2a000291bb656896ccdb971b8f",
+      "source_record_id": "f00cba99012f9cddc921eff8b86a50e74176280a8610075c2b4220353226b84f",
+      "line_number": 18,
+      "raw_hash": "20668b1d23a24ccfbc15c2b90d5577c6462fbd485353528dd7348ea23059509b",
+      "source_observed_at": "2019-12-16T01:20:00.384000"
+    },
+    {
+      "event_id": "11bc497478c01397932be080664cd8fcc864d4134a734cb81a15452a6c21a86d",
+      "source_record_id": "8b71ea0d0850e67f64ac4b95657119d9a8382a0107cd6a9f04591bcc19778344",
+      "line_number": 19,
+      "raw_hash": "0de87e28f66750f03a5a0b2a76334687d40f4f126dcb71b3d339b602c4ffab3c",
+      "source_observed_at": "2019-12-16T01:25:00.192000"
+    },
+    {
+      "event_id": "ffe0808f96a8fce9d2a1806582f23da2b1f84cd3aeb3cc3cccaa83b2c8bbfd0a",
+      "source_record_id": "c336acef6fb53b17dc7e5150d64edea98dd265e69050e0f85623feea9264a28a",
+      "line_number": 20,
+      "raw_hash": "c000f5c13b6db53c73d7579c295ee18bf39e31339ac4bbb77cc6daee40af2550",
+      "source_observed_at": "2019-12-16T01:30:00"
+    },
+    {
+      "event_id": "c051d5f13cd87acc15c8c13bbd9bd0c37cd159c7fdb12d33ed235c236920e978",
+      "source_record_id": "a3b19369d3ba6b9ce2281c98420ba16a5fd7560ef3cd8f619706941477c21ea1",
+      "line_number": 21,
+      "raw_hash": "f6f5b80938608af44a2493e9a2b02f2e57e99953d6e9c187ced166b946c8b760",
+      "source_observed_at": "2019-12-16T01:34:59.808000"
+    },
+    {
+      "event_id": "d8ac143e50e688255dc4a0200500b9f3da9849be8fc11e61f1a9223b9402d285",
+      "source_record_id": "c04ceb050ce58133e507aa5f414f754fc1c4bc5073aeb0081d48d0f34033e787",
+      "line_number": 22,
+      "raw_hash": "84a6b88870ca630c70442cb2dd631786d44fe6c844f976ce4940d766e540c3c5",
+      "source_observed_at": "2019-12-16T01:39:59.616000"
+    },
+    {
+      "event_id": "f53d7623e54cea702b470bb2d7009c470de80840f4a434395f1e1f77e8b4b284",
+      "source_record_id": "8846ca6d81727013bfd9b5851c86495cbbc19b0fdbc7817100a1b63ea079fed7",
+      "line_number": 23,
+      "raw_hash": "f5d14ce0c78d5b5c06fa5c1cf005e4966c290bc9dc8a882e187528f83bb558bc",
+      "source_observed_at": "2019-12-16T01:45:00.288000"
+    },
+    {
+      "event_id": "4355f283de3625a86d86fd3589bf6861d570e7ed6f3970b43cd03bb1e6c1e21e",
+      "source_record_id": "537c5d6263ce856be30e38c26e229a339bcb252929845e25accf10afe57f6391",
+      "line_number": 24,
+      "raw_hash": "13ee12be1b0ef129450962f8003164f6a910a146ab8572ce8b43ca0d27973534",
+      "source_observed_at": "2019-12-16T01:50:00.096000"
+    },
+    {
+      "event_id": "52691a1c402ae29198add735c8e24e5db1fbd8bcd2a06fcbbf5a5b05db992e4c",
+      "source_record_id": "831110909ab7589f5b73a975e08996929099a9032e182224f7a507d3673ef2f7",
+      "line_number": 25,
+      "raw_hash": "1f747304efb925ed40e7bb5d21c9c90acfdd60ecdf42892b1d4cce3bc8a71b30",
+      "source_observed_at": "2019-12-16T01:54:59.904000"
+    },
+    {
+      "event_id": "cac77e6bd709ad059b21ad91a1312286dbf7791e1c404ecac106a5937d41d754",
+      "source_record_id": "9e3e4af4830fb99967b4e49a5485be75a3fa4ed289294d2e151f441742214db8",
+      "line_number": 26,
+      "raw_hash": "88444b5afb89ab5d58fd13b1885f4ae7ac575d9984299b4eb8e24f2b2cd086e3",
+      "source_observed_at": "2019-12-16T01:59:59.712000"
+    },
+    {
+      "event_id": "4693754d68568b7c948d17b8065b0f25102eff87c55a82c07f5dae4fda5e4c04",
+      "source_record_id": "31f1632f9d7cdd467860971d0ec61b9fb72195b86ceedd5b1d623f16f87d3e31",
+      "line_number": 27,
+      "raw_hash": "fe98ad5dc76795881ddfeefe61222a112416c8ceb81507d888fcd2aa66561921",
+      "source_observed_at": "2019-12-16T02:05:00.384000"
+    },
+    {
+      "event_id": "be1671cefa03be752c0fa8a87786c48b924a3fb71b2631ddbc6bbe374dbbc4f1",
+      "source_record_id": "e83a6c3018c6ea8b5e9864f0abd8220b98266cf2dfc83f031f89bd86cedb3271",
+      "line_number": 28,
+      "raw_hash": "aa06d438fcba5a436db1a4e0bd0da86fef35eb52e111dfb01ce95e00eeb70c10",
+      "source_observed_at": "2019-12-16T02:10:00.192000"
+    },
+    {
+      "event_id": "ec0fa1779ae2c171cae6cf2de7499aed80e2c669dfc8d0559df7b8fd66256a28",
+      "source_record_id": "c16fbd72cee60a65016d35d422fb1782c22b221cf9db7053ad484512905c390c",
+      "line_number": 29,
+      "raw_hash": "849065617867ec753cefcc301d0a8612bafa7479736ff8047eb8195e0a675c13",
+      "source_observed_at": "2019-12-16T02:15:00"
+    },
+    {
+      "event_id": "4a0c6d7becd0d53786eb0d717db12ed04213023ab1b48b6c4443e54d83f19484",
+      "source_record_id": "8cef03275effbf66ddcea768f255d6f74ff71dee895850683dd68ce4424d1860",
+      "line_number": 30,
+      "raw_hash": "87daf243c5ff88eb1288a8b86e771cf738dff0104654abddca9747b76bf80693",
+      "source_observed_at": "2019-12-16T02:19:59.808000"
+    },
+    {
+      "event_id": "9275d80abb58600d1c9089b3bddcb57784715abb2201724f5a4c36cb6ed50210",
+      "source_record_id": "6467f7e12a56cb3fb01c1858abb1cf4317afeb602bb24d9dd29bc01e951aa8ee",
+      "line_number": 31,
+      "raw_hash": "7839313a2b822432ea42da847e7529f7ebc79fdc18a3e7a3a708198881b35f4e",
+      "source_observed_at": "2019-12-16T02:24:59.616000"
+    }
+  ],
+  "historical_publication": "df3e4bcbacab45a5b86fc37d2f53c00a",
+  "historical_reference_database": "greenhouse_hybrid_bench_t25_20261106_104814",
+  "replay_publication": "e58cebc7a8867db80440001a2e1370e89c3e64d58b03f946b395f2bd4434c321",
+  "quality_policy": "AGC_QUALITY_V1",
+  "climate_rule": "climate-demo-b01:Automatoes:v1",
+  "drain_rule": "drain-demo-b03:Automatoes:v1",
+  "parity": "passed: source lineage, per-slot values and quality, metric/joint durations, episodes",
+  "transport": "outbox to collector spool to Spark; real MQTT measured separately in synthetic run"
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "file": "compose.benchmark.yaml",
+    "sha256": "41e61454f4f7bc887cfc7709d1a6bfd24c043c6134c7b528dfd8fe7861a6c53b"
+  },
+  {
+    "file": "docs/evaluation/assets/clickhouse-performance/diagnostics/query_pauses.py",
+    "sha256": "902a3203b06620320efbf52c065a5a02ed27e39e5bf48f3f4f87b4d8bafe8edc"
+  },
+  {
+    "file": "docs/evaluation/assets/clickhouse-performance/diagnostics/slot_transport.py",
+    "sha256": "b658f760471be1621b6073cb50ed9f9d76314f6c8fdbd5202167881446ce4fa2"
+  },
+  {
+    "file": "scripts/clickhouse/audit_migration.py",
+    "sha256": "8d6854c0733efa29a35f4235fdf61f06dca790fd5f8afe577d6b9762c8b91027"
+  },
+  {
+    "file": "scripts/clickhouse/backfill.py",
+    "sha256": "e2752ede2b6df2d1994b56877c9cfa1393342c60bc40c5fce3e5d0145b326b1d"
+  },
+  {
+    "file": "scripts/clickhouse/benchmark_inventory.py",
+    "sha256": "171ce208f355b1c6f972b67bfea77444b277e8aa4727af2be452b240daa607bd"
+  },
+  {
+    "file": "scripts/clickhouse/benchmark_lifecycle.py",
+    "sha256": "bc9a01aff90eaa447e80ab2c79f2c7299dd7d6d860c5001369732e20f434e4f6"
+  },
+  {
+    "file": "scripts/clickhouse/benchmark_queries.py",
+    "sha256": "1341d6a3fd8869009e21191464f621a4b9618bf1c586aee34f13bdf8474d23aa"
+  },
+  {
+    "file": "scripts/clickhouse/benchmark_scenarios.py",
+    "sha256": "1a4128c08a0e08b7eb64942b7268b74627c3fdba4d2e0ccb7ae3c86eae6879c4"
+  },
+  {
+    "file": "scripts/clickhouse/benchmark_sensor.py",
+    "sha256": "19f9f1debb4d161f32f34fae82570d49579da0718faae3fd189ba9320f669daf"
+  },
+  {
+    "file": "scripts/clickhouse/check_parity.py",
+    "sha256": "b732075f367c15d1453fa3fec439d175446138721d8c37701ad718916185ae33"
+  },
+  {
+    "file": "scripts/clickhouse/export_postgres.py",
+    "sha256": "da5b9594a5aeed819419e27b425ba1f1a624d6fef497ddb205a0c812c1b95942"
+  },
+  {
+    "file": "scripts/clickhouse/import_scenarios_benchmark.py",
+    "sha256": "da35eea22af9072eae8d8ba209d1c9f3aa8b2d7fff306c819a357155c02b1323"
+  },
+  {
+    "file": "scripts/clickhouse/profile_publication.py",
+    "sha256": "a312773460f486d183e7f263a95da14a99b80641dccb0987293238eb8b9aeb6e"
+  },
+  {
+    "file": "scripts/clickhouse/profile_workloads.py",
+    "sha256": "7494a40d26fc7f362d90e2c2fa0af65499f1b59c0ed7fe55414341c57f5819c3"
+  },
+  {
+    "file": "scripts/clickhouse/read_business_reference.py",
+    "sha256": "c0365216f76e0672201708a399b8e5371c858be0a7a3ed748434c9f887835823"
+  },
+  {
+    "file": "scripts/clickhouse/read_export_reference.py",
+    "sha256": "27e15d5e16dc8c7dcae88824dcc81fa3dd926bbe631a49122fd0e1d6bd63723d"
+  },
+  {
+    "file": "scripts/clickhouse/read_lineage_reference.py",
+    "sha256": "ffc41121d3b3e38b36bd5e01c199b60b174cf3dc916034ec1e107397f7dd3598"
+  },
+  {
+    "file": "scripts/clickhouse/read_parity_reference.py",
+    "sha256": "233146a0cba9fd056d63538f03d651fd044e6e74f32a4a142443b29a48634144"
+  },
+  {
+    "file": "scripts/clickhouse/record_resources.py",
+    "sha256": "3de732c34333a7aa9e5b992806db8c0e728eee0f11b15e459d6016572b33bd4a"
+  },
+  {
+    "file": "scripts/clickhouse/seed_scenarios.py",
+    "sha256": "9946475cd5e0447fe56ce5ab1f0d0ea0dbdcb9f90447f17cc28f75e6aae16803"
+  },
+  {
+    "file": "scripts/clickhouse/settle_benchmark_parts.py",
+    "sha256": "ab80918e201ab1e9db5945ac2fb4fc493df81bc370442667080f2b6d7ef1dc22"
+  },
+  {
+    "file": "scripts/clickhouse/verify_retry.py",
+    "sha256": "10e12c9c649a5e8f9ab17bccdb5d041825ed5c992bebc23b1a11102d73aac816"
+  },
+  {
+    "file": "scripts/run_engine_benchmark.sh",
+    "sha256": "9662f48e0c6a9188482599a484a33c1d40223bd889f3ea172c141ae191a8217c"
+  },
+  {
+    "file": "src/greenhouse/app/runtime.py",
+    "sha256": "6048378f89df27b50015becc8bc24e6998e20dbb928feac0d340ad4d1743751d"
+  },
+  {
+    "file": "src/greenhouse/clickhouse/client.py",
+    "sha256": "20a357d78a9b44c9300f7ea3630c835f50b3ee0f6dd4b94e025b0153c593ae14"
+  },
+  {
+    "file": "src/greenhouse/clickhouse/proof_cache.py",
+    "sha256": "9639a33f23ff611266a0540bc6a3c78f70aa8a9b455d08a04ae9e2d4584a2810"
+  },
+  {
+    "file": "src/greenhouse/clickhouse/registry.py",
+    "sha256": "95346cb98875160010f8d54bd547d5d5713a05444ef78b3101a461459423c990"
+  },
+  {
+    "file": "src/greenhouse/clickhouse/repository.py",
+    "sha256": "f56cf70782962b7f08e81ef7d6d2f5197ac41676a016c2d01939113c56110f83"
+  },
+  {
+    "file": "src/greenhouse/clickhouse/rows.py",
+    "sha256": "1531aa70e47cd840de2d0af6981ffa0eb89c57f3a2841c9f68b78db31c07930d"
+  },
+  {
+    "file": "src/greenhouse/clickhouse/threshold.py",
+    "sha256": "5d01154eec39c5b1c570c22063480e267445a12adb0314c8b9d7f2e90cfc77a4"
+  },
+  {
+    "file": "tests/clickhouse/test_bounded_rows.py",
+    "sha256": "fbd197d20c787cbc44b740824152daa459ab9566b4f02af57be98e7d3804134c"
+  },
+  {
+    "file": "tests/clickhouse/test_proof_cache.py",
+    "sha256": "32aeefff58938f78ca5ae3248a106c89b8fdda28bd55e662814f2c4bddb0b6c6"
+  },
+  {
+    "file": "tests/clickhouse/test_threshold.py",
+    "sha256": "0f5a7a953a40983c037dbb59fb983aa4e03528ff8ee2b78cfccd1ce84b7c07fb"
+  },
+  {
+    "file": "tests/clickhouse/test_threshold_ui.py",
+    "sha256": "049ae00c4a6b016e95a35ae7cad99cdc7f6fa0c85cce181f2169c10f9aa0f325"
+  }
+]

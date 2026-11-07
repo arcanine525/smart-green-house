@@ -1,0 +1,358 @@
+{
+  "scenario": "synthetic-30-events-no-fault-real-mqtt",
+  "replay_id": "live-8a15c6596036",
+  "source_sha256": "68fdab276b112e20ce2525d2d3a2dd9d60ce24e4a0269f1be89f7976994ad3a5",
+  "events_expected": 30,
+  "events_unique": 30,
+  "queryable_samples": 30,
+  "latencies_ms_sorted": [
+    1000.6498750008177,
+    1004.5741669964627,
+    1006.0241669998504,
+    1007.4993749949499,
+    1012.5812499973108,
+    1014.8020419946988,
+    1021.2400419986807,
+    1023.3741249976447,
+    1025.5818340010592,
+    1060.3479999990668,
+    1201.371167000616,
+    1203.3474999989267,
+    1205.204458994558,
+    1209.9112500000047,
+    1211.7396670000744,
+    1213.3987919951323,
+    1216.5962090002722,
+    1219.6329169964883,
+    1222.308124997653,
+    1267.7510840003379,
+    1460.6207079996238,
+    1462.867666996317,
+    1468.7827499947161,
+    1470.8529169947724,
+    1473.4323329976178,
+    1477.6964999982738,
+    1483.8765829990734,
+    1488.3691249997355,
+    1491.5971669979626,
+    1497.2740829980467
+  ],
+  "event_traces": [
+    {
+      "event_id": "0641338ac5d631e95a9e4058ce00d18964593e7c3cf9b04db4af56dd364134ee",
+      "publisher_call_utc": "2026-11-06T14:39:04.527914+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.528979+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551292+00:00",
+      "publish_offset_ms": 473.89995800040197,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1023.3741249976447
+    },
+    {
+      "event_id": "0a102ac51708f10f35b967cfddb1506acb9452d032745a4f178d46fc280740df",
+      "publisher_call_utc": "2026-11-06T14:39:04.346083+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.346395+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551303+00:00",
+      "publish_offset_ms": 292.06962400348857,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1205.204458994558
+    },
+    {
+      "event_id": "0c60338580e63df03a670573d5d98412ec3041c3bac81d9f2e4b3508941ae424",
+      "publisher_call_utc": "2026-11-06T14:39:04.538707+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.538963+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551306+00:00",
+      "publish_offset_ms": 484.69283300073585,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1012.5812499973108
+    },
+    {
+      "event_id": "0ee78c94041fa8ab8ccb4df81a00b6d634d3fabf743c7cfd8ac0ff71d87f8604",
+      "publisher_call_utc": "2026-11-06T14:39:04.334692+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.335133+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551308+00:00",
+      "publish_offset_ms": 280.67787399777444,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1216.5962090002722
+    },
+    {
+      "event_id": "12273bcb7391be7cade19ce841d9890749092b6ab211b170fc7246a75b1d6e3a",
+      "publisher_call_utc": "2026-11-06T14:39:04.062338+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.064352+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551309+00:00",
+      "publish_offset_ms": 8.904957998311147,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1488.3691249997355
+    },
+    {
+      "event_id": "124ad2d00e0b79c8797321957a9ff943eace7cc692fc24e52fa09291caaae362",
+      "publisher_call_utc": "2026-11-06T14:39:04.349917+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.350390+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551310+00:00",
+      "publish_offset_ms": 295.9029159974307,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1201.371167000616
+    },
+    {
+      "event_id": "1a7e42dd8b65f4724ccdfcce0053008bd8ce83ceb4b0f1ca1291985a94e72b44",
+      "publisher_call_utc": "2026-11-06T14:39:04.283539+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.284034+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551311+00:00",
+      "publish_offset_ms": 229.52299899770878,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1267.7510840003379
+    },
+    {
+      "event_id": "1d759091ae335ab9bc2683c2cde938184984078ed4e1a6f5429baed139090f29",
+      "publisher_call_utc": "2026-11-06T14:39:04.087839+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.089584+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551312+00:00",
+      "publish_offset_ms": 34.40641600172967,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1462.867666996317
+    },
+    {
+      "event_id": "1dab8fe2bddd76d0e721bcf17bc9c2fd252571c99714060aca5a8d07fbf3dbfb",
+      "publisher_call_utc": "2026-11-06T14:39:04.543789+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.544115+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551313+00:00",
+      "publish_offset_ms": 489.77470800309675,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1007.4993749949499
+    },
+    {
+      "event_id": "1f3907cc1d685befcb8abe991b68109caf1495b1844c4816e276a526c1a94b90",
+      "publisher_call_utc": "2026-11-06T14:39:04.059111+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.061782+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551314+00:00",
+      "publish_offset_ms": 5.67691600008402,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1491.5971669979626
+    },
+    {
+      "event_id": "2e7ca2fe3114659271c31fe234125e9cb1ea390a1713d766f9a8bb52d27caa6b",
+      "publisher_call_utc": "2026-11-06T14:39:04.525707+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.526562+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551315+00:00",
+      "publish_offset_ms": 471.6922489969875,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1025.5818340010592
+    },
+    {
+      "event_id": "2e9fd7898573982d7c740bd86fc72f997ccef0cf9f2eac1d1f16b607dcaa79a8",
+      "publisher_call_utc": "2026-11-06T14:39:04.536487+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.536786+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551316+00:00",
+      "publish_offset_ms": 482.47204100334784,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1014.8020419946988
+    },
+    {
+      "event_id": "3b360e74a7720b004f250301ba7408f55b2e5ef64378b259334df5bf10ef99f6",
+      "publisher_call_utc": "2026-11-06T14:39:04.337889+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.338376+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551317+00:00",
+      "publish_offset_ms": 283.8752910029143,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1213.3987919951323
+    },
+    {
+      "event_id": "47f11b59a6b98de99632e586ad3ec44a5079db7f17a9528d0ddf5da1a6aa1542",
+      "publisher_call_utc": "2026-11-06T14:39:04.530048+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.530965+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551318+00:00",
+      "publish_offset_ms": 476.03404099936597,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1021.2400419986807
+    },
+    {
+      "event_id": "4b48d4bbde08ff42ff83b01a0e5817f6ebb081063e4ad4a91d6e3b5d969ef9c9",
+      "publisher_call_utc": "2026-11-06T14:39:04.053444+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.054312+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551319+00:00",
+      "publish_offset_ms": 0.0,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1497.2740829980467
+    },
+    {
+      "event_id": "55b7cf41d176df79650f0ef2ba13b7fe5de8bd8c66330dc250d5994fb3abd6a4",
+      "publisher_call_utc": "2026-11-06T14:39:04.331655+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.332302+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551320+00:00",
+      "publish_offset_ms": 277.6411660015583,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1219.6329169964883
+    },
+    {
+      "event_id": "59565a14a9af5c4499d82159d00ae0a088de3f6e2391cfd3e4c9ef2eee0b430f",
+      "publisher_call_utc": "2026-11-06T14:39:04.341377+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.342375+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551321+00:00",
+      "publish_offset_ms": 287.362832998042,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1209.9112500000047
+    },
+    {
+      "event_id": "5f899ebfb224f3697a0a85749aca6e6f7521de512dd6b576be9feb31295ebcca",
+      "publisher_call_utc": "2026-11-06T14:39:04.545264+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.547055+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551322+00:00",
+      "publish_offset_ms": 491.24991599819623,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1006.0241669998504
+    },
+    {
+      "event_id": "6c810242369ed581752c557120daa5c0abbc4ccc61d7bcbd0d6997b21578c674",
+      "publisher_call_utc": "2026-11-06T14:39:04.090085+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.094090+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551323+00:00",
+      "publish_offset_ms": 36.653374998422805,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1460.6207079996238
+    },
+    {
+      "event_id": "6d823a1f41efb513fff5ab4a0fdbcd096e2746a275e2c87ae3e85ccefe4b21c1",
+      "publisher_call_utc": "2026-11-06T14:39:04.066829+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.067518+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551324+00:00",
+      "publish_offset_ms": 13.397499998973217,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1483.8765829990734
+    },
+    {
+      "event_id": "73c3ea16ea7bee943435504979929716633920624999a491e65565b4cce518c2",
+      "publisher_call_utc": "2026-11-06T14:39:04.073010+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.075057+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551325+00:00",
+      "publish_offset_ms": 19.577582999772858,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1477.6964999982738
+    },
+    {
+      "event_id": "7ec75cc1bf5fd9a716703f014e07065c8d14e01870201e66750fa935fc30fbc5",
+      "publisher_call_utc": "2026-11-06T14:39:04.081923+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.084555+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551326+00:00",
+      "publish_offset_ms": 28.49133300333051,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1468.7827499947161
+    },
+    {
+      "event_id": "8934ab4a64a3da8f0a58899c3da0f2011f751c82dccf45a1ff2ae03ef4a6ee2d",
+      "publisher_call_utc": "2026-11-06T14:39:04.490941+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.523892+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551327+00:00",
+      "publish_offset_ms": 436.92608299897984,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1060.3479999990668
+    },
+    {
+      "event_id": "8abceb1e8fdfe920be10670b6d29855e497efc69220994a8ec943aedd4f45d9d",
+      "publisher_call_utc": "2026-11-06T14:39:04.347941+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.348655+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551328+00:00",
+      "publish_offset_ms": 293.92658299912,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1203.3474999989267
+    },
+    {
+      "event_id": "929a5be47b8b9f5019c8ab9bbd81feb76210f9b51fea47bc1b6f4bffe67fc1e1",
+      "publisher_call_utc": "2026-11-06T14:39:04.339548+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.340237+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551329+00:00",
+      "publish_offset_ms": 285.53441599797225,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1211.7396670000744
+    },
+    {
+      "event_id": "c9416873196f5e9df8eab9f1e1ee75ccee461cd810252a051ba02b2dda3078ee",
+      "publisher_call_utc": "2026-11-06T14:39:04.550638+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.551457+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551330+00:00",
+      "publish_offset_ms": 496.62420799722895,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1000.6498750008177
+    },
+    {
+      "event_id": "d37c4c90a1228e120a5d2bf9af782c81e6a02e3c9a46f0a482d0fe323f1c26a3",
+      "publisher_call_utc": "2026-11-06T14:39:04.328981+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.329601+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551331+00:00",
+      "publish_offset_ms": 274.9659580003936,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1222.308124997653
+    },
+    {
+      "event_id": "d68a54dbcf09d14168de85a1d5eff2a71468867f33ea4b241fc9b1044ac4b12f",
+      "publisher_call_utc": "2026-11-06T14:39:04.077274+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.078345+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551332+00:00",
+      "publish_offset_ms": 23.841750000428874,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1473.4323329976178
+    },
+    {
+      "event_id": "efc08001776089c2a4e795239dcb8c5685f8f07fdf5d245f13e095c2cf63ee4c",
+      "publisher_call_utc": "2026-11-06T14:39:04.546714+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.548927+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551333+00:00",
+      "publish_offset_ms": 492.6999160015839,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1004.5741669964627
+    },
+    {
+      "event_id": "fe005c3fc3bdf4d9e16932a37d4f051cc5ef411845f8393d10142e09964791db",
+      "publisher_call_utc": "2026-11-06T14:39:04.079853+00:00",
+      "collector_received_utc": "2026-11-06T14:39:04.081415+00:00",
+      "queryable_observed_utc": "2026-11-06T14:39:05.551334+00:00",
+      "publish_offset_ms": 26.421166003274266,
+      "queryable_offset_ms": 1497.2740829980467,
+      "latency_ms": 1470.8529169947724
+    }
+  ],
+  "processing_cgroup_memory_peak_bytes": "441614336",
+  "processing_cgroup_memory_limit_bytes": "1610612736",
+  "processing_cgroup_cpu_max": "100000 100000",
+  "stream_operational_wall_seconds": 6.361696836000192,
+  "stream_operational_cpu_seconds": 6.166824,
+  "resource_scope": "combined Spark, collector, publisher and test polling in one processing cgroup; memory peak also includes prior fixture batch",
+  "p50_ms": 1212.5692294976034,
+  "p95_ms_nearest_rank": 1491.5971669979626,
+  "throughput_events_per_second": 20.03641173026244,
+  "peak_unbatched_observed": 11,
+  "spooled_deliveries": 38,
+  "batched_deliveries": 38,
+  "remaining_unbatched": 0,
+  "ready_file_count": 9,
+  "state": {
+    "complete": true,
+    "conflicts": [],
+    "replay_id": "live-8a15c6596036",
+    "quarantined": 0,
+    "fault_summary": {
+      "drops": 0,
+      "delays": 0,
+      "conflicts": 0,
+      "duplicates": 0
+    },
+    "replay_status": "completed",
+    "slot_conflicts": [],
+    "time_conflicts": [],
+    "accepted_events": 30,
+    "cursor_mismatch": false,
+    "cursor_sequence": 30,
+    "expected_events": 30,
+    "scope_conflicts": [],
+    "control_sequence": 8,
+    "observed_through": "2019-12-16T02:24:59.999996",
+    "received_through": "2026-11-06T14:39:04.551457+00:00",
+    "checksum_verified": true,
+    "missing_sequences": [],
+    "completion_requested": true,
+    "cursor_outside_cycle": false,
+    "rejected_source_rows": 0,
+    "emitted_unique_events": 30,
+    "emitted_total_messages": 30
+  },
+  "batch_stream_br01_br03_values_quality_metrics_joint_and_episodes_equal": true,
+  "timing_method": "monotonic before MQTT publish call to first polling observation in current publication"
+}

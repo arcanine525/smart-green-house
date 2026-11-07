@@ -1,0 +1,320 @@
+{
+  "br": "06",
+  "title": "Chi phí và kịch bản giá",
+  "status": "passed",
+  "kind": "automated_playwright_walkthrough",
+  "script_sha256": "63cc5797ed7592e150a0170f6163a49e88e4eeee014c732e1a646d0613947b71",
+  "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+  "human_participants": 0,
+  "demo_database": "test_walkthrough_20261106T173153Z_9455",
+  "publication": "df3e4bcbacab45a5b86fc37d2f53c00a",
+  "playwright": "1.65.0",
+  "commit": "ae9303dcced49cd7eec334abe081dc1ef1733518",
+  "video": {
+    "file": "br-06.mp4",
+    "sha256": "ebcad4ab00762ef782e9e03370074e38bda343382902c3b89ef3a8f1c159e1c8",
+    "width": 1920,
+    "height": 1080,
+    "duration_seconds": 188.32,
+    "audio": false
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": "Mở màn hình Chi phí và kịch bản giá",
+      "detail": "Chọn BR ở thanh bên; các thao tác tiếp theo chạy trên bản sao dữ liệu AGC.",
+      "start_seconds": 1.946,
+      "end_seconds": 10.004,
+      "screenshot": "step-01.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n1,154.65 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n18.47 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n166/166 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n166/166 ngày"
+      ]
+    },
+    {
+      "step": 2,
+      "title": "Xác nhận publication lịch sử",
+      "detail": "Một publication cố định cho bộ lọc, chỉ số, chi tiết và file xuất.",
+      "start_seconds": 10.005,
+      "end_seconds": 19.422,
+      "screenshot": "step-02.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n1,154.65 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n18.47 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n166/166 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n166/166 ngày"
+      ]
+    },
+    {
+      "step": 3,
+      "title": "Chọn khoang và vụ Automatoes",
+      "detail": "Khoang/vụ xác định phạm vi phân tích; chọn lại sẽ cập nhật bộ lọc liên quan.",
+      "start_seconds": 19.422,
+      "end_seconds": 27.979,
+      "screenshot": "step-03.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n1,161.25 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n18.58 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n166/166 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n166/166 ngày"
+      ]
+    },
+    {
+      "step": 4,
+      "title": "Lọc hai ngày 02–03/03/2020",
+      "detail": "Cửa sổ giá và lượng phải khớp khi so baseline với scenario.",
+      "start_seconds": 27.979,
+      "end_seconds": 42.95,
+      "screenshot": "step-04.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "step": 5,
+      "title": "Đọc baseline lịch sử",
+      "detail": "Baseline 17,60 EUR; diện tích 62,5 m² là giả định, chi phí không phải hóa đơn.",
+      "start_seconds": 42.95,
+      "end_seconds": 50.199,
+      "screenshot": "step-05.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "step": 6,
+      "title": "Xem giá có hiệu lực",
+      "detail": "Nhiệt 0,0083 EUR/MJ; điện cao/thấp 0,08/0,04 EUR/kWh.",
+      "start_seconds": 50.2,
+      "end_seconds": 58.189,
+      "screenshot": "step-06.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "step": 7,
+      "title": "Mở phép nhân theo ngày",
+      "detail": "Đọc lượng × đơn giá của từng thành phần trong cửa sổ.",
+      "start_seconds": 58.189,
+      "end_seconds": 66.24,
+      "screenshot": "step-07.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "step": 8,
+      "title": "Đổi tổng hợp từ ngày sang tuần",
+      "detail": "Chọn grain tuần để xem tổng lượng và chi phí trong cùng cửa sổ.",
+      "start_seconds": 66.24,
+      "end_seconds": 74.263,
+      "screenshot": "step-08.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "step": 9,
+      "title": "Trở lại grain ngày",
+      "detail": "Đối chiếu từng ngày trước khi mở nguồn của thành phần năng lượng.",
+      "start_seconds": 74.263,
+      "end_seconds": 83.001,
+      "screenshot": "step-09.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "step": 10,
+      "title": "Truy vết nguồn năng lượng",
+      "detail": "Chọn revision, đọc tên file và xác minh checksum quantity đầu vào.",
+      "start_seconds": 83.002,
+      "end_seconds": 93.384,
+      "screenshot": "step-10.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "step": 11,
+      "title": "Mở form tạo kịch bản",
+      "detail": "Giữ nguyên lượng tiêu thụ; chỉ thay giá điện trong ví dụ này.",
+      "start_seconds": 93.387,
+      "end_seconds": 101.798,
+      "screenshot": "step-11.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "step": 12,
+      "title": "Đặt tên scenario mới",
+      "detail": "Tên rõ thay đổi để có thể tìm và mở lại đúng version.",
+      "start_seconds": 101.798,
+      "end_seconds": 109.096,
+      "screenshot": "step-12.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "step": 13,
+      "title": "Giữ giá nhiệt; tăng điện cao điểm 20%",
+      "detail": "Hình thức thay đổi theo phần trăm; nhập 20 vào trường điện cao điểm.",
+      "start_seconds": 109.096,
+      "end_seconds": 118.601,
+      "screenshot": "step-13.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "step": 14,
+      "title": "Tăng điện thấp điểm 20%",
+      "detail": "Giá nhiệt giữ nguyên; giá hai thành phần điện cùng tăng 20%.",
+      "start_seconds": 118.602,
+      "end_seconds": 128.105,
+      "screenshot": "step-14.png",
+      "metrics": [
+        "Tổng chi phí (EUR)\n\n17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+        "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+        "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+      ]
+    },
+    {
+      "step": 15,
+      "title": "Lưu kịch bản bất biến",
+      "detail": "Thao tác ghi chỉ diễn ra trong database demo riêng của buổi quay.",
+      "start_seconds": 128.105,
+      "end_seconds": 136.146,
+      "screenshot": "step-15.png",
+      "metrics": [
+        "Baseline (EUR)\n\n17.60 EUR",
+        "Kịch bản (EUR)\n\n20.84 EUR\n\n+3.24 EUR (+18.41%)",
+        "Kịch bản (EUR/m²)\n\n0.33 EUR/m²\n\n+0.05 EUR/m²",
+        "Priced / Expected Days\n\n2 / 2"
+      ]
+    },
+    {
+      "step": 16,
+      "title": "Đọc baseline, scenario và chênh lệch",
+      "detail": "Baseline 17,60 → scenario 20,84 EUR; tăng 3,24 EUR với cùng lượng tiêu thụ.",
+      "start_seconds": 136.146,
+      "end_seconds": 143.432,
+      "screenshot": "step-16.png",
+      "metrics": [
+        "Baseline (EUR)\n\n17.60 EUR",
+        "Kịch bản (EUR)\n\n20.84 EUR\n\n+3.24 EUR (+18.41%)",
+        "Kịch bản (EUR/m²)\n\n0.33 EUR/m²\n\n+0.05 EUR/m²",
+        "Priced / Expected Days\n\n2 / 2"
+      ]
+    },
+    {
+      "step": 17,
+      "title": "Khám phá đóng góp thành phần",
+      "detail": "Bảng chi phí nhiệt và điện đối chiếu baseline, scenario, delta và coverage.",
+      "start_seconds": 143.432,
+      "end_seconds": 152.343,
+      "screenshot": "step-17.png",
+      "metrics": [
+        "Baseline (EUR)\n\n17.60 EUR",
+        "Kịch bản (EUR)\n\n20.84 EUR\n\n+3.24 EUR (+18.41%)",
+        "Kịch bản (EUR/m²)\n\n0.33 EUR/m²\n\n+0.05 EUR/m²",
+        "Priced / Expected Days\n\n2 / 2"
+      ]
+    },
+    {
+      "step": 18,
+      "title": "Bỏ chọn rồi mở lại scenario đã lưu",
+      "detail": "Mở lại đúng tên/version; kịch bản phục hồi cửa sổ và baseline đã pin.",
+      "start_seconds": 152.343,
+      "end_seconds": 162.699,
+      "screenshot": "step-18.png",
+      "metrics": [
+        "Baseline (EUR)\n\n17.60 EUR",
+        "Kịch bản (EUR)\n\n20.84 EUR\n\n+3.24 EUR (+18.41%)",
+        "Kịch bản (EUR/m²)\n\n0.33 EUR/m²\n\n+0.05 EUR/m²",
+        "Priced / Expected Days\n\n2 / 2"
+      ]
+    },
+    {
+      "step": 19,
+      "title": "Xuất kết quả kịch bản",
+      "detail": "CSV và JSON giữ version cùng điều kiện phân tích đã dùng.",
+      "start_seconds": 162.7,
+      "end_seconds": 175.504,
+      "screenshot": "step-19.png",
+      "metrics": [
+        "Baseline (EUR)\n\n17.60 EUR",
+        "Kịch bản (EUR)\n\n20.84 EUR\n\n+3.24 EUR (+18.41%)",
+        "Kịch bản (EUR/m²)\n\n0.33 EUR/m²\n\n+0.05 EUR/m²",
+        "Priced / Expected Days\n\n2 / 2"
+      ]
+    },
+    {
+      "step": 20,
+      "title": "Hoàn tất BR-06",
+      "detail": "Các bước đã kiểm tra tự động. Video minh họa thao tác; không đo khả năng sử dụng của người thật.",
+      "start_seconds": 175.505,
+      "end_seconds": 182.781,
+      "screenshot": "step-20.png",
+      "metrics": [
+        "Baseline (EUR)\n\n17.60 EUR",
+        "Kịch bản (EUR)\n\n20.84 EUR\n\n+3.24 EUR (+18.41%)",
+        "Kịch bản (EUR/m²)\n\n0.33 EUR/m²\n\n+0.05 EUR/m²",
+        "Priced / Expected Days\n\n2 / 2"
+      ]
+    }
+  ],
+  "downloads": [
+    {
+      "file": "downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-bf93f84b4e9f4ea8880f189b14842434_v1-summary.csv",
+      "sha256": "5662e42d4d40514faed0908cf36879ea4652d2e814cf0cbc43feb74bd5a03e87",
+      "bytes": 2708
+    },
+    {
+      "file": "downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-bf93f84b4e9f4ea8880f189b14842434_v1-comparison.json",
+      "sha256": "17914e8003072bc8c84c6ddd17dab75ed3244cfb471bd955165a1b569ea83386",
+      "bytes": 37845
+    },
+    {
+      "file": "downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-bf93f84b4e9f4ea8880f189b14842434_v1-scenario.json",
+      "sha256": "ce39fa521bf8d1650ac1c98e457ac7ae22b56d332cf415906deddce49ee73a02",
+      "bytes": 3007
+    }
+  ]
+}

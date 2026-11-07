@@ -1,0 +1,21 @@
+{
+  "started_utc": "2026-11-06T16:05:31Z",
+  "source_head": "03b2a6f4c8c8936b137b461a84e7c5c69cec206b",
+  "working_tree_note": "offline smoke script and scripts README not yet committed",
+  "networks": [
+    "gh-offline-20261106160531-11679_backend internal=true",
+    "gh-offline-20261106160531-11679_frontend internal=true"
+  ],
+  "app_health": "app health: ok",
+  "results": {
+    "batch": "21 passed in 5.66s",
+    "ui": "97 passed in 60.74s (0:01:00)",
+    "sensor_live": "1 passed in 11.45s",
+    "sensor_spark-restart": "1 passed in 13.26s",
+    "sensor_fault-matrix": "7 passed in 36.93s",
+    "sensor_mqtt-faults": "8 passed in 22.02s",
+    "sensor_db": "1 passed in 8.70s",
+    "sensor_broker": "1 passed in 13.03s"
+  },
+  "limitations": "Synthetic fixture only; host connectivity was not disconnected; no complete AGC rebuild or real checkpoint restore."
+}

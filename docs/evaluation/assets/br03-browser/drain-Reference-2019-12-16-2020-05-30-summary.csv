@@ -1,0 +1,35 @@
+﻿# export=greenhouse-drain-csv-v1
+# quantity units: ec=dS/m, ph=pH
+# percent_unit=%
+# decimal=exact source scale (no rounding)
+# null=empty field
+# bool=true/false
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# publication=518aafbbff244e3f96b61a15252aa96a
+# finality=provisional
+# committed_at=2026-11-05T07:05:51.233515+00:00
+# cycle=agc-cycle-Reference
+# compartment=Reference
+# requested_window=[2019-12-16,2020-05-30)
+# effective_window=[2019-12-16T00:00:00,2020-05-30T00:00:00)
+# time_basis=source_naive (source timezone unresolved)
+# declared_context=drain_process_computer
+# declared_basis=measured
+# quality_policy=AGC_QUALITY_V1
+# pipeline_run=8bb40faa886a4beeaf5fa08ad3e672aa
+# parser_version=agc-parser-v1
+# code_version=pipeline-v5-drain
+# config_bundle_hash=17cd5654ca2395e3845097f39f77d3fedb44f1f27a2db175604ceddcd3eefaf8
+# requested_rule_version=drain-demo-b03:Reference:v1
+# rule_identities=ec:drain-demo-b03:Reference:v1;ph:drain-demo-b03:Reference:v1
+# rule_id=drain-demo-b03:Reference
+# rule_label=demo_rule
+# rule_is_demo=true
+# rule_evidence=Synthetic demo per docs/br/br_03_drain-nutrition-monitoring.md §3/§7: fixed target bands EC [2, 5] dS/m and pH [5.5, 6.5] on the measured drain_process_computer basis; explicitly NOT a verified agronomic standard for any variety/growth stage. Registration boundary follows the T14 schedule semantics (one revision per compartment; segment fixed bounds; historical revisions stay replayable).
+# episode_filter=list-only (summary totals never filtered); episode windows carry ORIGINAL and CLIPPED facts
+# profile_status=demo_unverified
+# demo bounds and engineer-entered bounds are not agronomically validated
+metric,measurement_context,basis,rule_version,unit,expected_minutes,valid_minutes,out_minutes,out_low_minutes,out_high_minutes,suspect_minutes,unknown_minutes,out_hours,out_percent,coverage_pct,unknown_reasons
+ec,drain_process_computer,measured,drain-demo-b03:Reference:v1,dS/m,239040,238690,218465,4455,214010,0,350,3641.0833333333333333333333333333333333333333333333,91.526666387364363819179689136536930746994008965604,99.853580990629183400267737617135207496653279785810,missing_input:350
+ph,drain_process_computer,measured,drain-demo-b03:Reference:v1,pH,239040,238665,132435,112770,19665,25,375,2207.25,55.489912639054742002388284834391301615234743259380,99.843122489959839357429718875502008032128514056225,missing_input:350;quality_suspect:25

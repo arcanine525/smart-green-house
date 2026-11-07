@@ -1,0 +1,319 @@
+{
+  "generated_at": "2026-11-05T07:13:31.369451+00:00",
+  "database": "greenhouse_t07_195889f1a3b1",
+  "workflow": "drain-br03-recovered-20261105",
+  "publication": "518aafbbff244e3f96b61a15252aa96a",
+  "versions": {
+    "code": "pipeline-v5-drain",
+    "basis": [
+      [
+        "AGC_PRODUCTION_62_5_V1:AICU:ProdA",
+        "source_verified"
+      ],
+      [
+        "AGC_PRODUCTION_62_5_V1:AICU:ProdB",
+        "source_verified"
+      ],
+      [
+        "AGC_PRODUCTION_62_5_V1:Automatoes:ProdA",
+        "source_verified"
+      ],
+      [
+        "AGC_PRODUCTION_62_5_V1:Automatoes:ProdB",
+        "source_verified"
+      ],
+      [
+        "AGC_PRODUCTION_62_5_V1:Digilog:ProdA",
+        "source_verified"
+      ],
+      [
+        "AGC_PRODUCTION_62_5_V1:Digilog:ProdB",
+        "source_verified"
+      ],
+      [
+        "AGC_PRODUCTION_62_5_V1:IUACAAS:ProdA",
+        "source_verified"
+      ],
+      [
+        "AGC_PRODUCTION_62_5_V1:IUACAAS:ProdB",
+        "source_verified"
+      ],
+      [
+        "AGC_PRODUCTION_62_5_V1:Reference:ProdA",
+        "source_verified"
+      ],
+      [
+        "AGC_PRODUCTION_62_5_V1:Reference:ProdB",
+        "source_verified"
+      ],
+      [
+        "AGC_PRODUCTION_62_5_V1:TheAutomators:ProdA",
+        "source_verified"
+      ],
+      [
+        "AGC_PRODUCTION_62_5_V1:TheAutomators:ProdB",
+        "source_verified"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:AICU:Drain",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:AICU:ElecHigh",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:AICU:ElecLow",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:AICU:Heat_cons",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:AICU:Irr",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:AICU:ProdA",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:AICU:ProdB",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Automatoes:Drain",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Automatoes:ElecHigh",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Automatoes:ElecLow",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Automatoes:Heat_cons",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Automatoes:Irr",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Automatoes:ProdA",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Automatoes:ProdB",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Digilog:Drain",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Digilog:ElecHigh",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Digilog:ElecLow",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Digilog:Heat_cons",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Digilog:Irr",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Digilog:ProdA",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Digilog:ProdB",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:IUACAAS:Drain",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:IUACAAS:ElecHigh",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:IUACAAS:ElecLow",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:IUACAAS:Heat_cons",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:IUACAAS:Irr",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:IUACAAS:ProdA",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:IUACAAS:ProdB",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Reference:Drain",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Reference:ElecHigh",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Reference:ElecLow",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Reference:Heat_cons",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Reference:Irr",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Reference:ProdA",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:Reference:ProdB",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:TheAutomators:Drain",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:TheAutomators:ElecHigh",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:TheAutomators:ElecLow",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:TheAutomators:Heat_cons",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:TheAutomators:Irr",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:TheAutomators:ProdA",
+        "shared_analysis"
+      ],
+      [
+        "AGC_SHARED_BASIS_V1:TheAutomators:ProdB",
+        "shared_analysis"
+      ]
+    ],
+    "marts": [
+      "irrigation-mart-v1",
+      "harvest-mart-v3",
+      "climate-mart-v1",
+      "drain-mart-v1"
+    ],
+    "parser": "agc-parser-v1",
+    "quality_hash": "5a808e958d1d7d11f067f916a781f06ce9af1d1c0356f62cba595990ee08afce",
+    "quality_policy": "AGC_QUALITY_V1"
+  },
+  "new_raw_manifest_checksum": "c1e40f1ea6bf0d7c9a729843ec1f8be917ad5966b788857813608bab47d8b0bd",
+  "old_workflow_unchanged": true,
+  "old_publications": [
+    "11d0e3523c024107936a2091e99ddec8",
+    "3459db897ead45a28177c60000bd0561",
+    "50c3485dd763453cb6c4395016d7554d",
+    "804770b6ac534b308ad4e449487db50a",
+    "adf2a02900864da2bf0e41b86516f6ef",
+    "dbc3d6cbf9fa4914b37137455e85576e"
+  ],
+  "all_publications": [
+    "11d0e3523c024107936a2091e99ddec8",
+    "3459db897ead45a28177c60000bd0561",
+    "50c3485dd763453cb6c4395016d7554d",
+    "518aafbbff244e3f96b61a15252aa96a",
+    "804770b6ac534b308ad4e449487db50a",
+    "adf2a02900864da2bf0e41b86516f6ef",
+    "dbc3d6cbf9fa4914b37137455e85576e"
+  ],
+  "exactly_one_new_publication": true,
+  "source_counts": {
+    "core.record_revision": 574843,
+    "core.climate_observation": 286854,
+    "core.drain_observation": 286854,
+    "core.measure_quality": 2874794,
+    "meta.correction": 0
+  },
+  "receipts": {
+    "irrigation": {
+      "day_count": 996,
+      "started_at": "2026-11-05T07:07:52.572443+00:00",
+      "cycle_count": 6,
+      "finished_at": "2026-11-05T07:07:53.635289+00:00",
+      "bundle_version": "irrigation-mart-v1",
+      "publication_id": "518aafbbff244e3f96b61a15252aa96a"
+    },
+    "harvest": {
+      "started_at": "2026-11-05T07:07:56.234486+00:00",
+      "cycle_count": 6,
+      "finished_at": "2026-11-05T07:07:56.824311+00:00",
+      "record_count": 139,
+      "bundle_version": "harvest-mart-v3",
+      "publication_id": "518aafbbff244e3f96b61a15252aa96a"
+    },
+    "climate": {
+      "slot_count": 286854,
+      "started_at": "2026-11-05T07:07:57.15748+00:00",
+      "cycle_count": 6,
+      "finished_at": "2026-11-05T07:10:03.670688+00:00",
+      "bundle_version": "climate-mart-v1",
+      "publication_id": "518aafbbff244e3f96b61a15252aa96a"
+    },
+    "drain": {
+      "slot_count": 286854,
+      "started_at": "2026-11-05T07:11:07.660396+00:00",
+      "cycle_count": 6,
+      "finished_at": "2026-11-05T07:12:26.907305+00:00",
+      "bundle_version": "drain-mart-v1",
+      "publication_id": "518aafbbff244e3f96b61a15252aa96a"
+    }
+  },
+  "steps": [
+    [
+      "ingest",
+      "completed",
+      1
+    ],
+    [
+      "load-core",
+      "completed",
+      1
+    ],
+    [
+      "publish",
+      "completed",
+      2
+    ],
+    [
+      "spark",
+      "completed",
+      1
+    ]
+  ]
+}

@@ -1,0 +1,569 @@
+{
+  "processing_image": "sha256:0ef5c8432242c223de0fd5c7158b5a35e2c75c145f15a1cc450e49b28c12fa3a",
+  "files": [
+    {
+      "file": "__init__.py",
+      "sha256": "ce7f4264e5582315da7861f4a78c98303d78d8c2ed55e0404e7b94a4ae829fce"
+    },
+    {
+      "file": "__main__.py",
+      "sha256": "b6ede4f8a85159210ae2c61dc36c4fdbe782c261e7283d23d52c7020f8e12bf6"
+    },
+    {
+      "file": "app/__init__.py",
+      "sha256": "12320dbeda8385c0ee33de8928bad0f1f8fa7ee24b44e57761af3cedd90ed803"
+    },
+    {
+      "file": "app/climate.py",
+      "sha256": "e456150d1ff97a87d262df9c8283235a929229be768b1d5394483213ac1b45c0"
+    },
+    {
+      "file": "app/cost.py",
+      "sha256": "af9822ee7839d8bb173a3bced24ec564317d363e03730932f776e5e3f50f7ddb"
+    },
+    {
+      "file": "app/cost_exports.py",
+      "sha256": "a4122fdd3009b1ee6fc997cebe8a517c4a765b06f0bdad2615469f4560f16522"
+    },
+    {
+      "file": "app/display.py",
+      "sha256": "1e4d7de23632f4379f3032a3833972f38119d60352f6b7c345310323a6cc205b"
+    },
+    {
+      "file": "app/drain.py",
+      "sha256": "f9e8567dc231b1af0c0d0401148b4034f4d24a332d61d835a7e8cf4eb42c1f10"
+    },
+    {
+      "file": "app/drain_actions.py",
+      "sha256": "2dd50ec9f28942032ad897e99ad2e859ede209f165616fff14ef5acea604c9b8"
+    },
+    {
+      "file": "app/drain_exports.py",
+      "sha256": "edce754967f71296bfa72c4fca4df705a351855220a9317d23d204668e80ce29"
+    },
+    {
+      "file": "app/energy.py",
+      "sha256": "9cfc43381ef23f392b69a6c644dc42b1a6295c782d6a57e6febf0c69204eaa31"
+    },
+    {
+      "file": "app/energy_exports.py",
+      "sha256": "d5ab733efffb7ebbfd450c0a975e3d7f05bbe46a4c6ad748b8b66964a3358c31"
+    },
+    {
+      "file": "app/exports.py",
+      "sha256": "f6a3b6e1c7cfa09af47b744b9309226b309edcf82d9b681e18ca864a155b52e5"
+    },
+    {
+      "file": "app/figures.py",
+      "sha256": "3176806b35822d40d58920d76493f891a5650287985b1652f7521db546e2d695"
+    },
+    {
+      "file": "app/harvest.py",
+      "sha256": "0a9d1e0407227aa4a4f22dfc18413bd44741dda785a6256d2079ca3ca9198123"
+    },
+    {
+      "file": "app/home.py",
+      "sha256": "93491ad830590ab51145b67e8e6e299d22969b98ca821bdbe16920d2cfa17da9"
+    },
+    {
+      "file": "app/overview.py",
+      "sha256": "46f80aa6863d0a9f3ede019436aae32955374f9d8cda56b01841a3438fdd4abc"
+    },
+    {
+      "file": "app/quality_reads.py",
+      "sha256": "1c69952c9e929d7baf0467467ff1f2f8e5f82761dc0d51fcf14a980a3fa7fce9"
+    },
+    {
+      "file": "app/replay.py",
+      "sha256": "a4c53f1364f97b0c026f44858c81b03cc6e4560898f9bf62aa0147aa5859a028"
+    },
+    {
+      "file": "app/replay_presenter.py",
+      "sha256": "2c49e613bed35479a1693ae5fc749d3ef48c7b50c5af87ed2e8e29e984c7d127"
+    },
+    {
+      "file": "app/replay_reads.py",
+      "sha256": "8945e538cbedd70155161b0b33e46dab2b9b6c7c0ab8e8cb6dadcbc23b0e1df4"
+    },
+    {
+      "file": "app/runtime.py",
+      "sha256": "6048378f89df27b50015becc8bc24e6998e20dbb928feac0d340ad4d1743751d"
+    },
+    {
+      "file": "app/shared_context.py",
+      "sha256": "c9bf407d2654748d85877f141373fb62b5c933e0af4e35d79aac40caddb17991"
+    },
+    {
+      "file": "app/wiring.py",
+      "sha256": "5ca672e8f5f5498829391c2b283ccee6cdcdee17ab45d975c1bad1a84c019c80"
+    },
+    {
+      "file": "cli.py",
+      "sha256": "7a1c8cc4b34bee9c39350a490260422fd95d3987367001c380688539401b8668"
+    },
+    {
+      "file": "clickhouse/__init__.py",
+      "sha256": "1273cc3ee9c782f54fc046c5d43d743357c95e8e37c61baa103b78ad980d0b0b"
+    },
+    {
+      "file": "clickhouse/cli.py",
+      "sha256": "8fa4a0ec6f2fbfb9339a5f966176856bd1863f01041c0b47c16721b92fbe3389"
+    },
+    {
+      "file": "clickhouse/client.py",
+      "sha256": "20a357d78a9b44c9300f7ea3630c835f50b3ee0f6dd4b94e025b0153c593ae14"
+    },
+    {
+      "file": "clickhouse/coordinator.py",
+      "sha256": "3eb875ac64b29bddbe722e30ec0abea4001679d8ddbcf3c82599674a9d98b015"
+    },
+    {
+      "file": "clickhouse/cost.py",
+      "sha256": "507c989cb503e75942a0f7913545c7a6f71d729bc9bed63a11896a53ec9ba96e"
+    },
+    {
+      "file": "clickhouse/encoding.py",
+      "sha256": "adb505e1036671219868c9aa52dc9fd3301f19bc655d4d093f7e227476b4ae72"
+    },
+    {
+      "file": "clickhouse/energy.py",
+      "sha256": "84c0195719309c1ae4c02906f175bd3adb3effb0b989bd22b28afa3737156c06"
+    },
+    {
+      "file": "clickhouse/energy_run.py",
+      "sha256": "21ea2a369b67b1ac40a74bb5c05aa0fbddeeb4ac966201b18e64d7077879876b"
+    },
+    {
+      "file": "clickhouse/harvest.py",
+      "sha256": "056c09050e0c459db5463126c4e637d6357c73aea0787555822ed221b0eadf01"
+    },
+    {
+      "file": "clickhouse/harvest_run.py",
+      "sha256": "7814e694f3af949a8f99671595b196a0dbc7ab5f335573d980dd551068043b0d"
+    },
+    {
+      "file": "clickhouse/journal.py",
+      "sha256": "904bec6e4f90087601bc69a4cf486ab65f81a8e59d708714111edc4859a037f0"
+    },
+    {
+      "file": "clickhouse/load.py",
+      "sha256": "dabdfba1a456e4d331fce636b60c5543a33ddfaed6ad615c0ef63f8c5e69fea4"
+    },
+    {
+      "file": "clickhouse/migration.py",
+      "sha256": "b940a811225aeb714c74e504d329fd86175ec8dbf0676d075be86c9e33f9c574"
+    },
+    {
+      "file": "clickhouse/port_forward.py",
+      "sha256": "941aa64fce6c8adaf9ea3491f3b77e7c1a67b4916f23d7a422842d37794f1ea6"
+    },
+    {
+      "file": "clickhouse/proof_cache.py",
+      "sha256": "9639a33f23ff611266a0540bc6a3c78f70aa8a9b455d08a04ae9e2d4584a2810"
+    },
+    {
+      "file": "clickhouse/publication.py",
+      "sha256": "62a2e307f9f0d1ad4338e8b808f68667be85a7e825f4b7f75c60b376d9fffea2"
+    },
+    {
+      "file": "clickhouse/quality.py",
+      "sha256": "88aa0a462af10a9c5ab4bbfa6c8c670b149d916ed1052100a4e3f27a563accd8"
+    },
+    {
+      "file": "clickhouse/quality_overview.py",
+      "sha256": "c3cec550690b237d07c3a65931237fee5af99ac0d3ae1f78e4441d93f9f02090"
+    },
+    {
+      "file": "clickhouse/raw_identity.py",
+      "sha256": "f06c8950ab2aef73f07eb8004a883f9ae137ce53ae44d0c16ecbc448382420ff"
+    },
+    {
+      "file": "clickhouse/registry.py",
+      "sha256": "95346cb98875160010f8d54bd547d5d5713a05444ef78b3101a461459423c990"
+    },
+    {
+      "file": "clickhouse/replay_catalog.py",
+      "sha256": "f4ce8ef177d6e3b0b868aa04c11b167d9bda064541dd37d756621c36d00d44f3"
+    },
+    {
+      "file": "clickhouse/replay_config.py",
+      "sha256": "a32490313f52e8c23aea1dcdb7907376b4997ae1c018aae945e1de19056f2d25"
+    },
+    {
+      "file": "clickhouse/replay_evaluation.py",
+      "sha256": "2003c3884361d4fe114b9999b610d84c528d1882217ee8c8d2657d4529e6be32"
+    },
+    {
+      "file": "clickhouse/replay_publication.py",
+      "sha256": "0f76d9df46b52b5af93525c7f3ac9d622105848f09c56ccaf6cd45663d5800b5"
+    },
+    {
+      "file": "clickhouse/repository.py",
+      "sha256": "f56cf70782962b7f08e81ef7d6d2f5197ac41676a016c2d01939113c56110f83"
+    },
+    {
+      "file": "clickhouse/rows.py",
+      "sha256": "1531aa70e47cd840de2d0af6981ffa0eb89c57f3a2841c9f68b78db31c07930d"
+    },
+    {
+      "file": "clickhouse/schedules.py",
+      "sha256": "2392e571e53c6ffbadd79fa60d4a460935b3442ade908bc24a45fa79e5def248"
+    },
+    {
+      "file": "clickhouse/schema.py",
+      "sha256": "4e060a65d34bacac0ee67c8edfc4b38e43bbf2d60513cd903413ae5f4d806804"
+    },
+    {
+      "file": "clickhouse/stream_store.py",
+      "sha256": "9b64865ccb1d563f9cefb906fcd07ca438b4c400d5978f531f04c0bf27370a3a"
+    },
+    {
+      "file": "clickhouse/threshold.py",
+      "sha256": "8e64aa0121f031340b77929eaef1c8a36d51cfdcf43029ce8e116343738dd0ce"
+    },
+    {
+      "file": "clickhouse/threshold_run.py",
+      "sha256": "b1de9426402c9bd46bac8b2aacd1066da89805947241260a3da89e91b280a3ed"
+    },
+    {
+      "file": "clickhouse/water.py",
+      "sha256": "7cc80d0bee70c51a885b086ce59fd9a136b5317cf5a1aa89c5cd7f04b955e6f5"
+    },
+    {
+      "file": "clickhouse/water_run.py",
+      "sha256": "102164eb8fd82256c4b322ef0c035e5c4464194c7eb435dac790d27e1fb72205"
+    },
+    {
+      "file": "contracts/__init__.py",
+      "sha256": "1f004558c365c4d3b86721415d253d0e1c2ae562c371e9984da355947f09881a"
+    },
+    {
+      "file": "contracts/models.py",
+      "sha256": "644bdf8a64ecfc0c728e3aa57ec209d074d45f4ea519c189934ee15b516a41f7"
+    },
+    {
+      "file": "contracts/serialization.py",
+      "sha256": "51c5bdffbd6feb64b3ccd627365d7c0315543eb3fc39e7b4c1f88b38b30fdcff"
+    },
+    {
+      "file": "db/__init__.py",
+      "sha256": "a6b30c9e865e9282e07660ce0b70f03263c7fa5b99bba747c137c2c44a9044e1"
+    },
+    {
+      "file": "db/catalog.py",
+      "sha256": "3e659debceac4403528e9e8377e1b5d09bbe30908ad742618b5d7c57ce740943"
+    },
+    {
+      "file": "db/climate_adapter.py",
+      "sha256": "db333a8fa5cd2e62063937a7ea5ae4984bdc1b119438774b6c71eac1c2379562"
+    },
+    {
+      "file": "db/climate_mart.py",
+      "sha256": "e4833784bb9a2579e06428e749f7e8a46d55381cba600d2b1d554b672e3bb1be"
+    },
+    {
+      "file": "db/corrections.py",
+      "sha256": "3ad7c73302ac2721e95883a4482c187ac2f00c63d4e66dddda06cded47a54597"
+    },
+    {
+      "file": "db/cost_adapter.py",
+      "sha256": "3e0efe0a9a348ef29dbfe403763f4dff7c24e94dbe3275cb6e7bd1900e6d5548"
+    },
+    {
+      "file": "db/demo_rules.py",
+      "sha256": "2c050627b3f826d6568b3abd15143992f616260ea7335c385093d91b0fb89f93"
+    },
+    {
+      "file": "db/drain_adapter.py",
+      "sha256": "7bf3e0e0bbe74e075fd73609e129f71ffa67e2b6fbd7d0f925b06d9095b10ffa"
+    },
+    {
+      "file": "db/drain_mart.py",
+      "sha256": "1b139294d6ec88e3b44b83e6c990a4c6315aba17cd220ea1951f0735f6fd719c"
+    },
+    {
+      "file": "db/drain_profiles.py",
+      "sha256": "d9b5373606be370aa636939459f72eba61dcad74a58b7d0f3a5238f4e018eae3"
+    },
+    {
+      "file": "db/energy_adapter.py",
+      "sha256": "1bbacc8b1c48d5b5c1734ed35dbb66a260ca54b895ffee31ae6334f82f070952"
+    },
+    {
+      "file": "db/energy_mart.py",
+      "sha256": "bd1d56f9fe3408247d3ec8c61fe4c3f70e40f41caa66256ed2abb5ce5383f3b6"
+    },
+    {
+      "file": "db/harvest_adapter.py",
+      "sha256": "93ed1d51443117b8e9dfa007f0b3f34e5d3893821cc09c708cb47e2264ec50ad"
+    },
+    {
+      "file": "db/harvest_mart.py",
+      "sha256": "970f49dd237a89d25759cc896f3a7408b97c88d7f1a57503c855a209c5e4fead"
+    },
+    {
+      "file": "db/harvest_rules.py",
+      "sha256": "fa3ca079247a6c65c44803a43849d93e5456edc2f3726c0e1421b00eb5198e09"
+    },
+    {
+      "file": "db/irrigation_mart.py",
+      "sha256": "29421c37aa206582702081f246eb01ab99dd1048236193b44a2820197ac23bf4"
+    },
+    {
+      "file": "db/irrigation_rules.py",
+      "sha256": "914f78e8f127dd347bc5f0b668fcbb6a95eae96998438be6365ceffefc976fa8"
+    },
+    {
+      "file": "db/lineage.py",
+      "sha256": "cfd2c980b6c86c160df2044f7eda66e869aeb7d4ef4f8e1fa56005859c17b32f"
+    },
+    {
+      "file": "db/loader.py",
+      "sha256": "a21da5618ef970a9bb9a170b8036d41128ed77cbd6405243a829dd6ff8d31314"
+    },
+    {
+      "file": "db/migrate.py",
+      "sha256": "343e6139d28a1d58361428a6baf5d1e6eab25a207a0ab088cb17487bac3e9f6c"
+    },
+    {
+      "file": "db/pipeline.py",
+      "sha256": "bb350d61e3c51bc0dd3c6907d35920c65fecace0bf8ae40acb2311d6b78ead11"
+    },
+    {
+      "file": "db/quality_overview.py",
+      "sha256": "3e35f9f8fd3128bd39b6541f330432e3eabbb9c605f5144ef46a335dca15389b"
+    },
+    {
+      "file": "db/query_adapter.py",
+      "sha256": "3b04ef982fdf66db61b820a649a7e740c678651bf9cf31236d94389e84db92d0"
+    },
+    {
+      "file": "db/reference_tariff.py",
+      "sha256": "b9fb42dfc16ec2a307dbf93207fe66578233ef38858cee8e8aa199ce0dab03c8"
+    },
+    {
+      "file": "db/replay_catalog.py",
+      "sha256": "a08764e4a12b43d7277688de99f3b2ed3ecaa1fc3fb76e66a07eeba6134e4084"
+    },
+    {
+      "file": "db/rule_schedule.py",
+      "sha256": "f254d0d06dfa630571de63263657019d586731b96528ebeab9a706c7fb1efd04"
+    },
+    {
+      "file": "db/spark_stage.py",
+      "sha256": "ac74c00b44dbc493d2ff165a323663219ce9402c0d40854eb1aa50685bd152ac"
+    },
+    {
+      "file": "diagnostics/__init__.py",
+      "sha256": "3fde1b85a9586c288b2f3abc307ab3c19dd177561af2d9c359d2f0df79cfe3c9"
+    },
+    {
+      "file": "diagnostics/agc_evidence.py",
+      "sha256": "e5a9402b629120aae333ef0ab47b7e2e6ff31dde4ca704b1ab84dac9e04bd8f5"
+    },
+    {
+      "file": "diagnostics/stack_probe.py",
+      "sha256": "f433a7e97f4b7fc7275fc2aef8c08fb091d98318603ebc8ab0fbf1fbc0d029d2"
+    },
+    {
+      "file": "evaluation/__init__.py",
+      "sha256": "4a800292156c6533e79f33edb18278aec9877f601dd0674f10b2c9e68a0ada61"
+    },
+    {
+      "file": "evaluation/br01.py",
+      "sha256": "332f7bf36e491e59dc96f6823ba977f03f512256b65090e8f4e0176ffc8d8d66"
+    },
+    {
+      "file": "evaluation/br02.py",
+      "sha256": "a26847411077cc023e89b62f225ab5931fe607e0302bd2f5a50f3c34f7f0f0bb"
+    },
+    {
+      "file": "evaluation/br03.py",
+      "sha256": "61288320dc36f9428ca3b50fa2d25f6ca7ad2251e985b79a1339e176bb95782d"
+    },
+    {
+      "file": "evaluation/br05.py",
+      "sha256": "ec701f5862cf9709e2529931f4170f79627ac0efe57ece5642d79b46c02f9d5a"
+    },
+    {
+      "file": "ingestion/__init__.py",
+      "sha256": "e260dbe5d8f3db05a7ec5bc59f5ed5224bc9bf8b9e8530761097fe9440cdd6c8"
+    },
+    {
+      "file": "ingestion/fixtures.py",
+      "sha256": "b8fc9862ed0fcbde3df0977afc9738910345fb283ac86dbaa70f0026afb887cb"
+    },
+    {
+      "file": "ingestion/inventory.py",
+      "sha256": "b2307deeaeeb5e43f58c203c945a562d2afa6b0814bd5f1823d12ee9f8dae4a2"
+    },
+    {
+      "file": "ingestion/parser.py",
+      "sha256": "5f36bacbc4b4601980caa6a7fa4f0e67c2fc5a35995fdff39fb4750402db0a4f"
+    },
+    {
+      "file": "ingestion/run.py",
+      "sha256": "c7191766feea9882ec9283fd9ef5f6c6817d02eacb02b139592689c6b218e04d"
+    },
+    {
+      "file": "ingestion/snapshot.py",
+      "sha256": "0876e0b3b17020209675907bb6c4b982b41213c99f3f03ea9be932b201c9c727"
+    },
+    {
+      "file": "kimball/__init__.py",
+      "sha256": "e547b43d912b45fda619763d482a7ae84a2f21c9d52ff2174df3471db4d64bf9"
+    },
+    {
+      "file": "kimball/adapter.py",
+      "sha256": "d8a9c30d905331c44057ccacc78498ef3c94836f59f36589dd4889630307a929"
+    },
+    {
+      "file": "kimball/audit.py",
+      "sha256": "77198b51a995b69af2497a8e9e90ecef9fbfbfc666962327c22d06538905808d"
+    },
+    {
+      "file": "kimball/etl.py",
+      "sha256": "d1c16f8833ce9fa4224c8c38b61e48dd8e549a514d2d965441cf522282f9726c"
+    },
+    {
+      "file": "kimball/schema.py",
+      "sha256": "2e5d9bce4c31225048b47a127dab066daed244eda2436f2e0fd892f176217437"
+    },
+    {
+      "file": "queries/__init__.py",
+      "sha256": "41e8bfa535ff7e2599df9586afeeff8db8f2abf8ea9b1afab805e78d589338d4"
+    },
+    {
+      "file": "queries/catalog.py",
+      "sha256": "175b7ebe8aa70678fe4ed0451b95c0cd451e65b3c5f02de6c324c52d16ffb755"
+    },
+    {
+      "file": "queries/climate.py",
+      "sha256": "5a9e0247aa9d3df0cb9b2e12bc9da355132a4fcaa409c09dc158b396459725bc"
+    },
+    {
+      "file": "queries/cost.py",
+      "sha256": "e920ddc947fc55ada465df198e86e7d501d65037a875f2a9c2b9ccb76829453d"
+    },
+    {
+      "file": "queries/drain.py",
+      "sha256": "1ca66e98aab97b6e9c6e39d464b928bc203d87d89a448a5790f87badd153c123"
+    },
+    {
+      "file": "queries/drain_profile.py",
+      "sha256": "56e8944589eedf1e230532105544c8edef5890c0df9328a353322f6fc93d1656"
+    },
+    {
+      "file": "queries/energy.py",
+      "sha256": "0b688715ab8514dd8df9fa630c078f1781899ee634061e71b3d4f00fed30021a"
+    },
+    {
+      "file": "queries/harvest.py",
+      "sha256": "af82cd66113bcc2391379603852d239aa95a488b591930c8e6b1970ca0539dc7"
+    },
+    {
+      "file": "queries/intensity.py",
+      "sha256": "90ab8a2f616dc1f274eaa32ffc7f251afe257d1a377ccd3faf9451036cf9a258"
+    },
+    {
+      "file": "queries/irrigation.py",
+      "sha256": "a1e478510eda99b66ee09b72f29014d67a8fb5386334d179dbc1cacc92666ae9"
+    },
+    {
+      "file": "queries/reference_tariff.py",
+      "sha256": "b79a64a394f48a4971498887c75b47351089cfb4f33cf4bd59d486b42d7e4bca"
+    },
+    {
+      "file": "queries/rule_duration.py",
+      "sha256": "ca8c37625abc770df1be166627fe7b3842074cdf1bc7131a5782b959f8b81a96"
+    },
+    {
+      "file": "queries/slot_rows.py",
+      "sha256": "86c6277500039b6c26bb781bceca706af61f708147ed54aa795314f4dd8037c5"
+    },
+    {
+      "file": "sensor/__init__.py",
+      "sha256": "3d85b7a5cbfade1a61078baa9e567565d767799e9fc2977b721bf2c4e5949596"
+    },
+    {
+      "file": "sensor/cli.py",
+      "sha256": "c6d0e39c9b5ae493810b555aaf280149a94bc4991c6b091b657b1f6a369e051a"
+    },
+    {
+      "file": "sensor/collector.py",
+      "sha256": "222811a6d45bfb55842224c88f33378b598da7014269bfc35bf6b004cbd79d45"
+    },
+    {
+      "file": "sensor/event_time.py",
+      "sha256": "087aa20e33c5c06118b1a886081af5c805337b437808d6be5c459dcf2c088018"
+    },
+    {
+      "file": "sensor/faults.py",
+      "sha256": "d949b8d36b615cd6d2dcb49c0b6cc5aa4a8ee5d49ccf02dff778e58e05158451"
+    },
+    {
+      "file": "sensor/outbox.py",
+      "sha256": "3d6669b503d1104e88b2f0b53a1a16442b5310e765b143dbf629324ee3dd2a0d"
+    },
+    {
+      "file": "sensor/publication_plan.py",
+      "sha256": "eb083c4c83411e7d7776049d37f4a361a0929a1e44313bb7ddb7b5c1e366d777"
+    },
+    {
+      "file": "sensor/publisher.py",
+      "sha256": "7a6af189b448242fe8f122f23b9d57a1cc23c493588f642513ca77e1c5f7933b"
+    },
+    {
+      "file": "sensor/replay_evaluation.py",
+      "sha256": "bacddee2ecf4daa6d9e696656e2afe87647cda59ff9aea0b170038f76c4f0204"
+    },
+    {
+      "file": "sensor/replay_models.py",
+      "sha256": "15c0c15dbdba8f676983c5d7daeecabfb917a4949b4dc13763eb6cb2c84bfafd"
+    },
+    {
+      "file": "sensor/replay_publication.py",
+      "sha256": "16730c15f7702f0c94a6b5491e514f50018e86a693fe0b92ee63099a47e835ba"
+    },
+    {
+      "file": "sensor/replay_slots.py",
+      "sha256": "048c8dd8e74e6ec7c195dc1a36b27a691eccf39b59245f8a64eac05155030b09"
+    },
+    {
+      "file": "sensor/replay_state.py",
+      "sha256": "9d49cbaa7e2c837c824acf3b1f068ab15add74f4e8ab319ed30ff3546cebba87"
+    },
+    {
+      "file": "sensor/schema.py",
+      "sha256": "f904f76e14615307893fd0e254af62d9308abd1dde98757847c939cf77164d23"
+    },
+    {
+      "file": "sensor/simulator.py",
+      "sha256": "187c34409ddcaf3d0a0c2157823dae038a3570ab9e8ada4b70195902093eaee0"
+    },
+    {
+      "file": "sensor/slot_inputs.py",
+      "sha256": "dedee91c26606fff838930622327f8efa5de0129f5d0b92b3090b7ef30e8003f"
+    },
+    {
+      "file": "sensor/stream_cli.py",
+      "sha256": "ddb9d246f73f70050b36479267133b1991b42bcbf261eb7f6df1bd19cc8429a2"
+    },
+    {
+      "file": "sensor/stream_landing.py",
+      "sha256": "60fa194062150fbfce3e2939afecab9cfd5bf4124829a8251c79679cf9f157ec"
+    },
+    {
+      "file": "sensor/stream_records.py",
+      "sha256": "169279498780538938e95a8f4c56a4b272967b1e89f38f816268ca5e8637ace2"
+    },
+    {
+      "file": "sensor/stream_store.py",
+      "sha256": "139e0819e056b106c7e6be70f42028769d88332e39580f0db80b3c0a39edb906"
+    },
+    {
+      "file": "settings.py",
+      "sha256": "065fac5c85dba4a1b8bcc14baff30a8153a3f96ea1015cd8b6b2ea1c1f6ae709"
+    }
+  ]
+}

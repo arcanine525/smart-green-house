@@ -1,0 +1,67 @@
+{
+	"meta":
+	[
+		{
+			"name": "event_time",
+			"type": "String"
+		},
+		{
+			"name": "current_database",
+			"type": "LowCardinality(String)"
+		},
+		{
+			"name": "exception_code",
+			"type": "Int32"
+		},
+		{
+			"name": "memory_usage",
+			"type": "UInt64"
+		},
+		{
+			"name": "query_id",
+			"type": "String"
+		},
+		{
+			"name": "query_prefix",
+			"type": "String"
+		},
+		{
+			"name": "error",
+			"type": "String"
+		}
+	],
+
+	"data":
+	[
+		{
+			"event_time": "2026-11-07 08:11:36",
+			"current_database": "greenhouse_t51_packaged_20261107",
+			"exception_code": 241,
+			"memory_usage": 17503280,
+			"query_id": "f5f0dac01294490c945009ac8bfb6870",
+			"query_prefix": "SELECT DISTINCT * FROM publication_state WHERE scope_id = 'ffcbed65bf4741c5a491d4dd723df7bd' FORMAT JSON",
+			"error": "Code: 241. DB::Exception: (total) memory limit exceeded: would use 1.18 GiB (attempt to allocate chunk of 9.06 MiB bytes), current RSS: 1.50 GiB, maximum: 1.50 GiB. OvercommitTracker decision: Query was selected to stop by OvercommitTracker: (while reading column payload): (while reading from part \/var\/lib\/clickhouse\/store\/b64\/b6410163-54bf-436d-b700-c496a86bfc21\/all_1_780_216\/"
+		},
+		{
+			"event_time": "2026-11-07 08:10:26",
+			"current_database": "greenhouse_t51_packaged_20261107",
+			"exception_code": 241,
+			"memory_usage": 7999756,
+			"query_id": "cff7f0874ab14f1b9c03f7943c17ab99",
+			"query_prefix": "SELECT DISTINCT * FROM publication_state WHERE scope_id = '695b2c382e3c4c67812994c72ddbedde' FORMAT JSON",
+			"error": "Code: 241. DB::Exception: (total) memory limit exceeded: would use 1.50 GiB (attempt to allocate chunk of 4.49 MiB bytes), current RSS: 1.12 GiB, maximum: 1.50 GiB. OvercommitTracker decision: Query was selected to stop by OvercommitTracker: (while reading column payload): (while reading from part \/var\/lib\/clickhouse\/store\/b64\/b6410163-54bf-436d-b700-c496a86bfc21\/all_1_744_200\/"
+		}
+	],
+
+	"rows": 2,
+
+	"rows_before_limit_at_least": 2,
+
+	"statistics":
+	{
+		"elapsed": 0.008958917,
+		"rows_read": 43915,
+		"bytes_read": 2122127
+	}
+}
+

@@ -1,0 +1,37 @@
+﻿# export=greenhouse-water-csv-v1
+# quantity_unit=L/m²
+# ratio_unit=%
+# coverage_unit=%
+# decimal=exact source scale (no rounding)
+# null=empty field
+# bool=true/false
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# publication=3459db897ead45a28177c60000bd0561
+# finality=provisional
+# committed_at=2026-11-04T06:32:36.212267+00:00
+# cycle=agc-cycle-AICU
+# compartment=AICU
+# requested_window=[2020-03-02,2020-03-09)
+# effective_window=[2020-03-02,2020-03-09)
+# time_basis=source_naive (source timezone unresolved)
+# status=complete
+# expected_days=7
+# accepted_days: irrigation=7,drain=7,paired=7
+# coverage_pct: irrigation=100,drain=100,paired=100
+# paired_l_m2: numerator(drain)=7.8,denominator(irrigation)=22.3
+# day_counts: unknown=0,suspect=0,drain_exceeds_irrigation=0
+# pipeline_run=2cd94424d938493086bc76bd9a6f9a37
+# quality_policy=AGC_QUALITY_V1
+# parser_version=agc-parser-v1
+# code_version=pipeline-v2-irrigation
+# config_bundle_hash=5c4e0ceff12091ef9b674d22ddfc8adea8bdf7780dea87c1669c3fdf47a7b9a0
+# metric_version=br02-summary-v1
+# basis_status=assumed_unverified
+# basis_label=giả định chưa xác minh
+# basis_version_ids=AGC_SHARED_BASIS_V1:AICU:Drain;AGC_SHARED_BASIS_V1:AICU:Irr
+# assumptions=AGC_SHARED_BASIS_V1 v1
+# rule_status=not_configured
+# rule_version=
+iso_year,iso_week,window_start,window_end,expected_days,irrigation_observed_l_m2,drain_observed_l_m2,paired_irrigation_l_m2,paired_drain_l_m2,drain_fraction_pct,irrigation_coverage_pct,drain_coverage_pct,paired_coverage_pct,irrigation_accepted_days,drain_accepted_days,paired_days,unknown_days,suspect_days,drain_exceeds_irrigation_days,outside_rule_days,rule_unknown_days,status,comparison_eligible,basis_status,basis_label,basis_version_ids,assumption_ids,assumption_versions,corrections,rule_status,rule_version,rule_profile_version,rule_profile_label,rule_profile_is_demo,rule_profile_evidence,unit,ratio_unit,time_basis,publication_id,scope_id,snapshot_id,pipeline_run_id,quality_policy_version,parser_version,code_version,config_bundle_hash,metric_version,reason_codes
+2020,10,2020-03-02,2020-03-09,7,22.3,7.8,22.3,7.8,34.977578475336322869955156950672645739910313901345,100,100,100,7,7,7,0,0,0,,,complete,true,assumed_unverified,giả định chưa xác minh,AGC_SHARED_BASIS_V1:AICU:Drain;AGC_SHARED_BASIS_V1:AICU:Irr,AGC_SHARED_BASIS_V1,1,,not_configured,,,,,,L/m²,%,source_naive,3459db897ead45a28177c60000bd0561,agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical,agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68,2cd94424d938493086bc76bd9a6f9a37,AGC_QUALITY_V1,agc-parser-v1,pipeline-v2-irrigation,5c4e0ceff12091ef9b674d22ddfc8adea8bdf7780dea87c1669c3fdf47a7b9a0,br02-summary-v1,

@@ -1,0 +1,127 @@
+{
+  "publication_id": "892b4cd58cdf4d099510974d91fa64ab",
+  "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+  "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "compartments": [
+    {
+      "compartment": "AICU",
+      "cycle_id": "agc-cycle-AICU",
+      "resource_days": 166,
+      "source_sums": {
+        "heat": "252.2952",
+        "elec_high": "169.251583338",
+        "elec_low": "71.004749999"
+      },
+      "baseline_cost_per_m2": "18.47436682700",
+      "baseline_cost_eur": "1154.647926687500",
+      "sensitivity_cost_eur": "1773.539215392000000",
+      "scenario_cost_per_m2": "21.7504301604000",
+      "scenario_cost_eur": "1359.40188502500000",
+      "delta_cost_per_m2": "3.2760633334000",
+      "delta_cost_eur": "204.75395833750000",
+      "baseline_match": true,
+      "scenario_match": true
+    },
+    {
+      "compartment": "Automatoes",
+      "cycle_id": "agc-cycle-Automatoes",
+      "resource_days": 166,
+      "source_sums": {
+        "heat": "185.3139",
+        "elec_high": "155.6",
+        "elec_low": "114.847583336"
+      },
+      "baseline_cost_per_m2": "18.58000870344",
+      "baseline_cost_eur": "1161.250543965000",
+      "sensitivity_cost_eur": "1783.680835530240000",
+      "scenario_cost_per_m2": "21.9883893701280",
+      "scenario_cost_eur": "1374.27433563300000",
+      "delta_cost_per_m2": "3.4083806666880",
+      "delta_cost_eur": "213.02379166800000",
+      "baseline_match": true,
+      "scenario_match": true
+    },
+    {
+      "compartment": "Digilog",
+      "cycle_id": "agc-cycle-Digilog",
+      "resource_days": 166,
+      "source_sums": {
+        "heat": "172.9920",
+        "elec_high": "191.118999997",
+        "elec_low": "132.043249994"
+      },
+      "baseline_cost_per_m2": "22.00708359952",
+      "baseline_cost_eur": "1375.442724970000",
+      "sensitivity_cost_eur": "2112.680025553920000",
+      "scenario_cost_per_m2": "26.1213335994240",
+      "scenario_cost_eur": "1632.58334996400000",
+      "delta_cost_per_m2": "4.1142499999040",
+      "delta_cost_eur": "257.14062499400000",
+      "baseline_match": true,
+      "scenario_match": true
+    },
+    {
+      "compartment": "IUACAAS",
+      "cycle_id": "agc-cycle-IUACAAS",
+      "resource_days": 166,
+      "source_sums": {
+        "heat": "334.8204",
+        "elec_high": "162.021749993",
+        "elec_low": "66.005250000"
+      },
+      "baseline_cost_per_m2": "18.38095931944",
+      "baseline_cost_eur": "1148.809957465000",
+      "sensitivity_cost_eur": "1764.572094666240000",
+      "scenario_cost_per_m2": "21.5013493193280",
+      "scenario_cost_eur": "1343.83433245800000",
+      "delta_cost_per_m2": "3.1203899998880",
+      "delta_cost_eur": "195.02437499300000",
+      "baseline_match": true,
+      "scenario_match": true
+    },
+    {
+      "compartment": "Reference",
+      "cycle_id": "agc-cycle-Reference",
+      "resource_days": 166,
+      "source_sums": {
+        "heat": "471.56",
+        "elec_high": "154.5",
+        "elec_low": "112.7"
+      },
+      "baseline_cost_per_m2": "20.781948",
+      "baseline_cost_eur": "1298.8717500",
+      "sensitivity_cost_eur": "1995.0670080000",
+      "scenario_cost_per_m2": "24.155548",
+      "scenario_cost_eur": "1509.7217500",
+      "delta_cost_per_m2": "3.373600",
+      "delta_cost_eur": "210.8500000",
+      "baseline_match": true,
+      "scenario_match": true
+    },
+    {
+      "compartment": "TheAutomators",
+      "cycle_id": "agc-cycle-TheAutomators",
+      "resource_days": 166,
+      "source_sums": {
+        "heat": "362.60",
+        "elec_high": "177.1",
+        "elec_low": "107.7"
+      },
+      "baseline_cost_per_m2": "21.485580",
+      "baseline_cost_eur": "1342.8487500",
+      "sensitivity_cost_eur": "2062.6156800000",
+      "scenario_cost_per_m2": "25.180780",
+      "scenario_cost_eur": "1573.7987500",
+      "delta_cost_per_m2": "3.695200",
+      "delta_cost_eur": "230.9500000",
+      "baseline_match": true,
+      "scenario_match": true
+    }
+  ],
+  "canonical_rates": {
+    "heat": "0.0083",
+    "elec_high": "0.08",
+    "elec_low": "0.04"
+  },
+  "all_match": true
+}

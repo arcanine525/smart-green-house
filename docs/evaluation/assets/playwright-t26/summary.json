@@ -1,0 +1,723 @@
+{
+  "kind": "automated_playwright_walkthrough",
+  "artifact_root": "tmp/walkthrough/20261106T173153Z-9455/videos",
+  "human_participants": 0,
+  "videos": [
+    {
+      "br": "01",
+      "title": "Khí hậu",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "42be37cc6f63525943e129d0dd23376652ae95cc82119174bfe2c6c280a035cb",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "demo_database": "test_walkthrough_20261106T173153Z_9455",
+      "publication": "df3e4bcbacab45a5b86fc37d2f53c00a",
+      "playwright": "1.65.0",
+      "commit": "ae9303dcced49cd7eec334abe081dc1ef1733518",
+      "video": {
+        "file": "br-01.mp4",
+        "sha256": "f9db74a2b343828de55a26cb3fe8ccc4a67853768647f380d523765d52957fa1",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 240.16,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/climate-IUACAAS-2020-05-21_2020-05-22-requested-summary.csv",
+          "sha256": "e60862d10cd9866351d1e05eb2fdc25552bff059f805e33be22719c079e1c56b",
+          "bytes": 2245
+        },
+        {
+          "file": "downloads/climate-IUACAAS-2020-05-21_2020-05-22-requested-episodes.csv",
+          "sha256": "64cb072c3efb89983e0f9520c885b2a9d2384fcb39f8b0e7e18ac2a02747b3b5",
+          "bytes": 3395
+        },
+        {
+          "file": "downloads/climate-IUACAAS-2020-05-21_2020-05-22-requested-result.json",
+          "sha256": "faa93bc29d4ab0bdce12ba866803444d0fea43db1629780306e3300f2ff85a8c",
+          "bytes": 64566
+        }
+      ],
+      "step_count": 16,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở màn hình Khí hậu",
+          "start_seconds": 1.858
+        },
+        {
+          "step": 2,
+          "title": "Xác nhận publication lịch sử",
+          "start_seconds": 13.494
+        },
+        {
+          "step": 3,
+          "title": "Chọn khoang và vụ IUACAAS",
+          "start_seconds": 22.899
+        },
+        {
+          "step": 4,
+          "title": "Chọn rule khí hậu demo",
+          "start_seconds": 37.306
+        },
+        {
+          "step": 5,
+          "title": "Lọc các đợt nhiệt độ",
+          "start_seconds": 51.018
+        },
+        {
+          "step": 6,
+          "title": "Đọc KPI và coverage",
+          "start_seconds": 61.011
+        },
+        {
+          "step": 7,
+          "title": "Chọn đợt dài nhất",
+          "start_seconds": 68.337
+        },
+        {
+          "step": 8,
+          "title": "Tương tác biểu đồ nhiệt độ",
+          "start_seconds": 77.348
+        },
+        {
+          "step": 9,
+          "title": "Mở nguồn của đỉnh lệch",
+          "start_seconds": 88.181
+        },
+        {
+          "step": 10,
+          "title": "So sánh basis realized",
+          "start_seconds": 96.184
+        },
+        {
+          "step": 11,
+          "title": "Trở lại basis requested",
+          "start_seconds": 112.794
+        },
+        {
+          "step": 12,
+          "title": "Giới hạn cửa sổ 21–22/05/2020",
+          "start_seconds": 126.466
+        },
+        {
+          "step": 13,
+          "title": "Đọc lại danh sách và trace sau lọc",
+          "start_seconds": 166.516
+        },
+        {
+          "step": 14,
+          "title": "Xuất summary và danh sách đợt",
+          "start_seconds": 174.191
+        },
+        {
+          "step": 15,
+          "title": "Xuất JSON kết quả có version",
+          "start_seconds": 198.717
+        },
+        {
+          "step": 16,
+          "title": "Hoàn tất BR-01",
+          "start_seconds": 212.591
+        }
+      ]
+    },
+    {
+      "br": "02",
+      "title": "Tưới và drain",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "42be37cc6f63525943e129d0dd23376652ae95cc82119174bfe2c6c280a035cb",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "demo_database": "test_walkthrough_20261106T173153Z_9455",
+      "publication": "df3e4bcbacab45a5b86fc37d2f53c00a",
+      "playwright": "1.65.0",
+      "commit": "ae9303dcced49cd7eec334abe081dc1ef1733518",
+      "video": {
+        "file": "br-02.mp4",
+        "sha256": "881e0369896f39673611c93ab9919d6849fc17939f7646a9eabe8d8a680c0461",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 134.88,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/water-Automatoes-2020-03-02_2020-03-03-days.csv",
+          "sha256": "0c299f1b032817282c363248a1fea6e94a1ae3fe6871ac5314e0a50cf68455bc",
+          "bytes": 3405
+        },
+        {
+          "file": "downloads/water-Automatoes-2020-03-02_2020-03-03-weekly.csv",
+          "sha256": "42a478b779ebd578df421a12707f2a7e26db33f0ba352f8a859644a7b84d44c7",
+          "bytes": 3269
+        },
+        {
+          "file": "downloads/water-Automatoes-2020-03-02_2020-03-03-summary.json",
+          "sha256": "0138c146ee4c3afc0f5d13e7c72a5df948367fbdab2e233cc4d8a88b06ebdfcd",
+          "bytes": 2721
+        }
+      ],
+      "step_count": 14,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở màn hình Tưới và drain",
+          "start_seconds": 3.983
+        },
+        {
+          "step": 2,
+          "title": "Xác nhận publication lịch sử",
+          "start_seconds": 12.157
+        },
+        {
+          "step": 3,
+          "title": "Chọn khoang và vụ Automatoes",
+          "start_seconds": 21.892
+        },
+        {
+          "step": 4,
+          "title": "Đọc dữ liệu toàn vụ",
+          "start_seconds": 30.502
+        },
+        {
+          "step": 5,
+          "title": "Khám phá biểu đồ ngày",
+          "start_seconds": 37.805
+        },
+        {
+          "step": 6,
+          "title": "Lọc ngày 02–03/03/2020",
+          "start_seconds": 48.885
+        },
+        {
+          "step": 7,
+          "title": "Đối chiếu tổng và tỷ lệ paired",
+          "start_seconds": 64.101
+        },
+        {
+          "step": 8,
+          "title": "Chọn rule demo có version",
+          "start_seconds": 71.893
+        },
+        {
+          "step": 9,
+          "title": "Đọc tổng hợp theo tuần",
+          "start_seconds": 80.19
+        },
+        {
+          "step": 10,
+          "title": "Chọn một ngày để xem chi tiết",
+          "start_seconds": 87.712
+        },
+        {
+          "step": 11,
+          "title": "Mở lineage về CSV gốc",
+          "start_seconds": 96.719
+        },
+        {
+          "step": 12,
+          "title": "Xuất CSV ngày",
+          "start_seconds": 104.652
+        },
+        {
+          "step": 13,
+          "title": "Xuất tổng hợp tuần và JSON",
+          "start_seconds": 112.609
+        },
+        {
+          "step": 14,
+          "title": "Hoàn tất BR-02",
+          "start_seconds": 122.218
+        }
+      ]
+    },
+    {
+      "br": "03",
+      "title": "EC / pH drain",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "e2cc4a6b507f313ffa53b7c00737337042c45ff0ee23432c88e2f6c164cf3168",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "demo_database": "test_walkthrough_20261106T173153Z_9455",
+      "publication": "df3e4bcbacab45a5b86fc37d2f53c00a",
+      "playwright": "1.65.0",
+      "commit": "ae9303dcced49cd7eec334abe081dc1ef1733518",
+      "video": {
+        "file": "br-03.mp4",
+        "sha256": "6d858dd3758bc5e34e3165b5bbab9779d706ab94645e0cfd7730be63a9840678",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 161.68,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/drain-Reference-2020-03-02-2020-03-04-summary.csv",
+          "sha256": "0a7124d071837955ed202bc6bca6d271c68f14409a40986e99fc0a5105402677",
+          "bytes": 2334
+        },
+        {
+          "file": "downloads/drain-Reference-2020-03-02-2020-03-04-episodes.csv",
+          "sha256": "bae156ff8f627858f5dade5a7fdda4dc1832f024a1128f508e04492def1f47d1",
+          "bytes": 2267
+        },
+        {
+          "file": "downloads/drain-Reference-2020-03-02-2020-03-04-result.json",
+          "sha256": "84a814f2f6ce3275381c0bad9b0bf3067ab7d8fe5e8434381318440b064968f2",
+          "bytes": 333604
+        }
+      ],
+      "step_count": 15,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở màn hình EC / pH drain",
+          "start_seconds": 2.018
+        },
+        {
+          "step": 2,
+          "title": "Xác nhận publication lịch sử",
+          "start_seconds": 10.921
+        },
+        {
+          "step": 3,
+          "title": "Chọn khoang và vụ Reference",
+          "start_seconds": 20.482
+        },
+        {
+          "step": 4,
+          "title": "Chọn profile EC/pH demo",
+          "start_seconds": 30.196
+        },
+        {
+          "step": 5,
+          "title": "Lọc đợt EC",
+          "start_seconds": 39.922
+        },
+        {
+          "step": 6,
+          "title": "Đọc KPI EC và coverage",
+          "start_seconds": 48.006
+        },
+        {
+          "step": 7,
+          "title": "Xem đợt EC dài nhất",
+          "start_seconds": 55.347
+        },
+        {
+          "step": 8,
+          "title": "Khám phá trace đợt EC",
+          "start_seconds": 64.262
+        },
+        {
+          "step": 9,
+          "title": "Chuyển sang các đợt pH",
+          "start_seconds": 75.078
+        },
+        {
+          "step": 10,
+          "title": "Trở lại EC và chọn cửa sổ nhỏ",
+          "start_seconds": 83.144
+        },
+        {
+          "step": 11,
+          "title": "Chọn ngày nguồn",
+          "start_seconds": 105.635
+        },
+        {
+          "step": 12,
+          "title": "Chọn slot nguồn và xác minh lineage",
+          "start_seconds": 116.449
+        },
+        {
+          "step": 13,
+          "title": "Xuất summary và đợt drain",
+          "start_seconds": 127.285
+        },
+        {
+          "step": 14,
+          "title": "Xuất JSON kết quả drain",
+          "start_seconds": 137.46
+        },
+        {
+          "step": 15,
+          "title": "Hoàn tất BR-03",
+          "start_seconds": 145.768
+        }
+      ]
+    },
+    {
+      "br": "04",
+      "title": "Năng lượng",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "e2cc4a6b507f313ffa53b7c00737337042c45ff0ee23432c88e2f6c164cf3168",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "demo_database": "test_walkthrough_20261106T173153Z_9455",
+      "publication": "df3e4bcbacab45a5b86fc37d2f53c00a",
+      "playwright": "1.65.0",
+      "commit": "ae9303dcced49cd7eec334abe081dc1ef1733518",
+      "video": {
+        "file": "br-04.mp4",
+        "sha256": "4c9ee87afb598423a27cecd12f8469600e9206f409c85b27e57abbccd2c1fa2c",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 122.04,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/energy-Automatoes-2020-03-02-2020-03-04-summary.csv",
+          "sha256": "2081297f23153d94a5f75942c0f783edad9dd8ca3b4c3e40683e1fa9c8ef7f1c",
+          "bytes": 1841
+        },
+        {
+          "file": "downloads/energy-Automatoes-2020-03-02-2020-03-04-quantities.csv",
+          "sha256": "4f192733e1ee83a9720e48fa952548e174cb5ea6300f324a2c8f5a82ca6ce36c",
+          "bytes": 6010
+        },
+        {
+          "file": "downloads/energy-Automatoes-2020-03-02-2020-03-04-result.json",
+          "sha256": "387608298bd9a94d419012da7a12b4f1b83aa17879afc9a38b51378dff1ec59a",
+          "bytes": 8236
+        },
+        {
+          "file": "downloads/energy-Automatoes-2020-03-02-2020-03-04-portfolio.json",
+          "sha256": "d5c5f9c8e275be81402516a43311b9d007a690535e46eafd70a970aeb0ce0656",
+          "bytes": 440786
+        }
+      ],
+      "step_count": 13,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở màn hình Năng lượng",
+          "start_seconds": 3.284
+        },
+        {
+          "step": 2,
+          "title": "Xác nhận publication lịch sử",
+          "start_seconds": 11.583
+        },
+        {
+          "step": 3,
+          "title": "Chọn khoang và vụ Automatoes",
+          "start_seconds": 21.125
+        },
+        {
+          "step": 4,
+          "title": "Đọc năng lượng và cường độ toàn vụ",
+          "start_seconds": 30.465
+        },
+        {
+          "step": 5,
+          "title": "Khám phá so sánh các khoang",
+          "start_seconds": 37.844
+        },
+        {
+          "step": 6,
+          "title": "Mở công thức và đóng góp",
+          "start_seconds": 47.261
+        },
+        {
+          "step": 7,
+          "title": "Lọc hai ngày 02–03/03/2020",
+          "start_seconds": 55.253
+        },
+        {
+          "step": 8,
+          "title": "Đối chiếu trường hợp mẫu số bằng 0",
+          "start_seconds": 70.289
+        },
+        {
+          "step": 9,
+          "title": "Chọn revision đóng góp",
+          "start_seconds": 77.582
+        },
+        {
+          "step": 10,
+          "title": "Xác minh lineage raw",
+          "start_seconds": 85.56
+        },
+        {
+          "step": 11,
+          "title": "Xuất summary và quantities",
+          "start_seconds": 93.536
+        },
+        {
+          "step": 12,
+          "title": "Xuất JSON cường độ và portfolio",
+          "start_seconds": 103.167
+        },
+        {
+          "step": 13,
+          "title": "Hoàn tất BR-04",
+          "start_seconds": 112.7
+        }
+      ]
+    },
+    {
+      "br": "05",
+      "title": "Thu hoạch A / B",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "e2cc4a6b507f313ffa53b7c00737337042c45ff0ee23432c88e2f6c164cf3168",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "demo_database": "test_walkthrough_20261106T173153Z_9455",
+      "publication": "df3e4bcbacab45a5b86fc37d2f53c00a",
+      "playwright": "1.65.0",
+      "commit": "ae9303dcced49cd7eec334abe081dc1ef1733518",
+      "video": {
+        "file": "br-05.mp4",
+        "sha256": "989a6d06a568e3af42953619e7acd4b995f1deb791e5dfe3a8a61ffc263b9df9",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 153.2,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/harvest-Digilog-2020-02-19_2020-02-19-records.csv",
+          "sha256": "dcd490fdcb177fddfc41bcbb307118b1e3f61f54ba4bd9ef6ba962f3e77e1dfe",
+          "bytes": 3844
+        },
+        {
+          "file": "downloads/harvest-Digilog-2020-02-19_2020-02-19-weekly.csv",
+          "sha256": "3e67599c3bbb92f0d386d70a19b4c21e8c95e9e1d0f527c9a158d91203683198",
+          "bytes": 4748
+        },
+        {
+          "file": "downloads/harvest-Digilog-2020-02-19_2020-02-19-summary.json",
+          "sha256": "e38bb083afe44969ebe95b1a054b2e94a72502960e78a479d2334676dd0dcb93",
+          "bytes": 4615
+        }
+      ],
+      "step_count": 15,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở màn hình Thu hoạch A / B",
+          "start_seconds": 3.016
+        },
+        {
+          "step": 2,
+          "title": "Xác nhận publication lịch sử",
+          "start_seconds": 11.055
+        },
+        {
+          "step": 3,
+          "title": "Chọn khoang và vụ Digilog",
+          "start_seconds": 20.576
+        },
+        {
+          "step": 4,
+          "title": "Đọc sản lượng và lũy kế toàn vụ",
+          "start_seconds": 29.241
+        },
+        {
+          "step": 5,
+          "title": "Khám phá biểu đồ thu hoạch",
+          "start_seconds": 36.532
+        },
+        {
+          "step": 6,
+          "title": "Chọn ngưỡng loại B demo",
+          "start_seconds": 47.407
+        },
+        {
+          "step": 7,
+          "title": "Lọc ngày 19/02/2020",
+          "start_seconds": 56.057
+        },
+        {
+          "step": 8,
+          "title": "Đối chiếu A, B và share B",
+          "start_seconds": 71.587
+        },
+        {
+          "step": 9,
+          "title": "Đổi grain từ record sang day",
+          "start_seconds": 78.877
+        },
+        {
+          "step": 10,
+          "title": "Xem kết luận theo week",
+          "start_seconds": 86.908
+        },
+        {
+          "step": 11,
+          "title": "Trở lại record và chọn lần thu",
+          "start_seconds": 94.927
+        },
+        {
+          "step": 12,
+          "title": "Mở lineage record accepted",
+          "start_seconds": 105.425
+        },
+        {
+          "step": 13,
+          "title": "Xuất lần thu và tổng hợp tuần",
+          "start_seconds": 113.94
+        },
+        {
+          "step": 14,
+          "title": "Xuất JSON có metadata",
+          "start_seconds": 125.978
+        },
+        {
+          "step": 15,
+          "title": "Hoàn tất BR-05",
+          "start_seconds": 135.287
+        }
+      ]
+    },
+    {
+      "br": "06",
+      "title": "Chi phí và kịch bản giá",
+      "status": "passed",
+      "kind": "automated_playwright_walkthrough",
+      "script_sha256": "63cc5797ed7592e150a0170f6163a49e88e4eeee014c732e1a646d0613947b71",
+      "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+      "human_participants": 0,
+      "demo_database": "test_walkthrough_20261106T173153Z_9455",
+      "publication": "df3e4bcbacab45a5b86fc37d2f53c00a",
+      "playwright": "1.65.0",
+      "commit": "ae9303dcced49cd7eec334abe081dc1ef1733518",
+      "video": {
+        "file": "br-06.mp4",
+        "sha256": "ebcad4ab00762ef782e9e03370074e38bda343382902c3b89ef3a8f1c159e1c8",
+        "width": 1920,
+        "height": 1080,
+        "duration_seconds": 188.32,
+        "audio": false
+      },
+      "downloads": [
+        {
+          "file": "downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-bf93f84b4e9f4ea8880f189b14842434_v1-summary.csv",
+          "sha256": "5662e42d4d40514faed0908cf36879ea4652d2e814cf0cbc43feb74bd5a03e87",
+          "bytes": 2708
+        },
+        {
+          "file": "downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-bf93f84b4e9f4ea8880f189b14842434_v1-comparison.json",
+          "sha256": "17914e8003072bc8c84c6ddd17dab75ed3244cfb471bd955165a1b569ea83386",
+          "bytes": 37845
+        },
+        {
+          "file": "downloads/cost-Automatoes-2020-03-02-2020-03-04-scenario_req-bf93f84b4e9f4ea8880f189b14842434_v1-scenario.json",
+          "sha256": "ce39fa521bf8d1650ac1c98e457ac7ae22b56d332cf415906deddce49ee73a02",
+          "bytes": 3007
+        }
+      ],
+      "step_count": 20,
+      "chapters": [
+        {
+          "step": 1,
+          "title": "Mở màn hình Chi phí và kịch bản giá",
+          "start_seconds": 1.946
+        },
+        {
+          "step": 2,
+          "title": "Xác nhận publication lịch sử",
+          "start_seconds": 10.005
+        },
+        {
+          "step": 3,
+          "title": "Chọn khoang và vụ Automatoes",
+          "start_seconds": 19.422
+        },
+        {
+          "step": 4,
+          "title": "Lọc hai ngày 02–03/03/2020",
+          "start_seconds": 27.979
+        },
+        {
+          "step": 5,
+          "title": "Đọc baseline lịch sử",
+          "start_seconds": 42.95
+        },
+        {
+          "step": 6,
+          "title": "Xem giá có hiệu lực",
+          "start_seconds": 50.2
+        },
+        {
+          "step": 7,
+          "title": "Mở phép nhân theo ngày",
+          "start_seconds": 58.189
+        },
+        {
+          "step": 8,
+          "title": "Đổi tổng hợp từ ngày sang tuần",
+          "start_seconds": 66.24
+        },
+        {
+          "step": 9,
+          "title": "Trở lại grain ngày",
+          "start_seconds": 74.263
+        },
+        {
+          "step": 10,
+          "title": "Truy vết nguồn năng lượng",
+          "start_seconds": 83.002
+        },
+        {
+          "step": 11,
+          "title": "Mở form tạo kịch bản",
+          "start_seconds": 93.387
+        },
+        {
+          "step": 12,
+          "title": "Đặt tên scenario mới",
+          "start_seconds": 101.798
+        },
+        {
+          "step": 13,
+          "title": "Giữ giá nhiệt; tăng điện cao điểm 20%",
+          "start_seconds": 109.096
+        },
+        {
+          "step": 14,
+          "title": "Tăng điện thấp điểm 20%",
+          "start_seconds": 118.602
+        },
+        {
+          "step": 15,
+          "title": "Lưu kịch bản bất biến",
+          "start_seconds": 128.105
+        },
+        {
+          "step": 16,
+          "title": "Đọc baseline, scenario và chênh lệch",
+          "start_seconds": 136.146
+        },
+        {
+          "step": 17,
+          "title": "Khám phá đóng góp thành phần",
+          "start_seconds": 143.432
+        },
+        {
+          "step": 18,
+          "title": "Bỏ chọn rồi mở lại scenario đã lưu",
+          "start_seconds": 152.343
+        },
+        {
+          "step": 19,
+          "title": "Xuất kết quả kịch bản",
+          "start_seconds": 162.7
+        },
+        {
+          "step": 20,
+          "title": "Hoàn tất BR-06",
+          "start_seconds": 175.505
+        }
+      ]
+    }
+  ]
+}

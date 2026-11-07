@@ -1,0 +1,313 @@
+{
+  "status": "completed",
+  "tables": [
+    {
+      "table": "source_measure",
+      "seconds": 2.9594775010000376
+    },
+    {
+      "table": "source_revision",
+      "seconds": 1.1867900839997674
+    },
+    {
+      "table": "threshold_cycle",
+      "seconds": 0.0043554589992709225
+    },
+    {
+      "table": "threshold_header",
+      "seconds": 0.0022224159993129433
+    },
+    {
+      "table": "threshold_measure",
+      "seconds": 0.9899710419995245
+    }
+  ],
+  "deduplicate": false,
+  "before": [
+    {
+      "table": "configuration_envelope",
+      "parts": 1,
+      "rows": 299,
+      "bytes": 188068
+    },
+    {
+      "table": "energy_basis",
+      "parts": 1,
+      "rows": 30,
+      "bytes": 3225
+    },
+    {
+      "table": "energy_cycle",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 1296
+    },
+    {
+      "table": "energy_header",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 653
+    },
+    {
+      "table": "energy_measure",
+      "parts": 1,
+      "rows": 2988,
+      "bytes": 151741
+    },
+    {
+      "table": "harvest_cycle",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 1296
+    },
+    {
+      "table": "harvest_header",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 785
+    },
+    {
+      "table": "harvest_measure",
+      "parts": 1,
+      "rows": 278,
+      "bytes": 34443
+    },
+    {
+      "table": "harvest_state",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 2053
+    },
+    {
+      "table": "load_file",
+      "parts": 1,
+      "rows": 45,
+      "bytes": 9512
+    },
+    {
+      "table": "load_issue",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 2081
+    },
+    {
+      "table": "load_member",
+      "parts": 1,
+      "rows": 287989,
+      "bytes": 18493274
+    },
+    {
+      "table": "load_receipt",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 1469
+    },
+    {
+      "table": "publication_state",
+      "parts": 1,
+      "rows": 4,
+      "bytes": 506795
+    },
+    {
+      "table": "source_disposition",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 2421
+    },
+    {
+      "table": "source_measure",
+      "parts": 3,
+      "rows": 14062934,
+      "bytes": 122200458
+    },
+    {
+      "table": "source_revision",
+      "parts": 8,
+      "rows": 287989,
+      "bytes": 200698479
+    },
+    {
+      "table": "threshold_cycle",
+      "parts": 2,
+      "rows": 12,
+      "bytes": 2744
+    },
+    {
+      "table": "threshold_header",
+      "parts": 2,
+      "rows": 2,
+      "bytes": 1481
+    },
+    {
+      "table": "threshold_measure",
+      "parts": 7,
+      "rows": 2868540,
+      "bytes": 69925862
+    },
+    {
+      "table": "water_cycle",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 1296
+    },
+    {
+      "table": "water_header",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 832
+    },
+    {
+      "table": "water_measure",
+      "parts": 1,
+      "rows": 1992,
+      "bytes": 103565
+    }
+  ],
+  "after": [
+    {
+      "table": "configuration_envelope",
+      "parts": 1,
+      "rows": 299,
+      "bytes": 188068
+    },
+    {
+      "table": "energy_basis",
+      "parts": 1,
+      "rows": 30,
+      "bytes": 3225
+    },
+    {
+      "table": "energy_cycle",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 1296
+    },
+    {
+      "table": "energy_header",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 653
+    },
+    {
+      "table": "energy_measure",
+      "parts": 1,
+      "rows": 2988,
+      "bytes": 151741
+    },
+    {
+      "table": "harvest_cycle",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 1296
+    },
+    {
+      "table": "harvest_header",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 785
+    },
+    {
+      "table": "harvest_measure",
+      "parts": 1,
+      "rows": 278,
+      "bytes": 34443
+    },
+    {
+      "table": "harvest_state",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 2053
+    },
+    {
+      "table": "load_file",
+      "parts": 1,
+      "rows": 45,
+      "bytes": 9512
+    },
+    {
+      "table": "load_issue",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 2081
+    },
+    {
+      "table": "load_member",
+      "parts": 1,
+      "rows": 287989,
+      "bytes": 18493274
+    },
+    {
+      "table": "load_receipt",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 1469
+    },
+    {
+      "table": "publication_state",
+      "parts": 1,
+      "rows": 4,
+      "bytes": 506795
+    },
+    {
+      "table": "source_disposition",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 2421
+    },
+    {
+      "table": "source_measure",
+      "parts": 1,
+      "rows": 14062934,
+      "bytes": 122770362
+    },
+    {
+      "table": "source_revision",
+      "parts": 1,
+      "rows": 287989,
+      "bytes": 200647784
+    },
+    {
+      "table": "threshold_cycle",
+      "parts": 1,
+      "rows": 12,
+      "bytes": 1419
+    },
+    {
+      "table": "threshold_header",
+      "parts": 1,
+      "rows": 2,
+      "bytes": 779
+    },
+    {
+      "table": "threshold_measure",
+      "parts": 1,
+      "rows": 2868540,
+      "bytes": 69904189
+    },
+    {
+      "table": "water_cycle",
+      "parts": 1,
+      "rows": 6,
+      "bytes": 1296
+    },
+    {
+      "table": "water_header",
+      "parts": 1,
+      "rows": 1,
+      "bytes": 832
+    },
+    {
+      "table": "water_measure",
+      "parts": 1,
+      "rows": 1992,
+      "bytes": 103565
+    }
+  ],
+  "fingerprint_samples": [
+    "bd17c05063f3315e3978282d6019bc81e5bd38bb0e9b6b245a08c1117ea1dbd9",
+    "bd17c05063f3315e3978282d6019bc81e5bd38bb0e9b6b245a08c1117ea1dbd9",
+    "bd17c05063f3315e3978282d6019bc81e5bd38bb0e9b6b245a08c1117ea1dbd9"
+  ],
+  "physical_rows_unchanged": true,
+  "seconds_including_20s_stability_probe": 25.21785072000057
+}

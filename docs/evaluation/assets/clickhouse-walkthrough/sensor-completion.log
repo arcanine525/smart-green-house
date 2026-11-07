@@ -1,0 +1,14 @@
+{"status": "passed", "phase": "complete", "backend": "clickhouse", "replay_id": "walkthrough-live-c4b35d584519", "publication_id": "a17563ff87c9589ddba705457a98654ab359d28bc0d7d274837463b67616e902", "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:sim-walkthrough-live-c4b35d584519", "accepted_events": 30, "original_envelopes_exact": true, "complete": true, "checksum_verified": true, "business_fingerprint": "7783fdfa2f63909171709dea99b43bb5e6956af13fde3dca15ce4d1030d1f675", "source_sha256": "3415b31b7958c735f836c7fa8f890a93020786be5c86dc2e7c42771fb0a02cd3", "spark_progress": [[1, 20]]}
+
+ Container gh-ch-repro-20261107032510-rebuilt-ch-broker-1 Running 
+ Container gh-ch-repro-20261107032510-rebuilt-ch-broker-1 Waiting 
+ Container gh-ch-repro-20261107032510-rebuilt-ch-broker-1 Healthy 
+ Container gh-ch-repro-20261107032510-rebuilt-ch-job-run-3cd3eec3f3f9 Creating 
+ Container gh-ch-repro-20261107032510-rebuilt-ch-job-run-3cd3eec3f3f9 Created 
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/07 09:12:09 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/07 09:12:15 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+[Stage 0:>                                                          (0 + 1) / 1]

@@ -1,0 +1,442 @@
+{
+  "br": "03",
+  "title": "EC / pH drain",
+  "status": "passed",
+  "kind": "automated_playwright_walkthrough",
+  "script_sha256": "da45348dc97433114d6bbd319cff7407704f54b167042aef034e74b8d9e1eee8",
+  "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+  "human_participants": 0,
+  "business_requirements": [
+    "03"
+  ],
+  "backend": "clickhouse",
+  "pace": 1,
+  "context_sha256": "59412651743aa986b4c5e686f51338c95d986b4394d0d145a3c568aed7c39cc0",
+  "configuration_hash": "0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7",
+  "source_revision": {
+    "ui_image": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b",
+    "fixed_images": {
+      "ui": {
+        "tag": "greenhouse-ch-walkthrough-ui:20261107-cold-fix",
+        "id": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b"
+      },
+      "processing": {
+        "tag": "greenhouse-ch-walkthrough-processing:20261107-cold-fix",
+        "id": "sha256:9511c439faba6542f282c4954fe7d64c55702a453f39d4c927aa1fb9301d67c1"
+      },
+      "client": {
+        "tag": "greenhouse-ch-walkthrough-client:20261107-cold-fix",
+        "id": "sha256:dbdca0b36ca689bbc4044896f3f1b5dfdb7ae4cc2c64d838ff3f6d5db48ff045"
+      }
+    },
+    "source_changes_relative_to_commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+    "source_changes": {
+      "src/greenhouse/clickhouse/client.py": "4ccb3ce69dbbb7278e4935419ec5dd78cfcc07f80a6b704884be3ec44d9089df",
+      "src/greenhouse/clickhouse/threshold.py": "b1400cf8274589ed94caeabc43df63d803524f6683362232eae1c02f90e5b035"
+    },
+    "app_postgres_credentials_present": false,
+    "app_networks": [
+      "gh-ch-repro-20261107032510-rebuilt_backend"
+    ],
+    "server_config_sha256": "5fba87641207e72842b46634ff87c0c8452fc7c86a5a1227a8efb34960551625",
+    "metric_log_collector_disabled": true,
+    "legacy_metric_log_merge_limit": 0
+  },
+  "external_http_blocked": true,
+  "trace_options": {
+    "screenshots": false,
+    "snapshots": true,
+    "sources": true
+  },
+  "demo_database": "greenhouse_repro",
+  "publication": "4b08bd51c092465783304f887d766d47",
+  "playwright": "1.65.0",
+  "commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+  "video": {
+    "file": "br-03.mp4",
+    "sha256": "91b975e18629d533103b3cf1f66990f4af041ba42c11a39349b07e7c8cfaa801",
+    "width": 1920,
+    "height": 1080,
+    "duration_seconds": 193.44,
+    "audio": false
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": "Mở màn hình EC / pH drain",
+      "detail": "Chọn BR ở thanh bên; các thao tác tiếp theo chạy trên bản sao dữ liệu AGC.",
+      "start_seconds": 7.195,
+      "end_seconds": 20.767,
+      "screenshot": "step-01.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\nNULL",
+        "EC ngoài dải %\n\nNULL",
+        "EC coverage %\n\n0,00",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\nNULL",
+        "PH ngoài dải %\n\nNULL",
+        "PH coverage %\n\n0,00",
+        "PH suspect (phút)\n\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\nNULL",
+        "OR ngoài dải %\n\nNULL",
+        "Coverage giao chung %\n\n0,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n553,50",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n211,40",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 2,
+      "title": "Xác nhận publication lịch sử",
+      "detail": "Một publication cố định cho bộ lọc, chỉ số, chi tiết và file xuất.",
+      "start_seconds": 20.768,
+      "end_seconds": 30.335,
+      "screenshot": "step-02.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\nNULL",
+        "EC ngoài dải %\n\nNULL",
+        "EC coverage %\n\n0,00",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\nNULL",
+        "PH ngoài dải %\n\nNULL",
+        "PH coverage %\n\n0,00",
+        "PH suspect (phút)\n\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\nNULL",
+        "OR ngoài dải %\n\nNULL",
+        "Coverage giao chung %\n\n0,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n553,50",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n211,40",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 3,
+      "title": "Chọn khoang và vụ Reference",
+      "detail": "Khoang/vụ xác định phạm vi phân tích; chọn lại sẽ cập nhật bộ lọc liên quan.",
+      "start_seconds": 30.335,
+      "end_seconds": 43.668,
+      "screenshot": "step-03.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\nNULL",
+        "EC ngoài dải %\n\nNULL",
+        "EC coverage %\n\n0,00",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\nNULL",
+        "PH ngoài dải %\n\nNULL",
+        "PH coverage %\n\n0,00",
+        "PH suspect (phút)\n\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\nNULL",
+        "OR ngoài dải %\n\nNULL",
+        "Coverage giao chung %\n\n0,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n788,60",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n350,30",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 4,
+      "title": "Chọn profile EC/pH demo",
+      "detail": "Profile có version tường minh, được dùng để đánh giá drain process computer.",
+      "start_seconds": 43.67,
+      "end_seconds": 57.652,
+      "screenshot": "step-04.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n218465,00",
+        "EC ngoài dải %\n\n91,53",
+        "EC coverage %\n\n99,85",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n132435,00",
+        "PH ngoài dải %\n\n55,49",
+        "PH coverage %\n\n99,84",
+        "PH suspect (phút)\n\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n221250,00",
+        "OR ngoài dải %\n\n92,70",
+        "Coverage giao chung %\n\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n212,40",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n85,60",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 5,
+      "title": "Lọc đợt EC",
+      "detail": "Đổi metric của danh sách; KPI EC/pH và OR vẫn được tính riêng.",
+      "start_seconds": 57.652,
+      "end_seconds": 68.51,
+      "screenshot": "step-05.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n218465,00",
+        "EC ngoài dải %\n\n91,53",
+        "EC coverage %\n\n99,85",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n132435,00",
+        "PH ngoài dải %\n\n55,49",
+        "PH coverage %\n\n99,84",
+        "PH suspect (phút)\n\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n221250,00",
+        "OR ngoài dải %\n\n92,70",
+        "Coverage giao chung %\n\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n212,40",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n85,60",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 6,
+      "title": "Đọc KPI EC và coverage",
+      "detail": "Phân biệt ngoài dải, suspect và thời gian không đánh giá được.",
+      "start_seconds": 68.51,
+      "end_seconds": 75.93,
+      "screenshot": "step-06.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n218465,00",
+        "EC ngoài dải %\n\n91,53",
+        "EC coverage %\n\n99,85",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n132435,00",
+        "PH ngoài dải %\n\n55,49",
+        "PH coverage %\n\n99,84",
+        "PH suspect (phút)\n\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n221250,00",
+        "OR ngoài dải %\n\n92,70",
+        "Coverage giao chung %\n\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n212,40",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n85,60",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 7,
+      "title": "Xem đợt EC dài nhất",
+      "detail": "Đáp án: 80.400 phút, từ 31/12/2019 12:35 đến 25/02/2020 08:35.",
+      "start_seconds": 75.93,
+      "end_seconds": 84.983,
+      "screenshot": "step-07.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n218465,00",
+        "EC ngoài dải %\n\n91,53",
+        "EC coverage %\n\n99,85",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n132435,00",
+        "PH ngoài dải %\n\n55,49",
+        "PH coverage %\n\n99,84",
+        "PH suspect (phút)\n\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n221250,00",
+        "OR ngoài dải %\n\n92,70",
+        "Coverage giao chung %\n\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n212,40",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n85,60",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 8,
+      "title": "Khám phá trace đợt EC",
+      "detail": "Hover actual/cận và kiểm tra phần trace được giới hạn khi đợt dài.",
+      "start_seconds": 84.983,
+      "end_seconds": 96.002,
+      "screenshot": "step-08.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n218465,00",
+        "EC ngoài dải %\n\n91,53",
+        "EC coverage %\n\n99,85",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n132435,00",
+        "PH ngoài dải %\n\n55,49",
+        "PH coverage %\n\n99,84",
+        "PH suspect (phút)\n\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n221250,00",
+        "OR ngoài dải %\n\n92,70",
+        "Coverage giao chung %\n\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n212,40",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n85,60",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 9,
+      "title": "Chuyển sang các đợt pH",
+      "detail": "Quan sát danh sách pH; không cộng thời lượng EC và pH để tính OR.",
+      "start_seconds": 96.003,
+      "end_seconds": 106.514,
+      "screenshot": "step-09.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n218465,00",
+        "EC ngoài dải %\n\n91,53",
+        "EC coverage %\n\n99,85",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n132435,00",
+        "PH ngoài dải %\n\n55,49",
+        "PH coverage %\n\n99,84",
+        "PH suspect (phút)\n\n25,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n221250,00",
+        "OR ngoài dải %\n\n92,70",
+        "Coverage giao chung %\n\n99,84",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n219,20",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n88,20",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 10,
+      "title": "Trở lại EC và chọn cửa sổ nhỏ",
+      "detail": "Xem 02–03/03/2020 để tra cứu dữ liệu nguồn theo ngày.",
+      "start_seconds": 106.514,
+      "end_seconds": 137.417,
+      "screenshot": "step-10.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n2880,00",
+        "EC ngoài dải %\n\n100,00",
+        "EC coverage %\n\n100,00",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n1045,00",
+        "PH ngoài dải %\n\n36,28",
+        "PH coverage %\n\n100,00",
+        "PH suspect (phút)\n\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n2880,00",
+        "OR ngoài dải %\n\n100,00",
+        "Coverage giao chung %\n\n100,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n13,30",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n8,60",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 11,
+      "title": "Chọn ngày nguồn",
+      "detail": "Ngày nguồn giúp đọc các slot đo gốc và quality EC/pH.",
+      "start_seconds": 137.418,
+      "end_seconds": 151.456,
+      "screenshot": "step-11.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n2880,00",
+        "EC ngoài dải %\n\n100,00",
+        "EC coverage %\n\n100,00",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n1045,00",
+        "PH ngoài dải %\n\n36,28",
+        "PH coverage %\n\n100,00",
+        "PH suspect (phút)\n\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n2880,00",
+        "OR ngoài dải %\n\n100,00",
+        "Coverage giao chung %\n\n100,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n13,30",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n8,60",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 12,
+      "title": "Chọn slot nguồn và xác minh lineage",
+      "detail": "Tên file, số dòng và checksum xác minh dữ liệu đến từ raw.",
+      "start_seconds": 151.456,
+      "end_seconds": 167.626,
+      "screenshot": "step-12.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n2880,00",
+        "EC ngoài dải %\n\n100,00",
+        "EC coverage %\n\n100,00",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n1045,00",
+        "PH ngoài dải %\n\n36,28",
+        "PH coverage %\n\n100,00",
+        "PH suspect (phút)\n\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n2880,00",
+        "OR ngoài dải %\n\n100,00",
+        "Coverage giao chung %\n\n100,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n13,30",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n8,60",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 13,
+      "title": "Xuất summary và đợt drain",
+      "detail": "File xuất đi cùng rule, phạm vi và publication đang xem.",
+      "start_seconds": 167.626,
+      "end_seconds": 177.478,
+      "screenshot": "step-13.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n2880,00",
+        "EC ngoài dải %\n\n100,00",
+        "EC coverage %\n\n100,00",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n1045,00",
+        "PH ngoài dải %\n\n36,28",
+        "PH coverage %\n\n100,00",
+        "PH suspect (phút)\n\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n2880,00",
+        "OR ngoài dải %\n\n100,00",
+        "Coverage giao chung %\n\n100,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n13,30",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n8,60",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 14,
+      "title": "Xuất JSON kết quả drain",
+      "detail": "Kiểm tra file tải về chứa đúng publication đã pin.",
+      "start_seconds": 177.478,
+      "end_seconds": 185.629,
+      "screenshot": "step-14.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n2880,00",
+        "EC ngoài dải %\n\n100,00",
+        "EC coverage %\n\n100,00",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n1045,00",
+        "PH ngoài dải %\n\n36,28",
+        "PH coverage %\n\n100,00",
+        "PH suspect (phút)\n\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n2880,00",
+        "OR ngoài dải %\n\n100,00",
+        "Coverage giao chung %\n\n100,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n13,30",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n8,60",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    },
+    {
+      "step": 15,
+      "title": "Hoàn tất BR-03",
+      "detail": "Các bước đã kiểm tra tự động. Video minh họa thao tác; không đo khả năng sử dụng của người thật.",
+      "start_seconds": 185.63,
+      "end_seconds": 193.037,
+      "screenshot": "step-15.png",
+      "metrics": [
+        "EC ngoài dải (phút)\n\n2880,00",
+        "EC ngoài dải %\n\n100,00",
+        "EC coverage %\n\n100,00",
+        "EC suspect (phút)\n\n0,00",
+        "PH ngoài dải (phút)\n\n1045,00",
+        "PH ngoài dải %\n\n36,28",
+        "PH coverage %\n\n100,00",
+        "PH suspect (phút)\n\n0,00",
+        "OR ngoài dải (phút, hợp lệ chung)\n\n2880,00",
+        "OR ngoài dải %\n\n100,00",
+        "Coverage giao chung %\n\n100,00",
+        "Tưới nguồn (L/m², ngày tính một lần)\n\n13,30",
+        "Drain nguồn (L/m², ngày tính một lần)\n\n8,60",
+        "Coverage nước ghép ngày %\n\n100,00"
+      ]
+    }
+  ],
+  "downloads": [
+    {
+      "file": "downloads/drain-Reference-2020-03-02-2020-03-04-summary.csv",
+      "sha256": "22fc45dc97cc974fc5770312e700d6bb6cdbb0cfdd237e2ca414a1cd6d4d8087",
+      "bytes": 2336
+    },
+    {
+      "file": "downloads/drain-Reference-2020-03-02-2020-03-04-episodes.csv",
+      "sha256": "dda2c961352857db70618cef372f8695d45c3ba6d66df4161b6b0db94f5a7f5b",
+      "bytes": 2269
+    },
+    {
+      "file": "downloads/drain-Reference-2020-03-02-2020-03-04-result.json",
+      "sha256": "dc34b1944d188c9f77e516746ef26a6ac0ca6419d325b5eb53de884121a21ef0",
+      "bytes": 333613
+    }
+  ]
+}

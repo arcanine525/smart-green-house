@@ -1,0 +1,22 @@
+ Container gh-engine-benchmark-20261107-ch-job-run-5c94287d971b Creating
+ Container gh-engine-benchmark-20261107-ch-job-run-5c94287d971b Created
+{
+  "status": "diagnostic_only",
+  "same_full_cycle_value_quality_identity": true,
+  "results": [
+    {
+      "transport": "full",
+      "seconds": 0.689788875999966,
+      "bytes": 34419960,
+      "rows": 47808,
+      "fingerprint": "5b42ef5e67ad5ed74daeaa1184d742efc54c2e8f3bd6dc7b91363e816a420f03"
+    },
+    {
+      "transport": "compact",
+      "seconds": 0.5960137510001005,
+      "bytes": 29118839,
+      "rows": 47808,
+      "fingerprint": "5b42ef5e67ad5ed74daeaa1184d742efc54c2e8f3bd6dc7b91363e816a420f03"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "kind": "video_artifact_verification",
+  "commands": [
+    "ffprobe -v error -show_streams -show_format -of json <video>",
+    "ffmpeg -v error -xerror -i <video> -f null -"
+  ],
+  "videos": [
+    {
+      "br": "01",
+      "codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "frame_rate": "25/1",
+      "duration_seconds": 240.16,
+      "audio_streams": 0,
+      "full_decode": "passed",
+      "video_sha256": "f9db74a2b343828de55a26cb3fe8ccc4a67853768647f380d523765d52957fa1",
+      "review_frame_seconds": 75.348,
+      "review_frame_sha256": "737b32fb50b65cc1de1c0bf4ac6ffe0ca7d5ad830d334f494db847b110fc1a71",
+      "steps": 16,
+      "exports": 3
+    },
+    {
+      "br": "02",
+      "codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "frame_rate": "25/1",
+      "duration_seconds": 134.88,
+      "audio_streams": 0,
+      "full_decode": "passed",
+      "video_sha256": "881e0369896f39673611c93ab9919d6849fc17939f7646a9eabe8d8a680c0461",
+      "review_frame_seconds": 69.892,
+      "review_frame_sha256": "ace7a40d38cd8c0b3f2179c94d863e52b2f054090e163082d6610275c452ccb4",
+      "steps": 14,
+      "exports": 3
+    },
+    {
+      "br": "03",
+      "codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "frame_rate": "25/1",
+      "duration_seconds": 161.68,
+      "audio_streams": 0,
+      "full_decode": "passed",
+      "video_sha256": "6d858dd3758bc5e34e3165b5bbab9779d706ab94645e0cfd7730be63a9840678",
+      "review_frame_seconds": 125.284,
+      "review_frame_sha256": "69653e07d3b266e9b6d8eb1958bdfbd957f82d1ac0c5fe7cd5ec5085076b17f7",
+      "steps": 15,
+      "exports": 3
+    },
+    {
+      "br": "04",
+      "codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "frame_rate": "25/1",
+      "duration_seconds": 122.04,
+      "audio_streams": 0,
+      "full_decode": "passed",
+      "video_sha256": "4c9ee87afb598423a27cecd12f8469600e9206f409c85b27e57abbccd2c1fa2c",
+      "review_frame_seconds": 75.582,
+      "review_frame_sha256": "06078d6a345e1422e1b5ad1ed27a2f8b9fccd448eae2b56c9adc398550f29a28",
+      "steps": 13,
+      "exports": 4
+    },
+    {
+      "br": "05",
+      "codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "frame_rate": "25/1",
+      "duration_seconds": 153.2,
+      "audio_streams": 0,
+      "full_decode": "passed",
+      "video_sha256": "989a6d06a568e3af42953619e7acd4b995f1deb791e5dfe3a8a61ffc263b9df9",
+      "review_frame_seconds": 76.877,
+      "review_frame_sha256": "196c7b9609da3678bce1e1c857660d556007e67391a3bee469210a8aa36cf60d",
+      "steps": 15,
+      "exports": 3
+    },
+    {
+      "br": "06",
+      "codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "frame_rate": "25/1",
+      "duration_seconds": 188.32,
+      "audio_streams": 0,
+      "full_decode": "passed",
+      "video_sha256": "ebcad4ab00762ef782e9e03370074e38bda343382902c3b89ef3a8f1c159e1c8",
+      "review_frame_seconds": 141.432,
+      "review_frame_sha256": "70d4060957929715f434eb48c1cc55703ce689a535193664d6303a752a3eec2f",
+      "steps": 20,
+      "exports": 3
+    }
+  ]
+}

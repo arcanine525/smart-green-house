@@ -1,0 +1,11 @@
+{
+  "group_id": "29",
+  "identity_status": "placeholders_authorized_by_user",
+  "members": [
+    {"role": "A", "name": "[HỌ TÊN A]", "student_id": "[MSSV A]", "business_requirements": ["BR-01", "BR-03"]},
+    {"role": "B", "name": "[HỌ TÊN B]", "student_id": "[MSSV B]", "business_requirements": ["BR-02", "BR-05"]},
+    {"role": "C", "name": "[HỌ TÊN C]", "student_id": "[MSSV C]", "business_requirements": ["BR-04", "BR-06"]}
+  ],
+  "presentation_assignment": "proposed_roles_to_be_confirmed_by_group",
+  "overall_video": "user_records_offline_after_delivery"
+}

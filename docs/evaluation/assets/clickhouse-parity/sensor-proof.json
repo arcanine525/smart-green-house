@@ -1,0 +1,144 @@
+{
+  "status": "passed",
+  "selection_limit": 30,
+  "source_events": 30,
+  "full_file_replay": false,
+  "source_snapshot": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "source_file_checksum": "3415b31b7958c735f836c7fa8f890a93020786be5c86dc2e7c42771fb0a02cd3",
+  "historical_publication": "8572a2e99a0a4a839aacb41f8f669916",
+  "replay_publication": "f68c949e50faf9cebb3e2d523173bf7d826f912bc86990cd31af0a2613ee4f82",
+  "complete": true,
+  "checksum_verified": true,
+  "missing_sequences": [],
+  "quarantined": 0,
+  "expected_minutes": "150",
+  "batch_stream_raw_metrics_episodes_quality_match": true,
+  "ready_files": 9,
+  "details": [
+    {
+      "kind": "climate",
+      "metrics": [
+        {
+          "metric": "temperature",
+          "expected_minutes": "150",
+          "valid_minutes": "0",
+          "unknown_minutes": "150",
+          "out_minutes": "0",
+          "suspect_minutes": "0",
+          "out_low_minutes": "0",
+          "out_high_minutes": "0"
+        },
+        {
+          "metric": "co2",
+          "expected_minutes": "150",
+          "valid_minutes": "0",
+          "unknown_minutes": "150",
+          "out_minutes": "0",
+          "suspect_minutes": "0",
+          "out_low_minutes": "0",
+          "out_high_minutes": "0"
+        }
+      ],
+      "episodes": [],
+      "joint": [
+        {
+          "metrics": [
+            "temperature",
+            "co2"
+          ],
+          "measurement_context": "climate",
+          "basis": "requested",
+          "contributions": [
+            {
+              "metric": "temperature",
+              "measurement_context": "climate",
+              "basis": "requested",
+              "rule_version": "threshold-agc-demo:climate:Automatoes:v1",
+              "unit": "°C"
+            },
+            {
+              "metric": "co2",
+              "measurement_context": "climate",
+              "basis": "requested",
+              "rule_version": "threshold-agc-demo:climate:Automatoes:v1",
+              "unit": "ppm"
+            }
+          ],
+          "jointly_valid_minutes": "0",
+          "joint_out_minutes": "0",
+          "joint_out_percent": null,
+          "joint_coverage_pct": "0"
+        }
+      ]
+    },
+    {
+      "kind": "drain",
+      "metrics": [
+        {
+          "metric": "ec",
+          "expected_minutes": "150",
+          "valid_minutes": "150",
+          "unknown_minutes": "0",
+          "out_minutes": "150",
+          "suspect_minutes": "0",
+          "out_low_minutes": "150",
+          "out_high_minutes": "0"
+        },
+        {
+          "metric": "ph",
+          "expected_minutes": "150",
+          "valid_minutes": "150",
+          "unknown_minutes": "0",
+          "out_minutes": "150",
+          "suspect_minutes": "0",
+          "out_low_minutes": "0",
+          "out_high_minutes": "150"
+        }
+      ],
+      "episodes": [
+        [
+          "ec",
+          "2019-12-16T00:00:00",
+          "2019-12-16T02:30:00",
+          "150"
+        ],
+        [
+          "ph",
+          "2019-12-16T00:00:00",
+          "2019-12-16T02:30:00",
+          "150"
+        ]
+      ],
+      "joint": [
+        {
+          "metrics": [
+            "ec",
+            "ph"
+          ],
+          "measurement_context": "drain_process_computer",
+          "basis": "measured",
+          "contributions": [
+            {
+              "metric": "ec",
+              "measurement_context": "drain_process_computer",
+              "basis": "measured",
+              "rule_version": "threshold-agc-demo:drain:Automatoes:v1",
+              "unit": "dS/m"
+            },
+            {
+              "metric": "ph",
+              "measurement_context": "drain_process_computer",
+              "basis": "measured",
+              "rule_version": "threshold-agc-demo:drain:Automatoes:v1",
+              "unit": "pH"
+            }
+          ],
+          "jointly_valid_minutes": "150",
+          "joint_out_minutes": "150",
+          "joint_out_percent": "100",
+          "joint_coverage_pct": "100"
+        }
+      ]
+    }
+  ]
+}

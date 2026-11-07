@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "sha256": "c31c588cc87edf265e22c2f58c05f22568abbf4818d6803fe8202f5cfe0ce1bd",
+  "publication": "5d455686a06649e789908b9708a9d436",
+  "configuration_versions": 315,
+  "scenario_versions": 178,
+  "corrected_revisions": 1,
+  "batches": 7,
+  "replays": 7
+}

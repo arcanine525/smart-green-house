@@ -1,0 +1,9 @@
+%%{init: {'themeVariables': {'fontSize': '22px'}}}%%
+flowchart TB
+  RAW["AGC raw + manifest"] --> BATCH["Python batch"]
+  RAW --> REPLAY["Replay: MQTT + collector + Spark"]
+  BATCH --> CH[("ClickHouse core / marts / config")]
+  REPLAY --> CH
+  CH --> PIN["Verified publication / replay pin"]
+  PIN --> APP["Streamlit / Plotly + exports"]
+  CH -. "verified rollback" .-> PG["Optional PostgreSQL"]

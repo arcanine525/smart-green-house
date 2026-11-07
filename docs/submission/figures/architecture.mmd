@@ -1,0 +1,9 @@
+%%{init: {'themeVariables': {'fontSize': '18px'}, 'flowchart': {'nodeSpacing': 28, 'rankSpacing': 28}}}%%
+flowchart TB
+  RAW["AGC raw + manifest"] --> BATCH["Python historical batch"]
+  RAW --> SENSOR["Replay: MQTT + collector<br/>Spark Structured Streaming"]
+  BATCH --> COORD["Coordinator: writer lock + journal"]
+  SENSOR --> COORD
+  COORD --> CH["ClickHouse core + typed marts<br/>Verified complete publication"]
+  CH --> UI["Streamlit / Plotly / exports"]
+  CH -. "delta + parity" .-> PG["Optional PostgreSQL rollback"]

@@ -1,0 +1,35 @@
+{
+  "name": "/gh-engine-benchmark-20261107-clickhouse-1",
+  "image_id": "sha256:a1304f616cd2a6ed51a616da1cd2e897850b520c3ebfbc2bcfba8d65581998ad",
+  "configured_image": "clickhouse/clickhouse-server:25.8@sha256:0152dd511befe6a2c2ef53e930726179669b08116da78500b37c51c96ff5ee77",
+  "nano_cpus": 1000000000,
+  "memory_bytes": 2147483648,
+  "oom_killed": false,
+  "restart_count": 0,
+  "networks": {
+    "gh-engine-benchmark-20261107_backend": {
+      "Aliases": [
+        "gh-engine-benchmark-20261107-clickhouse-1",
+        "clickhouse"
+      ],
+      "DNSNames": [
+        "gh-engine-benchmark-20261107-clickhouse-1",
+        "clickhouse",
+        "46e8e1adbb7e"
+      ],
+      "DriverOpts": null,
+      "EndpointID": "b38827e72a899c5aa8d2866233fbb4975aa910556114b0937a7e32e77ee6124a",
+      "Gateway": "",
+      "GlobalIPv6Address": "",
+      "GlobalIPv6PrefixLen": 0,
+      "GwPriority": 0,
+      "IPAMConfig": null,
+      "IPAddress": "192.168.0.2",
+      "IPPrefixLen": 20,
+      "IPv6Gateway": "",
+      "Links": null,
+      "MacAddress": "7a:8d:ae:fa:52:ae",
+      "NetworkID": "7f70c47d661f39ee64cf38410db4a9c5b3a562e637a55ba2ecb45f04ba3e656d"
+    }
+  }
+}

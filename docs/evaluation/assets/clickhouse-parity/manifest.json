@@ -1,0 +1,167 @@
+{
+  "status": "passed",
+  "source_head": "08c8a3b92b2dd5c1a0e151804195d4d8e600ad43",
+  "log_normalization": "Trailing whitespace and trailing blank lines removed; log-provenance.json preserves original transcript byte hashes",
+  "backend": "clickhouse",
+  "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "historical_publication": "8572a2e99a0a4a839aacb41f8f669916",
+  "postgres_reference_publication": "892b4cd58cdf4d099510974d91fa64ab",
+  "source_postgres_read_only": true,
+  "all_six_brs": true,
+  "threshold_groups": 18,
+  "full_cycle_boundary_episodes": 67829,
+  "business_csv_fingerprints": 60,
+  "threshold_csv_fingerprints": 36,
+  "raw_lineage_views": 30,
+  "scenario_versions_imported": 174,
+  "scenario_versions_reused": 174,
+  "native_configuration_versions": {
+    "area_basis": 84,
+    "rule_schedule": 14,
+    "harvest_rule": 12,
+    "tariff": 7
+  },
+  "sensor_selection_limit": 30,
+  "sensor_full_file_replay": false,
+  "source_sensor_schema_count": 0,
+  "source_correction_count": 0,
+  "tests_discovered": 77,
+  "tests_executed": 68,
+  "explicit_heavy_skips": 9,
+  "tests_seconds": 157.759,
+  "complete_workflow_retry": true,
+  "physical_counts_unchanged_on_retry": true,
+  "old_v1_pin_verified": true,
+  "limits": [
+    "Correctness gate only; T49 performance, T50 offline/backup, T51 detailed videos and T39 cutover remain separate",
+    "45 source files inventoried; 24 staged, 21 intentionally deferred; 18 selected telemetry/production files form the core",
+    "Source DB contains no sensor schema or correction rows; native actual AGC30 replay is additional proof, not fabricated migration inventory",
+    "Sensor first run really traversed MQTT/collector/Spark but harness compared eight/two-key maps to a ten-key map; repaired comparator verifies every measure value/verdict in a fresh independent actual MQTT/Spark run",
+    "Nine specialized heavy integration cases were skipped explicitly; prior T47/T48 fault evidence remains independently scoped",
+    "Initial full backfill exceeded server RAM before seal; resumed same load/publication after bounded readers; no Docker storage error or cache/volume pruning",
+    "Migration source retains eight original publication headers/seals; it does not fabricate eight native historical publications",
+    "Cold publication verification remains expensive and has not passed a latency target"
+  ],
+  "files": [
+    {
+      "file": "build.log",
+      "bytes": 8330,
+      "sha256": "6ea0aa165c1e4f2a465769dcd40fae062148619712d4952f32ffbcbb950134e0"
+    },
+    {
+      "file": "candidate-code.json",
+      "bytes": 3434,
+      "sha256": "d223844a4bf6caaecff6a2df03e1ef6df23c8e56bdfb863745318c17406a74c4"
+    },
+    {
+      "file": "full-retry.log",
+      "bytes": 1777,
+      "sha256": "4200f73828f0a7a2f6d80e21a31ca7b69f6dd650769764a1727dd2938c632e82"
+    },
+    {
+      "file": "historical-publication.json",
+      "bytes": 2700,
+      "sha256": "6c02444a6c357e8996bd00d7faa793f47d1e030cfb27493b99639e81e0921d77"
+    },
+    {
+      "file": "images.txt",
+      "bytes": 327,
+      "sha256": "cf5d9749b8520194ea3da3a917de735d8258b9f9d3b4bfb6e1dd681688db2a5a"
+    },
+    {
+      "file": "initial-memory-failure.log",
+      "bytes": 2011,
+      "sha256": "c66b53b3f717a53f2cc9794427b4ee20f5d1620628b97f4dfd1b098d2ce62785"
+    },
+    {
+      "file": "log-provenance.json",
+      "bytes": 1811,
+      "sha256": "46d4e9c0bd275116c1c4b1132e9f32ecb8dd0ee8fc6c25179fc298648851bed1"
+    },
+    {
+      "file": "memory-recovery.log",
+      "bytes": 2659,
+      "sha256": "92004cd7172d73633b2f5b7a687b4b518f267cde3171c02f38d6ffb690b95681"
+    },
+    {
+      "file": "migration-inventory.json",
+      "bytes": 2756,
+      "sha256": "33f3790102ae034d52ffac64bb48d1c9b8bca864ea572bfeb3a28110548674c8"
+    },
+    {
+      "file": "old-v1-publication.json",
+      "bytes": 2425,
+      "sha256": "1ca380fce6e9aa8f7310658e8b46d65087d29788d59d3f26c067ba2ce562c3c2"
+    },
+    {
+      "file": "parity.json",
+      "bytes": 6314,
+      "sha256": "b3d4fc0284de1973f3b5cba3219a30ed1afb3a60efdeacf9997cde497dbd3c7e"
+    },
+    {
+      "file": "proof-helper-build.log",
+      "bytes": 5870,
+      "sha256": "7cce3f97804fca8ee1d1b3bfa6d139b0567703779aed2b5e57cf36e917ec16fd"
+    },
+    {
+      "file": "reference-fingerprints.json",
+      "bytes": 995,
+      "sha256": "f335cc2b0b5547fe9b32dc0e2d7f9d7c4e9049b4631cb5d5cfb964835724d9f8"
+    },
+    {
+      "file": "retry-proof.json",
+      "bytes": 1662,
+      "sha256": "95ac2faae493e465c674f1feefa649e7269044a08c271a47aa4f74f21f5fa92d"
+    },
+    {
+      "file": "scenario-import.json",
+      "bytes": 389,
+      "sha256": "07dcb660e75607cc8724e2bb87eccef5ac127552351501f5eb33f0b70ae3d2ab"
+    },
+    {
+      "file": "sensor-completed-replay-guard.log",
+      "bytes": 966,
+      "sha256": "bbfecf0a4bae3cb91a2bd6b486cfa3d941f6eacd5b2f159fc84f2538f73b8c99"
+    },
+    {
+      "file": "sensor-completion-guard.log",
+      "bytes": 621,
+      "sha256": "214d6da20de029e973599c4f0f28125d72280bf515487ef34b565523a40bc22a"
+    },
+    {
+      "file": "sensor-final.log",
+      "bytes": 1374,
+      "sha256": "224bc1cadda47cd66c78a447c759687321f5e7918afec540ebfae3140a2712ac"
+    },
+    {
+      "file": "sensor-initial-comparator-failure.log",
+      "bytes": 1745,
+      "sha256": "0b83981e6368a0c7e58474e294b7de52e879236ed1a64a4b0b4c0f5633931ad9"
+    },
+    {
+      "file": "sensor-proof.json",
+      "bytes": 4056,
+      "sha256": "634d32d96f38c2b23b6560d833ac22f211d0cacf5dfd9d1fec9cf9f977fbb885"
+    },
+    {
+      "file": "server-version.json",
+      "bytes": 82,
+      "sha256": "42b658e6cc2b3698570f0130929b53a7f84d8f90d8fedb52f5d33e3d39d5ae75"
+    },
+    {
+      "file": "source-inventory.json",
+      "bytes": 14674,
+      "sha256": "3134d7fcb8da620f385d6070f8ca24da581898618cadd58611a82b2da75ff7c8"
+    },
+    {
+      "file": "source-readonly-audit.log",
+      "bytes": 87,
+      "sha256": "005ecafb545af21400fff532f148af053bbbae9c0863441628ac79436d54d783"
+    },
+    {
+      "file": "tests.log",
+      "bytes": 118485,
+      "sha256": "924e5db66810410eb94e523538a91cb60f641e63b08dfc5b782ded0238c09dab"
+    }
+  ]
+}

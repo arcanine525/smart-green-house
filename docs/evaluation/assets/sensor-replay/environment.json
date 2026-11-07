@@ -1,0 +1,38 @@
+{
+  "timestamp_utc": "2026-11-06 14:38:56 UTC",
+  "host_cpu": "Apple M4",
+  "host_logical_cpus": 10,
+  "host_memory_bytes": 17179869184,
+  "docker_server_version": "29.9.2",
+  "docker_cpus": 4,
+  "docker_memory_bytes": 8186281984,
+  "processing_image_id": "sha256:e641d359ad7938da0e7294b58ecb19e104527773efd84fde5b37d60881b6da28",
+  "processing_caps": "1 CPU, 1536 MiB; combined Spark, collector, publisher and test polling",
+  "postgresql": "17.10-bookworm; 0.5 CPU, 512 MiB",
+  "broker": "Mosquitto 2.0.22; 0.1 CPU, 128 MiB",
+  "python": "3.12.12",
+  "spark": "4.0.1",
+  "psycopg": "3.3.7",
+  "paho_mqtt": "2.1.0",
+  "source_commit": "ef8f038978a6b28da782120983b445e53b201d3e",
+  "test_file_sha256": {
+    "scripts/test_sensor_acceptance.sh": "7107ef29ad2fa9a18f59f295dc9e509c4d82e98b68a96c188c734315773d847a",
+    "tests/integration/test_sensor_live_replay.py": "e1e4c96d60e1241381527d0825885ba67dbe79ae119d9c869660c46c383bed43",
+    "tests/integration/test_sensor_fault_matrix.py": "bf14f8a49ad006ab3af400e20007b1b776691ec0d94421ed42ce05e004e8a20a",
+    "tests/integration/test_sensor_recovery_external.py": "c4bc2290eb6f2b8cd5a0fe8f058916cc6418feea26a5c13e7ca58f09dbaf19db",
+    "tests/integration/test_real_broker.py": "f440e4dc1a89bfe2f33e21f851e2a00bcf0fe58e79438532958dc40e5b5745e2"
+  },
+  "sampled_service_maxima": {
+    "broker": {
+      "samples": 19,
+      "max_cpu_percent": 0.2,
+      "max_sampled_memory_mib": 2.438
+    },
+    "postgresql": {
+      "samples": 19,
+      "max_cpu_percent": 2.21,
+      "max_sampled_memory_mib": 62.23
+    }
+  },
+  "note": "Sampling includes preparation/cleanup during baseline test; sampled maxima are not guaranteed peaks. Source and tests were bind-mounted read-only."
+}

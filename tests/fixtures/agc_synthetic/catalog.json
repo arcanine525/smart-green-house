@@ -1,0 +1,1691 @@
+{
+  "data_kind": "synthetic",
+  "provenance": "Hand-constructed from docs/br section 7; no AGC data rows copied. Headers only match source metadata.",
+  "agc_basis_timezone_tariff_validation": "phụ thuộc T03",
+  "source_headers": {
+    "GreenhouseClimate.csv": [
+      "%time",
+      "AssimLight",
+      "BlackScr",
+      "CO2air",
+      "Cum_irr",
+      "EC_drain_PC",
+      "EnScr",
+      "HumDef",
+      "PipeGrow",
+      "PipeLow",
+      "Rhair",
+      "Tair",
+      "Tot_PAR",
+      "Tot_PAR_Lamps",
+      "VentLee",
+      "Ventwind",
+      "assim_sp",
+      "assim_vip",
+      "co2_dos",
+      "co2_sp",
+      "co2_vip",
+      "dx_sp",
+      "dx_vip",
+      "int_blue_sp",
+      "int_blue_vip",
+      "int_farred_sp",
+      "int_farred_vip",
+      "int_red_sp",
+      "int_red_vip",
+      "int_white_sp",
+      "int_white_vip",
+      "pH_drain_PC",
+      "scr_blck_sp",
+      "scr_blck_vip",
+      "scr_enrg_sp",
+      "scr_enrg_vip",
+      "t_grow_min_sp",
+      "t_grow_min_vip",
+      "t_heat_sp",
+      "t_heat_vip",
+      "t_rail_min_sp",
+      "t_rail_min_vip",
+      "t_vent_sp",
+      "t_ventlee_vip",
+      "t_ventwind_vip",
+      "water_sup",
+      "water_sup_intervals_sp_min",
+      "water_sup_intervals_vip_min",
+      "window_pos_lee_sp",
+      "window_pos_lee_vip"
+    ],
+    "Resources.csv": [
+      "%Time ",
+      "Heat_cons",
+      "ElecHigh",
+      "ElecLow",
+      "CO2_cons",
+      "Irr",
+      "Drain"
+    ],
+    "Production.csv": [
+      "%time",
+      "ProdA",
+      "ProdB",
+      "avg_nr_harvested_trusses",
+      "Truss development time ",
+      "Nr_fruits_ClassA",
+      "Weight_fruits_ClassA",
+      "Nr_fruits_ClassB",
+      "Weight_fruits_ClassB"
+    ],
+    "LabAnalysis.csv": [
+      "%Time",
+      "irr_PH",
+      "irr_EC",
+      "irr_NH4",
+      "irr_K",
+      "irr_Na",
+      "irr_Ca",
+      "irr_Mg",
+      "irr_Si",
+      "irr_NO3",
+      "irr_Cl",
+      "irr_SO4",
+      "irr_HCO3",
+      "irr_PO4",
+      "irr_Fe",
+      "irr_Mn",
+      "irr_Zn",
+      "irr_B",
+      "irr_Cu",
+      "irr_Mo",
+      "drain_PH",
+      "drain_EC",
+      "drain_NH4",
+      "drain_K",
+      "drain_Na",
+      "drain_Ca",
+      "drain_Mg",
+      "drain_Si",
+      "drain_NO3",
+      "drain_Cl",
+      "drain_SO4",
+      "drain_HCO3",
+      "drain_PO4",
+      "drain_Fe",
+      "drain_Mn",
+      "drain_Zn",
+      "drain_B",
+      "drain_Cu",
+      "drain_Mo"
+    ]
+  },
+  "cases": {
+    "BR-01/AC-01": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_01/ac_01/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "delta_temp": 0,
+        "delta_co2": 0,
+        "basis": "requested",
+        "fixture_window_minutes": 30
+      },
+      "expected": {
+        "out_minutes": 15,
+        "valid_minutes": 25,
+        "unknown_minutes": 5,
+        "out_percent": 60,
+        "coverage_pct": 83.33333333333333,
+        "episode_minutes": [
+          5,
+          10
+        ]
+      }
+    },
+    "BR-01/AC-02": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_01/ac_02/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "delta_temp": 0,
+        "delta_co2": 0,
+        "basis": "requested",
+        "fixture_window_minutes": 30
+      },
+      "expected": {
+        "out_minutes": 0,
+        "boundary_inclusive": true
+      }
+    },
+    "BR-01/AC-03": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_01/ac_03/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "delta_temp": 0,
+        "delta_co2": 0,
+        "basis": "requested",
+        "fixture_window_minutes": 30
+      },
+      "expected": {
+        "requested": "unknown",
+        "realized": "independent",
+        "fallback": false
+      }
+    },
+    "BR-01/AC-04": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_01/ac_04/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "delta_temp": 0,
+        "delta_co2": 0,
+        "basis": "requested",
+        "fixture_window_minutes": 30
+      },
+      "expected": {
+        "or_out_minutes": 10
+      }
+    },
+    "BR-01/AC-05": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_01/ac_05/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "delta_temp": 0,
+        "delta_co2": 0,
+        "basis": "requested",
+        "fixture_window_minutes": 30
+      },
+      "expected": {
+        "episode_minutes": [
+          5,
+          5
+        ]
+      }
+    },
+    "BR-01/AC-06": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_01/ac_06/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "delta_temp": 0,
+        "delta_co2": 0,
+        "basis": "requested",
+        "fixture_window_minutes": 30
+      },
+      "expected": {
+        "coverage_pct": 0,
+        "out_hours": null,
+        "out_percent": null
+      }
+    },
+    "BR-01/AC-07": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_01/ac_07/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "delta_temp": 0,
+        "delta_co2": 0,
+        "basis": "requested",
+        "fixture_window_minutes": 30,
+        "cycle_end_exclusive_serial": "43981"
+      },
+      "expected": {
+        "boundary_stored": true,
+        "extra_minutes": 0
+      }
+    },
+    "BR-01/AC-08": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_01/ac_08/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "delta_temp": 0,
+        "delta_co2": 0,
+        "basis": "requested",
+        "fixture_window_minutes": 30,
+        "actions": [
+          "run",
+          "rerun",
+          "rule-v2",
+          "rule-v1"
+        ]
+      },
+      "expected": {
+        "rerun_duplicate_count": 0,
+        "versions_reproducible": true
+      }
+    },
+    "BR-01/AC-09": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_01/ac_09/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "delta_temp": 0,
+        "delta_co2": 0,
+        "basis": "requested",
+        "fixture_window_minutes": 30,
+        "report_start_slot": 1
+      },
+      "expected": {
+        "original_start_preserved": true,
+        "intersection_minutes": 25
+      }
+    },
+    "BR-01/AC-10": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_01/ac_10/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "delta_temp": 0,
+        "delta_co2": 0,
+        "basis": "requested",
+        "fixture_window_minutes": 30
+      },
+      "expected": {
+        "classification": "unknown",
+        "reason_required": true
+      }
+    },
+    "BR-02/AC-01": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_02/ac_01/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "irrigation_drain_basis": "synthetic-compatible, not AGC evidence",
+        "fixture_days": 2
+      },
+      "expected": {
+        "irrigation": 40,
+        "drain": 14,
+        "drain_fraction_pct": 35
+      }
+    },
+    "BR-02/AC-02": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_02/ac_02/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "irrigation_drain_basis": "synthetic-compatible, not AGC evidence",
+        "fixture_days": 2
+      },
+      "expected": {
+        "irrigation": 0,
+        "drain": 0,
+        "coverage_pct": 100,
+        "ratio": null
+      }
+    },
+    "BR-02/AC-03": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_02/ac_03/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "irrigation_drain_basis": "synthetic-compatible, not AGC evidence",
+        "fixture_days": 2
+      },
+      "expected": {
+        "irrigation_observed": 40,
+        "drain_observed": 2,
+        "paired_irrigation": 10,
+        "paired_drain": 2,
+        "ratio": 20,
+        "paired_coverage_pct": 50
+      }
+    },
+    "BR-02/AC-04": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_02/ac_04/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "irrigation_drain_basis": "synthetic-compatible, not AGC evidence",
+        "fixture_days": 2
+      },
+      "expected": {
+        "ratio": 120,
+        "clamped": false,
+        "review_flag": true
+      }
+    },
+    "BR-02/AC-05": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_02/ac_05/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "irrigation_drain_basis": "synthetic-compatible, not AGC evidence",
+        "fixture_days": 2
+      },
+      "expected": {
+        "irrigation": null,
+        "drain": null,
+        "ratio": null,
+        "coverage_pct": 0
+      }
+    },
+    "BR-02/AC-06": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_02/ac_06/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "irrigation_drain_basis": "synthetic-compatible, not AGC evidence",
+        "fixture_days": 2,
+        "min_drain_pct": 20,
+        "max_drain_pct": 40
+      },
+      "expected": {
+        "outside_rule_days": [
+          1
+        ],
+        "boundary_inclusive": true
+      }
+    },
+    "BR-02/AC-07": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_02/ac_07/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "irrigation_drain_basis": "synthetic-compatible, not AGC evidence",
+        "fixture_days": 2,
+        "rule": null
+      },
+      "expected": {
+        "rule_status": "not_configured",
+        "kpi_available": true
+      }
+    },
+    "BR-02/AC-08": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_02/ac_08/Synthetic/Resources.csv",
+        "br_02/ac_08/SyntheticConflict/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "irrigation_drain_basis": "synthetic-compatible, not AGC evidence",
+        "fixture_days": 2
+      },
+      "expected": {
+        "rerun_doubles_total": false,
+        "conflict_reported": true
+      }
+    },
+    "BR-02/AC-09": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_02/ac_09/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "irrigation_drain_basis": "unknown; phụ thuộc T03",
+        "fixture_days": 2
+      },
+      "expected": {
+        "ratio": null,
+        "basis_status": "phụ thuộc T03",
+        "ranking": false
+      }
+    },
+    "BR-02/AC-10": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_02/ac_10/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "irrigation_drain_basis": "synthetic-compatible, not AGC evidence",
+        "fixture_days": 2,
+        "actions": [
+          "filter one synthetic compartment/week",
+          "export"
+        ]
+      },
+      "expected": {
+        "export_matches_filter": true,
+        "outside_window_included": false
+      }
+    },
+    "BR-03/AC-01": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_03/ac_01/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "ec_range": [
+          2,
+          5
+        ],
+        "ph_range": [
+          5.5,
+          6.5
+        ],
+        "ph_zero_policy": "suspect, fixture assumption",
+        "context": "drain_process_computer"
+      },
+      "expected": {
+        "valid_minutes": 25,
+        "out_minutes": 15,
+        "out_percent": 60,
+        "coverage_pct": 83.33333333333333,
+        "episode_minutes": [
+          10,
+          5
+        ]
+      }
+    },
+    "BR-03/AC-02": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_03/ac_02/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "ec_range": [
+          2,
+          5
+        ],
+        "ph_range": [
+          5.5,
+          6.5
+        ],
+        "ph_zero_policy": "suspect, fixture assumption",
+        "context": "drain_process_computer"
+      },
+      "expected": {
+        "valid_minutes": 25,
+        "out_minutes": 5,
+        "suspect_minutes": 5,
+        "out_percent": 20,
+        "coverage_pct": 83.33333333333333
+      }
+    },
+    "BR-03/AC-03": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_03/ac_03/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "ec_range": [
+          2,
+          5
+        ],
+        "ph_range": [
+          5.5,
+          6.5
+        ],
+        "ph_zero_policy": "suspect, fixture assumption",
+        "context": "drain_process_computer"
+      },
+      "expected": {
+        "joint_valid_minutes": 20,
+        "or_out_minutes": 15,
+        "out_percent": 75,
+        "coverage_pct": 66.66666666666667
+      }
+    },
+    "BR-03/AC-04": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_03/ac_04/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "ec_range": [
+          2,
+          5
+        ],
+        "ph_range": [
+          5.5,
+          6.5
+        ],
+        "ph_zero_policy": "suspect, fixture assumption",
+        "context": "drain_process_computer"
+      },
+      "expected": {
+        "out_minutes": 0,
+        "boundary_inclusive": true
+      }
+    },
+    "BR-03/AC-05": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_03/ac_05/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "ec_range": [
+          2,
+          5
+        ],
+        "ph_range": [
+          5.5,
+          6.5
+        ],
+        "ph_zero_policy": "suspect, fixture assumption",
+        "context": "drain_process_computer"
+      },
+      "expected": {
+        "ec_preserved": true,
+        "ph_status": "unknown"
+      }
+    },
+    "BR-03/AC-06": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_03/ac_06/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "ec_range": [
+          2,
+          5
+        ],
+        "ph_range": [
+          5.5,
+          6.5
+        ],
+        "ph_zero_policy": "suspect, fixture assumption",
+        "context": "drain_process_computer",
+        "rule": null
+      },
+      "expected": {
+        "out_hours": null,
+        "reason_required": true
+      }
+    },
+    "BR-03/AC-07": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_03/ac_07/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "ec_range": [
+          2,
+          5
+        ],
+        "ph_range": [
+          5.5,
+          6.5
+        ],
+        "ph_zero_policy": "suspect, fixture assumption",
+        "context": "drain_process_computer",
+        "rule_versions": [
+          "v1",
+          "v1",
+          "v2"
+        ]
+      },
+      "expected": {
+        "merged_across_gap_or_rule": false
+      }
+    },
+    "BR-03/AC-08": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_03/ac_08/Synthetic/GreenhouseClimate.csv",
+        "br_03/ac_08/Synthetic/LabAnalysis.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "ec_range": [
+          2,
+          5
+        ],
+        "ph_range": [
+          5.5,
+          6.5
+        ],
+        "ph_zero_policy": "suspect, fixture assumption",
+        "context": "drain_process_computer"
+      },
+      "expected": {
+        "lab_interpolated_minutes": 0,
+        "lab_records": 2
+      }
+    },
+    "BR-03/AC-09": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_03/ac_09/Synthetic/GreenhouseClimate.csv",
+        "br_03/ac_09/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "ec_range": [
+          2,
+          5
+        ],
+        "ph_range": [
+          5.5,
+          6.5
+        ],
+        "ph_zero_policy": "suspect, fixture assumption",
+        "context": "drain_process_computer"
+      },
+      "expected": {
+        "irrigation": 40,
+        "drain": 14,
+        "multiplied_by_slots": false
+      }
+    },
+    "BR-03/AC-10": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_03/ac_10/Synthetic/GreenhouseClimate.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "ec_range": [
+          2,
+          5
+        ],
+        "ph_range": [
+          5.5,
+          6.5
+        ],
+        "ph_zero_policy": "suspect, fixture assumption",
+        "context": "drain_process_computer",
+        "actions": [
+          "profile-v1",
+          "profile-v2",
+          "profile-v1",
+          "export"
+        ]
+      },
+      "expected": {
+        "versions_reproducible": true,
+        "export_version_matches": true
+      }
+    },
+    "BR-04/AC-01": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_04/ac_01/Synthetic/Resources.csv",
+        "br_04/ac_01/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "heat_electricity_area_m2": 100,
+        "production_area_m2": 50,
+        "area_evidence": "explicit synthetic AC assumption; AGC phụ thuộc T03",
+        "fixture_days": 2,
+        "harvest_complete": true
+      },
+      "expected": {
+        "heat_kwh": 300,
+        "electricity_kwh": 200,
+        "energy_kwh": 500,
+        "class_a_kg": 100,
+        "kwh_per_kg_a": 5
+      }
+    },
+    "BR-04/AC-02": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_04/ac_02/Synthetic/Resources.csv",
+        "br_04/ac_02/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "heat_electricity_area_m2": 100,
+        "production_area_m2": 50,
+        "area_evidence": "explicit synthetic AC assumption; AGC phụ thuộc T03",
+        "fixture_days": 2,
+        "harvest_complete": true
+      },
+      "expected": {
+        "rejected_naive_ratio": 2.5,
+        "kwh_per_kg_a": 5
+      }
+    },
+    "BR-04/AC-03": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_04/ac_03/Synthetic/Resources.csv",
+        "br_04/ac_03/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "heat_electricity_area_m2": 100,
+        "production_area_m2": 50,
+        "area_evidence": "explicit synthetic AC assumption; AGC phụ thuộc T03",
+        "fixture_days": 2,
+        "harvest_complete": true
+      },
+      "expected": {
+        "day_without_harvest_kwh": 200,
+        "included": true
+      }
+    },
+    "BR-04/AC-04": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_04/ac_04/Synthetic/Resources.csv",
+        "br_04/ac_04/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "heat_electricity_area_m2": 100,
+        "production_area_m2": 50,
+        "area_evidence": "explicit synthetic AC assumption; AGC phụ thuộc T03",
+        "fixture_days": 2,
+        "harvest_complete": true
+      },
+      "expected": {
+        "kwh_per_kg_a": 5,
+        "denominator": "A"
+      }
+    },
+    "BR-04/AC-05": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_04/ac_05/Synthetic/Resources.csv",
+        "br_04/ac_05/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "heat_electricity_area_m2": 100,
+        "production_area_m2": 50,
+        "area_evidence": "explicit synthetic AC assumption; AGC phụ thuộc T03",
+        "fixture_days": 2,
+        "harvest_complete": true
+      },
+      "expected": {
+        "kpi": null,
+        "energy_coverage_pct": 50
+      }
+    },
+    "BR-04/AC-06": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_04/ac_06/Synthetic/Resources.csv",
+        "br_04/ac_06/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "heat_electricity_area_m2": null,
+        "production_area_m2": 50,
+        "area_evidence": "explicit synthetic AC assumption; AGC phụ thuộc T03",
+        "fixture_days": 2,
+        "harvest_complete": true
+      },
+      "expected": {
+        "kpi": null,
+        "basis_status": "phụ thuộc T03",
+        "ranking": false
+      }
+    },
+    "BR-04/AC-07": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_04/ac_07/Synthetic/Resources.csv",
+        "br_04/ac_07/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "heat_electricity_area_m2": 100,
+        "production_area_m2": 50,
+        "area_evidence": "explicit synthetic AC assumption; AGC phụ thuộc T03",
+        "fixture_days": 2,
+        "harvest_complete": true
+      },
+      "expected": {
+        "kpi": null,
+        "reason_required": true
+      }
+    },
+    "BR-04/AC-08": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_04/ac_08/Synthetic/Resources.csv",
+        "br_04/ac_08/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "heat_electricity_area_m2": 100,
+        "production_area_m2": 50,
+        "area_evidence": "explicit synthetic AC assumption; AGC phụ thuộc T03",
+        "fixture_days": 2,
+        "harvest_complete": false
+      },
+      "expected": {
+        "kpi": null,
+        "quarantine_visible": true
+      }
+    },
+    "BR-04/AC-09": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_04/ac_09/Synthetic/Resources.csv",
+        "br_04/ac_09/Synthetic/Production.csv",
+        "br_04/ac_09/SyntheticSecond/Resources.csv",
+        "br_04/ac_09/SyntheticSecond/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "heat_electricity_area_m2": 100,
+        "production_area_m2": 50,
+        "area_evidence": "explicit synthetic AC assumption; AGC phụ thuộc T03",
+        "fixture_days": 2,
+        "harvest_complete": true
+      },
+      "expected": {
+        "energy_kwh": 600,
+        "class_a_kg": 150,
+        "combined_ratio": 4
+      }
+    },
+    "BR-04/AC-10": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_04/ac_10/Synthetic/Resources.csv",
+        "br_04/ac_10/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "heat_electricity_area_m2": 100,
+        "production_area_m2": 50,
+        "area_evidence": "explicit synthetic AC assumption; AGC phụ thuộc T03",
+        "fixture_days": 2,
+        "harvest_complete": true,
+        "actions": [
+          "run",
+          "rerun",
+          "join cycle aggregates"
+        ]
+      },
+      "expected": {
+        "rows_per_cycle": 1,
+        "rerun_unchanged": true
+      }
+    },
+    "BR-05/AC-01": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_05/ac_01/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "harvest_complete": true,
+        "fixture_calendar_days": 3,
+        "max_class_b_share_pct": 10,
+        "threshold_kind": "demo"
+      },
+      "expected": {
+        "a": 3,
+        "b": 0.2,
+        "total": 3.2,
+        "a_share_pct": 93.75,
+        "b_share_pct": 6.25
+      }
+    },
+    "BR-05/AC-02": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_05/ac_02/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "harvest_complete": true,
+        "fixture_calendar_days": 3,
+        "max_class_b_share_pct": 10,
+        "threshold_kind": "demo"
+      },
+      "expected": {
+        "a_share_pct": 93.75,
+        "rejected_unweighted_pct": 91.666667
+      }
+    },
+    "BR-05/AC-03": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_05/ac_03/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "harvest_complete": false,
+        "fixture_calendar_days": 3,
+        "max_class_b_share_pct": 10,
+        "threshold_kind": "demo"
+      },
+      "expected": {
+        "accepted_a": 3,
+        "quarantine_a": 0.32,
+        "complete": false,
+        "ranking": false
+      }
+    },
+    "BR-05/AC-04": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_05/ac_04/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "harvest_complete": true,
+        "fixture_calendar_days": 3,
+        "max_class_b_share_pct": 10,
+        "threshold_kind": "demo"
+      },
+      "expected": {
+        "a_observed": 3,
+        "b_observed": 0.2,
+        "paired_a": 1,
+        "paired_b": 0.2,
+        "a_share_pct": 83.33333333333333,
+        "partial": true
+      }
+    },
+    "BR-05/AC-05": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_05/ac_05/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "harvest_complete": true,
+        "fixture_calendar_days": 3,
+        "max_class_b_share_pct": 10,
+        "threshold_kind": "demo"
+      },
+      "expected": {
+        "total": 0,
+        "ratio": null
+      }
+    },
+    "BR-05/AC-06": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_05/ac_06/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "harvest_complete": true,
+        "fixture_calendar_days": 3,
+        "max_class_b_share_pct": 10,
+        "threshold_kind": "demo"
+      },
+      "expected": {
+        "calendar_missing_event": 0,
+        "record_present": false,
+        "event_count": 2
+      }
+    },
+    "BR-05/AC-07": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_05/ac_07/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "harvest_complete": false,
+        "fixture_calendar_days": 3,
+        "max_class_b_share_pct": 10,
+        "threshold_kind": "demo",
+        "ingestion_status": "synthetic parse failure"
+      },
+      "expected": {
+        "calendar_missing_event": null,
+        "complete": false
+      }
+    },
+    "BR-05/AC-08": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_05/ac_08/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "harvest_complete": true,
+        "fixture_calendar_days": 3,
+        "max_class_b_share_pct": 10,
+        "threshold_kind": "demo"
+      },
+      "expected": {
+        "flagged_record_indices": [
+          0
+        ]
+      }
+    },
+    "BR-05/AC-09": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_05/ac_09/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "harvest_complete": true,
+        "fixture_calendar_days": 3,
+        "max_class_b_share_pct": 10,
+        "threshold_kind": "demo",
+        "zoom_record_indices": [
+          1
+        ],
+        "cumulative_start": "cycle start"
+      },
+      "expected": {
+        "cumulative_a": 3,
+        "cumulative_total": 3.2,
+        "zoom_does_not_reset": true
+      }
+    },
+    "BR-05/AC-10": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_05/ac_10/Synthetic/Production.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "harvest_complete": true,
+        "fixture_calendar_days": 3,
+        "max_class_b_share_pct": 10,
+        "threshold_kind": "demo",
+        "actions": [
+          "run",
+          "rerun",
+          "reuse accepted A/completeness in BR04"
+        ]
+      },
+      "expected": {
+        "rerun_duplicates": 0,
+        "accepted_a_matches_br04": true
+      }
+    },
+    "BR-06/AC-01": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_06/ac_01/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "currency": "EUR",
+        "heat_price_eur_mj": "0.0083",
+        "peak_price_eur_kwh": "0.08",
+        "offpeak_price_eur_kwh": "0.04",
+        "basis": "synthetic-common-fixed",
+        "tariff_source": "BR06 fixture; AGC scope phụ thuộc T03"
+      },
+      "expected": {
+        "heat": 0.83,
+        "peak": 0.8,
+        "offpeak": 0.2,
+        "total": 1.83
+      }
+    },
+    "BR-06/AC-02": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_06/ac_02/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "currency": "EUR",
+        "heat_price_eur_mj": "0.0083",
+        "peak_price_eur_kwh": "0.08",
+        "offpeak_price_eur_kwh": "0.04",
+        "basis": "synthetic-common-fixed",
+        "tariff_source": "BR06 fixture; AGC scope phụ thuộc T03",
+        "scenario_peak": "0.096",
+        "scenario_offpeak": "0.048",
+        "scenario_heat": "0.0083"
+      },
+      "expected": {
+        "peak": 0.96,
+        "offpeak": 0.24,
+        "total": 2.03,
+        "delta": 0.2,
+        "delta_pct": 10.92896174863388
+      }
+    },
+    "BR-06/AC-03": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_06/ac_03/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "currency": "EUR",
+        "heat_price_eur_mj": "0.0083",
+        "peak_price_eur_kwh": "0.08",
+        "offpeak_price_eur_kwh": "0.04",
+        "basis": "synthetic-common-fixed",
+        "tariff_source": "BR06 fixture; AGC scope phụ thuộc T03",
+        "heat_price_eur_kwh": "0.02988"
+      },
+      "expected": {
+        "heat": 0.83,
+        "heat_price_eur_kwh": 0.02988
+      }
+    },
+    "BR-06/AC-04": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_06/ac_04/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "currency": "EUR",
+        "heat_price_eur_mj": "0.0083",
+        "peak_price_eur_kwh": "0.08",
+        "offpeak_price_eur_kwh": "0.04",
+        "basis": "synthetic-common-fixed",
+        "tariff_source": "BR06 fixture; AGC scope phụ thuộc T03",
+        "peak_prices_by_day": [
+          "0.08",
+          "0.10"
+        ]
+      },
+      "expected": {
+        "peak": 3.8,
+        "rejected_simple_average": 3.6
+      }
+    },
+    "BR-06/AC-05": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_06/ac_05/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "currency": "EUR",
+        "heat_price_eur_mj": "0.0083",
+        "peak_price_eur_kwh": "0.08",
+        "offpeak_price_eur_kwh": "0.04",
+        "basis": "synthetic-common-fixed",
+        "tariff_source": "BR06 fixture; AGC scope phụ thuộc T03",
+        "rate_intervals": [
+          {
+            "start": "43831",
+            "end": "43833",
+            "component": "peak"
+          },
+          {
+            "start": "43832",
+            "end": "43834",
+            "component": "peak"
+          }
+        ]
+      },
+      "expected": {
+        "overlapping_rates": "rejected"
+      }
+    },
+    "BR-06/AC-06": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_06/ac_06/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "currency": "EUR",
+        "heat_price_eur_mj": "0.0083",
+        "peak_price_eur_kwh": "0.08",
+        "offpeak_price_eur_kwh": "0.04",
+        "basis": "synthetic-common-fixed",
+        "tariff_source": "BR06 fixture; AGC scope phụ thuộc T03",
+        "missing_rate_day": 1
+      },
+      "expected": {
+        "official_total": null,
+        "official_delta": null,
+        "partial": true
+      }
+    },
+    "BR-06/AC-07": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_06/ac_07/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "currency": "EUR",
+        "heat_price_eur_mj": "0.0083",
+        "peak_price_eur_kwh": "0.08",
+        "offpeak_price_eur_kwh": "0.04",
+        "basis": "synthetic-common-fixed",
+        "tariff_source": "BR06 fixture; AGC scope phụ thuộc T03"
+      },
+      "expected": {
+        "cost": 0,
+        "delta": 0,
+        "delta_pct": null
+      }
+    },
+    "BR-06/AC-08": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_06/ac_08/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "currency": "EUR",
+        "heat_price_eur_mj": "0.0083",
+        "peak_price_eur_kwh": "0.08",
+        "offpeak_price_eur_kwh": "0.04",
+        "basis": "unknown; phụ thuộc T03",
+        "tariff_source": "BR06 fixture; AGC scope phụ thuộc T03"
+      },
+      "expected": {
+        "total": null,
+        "component_costs_available": true,
+        "basis_status": "phụ thuộc T03"
+      }
+    },
+    "BR-06/AC-09": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_06/ac_09/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "currency": "EUR",
+        "heat_price_eur_mj": "0.0083",
+        "peak_price_eur_kwh": "0.08",
+        "offpeak_price_eur_kwh": "0.04",
+        "basis": "synthetic-common-fixed",
+        "tariff_source": "BR06 fixture; AGC scope phụ thuộc T03",
+        "invalid_rate_inputs": [
+          "NaN",
+          "-1",
+          "EUR/incorrect-unit"
+        ],
+        "request": "change peak hours"
+      },
+      "expected": {
+        "invalid_inputs": "rejected",
+        "allow_change_peak_hours": false
+      }
+    },
+    "BR-06/AC-10": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_06/ac_10/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "currency": "EUR",
+        "heat_price_eur_mj": "0.0083",
+        "peak_price_eur_kwh": "0.08",
+        "offpeak_price_eur_kwh": "0.04",
+        "basis": "synthetic-common-fixed",
+        "tariff_source": "BR06 fixture; AGC scope phụ thuộc T03",
+        "actions": [
+          "save scenario-v2",
+          "reopen baseline/v1",
+          "rerun",
+          "export"
+        ]
+      },
+      "expected": {
+        "baseline_immutable": true,
+        "versions_reproducible": true
+      }
+    },
+    "BR-06/AC-11": {
+      "data_kind": "synthetic",
+      "files": [
+        "br_06/ac_11/Synthetic/Resources.csv"
+      ],
+      "parameters": {
+        "window_start_serial": "43831",
+        "fixture_only": true,
+        "source_timezone": "unspecified",
+        "coverage_window": "only fixture slots/days, not full AGC cycle",
+        "currency": "EUR",
+        "heat_price_eur_mj": "0.0083",
+        "peak_price_eur_kwh": "0.08",
+        "offpeak_price_eur_kwh": "0.04",
+        "basis": "synthetic-common-fixed",
+        "tariff_source": "BR06 fixture; AGC scope phụ thuộc T03",
+        "actions": [
+          "save scenario-v2",
+          "reopen baseline/v1",
+          "rerun",
+          "export"
+        ]
+      },
+      "expected": {
+        "rerun_duplicates": 0,
+        "lineage_versions_match": true
+      }
+    }
+  },
+  "errors": {
+    "errors/invalid_format/Synthetic/Resources.csv": {
+      "data_kind": "synthetic",
+      "expected": "non-numeric time and quantity",
+      "owner": "T06"
+    },
+    "errors/missing_columns/Synthetic/Resources.csv": {
+      "data_kind": "synthetic",
+      "expected": "Drain header absent",
+      "owner": "T06"
+    },
+    "errors/missing_values/Synthetic/Resources.csv": {
+      "data_kind": "synthetic",
+      "expected": "Irr/Drain empty",
+      "owner": "T06"
+    },
+    "errors/duplicate/Synthetic/Resources.csv": {
+      "data_kind": "synthetic",
+      "expected": "same source key and same content",
+      "owner": "T06"
+    },
+    "errors/conflict/Synthetic/Resources.csv": {
+      "data_kind": "synthetic",
+      "expected": "same source key and different content",
+      "owner": "T06"
+    },
+    "errors/broken_csv/Synthetic/Resources.csv": {
+      "data_kind": "synthetic",
+      "expected": "CSV lexical parse failure",
+      "owner": "T06"
+    }
+  },
+  "file_checksums": {
+    "br_01/ac_01/Synthetic/GreenhouseClimate.csv": "c0c2405ec59c92e32a75fb97e6c927b94e3ccebb0041f27bb9ed1e3d5bfcf6d1",
+    "br_01/ac_02/Synthetic/GreenhouseClimate.csv": "dd9a764929062e7e62ba9564317b5d768c33433c1eee3dc490d342c0f1a958e1",
+    "br_01/ac_03/Synthetic/GreenhouseClimate.csv": "fb30f5e26c19083e4d2f44a82028b6047198e485125c9bda0301fa64c43659c2",
+    "br_01/ac_04/Synthetic/GreenhouseClimate.csv": "54b47d0f476a677755ff9f172034f5c864728d89809133d4dcb0ad4140e4f527",
+    "br_01/ac_05/Synthetic/GreenhouseClimate.csv": "f23bc0800bd57e7f952b783ec629ca9497e1a58d3a56f4840e8936ed42209f46",
+    "br_01/ac_06/Synthetic/GreenhouseClimate.csv": "dff5d8a9d02b49b0ceea498d1c1cea1a6a648bfabe1982cd5e2b659a63764e88",
+    "br_01/ac_07/Synthetic/GreenhouseClimate.csv": "308297fe1e60dd8d0c2d8b5caf528b9bb792172a752811d540cd6998e69b20f4",
+    "br_01/ac_08/Synthetic/GreenhouseClimate.csv": "c0c2405ec59c92e32a75fb97e6c927b94e3ccebb0041f27bb9ed1e3d5bfcf6d1",
+    "br_01/ac_09/Synthetic/GreenhouseClimate.csv": "a8eac8d430489d8e9a55f3c3984e37fec9dcd19541a69a719bc59ee2215f28dd",
+    "br_01/ac_10/Synthetic/GreenhouseClimate.csv": "85efd2a5073a3689ecfd6320afff769fde9a6422a7f25a2501ec151f54eb1acf",
+    "br_02/ac_01/Synthetic/Resources.csv": "324f42bc17a87ace2ae15c9954015ebe740657d90f766e4a055c06ce6db4006f",
+    "br_02/ac_02/Synthetic/Resources.csv": "47b6f552bc59f2d4e4b91e274f60eac9fe1db400ec4906e14fb24570e06d48ad",
+    "br_02/ac_03/Synthetic/Resources.csv": "9ad1d485d96105780d20164c9276cf9cd44456647682b7edfe64b8a6f3470413",
+    "br_02/ac_04/Synthetic/Resources.csv": "af654550c5bb284f26ba087a204793cf549bc6fd8d024e3e4e029743f502d21b",
+    "br_02/ac_05/Synthetic/Resources.csv": "fdaa1b792948fe7c837a25198e132e3b999075a53c5a902520ad9dd7687a58d9",
+    "br_02/ac_06/Synthetic/Resources.csv": "c2f7dc2d825eeb7c54eaccc1c72fdfad22f8e9c93e50142c33159851913374e6",
+    "br_02/ac_07/Synthetic/Resources.csv": "324f42bc17a87ace2ae15c9954015ebe740657d90f766e4a055c06ce6db4006f",
+    "br_02/ac_08/Synthetic/Resources.csv": "980677973139b7eb4bcaa99604b36e805ccdf79043fd79bfbc66c7263bc57258",
+    "br_02/ac_08/SyntheticConflict/Resources.csv": "8bbf90d56b29239a78a1c9b4fdbc37665d4eda3b8a3fbbea27a9b81f031113e2",
+    "br_02/ac_09/Synthetic/Resources.csv": "324f42bc17a87ace2ae15c9954015ebe740657d90f766e4a055c06ce6db4006f",
+    "br_02/ac_10/Synthetic/Resources.csv": "324f42bc17a87ace2ae15c9954015ebe740657d90f766e4a055c06ce6db4006f",
+    "br_03/ac_01/Synthetic/GreenhouseClimate.csv": "e14ee9db07a9b854ad281f08959c972db8b51ca719816d675ea9f9b22945d445",
+    "br_03/ac_02/Synthetic/GreenhouseClimate.csv": "e14ee9db07a9b854ad281f08959c972db8b51ca719816d675ea9f9b22945d445",
+    "br_03/ac_03/Synthetic/GreenhouseClimate.csv": "e14ee9db07a9b854ad281f08959c972db8b51ca719816d675ea9f9b22945d445",
+    "br_03/ac_04/Synthetic/GreenhouseClimate.csv": "b5f16169ebea36fd182b0ab0a729e72e3756cbeba6a7792dd239463f1e9c591b",
+    "br_03/ac_05/Synthetic/GreenhouseClimate.csv": "35b5059e46c5580d1435af7db9f46f199b73f8e8e1dfd7e5b2245857c1889d0e",
+    "br_03/ac_06/Synthetic/GreenhouseClimate.csv": "ac774a5b369e3277643c104c94893ffe0d1d9f5c482c5feddf5fb81ef2390024",
+    "br_03/ac_07/Synthetic/GreenhouseClimate.csv": "58b0e2a7226cb0f721f9781aa907feae43baf2668c2e52a3ed4f992f738cb9c8",
+    "br_03/ac_08/Synthetic/GreenhouseClimate.csv": "e14ee9db07a9b854ad281f08959c972db8b51ca719816d675ea9f9b22945d445",
+    "br_03/ac_08/Synthetic/LabAnalysis.csv": "45a8144fcfd1d43d04685a9787dc1450a44a36e1bd64347a0bc933b0cb0fcd20",
+    "br_03/ac_09/Synthetic/GreenhouseClimate.csv": "e14ee9db07a9b854ad281f08959c972db8b51ca719816d675ea9f9b22945d445",
+    "br_03/ac_09/Synthetic/Resources.csv": "324f42bc17a87ace2ae15c9954015ebe740657d90f766e4a055c06ce6db4006f",
+    "br_03/ac_10/Synthetic/GreenhouseClimate.csv": "e14ee9db07a9b854ad281f08959c972db8b51ca719816d675ea9f9b22945d445",
+    "br_04/ac_01/Synthetic/Production.csv": "1dbbaa79128a743b0cc713474222f4bc2e5ad8b76a037bf2250ca1d17eac8f45",
+    "br_04/ac_01/Synthetic/Resources.csv": "a4ead7f2aad6a1f9a7aee0956f110837a240f7a1ec902098e30a9bfd7085e438",
+    "br_04/ac_02/Synthetic/Production.csv": "1dbbaa79128a743b0cc713474222f4bc2e5ad8b76a037bf2250ca1d17eac8f45",
+    "br_04/ac_02/Synthetic/Resources.csv": "a4ead7f2aad6a1f9a7aee0956f110837a240f7a1ec902098e30a9bfd7085e438",
+    "br_04/ac_03/Synthetic/Production.csv": "1dbbaa79128a743b0cc713474222f4bc2e5ad8b76a037bf2250ca1d17eac8f45",
+    "br_04/ac_03/Synthetic/Resources.csv": "a4ead7f2aad6a1f9a7aee0956f110837a240f7a1ec902098e30a9bfd7085e438",
+    "br_04/ac_04/Synthetic/Production.csv": "da92c132ff2f6c4f44b0a95ea1ba14d875ef727294ffac22b437881884713c62",
+    "br_04/ac_04/Synthetic/Resources.csv": "a4ead7f2aad6a1f9a7aee0956f110837a240f7a1ec902098e30a9bfd7085e438",
+    "br_04/ac_05/Synthetic/Production.csv": "1dbbaa79128a743b0cc713474222f4bc2e5ad8b76a037bf2250ca1d17eac8f45",
+    "br_04/ac_05/Synthetic/Resources.csv": "30c535afabefa97812b6402b6a8a2b98524dda618b7b469d46044c79210dab88",
+    "br_04/ac_06/Synthetic/Production.csv": "1dbbaa79128a743b0cc713474222f4bc2e5ad8b76a037bf2250ca1d17eac8f45",
+    "br_04/ac_06/Synthetic/Resources.csv": "a4ead7f2aad6a1f9a7aee0956f110837a240f7a1ec902098e30a9bfd7085e438",
+    "br_04/ac_07/Synthetic/Production.csv": "450f02c3abdf0df7fdfd37b2a853e5ad3ec7360db23f88856ab49c3ce5b3f4c6",
+    "br_04/ac_07/Synthetic/Resources.csv": "a4ead7f2aad6a1f9a7aee0956f110837a240f7a1ec902098e30a9bfd7085e438",
+    "br_04/ac_08/Synthetic/Production.csv": "57b95d3b68db9457c7224780a37e0c53ca1abf43aa699a565a7018d865b4bde7",
+    "br_04/ac_08/Synthetic/Resources.csv": "a4ead7f2aad6a1f9a7aee0956f110837a240f7a1ec902098e30a9bfd7085e438",
+    "br_04/ac_09/Synthetic/Production.csv": "1dbbaa79128a743b0cc713474222f4bc2e5ad8b76a037bf2250ca1d17eac8f45",
+    "br_04/ac_09/Synthetic/Resources.csv": "a4ead7f2aad6a1f9a7aee0956f110837a240f7a1ec902098e30a9bfd7085e438",
+    "br_04/ac_09/SyntheticSecond/Production.csv": "893fbef5c24226f4ff126c3e2430d03f4ff2d77bb3fd26681952661bdf127721",
+    "br_04/ac_09/SyntheticSecond/Resources.csv": "9c48a2a596d47849f7399f3166592b221c9d223faa6a1832c0741e52fd3364e8",
+    "br_04/ac_10/Synthetic/Production.csv": "1dbbaa79128a743b0cc713474222f4bc2e5ad8b76a037bf2250ca1d17eac8f45",
+    "br_04/ac_10/Synthetic/Resources.csv": "a4ead7f2aad6a1f9a7aee0956f110837a240f7a1ec902098e30a9bfd7085e438",
+    "br_05/ac_01/Synthetic/Production.csv": "edc6a91288f2c3820b2fc9255b27e748e8239e10ad81cbd7f3af4f3ad9546da1",
+    "br_05/ac_02/Synthetic/Production.csv": "edc6a91288f2c3820b2fc9255b27e748e8239e10ad81cbd7f3af4f3ad9546da1",
+    "br_05/ac_03/Synthetic/Production.csv": "4700fce798e635084976452ba244f8d22f9251aac04f88b721eb2a411eaba47f",
+    "br_05/ac_04/Synthetic/Production.csv": "8dff99055e8ba2f78fec31f3a43c0fda417b1865658f49bc6a72c22953658389",
+    "br_05/ac_05/Synthetic/Production.csv": "6f711a663b43d1fde127e8d68fc3fd220f3f19de5102c65b2854956e11793a12",
+    "br_05/ac_06/Synthetic/Production.csv": "edc6a91288f2c3820b2fc9255b27e748e8239e10ad81cbd7f3af4f3ad9546da1",
+    "br_05/ac_07/Synthetic/Production.csv": "edc6a91288f2c3820b2fc9255b27e748e8239e10ad81cbd7f3af4f3ad9546da1",
+    "br_05/ac_08/Synthetic/Production.csv": "edc6a91288f2c3820b2fc9255b27e748e8239e10ad81cbd7f3af4f3ad9546da1",
+    "br_05/ac_09/Synthetic/Production.csv": "edc6a91288f2c3820b2fc9255b27e748e8239e10ad81cbd7f3af4f3ad9546da1",
+    "br_05/ac_10/Synthetic/Production.csv": "edc6a91288f2c3820b2fc9255b27e748e8239e10ad81cbd7f3af4f3ad9546da1",
+    "br_06/ac_01/Synthetic/Resources.csv": "eb006881d6091fa4b003f5683c0e958ca1f9aa47099cb214aeed05f61a3b3dc7",
+    "br_06/ac_02/Synthetic/Resources.csv": "eb006881d6091fa4b003f5683c0e958ca1f9aa47099cb214aeed05f61a3b3dc7",
+    "br_06/ac_03/Synthetic/Resources.csv": "eb006881d6091fa4b003f5683c0e958ca1f9aa47099cb214aeed05f61a3b3dc7",
+    "br_06/ac_04/Synthetic/Resources.csv": "65b65c489895ead001fedeaa88b977b17a89ffbc30b532b31a5f67f4e33e0a25",
+    "br_06/ac_05/Synthetic/Resources.csv": "eb006881d6091fa4b003f5683c0e958ca1f9aa47099cb214aeed05f61a3b3dc7",
+    "br_06/ac_06/Synthetic/Resources.csv": "75cfd80193d3535d1f8b3544952a3fe11def2f98434c6aa3c2a25940f63e1d0a",
+    "br_06/ac_07/Synthetic/Resources.csv": "a240c8aa0bc233af46c7dfd049c5001dec0c3e135f996730040b4e41494c51b7",
+    "br_06/ac_08/Synthetic/Resources.csv": "eb006881d6091fa4b003f5683c0e958ca1f9aa47099cb214aeed05f61a3b3dc7",
+    "br_06/ac_09/Synthetic/Resources.csv": "eb006881d6091fa4b003f5683c0e958ca1f9aa47099cb214aeed05f61a3b3dc7",
+    "br_06/ac_10/Synthetic/Resources.csv": "eb006881d6091fa4b003f5683c0e958ca1f9aa47099cb214aeed05f61a3b3dc7",
+    "br_06/ac_11/Synthetic/Resources.csv": "eb006881d6091fa4b003f5683c0e958ca1f9aa47099cb214aeed05f61a3b3dc7",
+    "errors/broken_csv/Synthetic/Resources.csv": "dd0973e3f68080e40018649f7f6f2c29fd254fa51010976d0ea2b877e234cb5b",
+    "errors/conflict/Synthetic/Resources.csv": "8bbf90d56b29239a78a1c9b4fdbc37665d4eda3b8a3fbbea27a9b81f031113e2",
+    "errors/duplicate/Synthetic/Resources.csv": "980677973139b7eb4bcaa99604b36e805ccdf79043fd79bfbc66c7263bc57258",
+    "errors/invalid_format/Synthetic/Resources.csv": "98861cb36c8bc0030206b81d5244025d152eac877ef8f0ee62af3b09193a017c",
+    "errors/missing_columns/Synthetic/Resources.csv": "44346378d6a435a8998253e233f6517a74718ab3fcb836fb19da7fe7b4343c1a",
+    "errors/missing_values/Synthetic/Resources.csv": "55c72ddb28ee7a5783d7a8f54003931382df844f7835db62596ee5bba4eee85c"
+  },
+  "byte_format": {
+    "encoding": "UTF-8",
+    "line_terminator": "CRLF",
+    "utf8_bom_files": [
+      "br_03/ac_08/Synthetic/LabAnalysis.csv"
+    ]
+  }
+}

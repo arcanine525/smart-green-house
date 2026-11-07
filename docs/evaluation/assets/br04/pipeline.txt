@@ -1,0 +1,10 @@
+ Container smart-greenhouse-job-run-1a0269ce1462 Creating
+ Container smart-greenhouse-job-run-1a0269ce1462 Created
+PREFLIGHT_PASS {"core.record_revision": 574843, "core.climate_observation": 286854, "core.drain_observation": 286854, "core.resource_day": 996, "core.measure_quality": 2874794, "meta.correction": 0}
+MIGRATION {"applied": ["011_energy_mart.sql"], "skipped": ["001_core_metadata.sql", "002_agc_reference.sql", "003_explanation_views.sql", "004_pipeline_publication.sql", "005_irrigation_mart.sql", "006_harvest_mart.sql", "007_harvest_rule.sql", "008_rule_schedule.sql", "009_climate_mart.sql", "010_drain_mart.sql"]}
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/05 09:14:29 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[Stage 0:>                                                          (0 + 1) / 2][Stage 0:=============================>                             (1 + 1) / 2]                                                                                PIPELINE_RESULT {"workflow_id": "energy-br04-20261105", "status": "completed", "publication_id": "892b4cd58cdf4d099510974d91fa64ab", "output": "/data/output/pipeline/energy-br04-20261105"}

@@ -135,6 +135,28 @@ Tất cả dữ liệu dưới đây là fixture tổng hợp để kiểm thử
 ## 9. Nguồn và quan hệ tài liệu
 
 - [Yêu cầu môn học](../../DE_Requirements.pdf), trang 1–2, 5–6: business requirements, correctness, performance và khai thác ứng dụng.
-- [Dataset và profiling](../../case-analysis/01-case-va-dataset.md), mục 1.2–1.5; [nguồn và giới hạn](../../case-analysis/05-nguon-va-phuong-phap.md).
+- [Nguồn AGC trong phân tích tham khảo](../ref/SmartGreenhouse_Case_Analysis.md#21-nguồn-dữ-liệu), [quy mô](../ref/SmartGreenhouse_Case_Analysis.md#22-quy-mô) và [grain](../ref/SmartGreenhouse_Case_Analysis.md#23-grain-ba-mức-cùng-tồn-tại). Đây là tổng quan lịch sử, không phải báo cáo profiling snapshot; [inventory T05](../implementation/data-inventory.md) đã đo số dòng/header/time và token rỗng; chưa tính accepted coverage. [Quyết định ngữ nghĩa](../implementation/data-decisions.md#3-thời-gian-biên-vụ-và-drift-serial) ghi chính sách thời gian và bằng chứng; timezone và [mapping off-mode](../implementation/data-decisions.md#4-setpoint-và-off-mode) vẫn chưa xác minh, giữ unknown theo policy.
 - `ReadMe.pdf`, mục GreenhouseClimate và Climate and irrigation setpoints, trong [archive Kaggle AGC](https://www.kaggle.com/datasets/piantic/autonomous-greenhouse-challengeagc-2nd-2019/).
-- [Schema gợi ý](../../case-analysis/03-schema-dai-dien.md). Tài liệu cũ là tham chiếu; công thức/rule của BR-01 cuối kỳ được định nghĩa tại file này.
+- Schema gợi ý trong phân tích tham khảo: [Inmon](../ref/SmartGreenhouse_Case_Analysis.md#3-schema-đại-diện-inmon-lõi-3nf), [Kimball](../ref/SmartGreenhouse_Case_Analysis.md#4-schema-đại-diện-kimball-star-factclimate) và [Hybrid](../ref/SmartGreenhouse_Case_Analysis.md#5-schema-đại-diện-hybrid). Tài liệu cũ là tham chiếu; công thức/rule của BR-01 cuối kỳ được định nghĩa tại file này.
+
+## 10. Phụ lục acceptance — sensor replay
+
+Phạm vi này là **dữ liệu AGC phát lại qua sensor giả lập**, tách khỏi publication
+lịch sử. Nó mở rộng BR-01; không biến event-time năm 2019–2020 thành số đo hiện tại.
+
+- **LIVE-01:** Chọn replay/khoang và pin publication; mọi KPI, episode và CSV
+  trong một lần hiển thị dùng cùng ID, scope, quality policy, basis và rule.
+- **LIVE-02:** Hiện replay clock theo source time, mẫu hợp lệ gần nhất, thời
+  điểm collector nhận thực tế và tuổi tín hiệu theo đồng hồ vận hành. Không
+  tính lag bằng hiện tại trừ timestamp AGC.
+- **LIVE-03:** Khi chưa có dữ liệu hoặc thiếu rule, hiển thị unknown/chưa sẵn
+  sàng; không thay bằng 0. Hiện verdict quality và coverage đến cursor; phần
+  tương lai chưa replay không bị tính là missing.
+- **LIVE-04:** Pause, stale, conflict, gap và replay chưa đối soát được gắn
+  nhãn rõ; episode chạm biên cursor được gắn open/provisional. Event đến trễ
+  có thể thay kết quả ở publication mới, không thay publication đã pin.
+- **LIVE-05:** Rule lịch sử chỉ được ánh xạ tường minh khi snapshot và khoang
+  nguồn khớp; giữ nhãn demo. Không phát cảnh báo ngoài hoặc điều khiển thiết bị.
+
+Kiểm thử giao diện thực tế và fault matrix của toàn đường sensor thuộc T36;
+[hướng dẫn stream](../../src/greenhouse/sensor/README.md).

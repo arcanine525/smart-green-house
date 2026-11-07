@@ -1,0 +1,17 @@
+{"label": "baseline-parity-with-config", "image": "greenhouse-cutover-processing:20261107", "source_head": "f5ccd38f1ee536f6e66e906cf44d69170cb5c6e7"}
+Traceback (most recent call last):
+  File "/cutover-tools/state.py", line 116, in <module>
+    elif args.mode=='baseline':baseline()
+                               ^^^^^^^^^^
+  File "/cutover-tools/state.py", line 87, in baseline
+    kinds=archive_native(conn,archive,hashed);configurations(conn,archive)
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cutover-tools/rollback.py", line 56, in configurations
+    if kind=='tariff':cost.register_tariff(from_dict(TariffProfile,payload))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/db/cost_adapter.py", line 92, in register_tariff
+    self.connection.execute(sql('insert_tariff_profile'), (
+  File "/usr/local/lib/python3.12/site-packages/psycopg/connection.py", line 304, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "tariff_profile_tariff_id_version_scope_comp_key"
+DETAIL:  Key (tariff_id, version, data_scope_id, compartment_id)=(AGC_2020_REFERENCE_V1, 1, agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical, null) already exists.

@@ -1,0 +1,5 @@
+{"stage": "raw-rebuild-retry", "preflight_host_free_bytes": 6892630016, "enforced_headroom_gib": 6, "helpers_serialized": true}
+ Container gh-ch-repro-20261107032510-rebuilt-raw-rebuild-retry Creating 
+ Container gh-ch-repro-20261107032510-rebuilt-raw-rebuild-retry Created 
+{"stage": "native_rebuild_inputs_verified", "backend": "clickhouse", "archive_sha256": "ad4c5cb93978313a4f3b690676709156fb85e91d19be6d23c83ac4c842b88836", "configuration_versions_restored": 126, "source_publication": "52b72d65384944798dd7981c0a46615b"}
+{"stage": "native_raw_rebuilt", "publication_id": "4b08bd51c092465783304f887d766d47", "load_id": "b46b4d1fa95641b891c447faed0c07dc"}

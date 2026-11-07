@@ -1,0 +1,15 @@
+{
+  "packaged-ui-tests-runtimefix": {
+    "exit_code": 0,
+    "elapsed_seconds": 101.6309940000001,
+    "log": "diagnostics/packaged-ui-tests-runtimefix.log",
+    "sha256": "ce7805eef86d1dd076b5163fe6126bf13fffb9ad6a448600d0b4a03721a797f7"
+  },
+  "fixed-full-parity-runtimefix": {
+    "exit_code": 0,
+    "elapsed_seconds": 434.36753337499977,
+    "log": "diagnostics/fixed-full-parity-final.log",
+    "sha256": "d1379b52e1f47c318cfe8465e1d03c2872598d8f224030972f1ab7fb734acda6",
+    "raw_snapshot_path": "/data/raw/agc-2nd-2019/c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68"
+  }
+}

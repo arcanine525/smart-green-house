@@ -1,0 +1,15 @@
+{"label": "baseline-parity", "image": "greenhouse-cutover-processing:20261107", "source_head": "f5ccd38f1ee536f6e66e906cf44d69170cb5c6e7"}
+{"stage": "business_reference", "compartment": "AICU"}
+{"stage": "business_reference", "compartment": "Automatoes"}
+{"stage": "business_reference", "compartment": "Digilog"}
+{"stage": "business_reference", "compartment": "IUACAAS"}
+{"stage": "business_reference", "compartment": "Reference"}
+{"stage": "business_reference", "compartment": "TheAutomators"}
+Traceback (most recent call last):
+  File "/cutover-tools/state.py", line 111, in <module>
+    elif args.mode=='baseline':baseline()
+                               ^^^^^^^^^^
+  File "/cutover-tools/state.py", line 87, in baseline
+    if result['results']!=archive['business']:raise ValueError('Restored PG baseline differs from cutover business contracts')
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Restored PG baseline differs from cutover business contracts

@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "business_intents": 62,
+  "head": "bbfd7017ae3b8c72ca4445544b2ee8012eb0ac48576f579408ba11320fce7a03",
+  "mode": "active",
+  "outcomes": [
+    [
+      "QueryFinish",
+      62
+    ]
+  ],
+  "unchanged_since_accepted_cutover": true,
+  "after_final_rehearsal": true,
+  "after_intents": 62,
+  "after_head": "bbfd7017ae3b8c72ca4445544b2ee8012eb0ac48576f579408ba11320fce7a03"
+}

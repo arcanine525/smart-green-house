@@ -1,0 +1,51 @@
+{"step":1,"title":"BR-02: current publication and corrected two-day water","status":"passed"}
+{"step":2,"title":"BR-01: climate rule and episode over boundary","status":"passed"}
+{"step":3,"title":"BR-03: drain rule, EC/pH and export","status":"passed"}
+{"step":4,"title":"BR-05: harvest source day and paired share","status":"passed"}
+ExpectError: expect(locator).toContainText(expected) failed
+
+Locator: getByTestId('stMetric').filter({ has: getByText('Năng lượng (kWh)', { exact: true }) })
+Expected substring: "308.078"
+Received string:    "Năng lượng (kWh)2,305.911"
+Timeout: 120000ms
+
+Call log:
+  - Expect "toContainText" getByTestId('stMetric').filter({ has: getByText('Năng lượng (kWh)', { exact: true }) }) with timeout 120000ms
+  - waiting for getByTestId('stMetric').filter({ has: getByText('Năng lượng (kWh)', { exact: true }) })
+    242 × locator resolved to <div data-testid="stMetric" class="stMetric st-emotion-cache-10klw3m e3lvb7d0">…</div>
+        - unexpected value "Năng lượng (kWh)2,305.911"
+
+    at captureRawStack (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/node_modules/playwright-core/lib/coreBundle.js:9551:17)
+    at callMatcherAsStep (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/node_modules/playwright/lib/matchers/expect.js:13342:57)
+    at Object.toContainText (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/node_modules/playwright/lib/matchers/expect.js:13334:23)
+    at metric (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/rehearse_submission.cjs:37:127)
+    at /Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/rehearse_submission.cjs:84:49
+    at async step (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/rehearse_submission.cjs:47:21)
+    at async /Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/rehearse_submission.cjs:82:3 {
+  matcherResult: {
+    name: 'toContainText',
+    expected: '308.078',
+    message: 'expect(locator).toContainText(expected) failed\n' +
+      '\n' +
+      "Locator: getByTestId('stMetric').filter({ has: getByText('Năng lượng (kWh)', { exact: true }) })\n" +
+      'Expected substring: "308.078"\n' +
+      'Received string:    "Năng lượng (kWh)2,305.911"\n' +
+      'Timeout: 120000ms\n' +
+      '\n' +
+      'Call log:\n' +
+      `  - Expect "toContainText" getByTestId('stMetric').filter({ has: getByText('Năng lượng (kWh)', { exact: true }) }) with timeout 120000ms\n` +
+      "  - waiting for getByTestId('stMetric').filter({ has: getByText('Năng lượng (kWh)', { exact: true }) })\n" +
+      '    242 × locator resolved to <div data-testid="stMetric" class="stMetric st-emotion-cache-10klw3m e3lvb7d0">…</div>\n' +
+      '        - unexpected value "Năng lượng (kWh)2,305.911"\n',
+    pass: false,
+    actual: 'Năng lượng (kWh)2,305.911',
+    log: [
+      `  - Expect "toContainText" getByTestId('stMetric').filter({ has: getByText('Năng lượng (kWh)', { exact: true }) }) with timeout 120000ms`,
+      "  - waiting for getByTestId('stMetric').filter({ has: getByText('Năng lượng (kWh)', { exact: true }) })",
+      '    242 × locator resolved to <div data-testid="stMetric" class="stMetric st-emotion-cache-10klw3m e3lvb7d0">…</div>',
+      '        - unexpected value "Năng lượng (kWh)2,305.911"'
+    ],
+    timeout: 120000,
+    ariaSnapshot: '- paragraph: Năng lượng (kWh)\n- paragraph: 2,305.911'
+  }
+}

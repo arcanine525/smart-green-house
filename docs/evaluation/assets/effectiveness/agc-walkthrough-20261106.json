@@ -1,0 +1,128 @@
+{
+  "kind": "automated-ui-walkthrough",
+  "human_participants": 0,
+  "database_read_only": true,
+  "publication_id": "df3e4bcbacab45a5b86fc37d2f53c00a",
+  "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+  "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "cycle_id": "agc-cycle-Automatoes",
+  "compartment_id": "Automatoes",
+  "window_inclusive": [
+    "2020-03-02",
+    "2020-03-03"
+  ],
+  "raw_water_oracle": {
+    "source": "Automatoes/Resources.csv",
+    "sha256": "8b3d980fc7b3646c746dfc577af59159a49eef31770b84898502ecc5ef1d45f5",
+    "rows": 2,
+    "irrigation_l_m2": "9.36",
+    "drain_l_m2": "3.89",
+    "paired_ratio_percent": "41.55982905982905982905982906",
+    "assumed_area_m2": "62.5",
+    "energy_kwh": "308.0781250416666666666666667",
+    "historical_cost_eur": "17.600067710000",
+    "tariff": {
+      "heat_eur_mj": "0.0083",
+      "high_eur_kwh": "0.08",
+      "low_eur_kwh": "0.04"
+    }
+  },
+  "total_elapsed_seconds": 6.523,
+  "screens": [
+    {
+      "screen": "climate",
+      "elapsed_seconds": 3.056,
+      "metrics": {
+        "Nhiệt độ out (giờ quan sát được)": "NULL",
+        "Nhiệt độ coverage": "0,00 %",
+        "CO₂ out (giờ quan sát được)": "NULL",
+        "CO₂ coverage": "0,00 %",
+        "OR lệch (giờ, hợp lệ chung)": "NULL",
+        "OR lệch %": "NULL",
+        "Coverage giao chung": "0,00 %"
+      },
+      "download_count": 4
+    },
+    {
+      "screen": "water",
+      "elapsed_seconds": 0.039,
+      "metrics": {
+        "Irrigation observed": "9,36 L/m²",
+        "Drain observed": "3,89 L/m²",
+        "Tỷ lệ drain (paired)": "41,56 %",
+        "Độ phủ paired": "100,00 %"
+      },
+      "download_count": 3
+    },
+    {
+      "screen": "drain",
+      "elapsed_seconds": 2.178,
+      "metrics": {
+        "EC ngoài dải (phút)": "NULL",
+        "EC ngoài dải %": "NULL",
+        "EC coverage %": "0,00",
+        "EC suspect (phút)": "0,00",
+        "PH ngoài dải (phút)": "NULL",
+        "PH ngoài dải %": "NULL",
+        "PH coverage %": "0,00",
+        "PH suspect (phút)": "0,00",
+        "OR ngoài dải (phút, hợp lệ chung)": "NULL",
+        "OR ngoài dải %": "NULL",
+        "Coverage giao chung %": "0,00",
+        "Tưới nguồn (L/m², ngày tính một lần)": "9,36",
+        "Drain nguồn (L/m², ngày tính một lần)": "3,89",
+        "Coverage nước ghép ngày %": "100,00"
+      },
+      "download_count": 6
+    },
+    {
+      "screen": "energy",
+      "elapsed_seconds": 0.194,
+      "metrics": {
+        "Năng lượng (kWh)": "308.078",
+        "Sản lượng A (kg)": "0.000",
+        "kWh/kg A": "NULL",
+        "Coverage năng lượng (%)": "100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA": "24.867"
+      },
+      "download_count": 6
+    },
+    {
+      "screen": "harvest",
+      "elapsed_seconds": 0.039,
+      "metrics": {
+        "A observed": "0,00 kg/m²",
+        "B observed": "0,00 kg/m²",
+        "Tổng paired A+B": "— kg/m²",
+        "Share B (paired)": "— %",
+        "Paired A (kg/m²)": "—",
+        "Paired B (kg/m²)": "—",
+        "Share A (paired)": "— %"
+      },
+      "download_count": 5
+    },
+    {
+      "screen": "cost",
+      "elapsed_seconds": 0.067,
+      "metrics": {
+        "Tổng chi phí (EUR)": "17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)": "0.28 EUR/m²",
+        "Coverage định giá (%)": "100.0%",
+        "Coverage lượng (%)": "100.0%"
+      },
+      "download_count": 7
+    },
+    {
+      "screen": "overview",
+      "elapsed_seconds": 0.016,
+      "metrics": {},
+      "download_count": 0
+    },
+    {
+      "screen": "quality",
+      "elapsed_seconds": 0.036,
+      "metrics": {},
+      "download_count": 0
+    }
+  ]
+}

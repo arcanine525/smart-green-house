@@ -1,0 +1,1491 @@
+{
+  "task": "T25",
+  "title": "Smart Greenhouse Architecture and Technology Benchmark",
+  "started_at": "2026-11-06T10:48:14.757881+00:00",
+  "status": "failed",
+  "stages": {
+    "system_metadata": {
+      "timestamp_utc": "2026-11-06T10:48:14.774708+00:00",
+      "python_version": "3.12.12",
+      "packages": {
+        "psycopg": "3.3.7",
+        "pyspark": "4.0.1"
+      },
+      "archive_sha256": "c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+      "platform": "Linux-7.0.14-linuxkit-aarch64-with-glibc2.36",
+      "processor": "",
+      "postgres_version": "PostgreSQL 17.10 (Debian 17.10-1.pgdg12+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+      "source_snapshot": "/data/raw/agc-2nd-2019/c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+      "raw_manifest_sha256": "c1e40f1ea6bf0d7c9a729843ec1f8be917ad5966b788857813608bab47d8b0bd",
+      "benchmark_script_sha256": "dd6279b3b22dd5fc4bfc6451d8a071bec978d36b18eed827fa1fb7eba63b1cb9",
+      "parser_version": "agc-parser-v1",
+      "quality_policy": "AGC_QUALITY_V1",
+      "area_basis": "AGC_SHARED_BASIS_V1;62.5m2;assumed_unverified",
+      "cgroup": {
+        "cgroup_memory_max_bytes": "2147483648",
+        "cgroup_memory_peak_bytes": "36601856",
+        "cgroup_cpu_max": "150000 100000"
+      },
+      "container_processing_caps": {
+        "cpu": "1.5",
+        "memory": "2GiB"
+      },
+      "container_db_caps": {
+        "cpu": "0.5",
+        "memory": "512MiB"
+      }
+    },
+    "pipeline_progress": {
+      "hybrid": {
+        "fresh_database": "greenhouse_hybrid_bench_t25_20261106_104814",
+        "rebuild_database": "greenhouse_hybrid_rebuild_t25_20261106_104814",
+        "output_paths": {
+          "fresh": "/data/output/t25_bench/fresh_3ad7614f",
+          "rerun": "/data/output/t25_bench/rerun_3ad7614f",
+          "rebuild": "/data/output/t25_bench/rebuild_3ad7614f"
+        },
+        "publication_id": "df3e4bcbacab45a5b86fc37d2f53c00a",
+        "fresh_pipeline_duration_seconds": 880.3341051909993,
+        "migrations_applied_count": 15,
+        "rerun_reuse_duration_seconds": 183.58486050099964,
+        "rerun_reused_publication_identical": true,
+        "clean_rebuild_duration_seconds": 926.9126304250021,
+        "rebuild_publication_id": "eeeed4250eef4d12b96319a1a2b2ec47"
+      },
+      "kimball": {
+        "fresh_database": "greenhouse_kimball_bench_t25_20261106_104814",
+        "rebuild_database": "greenhouse_kimball_rebuild_t25_20261106_104814",
+        "publication_id": "kimball-pub-f2b6-t24-historical",
+        "fresh_pipeline_duration_seconds": 40.34586968499934,
+        "rerun_rejection_duration_seconds": 3.7286600849984097,
+        "publication_immutability_enforced": true,
+        "rerun_specific_rejection_message": "Publication 'kimball-pub-f2b6-t24-historical' already exists and is immutable; cannot overwrite.",
+        "clean_rebuild_duration_seconds": 41.54304618599781,
+        "rebuild_publication_id": "kimball-pub-f2b6-t24-historical"
+      },
+      "run_id": "3ad7614f",
+      "run_count_per_path": 1,
+      "measurement_order": [
+        "hybrid_fresh",
+        "hybrid_rerun",
+        "hybrid_rebuild",
+        "kimball_fresh",
+        "kimball_rerun",
+        "kimball_rebuild"
+      ],
+      "initial_data_filesystem_free_bytes": 12636110848,
+      "timer_boundary": "Includes verification, schema/database creation, transform, publication and required demo metadata; excludes query evaluation."
+    },
+    "pipeline_lifecycle": {
+      "hybrid": {
+        "fresh_database": "greenhouse_hybrid_bench_t25_20261106_104814",
+        "rebuild_database": "greenhouse_hybrid_rebuild_t25_20261106_104814",
+        "output_paths": {
+          "fresh": "/data/output/t25_bench/fresh_3ad7614f",
+          "rerun": "/data/output/t25_bench/rerun_3ad7614f",
+          "rebuild": "/data/output/t25_bench/rebuild_3ad7614f"
+        },
+        "publication_id": "df3e4bcbacab45a5b86fc37d2f53c00a",
+        "fresh_pipeline_duration_seconds": 880.3341051909993,
+        "migrations_applied_count": 15,
+        "rerun_reuse_duration_seconds": 183.58486050099964,
+        "rerun_reused_publication_identical": true,
+        "clean_rebuild_duration_seconds": 926.9126304250021,
+        "rebuild_publication_id": "eeeed4250eef4d12b96319a1a2b2ec47"
+      },
+      "kimball": {
+        "fresh_database": "greenhouse_kimball_bench_t25_20261106_104814",
+        "rebuild_database": "greenhouse_kimball_rebuild_t25_20261106_104814",
+        "publication_id": "kimball-pub-f2b6-t24-historical",
+        "fresh_pipeline_duration_seconds": 40.34586968499934,
+        "rerun_rejection_duration_seconds": 3.7286600849984097,
+        "publication_immutability_enforced": true,
+        "rerun_specific_rejection_message": "Publication 'kimball-pub-f2b6-t24-historical' already exists and is immutable; cannot overwrite.",
+        "clean_rebuild_duration_seconds": 41.54304618599781,
+        "rebuild_publication_id": "kimball-pub-f2b6-t24-historical"
+      },
+      "run_id": "3ad7614f",
+      "run_count_per_path": 1,
+      "measurement_order": [
+        "hybrid_fresh",
+        "hybrid_rerun",
+        "hybrid_rebuild",
+        "kimball_fresh",
+        "kimball_rerun",
+        "kimball_rebuild"
+      ],
+      "initial_data_filesystem_free_bytes": 12636110848,
+      "timer_boundary": "Includes verification, schema/database creation, transform, publication and required demo metadata; excludes query evaluation."
+    },
+    "workload_parity_verification": {
+      "BR-01": {
+        "digest": "3929da6567812904bf5a8c9270d3f34c325699794d75f656bc4c37b5435a35e2",
+        "slot_count": 47808,
+        "episodes_count": 3959,
+        "metrics_count": 2,
+        "joint_count": 1,
+        "parity_verified": true
+      },
+      "BR-02": {
+        "digest": "4f706845e32824cfc1f7da35088191e1bc2bd67021f559559fdd055cba4c4cc3",
+        "day_count": 166,
+        "irrigation_total": "788.851818181",
+        "drain_total": "324.08",
+        "parity_verified": true
+      },
+      "BR-03": {
+        "digest": "9bd61e7d27d94c7f8a8871c14443ceb8b5dee163c751a2e8fc9851f1c8358db9",
+        "slot_count": 47808,
+        "episodes_count": 447,
+        "metrics_count": 2,
+        "joint_count": 1,
+        "parity_verified": true
+      },
+      "BR-04": {
+        "digest": "a0f1c670a895ad61dfec6e46dbd3cca2babb349b0286a2f35e80df117b0f7c3f",
+        "quantities_count": 498,
+        "intensity_kwh_kg_a": "22.418082637140204271123491179201485608170844939647",
+        "parity_verified": true
+      },
+      "BR-05": {
+        "digest": "85571cf11a2baaf47a22abcd242ee9badcda099a19304a527dc7896d3ca23887",
+        "records_count": 23,
+        "paired_total_kg": "14.9188",
+        "parity_verified": true
+      },
+      "BR-06": {
+        "digest": "096cb5129abd17a5265168644e5fd5ffc78e611adebb6a299ec6341ae5b204a4",
+        "baseline_cost_eur": "1161.250543965",
+        "priced_days": 166,
+        "parity_verified": true,
+        "scenario_cost_eur": "1175.149086465"
+      }
+    },
+    "workload_latencies": {
+      "BR-01_Climate": {
+        "description": "5-minute slot time series reading + temperature/CO2 violation evaluation (use_cache=False)",
+        "compartment": "Automatoes",
+        "hybrid": {
+          "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
+          "first_touch_initialization_ms": 1572.215,
+          "warmup_iterations_count": 5,
+          "warmup_samples_ms": [
+            4251.62,
+            2903.564,
+            4490.86,
+            2589.729,
+            2992.403
+          ],
+          "measured_count": 30,
+          "measured_samples_ms": [
+            2887.785,
+            3124.42,
+            2871.06,
+            4218.154,
+            2842.815,
+            2992.088,
+            3551.784,
+            2963.026,
+            2766.181,
+            3229.185,
+            2871.501,
+            2713.208,
+            3038.466,
+            2915.053,
+            2662.411,
+            2739.779,
+            3247.781,
+            2751.942,
+            2571.726,
+            3068.802,
+            2995.751,
+            2963.108,
+            2687.759,
+            2923.86,
+            2763.217,
+            2757.708,
+            4060.807,
+            2860.445,
+            2711.226,
+            3080.463
+          ],
+          "median_ms": 2901.419,
+          "mean_ms": 2994.384,
+          "min_ms": 2571.726,
+          "max_ms": 4218.154,
+          "p95_nearest_rank_ms": 4060.807,
+          "target_ms": 2000.0,
+          "p95_target_pass": false
+        },
+        "kimball": {
+          "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
+          "first_touch_initialization_ms": 1713.478,
+          "warmup_iterations_count": 5,
+          "warmup_samples_ms": [
+            5217.665,
+            6068.543,
+            3749.468,
+            4046.372,
+            3671.996
+          ],
+          "measured_count": 30,
+          "measured_samples_ms": [
+            2823.408,
+            2947.483,
+            3028.133,
+            2962.074,
+            2719.086,
+            3188.374,
+            2772.867,
+            2763.106,
+            2715.707,
+            2769.301,
+            2655.576,
+            2505.832,
+            2854.006,
+            2515.263,
+            2558.231,
+            2521.947,
+            2675.627,
+            2603.51,
+            2473.99,
+            2633.51,
+            2671.812,
+            2722.419,
+            2520.793,
+            2592.524,
+            2628.12,
+            2586.349,
+            2588.284,
+            2518.836,
+            2812.136,
+            2501.829
+          ],
+          "median_ms": 2663.694,
+          "mean_ms": 2694.338,
+          "min_ms": 2473.99,
+          "max_ms": 3188.374,
+          "p95_nearest_rank_ms": 3028.133,
+          "target_ms": 2000.0,
+          "p95_target_pass": false
+        }
+      },
+      "BR-02_Water": {
+        "description": "Daily irrigation & drain pairing, balance summary, and drain fraction %",
+        "compartment": "Automatoes",
+        "hybrid": {
+          "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
+          "first_touch_initialization_ms": 15.256,
+          "warmup_iterations_count": 5,
+          "warmup_samples_ms": [
+            10.457,
+            10.229,
+            10.094,
+            11.639,
+            31.738
+          ],
+          "measured_count": 30,
+          "measured_samples_ms": [
+            22.22,
+            16.177,
+            19.493,
+            19.225,
+            13.39,
+            18.842,
+            13.987,
+            13.397,
+            12.757,
+            60.942,
+            78.168,
+            76.39,
+            52.611,
+            14.975,
+            21.909,
+            45.333,
+            44.758,
+            21.203,
+            15.696,
+            14.661,
+            13.687,
+            13.836,
+            13.287,
+            12.42,
+            11.4,
+            12.348,
+            13.053,
+            11.956,
+            11.252,
+            11.479
+          ],
+          "median_ms": 14.818,
+          "mean_ms": 24.028,
+          "min_ms": 11.252,
+          "max_ms": 78.168,
+          "p95_nearest_rank_ms": 76.39,
+          "target_ms": 2000.0,
+          "p95_target_pass": true
+        },
+        "kimball": {
+          "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
+          "first_touch_initialization_ms": 2828.923,
+          "warmup_iterations_count": 5,
+          "warmup_samples_ms": [
+            7.159,
+            7.033,
+            6.857,
+            7.392,
+            6.69
+          ],
+          "measured_count": 30,
+          "measured_samples_ms": [
+            6.584,
+            6.589,
+            6.589,
+            6.582,
+            6.635,
+            6.591,
+            6.562,
+            6.574,
+            6.558,
+            6.562,
+            6.53,
+            6.56,
+            6.563,
+            6.59,
+            6.589,
+            6.56,
+            10.612,
+            9.233,
+            9.547,
+            6.768,
+            6.678,
+            6.719,
+            7.212,
+            6.958,
+            7.156,
+            6.618,
+            6.522,
+            6.694,
+            7.864,
+            7.747
+          ],
+          "median_ms": 6.591,
+          "mean_ms": 7.051,
+          "min_ms": 6.522,
+          "max_ms": 10.612,
+          "p95_nearest_rank_ms": 9.547,
+          "target_ms": 2000.0,
+          "p95_target_pass": true
+        }
+      },
+      "BR-03_Drain": {
+        "description": "5-minute EC/pH slot readings + dry-down and out-of-band episode evaluations (use_cache=False)",
+        "compartment": "Automatoes",
+        "hybrid": {
+          "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
+          "first_touch_initialization_ms": 414.103,
+          "warmup_iterations_count": 5,
+          "warmup_samples_ms": [
+            1992.693,
+            1735.644,
+            1653.917,
+            1737.596,
+            1685.824
+          ],
+          "measured_count": 30,
+          "measured_samples_ms": [
+            1685.479,
+            1784.318,
+            1896.326,
+            2015.032,
+            1632.171,
+            1644.304,
+            1879.5,
+            1767.137,
+            1651.507,
+            1769.389,
+            1856.321,
+            1719.519,
+            1806.274,
+            1715.262,
+            1687.761,
+            1715.89,
+            1657.842,
+            1755.577,
+            1804.666,
+            1732.548,
+            1577.716,
+            1649.008,
+            1794.517,
+            1783.154,
+            1807.196,
+            1806.337,
+            1932.328,
+            1846.591,
+            1601.738,
+            1959.897
+          ],
+          "median_ms": 1768.263,
+          "mean_ms": 1764.51,
+          "min_ms": 1577.716,
+          "max_ms": 2015.032,
+          "p95_nearest_rank_ms": 1959.897,
+          "target_ms": 2000.0,
+          "p95_target_pass": true
+        },
+        "kimball": {
+          "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
+          "first_touch_initialization_ms": 796.789,
+          "warmup_iterations_count": 5,
+          "warmup_samples_ms": [
+            2750.684,
+            2194.241,
+            2107.043,
+            2116.254,
+            1722.658
+          ],
+          "measured_count": 30,
+          "measured_samples_ms": [
+            1647.569,
+            1540.748,
+            1604.032,
+            1583.616,
+            1816.707,
+            1729.684,
+            1675.221,
+            1556.768,
+            1580.912,
+            1594.162,
+            1762.088,
+            1670.589,
+            1612.582,
+            1522.46,
+            1626.178,
+            1662.818,
+            1803.897,
+            1706.766,
+            1608.411,
+            1536.996,
+            1590.672,
+            1640.106,
+            1831.434,
+            1686.784,
+            1589.458,
+            1544.465,
+            1588.578,
+            1700.795,
+            1796.058,
+            1713.21
+          ],
+          "median_ms": 1633.142,
+          "mean_ms": 1650.792,
+          "min_ms": 1522.46,
+          "max_ms": 1831.434,
+          "p95_nearest_rank_ms": 1816.707,
+          "target_ms": 2000.0,
+          "p95_target_pass": true
+        }
+      },
+      "BR-04_Energy": {
+        "description": "Daily heat/electricity quantity normalization, official total, and specific yield intensity",
+        "compartment": "Automatoes",
+        "hybrid": {
+          "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
+          "first_touch_initialization_ms": 19.04,
+          "warmup_iterations_count": 5,
+          "warmup_samples_ms": [
+            28.637,
+            20.28,
+            20.139,
+            20.168,
+            20.026
+          ],
+          "measured_count": 30,
+          "measured_samples_ms": [
+            19.818,
+            19.584,
+            19.705,
+            19.354,
+            19.85,
+            19.436,
+            19.573,
+            19.469,
+            19.491,
+            19.351,
+            19.612,
+            19.596,
+            19.275,
+            19.408,
+            19.539,
+            19.723,
+            19.759,
+            19.434,
+            19.493,
+            19.82,
+            19.329,
+            19.613,
+            19.299,
+            19.184,
+            19.572,
+            19.628,
+            19.399,
+            19.146,
+            19.502,
+            19.441
+          ],
+          "median_ms": 19.498,
+          "mean_ms": 19.514,
+          "min_ms": 19.146,
+          "max_ms": 19.85,
+          "p95_nearest_rank_ms": 19.82,
+          "target_ms": 2000.0,
+          "p95_target_pass": true
+        },
+        "kimball": {
+          "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
+          "first_touch_initialization_ms": 2652.869,
+          "warmup_iterations_count": 5,
+          "warmup_samples_ms": [
+            20.972,
+            17.565,
+            16.985,
+            16.503,
+            16.879
+          ],
+          "measured_count": 30,
+          "measured_samples_ms": [
+            16.676,
+            16.724,
+            16.941,
+            16.485,
+            16.247,
+            16.327,
+            16.478,
+            16.281,
+            16.347,
+            16.346,
+            16.265,
+            16.314,
+            16.345,
+            16.192,
+            16.233,
+            16.292,
+            16.221,
+            16.326,
+            18.108,
+            19.531,
+            16.713,
+            16.883,
+            16.765,
+            16.288,
+            16.729,
+            16.579,
+            16.587,
+            16.675,
+            16.703,
+            16.543
+          ],
+          "median_ms": 16.481,
+          "mean_ms": 16.638,
+          "min_ms": 16.192,
+          "max_ms": 19.531,
+          "p95_nearest_rank_ms": 18.108,
+          "target_ms": 2000.0,
+          "p95_target_pass": true
+        }
+      },
+      "BR-05_Harvest": {
+        "description": "Harvest record pairing, class A/B share calculation, and snapshot completeness gate",
+        "compartment": "Automatoes",
+        "hybrid": {
+          "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
+          "first_touch_initialization_ms": 11.166,
+          "warmup_iterations_count": 5,
+          "warmup_samples_ms": [
+            2.495,
+            2.431,
+            2.32,
+            2.407,
+            3.046
+          ],
+          "measured_count": 30,
+          "measured_samples_ms": [
+            2.927,
+            2.956,
+            2.909,
+            2.863,
+            2.907,
+            2.956,
+            3.016,
+            2.972,
+            2.966,
+            2.951,
+            3.335,
+            3.765,
+            3.225,
+            3.046,
+            2.985,
+            2.96,
+            3.033,
+            3.052,
+            3.075,
+            3.05,
+            3.025,
+            3.019,
+            3.049,
+            3.037,
+            3.018,
+            3.043,
+            3.011,
+            2.991,
+            3.058,
+            2.979
+          ],
+          "median_ms": 3.017,
+          "mean_ms": 3.039,
+          "min_ms": 2.863,
+          "max_ms": 3.765,
+          "p95_nearest_rank_ms": 3.335,
+          "target_ms": 2000.0,
+          "p95_target_pass": true
+        },
+        "kimball": {
+          "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
+          "first_touch_initialization_ms": 2105.654,
+          "warmup_iterations_count": 5,
+          "warmup_samples_ms": [
+            1.338,
+            1.241,
+            1.221,
+            1.229,
+            1.214
+          ],
+          "measured_count": 30,
+          "measured_samples_ms": [
+            1.186,
+            1.197,
+            1.214,
+            1.215,
+            1.209,
+            1.191,
+            1.203,
+            1.213,
+            1.199,
+            1.196,
+            1.17,
+            1.169,
+            1.197,
+            1.167,
+            1.166,
+            1.19,
+            1.193,
+            1.173,
+            1.169,
+            1.176,
+            1.199,
+            1.16,
+            1.19,
+            1.192,
+            1.171,
+            1.18,
+            1.187,
+            1.172,
+            1.175,
+            1.19
+          ],
+          "median_ms": 1.19,
+          "mean_ms": 1.187,
+          "min_ms": 1.16,
+          "max_ms": 1.215,
+          "p95_nearest_rank_ms": 1.214,
+          "target_ms": 2000.0,
+          "p95_target_pass": true
+        }
+      },
+      "BR-06_Cost": {
+        "description": "Baseline component prices applied to daily energy quantities across the historical season",
+        "compartment": "Automatoes",
+        "hybrid": {
+          "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
+          "first_touch_initialization_ms": 10.189,
+          "warmup_iterations_count": 5,
+          "warmup_samples_ms": [
+            9.031,
+            9.422,
+            9.764,
+            9.119,
+            9.093
+          ],
+          "measured_count": 30,
+          "measured_samples_ms": [
+            9.191,
+            9.144,
+            9.136,
+            8.995,
+            8.959,
+            9.055,
+            8.93,
+            9.012,
+            8.978,
+            9.131,
+            9.2,
+            8.946,
+            9.137,
+            9.136,
+            8.992,
+            8.985,
+            8.985,
+            9.082,
+            8.97,
+            9.068,
+            8.962,
+            8.949,
+            8.983,
+            9.001,
+            8.972,
+            9.085,
+            9.178,
+            9.017,
+            9.13,
+            8.95
+          ],
+          "median_ms": 9.007,
+          "mean_ms": 9.042,
+          "min_ms": 8.93,
+          "max_ms": 9.2,
+          "p95_nearest_rank_ms": 9.191,
+          "target_ms": 2000.0,
+          "p95_target_pass": true
+        },
+        "kimball": {
+          "cache_state_description": "First-touch measures fresh adapter initialization and cryptographic publication verification; warmups and steady-state samples execute with use_cache=False over warm PostgreSQL shared buffers.",
+          "first_touch_initialization_ms": 7.996,
+          "warmup_iterations_count": 5,
+          "warmup_samples_ms": [
+            8.156,
+            8.053,
+            7.96,
+            7.965,
+            7.866
+          ],
+          "measured_count": 30,
+          "measured_samples_ms": [
+            7.862,
+            7.827,
+            7.806,
+            8.007,
+            7.904,
+            7.838,
+            7.928,
+            7.805,
+            7.825,
+            7.836,
+            7.827,
+            7.889,
+            7.839,
+            7.9,
+            7.851,
+            7.839,
+            8.015,
+            7.978,
+            7.965,
+            7.971,
+            7.956,
+            7.977,
+            7.874,
+            7.821,
+            7.851,
+            7.811,
+            8.033,
+            7.974,
+            7.972,
+            7.956
+          ],
+          "median_ms": 7.882,
+          "mean_ms": 7.898,
+          "min_ms": 7.805,
+          "max_ms": 8.033,
+          "p95_nearest_rank_ms": 8.015,
+          "target_ms": 2000.0,
+          "p95_target_pass": true
+        }
+      }
+    },
+    "storage_footprint": {
+      "hybrid": {
+        "database_name": "greenhouse_hybrid_bench_t25_20261106_104814",
+        "database_size_bytes": 3563222707,
+        "staging_artifact_disk_bytes": 405331629,
+        "artifact_bytes_by_lifecycle_path": {
+          "fresh": 405331629,
+          "rerun": 405331498,
+          "rebuild": 405332408
+        },
+        "workflow_count": 2,
+        "publication_count": 1,
+        "schema_aggregates": {
+          "core": {
+            "total_bytes": 1870987264,
+            "table_bytes": 714293248,
+            "index_bytes": 1156243456
+          },
+          "mart": {
+            "total_bytes": 699203584,
+            "table_bytes": 487415808,
+            "index_bytes": 211386368
+          },
+          "meta": {
+            "total_bytes": 961036288,
+            "table_bytes": 476700672,
+            "index_bytes": 483721216
+          },
+          "config": {
+            "total_bytes": 712704,
+            "table_bytes": 147456,
+            "index_bytes": 401408
+          }
+        },
+        "detailed_tables": [
+          {
+            "schemaname": "core",
+            "tablename": "record_revision",
+            "total_bytes": 1094254592,
+            "table_bytes": 294322176,
+            "index_bytes": 799817728
+          },
+          {
+            "schemaname": "core",
+            "tablename": "measure_quality",
+            "total_bytes": 655851520,
+            "table_bytes": 342827008,
+            "index_bytes": 312893440
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "fact_climate_slot",
+            "total_bytes": 441081856,
+            "table_bytes": 335708160,
+            "index_bytes": 105242624
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "source_record",
+            "total_bytes": 299204608,
+            "table_bytes": 147431424,
+            "index_bytes": 151699456
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "publication_member",
+            "total_bytes": 290791424,
+            "table_bytes": 136536064,
+            "index_bytes": 154181632
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "workflow_candidate",
+            "total_bytes": 259416064,
+            "table_bytes": 116277248,
+            "index_bytes": 143073280
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "fact_drain_slot",
+            "total_bytes": 253968384,
+            "table_bytes": 148504576,
+            "index_bytes": 105390080
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "dq_issue",
+            "total_bytes": 110526464,
+            "table_bytes": 76193792,
+            "index_bytes": 34275328
+          },
+          {
+            "schemaname": "core",
+            "tablename": "climate_observation",
+            "total_bytes": 62529536,
+            "table_bytes": 40796160,
+            "index_bytes": 21684224
+          },
+          {
+            "schemaname": "core",
+            "tablename": "drain_observation",
+            "total_bytes": 57843712,
+            "table_bytes": 36151296,
+            "index_bytes": 21643264
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "fact_energy_day",
+            "total_bytes": 2719744,
+            "table_bytes": 2383872,
+            "index_bytes": 294912
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "fact_irrigation_day",
+            "total_bytes": 794624,
+            "table_bytes": 630784,
+            "index_bytes": 131072
+          },
+          {
+            "schemaname": "core",
+            "tablename": "resource_day",
+            "total_bytes": 262144,
+            "table_bytes": 139264,
+            "index_bytes": 90112
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "file_ingestion",
+            "total_bytes": 172032,
+            "table_bytes": 98304,
+            "index_bytes": 40960
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "fact_harvest_record",
+            "total_bytes": 172032,
+            "table_bytes": 90112,
+            "index_bytes": 49152
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "pipeline_run",
+            "total_bytes": 122880,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "config",
+            "tablename": "area_basis_version",
+            "total_bytes": 122880,
+            "table_bytes": 32768,
+            "index_bytes": 57344
+          },
+          {
+            "schemaname": "config",
+            "tablename": "basis_application",
+            "total_bytes": 98304,
+            "table_bytes": 24576,
+            "index_bytes": 40960
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "source_file",
+            "total_bytes": 98304,
+            "table_bytes": 16384,
+            "index_bytes": 49152
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "workflow_basis",
+            "total_bytes": 90112,
+            "table_bytes": 16384,
+            "index_bytes": 40960
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "workflow_step",
+            "total_bytes": 73728,
+            "table_bytes": 24576,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "config",
+            "tablename": "cost_scenario",
+            "total_bytes": 65536,
+            "table_bytes": 8192,
+            "index_bytes": 49152
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "publication_basis",
+            "total_bytes": 65536,
+            "table_bytes": 16384,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "core",
+            "tablename": "harvest",
+            "total_bytes": 65536,
+            "table_bytes": 16384,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "publication",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "config",
+            "tablename": "tariff_profile",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "config",
+            "tablename": "measure_definition",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "workflow_run",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "source_folder_mapping",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "data_scope",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "publication_seal",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "dim_irrigation_cycle",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "dim_harvest_cycle",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "config",
+            "tablename": "harvest_rule_profile",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "config",
+            "tablename": "rule_schedule_revision",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "dim_climate_cycle",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "core",
+            "tablename": "growing_cycle",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "dim_drain_cycle",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "dim_energy_cycle",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "quarantine_record",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "config",
+            "tablename": "tariff_rate",
+            "total_bytes": 40960,
+            "table_bytes": 8192,
+            "index_bytes": 24576
+          },
+          {
+            "schemaname": "config",
+            "tablename": "cost_scenario_rate",
+            "total_bytes": 40960,
+            "table_bytes": 8192,
+            "index_bytes": 24576
+          },
+          {
+            "schemaname": "core",
+            "tablename": "crop",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "irrigation_publication",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "drain_publication",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "core",
+            "tablename": "team",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "harvest_cycle_state",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "harvest_publication",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "current_publication",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "core",
+            "tablename": "site",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "correction",
+            "total_bytes": 32768,
+            "table_bytes": 0,
+            "index_bytes": 24576
+          },
+          {
+            "schemaname": "config",
+            "tablename": "quality_policy_version",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "core",
+            "tablename": "compartment",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "config",
+            "tablename": "basis_assumption_version",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "config",
+            "tablename": "assumption_application",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "schema_migration",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "energy_publication",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "dataset_snapshot",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "climate_publication",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "core_baseline_receipt",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "config",
+            "tablename": "irrigation_rule_profile",
+            "total_bytes": 24576,
+            "table_bytes": 0,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "config",
+            "tablename": "rule_schedule_segment",
+            "total_bytes": 24576,
+            "table_bytes": 8192,
+            "index_bytes": 8192
+          },
+          {
+            "schemaname": "mart",
+            "tablename": "dim_date",
+            "total_bytes": 24576,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "meta",
+            "tablename": "sensor_event",
+            "total_bytes": 16384,
+            "table_bytes": 0,
+            "index_bytes": 8192
+          }
+        ]
+      },
+      "kimball": {
+        "database_name": "greenhouse_kimball_bench_t25_20261106_104814",
+        "database_size_bytes": 668882611,
+        "staging_artifact_disk_bytes": 0,
+        "schema_aggregates": {
+          "kimball": {
+            "total_bytes": 660553728,
+            "table_bytes": 610467840,
+            "index_bytes": 49537024
+          }
+        },
+        "detailed_tables": [
+          {
+            "schemaname": "kimball",
+            "tablename": "fact_climate_slot",
+            "total_bytes": 416309248,
+            "table_bytes": 391774208,
+            "index_bytes": 24395776
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "fact_drain_slot",
+            "total_bytes": 238526464,
+            "table_bytes": 214040576,
+            "index_bytes": 24395776
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "fact_energy_day",
+            "total_bytes": 3547136,
+            "table_bytes": 3211264,
+            "index_bytes": 294912
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "fact_irrigation_day",
+            "total_bytes": 1245184,
+            "table_bytes": 1114112,
+            "index_bytes": 98304
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "fact_harvest_record",
+            "total_bytes": 221184,
+            "table_bytes": 147456,
+            "index_bytes": 40960
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_area_basis",
+            "total_bytes": 73728,
+            "table_bytes": 24576,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "source_file",
+            "total_bytes": 65536,
+            "table_bytes": 16384,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_date",
+            "total_bytes": 57344,
+            "table_bytes": 16384,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_scenario",
+            "total_bytes": 49152,
+            "table_bytes": 8192,
+            "index_bytes": 32768
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_tariff_profile",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_tariff_rate",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_site",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_scenario_rate",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "publication",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "publication_receipt",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_harvest_rule",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "quarantine_record",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "harvest_cycle_state",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_rule_segment",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_rule_schedule",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_measure_definition",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_growing_cycle",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          },
+          {
+            "schemaname": "kimball",
+            "tablename": "dim_compartment",
+            "total_bytes": 32768,
+            "table_bytes": 8192,
+            "index_bytes": 16384
+          }
+        ]
+      },
+      "ratio_kimball_to_hybrid_db_size": 0.1877,
+      "total_storage_saved_bytes": 3299671725
+    }
+  },
+  "stage_script_sha256": {
+    "system_metadata": "dd6279b3b22dd5fc4bfc6451d8a071bec978d36b18eed827fa1fb7eba63b1cb9",
+    "pipeline_progress": "dd6279b3b22dd5fc4bfc6451d8a071bec978d36b18eed827fa1fb7eba63b1cb9",
+    "pipeline_lifecycle": "dd6279b3b22dd5fc4bfc6451d8a071bec978d36b18eed827fa1fb7eba63b1cb9",
+    "workload_parity_verification": "dd6279b3b22dd5fc4bfc6451d8a071bec978d36b18eed827fa1fb7eba63b1cb9",
+    "workload_latencies": "dd6279b3b22dd5fc4bfc6451d8a071bec978d36b18eed827fa1fb7eba63b1cb9",
+    "storage_footprint": "dd6279b3b22dd5fc4bfc6451d8a071bec978d36b18eed827fa1fb7eba63b1cb9"
+  },
+  "last_updated_at": "2026-11-06T11:29:08.567924+00:00",
+  "failed_stage": "execution",
+  "error_type": "AssertionError",
+  "error_message": "Expected 48,000 sample climate rows, got 47809",
+  "failed_at": "2026-11-06T11:29:09.954605+00:00"
+}

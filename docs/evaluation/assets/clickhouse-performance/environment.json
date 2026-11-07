@@ -1,0 +1,11 @@
+{
+  "cpu_model": "Apple M4",
+  "logical_cpus": "10",
+  "memory_bytes": "17179869184",
+  "docker": {
+    "version": "29.9.2",
+    "cpus": 4,
+    "memory_bytes": 8186281984,
+    "storage_driver": "overlay2"
+  }
+}

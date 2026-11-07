@@ -1,0 +1,1310 @@
+{
+  "tool": "greenhouse.evaluation.br01",
+  "generated_at": "2026-11-04T21:31:19.496196+00:00",
+  "database": "greenhouse_t07_195889f1a3b1",
+  "agc": {
+    "mode": "agc",
+    "read_only": true,
+    "oracle": "doc §4 reimplemented inside this runner (no service import of the slot/classification code)",
+    "cycles": [
+      {
+        "cycle_id": "agc-cycle-AICU",
+        "compartment": "AICU",
+        "window": "[2019-12-16,2020-05-30)",
+        "raw_slots": 47808,
+        "mart_slots": 47809,
+        "raw_first": "2019-12-16T00:00:00",
+        "raw_last": "2020-05-29T23:55:00",
+        "boundary_sample_stored_count": 1,
+        "mart_rows_beyond_cycle": 0,
+        "mart_rows_at_end_only": 1,
+        "value_mismatch": 0,
+        "quality_shape_mismatch": 0,
+        "off_mode_triplet_mismatch": 0,
+        "boundary_value_mismatch": 0,
+        "mismatch_samples": [],
+        "demo_rule": "climate-demo-b01:AICU:v1",
+        "kpis": {
+          "requested": {
+            "match": true,
+            "differences": [],
+            "oracle_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "68785",
+                "out_minutes": "16975",
+                "out_low_minutes": "4070",
+                "out_high_minutes": "12905",
+                "suspect_minutes": "0",
+                "unknown_minutes": "170255",
+                "unknown_reasons": {
+                  "missing_input": "170255"
+                },
+                "out_hours": "282.9166666666666666666666667",
+                "out_percent": "24.678345569528240168641418914007414407210874463909",
+                "coverage_pct": "28.775518741633199464524765729585006693440428380187"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "33385",
+                "out_minutes": "21875",
+                "out_low_minutes": "2195",
+                "out_high_minutes": "19680",
+                "suspect_minutes": "0",
+                "unknown_minutes": "205655",
+                "unknown_reasons": {
+                  "missing_input": "205655"
+                },
+                "out_hours": "364.5833333333333333333333333",
+                "out_percent": "65.523438670061404822525086116519394937846338175827",
+                "coverage_pct": "13.966281793842034805890227576974564926372155287818"
+              }
+            },
+            "engine_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "68785",
+                "out_minutes": "16975",
+                "out_low_minutes": "4070",
+                "out_high_minutes": "12905",
+                "suspect_minutes": "0",
+                "unknown_minutes": "170255",
+                "unknown_reasons": {
+                  "missing_input": "170255"
+                },
+                "out_hours": "282.91666666666666666666666666666666666666666666667",
+                "out_percent": "24.678345569528240168641418914007414407210874463909",
+                "coverage_pct": "28.775518741633199464524765729585006693440428380187"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "33385",
+                "out_minutes": "21875",
+                "out_low_minutes": "2195",
+                "out_high_minutes": "19680",
+                "suspect_minutes": "0",
+                "unknown_minutes": "205655",
+                "unknown_reasons": {
+                  "missing_input": "205655"
+                },
+                "out_hours": "364.58333333333333333333333333333333333333333333333",
+                "out_percent": "65.523438670061404822525086116519394937846338175827",
+                "coverage_pct": "13.966281793842034805890227576974564926372155287818"
+              }
+            },
+            "episode_counts": {
+              "oracle": 1643,
+              "engine": 1643
+            },
+            "lineage_spot": {
+              "metric": "co2",
+              "peak_time": "2019-12-17T17:35:00",
+              "revision_id": "e32505e9150920dad7843d58ffe0d511",
+              "relative_path": "AICU/GreenhouseClimate.csv",
+              "line_number": 501,
+              "source_time_serial_serialized": "43816.73264",
+              "serial_maps_to_peak_slot": true,
+              "raw_hash_verified": true
+            }
+          },
+          "realized": {
+            "match": true,
+            "differences": [],
+            "oracle_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "37525",
+                "out_low_minutes": "8030",
+                "out_high_minutes": "29495",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "625.4166666666666666666666667",
+                "out_percent": "15.721228371527923247727177510578574720348569273954",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "151355",
+                "out_low_minutes": "22745",
+                "out_high_minutes": "128610",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "2522.583333333333333333333333",
+                "out_percent": "63.410700071222087226109179270183082659516527713771",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              }
+            },
+            "engine_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "37525",
+                "out_low_minutes": "8030",
+                "out_high_minutes": "29495",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "625.41666666666666666666666666666666666666666666667",
+                "out_percent": "15.721228371527923247727177510578574720348569273954",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "151355",
+                "out_low_minutes": "22745",
+                "out_high_minutes": "128610",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "2522.5833333333333333333333333333333333333333333333",
+                "out_percent": "63.410700071222087226109179270183082659516527713771",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              }
+            },
+            "episode_counts": {
+              "oracle": 6703,
+              "engine": 6703
+            },
+            "lineage_spot": {
+              "metric": "co2",
+              "peak_time": "2020-03-19T16:30:00",
+              "revision_id": "6defddacaebda95c88096d3a23d732eb",
+              "relative_path": "AICU/GreenhouseClimate.csv",
+              "line_number": 27272,
+              "source_time_serial_serialized": "43909.68750",
+              "serial_maps_to_peak_slot": true,
+              "raw_hash_verified": true
+            }
+          }
+        },
+        "mart_end_row": true,
+        "match": true
+      },
+      {
+        "cycle_id": "agc-cycle-Automatoes",
+        "compartment": "Automatoes",
+        "window": "[2019-12-16,2020-05-30)",
+        "raw_slots": 47808,
+        "mart_slots": 47809,
+        "raw_first": "2019-12-16T00:00:00",
+        "raw_last": "2020-05-29T23:55:00",
+        "boundary_sample_stored_count": 1,
+        "mart_rows_beyond_cycle": 0,
+        "mart_rows_at_end_only": 1,
+        "value_mismatch": 0,
+        "quality_shape_mismatch": 0,
+        "off_mode_triplet_mismatch": 0,
+        "boundary_value_mismatch": 0,
+        "mismatch_samples": [],
+        "demo_rule": "climate-demo-b01:Automatoes:v1",
+        "kpis": {
+          "requested": {
+            "match": true,
+            "differences": [],
+            "oracle_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "175860",
+                "out_minutes": "7575",
+                "out_low_minutes": "2745",
+                "out_high_minutes": "4830",
+                "suspect_minutes": "0",
+                "unknown_minutes": "63180",
+                "unknown_reasons": {
+                  "inverted_bounds": "10",
+                  "missing_input": "63170"
+                },
+                "out_hours": "126.25",
+                "out_percent": "4.3074036165131354486523370863186625725008529512112",
+                "coverage_pct": "73.569277108433734939759036144578313253012048192771"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "166830",
+                "out_minutes": "110280",
+                "out_low_minutes": "17170",
+                "out_high_minutes": "93110",
+                "suspect_minutes": "0",
+                "unknown_minutes": "72210",
+                "unknown_reasons": {
+                  "missing_input": "4045",
+                  "sp0_off_mode": "68165"
+                },
+                "out_hours": "1838",
+                "out_percent": "66.103218845531379248336630102499550440568243121741",
+                "coverage_pct": "69.791666666666666666666666666666666666666666666667"
+              }
+            },
+            "engine_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "175860",
+                "out_minutes": "7575",
+                "out_low_minutes": "2745",
+                "out_high_minutes": "4830",
+                "suspect_minutes": "0",
+                "unknown_minutes": "63180",
+                "unknown_reasons": {
+                  "missing_input": "63170",
+                  "inverted_bounds": "10"
+                },
+                "out_hours": "126.25",
+                "out_percent": "4.3074036165131354486523370863186625725008529512112",
+                "coverage_pct": "73.569277108433734939759036144578313253012048192771"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "166830",
+                "out_minutes": "110280",
+                "out_low_minutes": "17170",
+                "out_high_minutes": "93110",
+                "suspect_minutes": "0",
+                "unknown_minutes": "72210",
+                "unknown_reasons": {
+                  "missing_input": "4045",
+                  "sp0_off_mode": "68165"
+                },
+                "out_hours": "1838",
+                "out_percent": "66.103218845531379248336630102499550440568243121741",
+                "coverage_pct": "69.791666666666666666666666666666666666666666666667"
+              }
+            },
+            "episode_counts": {
+              "oracle": 3959,
+              "engine": 3959
+            },
+            "lineage_spot": {
+              "metric": "co2",
+              "peak_time": "2020-05-20T19:45:00",
+              "revision_id": "1f5e49ee88482a301bc6d648d176ef1b",
+              "relative_path": "Automatoes/GreenhouseClimate.csv",
+              "line_number": 45167,
+              "source_time_serial_serialized": "43971.82292",
+              "serial_maps_to_peak_slot": true,
+              "raw_hash_verified": true
+            }
+          },
+          "realized": {
+            "match": true,
+            "differences": [],
+            "oracle_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238655",
+                "out_minutes": "9330",
+                "out_low_minutes": "4020",
+                "out_high_minutes": "5310",
+                "suspect_minutes": "0",
+                "unknown_minutes": "385",
+                "unknown_reasons": {
+                  "inverted_bounds": "35",
+                  "missing_input": "350"
+                },
+                "out_hours": "155.5",
+                "out_percent": "3.9094089794892208418009260229201148100814983972680",
+                "coverage_pct": "99.838939089692101740294511378848728246318607764391"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "170400",
+                "out_minutes": "112630",
+                "out_low_minutes": "16875",
+                "out_high_minutes": "95755",
+                "suspect_minutes": "0",
+                "unknown_minutes": "68640",
+                "unknown_reasons": {
+                  "missing_input": "350",
+                  "sp0_off_mode": "68290"
+                },
+                "out_hours": "1877.166666666666666666666667",
+                "out_percent": "66.097417840375586854460093896713615023474178403756",
+                "coverage_pct": "71.285140562248995983935742971887550200803212851406"
+              }
+            },
+            "engine_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238655",
+                "out_minutes": "9330",
+                "out_low_minutes": "4020",
+                "out_high_minutes": "5310",
+                "suspect_minutes": "0",
+                "unknown_minutes": "385",
+                "unknown_reasons": {
+                  "missing_input": "350",
+                  "inverted_bounds": "35"
+                },
+                "out_hours": "155.5",
+                "out_percent": "3.9094089794892208418009260229201148100814983972680",
+                "coverage_pct": "99.838939089692101740294511378848728246318607764391"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "170400",
+                "out_minutes": "112630",
+                "out_low_minutes": "16875",
+                "out_high_minutes": "95755",
+                "suspect_minutes": "0",
+                "unknown_minutes": "68640",
+                "unknown_reasons": {
+                  "missing_input": "350",
+                  "sp0_off_mode": "68290"
+                },
+                "out_hours": "1877.1666666666666666666666666666666666666666666667",
+                "out_percent": "66.097417840375586854460093896713615023474178403756",
+                "coverage_pct": "71.285140562248995983935742971887550200803212851406"
+              }
+            },
+            "episode_counts": {
+              "oracle": 4139,
+              "engine": 4139
+            },
+            "lineage_spot": {
+              "metric": "co2",
+              "peak_time": "2020-05-20T19:40:00",
+              "revision_id": "72ef3030d3b7611b5e045cb156d3964a",
+              "relative_path": "Automatoes/GreenhouseClimate.csv",
+              "line_number": 45166,
+              "source_time_serial_serialized": "43971.81944",
+              "serial_maps_to_peak_slot": true,
+              "raw_hash_verified": true
+            }
+          }
+        },
+        "mart_end_row": true,
+        "match": true
+      },
+      {
+        "cycle_id": "agc-cycle-Digilog",
+        "compartment": "Digilog",
+        "window": "[2019-12-16,2020-05-30)",
+        "raw_slots": 47808,
+        "mart_slots": 47809,
+        "raw_first": "2019-12-16T00:00:00",
+        "raw_last": "2020-05-29T23:55:00",
+        "boundary_sample_stored_count": 1,
+        "mart_rows_beyond_cycle": 0,
+        "mart_rows_at_end_only": 1,
+        "value_mismatch": 0,
+        "quality_shape_mismatch": 0,
+        "off_mode_triplet_mismatch": 0,
+        "boundary_value_mismatch": 0,
+        "mismatch_samples": [],
+        "demo_rule": "climate-demo-b01:Digilog:v1",
+        "kpis": {
+          "requested": {
+            "match": true,
+            "differences": [],
+            "oracle_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "236150",
+                "out_minutes": "72455",
+                "out_low_minutes": "3060",
+                "out_high_minutes": "69395",
+                "suspect_minutes": "0",
+                "unknown_minutes": "2890",
+                "unknown_reasons": {
+                  "inverted_bounds": "5",
+                  "missing_input": "2885"
+                },
+                "out_hours": "1207.583333333333333333333333",
+                "out_percent": "30.681770061401651492695320770696591149692991742537",
+                "coverage_pct": "98.790997322623828647925033467202141900937081659973"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "149655",
+                "out_minutes": "85680",
+                "out_low_minutes": "34235",
+                "out_high_minutes": "51445",
+                "suspect_minutes": "0",
+                "unknown_minutes": "89385",
+                "unknown_reasons": {
+                  "missing_input": "2855",
+                  "sp0_off_mode": "86530"
+                },
+                "out_hours": "1428",
+                "out_percent": "57.251678861381176706424776987070261601683872907688",
+                "coverage_pct": "62.606676706827309236947791164658634538152610441767"
+              }
+            },
+            "engine_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "236150",
+                "out_minutes": "72455",
+                "out_low_minutes": "3060",
+                "out_high_minutes": "69395",
+                "suspect_minutes": "0",
+                "unknown_minutes": "2890",
+                "unknown_reasons": {
+                  "missing_input": "2885",
+                  "inverted_bounds": "5"
+                },
+                "out_hours": "1207.5833333333333333333333333333333333333333333333",
+                "out_percent": "30.681770061401651492695320770696591149692991742537",
+                "coverage_pct": "98.790997322623828647925033467202141900937081659973"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "149655",
+                "out_minutes": "85680",
+                "out_low_minutes": "34235",
+                "out_high_minutes": "51445",
+                "suspect_minutes": "0",
+                "unknown_minutes": "89385",
+                "unknown_reasons": {
+                  "missing_input": "2855",
+                  "sp0_off_mode": "86530"
+                },
+                "out_hours": "1428",
+                "out_percent": "57.251678861381176706424776987070261601683872907688",
+                "coverage_pct": "62.606676706827309236947791164658634538152610441767"
+              }
+            },
+            "episode_counts": {
+              "oracle": 6837,
+              "engine": 6837
+            },
+            "lineage_spot": {
+              "metric": "co2",
+              "peak_time": "2019-12-17T15:55:00",
+              "revision_id": "41f9494d32f368088f46e1ee976018b8",
+              "relative_path": "Digilog/GreenhouseClimate.csv",
+              "line_number": 481,
+              "source_time_serial_serialized": "43816.66319",
+              "serial_maps_to_peak_slot": true,
+              "raw_hash_verified": true
+            }
+          },
+          "realized": {
+            "match": true,
+            "differences": [],
+            "oracle_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "72025",
+                "out_low_minutes": "3025",
+                "out_high_minutes": "69000",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "1200.416666666666666666666667",
+                "out_percent": "30.175122543885374334911391344421634756378566341279",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "145980",
+                "out_minutes": "79465",
+                "out_low_minutes": "38710",
+                "out_high_minutes": "40755",
+                "suspect_minutes": "0",
+                "unknown_minutes": "93060",
+                "unknown_reasons": {
+                  "missing_input": "350",
+                  "sp0_off_mode": "92710"
+                },
+                "out_hours": "1324.416666666666666666666667",
+                "out_percent": "54.435539114947253048362789423208658720372653788190",
+                "coverage_pct": "61.069277108433734939759036144578313253012048192771"
+              }
+            },
+            "engine_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "72025",
+                "out_low_minutes": "3025",
+                "out_high_minutes": "69000",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "1200.4166666666666666666666666666666666666666666667",
+                "out_percent": "30.175122543885374334911391344421634756378566341279",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "145980",
+                "out_minutes": "79465",
+                "out_low_minutes": "38710",
+                "out_high_minutes": "40755",
+                "suspect_minutes": "0",
+                "unknown_minutes": "93060",
+                "unknown_reasons": {
+                  "missing_input": "350",
+                  "sp0_off_mode": "92710"
+                },
+                "out_hours": "1324.4166666666666666666666666666666666666666666667",
+                "out_percent": "54.435539114947253048362789423208658720372653788190",
+                "coverage_pct": "61.069277108433734939759036144578313253012048192771"
+              }
+            },
+            "episode_counts": {
+              "oracle": 6490,
+              "engine": 6490
+            },
+            "lineage_spot": {
+              "metric": "co2",
+              "peak_time": "2019-12-17T15:55:00",
+              "revision_id": "41f9494d32f368088f46e1ee976018b8",
+              "relative_path": "Digilog/GreenhouseClimate.csv",
+              "line_number": 481,
+              "source_time_serial_serialized": "43816.66319",
+              "serial_maps_to_peak_slot": true,
+              "raw_hash_verified": true
+            }
+          }
+        },
+        "mart_end_row": true,
+        "match": true
+      },
+      {
+        "cycle_id": "agc-cycle-IUACAAS",
+        "compartment": "IUACAAS",
+        "window": "[2019-12-16,2020-05-30)",
+        "raw_slots": 47808,
+        "mart_slots": 47809,
+        "raw_first": "2019-12-16T00:00:00",
+        "raw_last": "2020-05-29T23:55:00",
+        "boundary_sample_stored_count": 1,
+        "mart_rows_beyond_cycle": 0,
+        "mart_rows_at_end_only": 1,
+        "value_mismatch": 0,
+        "quality_shape_mismatch": 0,
+        "off_mode_triplet_mismatch": 0,
+        "boundary_value_mismatch": 0,
+        "mismatch_samples": [],
+        "demo_rule": "climate-demo-b01:IUACAAS:v1",
+        "kpis": {
+          "requested": {
+            "match": true,
+            "differences": [],
+            "oracle_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "227735",
+                "out_minutes": "52595",
+                "out_low_minutes": "15545",
+                "out_high_minutes": "37050",
+                "suspect_minutes": "0",
+                "unknown_minutes": "11305",
+                "unknown_reasons": {
+                  "inverted_bounds": "10",
+                  "missing_input": "11295"
+                },
+                "out_hours": "876.5833333333333333333333333",
+                "out_percent": "23.094825125694337717083452258107010340966474191495",
+                "coverage_pct": "95.270665997322623828647925033467202141900937081660"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "140635",
+                "out_minutes": "78580",
+                "out_low_minutes": "28490",
+                "out_high_minutes": "50090",
+                "suspect_minutes": "0",
+                "unknown_minutes": "98405",
+                "unknown_reasons": {
+                  "missing_input": "12480",
+                  "sp0_off_mode": "85925"
+                },
+                "out_hours": "1309.666666666666666666666667",
+                "out_percent": "55.875137767980943577345610978774842677854019269741",
+                "coverage_pct": "58.833249665327978580990629183400267737617135207497"
+              }
+            },
+            "engine_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "227735",
+                "out_minutes": "52595",
+                "out_low_minutes": "15545",
+                "out_high_minutes": "37050",
+                "suspect_minutes": "0",
+                "unknown_minutes": "11305",
+                "unknown_reasons": {
+                  "missing_input": "11295",
+                  "inverted_bounds": "10"
+                },
+                "out_hours": "876.58333333333333333333333333333333333333333333333",
+                "out_percent": "23.094825125694337717083452258107010340966474191495",
+                "coverage_pct": "95.270665997322623828647925033467202141900937081660"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "140635",
+                "out_minutes": "78580",
+                "out_low_minutes": "28490",
+                "out_high_minutes": "50090",
+                "suspect_minutes": "0",
+                "unknown_minutes": "98405",
+                "unknown_reasons": {
+                  "missing_input": "12480",
+                  "sp0_off_mode": "85925"
+                },
+                "out_hours": "1309.6666666666666666666666666666666666666666666667",
+                "out_percent": "55.875137767980943577345610978774842677854019269741",
+                "coverage_pct": "58.833249665327978580990629183400267737617135207497"
+              }
+            },
+            "episode_counts": {
+              "oracle": 5175,
+              "engine": 5175
+            },
+            "lineage_spot": {
+              "metric": "temperature",
+              "peak_time": "2020-05-21T21:55:00",
+              "revision_id": "1e04d19e8fb1631884c24432693e35d2",
+              "relative_path": "IUACAAS/GreenhouseClimate.csv",
+              "line_number": 45481,
+              "source_time_serial_serialized": "43972.91319",
+              "serial_maps_to_peak_slot": true,
+              "raw_hash_verified": true
+            }
+          },
+          "realized": {
+            "match": true,
+            "differences": [],
+            "oracle_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "52650",
+                "out_low_minutes": "15035",
+                "out_high_minutes": "37615",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "877.5",
+                "out_percent": "22.057899367380284050441995894256148141941430307093",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "152145",
+                "out_minutes": "87540",
+                "out_low_minutes": "28650",
+                "out_high_minutes": "58890",
+                "suspect_minutes": "0",
+                "unknown_minutes": "86895",
+                "unknown_reasons": {
+                  "missing_input": "350",
+                  "sp0_off_mode": "86545"
+                },
+                "out_hours": "1459",
+                "out_percent": "57.537217785664990633934733313615301192940944493740",
+                "coverage_pct": "63.648343373493975903614457831325301204819277108434"
+              }
+            },
+            "engine_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "52650",
+                "out_low_minutes": "15035",
+                "out_high_minutes": "37615",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "877.5",
+                "out_percent": "22.057899367380284050441995894256148141941430307093",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "152145",
+                "out_minutes": "87540",
+                "out_low_minutes": "28650",
+                "out_high_minutes": "58890",
+                "suspect_minutes": "0",
+                "unknown_minutes": "86895",
+                "unknown_reasons": {
+                  "missing_input": "350",
+                  "sp0_off_mode": "86545"
+                },
+                "out_hours": "1459",
+                "out_percent": "57.537217785664990633934733313615301192940944493740",
+                "coverage_pct": "63.648343373493975903614457831325301204819277108434"
+              }
+            },
+            "episode_counts": {
+              "oracle": 5465,
+              "engine": 5465
+            },
+            "lineage_spot": {
+              "metric": "temperature",
+              "peak_time": "2020-05-21T21:50:00",
+              "revision_id": "12adbab21eec0922b2df1fa5bd753f5e",
+              "relative_path": "IUACAAS/GreenhouseClimate.csv",
+              "line_number": 45480,
+              "source_time_serial_serialized": "43972.90972",
+              "serial_maps_to_peak_slot": true,
+              "raw_hash_verified": true
+            }
+          }
+        },
+        "mart_end_row": true,
+        "match": true
+      },
+      {
+        "cycle_id": "agc-cycle-Reference",
+        "compartment": "Reference",
+        "window": "[2019-12-16,2020-05-30)",
+        "raw_slots": 47808,
+        "mart_slots": 47809,
+        "raw_first": "2019-12-16T00:00:00",
+        "raw_last": "2020-05-29T23:55:00",
+        "boundary_sample_stored_count": 1,
+        "mart_rows_beyond_cycle": 0,
+        "mart_rows_at_end_only": 1,
+        "value_mismatch": 0,
+        "quality_shape_mismatch": 0,
+        "off_mode_triplet_mismatch": 0,
+        "boundary_value_mismatch": 0,
+        "mismatch_samples": [],
+        "demo_rule": "climate-demo-b01:Reference:v1",
+        "kpis": {
+          "requested": {
+            "match": true,
+            "differences": [],
+            "oracle_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "228935",
+                "out_minutes": "83290",
+                "out_low_minutes": "22450",
+                "out_high_minutes": "60840",
+                "suspect_minutes": "0",
+                "unknown_minutes": "10105",
+                "unknown_reasons": {
+                  "inverted_bounds": "25",
+                  "missing_input": "10080"
+                },
+                "out_hours": "1388.166666666666666666666667",
+                "out_percent": "36.381505667547557166881429226636381505667547557167",
+                "coverage_pct": "95.772674029451137884872824631860776439089692101740"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "231150",
+                "out_minutes": "141775",
+                "out_low_minutes": "28460",
+                "out_high_minutes": "113315",
+                "suspect_minutes": "0",
+                "unknown_minutes": "7890",
+                "unknown_reasons": {
+                  "missing_input": "7890"
+                },
+                "out_hours": "2362.916666666666666666666667",
+                "out_percent": "61.334631191866753190568894657149037421587713605884",
+                "coverage_pct": "96.699297188755020080321285140562248995983935742972"
+              }
+            },
+            "engine_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "228935",
+                "out_minutes": "83290",
+                "out_low_minutes": "22450",
+                "out_high_minutes": "60840",
+                "suspect_minutes": "0",
+                "unknown_minutes": "10105",
+                "unknown_reasons": {
+                  "missing_input": "10080",
+                  "inverted_bounds": "25"
+                },
+                "out_hours": "1388.1666666666666666666666666666666666666666666667",
+                "out_percent": "36.381505667547557166881429226636381505667547557167",
+                "coverage_pct": "95.772674029451137884872824631860776439089692101740"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "231150",
+                "out_minutes": "141775",
+                "out_low_minutes": "28460",
+                "out_high_minutes": "113315",
+                "suspect_minutes": "0",
+                "unknown_minutes": "7890",
+                "unknown_reasons": {
+                  "missing_input": "7890"
+                },
+                "out_hours": "2362.9166666666666666666666666666666666666666666667",
+                "out_percent": "61.334631191866753190568894657149037421587713605884",
+                "coverage_pct": "96.699297188755020080321285140562248995983935742972"
+              }
+            },
+            "episode_counts": {
+              "oracle": 4606,
+              "engine": 4606
+            },
+            "lineage_spot": {
+              "metric": "co2",
+              "peak_time": "2020-05-20T05:10:00",
+              "revision_id": "19a5e80eb9f8740568c2ff23556915a3",
+              "relative_path": "Reference/GreenhouseClimate.csv",
+              "line_number": 44992,
+              "source_time_serial_serialized": "43971.21528",
+              "serial_maps_to_peak_slot": true,
+              "raw_hash_verified": true
+            }
+          },
+          "realized": {
+            "match": true,
+            "differences": [],
+            "oracle_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "79665",
+                "out_low_minutes": "25770",
+                "out_high_minutes": "53895",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "1327.75",
+                "out_percent": "33.375926934517575097406678118061083413632745401986",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "137875",
+                "out_low_minutes": "32165",
+                "out_high_minutes": "105710",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "2297.916666666666666666666667",
+                "out_percent": "57.763207507645900540449956009887301520801039004567",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              }
+            },
+            "engine_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "79665",
+                "out_low_minutes": "25770",
+                "out_high_minutes": "53895",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "1327.75",
+                "out_percent": "33.375926934517575097406678118061083413632745401986",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "137875",
+                "out_low_minutes": "32165",
+                "out_high_minutes": "105710",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "2297.9166666666666666666666666666666666666666666667",
+                "out_percent": "57.763207507645900540449956009887301520801039004567",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              }
+            },
+            "episode_counts": {
+              "oracle": 5204,
+              "engine": 5204
+            },
+            "lineage_spot": {
+              "metric": "co2",
+              "peak_time": "2020-05-20T05:10:00",
+              "revision_id": "19a5e80eb9f8740568c2ff23556915a3",
+              "relative_path": "Reference/GreenhouseClimate.csv",
+              "line_number": 44992,
+              "source_time_serial_serialized": "43971.21528",
+              "serial_maps_to_peak_slot": true,
+              "raw_hash_verified": true
+            }
+          }
+        },
+        "mart_end_row": true,
+        "match": true
+      },
+      {
+        "cycle_id": "agc-cycle-TheAutomators",
+        "compartment": "TheAutomators",
+        "window": "[2019-12-16,2020-05-30)",
+        "raw_slots": 47808,
+        "mart_slots": 47809,
+        "raw_first": "2019-12-16T00:00:00",
+        "raw_last": "2020-05-29T23:55:00",
+        "boundary_sample_stored_count": 1,
+        "mart_rows_beyond_cycle": 0,
+        "mart_rows_at_end_only": 1,
+        "value_mismatch": 0,
+        "quality_shape_mismatch": 0,
+        "off_mode_triplet_mismatch": 0,
+        "boundary_value_mismatch": 0,
+        "mismatch_samples": [],
+        "demo_rule": "climate-demo-b01:TheAutomators:v1",
+        "kpis": {
+          "requested": {
+            "match": true,
+            "differences": [],
+            "oracle_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "236045",
+                "out_minutes": "79505",
+                "out_low_minutes": "5600",
+                "out_high_minutes": "73905",
+                "suspect_minutes": "0",
+                "unknown_minutes": "2995",
+                "unknown_reasons": {
+                  "missing_input": "2995"
+                },
+                "out_hours": "1325.083333333333333333333333",
+                "out_percent": "33.682136880679531445275265309580800271134741256964",
+                "coverage_pct": "98.747071619812583668005354752342704149933065595716"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "235545",
+                "out_minutes": "150140",
+                "out_low_minutes": "43275",
+                "out_high_minutes": "106865",
+                "suspect_minutes": "0",
+                "unknown_minutes": "3495",
+                "unknown_reasons": {
+                  "missing_input": "3495"
+                },
+                "out_hours": "2502.333333333333333333333333",
+                "out_percent": "63.741535587679636587488590290602644929843554310217",
+                "coverage_pct": "98.537901606425702811244979919678714859437751004016"
+              }
+            },
+            "engine_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "236045",
+                "out_minutes": "79505",
+                "out_low_minutes": "5600",
+                "out_high_minutes": "73905",
+                "suspect_minutes": "0",
+                "unknown_minutes": "2995",
+                "unknown_reasons": {
+                  "missing_input": "2995"
+                },
+                "out_hours": "1325.0833333333333333333333333333333333333333333333",
+                "out_percent": "33.682136880679531445275265309580800271134741256964",
+                "coverage_pct": "98.747071619812583668005354752342704149933065595716"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "235545",
+                "out_minutes": "150140",
+                "out_low_minutes": "43275",
+                "out_high_minutes": "106865",
+                "suspect_minutes": "0",
+                "unknown_minutes": "3495",
+                "unknown_reasons": {
+                  "missing_input": "3495"
+                },
+                "out_hours": "2502.3333333333333333333333333333333333333333333333",
+                "out_percent": "63.741535587679636587488590290602644929843554310217",
+                "coverage_pct": "98.537901606425702811244979919678714859437751004016"
+              }
+            },
+            "episode_counts": {
+              "oracle": 7878,
+              "engine": 7878
+            },
+            "lineage_spot": {
+              "metric": "co2",
+              "peak_time": "2020-05-20T16:15:00",
+              "revision_id": "816a6c3076dc42a5968e75c06880f5f6",
+              "relative_path": "TheAutomators/GreenhouseClimate.csv",
+              "line_number": 45125,
+              "source_time_serial_serialized": "43971.67708",
+              "serial_maps_to_peak_slot": true,
+              "raw_hash_verified": true
+            }
+          },
+          "realized": {
+            "match": true,
+            "differences": [],
+            "oracle_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "79360",
+                "out_low_minutes": "5290",
+                "out_high_minutes": "74070",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "1322.666666666666666666666667",
+                "out_percent": "33.248146130964849805186643763877833172734509196028",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "152240",
+                "out_low_minutes": "43150",
+                "out_high_minutes": "109090",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "2537.333333333333333333333333",
+                "out_percent": "63.781473878252126188780426494616448112614688508107",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              }
+            },
+            "engine_summary": {
+              "temperature": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "79360",
+                "out_low_minutes": "5290",
+                "out_high_minutes": "74070",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "1322.6666666666666666666666666666666666666666666667",
+                "out_percent": "33.248146130964849805186643763877833172734509196028",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              },
+              "co2": {
+                "expected_minutes": "239040",
+                "valid_minutes": "238690",
+                "out_minutes": "152240",
+                "out_low_minutes": "43150",
+                "out_high_minutes": "109090",
+                "suspect_minutes": "0",
+                "unknown_minutes": "350",
+                "unknown_reasons": {
+                  "missing_input": "350"
+                },
+                "out_hours": "2537.3333333333333333333333333333333333333333333333",
+                "out_percent": "63.781473878252126188780426494616448112614688508107",
+                "coverage_pct": "99.853580990629183400267737617135207496653279785810"
+              }
+            },
+            "episode_counts": {
+              "oracle": 7887,
+              "engine": 7887
+            },
+            "lineage_spot": {
+              "metric": "co2",
+              "peak_time": "2020-05-20T16:15:00",
+              "revision_id": "816a6c3076dc42a5968e75c06880f5f6",
+              "relative_path": "TheAutomators/GreenhouseClimate.csv",
+              "line_number": 45125,
+              "source_time_serial_serialized": "43971.67708",
+              "serial_maps_to_peak_slot": true,
+              "raw_hash_verified": true
+            }
+          }
+        },
+        "mart_end_row": true,
+        "match": true
+      }
+    ],
+    "all_match": true,
+    "publication": {
+      "publication_id": "804770b6ac534b308ad4e449487db50a",
+      "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+      "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+      "committed_at": "2026-11-04T20:43:08.255736+00:00",
+      "finality_status": "provisional",
+      "code_version": "pipeline-v4-climate",
+      "quality_policy_version": "AGC_QUALITY_V1",
+      "parser_version": "agc-parser-v1",
+      "climate_bundle": "climate-mart-v1",
+      "cycle_count": 6,
+      "is_current": true
+    },
+    "lineage_spots": [
+      {
+        "cycle": "agc-cycle-AICU",
+        "basis": "requested",
+        "metric": "co2",
+        "peak_time": "2019-12-17T17:35:00",
+        "revision_id": "e32505e9150920dad7843d58ffe0d511",
+        "relative_path": "AICU/GreenhouseClimate.csv",
+        "line_number": 501,
+        "source_time_serial_serialized": "43816.73264",
+        "serial_maps_to_peak_slot": true,
+        "raw_hash_verified": true
+      },
+      {
+        "cycle": "agc-cycle-AICU",
+        "basis": "realized",
+        "metric": "co2",
+        "peak_time": "2020-03-19T16:30:00",
+        "revision_id": "6defddacaebda95c88096d3a23d732eb",
+        "relative_path": "AICU/GreenhouseClimate.csv",
+        "line_number": 27272,
+        "source_time_serial_serialized": "43909.68750",
+        "serial_maps_to_peak_slot": true,
+        "raw_hash_verified": true
+      },
+      {
+        "cycle": "agc-cycle-Automatoes",
+        "basis": "requested",
+        "metric": "co2",
+        "peak_time": "2020-05-20T19:45:00",
+        "revision_id": "1f5e49ee88482a301bc6d648d176ef1b",
+        "relative_path": "Automatoes/GreenhouseClimate.csv",
+        "line_number": 45167,
+        "source_time_serial_serialized": "43971.82292",
+        "serial_maps_to_peak_slot": true,
+        "raw_hash_verified": true
+      },
+      {
+        "cycle": "agc-cycle-Automatoes",
+        "basis": "realized",
+        "metric": "co2",
+        "peak_time": "2020-05-20T19:40:00",
+        "revision_id": "72ef3030d3b7611b5e045cb156d3964a",
+        "relative_path": "Automatoes/GreenhouseClimate.csv",
+        "line_number": 45166,
+        "source_time_serial_serialized": "43971.81944",
+        "serial_maps_to_peak_slot": true,
+        "raw_hash_verified": true
+      },
+      {
+        "cycle": "agc-cycle-Digilog",
+        "basis": "requested",
+        "metric": "co2",
+        "peak_time": "2019-12-17T15:55:00",
+        "revision_id": "41f9494d32f368088f46e1ee976018b8",
+        "relative_path": "Digilog/GreenhouseClimate.csv",
+        "line_number": 481,
+        "source_time_serial_serialized": "43816.66319",
+        "serial_maps_to_peak_slot": true,
+        "raw_hash_verified": true
+      },
+      {
+        "cycle": "agc-cycle-Digilog",
+        "basis": "realized",
+        "metric": "co2",
+        "peak_time": "2019-12-17T15:55:00",
+        "revision_id": "41f9494d32f368088f46e1ee976018b8",
+        "relative_path": "Digilog/GreenhouseClimate.csv",
+        "line_number": 481,
+        "source_time_serial_serialized": "43816.66319",
+        "serial_maps_to_peak_slot": true,
+        "raw_hash_verified": true
+      },
+      {
+        "cycle": "agc-cycle-IUACAAS",
+        "basis": "requested",
+        "metric": "temperature",
+        "peak_time": "2020-05-21T21:55:00",
+        "revision_id": "1e04d19e8fb1631884c24432693e35d2",
+        "relative_path": "IUACAAS/GreenhouseClimate.csv",
+        "line_number": 45481,
+        "source_time_serial_serialized": "43972.91319",
+        "serial_maps_to_peak_slot": true,
+        "raw_hash_verified": true
+      },
+      {
+        "cycle": "agc-cycle-IUACAAS",
+        "basis": "realized",
+        "metric": "temperature",
+        "peak_time": "2020-05-21T21:50:00",
+        "revision_id": "12adbab21eec0922b2df1fa5bd753f5e",
+        "relative_path": "IUACAAS/GreenhouseClimate.csv",
+        "line_number": 45480,
+        "source_time_serial_serialized": "43972.90972",
+        "serial_maps_to_peak_slot": true,
+        "raw_hash_verified": true
+      },
+      {
+        "cycle": "agc-cycle-Reference",
+        "basis": "requested",
+        "metric": "co2",
+        "peak_time": "2020-05-20T05:10:00",
+        "revision_id": "19a5e80eb9f8740568c2ff23556915a3",
+        "relative_path": "Reference/GreenhouseClimate.csv",
+        "line_number": 44992,
+        "source_time_serial_serialized": "43971.21528",
+        "serial_maps_to_peak_slot": true,
+        "raw_hash_verified": true
+      },
+      {
+        "cycle": "agc-cycle-Reference",
+        "basis": "realized",
+        "metric": "co2",
+        "peak_time": "2020-05-20T05:10:00",
+        "revision_id": "19a5e80eb9f8740568c2ff23556915a3",
+        "relative_path": "Reference/GreenhouseClimate.csv",
+        "line_number": 44992,
+        "source_time_serial_serialized": "43971.21528",
+        "serial_maps_to_peak_slot": true,
+        "raw_hash_verified": true
+      },
+      {
+        "cycle": "agc-cycle-TheAutomators",
+        "basis": "requested",
+        "metric": "co2",
+        "peak_time": "2020-05-20T16:15:00",
+        "revision_id": "816a6c3076dc42a5968e75c06880f5f6",
+        "relative_path": "TheAutomators/GreenhouseClimate.csv",
+        "line_number": 45125,
+        "source_time_serial_serialized": "43971.67708",
+        "serial_maps_to_peak_slot": true,
+        "raw_hash_verified": true
+      },
+      {
+        "cycle": "agc-cycle-TheAutomators",
+        "basis": "realized",
+        "metric": "co2",
+        "peak_time": "2020-05-20T16:15:00",
+        "revision_id": "816a6c3076dc42a5968e75c06880f5f6",
+        "relative_path": "TheAutomators/GreenhouseClimate.csv",
+        "line_number": 45125,
+        "source_time_serial_serialized": "43971.67708",
+        "serial_maps_to_peak_slot": true,
+        "raw_hash_verified": true
+      }
+    ]
+  }
+}

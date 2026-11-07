@@ -1,0 +1,39 @@
+﻿# export=greenhouse-water-csv-v1
+# quantity_unit=L/m²
+# ratio_unit=%
+# coverage_unit=%
+# decimal=exact source scale (no rounding)
+# null=empty field
+# bool=true/false
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# publication=5d455686a06649e789908b9708a9d436
+# finality=complete
+# committed_at=2026-11-07T10:18:18.898319+00:00
+# cycle=agc-cycle-Automatoes
+# compartment=Automatoes
+# requested_window=[2020-03-02,2020-03-04)
+# effective_window=[2020-03-02,2020-03-04)
+# time_basis=source_naive (source timezone unresolved)
+# status=complete
+# expected_days=2
+# accepted_days: irrigation=2,drain=2,paired=2
+# coverage_pct: irrigation=100,drain=100,paired=100
+# paired_l_m2: numerator(drain)=3.89,denominator(irrigation)=10.36
+# day_counts: unknown=0,suspect=0,drain_exceeds_irrigation=0
+# pipeline_run=a34cccc109772f02c4d8dec4f695d327f52da7f48a5b233c5daa8b747da6e0a2
+# quality_policy=AGC_QUALITY_V1
+# parser_version=agc-parser-v1
+# code_version=clickhouse-warehouse-v1
+# config_bundle_hash=983e64e920efe12a94477ae0b34229498e942fe131806d5bdba80ad319a4ee69
+# metric_version=br02-summary-v1
+# basis_status=assumed_unverified
+# basis_label=giả định chưa xác minh
+# basis_version_ids=AGC_SHARED_BASIS_V1:Automatoes:Drain;AGC_SHARED_BASIS_V1:Automatoes:Irr
+# assumptions=AGC_SHARED_BASIS_V1 v1
+# rule_status=not_configured
+# rule_version=
+# corrections=cutover-resource-20261107 v1
+resource_date,irrigation_l_m2,drain_l_m2,irrigation_quality,irrigation_applicability,irrigation_reason_code,irrigation_source_unit,irrigation_basis_status,irrigation_basis_version_id,irrigation_area_m2,irrigation_basis_kind,irrigation_assumption_id,irrigation_assumption_version,irrigation_basis_label,drain_quality,drain_applicability,drain_reason_code,drain_source_unit,drain_basis_status,drain_basis_version_id,drain_area_m2,drain_basis_kind,drain_assumption_id,drain_assumption_version,drain_basis_label,paired,drain_fraction_pct,drain_exceeds_irrigation,rule_status,rule_version,revision_id,logical_record_key,correction_id,correction_version,reason_codes
+2020-03-02,5.68,2.04,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:Automatoes:Irr,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:Automatoes:Drain,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,true,35.915492957746478873239436619718309859154929577465,false,not_configured,,f6b81811864cb84776e817417f6b28a742f36f06efb5f7fee600b30502ec162e,agc-cycle-Automatoes:2020-03-02,cutover-resource-20261107,1,
+2020-03-03,4.68,1.85,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:Automatoes:Irr,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,accepted,applicable,,L/m²/day,assumed_unverified,AGC_SHARED_BASIS_V1:Automatoes:Drain,62.5,growing_area_assumed,AGC_SHARED_BASIS_V1,1,giả định chưa xác minh,true,39.529914529914529914529914529914529914529914529915,false,not_configured,,de3d51e9dfc05c55690fa5405fabbfa818afd5b826b1a0b9c94de0f7d294a1b7,agc-cycle-Automatoes:2020-03-03,,,

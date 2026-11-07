@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "actual_clickhouse_stop_start": true,
+  "checkpoint_failed_batch_not_advanced": true,
+  "same_generation_resume": true,
+  "ambiguous_server_insert_reconciled": true,
+  "batch_receipts_after_retry": 3,
+  "old_complete_pin_unchanged": true,
+  "late_conflict_new_publication_incomplete": true,
+  "old_publication": "54bd5805b5da588c94acb0b15fea8ed83c0cdd898a35cbcd12ec70fb127ace94",
+  "new_publication": "1815ebcd2f22fc8e9e26341e51661307b74d12937630273c822d2c4e855c436b"
+}
