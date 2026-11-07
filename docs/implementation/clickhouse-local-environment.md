@@ -1,8 +1,11 @@
-# ClickHouse candidate: chạy local
+# ClickHouse: môi trường local mặc định
 
-Candidate có client, ingestion/publication và [luồng nước BR-02](clickhouse-water.md) / [thu hoạch BR-05](clickhouse-harvest.md) / [khí hậu và drain BR-01/03](clickhouse-thresholds.md). [Năng lượng/scenario BR04/06](clickhouse-energy-cost.md) cũng có adapter; [sensor sink/replay](clickhouse-sensor.md) đã chuyển sang ClickHouse; tích hợp toàn bộ màn hình tiếp tục theo T48; PostgreSQL giữ vai trò baseline/mặc định đến T39. Thiết kế ở [ADR-003](../adr/003-clickhouse-warehouse.md).
-Không có fallback ngầm khi ClickHouse lỗi. Server và client dùng Compose riêng
-để không khởi động/sửa database người dùng trong giai đoạn chuyển đổi.
+Đủ sáu BR, UI/CLI và Spark sensor sink đã nghiệm thu trên ClickHouse.
+`compose.yaml` include cấu hình native; PostgreSQL chỉ có ở
+`compose.postgres.yaml` cho đối chứng/rollback, project/volume riêng.
+Không fallback ngầm khi CH lỗi. [Quickstart](../../readme.md#chạy-local),
+[cutover/rollback](clickhouse-cutover-rollback.md),
+[ADR-003](../adr/003-clickhouse-warehouse.md).
 
 ## Chuẩn bị
 
@@ -32,7 +35,7 @@ image đã chuẩn bị trước, `--pull never`. Khi pass chỉ dọn tài nguy
 lượt smoke; khi fail giữ lại cho chẩn đoán. Evidence tại `tmp/clickhouse-smoke/`.
 Chưa phải test full warehouse, workload performance hoặc all fault scenarios.
 
-## Candidate giữ lại để phát triển
+## Project phát triển riêng
 
 ```bash
 docker compose -f compose.clickhouse.yaml -p greenhouse-ch-dev up -d --wait --no-build --pull never clickhouse
@@ -43,8 +46,9 @@ docker compose -f compose.clickhouse.yaml -p greenhouse-ch-dev stop clickhouse
 
 Warehouse không publish HTTP trực tiếp. Dashboard publish `127.0.0.1:18581` (GREENHOUSE_CH_APP_PORT) qua `ch-web`, relay TCP đích cố định `ch-app:8501`; app và warehouse chỉ ở backend internal. Relay là thành phần truy cập localhost, không là forward proxy. Default
 server cap 1 CPU / 2 GiB, query max 2 threads / 768 MiB, server budget 1.5 GiB;
-đây là cấu hình nền, benchmark sẽ công bố riêng. Lưu data/logs trong named volume.
+đây là cấu hình nền, benchmark [đã công bố riêng](../evaluation/clickhouse-performance.md). Lưu data/logs trong named volume.
 Không dùng chung tên project/volume với ứng dụng PostgreSQL hoặc một lượt restore.
 Client đọc CH_HOST/PORT/DATABASE/USER/PASSWORD/TIMEOUT, không yêu cầu PG env.
 Client không tự retry request thất bại vì write outcome có thể chưa biết;
-coordinator sẽ reconcile theo query ID trước retry ở T42.
+coordinator reconcile theo query ID/terminal query_log trước retry. Đã cutover
+thì bật `GREENHOUSE_CH_REQUIRE_CUTOVER_JOURNAL=1` với journal cùng namespace.

@@ -1,0 +1,11 @@
+ Container gh-ch-docs-20261107-ch-job-run-b95796621778 Creating
+ Container gh-ch-docs-20261107-ch-job-run-b95796621778 Created
+usage: python -m greenhouse [-h] [--backend {postgres,clickhouse}]
+                            {setup,test,preview,snapshot,inventory,verify-fixtures,ingest,migrate,load-core,explain-core,run-pipeline,transform,publish,correct-core,lineage,simulate,collect,stream,register-agc-tariff}
+
+positional arguments:
+  {setup,test,preview,snapshot,inventory,verify-fixtures,ingest,migrate,load-core,explain-core,run-pipeline,transform,publish,correct-core,lineage,simulate,collect,stream,register-agc-tariff}
+
+options:
+  -h, --help            show this help message and exit
+  --backend {postgres,clickhouse}

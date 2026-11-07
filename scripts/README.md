@@ -1,5 +1,19 @@
 # Scripts
 
+## ClickHouse mặc định
+
+- [Full offline/rebuild harness](clickhouse_repro/README.md).
+- `clickhouse_cutover/`: cutoff/durable journal/reverse import/full parity, theo
+  [runbook](../docs/implementation/clickhouse-cutover-rollback.md), có identity guard.
+- Native acceptance/evidence: [danh mục](../docs/evaluation/README.md).
+- `build_submission.sh`, `check_submission.sh`: tạo/kiểm tài liệu và gói bàn giao.
+
+## PostgreSQL baseline và công cụ chung
+
+Các script legacy bên dưới chọn `compose.postgres.yaml` tường minh và project
+riêng; không chạy service PG từ wrapper Compose native.
+
+
 - `rehearse_agc_batch.sh` → `rehearse_agc_restore.sh`: full snapshot AGC trên
   project cô lập, kiểm sáu BR và phục hồi DB/raw/sáu volume cùng replay AGC thật.
   Chuẩn bị image trước; xem [hướng dẫn](repro/README.md).

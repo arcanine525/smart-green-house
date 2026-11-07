@@ -1,5 +1,10 @@
 # ADR-001 — PostgreSQL local trước, sensor replay và đường chuyển ClickHouse
 
+> Bản ghi quyết định/lượt spike PostgreSQL ban đầu, giữ nguyên bối cảnh lịch sử.
+> Backend hiện tại là ClickHouse theo [ADR-003](003-clickhouse-warehouse.md);
+> lệnh chạy hiện hành ở [README](../../readme.md). Các trạng thái chưa triển khai
+> bên dưới mô tả thời điểm ban đầu, không phải nghiệm thu hiện tại.
+
 - Ngày: 2026-11-03
 - Trạng thái: thiết kế theo hướng PostgreSQL trước và bổ sung sensor giả lập. [ADR-002](002-container-stack-compatibility.md) khóa phiên bản và ghi bằng chứng spike container ở T02; chưa có pipeline AGC hoặc nghiệm thu BR.
 - Phạm vi: sáu BR trong `docs/br/` và sensor extension của BR-01/03; xem [ma trận truy vết triển khai](../implementation/requirements-matrix.md). [Bộ sơ đồ Mermaid chi tiết](../architecture/README.md).

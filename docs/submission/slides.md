@@ -1,116 +1,136 @@
 ---
 title: "Smart Greenhouse"
 subtitle: "Data Engineering · Project cuối kỳ · bản dự thảo"
-date: "06/11/2026"
+date: "07/11/2026"
 lang: vi-VN
 ---
 
-## 1. Bối cảnh và người dùng
+## I · 1. Bối cảnh và người dùng
 
-- Nhà kính có nhiều nguồn, grain và độ tin cậy khác nhau.
-- Người vận hành: khí hậu, tưới, drain; kỹ sư: EC/pH và episode.
-- Quản lý: thu hoạch, năng lượng, chi phí và kịch bản.
-- Mục tiêu: phân tích có nguồn, version, quality và giới hạn rõ ràng.
+- Người vận hành: khí hậu, tưới, drain; kỹ sư: EC/pH và quality.
+- Quản lý: thu hoạch, năng lượng, chi phí và scenario.
+- Vấn đề: khác grain/đơn vị, thiếu dữ liệu, khó truy nguồn.
+- Mục tiêu: phân tích local có version, quality và bằng chứng.
 
-## 2. Sáu yêu cầu nghiệp vụ
+## I · 2. Sáu BR cho ba thành viên
 
-- BR-01–03: đợt lệch khí hậu, tỷ lệ drain, đợt EC/pH.
-- BR-04–06: kWh/kg loại A, cơ cấu thu hoạch, kịch bản chi phí.
-- Mỗi BR có công thức, grain, điều kiện công bố và AC.
-- Không biến telemetry replay thành dữ liệu lịch sử mới.
+- A: BR-01 khí hậu; BR-03 EC/pH drain.
+- B: BR-02 tưới/drain; BR-05 thu hoạch A/B.
+- C: BR-04 kWh/kg A; BR-06 chi phí và scenario.
+- Mỗi BR có công thức, edge cases, UI/export và AC.
 
-## 3. Dataset AGC
+## II · 3. Dataset và grain
 
-- Autonomous Greenhouse Challenge 2nd edition 2019–2020.
-- 45 file, 622.899 dòng CSV; manifest và checksum bất biến.
-- Climate: slot 5 phút; Resources: ngày; Production: record thu hoạch.
-- Nguồn thời gian chưa xác minh timezone; NULL ≠ 0.
+- AGC 2nd edition 2019–2020:45 file,43 CSV,622.899 dòngCSV; ZIP khóa SHA-256.
+- Climate:5 phút; Resources:ngày; Production:record thu hoạch.
+- Full core:287.989 revision/14.062.934 measures được đối soát.
+- Source clock chưa xác minh timezone; NULL khác 0; replay khác lịch sử.
 
-## 4. Thiết kế local
+## II · 4. Chất lượng và giả định
+
+- Quality theo measure; missing/invalid/suspect có reason và provenance.
+- Reference ngoài vụ: quarantine, không tự sửa năm.
+- Basis 62,5 m² assumed_unverified; sensitivity 96/62,5=1,536.
+- Rule demo/tariff lịch sử có nhãn; scenario không phải hóa đơn.
+
+## III · 5. Kiến trúc thực chạy
 
 ![](figures/architecture-slide.png)
 
-## 5. Công nghệ sử dụng
+## III · 6. Công nghệ và lý do chọn
 
-- PostgreSQL: transactions, quality, revision, metadata và marts.
-- PySpark batch / Structured Streaming; MQTT Mosquitto và collector lưu bền.
-- Streamlit + Plotly: sáu BR, tổng quan, quality, replay và CSV/JSON.
-- Docker Compose local; ClickHouse là phương án tương lai.
+- ClickHouse 25.8: columnar warehouse; Python native historical batch.
+- Spark 4.0.1 Structured Streaming: sensor micro-batch/checkpoint.
+- MQTT+SQLite: outbox/spool bền; Streamlit/Plotly:9 màn hình, CSV/JSON.
+- Docker local/internal network; PG 17.10 đối chứng và rollback riêng.
 
-## 6. Từ dữ liệu đến KPI
+## III · 7. Publication, retry và correction
 
-- Water: tổng paired drain / tổng paired irrigation; mẫu 0 → NULL.
-- Harvest: B / (A+B) trên cùng record; quarantine ảnh hưởng completeness.
-- Energy: tổng kWh / tổng kg A, tổng hợp mỗi nguồn trước khi ghép.
-- Cost: lượng × giá theo ngày/component; khóa overlap/gap.
+- Append-only revisions; conflict không last-write-wins.
+- Shared flock, durable intent/query ID; lost ACK phải reconcile.
+- Verify bundles rồi COMPLETE; một action/export ghim một publication.
+- Correction tạo pin mới; config/scenario lưu full immutable envelope.
 
-## 7. Chất lượng và lineage
+## III · 8. Sensor: hai loại xác nhận
 
-- Quality theo measure: accepted / missing / invalid / suspect.
-- Phiên bản publication, policy, basis, rule và scenario được giữ rõ.
-- Quarantine Reference ngoài vụ: không tự sửa năm.
-- Diện tích 62,5 m² `assumed_unverified`; sensitivity 96/62,5 = 1,536.
+- Replay Climate→outbox→MQTT→durable collector→raw-ready→Spark→CH.
+- PUBACK khác warehouse receipt; kiểm count/hash/cursor/control.
+- Replay scope/checkpoint generation riêng; không cộng lịch sử.
+- Finite replay complete vẫn có collector stale khi producer dừng.
 
-## 8. Phương án so sánh
+## IV · 9. Demo BR-01/02
 
-- Hybrid: raw → staging → core revision → marts; giữ lineage và checkpoint.
-- Kimball gọn: raw → staging → dimensional facts; ít lớp vật lý hơn.
-- Cùng snapshot, engine, cleaning, rules và sáu workload; đã kiểm parity.
-- Kimball chưa chứng minh recovery tương đương.
+- Chọn scope/khoang/ngày/rule; xem episode, coverage và nguồn.
+- Video gốc 4 b 08…: Automatoes 02–03/03,tưới 9,36/drain 3,89→41,56%.
+- App hiện hành 5 d 45…: correction có audit+1 Irr→10,36/3,89→37,55%.
+- Raw/pin gốc không đổi; export ghim đúng pin, không trộn số.
 
-## 9. Demo: khí hậu và nước
+## IV · 10. Demo BR-03/05
 
-- Chọn publication, khoang, khoảng ngày, rule và basis.
-- Tìm đợt nhiệt độ ngoài điều kiện; mở nguồn và quality.
-- AGC Automatoes, 02–03/03/2020: tưới 9,36 / drain 3,89 L/m² → 41,56%.
-- Publication df3e4bcb…; coverage paired 100%; ngày thiếu vẫn là NULL.
-- Xuất CSV cùng publication và bộ lọc.
+- EC/pH: tìm episode ngoài rule demo, unknown/gap và nước ngày.
+- Harvest: record/ngày/tuần; paired B/(A+B), lineage, completeness.
+- Digilog 19/02:A 0,05/B 0,10 kg/m²→share B 66,67%.
+- Reference quarantine khác một vụ đầy đủ; thiếu khác 0.
 
-## 10. Demo: EC/pH và thu hoạch
+## IV · 11. Demo BR-04/06
 
-- Lọc đợt EC/pH, xem suspect và bối cảnh tưới theo ngày.
-- Xem sản lượng A/B, record/tuần và lineage; phân biệt incomplete.
-- Ngưỡng hiển thị là demo khi chưa có evidence vận hành.
+- Automatoes 02–03/03:308,078 kWh; A=0→intensityNULL.
+- Basis 62,5 m² giả định; tariff tham chiếu lịch sử.
+- Baseline 17,6001→điện +20%:20,8407 EUR; tổng tăng 18,41%.
+- Save/reopen frozen scenario; không áp pin cũ ngầm lên pin mới.
 
-## 11. Demo: năng lượng và scenario
+## IV · 12. Demo replay và bộ video
 
-- Cùng Automatoes 02–03/03: 308,078 kWh; kg A = 0 → kWh/kg là NULL.
-- Baseline 17,60 EUR theo biểu giá lịch sử và diện tích giả định 62,5 m².
-- Kịch bản điện +20% giữ nguyên lượng; không trình bày là hóa đơn thật.
+- Replay 30 dòng AGC, MQTT/Spark thật; theo dõi 10→30 và đối soát.
+- Tách source clock/freshness; xem quality, trace và export.
+- Bảy native video 1080 p:109 bước/21 exports/27 phút 22,56 s.
+- Thuyết trình 24 phút chỉ dùng highlights; toàn bộ video nộp riêng.
 
-## 12. Demo: sensor replay
+## V · 13. Correctness và rollback
 
-- Replay Climate qua simulator → MQTT → collector → Spark → PostgreSQL.
-- UI chọn scope replay riêng, publication pin, freshness và quality.
-- Fault/late, checkpoint và resume: giải thích bằng trace, không cộng lịch sử.
+- Full 6 BR/96 CSV/30 lineage/18 nhómthreshold/67.829 episode khớpPG/raw.
+- T39:100 tests,91 chạy/chínheavy skips; không cộng các suite giao nhau.
+- Cutover:315 configs/178 scenarios/62 intents/bảy replay pins bảo toàn.
+- Backup đọc toàn bộ; reverse import→parity→mởapp; originalPG giữ nguyên.
 
-## 13. Correctness và recovery
+## V · 14. Hai phép so riêng biệt
 
-- Một lượt local: **419 backend + 97 UI + 19 sensor/recovery** pass.
-- Sáu BR có raw/fixture oracle, lineage và version trong báo cáo correctness.
-- Kiểm duplicate/conflict, correction, publication pin và restart.
-- Phạm vi test: phần mềm và snapshot/fixture được nêu, không khẳng định nông học.
+- Kiến trúc: Hybrid vs Kimball gọn, cùng PostgreSQL và semantic contracts.
+- Engine: native Hybrid CH vs PG, cùng snapshot/workload/caps.
+- PG lifecycle có Spark stage; CH historical là Python: so implementation.
+- Kimball ít lớp; chưa chứng minh recovery/correction tương đương Hybrid.
 
-## 14. Performance: cùng snapshot, cùng PostgreSQL
+## V · 15. Performance engine: warm p95
 
-- Fresh build (một lượt): Hybrid 880,33 s; Kimball 40,35 s.
-- Database: Hybrid 3,319 GiB; Kimball 0,623 GiB (không gồm WAL/raw).
-- BR-01 p95 gốc: 4.060,81 / 3.028,13 ms; cả hai vượt 2.000 ms.
-- Follow-up Hybrid sau tối ưu: 1.770,93 ms; một lượt riêng, không phải SLA.
-- BR-03 p95: 1.959,90 / 1.816,71 ms.
-- Query Automatoes: 30 mẫu + 5 warm-up.
+- 1 CPU/2 GiB mỗiDB; Automatoes 166 ngày;5 warm-up+30 mẫu/BR.
+- CH BR-01→06:1786/108/1363/118/99/134 ms; cả sáu≤2000 ms.
+- PG tương ứng 1498/12/1052/20/5/17 ms: nhanh hơn lượt đã đo.
+- CH active footprint thấp hơn; cold proof/scenario writes có chi phí lớn.
 
-## 15. Effectiveness và giới hạn
+## V · 16. Cold và kiến trúc: đọc đúng số
 
-- Sáu video Playwright 1080p: 93 bước, 19 file xuất, 6/6 luồng đạt.
-- AppTest fixture đạt; thời lượng automation không đo thời gian người dùng.
-- **Chưa có người tham gia**; chưa đo phản hồi UX hoặc hiểu coverage.
-- Basis chưa xác minh; Reference incomplete; rule/scenario có nhãn.
-- Full AGC/6 volume restore đạt; 30 event replay AGC phục hồi queue, WAL và checkpoint.
+- T49 cold catalog:PG 0,167 s/CH 141,242 s; không phải warm query.
+- PG Hybrid/Kimball gốc:BR-01 p 95 4061/3028 ms, đều vượt 2 s.
+- Hybrid follow-up 1771 ms là lượt riêng; không thay số benchmark gốc.
+- Chưa đo concurrent users/SLA; raw samples và điều kiện có trong report.
 
-## 16. Kết luận và hướng tiếp theo
+## V · 17. Effectiveness và lỗi đã xử lý
 
-- Sáu BR và replay local có bằng chứng correctness, performance và UI tự động.
-- T26–T28 hoàn thành; còn metadata nhóm và video thuyết trình 20–30 phút.
-- BR-01 gốc vượt p95; follow-up sau tối ưu đạt trong một lượt, chưa phải SLA.
-- ClickHouse chỉ xét sau khi có backfill/parity và bằng chứng phù hợp.
+- Playwright có oracle/filter/export/save/reopen; đầy đủdecode/playerreview.
+- Chưa có người tham gia; automation không đo user satisfaction/time.
+- Sửa late HTTP stream error, cold metric_log memory và replay clock import.
+- Giữ expected outputs/fault logs; không tăng memory cap để che lỗi.
+
+## VI · 18. Chạy lại và bàn giao
+
+- Images+ZIP chuẩn bị trước; snapshot→migrate→pipeline→tariff→app.
+- Default CH không cầnPG; backup gồmDB/raw/config/journal/WAL/checkpoint.
+- project-submit:report/slides/app+walkthrough; tên/MSSV placeholder.
+- Video tổng thể 20–30 phút nhóm quay offline, kiểm gói cuối sau khi bổ sung.
+
+## VI · 19. Kết luận và giới hạn
+
+- SáuBR+sensor local có correctness/performance/UI evidence và alternatives.
+- Giới hạn:single-node, cold minutes, scenario writes, basis/timezone/rule demo.
+- Không có hardware/user study; chưa chứng minh năng suất/lợi nhuận thực tế.
+- Nguồn:DE_Requirements.pdf, AGC ReadMe/Economics, docs/evaluation manifests.

@@ -13,24 +13,16 @@ Replay có scope và publication riêng, không cộng vào lịch sử.
 
 ## Chạy
 
-```bash
-cp .env.example .env            # đặt GREENHOUSE_DB_PASSWORD
-docker compose -p smart-greenhouse --profile '*' build
-docker compose -p smart-greenhouse run --rm job python -m greenhouse migrate
-docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id water-first
-docker compose -p smart-greenhouse up -d --wait db app
-```
+Backend mặc định ClickHouse. Theo [quickstart](../../../readme.md#chạy-local):
+build images → snapshot → migrate → run-pipeline/basis → register tariff →
+`docker compose up -d --wait --no-build --pull never ch-app ch-web`.
+Mở localhost18581 (hoặc port trong `.env`); app không tự tạo data.
+Factories chọn native adapters qua runtime, shared services/DTO không đổi.
 
-Trước `run-pipeline` cần snapshot đã khóa: xem [chuẩn bị snapshot AGC](../../../docs/implementation/dataset-snapshot.md)
-(lệnh `snapshot`/`dataset-download` đặt raw vào `data/raw/`). Clean flow đầy đủ:
-build → migrate → snapshot → ingest/pipeline → `up -d --wait db app`.
-
-Mở **http://127.0.0.1:8501** (đổi cổng bằng `GREENHOUSE_APP_PORT`). App service
-mount raw read-only (`GREENHOUSE_RAW_PATH` → `/data/raw`) chỉ để xác minh lineage:
-`raw_snapshot_mapping` nhận diện snapshot **từ manifest.json bên trong thư mục**
-(không đoán theo tên), hỗ trợ cả snapshot root lẫn layout khóa `raw/<dataset>/<sha>`;
-manifest lỗi/không đọc được/trùng snapshot_id bị bỏ qua — các snapshot đó hiển thị
-**chưa xác minh được**, không bịa "đã xác minh". Việc băm file/record vẫn nằm ở lineage.
+PostgreSQL baseline: dùng project riêng và `-f compose.postgres.yaml` trong **mọi**
+lệnh Compose, migrate/pipeline trước khi mở `app`. Không chạy PG commands lên
+project native. Raw mount read-only phục vụ xác minh lineage; manifest bên trong
+nhận diện snapshot, không đoán ID theo tên folder.
 
 ## Tổng quan và chất lượng
 
@@ -97,8 +89,8 @@ replay, xem [cấu hình UI/CLI](../../../docs/implementation/clickhouse-ui-cli.
 Không cần PostgreSQL khả dụng; chuyển namespace backend sẽ reset state cũ.
 
 ```bash
-docker compose --profile test run --rm ui-test          # tests/ui (AppTest + service/export)
-docker compose --profile test run --rm test-runner      # bộ backend hiện có
+docker compose -p greenhouse-pg-tests -f compose.postgres.yaml --profile test run --rm ui-test          # tests/ui (AppTest + service/export)
+docker compose -p greenhouse-pg-tests -f compose.postgres.yaml --profile test run --rm test-runner      # bộ backend hiện có
 ```
 
 `ui-test` chạy trong image UI (pytest/psycopg trong `requirements-ui.lock`), tạo database

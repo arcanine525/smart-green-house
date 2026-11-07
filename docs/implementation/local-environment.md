@@ -1,5 +1,9 @@
 # Môi trường local Docker-first
 
+> Hướng dẫn backend **PostgreSQL compatibility**, project riêng.
+> Đường chạy mặc định ClickHouse: [README](../../readme.md),
+> [backup/cutover native](clickhouse-cutover-rollback.md).
+
 Hướng dẫn này giữ lại bằng chứng scaffold T04/T05 và các hướng dẫn theo giai đoạn; trạng thái, lệnh và giới hạn hiện hành xem [README](../../readme.md) và [chạy lại local](../evaluation/local-repro.md). Compose/Dockerfile theo [ADR-002](../adr/002-container-stack-compatibility.md). Host chỉ cần Docker Engine + Compose v2 trở lên. Không có Python/Java/Spark trên host trong các lệnh runtime. Snapshot/inventory, database pipeline, simulator, collector và stream replay đều có lệnh local; live replay view và [fault/recovery acceptance](../evaluation/sensor-replay.md) đã có.
 
 ## Clone mới → build → setup → test → prototype
@@ -8,17 +12,17 @@ Từ root repository:
 
 ```bash
 cp .env.example .env
-docker compose --profile '*' build
-docker compose --profile batch run --rm job
-docker compose --profile test run --rm test-runner
-docker compose --profile batch up -d --wait db app
-docker compose exec -T app python -c "import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health').read().decode())"
-docker compose --profile sensor config --quiet
+docker compose -f compose.postgres.yaml --profile '*' build
+docker compose -f compose.postgres.yaml --profile batch run --rm job
+docker compose -f compose.postgres.yaml --profile test run --rm test-runner
+docker compose -f compose.postgres.yaml --profile batch up -d --wait db app
+docker compose -f compose.postgres.yaml exec -T app python -c "import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health').read().decode())"
+docker compose -f compose.postgres.yaml --profile sensor config --quiet
 ```
 
-Mở **http://127.0.0.1:8501**. Lệnh setup mặc định của `job` là `python -m greenhouse setup`; chạy lại idempotent, chỉ kiểm tra env/mount/quyền ghi output và `SELECT 1`, chưa tạo schema/core/mart. Có thể dùng `docker compose --profile batch up -d` để dựng cả job setup một lần cùng app/db; dùng `up -d --wait db app` như trên để chỉ đợi các dịch vụ sống lâu có healthcheck.
+Mở **http://127.0.0.1:8501**. Lệnh setup mặc định của `job` là `python -m greenhouse setup`; chạy lại idempotent, chỉ kiểm tra env/mount/quyền ghi output và `SELECT 1`, chưa tạo schema/core/mart. Có thể dùng `docker compose -f compose.postgres.yaml --profile batch up -d` để dựng cả job setup một lần cùng app/db; dùng `up -d --wait db app` như trên để chỉ đợi các dịch vụ sống lâu có healthcheck.
 
-`db`, `app`, `job` là nền batch luôn được bật: `docker compose build` build processing/UI. `--profile '*' build` bổ sung image sensor, không khởi chạy stub. Profile sensor thêm các dịch vụ vào nền batch; khi chỉ chạy test bằng `run test-runner`, Compose chỉ dựng dependencies của test, không tự khởi chạy app/job. Lần build đầu cần Internet; dependencies/JDBC đều đóng gói sẵn. Package `greenhouse` được cài trong từng image từ [pyproject.toml](../../pyproject.toml), không dựa vào bind mount source hoặc pip install khi chạy.
+`db`, `app`, `job` là nền batch luôn được bật: `docker compose -f compose.postgres.yaml build` build processing/UI. `--profile '*' build` bổ sung image sensor, không khởi chạy stub. Profile sensor thêm các dịch vụ vào nền batch; khi chỉ chạy test bằng `run test-runner`, Compose chỉ dựng dependencies của test, không tự khởi chạy app/job. Lần build đầu cần Internet; dependencies/JDBC đều đóng gói sẵn. Package `greenhouse` được cài trong từng image từ [pyproject.toml](../../pyproject.toml), không dựa vào bind mount source hoặc pip install khi chạy.
 
 ## Service, profile, port và storage
 
@@ -75,10 +79,10 @@ Build tools cũng pin pip 25.2, setuptools 80.9.0, wheel 0.45.1. Khóa phiên b�
 Một entrypoint: `python -m greenhouse <command>` bên trong container. Ví dụ:
 
 ```bash
-docker compose --profile batch run --rm job python -m greenhouse setup
-docker compose -p smart-greenhouse run --rm job python -m greenhouse ingest
-docker compose --profile batch run --rm job python -m greenhouse transform
-docker compose --profile test run --rm test-runner
+docker compose -f compose.postgres.yaml --profile batch run --rm job python -m greenhouse setup
+docker compose -f compose.postgres.yaml -p smart-greenhouse run --rm job python -m greenhouse ingest
+docker compose -f compose.postgres.yaml --profile batch run --rm job python -m greenhouse transform
+docker compose -f compose.postgres.yaml --profile test run --rm test-runner
 ```
 
 | Command | Hành vi hiện tại | Task tiếp theo |
@@ -102,12 +106,12 @@ Profile sensor có simulator, collector và stream worker với volumes tách bi
 ## Tạo HTML và dừng dịch vụ
 
 ```bash
-docker compose --profile tools run --rm preview-build
+docker compose -f compose.postgres.yaml --profile tools run --rm preview-build
 ```
 
-File mặc định: `data/output/preview/preview.html`. Khi chủ đích cập nhật artifact tracked, dùng `GREENHOUSE_PREVIEW_PATH=./prototypes/dashboard docker compose --profile tools run --rm preview-build`; không cần sửa file Python để đổi nơi xuất. Service chỉ bind output; source trong image không bị che bằng host venv/cache.
+File mặc định: `data/output/preview/preview.html`. Khi chủ đích cập nhật artifact tracked, dùng `GREENHOUSE_PREVIEW_PATH=./prototypes/dashboard docker compose -f compose.postgres.yaml --profile tools run --rm preview-build`; không cần sửa file Python để đổi nơi xuất. Service chỉ bind output; source trong image không bị che bằng host venv/cache.
 
-`docker compose --profile '*' down` giữ dữ liệu named volumes. `docker compose --profile '*' down -v` xóa named volumes **của project smart-greenhouse**, bao gồm DB, outputs, broker/outbox/spool/raw-ready/checkpoints; không xóa import/raw/preview bind mounts hoặc image của project khác. Đây không phải lệnh backup/restore an toàn cho pipeline thật; hướng vận hành đó sẽ được kiểm chứng ở T28.
+`docker compose -f compose.postgres.yaml --profile '*' down` giữ dữ liệu named volumes. `docker compose -f compose.postgres.yaml --profile '*' down -v` xóa named volumes **của project smart-greenhouse**, bao gồm DB, outputs, broker/outbox/spool/raw-ready/checkpoints; không xóa import/raw/preview bind mounts hoặc image của project khác. Đây không phải lệnh backup/restore an toàn cho pipeline thật; hướng vận hành đó sẽ được kiểm chứng ở T28.
 
 ## Bằng chứng scaffold
 
@@ -115,7 +119,7 @@ Kiểm chứng ngày 2026-11-04 trên Docker Linux arm64, VM 4 CPU/~7.62 GiB. Ru
 
 | Kiểm tra | Kết quả |
 |---|---|
-| Build toàn bộ profiles và plain `docker compose build` | Thành công; ba image có dependencies khóa và `pip check` đạt; plain build dựng processing/UI |
+| Build toàn bộ profiles và plain `docker compose -f compose.postgres.yaml build` | Thành công; ba image có dependencies khóa và `pip check` đạt; plain build dựng processing/UI |
 | `down -v` rồi `run --rm job` hai lần | Cả hai lần `Setup OK`; mount input chỉ đọc, output ghi được, DB reachable; không migration/ingest |
 | `--profile test run --rm test-runner` | **23 passed in 5.57s**: bảy stack checks kế thừa T02, CLI stub failures, invalid config/port, password redaction, setup lỗi và idempotency trên DB thật |
 | Prototype health | App healthy; cả HTTP trong container và `http://127.0.0.1:8501/_stcore/health` trên host trả `ok` |
@@ -133,9 +137,9 @@ Bảng trên là bằng chứng scaffold gốc, không phải trạng thái nghi
 Sau snapshot và ingest, dùng run_id đã trả về. Schema/basis/quality và các giới hạn của loader được ghi trong [PostgreSQL core contract](../../src/greenhouse/db/README.md).
 
 ```bash
-docker compose -p smart-greenhouse run --rm job python -m greenhouse migrate
-docker compose -p smart-greenhouse run --rm job python -m greenhouse load-core --run /data/output/ingestion/<run_id>
-docker compose -p smart-greenhouse run --rm job python -m greenhouse explain-core --compartment AICU --date 2020-01-01 --measure Irr --limit 5
+docker compose -f compose.postgres.yaml -p smart-greenhouse run --rm job python -m greenhouse migrate
+docker compose -f compose.postgres.yaml -p smart-greenhouse run --rm job python -m greenhouse load-core --run /data/output/ingestion/<run_id>
+docker compose -f compose.postgres.yaml -p smart-greenhouse run --rm job python -m greenhouse explain-core --compartment AICU --date 2020-01-01 --measure Irr --limit 5
 ```
 
 `migrate` không tự xóa DB hoặc raw; `load-core` từ chối cùng run và rollback khi lỗi. Candidate core chỉ trở thành public khi coordinator run-pipeline/publish commit pointer. LabAnalysis vẫn raw/staging, core deferred. Không dùng SQL load thành công thay nghiệm thu BR.
@@ -143,18 +147,18 @@ docker compose -p smart-greenhouse run --rm job python -m greenhouse explain-cor
 ## Chạy batch và phục hồi
 
 ```bash
-docker compose -p smart-greenhouse run --rm job python -m greenhouse migrate
-docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id historical-first
-docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --resume historical-first
-docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id historical-repeat
+docker compose -f compose.postgres.yaml -p smart-greenhouse run --rm job python -m greenhouse migrate
+docker compose -f compose.postgres.yaml -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id historical-first
+docker compose -f compose.postgres.yaml -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --resume historical-first
+docker compose -f compose.postgres.yaml -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id historical-repeat
 ```
 
 Outputs ở volume outputs: `pipeline/<workflow_id>/steps.jsonl`, mỗi attempt có artifact manifest/checksums, Spark Parquet và profile JSON/JSONL. Resume kiểm step completed rồi skip; failed step chạy lại với attempt mới. Không xóa pending/raw/staging. DB T07 đã load có thể adopt `--ingestion-run /data/output/ingestion/<run_id>`, không nạp lại core. Snapshot/policy/scope/output phải giữ nguyên khi resume; config drift cần run mới. Same-snapshot không đổi reuse publication, correction được audit và chọn trong publication tiếp theo. Khác snapshot không auto-merge/basis. Resource limits Compose giữ nguyên: job 2 GiB/1.5 CPU, db 512 MiB/0.5 CPU; Spark local[1], driver 768 MiB, shuffle 4. Không restart Docker tự động nếu engine mất; lỗi transaction rollback và resume sau khi engine trở lại. Giữ db/broker chạy cho review.
 
 ## Water mart bundle
 
-Chạy migrate (005+) rồi workflow mới: `docker compose -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id water-first`. Bundle code `pipeline-v2-irrigation` bảo đảm publication mới có water mart. `transform` là alias cùng flags; rerun không đổi reuse publication và không nhân fact rows. Default adapter từ chối publication cũ chưa có mart, không tự backfill/sửa publication đã seal. Xem [mart/rule config](../../src/greenhouse/db/README.md#mart-nước-và-rule-profiles) và [queries ngày/tuần/vụ](../../src/greenhouse/queries/README.md#day-iso-week-cycle-và-review-rule). Rule profile cần version ID tường minh; không seed threshold AGC. Shared basis vẫn có nhãn giả định chưa xác minh. Đây chưa phải UI hoặc nghiệm thu BR-02.
+Chạy migrate (005+) rồi workflow mới: `docker compose -f compose.postgres.yaml -p smart-greenhouse run --rm job python -m greenhouse run-pipeline --workflow-id water-first`. Bundle code `pipeline-v2-irrigation` bảo đảm publication mới có water mart. `transform` là alias cùng flags; rerun không đổi reuse publication và không nhân fact rows. Default adapter từ chối publication cũ chưa có mart, không tự backfill/sửa publication đã seal. Xem [mart/rule config](../../src/greenhouse/db/README.md#mart-nước-và-rule-profiles) và [queries ngày/tuần/vụ](../../src/greenhouse/queries/README.md#day-iso-week-cycle-và-review-rule). Rule profile cần version ID tường minh; không seed threshold AGC. Shared basis vẫn có nhãn giả định chưa xác minh. Đây chưa phải UI hoặc nghiệm thu BR-02.
 
 ## Ứng dụng nước
 
-`docker compose -p smart-greenhouse up -d --wait db app` rồi mở `http://127.0.0.1:8501` — [ứng dụng nước production](../../src/greenhouse/app/README.md) đọc publication hiện hành theo scope qua catalog; chọn khoang/cửa sổ, xem KPI/chart/tuần, drill-down ngày + lineage và xuất CSV/JSON. App mount raw read-only để xác minh lineage; thiếu mount chỉ làm lineage "chưa xác minh được", không chặn KPI. DB trống → trạng thái hướng dẫn; publication thiếu mart → lỗi rõ, không fallback. Kiểm thử UI: `docker compose --profile test run --rm ui-test` (AppTest chạy `home.py` thật với database fixture `test_ui_*` tự drop). Nghiệm thu BR-02 end-to-end thuộc task sau; UI không tự publish/migrate.
+`docker compose -f compose.postgres.yaml -p smart-greenhouse up -d --wait db app` rồi mở `http://127.0.0.1:8501` — [ứng dụng nước production](../../src/greenhouse/app/README.md) đọc publication hiện hành theo scope qua catalog; chọn khoang/cửa sổ, xem KPI/chart/tuần, drill-down ngày + lineage và xuất CSV/JSON. App mount raw read-only để xác minh lineage; thiếu mount chỉ làm lineage "chưa xác minh được", không chặn KPI. DB trống → trạng thái hướng dẫn; publication thiếu mart → lỗi rõ, không fallback. Kiểm thử UI: `docker compose -f compose.postgres.yaml --profile test run --rm ui-test` (AppTest chạy `home.py` thật với database fixture `test_ui_*` tự drop). Nghiệm thu BR-02 end-to-end thuộc task sau; UI không tự publish/migrate.

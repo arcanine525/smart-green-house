@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "source_head": "82c5a987a37af3ace886d627abaa7cb8f60364f3",
+  "candidate_docs_only": true,
+  "project": "gh-ch-docs-20261107",
+  "images": {
+    "greenhouse-cutover-ui:20261107": "sha256:b81bcabae1f323eceb094245e651e7d8cc929f8b29a3012fd3aa5501d562026d",
+    "greenhouse-cutover-processing:20261107": "sha256:4e99a12aa61d1c176aa96a3ce1eb0c5ccfe61255bf0c083b0142f31108726f5e",
+    "greenhouse-cutover-client:20261107": "sha256:be77d33e050a9a0269f7f9966e4b946d23d87d15bcb90d8c404b954e9b891e70"
+  },
+  "prepared_images_reused": true,
+  "normal_docker_build_repeated": false,
+  "fresh_database": true,
+  "raw_import_empty": true,
+  "migrations": true,
+  "cli_help": true,
+  "native_default_without_postgres": true,
+  "browser_empty_state": true,
+  "internal_egress_blocked": true,
+  "fixture_stopped": true,
+  "user_volumes_untouched": true,
+  "elapsed_seconds": 26.012
+}

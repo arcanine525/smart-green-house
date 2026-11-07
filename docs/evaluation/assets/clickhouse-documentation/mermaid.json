@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "diagrams": [
+    {
+      "source": "01-overview-0.mmd",
+      "returncode": 0,
+      "seconds": 0.807
+    },
+    {
+      "source": "02-local-deployment-0.mmd",
+      "returncode": 0,
+      "seconds": 0.459
+    },
+    {
+      "source": "03-sensor-ingestion-0.mmd",
+      "returncode": 0,
+      "seconds": 0.424
+    },
+    {
+      "source": "04-processing-publication-0.mmd",
+      "returncode": 0,
+      "seconds": 0.445
+    },
+    {
+      "source": "05-core-schema-0.mmd",
+      "returncode": 0,
+      "seconds": 0.469
+    },
+    {
+      "source": "06-metadata-schema-0.mmd",
+      "returncode": 0,
+      "seconds": 0.452
+    },
+    {
+      "source": "06-metadata-schema-1.mmd",
+      "returncode": 0,
+      "seconds": 0.422
+    },
+    {
+      "source": "07-data-marts-0.mmd",
+      "returncode": 0,
+      "seconds": 0.442
+    },
+    {
+      "source": "08-application-contracts-0.mmd",
+      "returncode": 0,
+      "seconds": 0.455
+    },
+    {
+      "source": "08-application-contracts-1.mmd",
+      "returncode": 0,
+      "seconds": 0.423
+    },
+    {
+      "source": "09-clickhouse-migration-0.mmd",
+      "returncode": 0,
+      "seconds": 0.459
+    },
+    {
+      "source": "10-durable-recovery-0.mmd",
+      "returncode": 0,
+      "seconds": 0.448
+    },
+    {
+      "source": "readme-0.mmd",
+      "returncode": 0,
+      "seconds": 0.447
+    }
+  ]
+}

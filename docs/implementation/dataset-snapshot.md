@@ -1,6 +1,7 @@
 # Snapshot AGC và fixture tổng hợp
 
-T05 chuẩn bị nguồn bất biến và kiểm kê; chưa parse typed records vào PostgreSQL, chưa xác minh basis/timezone/quality hoặc nghiệm thu BR.
+Tài liệu snapshot/inventory ban đầu được giữ cùng evidence lịch sử. Commands dưới
+đã cập nhật cho ClickHouse mặc định; chất lượng/basis và nghiệm thu ở ma trận yêu cầu.
 
 ## Nguồn đã khóa
 
@@ -16,28 +17,34 @@ Snapshot đã đo gồm **45 file = 43 CSV + 2 PDF**, **103,682,625 byte** giả
 ## Clone mới và nhập ZIP local — không cần Internet ở runtime
 
 ```bash
-cp .env.example .env
-docker compose -p smart-greenhouse --profile tools build snapshot
-docker compose -p smart-greenhouse --profile tools run --rm snapshot
+test -e .env || cp .env.example .env
+mkdir -p data/import data/raw
+docker compose --profile tools build ch-job
+docker compose --profile tools run --rm --no-deps --user 0:0 \
+  -v "$PWD/data/raw:/data/raw" ch-job python -m greenhouse snapshot
 ```
 
 Đặt ZIP trong thư mục `data/import/` trước lệnh cuối; hoặc cấu hình `GREENHOUSE_IMPORT_PATH` trong `.env` trỏ tới **thư mục** chứa một bản copy ZIP trên host. Archive mặc định trong container là `/data/import/autonomous-greenhouse-challengeagc-2nd-2019.zip`. Nếu tên file local khác:
 
 ```bash
-docker compose -p smart-greenhouse --profile tools run --rm snapshot python -m greenhouse snapshot --archive /data/import/custom-name.zip
+docker compose --profile tools run --rm --no-deps --user 0:0 \
+  -v "$PWD/data/raw:/data/raw" ch-job python -m greenhouse snapshot --archive /data/import/custom-name.zip
 ```
 
-Service `snapshot` không phụ thuộc DB/broker, chỉ dùng backend `internal: true`. Import luôn read-only. Chỉ snapshot writer được mount raw read-write; job/stream/simulator vẫn raw read-only. ZIP và thư mục giải nén thủ công trong import không bị sửa/xóa/di chuyển. Bản giải nén thủ công không được dùng như snapshot.
+Invocation snapshot `ch-job --no-deps` không khởi động DB/broker, chỉ dùng backend `internal: true`. Import luôn read-only. Raw mount override trên chỉ dành cho snapshot writer; job/stream/app bình thường vẫn raw read-only.
+Nếu đổi GREENHOUSE_RAW_PATH, thay host path trong override tương ứng. ZIP và thư mục giải nén thủ công trong import không bị sửa/xóa/di chuyển. Bản giải nén thủ công không được dùng như snapshot.
 
 Chạy lại lệnh cùng archive trả `already_exists_verified`, không ghi lại file hoặc acquisition time. Mỗi lần vẫn kiểm ZIP size/hash, kiểm snapshot trên disk và manifest so với nội dung ZIP đã khóa. Sai khác file/hash/metadata/counters làm lệnh thất bại, không tự sửa hoặc thay snapshot.
 
 ## Nhánh tải thật
 
 ```bash
-docker compose -p smart-greenhouse --profile tools run --rm dataset-download
+docker compose -p greenhouse-source-setup -f compose.postgres.yaml --profile tools \
+  run --rm --no-deps dataset-download
 ```
 
-Service này dùng cùng processing image, chỉ mount raw read-write; không mount import hoặc DB credentials. Network `download` riêng có Internet cho setup-only GET. Job/test/stream vẫn chỉ dùng backend nội bộ. Không publish thêm cổng, không có token Kaggle.
+Đây là setup-only service legacy trong Compose PG riêng, không khởi động PG và
+không dùng project native. Service này dùng cùng processing image, chỉ mount raw read-write; không mount import hoặc DB credentials. Network `download` riêng có Internet cho setup-only GET. Job/test/stream vẫn chỉ dùng backend nội bộ. Không publish thêm cổng, không có token Kaggle.
 
 Download ghi `.downloads/download-*.part` trong raw root, giới hạn số byte nhận; kiểm size/SHA-256 trước rename thành `.downloads/<sha256>.zip`. Cache đúng checksum được dùng lại; import local không tạo cache này nên nhánh tải đầu tiên sau nhập local vẫn thực hiện GET. Nếu cần kiểm chứng một GET mới, dùng một raw root scratch khác qua `GREENHOUSE_RAW_PATH` thay vì xóa bằng chứng cũ.
 
@@ -66,9 +73,9 @@ Trên Docker Desktop/macOS arm64 đã kiểm chứng, container thấy file `044
 Inventory đọc snapshot + manifest, kiểm file/hash/counters trước khi render. Output ổn định, bỏ acquisition clock và đường dẫn máy:
 
 ```bash
-docker compose -p smart-greenhouse --profile tools run --rm snapshot python -m greenhouse inventory > docs/implementation/data-inventory.md
-docker compose -p smart-greenhouse --profile tools run --rm snapshot python -m greenhouse verify-fixtures
-docker compose -p smart-greenhouse --profile test run --rm test-runner
+docker compose --profile tools run --rm --no-deps ch-job python -m greenhouse inventory > docs/implementation/data-inventory.md
+docker compose --profile tools run --rm --no-deps ch-job python -m greenhouse verify-fixtures
+docker compose -p greenhouse-pg-tests -f compose.postgres.yaml --profile test run --rm test-runner
 ```
 
 Lệnh inventory có thể dùng `--output /data/output/data-inventory.md` để ghi named volume output, hoặc `--snapshot` chỉ rõ thư mục snapshot trong raw mount. Redirect ở ví dụ đầu là thao tác **chủ đích cập nhật tài liệu tracked**; các lệnh snapshot/test thông thường chỉ tạo dữ liệu trong vùng Git ignore.

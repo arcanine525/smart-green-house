@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "artifacts": {
+    "report": {
+      "pages": 11,
+      "bytes": 267904,
+      "sha256": "dd8af8d77dd468529ef64e97ddea0881e842a03c1056eb97dbba99f2c7279523",
+      "searchable_text": true
+    },
+    "slides": {
+      "pages": 20,
+      "bytes": 147599,
+      "sha256": "645798d401f44277cc316bc9453cd8ce32b732dd8c7a6c22ce3676db310590db",
+      "searchable_text": true
+    }
+  },
+  "visual_review": [
+    "report first page",
+    "architecture slide"
+  ],
+  "scope": "engine-updated drafts; final metadata and delivery in T29"
+}

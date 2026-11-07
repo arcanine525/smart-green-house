@@ -1,6 +1,7 @@
 # ADR-003 — ClickHouse local và hợp đồng chuyển warehouse
 
-Ngày: 2026-11-07. Trạng thái: quyết định thiết kế; triển khai/nghiệm thu theo T40–T52.
+Ngày: 2026-11-07. Trạng thái: **đã triển khai, nghiệm thu và chọn làm backend mặc định**.
+T39 commit `82c5a98`; [cutover evidence](../evaluation/clickhouse-cutover.md).
 Baseline PostgreSQL: `da1d13d44922fad1b83b4a8d1a132c57af15610c`.
 
 ## Phạm vi
@@ -88,8 +89,10 @@ Ngày nguồn Date/Date32; timestamp nguồn là wall clock không xác minh tim
 lưu serial/string gốc và integer microsecond source-clock riêng, không tự gắn UTC.
 Timestamp vận hành có UTC thật, phân biệt rõ trong schema và DTO.
 
-Xem tolerance/gates ở contract. Bản thiết kế không tuyên bố ClickHouse đã chạy
-hoặc nhanh hơn. Benchmark engine giữ Hybrid/workload/resources giống nhau;
+Xem tolerance/gates ở contract. Triển khai đã qua [full parity](../evaluation/clickhouse-parity.md),
+[offline/restore](../evaluation/clickhouse-local-repro.md) và walkthrough.
+[Benchmark](../evaluation/clickhouse-performance.md) cho thấy PG nhanh hơn trên
+các workload warm đã đo, CH active footprint thấp hơn; không kết luận CH nhanh hơn. Benchmark engine giữ Hybrid/workload/resources giống nhau;
 không gộp với thí nghiệm Hybrid/Kimball PostgreSQL.
 
 ## Recovery và chuyển backend
@@ -107,5 +110,10 @@ cutoff; rollback phải mang theo config/scenario/correction/events phát sinh m
 - [ReplacingMergeTree: merge nền không bảo đảm loại trùng ngay; FINAL tại query](https://clickhouse.com/docs/reference/engines/table-engines/mergetree-family/replacingmergetree).
 - [Docker self-managed, version tags và architectures](https://clickhouse.com/docs/get-started/setup/self-managed/docker).
 
-Phiên bản/digest thực chạy sẽ khóa và ghi bằng chứng tại T40, mọi giả định runtime
-ở trên phải có fault test trước nghiệm thu T42/T47/T51.
+Phiên bản/digest thực chạy khóa trong Compose và [môi trường local](../implementation/clickhouse-local-environment.md).
+Pending INSERT và journal rollback được kiểm qua fault tests cùng query_log terminal evidence.
+Đã cutover thì bắt buộc journal hiện hữu đúng namespace; thiếu hoặc chưa reconcile
+phải chặn ghi. Publication mới không sửa pin cũ. Cold proof mất vài phút và scenario
+writes có chi phí đáng kể; single-node flock là giới hạn được chấp nhận.
+Native batch dùng Python; Spark Structured Streaming thực sự chạy sensor, không
+gán nhãn Spark cho đường historical Python. [Mười sơ đồ](../architecture/README.md).

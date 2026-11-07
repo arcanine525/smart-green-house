@@ -1,6 +1,9 @@
 %%{init: {'themeVariables': {'fontSize': '22px'}}}%%
-flowchart LR
-  AGC["AGC snapshot"] --> BATCH["Batch Spark"] --> HIST[("Historical<br/>core + marts")]
-  AGC --> REPLAY["Replay · MQTT<br/>collector · Spark"] --> LIVE[("Replay scope<br/>+ publication")]
-  HIST --> APP["Dashboard<br/>6 BR"]
-  LIVE --> APP
+flowchart TB
+  RAW["AGC raw + manifest"] --> BATCH["Python batch"]
+  RAW --> REPLAY["Replay: MQTT + collector + Spark"]
+  BATCH --> CH[("ClickHouse core / marts / config")]
+  REPLAY --> CH
+  CH --> PIN["Verified publication / replay pin"]
+  PIN --> APP["Streamlit / Plotly + exports"]
+  CH -. "verified rollback" .-> PG["Optional PostgreSQL"]

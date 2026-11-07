@@ -1,15 +1,16 @@
 # Ma trận truy vết yêu cầu Smart Greenhouse
 
-Cập nhật: 2026-11-07. Sáu BR có baseline PostgreSQL và ứng viên ClickHouse
+Cập nhật: 2026-11-07. Sáu BR có baseline PostgreSQL và backend mặc định ClickHouse
 được kiểm riêng theo engine. Các bảng ở mục 2–7 giữ kết quả PostgreSQL lịch sử;
 không dùng số đo đó làm bằng chứng ClickHouse. Full parity, benchmark và
 restore ClickHouse đã đạt trong phạm vi công bố. Walkthrough ClickHouse T51
-đã đạt; cutover T39 và gói report/slides/app vẫn có điều kiện riêng.
+đã đạt; cutover T39 đã kiểm và chuyển mặc định. Gói report/slides/app và
+video thuyết trình có điều kiện riêng ở T29–T30/T53.
 
 ## 1. Nguồn và cách đọc
 
 - Đặc tả hiện hành là [sáu BR](../br/); [đề môn](../../DE_Requirements.md#23-yêu-cầu-cụ-thể) yêu cầu correctness, performance và effectiveness.
-- Triển khai local theo [ADR-001](../adr/001-local-deployment-stack.md): raw → Python/PySpark → PostgreSQL core/mart → Streamlit/Plotly; sensor replay qua MQTT và Structured Streaming. [Sơ đồ](../architecture/README.md) cần đối chiếu với trạng thái thực tế khi làm báo cáo.
+- Triển khai local theo [ADR-003](../adr/003-clickhouse-warehouse.md): raw → Python batch → ClickHouse core/marts → Streamlit/Plotly; sensor replay qua MQTT và Spark Structured Streaming. ADR-001 và các bảng PostgreSQL giữ bối cảnh lịch sử. [Sơ đồ](../architecture/README.md) cần đối chiếu với trạng thái thực tế khi làm báo cáo.
 - Nguồn lịch sử là AGC 2nd edition đã khóa checksum: [snapshot](dataset-snapshot.md), [inventory](data-inventory.md), [quyết định dữ liệu](data-decisions.md).
 - Đọc từng artifact để biết snapshot, publication, version và điều kiện; các lần đo khác nhau không tự động cùng publication. Thời gian nguồn chưa xác minh timezone, NULL khác 0; basis `AGC_SHARED_BASIS_V1` là giả định chưa xác minh.
 - **Đạt có phạm vi** nghĩa là kiểm tra được nêu trong artifact đã pass, không khẳng định đúng cho mọi dataset. **Một phần** chỉ rõ mục tiêu/bằng chứng chưa đạt hoặc chưa có.
@@ -125,3 +126,25 @@ ghi lỗi RAM/HTTP stream đã phát hiện, regression, cấu hình telemetry v
 hạn vận hành. Chưa dùng gate này để tuyên bố đã cutover hoặc gói nộp cuối đã
 đủ; T39, T52, T29–T30 còn điều kiện riêng. Video thuyết trình tổng thể T53 do
 user tự thực hiện offline; sáu walkthrough BR không thay thế video đó.
+
+## 9. Backend mặc định và rollback — T39/T52
+
+[Cutover](../evaluation/clickhouse-cutover.md) đạt: journal62 intents được đối soát,
+315 config envelopes,178 scenario versions, bảy replay pins gồm partial; toàn bộ
+metadata clock/cursor/checksum khớp. Correction +1 Irr ngày02/03/2020 là diễn tập
+có audit, không sửa raw. Native publication mới `5d455686a06649e789908b9708a9d436`;
+PostgreSQL rollback `c51402d9d25f45c182140b072397de78`. Full6BR/96CSV/30lineage/
+18threshold groups/67.829episodes đạt sau reverse import; old pin giữ nguyên.
+Một scenario family trùng ID từ hai lineage được namespace/map bất biến, không
+ghi đè scenario PG. Chỉ fixture agent được dựng lại, database/volumes gốc giữ nguyên.
+
+100 native tests (91 chạy/chín heavy skips),24PG cost và8routing pass; các suite
+có thể giao nhau, không cộng thành tổng. Native UI chín màn hình pass khi PG dừng.
+Backup PG đọc toàn bộ archive; quay lại native và journal active đã kiểm.
+HTTP switch9,250s và KPI cold198,954s là hai mốc riêng; không gọi9s là tổng downtime.
+
+[Mười sơ đồ](../architecture/README.md), [README local](../../readme.md) và
+[runbook](clickhouse-cutover-rollback.md) mô tả đường chạy thật. Video ClickHouse
+đã quay ghim publication gốc `4b08bd51c092465783304f887d766d47`; cửa sổ Automatoes
+02–03/03 có Irr9,36. Deployment sau correction có Irr10,36; không trộn số giữa pins.
+Group29/tên-MSSV placeholder theo user; T53 là video20–30phút user quay offline.

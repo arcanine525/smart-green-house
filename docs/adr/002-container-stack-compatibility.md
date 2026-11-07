@@ -1,5 +1,10 @@
 # ADR-002 — Khóa stack và kiểm chứng tương thích bằng container
 
+> Bản ghi quyết định/lượt spike PostgreSQL ban đầu, giữ nguyên bối cảnh lịch sử.
+> Backend hiện tại là ClickHouse theo [ADR-003](003-clickhouse-warehouse.md);
+> lệnh chạy hiện hành ở [README](../../readme.md). Các trạng thái chưa triển khai
+> bên dưới mô tả thời điểm ban đầu, không phải nghiệm thu hiện tại.
+
 - Ngày: 2026-11-04.
 - Trạng thái: spike T02 đã đạt trên Linux arm64; toàn bộ bằng chứng dưới đây dùng dữ liệu **synthetic**, không phải pipeline AGC hoặc nghiệm thu sáu BR.
 - Kế thừa [ADR-001](001-local-deployment-stack.md). T04 đã hấp thụ spike vào [compose.yaml](../../compose.yaml), [package greenhouse](../../src/greenhouse/) và [tests](../../tests/). Không giữ bộ Compose thứ hai; xem [môi trường hiện hành](../implementation/local-environment.md).

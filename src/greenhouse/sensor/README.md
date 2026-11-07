@@ -251,7 +251,7 @@ python -m greenhouse simulate --resume --outbox-dir tmp/outbox
 python -m greenhouse simulate --outbox-dir tmp/outbox --retry-event <EVENT_ID>
 ```
 
-## Streaming landing đang phát triển
+## Streaming landing và replay
 
 Collector ghi `raw_payload_base64` trong từng dòng raw-ready để có thể kiểm tra
 chính xác payload gốc, kể cả JSON lỗi. Các batch cũ không có trường này sẽ được
@@ -263,15 +263,16 @@ Migration `016_sensor_stream.sql` và các module `stream_records`, `stream_stor
 `stream_landing` cung cấp lớp landing: xác thực, ghi transaction,
 chặn batch ID tái sử dụng khác nội dung và giữ mọi biến thể xung đột. View
 `uncontested_event` loại identity có nhiều hash. Cursor và manifest được đối
-soát bảo thủ; bộ fault matrix và nghiệm thu sensor end-to-end vẫn thuộc T36.
+soát bảo thủ; bộ fault/recovery đã kiểm riêng trên PostgreSQL và ClickHouse; xem
+[nghiệm thu native](../../../docs/implementation/clickhouse-sensor.md).
 Kết quả BR từ `replay_evaluation` là provisional nếu replay chưa đối soát xong.
 
 `replay_state` kiểm tra thứ tự control liên tục, đối chiếu checksum outbox,
 phát hiện event thiếu hoặc xung đột và theo dõi thời gian nhận theo UTC. Trạng
 thái hoàn tất chỉ được tính khi đủ các bằng chứng này; publication được chốt
-theo membership riêng của replay, còn nghiệm thu KPI end-to-end thuộc T36.
+theo membership riêng của replay, KPI end-to-end được đối chiếu raw/batch trong evidence sensor.
 
-### Chạy stream local
+### PostgreSQL compatibility (project riêng)
 
 Sau khi build lại processing image, chạy migration, khởi động PostgreSQL và
 collector, đặt các biến sau cùng replay do simulator tạo. `scope` phải là
@@ -285,7 +286,7 @@ GREENHOUSE_REPLAY_SCOPE_ID='<snapshot-id>:sim-demo' \
 GREENHOUSE_REPLAY_CYCLE_ID=agc-cycle-AICU \
 GREENHOUSE_REPLAY_COMPARTMENT_ID=AICU \
 GREENHOUSE_REPLAY_QUALITY_POLICY=AGC_QUALITY_V1 \
-docker compose --profile sensor up stream-worker
+docker compose -p greenhouse-pg-replay -f compose.postgres.yaml --profile sensor up stream-worker
 ```
 
 Một checkpoint gắn với stream ID, generation, đường dẫn source và PostgreSQL
@@ -294,3 +295,11 @@ transaction với batch; replay chưa đủ manifest/checksum hoặc có gap/con
 không được gắn nhãn complete. `--available-now` chạy các file hiện có rồi dừng.
 Hợp đồng `replay_evaluation.evaluate_publication` nhận rule revisions gắn rõ
 scope replay; không tự gán rule của historical.
+
+### ClickHouse mặc định
+
+Dùng `ch-stream` cùng coordinator với app/job, generation/checkpoint mới cho
+warehouse mới; không dùng checkpoint PG để bỏ qua event chưa nạp CH.
+[Hướng dẫn và lệnh native](../../../docs/implementation/clickhouse-sensor.md),
+[diagram](../../../docs/architecture/03-sensor-ingestion.md). Finite replay complete
+có collector stale sau khi producer dừng là trạng thái có thể dự kiến.

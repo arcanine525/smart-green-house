@@ -1,5 +1,9 @@
 # Backup và khôi phục local
 
+> Hướng dẫn backend **PostgreSQL compatibility**, project riêng.
+> Đường chạy mặc định ClickHouse: [README](../../readme.md),
+> [backup/cutover native](clickhouse-cutover-rollback.md).
+
 Đã diễn tập trên full snapshot AGC: dump/restore 71 bảng, ZIP/raw và cả sáu
 named volumes; replay 30 dòng AGC phục hồi queue MQTT, SQLite WAL và Spark
 checkpoint, giữ checksum và publication. Xem [bằng chứng](../evaluation/assets/full-local-repro/README.md)
@@ -13,16 +17,16 @@ lưu cùng một mốc dừng; riêng database dump không đủ để tiếp t�
 
 Chọn cửa sổ bảo trì, đảm bảo không có job `run`, người dùng UI, simulator,
 collector hoặc stream worker khác đang ghi. Chờ các lệnh một lần kết thúc; chỉ
-`docker compose stop` không dừng container `docker compose run` khác. Trên project
+`docker compose -f compose.postgres.yaml stop` không dừng container `docker compose -f compose.postgres.yaml run` khác. Trên project
 `smart-greenhouse`, dừng các writer dài hạn, giữ PostgreSQL chạy để dump:
 
 ```bash
-docker compose -p smart-greenhouse stop app simulator collector stream-worker broker
-docker compose -p smart-greenhouse up -d --wait db
+docker compose -f compose.postgres.yaml -p smart-greenhouse stop app simulator collector stream-worker broker
+docker compose -f compose.postgres.yaml -p smart-greenhouse up -d --wait db
 umask 077
 backup_dir="$PWD/../greenhouse-backup-$(date -u +%Y%m%dT%H%M%SZ)"
 mkdir -p "$backup_dir/volumes"
-docker compose -p smart-greenhouse exec -T db sh -c \
+docker compose -f compose.postgres.yaml -p smart-greenhouse exec -T db sh -c \
   'exec pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Fc' > "$backup_dir/database.dump"
 ```
 
@@ -77,8 +81,8 @@ if [ -n "$(docker ps -aq --filter "label=com.docker.compose.project=$restore_pro
   printf 'Project đích đã có container\n' >&2
   return 1 2>/dev/null || exit 1
 fi
-docker compose -p "$restore_project" up -d --wait db
-docker compose -p "$restore_project" exec -T db sh -c \
+docker compose -f compose.postgres.yaml -p "$restore_project" up -d --wait db
+docker compose -f compose.postgres.yaml -p "$restore_project" exec -T db sh -c \
   'exec pg_restore -U "$POSTGRES_USER" -d "$POSTGRES_DB" --no-owner --no-privileges --exit-on-error' \
   < "$backup_dir/database.dump"
 ```

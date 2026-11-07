@@ -1,276 +1,146 @@
 # Smart Greenhouse
 
-Assignment môn **Data Engineering**: hệ thống phân tích dữ liệu nhà kính chạy
-local, từ AGC snapshot và sensor replay qua PostgreSQL data warehouse tới
-Streamlit/Plotly dashboard. Sáu nghiệp vụ bao gồm khí hậu, nước, EC/pH, năng
-lượng, thu hoạch và chi phí; [đặc tả](docs/br/) và
-[ma trận bằng chứng](docs/implementation/requirements-matrix.md) mô tả phạm vi.
+Assignment môn **Data Engineering**: warehouse phân tích nhà kính chạy local với
+**ClickHouse**, Python, MQTT, Spark Structured Streaming và Streamlit/Plotly.
+Sáu BR bao gồm khí hậu, nước, EC/pH drain, năng lượng, thu hoạch và chi phí.
+PostgreSQL là backend đối chứng và rollback theo nhu cầu.
 
-**Trạng thái:** sáu màn hình BR, simulator/collector/Structured Streaming và
-replay view đã triển khai. [Correctness và phục hồi](docs/evaluation/correctness.md)
-có test và oracle theo BR; [benchmark](docs/evaluation/performance.md) cho thấy
-lượt gốc BR-01 p95 uncached **4.060,81 ms**, chưa đạt 2.000 ms; [follow-up sau tối ưu](docs/evaluation/rule-engine-optimization.md) đo **1.770,93 ms** trên cùng workload trong một lượt riêng. [Sáu video walkthrough Playwright](docs/evaluation/usability.md) đã đạt: 93 bước,
-19 file xuất, MP4 1080p có chú thích tiếng Việt. Đây là đánh giá tự động, chưa có
-người tham gia. Kết quả lịch sử, replay và scenario luôn tách scope; giả định diện
-tích và ngưỡng demo có nhãn, không phải khuyến nghị canh tác.
+Dữ liệu chính là AGC 2nd edition 2019–2020. Simulator phát lại các dòng Climate
+thật qua outbox → MQTT → collector → Spark; đây là replay dữ liệu lịch sử,
+không phải measurement mới từ phần cứng. Raw, lịch sử, replay và scenario có
+định danh riêng. Ngưỡng demo và diện tích giả định luôn có nhãn.
 
 ## Chạy local
 
-Cần Docker Engine và Docker Compose, đủ dung lượng cho image, PostgreSQL và
-snapshot. Lần build đầu tải base image, apt/pip và JDBC; chuẩn bị trước để vận
-hành offline. Không cần cài Python, Java, Spark, PostgreSQL hay tài khoản cloud
-trên host. Sau khi chuẩn bị, thao tác runtime dùng dịch vụ local.
+Cần Docker/Compose, image và dependency chuẩn bị trước, ZIP AGC đã khóa và
+filesystem local hỗ trợ POSIX lock. Full AGC cần thêm dung lượng cho temporary
+verified rows, warehouse và backup; nên chuẩn bị ít nhất 12 GiB trống cho lần
+bootstrap riêng. Harness kiểm tối thiểu 6 GiB trước rebuild và 3 GiB trước read.
+Không cần tài khoản cloud hoặc PostgreSQL server cho đường chạy mặc định.
+
+Lệnh dưới dành cho checkout mới. Với deployment có sẵn, giữ `.env`, project,
+volume và coordinator cũ; đọc [cutover/rollback](docs/implementation/clickhouse-cutover-rollback.md)
+trước khi đổi backend.
 
 ```bash
-cp .env.example .env
-# Chỉnh GREENHOUSE_DB_PASSWORD và đường dẫn trong .env cho môi trường local.
-docker compose --profile '*' build
-docker compose up -d --wait db
-docker compose run --rm job python -m greenhouse migrate
+test -e .env || cp .env.example .env
+# Chỉnh CH_PASSWORD và host paths trong .env.
+mkdir -p data/import data/raw tmp/clickhouse-state/coordinator tmp/clickhouse-state/output
+chmod 777 tmp/clickhouse-state tmp/clickhouse-state/coordinator tmp/clickhouse-state/output
+docker compose --profile tools build ch-client ch-job ch-app
+docker compose up -d --wait --no-build --pull never clickhouse
 ```
 
-`.env` không được commit. Với DB volume đã tồn tại, đổi password trong `.env`
-không tự đổi password trong PostgreSQL. Dừng dịch vụ bằng
-`docker compose --profile '*' down` (giữ named volumes). Xem
-[backup và khôi phục](docs/implementation/backup-restore.md) trước khi di chuyển
-hoặc thay đổi dữ liệu.
-
-### Chuẩn bị AGC và nạp dữ liệu lịch sử
-
-Lấy archive AGC 2nd edition theo [hướng dẫn snapshot](docs/implementation/dataset-snapshot.md),
-đặt bản ZIP đã khóa trong `data/import/`. SHA-256 bắt buộc:
+Đặt ZIP `autonomous-greenhouse-challengeagc-2nd-2019.zip` trong `data/import/`.
+SHA-256 bắt buộc là
 `c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68`.
-Đường dẫn import/raw có thể đổi trong `.env`; không commit dataset hoặc credential.
-Snapshot kiểm checksum, tạo manifest và không ghi đè snapshot bất biến.
-
-Lệnh biểu giá đăng ký baseline lịch sử từ `Economics.pdf` cho BR-06: nhiệt
-0,0083 EUR/MJ, điện cao 0,08 EUR/kWh và điện thấp 0,04 EUR/kWh trong khoảng
-hiệu lực đã ghi trong nguồn. Đây là giá tham chiếu, không phải hóa đơn thực.
-Chạy lệnh không có `--apply` để kiểm tra trước; lệnh chỉ chấp nhận scope AGC
-lịch sử đã công bố energy mart và không thay biểu giá baseline khác đã có.
+Xem [snapshot](docs/implementation/dataset-snapshot.md) để lấy nguồn và kiểm
+checksum. Không commit dataset hoặc credential.
 
 ```bash
-docker compose --profile tools run --rm snapshot
-docker compose run --rm job python -m greenhouse run-pipeline --workflow-id first-local-run
-docker compose run --rm job python -m greenhouse register-agc-tariff --apply
-docker compose up -d --wait db app
+# Snapshot cần raw mount writable; job phân tích bình thường chỉ đọc raw.
+# Nếu đổi GREENHOUSE_RAW_PATH, thay host path dưới đây tương ứng.
+docker compose --profile tools run --rm --no-deps --user 0:0 \
+  -v "$PWD/data/raw:/data/raw" ch-job python -m greenhouse snapshot
+
+docker compose --profile tools run --rm ch-job python -m greenhouse migrate
+docker compose --profile tools run --rm ch-job python -m greenhouse run-pipeline \
+  --scope-id agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical \
+  --workflow-id first-local-run --agc-shared-basis
 ```
 
-Mở **http://127.0.0.1:8501**. Chọn publication, khoang/vụ và khoảng ngày;
-chuyển giữa sáu BR, tổng quan và chất lượng bằng thanh bên. Nếu chưa có
-publication thì app báo dữ liệu trống, không tự tạo fixture. Lệnh `setup` mặc
-định chỉ kiểm tra môi trường, không nạp dữ liệu. Xem [ứng dụng](src/greenhouse/app/README.md)
-và [pipeline](src/greenhouse/db/README.md) để hiểu rule, basis, lineage và export.
-
-### Rule demo và diễn tập từ clone riêng
-
-Pipeline không tự gán ngưỡng nông học. Khi cần minh họa đánh giá khí hậu,
-EC/pH hoặc loại B, có thể đăng ký rõ các profile **demo**, rồi chọn version
-trong dashboard. Bỏ `--apply` để xem kế hoạch trước:
+Lệnh pipeline chọn rõ giả định shared basis 62,5 m²; không biến giả định này
+thành bằng chứng nguồn. Giữ publication ID từ output để đăng ký tariff:
 
 ```bash
-docker compose run --rm job python -m greenhouse.db.demo_rules --kind climate --apply
-docker compose run --rm job python -m greenhouse.db.demo_rules --kind drain --apply
-docker compose run --rm job python -m greenhouse.db.demo_rules --kind harvest --apply
+docker compose --profile tools run --rm ch-job python -m greenhouse register-agc-tariff \
+  --publication-id PUBLICATION_ID \
+  --scope-id agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+docker compose up -d --wait --no-build --pull never ch-app ch-web
 ```
 
-Để kiểm tra toàn bộ snapshot trên database mới, cách ly Internet runtime và
-backup/restore raw, DB, outputs cùng trạng thái sensor, dùng
-[hướng dẫn diễn tập full AGC](scripts/repro/README.md). Các script tạo project
-Docker riêng; không trỏ vào volume hoặc database đang vận hành.
+Mở **http://127.0.0.1:18581**; port có thể đổi bằng `GREENHOUSE_CH_APP_PORT`.
+Chọn khoang/vụ, ngày, rule version và scenario trong thanh bên. App không tự
+migrate, nạp fixture hay tạo số liệu khi chưa có publication.
 
-### Sensor replay và kiểm thử
-
-Simulator phát lại Climate qua MQTT, collector lưu spool trước ACK và Spark
-công bố replay trong scope riêng. [Hướng dẫn sensor](src/greenhouse/sensor/README.md)
-mô tả simulator, collector, stream ID, checkpoint, scope và resume; không gộp
-replay với publication lịch sử. [Bằng chứng replay](docs/evaluation/sensor-replay.md)
-bao gồm duplicate/conflict/late và restart dịch vụ test riêng.
-
-```bash
-./scripts/test_local.sh           # backend, UI/export, sensor fault & recovery
-./scripts/test_offline_smoke.sh   # fixture: Spark + UI + sensor trên network internal
-./scripts/test_sensor_backup_restore.sh # fixture: SQLite WAL + Spark checkpoint restore
-./scripts/test_effectiveness.sh   # sáu walkthrough UI tự động, không phải test người thật
-```
-
-Test tạo database fixture `test_` và container sensor riêng; log trong `tmp/`.
-Thời gian AppTest không phải thời gian thao tác người dùng. Có thể mở
-[prototype HTML](prototypes/dashboard/preview.html) offline; đây là fixture
-review giao diện, khác app production.
-
-Để quay lại hoặc mở bộ video sáu BR, xem [hướng dẫn Playwright](tools/walkthrough/README.md)
-và [danh mục video local](docs/evaluation/assets/playwright-t26/README.md).
-
-## Dữ liệu và phạm vi
-
-AGC 2nd edition (2019–2020) chứa lịch sử nhà kính cà chua: `GreenhouseClimate.csv`
-ở grain khoang × slot 5 phút, `Resources.csv` ở grain khoang × ngày và
-`Production.csv` theo record thu hoạch. Weather và nguồn bổ sung không được tự
-trộn vào KPI. Thiếu dữ liệu, NULL, zero, partial và chất lượng theo measure được
-phân biệt; source timestamp chưa được gắn timezone suy đoán. Đọc
-[quyết định dữ liệu](docs/implementation/data-decisions.md) trước khi diễn giải.
+`compose.yaml` include cấu hình native; chỉ relay `ch-web` publish localhost.
+App, job và DB dùng network internal. Native batch dùng CPython/shared semantic
+transforms; Spark thực sự chạy ở sensor streaming. Image processing chung còn
+chứa JDBC/driver cho PostgreSQL compatibility, không cần server PG để chạy CH.
 
 ## Yêu cầu nghiệp vụ
 
-| BR | Câu hỏi cần trả lời | Đặc tả |
+| BR | Câu hỏi | Đặc tả |
 |---|---|---|
-| BR-01 | Khoang nào có đợt nhiệt độ/CO₂ lệch điều kiện, diễn ra khi nào và kéo dài bao lâu? | [Theo dõi khí hậu](docs/br/br_01_climate-condition-monitoring.md) |
-| BR-02 | Lượng tưới, drain và tỷ lệ drain thay đổi thế nào theo ngày/tuần/vụ? | [Tưới và drainage](docs/br/br_02_irrigation-drainage-monitoring.md) |
-| BR-03 | EC/pH drain có các đợt ngoài mục tiêu nào, và đâu là dữ liệu nghi lỗi? | [Dinh dưỡng qua EC/pH](docs/br/br_03_drain-nutrition-monitoring.md) |
-| BR-04 | Cần bao nhiêu kWh cho mỗi kg loại A khi đủ bằng chứng về diện tích và dữ liệu? | [Cường độ năng lượng](docs/br/br_04_energy-intensity-analysis.md) |
-| BR-05 | Sản lượng, cơ cấu A/B và lũy kế thu hoạch thay đổi ra sao? | [Thu hoạch và chất lượng](docs/br/br_05_harvest-quality-tracking.md) |
-| BR-06 | Chi phí năng lượng thay đổi bao nhiêu nếu đổi biểu giá và giữ nguyên tiêu thụ? | [Kịch bản chi phí](docs/br/br_06_energy-cost-scenarios.md) |
+| BR-01 | Nhiệt độ/CO₂ lệch điều kiện khi nào, bao lâu? | [Khí hậu](docs/br/br_01_climate-condition-monitoring.md) |
+| BR-02 | Lượng tưới, drain và tỷ lệ paired theo ngày/tuần/vụ? | [Nước](docs/br/br_02_irrigation-drainage-monitoring.md) |
+| BR-03 | EC/pH drain có các đợt ngoài mục tiêu nào? | [EC/pH](docs/br/br_03_drain-nutrition-monitoring.md) |
+| BR-04 | Năng lượng và cường độ trên sản lượng A là bao nhiêu? | [Năng lượng](docs/br/br_04_energy-intensity-analysis.md) |
+| BR-05 | Sản lượng A/B, cơ cấu và mức độ đầy đủ thay đổi ra sao? | [Thu hoạch](docs/br/br_05_harvest-quality-tracking.md) |
+| BR-06 | Chi phí theo tariff và kịch bản giá thay đổi thế nào? | [Chi phí](docs/br/br_06_energy-cost-scenarios.md) |
 
-Mỗi BR có quy tắc quality, missing data, đơn vị, mẫu số và tiêu chí đối soát. Giá trị `0`, `NULL`, kết quả partial và chưa đủ điều kiện tính được phân biệt rõ. Tính năng sensor replay mở rộng BR-01/03, không thay thế các yêu cầu phân tích lịch sử.
+Các tên file BR đầy đủ được liệt kê tại [docs/br](docs/br/).
+Missing, NULL, zero, suspect, invalid và partial được phân biệt. Source clock
+chưa xác minh timezone; operating clock dùng UTC. Không điền thiếu bằng 0.
+[Quyết định dữ liệu](docs/implementation/data-decisions.md) ghi unit, quality,
+area basis, boundary và provenance trước khi diễn giải KPI.
 
-[Ma trận truy vết yêu cầu](docs/implementation/requirements-matrix.md) nối sáu BR với nguồn/cột, biến đổi, màn hình, AC và bằng chứng thực tế và các giới hạn còn lại; đồng thời phân biệt BR hiện hành với mã BR trong presentation cũ.
-
-## Tech stack
-
-| Thành phần | Công nghệ | Vai trò |
-|---|---|---|
-| Ngôn ngữ | Python, SQL | Tiếp nhận, xử lý, truy vấn và ứng dụng |
-| Raw storage | Filesystem local | Snapshot, CSV/JSONL, checksum và manifest |
-| Sensor giả lập | Python + MQTT Mosquitto | Replay, fault injection và collector lưu bền |
-| Xử lý | PySpark batch + Structured Streaming | Chuẩn hóa, quality, episode và xử lý micro-batch |
-| Data warehouse | PostgreSQL | Staging, core, marts, metadata và cấu hình có version |
-| Dashboard | Streamlit + Plotly | Bộ lọc, biểu đồ, drill-down, scenario và export |
-| Đóng gói | Docker Compose | Processing, UI, sensor images; profiles và volumes local |
-| Kiểm thử | pytest; SQL assertions, contract/fault tests | Kiểm tra BR, publication, export và phục hồi sensor |
-
-Prototype dùng fixture riêng; app production đọc publication đã công bố. Quyết định kiến trúc nằm trong [ADR-001](docs/adr/001-local-deployment-stack.md), phiên bản và bằng chứng spike trong [ADR-002](docs/adr/002-container-stack-compatibility.md).
-
-## Kiến trúc tổng quan
-
-Kiến trúc Hybrid giữ raw, chuẩn hóa dữ liệu trong core rồi tạo dimensional marts phục vụ các BR.
-
-```mermaid
-flowchart TB
-    SOURCE["AGC CSV snapshot local"]
-    SOURCE --> IMPORT["Batch importer"]
-    SOURCE --> SIM["Sensor simulator<br/>Climate replay"]
-    SIM --> MQTT["Mosquitto MQTT"]
-    MQTT --> COLLECTOR["Python collector<br/>durable spool"]
-    IMPORT --> RAW[("Raw filesystem<br/>snapshot + event files")]
-    COLLECTOR --> RAW
-    RAW --> BATCH["PySpark batch"]
-    RAW --> STREAM["Structured Streaming<br/>file source + checkpoint"]
-    BATCH --> TRANSFORM["Shared transforms<br/>time, units, quality, episodes"]
-    STREAM --> TRANSFORM
-    subgraph PG["PostgreSQL"]
-        STAGING[("Staging theo run / batch")]
-        CORE[("Core revisions")]
-        MART[("Dimensional marts")]
-        META[("Metadata + configuration<br/>lineage, rules, publications")]
-        STAGING --> CORE --> MART
-        META -.-> CORE
-        META -.-> MART
-    end
-    TRANSFORM --> STAGING
-    MART --> SERVICE["Query / command services<br/>publication đã công bố"]
-    CORE --> SERVICE
-    META --> SERVICE
-    SERVICE --> UI["Streamlit + Plotly<br/>6 BR + replay view + CSV"]
-    UI -->|"Scenario version mới"| SERVICE
-    SERVICE -->|"Ghi cấu hình"| META
-```
-
-Collector lưu raw trước khi xác nhận nhận message; pipeline kiểm tra và công bố dữ liệu theo version. Dashboard dùng cùng `publication_id` cho KPI, drill-down và export. Thời gian nguồn phục vụ phân tích nghiệp vụ được tách khỏi thời gian phát/nhận phục vụ đo độ trễ.
-
-## Data marts và luồng phân tích
+## Kiến trúc thực chạy
 
 ```mermaid
 flowchart LR
-    CLIMATE["Core ClimateObservation"] --> FC["FactClimate + ClimateEpisode"] --> BR1["BR-01<br/>Khí hậu"]
-    DRAIN["Core DrainObservation"] --> FD["FactDrainCondition + DrainEpisode"] --> BR3["BR-03<br/>EC / pH"]
-    RESOURCE["Core ResourceDay"] --> FI["FactIrrigationDay"] --> BR2["BR-02<br/>Tưới / drain"]
-    RESOURCE --> FE["FactEnergyDay"]
-    HARVEST["Core Harvest"] --> FH["FactHarvest"] --> BR5["BR-05<br/>Sản lượng A / B"]
-    FE --> EA["Energy cycle aggregate"]
-    FH --> HA["Harvest cycle aggregate"]
-    EA --> GATE["Ghép theo cycle<br/>kiểm tra basis và completeness"]
-    HA --> GATE
-    GATE --> BR4["BR-04<br/>kWh / kg A"]
-    FE --> COST["EnergyCostDay<br/>quantity x rate"]
-    RATE["Tariff / scenario versions"] --> COST
-    COST --> BR6["BR-06<br/>Baseline và scenario"]
+    ZIP["AGC ZIP + manifest"] --> RAW["Locked filesystem raw"]
+    RAW --> BATCH["Python parser + canonical revisions"]
+    RAW --> SIM["Sensor simulator + SQLite outbox"]
+    SIM --> MQTT["MQTT QoS 1"] --> COL["Collector SQLite spool + atomic ready files"]
+    COL --> SPARK["Spark Structured Streaming + own checkpoint"]
+    BATCH --> WRITE["Shared writer lock + pending fence + rollback journal"]
+    SPARK --> WRITE
+    WRITE --> CH["ClickHouse core / config / typed marts"]
+    CH --> SEAL["Verified complete publication / replay pin"]
+    SEAL --> UI["Shared services → Streamlit / Plotly / CSV / JSON"]
+    CH -. "cutoff + delta + verified mapping" .-> PG["Optional PostgreSQL rollback"]
 ```
 
-Energy và Harvest được tổng hợp riêng trước khi ghép để tránh nhân dữ liệu. Các tỷ lệ dùng tử/mẫu trên cùng tập hợp lệ; không cộng các tỷ lệ ngày. Diện tích, completeness và các điều kiện công bố KPI được mô tả trong [thiết kế data marts](docs/architecture/07-data-marts.md).
+[Danh mục 10 sơ đồ](docs/architecture/README.md) đi sâu vào deployment, sensor,
+publication, core schema, metadata, marts, application contracts và recovery.
+[ADR ClickHouse](docs/adr/003-clickhouse-warehouse.md) và
+[migration contract](docs/implementation/clickhouse-migration-contract.md) giải
+thích immutable envelopes, exact Decimal, correction và retry.
 
-## Tài liệu và sơ đồ
+## Kiểm chứng và chạy lại
 
-[Báo cáo, slide và kịch bản video dự thảo](docs/submission/README.md) giữ rõ các phần chưa hoàn tất.
+- [Correctness PostgreSQL](docs/evaluation/correctness.md) và [ClickHouse parity](docs/evaluation/clickhouse-parity.md): giữ nhãn engine và publication riêng.
+- [ClickHouse acceptance](docs/evaluation/clickhouse-acceptance.md), [offline/restore](docs/evaluation/clickhouse-local-repro.md) và [cutover/rollback](docs/implementation/clickhouse-cutover-rollback.md): publication, config/scenario, WAL và checkpoints có bằng chứng.
+- [Benchmark engine](docs/evaluation/clickhouse-performance.md): cùng workload/caps, warm-up và mẫu đo được ghi rõ. PostgreSQL nhanh hơn các workload đã đo; ClickHouse có active footprint thấp hơn. Cold verification và scenario writes có chi phí đáng kể.
+- [Hybrid/Kimball](docs/evaluation/kimball.md): thí nghiệm riêng trên PostgreSQL; không gộp với so sánh engine.
+- [Walkthrough](docs/evaluation/usability.md): bảy video native có 109 bước, 21 file xuất, gồm sensor MQTT/Spark thật. Đây là kiểm thử tự động, chưa có nghiên cứu người dùng.
 
+Video nằm local tại `project-submit/demo-videos/clickhouse/index.html`, không
+commit media. [Metadata/checksum](docs/evaluation/assets/clickhouse-walkthrough/README.md)
+và [hướng dẫn recorder](tools/walkthrough/README.md) nằm trong Git. Video gốc ghim
+publication đã nghiệm thu; các correction diễn tập sau đó có publication và
+audit riêng, không thay raw hoặc giả làm quan sát AGC gốc.
 
-Toàn bộ sơ đồ được viết bằng **Mermaid** trong Markdown. Xem [mục lục kiến trúc](docs/architecture/README.md) hoặc mở từng thành phần:
+Bản PostgreSQL giữ các script legacy: `scripts/test_local.sh`,
+`scripts/test_offline_smoke.sh`, `scripts/test_sensor_backup_restore.sh` dùng
+`compose.postgres.yaml` tường minh và fixture riêng. Với PG deployment thủ công,
+luôn dùng project riêng, ví dụ `docker compose -p greenhouse-postgres -f
+compose.postgres.yaml ...`; không dùng project native để tạo/xóa PG volumes.
 
-| Tài liệu | Nội dung |
-|---|---|
-| [Quyết định stack](docs/adr/001-local-deployment-stack.md) | PostgreSQL trước, chạy local, sensor replay và hướng chuyển ClickHouse |
-| [Khóa phiên bản và spike container](docs/adr/002-container-stack-compatibility.md) | Docker-first, phiên bản/nguồn, lệnh kiểm tra MQTT–Spark–PostgreSQL và kết quả synthetic |
-| [01 — Tổng quan](docs/architecture/01-overview.md) | Nguồn, ingestion, processing, warehouse và dashboard |
-| [02 — Deployment local](docs/architecture/02-local-deployment.md) | Services, network, volumes và các profile dự kiến |
-| [03 — Sensor ingestion](docs/architecture/03-sensor-ingestion.md) | Simulator, event envelope, collector, ACK và lưu bền |
-| [04 — Processing & publication](docs/architecture/04-processing-publication.md) | Transform dùng chung, late data, idempotency và phục hồi |
-| [05 — Core schema](docs/architecture/05-core-schema.md) | ERD nghiệp vụ, grain, revision và quality theo measure |
-| [06 — Metadata & configuration](docs/architecture/06-metadata-schema.md) | ERD lineage, publication, rule, tariff và scenario |
-| [07 — Data marts](docs/architecture/07-data-marts.md) | Conformed dimensions và luồng mart của sáu BR |
-| [08 — Application contracts](docs/architecture/08-application-contracts.md) | UI/service/adapter, query contracts và tạo scenario |
-| [09 — ClickHouse migration](docs/architecture/09-clickhouse-migration.md) | Backfill, parity checks, cutover và rollback sau MVP |
-| [Benchmark Hybrid/Kimball](docs/evaluation/performance.md) | Pipeline mới/rerun/rebuild, storage, sáu BR và COPY so với INSERT; số đo và lệnh tái lập |
-| [Benchmark PostgreSQL/ClickHouse](docs/evaluation/clickhouse-performance.md) | Cùng workload/caps, 30 mẫu mỗi BR, scenario/sensor, storage và các giới hạn đã đo |
-| [UI prototype](prototypes/dashboard/README.md) | Cách chạy, fixture, giới hạn và kiểm tra giao diện |
+Native test và replay harness: [client/package](src/greenhouse/clickhouse/README.md),
+[UI/CLI](docs/implementation/clickhouse-ui-cli.md), [sensor](docs/implementation/clickhouse-sensor.md),
+[full local rehearsal](scripts/clickhouse_repro/README.md). Đã cutover thì giữ
+`GREENHOUSE_CH_REQUIRE_CUTOVER_JOURNAL=1`; thiếu journal/sai namespace hoặc intent
+chưa rõ kết quả phải chặn ghi.
 
-Tài liệu nền:
+## Bàn giao
 
-- [Yêu cầu assignment môn DE — PDF](DE_Requirements.pdf) và [bản Markdown](DE_Requirements.md).
-- [Nghiên cứu các cách thiết kế data warehouse](docs/ref/DWH_Design_Approaches_Research.md).
-- [Phân tích kiến trúc Hybrid](docs/ref/DWH_Hybrid_Approach_Deep_Dive.md).
-- [Phân tích nguồn dữ liệu Smart Greenhouse](docs/ref/SmartGreenhouse_Case_Analysis.md).
+[project-submit](project-submit/) chứa report/slides PDF, gói ứng dụng, video
+walkthrough và hướng dẫn. Source tài liệu ở [docs/submission](docs/submission/).
+Video thuyết trình tổng thể do người dùng quay offline sau cùng theo kịch bản;
+kiểm gói trước video và kiểm cuối cùng là hai trạng thái riêng.
 
-Các tài liệu trong `docs/ref/` là tham khảo từ giai đoạn nghiên cứu và có thể chứa đề xuất cũ. Khi có khác biệt, dùng bộ BR, ADR và thiết kế hiện tại làm cơ sở triển khai.
-
-## Cấu trúc repository
-
-```text
-.
-├── readme.md
-├── .streamlit/config.toml          # Theme và cấu hình UI local
-├── compose.yaml                    # Profiles batch / sensor / test / tools
-├── docker/                         # Processing / UI / sensor images và Mosquitto config
-├── requirements*.lock              # Dependency closure từng image, pin chính xác
-├── src/greenhouse/                 # Package, CLI, config và diagnostic probes
-│   └── app/                        # Sáu BR, replay, catalog và export (Streamlit)
-├── tests/                          # Unit/integration tests, tests/ui (AppTest) và fixture synthetic
-├── config/                         # Quy ước cấu hình
-├── scripts/                        # Quy ước wrapper Compose
-├── DE_Requirements.pdf
-├── DE_Requirements.md
-├── docs/
-│   ├── adr/                       # Quyết định kiến trúc
-│   ├── architecture/              # Mermaid diagrams và thiết kế chi tiết
-│   ├── br/                        # Sáu đặc tả nghiệp vụ
-│   ├── implementation/            # Ma trận truy vết yêu cầu và bằng chứng
-│   └── ref/                       # Tài liệu nghiên cứu và tham khảo
-└── prototypes/dashboard/
-    ├── app.py                     # Ứng dụng Streamlit
-    ├── data.py                    # Fixture, KPI demo và Plotly figures
-    ├── build_preview.py           # Tạo HTML offline
-    ├── template.html              # Layout của HTML preview
-    ├── preview.html               # Artifact để mở review
-    ├── requirements.txt
-    └── README.md
-```
-
-## Giới hạn và công việc còn lại
-
-- Đánh giá người dùng theo [protocol](docs/evaluation/usability.md) là mở rộng tùy chọn; T26 dùng walkthrough Playwright theo phạm vi đã chốt. Không suy ra hiệu quả thực tế từ test tự động.
-- BR-01 vượt mục tiêu p95 ở lượt gốc; lượt sau tối ưu đạt 1.770,93 ms trong điều kiện đo, cần lặp lại trước khi kết luận SLA. Xem [benchmark](docs/evaluation/performance.md) và [follow-up](docs/evaluation/rule-engine-optimization.md).
-- [Full AGC/offline và backup/restore](docs/evaluation/local-repro.md) đã đạt trên clone riêng; sensor phục hồi được kiểm trên 30 dòng AGC. Còn hoàn thiện metadata nhóm, báo cáo/slide cuối và video thuyết trình để chốt nộp.
-- ClickHouse đang được chuyển đổi theo [các gate migration](docs/architecture/09-clickhouse-migration.md); PostgreSQL vẫn là baseline đến khi đủ nghiệm thu.
-
-### ClickHouse candidate
-
-Cả sáu BR có bản ClickHouse chạy local, dùng cùng dashboard và contracts. Xem [cách chạy và đối soát](docs/implementation/clickhouse-water.md). Xem thêm [thu hoạch và completeness](docs/implementation/clickhouse-harvest.md), [khí hậu/drain và episode](docs/implementation/clickhouse-thresholds.md), [năng lượng và scenario giá](docs/implementation/clickhouse-energy-cost.md), [sensor sink và replay](docs/implementation/clickhouse-sensor.md). [Toàn bộ dashboard và CLI](docs/implementation/clickhouse-ui-cli.md) chọn backend tường minh, không fallback sang PostgreSQL. Full backfill, parity, benchmark và offline/restore đã có bằng chứng riêng. [Biên bản ứng viên ClickHouse](docs/evaluation/clickhouse-acceptance.md) tổng hợp gate và giới hạn; [bảy walkthrough ClickHouse](docs/evaluation/assets/clickhouse-walkthrough/README.md) đã đạt, gồm 109 bước và sensor MQTT/Spark thật. Backend mặc định vẫn là PostgreSQL cho đến task cutover/rollback riêng.
+Giới hạn thực tế: single-node/local flock; cold proof có thể mất nhiều phút;
+raw/basis/rule chưa phải xác minh nông học; replay không chứng minh sensor phần
+cứng; chưa có user study. Mọi mở rộng hoặc tối ưu cần giữ các contract và gate.

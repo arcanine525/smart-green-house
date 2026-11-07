@@ -2,8 +2,8 @@
 
 `GREENHOUSE_BACKEND=postgres|clickhouse` chọn backend cho toàn bộ dashboard.
 CLI nhận cùng biến môi trường và cho phép ghi đè bằng `--backend`. Mặc định
-vẫn là PostgreSQL trong giai đoạn candidate; chuyển mặc định và rollback thuộc
-gate cutover riêng. Không có fallback từ ClickHouse sang PostgreSQL.
+là **ClickHouse** sau [cutover đã kiểm](clickhouse-cutover-rollback.md). PostgreSQL
+chạy bằng `compose.postgres.yaml` và project riêng khi cần đối chứng/rollback. Không có fallback từ ClickHouse sang PostgreSQL.
 
 ## Dashboard
 
@@ -19,8 +19,12 @@ nạp mới. Dòng không có thời gian vẫn có nhãn và được giữ tro
 Historical filters truyền publication, cycle và ngày giữa các màn hình tương
 thích. Namespace là backend + host + port + database + user, không có password.
 Khi namespace thay đổi, UI xóa widget, historical context và write intent cũ.
-Connection mới mỗi action; ClickHouse chỉ tái dùng kết quả verify immutable
-publication/load trong cùng action rồi bỏ khi close. Evaluation cache của
+Connection mới mỗi action. UI bật bounded process proof cache (tối đa hai entries)
+cho immutable publication/load; guard namespace/server identity, table/schema/parts,
+pending mutation và cấu hình vẫn kiểm ở mỗi action. INSERT, merge, mutation hoặc
+recreate làm proof bị invalidate; không tái dùng business result để bỏ validation.
+Command writer không bật read proof cache. Cold proof phải đọc/verify lại, có thể
+mất vài phút. Evaluation cache riêng của
 climate/drain còn ghim namespace, publication, scope, config và rule content.
 Client dùng cho command ghi không bật action cache.
 
@@ -105,7 +109,7 @@ lịch sử có provenance, không phải giá thị trường hiện tại.
 
 Stream vẫn dùng `stream --backend clickhouse` và immutable replay config như
 [hướng dẫn sensor](clickhouse-sensor.md). Parser chính luôn forward backend
-tường minh sang stream, kể cả khi ENV mặc định PostgreSQL. `simulate`, `collect`,
+tường minh sang stream, kể cả khi ENV chọn PostgreSQL. `simulate`, `collect`,
 snapshot/ingest/inventory độc lập DB, giữ nguyên CLI hiện có.
 
 ## Kiểm chứng

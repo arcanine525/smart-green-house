@@ -11,7 +11,14 @@ Mỗi báo cáo ghi phạm vi, dữ liệu, điều kiện chạy và giới h�
 | BR-05 | [Thu hoạch](br_05.md) | Sản lượng, tỷ lệ loại B và completeness |
 | BR-06 | [Chi phí](br_06.md) | Baseline tariff và scenario |
 
-## Kiến trúc và hiệu năng
+## ClickHouse mặc định — bằng chứng hiện hành
+
+- [Full parity](clickhouse-parity.md): sáu BR,96CSV,30lineage,67.829episodes và raw oracle.
+- [Engine benchmark](clickhouse-performance.md): caps/workload cố định; PG nhanh hơn warm, CH active footprint nhỏ hơn.
+- [Offline/restore](clickhouse-local-repro.md), [walkthrough/acceptance](clickhouse-acceptance.md).
+- [Cutover và rollback hai chiều](clickhouse-cutover.md): config/scenario/correction/replay và durable journal.
+
+## Baseline PostgreSQL, kiến trúc và hiệu năng
 
 - [Chạy lại local](local-repro.md): full AGC trên clone riêng, test offline, backup/restore sáu volume và replay AGC thật có giới hạn.
 
