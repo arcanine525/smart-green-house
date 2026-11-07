@@ -17,13 +17,25 @@ def adopt_publication(state, widget_key, options, warn):
     if not pending:
         return
     old = pending['values']
+    if pending.get('publication_applied'):
+        # A failed pin may stop rendering before remember() consumes the
+        # transfer. A later explicit selection must still be able to recover.
+        selected = state.get(widget_key)
+        if selected is None or any(getattr(selected, key, None) != old[key]
+                                   for key in ('publication_id', 'scope_id', 'snapshot_id')):
+            state[PENDING] = None
+        return
     found = next((item for item in options if item.publication_id == old['publication_id']
                   and item.scope_id == old['scope_id'] and item.snapshot_id == old['snapshot_id']), None)
     if found is None:
+        # Consume an unavailable transfer once. Keeping it pending resets the
+        # user's selector on every rerun if the default publication also fails.
+        state[PENDING] = None
         state.pop(widget_key, None)
         warn('Publication trước không có ở màn hình này; hãy chọn lại scope và kiểm tra version.')
         return
     state[widget_key] = found
+    pending['publication_applied'] = True
     pending['publication_matched'] = True
 
 

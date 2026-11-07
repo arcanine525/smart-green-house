@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "owner_uid": 10001,
+  "owner_gid": 10001,
+  "mode": "0640",
+  "relative_symlink_exact": true,
+  "nonempty_restore_refused": true
+}

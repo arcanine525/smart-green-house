@@ -2,13 +2,54 @@ import os
 from datetime import date
 from pathlib import Path
 import unittest
+from unittest.mock import patch
+from uuid import uuid4
 import test_threshold as fixtures
 
 
 @unittest.skipUnless(os.environ.get('GREENHOUSE_CH_UI_TEST')=='1','UI image required')
 class ThresholdUITest(unittest.TestCase):
-    setUp=fixtures.ThresholdTest.setUp
+    def setUp(self):
+        # UI discovery scans every published scope. Fault-injection fixtures in
+        # other tests must not select a corrupt default before this test starts.
+        from greenhouse.clickhouse.client import Client, ClickHouseSettings
+        admin=Client(ClickHouseSettings.from_env());database='threshold_ui_'+uuid4().hex
+        admin.execute('CREATE DATABASE '+database)
+        self.addCleanup(admin.execute,'DROP DATABASE '+database+' SYNC')
+        environment=patch.dict(os.environ,{'CH_DATABASE':database})
+        environment.start();self.addCleanup(environment.stop)
+        fixtures.ThresholdTest.setUp(self)
+
     prepare=fixtures.ThresholdTest.prepare
+
+    def test_missing_transferred_publication_allows_recovery_from_invalid_default(self):
+        from streamlit.testing.v1 import AppTest
+        from greenhouse.clickhouse.repository import Repository
+        from greenhouse.clickhouse.water_run import run
+        # A water-only publication is transferred into a screen where it is
+        # unavailable. The first climate option is deliberately corrupt, while
+        # the user's explicit replacement is valid. Recovery must remain usable.
+        self.scope='000-water'
+        run(self.client,self.root,self.raw,self.root/'output',self.scope,self.workflow,self.config)
+        fixtures.ThresholdTest.setUp(self);self.scope='aaa-corrupt'
+        bad,*_=self.prepare()
+        row=self.client.query("SELECT * FROM threshold_measure WHERE scope_id={scope:String} AND publication_id={pub:String} AND bundle='climate' LIMIT 1",
+            {'scope':self.scope,'pub':bad['publication_id']})[0]
+        Repository(self.client,self.root)._insert('threshold_measure',[dict(row,value_exact='999',value_decimal='999')])
+        fixtures.ThresholdTest.setUp(self);self.scope='zzz-valid'
+        self.prepare()
+        previous=dict(os.environ)
+        self.addCleanup(lambda:(os.environ.clear(),os.environ.update(previous)))
+        os.environ.update(GREENHOUSE_BACKEND='clickhouse',GREENHOUSE_RAW_DIR=str(self.raw),GREENHOUSE_CH_COORDINATOR=str(self.root))
+        app=AppTest.from_file(str(Path(__file__).resolve().parents[2]/'src/greenhouse/app/home.py'),default_timeout=180).run()
+        app.radio(key='screen_choice').set_value('🌡️ Khí hậu (BR-01)').run()
+        self.assertTrue(app.error, 'Corrupt default must still fail closed')
+        index=next(i for i,v in enumerate(app.selectbox(key='clim_pub_choice').options) if self.scope in v)
+        app.selectbox(key='clim_pub_choice').select_index(index).run()
+        self.assertEqual(app.selectbox(key='clim_pub_choice').value.scope_id,self.scope)
+        self.assertFalse(app.exception,[e.message for e in app.exception])
+        self.assertFalse(app.error,[e.value for e in app.error])
+        self.assertIsNotNone(app.date_input(key='clim_window'))
 
     def test_valid_physical_retry_during_pin_still_renders_climate_filters(self):
         from streamlit.testing.v1 import AppTest

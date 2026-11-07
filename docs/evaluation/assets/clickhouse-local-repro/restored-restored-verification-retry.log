@@ -1,0 +1,190 @@
+{"stage": "restored-verification-retry", "preflight_host_free_bytes": 4818210816, "enforced_headroom_gib": 3, "helpers_serialized": true}
+ Container gh-ch-repro-20261107032510-restored-restored-verification-retry Creating 
+ Container gh-ch-repro-20261107032510-restored-restored-verification-retry Created 
+{"status": "passed", "mode": "physical", "exact_configuration_versions": 302, "explicitly_mapped_versions": 0, "scenario_versions": 175}
+2026-11-07 04:19:51.379 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-07 04:19:53.193 The widget with key "clim_window" was created with a default value but also had its value set via the Session State API.
+Stack (most recent call last):
+  File "/usr/local/lib/python3.12/threading.py", line 1032, in _bootstrap
+    self._bootstrap_inner()
+  File "/usr/local/lib/python3.12/threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "/usr/local/lib/python3.12/threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/local/lib/python3.12/site-packages/streamlit/testing/v1/local_script_runner.py", line 144, in _run_script_thread
+    super()._run_script_thread()
+  File "/usr/local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 436, in _run_script_thread
+    self._run_script(request.rerun_data)
+  File "/usr/local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 949, in _run_script
+    ) = exec_func_with_error_handling(code_to_exec, ctx)
+  File "/usr/local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 136, in exec_func_with_error_handling
+    result = func()
+  File "/usr/local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 924, in code_to_exec
+    exec(code, module.__dict__)  # noqa: S102
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/app/home.py", line 357, in <module>
+    render(connection)
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/app/home.py", line 93, in render
+    return climate_screen.render(connection, settings, publications)
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/app/climate.py", line 167, in render
+    window = st.date_input('Khoảng ngày (cả hai đầu, theo ngày nguồn)', key='clim_window',
+  File "/usr/local/lib/python3.12/site-packages/streamlit/runtime/metrics_util.py", line 725, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/streamlit/elements/widgets/time_widgets.py", line 2018, in date_input
+    return self._date_input(
+  File "/usr/local/lib/python3.12/site-packages/streamlit/elements/widgets/time_widgets.py", line 2063, in _date_input
+    check_widget_policies(
+  File "/usr/local/lib/python3.12/site-packages/streamlit/elements/lib/policies.py", line 146, in check_widget_policies
+    check_session_state_rules(
+  File "/usr/local/lib/python3.12/site-packages/streamlit/elements/lib/policies.py", line 90, in check_session_state_rules
+    _LOGGER.warning(
+{
+  "kind": "automated-ui-walkthrough",
+  "human_participants": 0,
+  "database_read_only": true,
+  "backend": "clickhouse",
+  "publication_id": "52b72d65384944798dd7981c0a46615b",
+  "scope_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical",
+  "snapshot_id": "agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68",
+  "cycle_id": "agc-cycle-Automatoes",
+  "compartment_id": "Automatoes",
+  "window_inclusive": [
+    "2020-03-02",
+    "2020-03-03"
+  ],
+  "raw_water_oracle": {
+    "source": "Automatoes/Resources.csv",
+    "sha256": "8b3d980fc7b3646c746dfc577af59159a49eef31770b84898502ecc5ef1d45f5",
+    "rows": 2,
+    "irrigation_l_m2": "9.36",
+    "drain_l_m2": "3.89",
+    "paired_ratio_percent": "41.55982905982905982905982906",
+    "assumed_area_m2": "62.5",
+    "energy_kwh": "308.0781250416666666666666667",
+    "historical_cost_eur": "17.600067710000",
+    "tariff": {
+      "heat_eur_mj": "0.0083",
+      "high_eur_kwh": "0.08",
+      "low_eur_kwh": "0.04"
+    }
+  },
+  "total_elapsed_seconds": 32.669,
+  "screens": [
+    {
+      "screen": "climate",
+      "elapsed_seconds": 1.78,
+      "metrics": {
+        "Nhiệt độ out (giờ quan sát được)": "NULL",
+        "Nhiệt độ coverage": "0,00 %",
+        "CO₂ out (giờ quan sát được)": "NULL",
+        "CO₂ coverage": "0,00 %",
+        "OR lệch (giờ, hợp lệ chung)": "NULL",
+        "OR lệch %": "NULL",
+        "Coverage giao chung": "0,00 %"
+      },
+      "download_count": 4
+    },
+    {
+      "screen": "water",
+      "elapsed_seconds": 0.268,
+      "metrics": {
+        "Irrigation observed": "9,36 L/m²",
+        "Drain observed": "3,89 L/m²",
+        "Tỷ lệ drain (paired)": "41,56 %",
+        "Độ phủ paired": "100,00 %"
+      },
+      "download_count": 3
+    },
+    {
+      "screen": "drain",
+      "elapsed_seconds": 1.169,
+      "metrics": {
+        "EC ngoài dải (phút)": "NULL",
+        "EC ngoài dải %": "NULL",
+        "EC coverage %": "0,00",
+        "EC suspect (phút)": "0,00",
+        "PH ngoài dải (phút)": "NULL",
+        "PH ngoài dải %": "NULL",
+        "PH coverage %": "0,00",
+        "PH suspect (phút)": "0,00",
+        "OR ngoài dải (phút, hợp lệ chung)": "NULL",
+        "OR ngoài dải %": "NULL",
+        "Coverage giao chung %": "0,00",
+        "Tưới nguồn (L/m², ngày tính một lần)": "9,36",
+        "Drain nguồn (L/m², ngày tính một lần)": "3,89",
+        "Coverage nước ghép ngày %": "100,00"
+      },
+      "download_count": 6
+    },
+    {
+      "screen": "energy",
+      "elapsed_seconds": 0.452,
+      "metrics": {
+        "Năng lượng (kWh)": "308.078",
+        "Sản lượng A (kg)": "0.000",
+        "kWh/kg A": "NULL",
+        "Coverage năng lượng (%)": "100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA": "24.867"
+      },
+      "download_count": 6
+    },
+    {
+      "screen": "harvest",
+      "elapsed_seconds": 0.289,
+      "metrics": {
+        "A observed": "0,00 kg/m²",
+        "B observed": "0,00 kg/m²",
+        "Tổng paired A+B": "— kg/m²",
+        "Share B (paired)": "— %",
+        "Paired A (kg/m²)": "—",
+        "Paired B (kg/m²)": "—",
+        "Share A (paired)": "— %"
+      },
+      "download_count": 5
+    },
+    {
+      "screen": "cost",
+      "elapsed_seconds": 3.748,
+      "metrics": {
+        "Tổng chi phí (EUR)": "17.60 EUR",
+        "Chi phí trên diện tích (EUR/m²)": "0.28 EUR/m²",
+        "Coverage định giá (%)": "100.0%",
+        "Coverage lượng (%)": "100.0%"
+      },
+      "download_count": 7
+    },
+    {
+      "screen": "overview",
+      "elapsed_seconds": 0.187,
+      "metrics": {},
+      "download_count": 0
+    },
+    {
+      "screen": "quality",
+      "elapsed_seconds": 3.598,
+      "metrics": {},
+      "download_count": 0
+    }
+  ],
+  "configured_rule_and_scenario_tasks": {
+    "BR-01": "#1 · temperature · gốc 1180,00p (2020-05-21T11:45:00 → 2020-05-22T07:25:00) · high · peak 9,20 @ 2020-05-21T21:55:00 · trong báo cáo 1180,00p",
+    "BR-03": "ec · 80400 phút gốc · 2019-12-31T12:35:00 → 2020-02-25T08:35:00 · trong kỳ 80400 phút · peak 4.5 @ 2020-01-19T19:10:00 · high",
+    "BR-05": {
+      "A observed": "0,05 kg/m²",
+      "B observed": "0,10 kg/m²",
+      "Tổng paired A+B": "0,15 kg/m²",
+      "Share B (paired)": "66,67 %",
+      "Paired A (kg/m²)": "0,05",
+      "Paired B (kg/m²)": "0,10",
+      "Share A (paired)": "33,33 %"
+    },
+    "BR-06": {
+      "Baseline (EUR)": "17.60 EUR",
+      "Kịch bản (EUR)": "20.84 EUR",
+      "Kịch bản (EUR/m²)": "0.33 EUR/m²",
+      "Priced / Expected Days": "2 / 2"
+    }
+  }
+}
+2026-11-07 04:20:28.196 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+{"status": "passed", "replay_id": "agc-restore-ff62a380f978", "publication_id": "d79e77c34cdb89077a9668e3da540c5e498e776ed21671375cbda73439894f44", "accepted_events": 30, "complete": true, "climate_rule": "climate-demo-b01:Automatoes:v1", "drain_rule": "drain-demo-b03:Automatoes:v1", "charts": 4, "csv_export_available": true}
+{"status": "passed", "mode": "physical", "historical_screens": 8, "custom_drain_profile": true, "custom_cost_scenario": true, "replay_ui": true}

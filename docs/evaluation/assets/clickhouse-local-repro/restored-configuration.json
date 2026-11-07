@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "backend": "clickhouse",
+  "mode": "physical",
+  "archive_sha256": "ad4c5cb93978313a4f3b690676709156fb85e91d19be6d23c83ac4c842b88836",
+  "source_publication": "52b72d65384944798dd7981c0a46615b",
+  "target_publication": "52b72d65384944798dd7981c0a46615b",
+  "exact_configuration_versions": 302,
+  "explicitly_mapped_versions": 0,
+  "scenario_versions": 175,
+  "all_scenario_fields_preserved_except_explicit_physical_mapping": true,
+  "original_local_receipt_sha256": "2d9b988b59d5f50793bbc2f1409d9ff9f1d115e4e11df0527518a5dc72cefe7a"
+}

@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "backend": "clickhouse",
+  "mode": "raw-ready-files-new-checkpoint",
+  "replay_id": "agc-restore-ff62a380f978",
+  "publication_id": "33415da46b0acfd5dc87d1ed9b2eb8024eed032c81d3d62e3529197d8417171f",
+  "unique_events": 30,
+  "original_envelopes_exact": true,
+  "business_fingerprint": "7783fdfa2f63909171709dea99b43bb5e6956af13fde3dca15ce4d1030d1f675",
+  "complete": true,
+  "checksum_verified": true,
+  "progress": [
+    [
+      0,
+      66
+    ]
+  ],
+  "old_checkpoint_used": false,
+  "deliveries": 66,
+  "batches": 1,
+  "original_local_receipt_sha256": "e1126262e7ba81e5eed25b59f61e8835d6423f11985d72dba6866becc1cfc9ad"
+}

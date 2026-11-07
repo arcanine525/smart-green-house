@@ -1,0 +1,21 @@
+ Container gh-ch-repro-20261107032510-tests-ch-ui-test-run-5d9757d1e312 Creating 
+ Container gh-ch-repro-20261107032510-tests-ch-ui-test-run-5d9757d1e312 Created 
+test_missing_transferred_publication_allows_recovery_from_invalid_default (test_threshold_ui.ThresholdUITest.test_missing_transferred_publication_allows_recovery_from_invalid_default) ... 2026-11-07 03:42:50.716 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+FAIL
+
+======================================================================
+FAIL: test_missing_transferred_publication_allows_recovery_from_invalid_default (test_threshold_ui.ThresholdUITest.test_missing_transferred_publication_allows_recovery_from_invalid_default)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/tests/clickhouse/test_threshold_ui.py", line 49, in test_missing_transferred_publication_allows_recovery_from_invalid_default
+    self.assertEqual(app.selectbox(key='clim_pub_choice').value.scope_id,self.scope)
+AssertionError: 'aaa-corrupt' != 'zzz-valid'
+- aaa-corrupt
++ zzz-valid
+
+
+----------------------------------------------------------------------
+Ran 1 test in 1.519s
+
+FAILED (failures=1)
+

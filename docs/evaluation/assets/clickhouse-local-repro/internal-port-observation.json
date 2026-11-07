@@ -1,0 +1,24 @@
+{
+  "container": "gh-ch-repro-20261107032510-ch-web-1",
+  "configured_bindings": {
+    "8501/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "18582"
+      }
+    ]
+  },
+  "actual_ports": {
+    "8501/tcp": []
+  },
+  "networks": [
+    {
+      "name": "gh-ch-repro-20261107032510_backend",
+      "internal": true
+    },
+    {
+      "name": "gh-ch-repro-20261107032510_frontend",
+      "internal": true
+    }
+  ]
+}

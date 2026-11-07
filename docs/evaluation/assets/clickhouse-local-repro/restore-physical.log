@@ -1,0 +1,29 @@
+{"status": "restore_passed", "archive": "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/backup/bind-state-inputs.tar.gz", "bytes": 135484951, "sha256": "01c208aa0a514922c15f26f552842204fd55cd0321b4e8615582bd9a9eb26595"}
+{"prepared": "gh-ch-repro-20261107032510-restored", "state": "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/restored/state", "data": "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/restored/data"}
+ Volume gh-ch-repro-20261107032510-restored_ch_logs Creating 
+ Volume gh-ch-repro-20261107032510-restored_ch_data Creating 
+ Network gh-ch-repro-20261107032510-restored_backend Creating 
+ Volume gh-ch-repro-20261107032510-restored_ch_logs Creating 
+ Network gh-ch-repro-20261107032510-restored_backend Creating 
+ Volume gh-ch-repro-20261107032510-restored_ch_data Creating 
+ Volume gh-ch-repro-20261107032510-restored_ch_broker Creating 
+ Volume gh-ch-repro-20261107032510-restored_ch_broker Creating 
+ Volume gh-ch-repro-20261107032510-restored_ch_logs Created 
+ Volume gh-ch-repro-20261107032510-restored_ch_logs Created 
+ Volume gh-ch-repro-20261107032510-restored_ch_data Created 
+ Volume gh-ch-repro-20261107032510-restored_ch_data Created 
+ Volume gh-ch-repro-20261107032510-restored_ch_broker Created 
+ Volume gh-ch-repro-20261107032510-restored_ch_broker Created 
+ Network gh-ch-repro-20261107032510-restored_backend Created 
+ Network gh-ch-repro-20261107032510-restored_backend Created 
+ Container gh-ch-repro-20261107032510-restored-clickhouse-1 Creating 
+ Container gh-ch-repro-20261107032510-restored-ch-broker-1 Creating 
+ Container gh-ch-repro-20261107032510-restored-clickhouse-1 Created 
+ Container gh-ch-repro-20261107032510-restored-ch-broker-1 Created 
+{"status": "restored", "volume": "gh-ch-repro-20261107032510-restored_ch_data", "archive": "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/backup/ch_data.tar.gz"}
+{"status": "restored", "volume": "gh-ch-repro-20261107032510-restored_ch_logs", "archive": "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/backup/ch_logs.tar.gz"}
+{"status": "restored", "volume": "gh-ch-repro-20261107032510-restored_ch_broker", "archive": "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/backup/ch_broker.tar.gz"}
+ Container gh-ch-repro-20261107032510-restored-clickhouse-1 Starting 
+ Container gh-ch-repro-20261107032510-restored-clickhouse-1 Started 
+ Container gh-ch-repro-20261107032510-restored-clickhouse-1 Waiting 
+ Container gh-ch-repro-20261107032510-restored-clickhouse-1 Healthy 

@@ -1,0 +1,70 @@
+ Container gh-ch-repro-20261107032510-restored-restored-verification Creating 
+ Container gh-ch-repro-20261107032510-restored-restored-verification Created 
+{"status": "passed", "mode": "physical", "exact_configuration_versions": 302, "explicitly_mapped_versions": 0, "scenario_versions": 175}
+2026-11-07 04:04:57.682 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-07 04:05:01.697 The widget with key "clim_window" was created with a default value but also had its value set via the Session State API.
+Stack (most recent call last):
+  File "/usr/local/lib/python3.12/threading.py", line 1032, in _bootstrap
+    self._bootstrap_inner()
+  File "/usr/local/lib/python3.12/threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "/usr/local/lib/python3.12/threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/local/lib/python3.12/site-packages/streamlit/testing/v1/local_script_runner.py", line 144, in _run_script_thread
+    super()._run_script_thread()
+  File "/usr/local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 436, in _run_script_thread
+    self._run_script(request.rerun_data)
+  File "/usr/local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 949, in _run_script
+    ) = exec_func_with_error_handling(code_to_exec, ctx)
+  File "/usr/local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 136, in exec_func_with_error_handling
+    result = func()
+  File "/usr/local/lib/python3.12/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 924, in code_to_exec
+    exec(code, module.__dict__)  # noqa: S102
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/app/home.py", line 357, in <module>
+    render(connection)
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/app/home.py", line 93, in render
+    return climate_screen.render(connection, settings, publications)
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/app/climate.py", line 167, in render
+    window = st.date_input('Khoảng ngày (cả hai đầu, theo ngày nguồn)', key='clim_window',
+  File "/usr/local/lib/python3.12/site-packages/streamlit/runtime/metrics_util.py", line 725, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+  File "/usr/local/lib/python3.12/site-packages/streamlit/elements/widgets/time_widgets.py", line 2018, in date_input
+    return self._date_input(
+  File "/usr/local/lib/python3.12/site-packages/streamlit/elements/widgets/time_widgets.py", line 2063, in _date_input
+    check_widget_policies(
+  File "/usr/local/lib/python3.12/site-packages/streamlit/elements/lib/policies.py", line 146, in check_widget_policies
+    check_session_state_rules(
+  File "/usr/local/lib/python3.12/site-packages/streamlit/elements/lib/policies.py", line 90, in check_session_state_rules
+    _LOGGER.warning(
+Traceback (most recent call last):
+  File "/repro/verify_restored.py", line 21, in <module>
+    ui = runpy.run_path('/repro/check_ui.py', run_name='__main__')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/repro/check_ui.py", line 143, in <module>
+    options = app.selectbox(key='cost_scenario_select').options
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/streamlit/testing/v1/element_tree.py", line 590, in __call__
+    raise KeyError(key)
+KeyError: 'cost_scenario_select'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/weakref.py", line 666, in _exitfunc
+    f()
+  File "/usr/local/lib/python3.12/weakref.py", line 590, in __call__
+    return info.func(*info.args, **(info.kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/tempfile.py", line 939, in _cleanup
+    cls._rmtree(name, ignore_errors=ignore_errors)
+  File "/usr/local/lib/python3.12/tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "/usr/local/lib/python3.12/shutil.py", line 759, in rmtree
+    _rmtree_safe_fd(stack, onexc)
+  File "/usr/local/lib/python3.12/shutil.py", line 703, in _rmtree_safe_fd
+    onexc(func, path, err)
+  File "/usr/local/lib/python3.12/shutil.py", line 662, in _rmtree_safe_fd
+    os.rmdir(name, dir_fd=dirfd)
+OSError: [Errno 30] Read-only file system: '/tmp/tmp2qo4km2m'
+time="2026-11-07T11:05:55+07:00" level=error msg="Error waiting for container: driver \"overlay2\" failed to remove root filesystem: unlinkat /var/lib/docker/overlay2/b05fb28290ee745c94eba4aab1a78b8d955bedaf93b8aef272766d4d16eee5b2/diff/state: read-only file system"
+

@@ -1,1 +1,3 @@
 tests/fixtures/agc_synthetic/**/*.csv -text
+# Preserve raw command-output bytes, including Compose progress whitespace.
+/docs/evaluation/assets/clickhouse-local-repro/*.log -whitespace

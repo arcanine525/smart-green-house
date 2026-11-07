@@ -1,0 +1,93 @@
+{
+  "project": "gh-ch-repro-20261107032510",
+  "status": "passed",
+  "host_access": "loopback Docker-exec stdio tunnel",
+  "health": "ok",
+  "html_status": 200,
+  "networks": [
+    {
+      "name": "gh-ch-repro-20261107032510_backend",
+      "internal": true
+    },
+    {
+      "name": "gh-ch-repro-20261107032510_frontend",
+      "internal": true
+    }
+  ],
+  "images": {
+    "processing": "sha256:22967e2cab329642962104b9b14a34611912e2b8dcc86703fc80ac6f612e8b92",
+    "ui": "sha256:7ae6287d2b008c000ec58f399fe0616eb788e969969347aaa58d24d204695605",
+    "client": "sha256:d02b1210e4196b1f5f27e1c20fe0f78bb955195d0bcfef8f5b5be774b4ffa3a7"
+  },
+  "resources_mounts": [
+    {
+      "container": "gh-ch-repro-20261107032510-clickhouse-1",
+      "cpu_nano": 1000000000,
+      "memory_bytes": 2147483648,
+      "mounts": [
+        {
+          "source": "/var/lib/docker/volumes/gh-ch-repro-20261107032510_ch_data/_data",
+          "destination": "/var/lib/clickhouse",
+          "rw": true,
+          "type": "volume"
+        },
+        {
+          "source": "/var/lib/docker/volumes/gh-ch-repro-20261107032510_ch_logs/_data",
+          "destination": "/var/log/clickhouse-server",
+          "rw": true,
+          "type": "volume"
+        },
+        {
+          "source": "/host_mnt/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/checkout/docker/clickhouse/local.xml",
+          "destination": "/etc/clickhouse-server/config.d/local.xml",
+          "rw": false,
+          "type": "bind"
+        }
+      ]
+    },
+    {
+      "container": "gh-ch-repro-20261107032510-ch-broker-1",
+      "cpu_nano": 100000000,
+      "memory_bytes": 134217728,
+      "mounts": [
+        {
+          "source": "/var/lib/docker/volumes/gh-ch-repro-20261107032510_ch_broker/_data",
+          "destination": "/mosquitto/data",
+          "rw": true,
+          "type": "volume"
+        },
+        {
+          "source": "/var/lib/docker/volumes/26e08b3151148b757e3340c71189f6a8fb575210fa004a554d12756bc0bb9efa/_data",
+          "destination": "/mosquitto/log",
+          "rw": true,
+          "type": "volume"
+        },
+        {
+          "source": "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/checkout/docker/mosquitto/mosquitto.conf",
+          "destination": "/mosquitto/config/mosquitto.conf",
+          "rw": false,
+          "type": "bind"
+        }
+      ]
+    },
+    {
+      "container": "gh-ch-repro-20261107032510-ch-app-1",
+      "cpu_nano": 1000000000,
+      "memory_bytes": 1610612736,
+      "mounts": [
+        {
+          "source": "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/state",
+          "destination": "/candidate",
+          "rw": true,
+          "type": "bind"
+        },
+        {
+          "source": "/Users/hiep.le/Downloads/project/internal/data-eng/tmp/clickhouse-repro/20261107032510/checkout/data/raw",
+          "destination": "/data/raw",
+          "rw": false,
+          "type": "bind"
+        }
+      ]
+    }
+  ]
+}

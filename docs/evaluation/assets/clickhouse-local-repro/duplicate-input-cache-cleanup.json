@@ -1,0 +1,16 @@
+{
+  "removed": [
+    {
+      "removed_own_duplicate": "checkout/data",
+      "bytes": 220248962
+    },
+    {
+      "removed_own_duplicate": "state/output",
+      "bytes": 91426212
+    }
+  ],
+  "rebuilt_raw_zip_copy_verified_against_archived_file_inventory": true,
+  "restored_output_copy_verified": true,
+  "full_backup_kept": true,
+  "original_workspace_data_untouched": true
+}

@@ -1,0 +1,7 @@
+{
+  "removed_project": "gh-ch-repro-20261107032510-rebuilt",
+  "reason": "Failed incomplete derived raw rebuild; no complete publication; reset only own disposable attempt",
+  "input_archives_retained": true,
+  "failure_log_retained": true,
+  "original_services_or_volumes_removed": false
+}

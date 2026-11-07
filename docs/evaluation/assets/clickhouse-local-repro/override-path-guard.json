@@ -1,0 +1,5 @@
+{
+  "status": "passed",
+  "actual_restored_and_rebuilt_overrides_unchanged": true,
+  "project_name_inside_mount_path_preserved": true
+}

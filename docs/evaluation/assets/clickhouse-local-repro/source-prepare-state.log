@@ -1,0 +1,19 @@
+ Container gh-ch-repro-20261107032510-prepare-state Creating 
+ Container gh-ch-repro-20261107032510-prepare-state Created 
+{"status": "imported", "scenario_versions": 174, "inserted": 174, "reused": 0, "source_metadata_hash": "f0731bf316455b6a8e4c0dbb7bce1f66c262c1946dc43df0273465bd975d72a1", "mapping_hash": "1036cdb0f724d47f5454bd34c571ac77d7c4ca279fa2cc1321dbbf8f9f7c145a", "source_publication": "892b4cd58cdf4d099510974d91fa64ab", "target_publication": "52b72d65384944798dd7981c0a46615b"}
+{"status": "passed", "backend": "clickhouse", "baseline_eur": "17.600067710000", "scenario_eur": "20.8407343770000"}
+Traceback (most recent call last):
+  File "/repro/prepare_state.py", line 15, in <module>
+    runpy.run_path('/repro/agc_sensor.py', run_name='__main__')
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/repro/agc_sensor.py", line 238, in <module>
+    {'seed':seed,'restore':restore,'rebuild':rebuild}[sys.argv[1]]()
+  File "/repro/agc_sensor.py", line 94, in seed
+    source = Settings.from_env().raw_dir/'agc-2nd-2019'/AGC_SHA/'Automatoes/GreenhouseClimate.csv'
+             ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/settings.py", line 25, in from_env
+    raise ValueError("Thiếu cấu hình: " + ", ".join(missing))
+ValueError: Thiếu cấu hình: PGHOST, PGDATABASE, PGUSER, PGPASSWORD
+

@@ -1,0 +1,26 @@
+ Container gh-ch-repro-20261107032510-rebuilt-raw-rebuild Creating 
+ Container gh-ch-repro-20261107032510-rebuilt-raw-rebuild Created 
+{"stage": "native_rebuild_inputs_verified", "backend": "clickhouse", "archive_sha256": "ad4c5cb93978313a4f3b690676709156fb85e91d19be6d23c83ac4c842b88836", "configuration_versions_restored": 126, "source_publication": "52b72d65384944798dd7981c0a46615b"}
+Traceback (most recent call last):
+  File "/repro/native_state.py", line 204, in <module>
+    main()
+  File "/repro/native_state.py", line 200, in main
+    {'export': export, 'rebuild': rebuild, 'import-scenarios': import_scenarios}[args.mode](args)
+  File "/repro/native_state.py", line 115, in rebuild
+    result = run(client, COORDINATOR, args.raw, STATE / 'output', source.scope_id,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/energy_run.py", line 66, in run
+    result=load_snapshot(client,coordinator,raw,output,scope,kinds={'Resources','Production','GreenhouseClimate'},climate_window=threshold_config.get('climate_window'))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/load.py", line 98, in load_snapshot
+    canonical=repo.canonical_records(scope,revision_ids=membership)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/repository.py", line 263, in canonical_records
+    selected_keys.add(key);found.add(row['revision_id']);selected.append(row)
+                                                         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/greenhouse/clickhouse/rows.py", line 28, in append
+    self._file.write(data);self._offsets.append(self._offsets[-1]+len(data))
+    ^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 30] Read-only file system
+time="2026-11-07T11:05:55+07:00" level=error msg="Error waiting for container: driver \"overlay2\" failed to remove root filesystem: unlinkat /var/lib/docker/overlay2/c58e6e25ca19c64e28d1c85d41d5d378f8fd2a65f21f985a72b2d924dbeb5e75/diff/state: read-only file system"
+

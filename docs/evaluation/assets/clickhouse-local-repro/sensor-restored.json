@@ -1,0 +1,32 @@
+{
+  "real_agc": true,
+  "scope": "30 Automatoes source rows through MQTT and Spark",
+  "source_sha256": "3415b31b7958c735f836c7fa8f890a93020786be5c86dc2e7c42771fb0a02cd3",
+  "replay_id": "agc-restore-ff62a380f978",
+  "publication_id": "d79e77c34cdb89077a9668e3da540c5e498e776ed21671375cbda73439894f44",
+  "unique_events": 30,
+  "deliveries": 66,
+  "batches": 2,
+  "complete": true,
+  "checksum_verified": true,
+  "business_fingerprint": "7783fdfa2f63909171709dea99b43bb5e6956af13fde3dca15ce4d1030d1f675",
+  "original_envelopes_exact": true,
+  "queued_rows_received_before_retry": 28,
+  "wal_integrity": [
+    "outbox",
+    "spool"
+  ],
+  "base_rows_without_wal": 0,
+  "seed_progress": [
+    [
+      0,
+      10
+    ]
+  ],
+  "restored_progress": [
+    [
+      1,
+      56
+    ]
+  ]
+}

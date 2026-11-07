@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "removed_project": "gh-ch-repro-20261107032510",
+  "reason": "Verified physical restore and archived snapshots; free owned fixture storage before raw rebuild",
+  "all_28_tables_exact_before_removal": true,
+  "verified_archives": [
+    {
+      "archive": "ch_data.tar.gz",
+      "sha256": "ac0c246e8e6ee5efd043566af829ac65f11752d92595e3a16b00622142b121b6"
+    },
+    {
+      "archive": "ch_logs.tar.gz",
+      "sha256": "1924812ec0b26e8ce97457a89d6f42f17ec789cd7af02057bcfe259e0cf7573f"
+    },
+    {
+      "archive": "ch_broker.tar.gz",
+      "sha256": "df99d36cb36017960b3f0de6e3600662f55ba250b9aff7d0e4c39f3917602ac9"
+    }
+  ],
+  "bind_archive_sha256": "01c208aa0a514922c15f26f552842204fd55cd0321b4e8615582bd9a9eb26595",
+  "original_candidates_untouched": true
+}
