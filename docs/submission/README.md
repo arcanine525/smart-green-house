@@ -30,3 +30,16 @@ trước video và gói cuối đủ bốn sản phẩm là hai trạng thái ri
 Bằng chứng: [ma trận yêu cầu](../implementation/requirements-matrix.md),
 [correctness/benchmark/recovery](../evaluation/README.md),
 [walkthrough native](../evaluation/assets/clickhouse-walkthrough/README.md).
+
+## Kiểm trước video và kiểm cuối
+
+```bash
+python3 scripts/submission_package.py build 29 project-submit
+./scripts/check_submission.sh 29 project-submit --pre-video
+```
+
+Source ZIP và video giữ local. Checker đọc CRC/path/hash từng source file, PDF
+identity/text, checksums bảy video/21exports và Compose. Gói thiếu video tổng thể
+hoặc tên/MSSV còn placeholder chỉ được qua chế độ **pre-video**. Sau user hoàn tất,
+build lại PDFs/manifest rồi bỏ `--pre-video` để kiểm cấu trúc đủ bốn sản phẩm.
+Ghi hình, nghe/xem và kiểm nơi nộp vẫn do nhóm thực hiện, không tự nộp qua script.

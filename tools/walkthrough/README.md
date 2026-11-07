@@ -178,3 +178,24 @@ APP_URL=http://127.0.0.1:18582 node tools/walkthrough/check-harvest.cjs
 
 Helper harvest kiểm Digilog toàn vụ, tải records CSV thật và xem Reference với
 nhãn snapshot chưa hoàn chỉnh. Artifact ở tmp, không tự tạo video thuyết trình.
+
+## Diễn tập trước video, không ghi hình
+
+`rehearse_submission.cjs CONTEXT_JSON OUTPUT_DIR` dùng Playwright thật, chỉ đọc
+nghiệp vụ: sáu BR, filter/rule, exports, mở lại scenario frozen có sẵn, overview,
+quality và replay complete. Không tạo measurement/scenario mới, không sửaDOM/KPI
+và không xuất video thuyết trình. Chọn output mới để giữ mọi log lỗi trước đó.
+Context gồm `url` localhost, `publication` hiện hành, `replay`30events đã complete;
+`scenario` tùy chọn có `name`, `publication`, `version` từ scenario DTO đã nghiệm thu.
+
+```bash
+node tools/walkthrough/rehearse_submission.cjs tmp/submission-rehearsal/context.json \
+  tmp/submission-rehearsal/new-run
+```
+
+Đây là kịch bản dữ liệu AGC đã khóa: Irr10,36 sau correction diễn tập, drain3,89;
+IUACAAS episode1180phút; Digilog19/02 shareB66,67%; energy308,078/A0→NULL.
+Fresh raw deployment chưa có correction không được dùng kỳ vọng10,36; chọn
+recorder gốc/raw oracle hoặc chuẩn bị đúng correction/context rõ ràng. Nếu mở
+scenario gốc4b08 trên catalog hiện hành5d45, UI phải cảnh báo và giữ **frozen context**,
+không ngầm áp quantity/publication mới. Timing automation không phải24phút nói.

@@ -1,0 +1,17 @@
+{"step":1,"title":"BR-02: current publication and corrected two-day water","status":"passed"}
+{"step":2,"title":"BR-01: climate rule and episode over boundary","status":"passed"}
+{"step":3,"title":"BR-03: drain rule, EC/pH and export","status":"passed"}
+{"step":4,"title":"BR-05: harvest source day and paired share","status":"passed"}
+locator.scrollIntoViewIfNeeded: Timeout 180000ms exceeded.
+Call log:
+  - waiting for getByRole('combobox', { name: 'Khoang · vụ', exact: true })
+
+    at combo (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/rehearse_submission.cjs:20:12)
+    at /Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/rehearse_submission.cjs:83:82
+    at async step (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/rehearse_submission.cjs:47:21)
+    at async /Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/rehearse_submission.cjs:82:3 {
+  log: [
+    "  - waiting for getByRole('combobox', { name: 'Khoang · vụ', exact: true })"
+  ],
+  name: 'TimeoutError'
+}

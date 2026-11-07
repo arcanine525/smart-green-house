@@ -148,3 +148,19 @@ HTTP switch9,250s và KPI cold198,954s là hai mốc riêng; không gọi9s là 
 đã quay ghim publication gốc `4b08bd51c092465783304f887d766d47`; cửa sổ Automatoes
 02–03/03 có Irr9,36. Deployment sau correction có Irr10,36; không trộn số giữa pins.
 Group29/tên-MSSV placeholder theo user; T53 là video20–30phút user quay offline.
+
+## 10. Tài liệu cuối và gói trước video — T29/T30
+
+[Report và slide hiện hành](../submission/README.md) ở `project-submit/`:
+Group29, báo cáo8trangA4/slide20trang/DOCX/PPTX, script24phút; tên/MSSV là
+placeholder theo user. Nguồn identity duy nhất và hướng dẫn rebuild đã có.
+[Kiểm gói/diễn tập](../evaluation/assets/submission-package/README.md) ghi kết quả
+sourceZIP, checksum bảy video/21exports, local Compose và thao tác sáuBR/sensor
+trên publication hiện hành. BaseHEAD và per-file hashes phân biệt source ứng viên
+đã review với commit gốc; không tuyên bố ZIP là nguyên HEAD sạch khi chưa đúng.
+
+Trạng thái pre-video tách rõ khỏi đủ bốn sản phẩm: user còn điền danh tính,
+xác nhận phần trình bày thực tế, quay video tổng thể20–30phút có audio, xem/nghe
+và kiểm quyền truy cập nơi nộp. Checker mặc định từ chối danh tính placeholder/
+thiếu video; `--pre-video` chỉ chấp nhận các phần đã có. Không tạo video giả hoặc
+tự nộp bài. Timing automation không phải thời lượng thuyết trình của ba người.

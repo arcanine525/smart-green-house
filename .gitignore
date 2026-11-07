@@ -43,3 +43,6 @@ checkpoints/
 *.egg-info/
 /build/
 /dist/
+
+# Reproducible application archive stays local; code and hash manifests are tracked.
+/project-submit/*_application.zip

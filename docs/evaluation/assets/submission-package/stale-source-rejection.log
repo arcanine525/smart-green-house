@@ -1,0 +1,3 @@
+PASS: searchable PDF, group identity and placeholders policy: 29_technical_report.pdf
+PASS: searchable PDF, group identity and placeholders policy: 29_slides.pdf
+FAIL: Source changed: docs/evaluation/README.md; rebuild package

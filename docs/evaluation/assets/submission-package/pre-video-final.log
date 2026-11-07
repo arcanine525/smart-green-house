@@ -1,0 +1,7 @@
+PASS: searchable PDF, group identity and placeholders policy: 29_technical_report.pdf
+PASS: searchable PDF, group identity and placeholders policy: 29_slides.pdf
+PASS: application ZIP CRC, safe paths and 1356 source hashes
+PASS: seven native 1080p videos and 21 exports match accepted checksums
+PASS: default Compose configuration
+PRE_VIDEO_PASS: report/slides/application/walkthroughs verified; overall presentation and identity completion are handed to user.
+Identity placeholders: True; overall video: pending_user_offline. This is not a complete four-product submission.

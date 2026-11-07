@@ -33,3 +33,9 @@ Mỗi báo cáo ghi phạm vi, dữ liệu, điều kiện chạy và giới h�
 - [Benchmark Hybrid/Kimball](performance.md): pipeline mới/rerun/rebuild, storage, workload sáu BR và COPY so với INSERT; kèm số đo thô và lệnh tái lập.
 
 Benchmark trên snapshot lịch sử không thay thế đánh giá usability hoặc nghiệm thu đường sensor replay. Basis diện tích và nước vẫn phải được đọc theo nhãn `assumed_unverified` trong từng báo cáo. Bằng chứng dựng môi trường nằm trong [hướng dẫn local](../implementation/local-environment.md).
+
+## Tài liệu và bàn giao trước video
+
+- [PDF/editable/script Group29](../submission/README.md), tên/MSSV placeholder do user điền.
+- [Gói trước video và diễn tập](assets/submission-package/README.md): source hashes,
+  local walkthroughs và native UI; video thuyết trình tổng thể do user quay offline.

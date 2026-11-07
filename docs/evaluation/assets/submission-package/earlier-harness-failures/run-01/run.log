@@ -1,0 +1,28 @@
+{"step":1,"title":"BR-02: current publication and corrected two-day water","status":"passed"}
+locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByRole('option').filter({ hasText: 'climate-demo-b01:IUACAAS:v1' }).first()
+    - locator resolved to <div data-rac="" data-key="1" role="option" aria-selected="false" data-selection-mode="single" data-react-aria-pressable="true" id="react-aria2947171837-:ran:-option-1" class="st-emotion-cache-87zowo e1oobldh7" data-collection="react-aria2947171837-:rde:">…</div>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+    - element is not stable
+  - retrying click action
+    - waiting for element to be visible, enabled and stable
+  - element was detached from the DOM, retrying
+
+    at combo (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/rehearse_submission.cjs:20:65)
+    at async /Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/rehearse_submission.cjs:65:4
+    at async step (/Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/rehearse_submission.cjs:46:21)
+    at async /Users/hiep.le/Downloads/project/internal/data-eng/tools/walkthrough/rehearse_submission.cjs:63:3 {
+  log: [
+    "  - waiting for getByRole('option').filter({ hasText: 'climate-demo-b01:IUACAAS:v1' }).first()",
+    '    - locator resolved to <div data-rac="" data-key="1" role="option" aria-selected="false" data-selection-mode="single" data-react-aria-pressable="true" id="react-aria2947171837-:ran:-option-1" class="st-emotion-cache-87zowo e1oobldh7" data-collection="react-aria2947171837-:rde:">…</div>',
+    '  - attempting click action',
+    '    - waiting for element to be visible, enabled and stable',
+    '    - element is not stable',
+    '  - retrying click action',
+    '    - waiting for element to be visible, enabled and stable',
+    '  - element was detached from the DOM, retrying'
+  ],
+  name: 'TimeoutError'
+}

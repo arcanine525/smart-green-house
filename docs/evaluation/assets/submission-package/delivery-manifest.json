@@ -1,0 +1,146 @@
+{
+  "kind": "pre_video_delivery_bundle",
+  "group_id": "29",
+  "source_base_head": "ad849b9d9cc3e354d4bdc6e7cc47cd6959595d4c",
+  "source_identity": "Per-file hashes in ZIP source-manifest.json; base HEAD is not claimed as an exact clean source commit",
+  "artifacts": [
+    {
+      "file": "29_technical_report.pdf",
+      "bytes": 243477,
+      "sha256": "880c069a137992846f25cc56a2727aad4e99754edfdc7df42f251f476477f693"
+    },
+    {
+      "file": "29_slides.pdf",
+      "bytes": 148596,
+      "sha256": "28ae934cf4e2ca39348de9f6745bf490db34a40d8d26c47d80d61f57e858a206"
+    },
+    {
+      "file": "29_technical_report.docx",
+      "bytes": 67050,
+      "sha256": "bcc4cb099b1941812a33d7baf4655363ed4997dc4866ca7aec2f94045e78c650"
+    },
+    {
+      "file": "29_slides.pptx",
+      "bytes": 94506,
+      "sha256": "6bf87059c3c9d43ea80931e31dd34575a0f416784fafd15be992018e1bd28841"
+    },
+    {
+      "file": "29_video_script.md",
+      "bytes": 4706,
+      "sha256": "224d54f70fa239b1c092c1f68f0ab855da0b5430e222b7f0cf534526849485e5"
+    },
+    {
+      "file": "29_application.zip",
+      "bytes": 27306670,
+      "sha256": "3a798dd8d2a04847a39e4d49832f692a918eb617397f4cb224a18970d117d2e7"
+    },
+    {
+      "file": "README.md",
+      "bytes": 5921,
+      "sha256": "325f7c46a1fc9b38535f861a0c5f36fc19a5d0c5c1ec78b6d9b7f46ca43859df"
+    },
+    {
+      "file": "group.json",
+      "bytes": 573,
+      "sha256": "e3a4de905c8aa19a1e0d4fddb3fd5dba01d4b38cbfa654cb6fc7bf22cdd1feb0"
+    }
+  ],
+  "walkthroughs": [
+    {
+      "file": "demo-videos/clickhouse/br-01/br-01.mp4",
+      "bytes": 14441002,
+      "sha256": "af0ac3bd522ee60a0b0e21feeaa48b8511e8ddcb6414900ff2046fc4e2f0fa17",
+      "br": "01",
+      "duration_seconds": 218.64,
+      "width": 1920,
+      "height": 1080,
+      "downloads_verified": 3,
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "kind": "automated_walkthrough"
+    },
+    {
+      "file": "demo-videos/clickhouse/br-02/br-02.mp4",
+      "bytes": 9038051,
+      "sha256": "59605d5fef894e5264ab0ae8751c1e4c7a07d7dfe9dda6cd7fa4382295a38df5",
+      "br": "02",
+      "duration_seconds": 165.2,
+      "width": 1920,
+      "height": 1080,
+      "downloads_verified": 3,
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "kind": "automated_walkthrough"
+    },
+    {
+      "file": "demo-videos/clickhouse/br-03/br-03.mp4",
+      "bytes": 11131216,
+      "sha256": "91b975e18629d533103b3cf1f66990f4af041ba42c11a39349b07e7c8cfaa801",
+      "br": "03",
+      "duration_seconds": 193.44,
+      "width": 1920,
+      "height": 1080,
+      "downloads_verified": 3,
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "kind": "automated_walkthrough"
+    },
+    {
+      "file": "demo-videos/clickhouse/br-04/br-04.mp4",
+      "bytes": 7323799,
+      "sha256": "1b50686dbc03193eb2472691fe76e355db7d10e82c2422588d0a878fb14a58fc",
+      "br": "04",
+      "duration_seconds": 150.16,
+      "width": 1920,
+      "height": 1080,
+      "downloads_verified": 4,
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "kind": "automated_walkthrough"
+    },
+    {
+      "file": "demo-videos/clickhouse/br-05/br-05.mp4",
+      "bytes": 13465986,
+      "sha256": "651d22ef1090cf2f850b22fc7cbe2c27016d5c63f35fa15d5a1bda1e91ef9c74",
+      "br": "05",
+      "duration_seconds": 205.24,
+      "width": 1920,
+      "height": 1080,
+      "downloads_verified": 3,
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "kind": "automated_walkthrough"
+    },
+    {
+      "file": "demo-videos/clickhouse/br-06/br-06.mp4",
+      "bytes": 16422243,
+      "sha256": "6b96a54e9a1a2a27e4461b54b7d7701b049b6ef3770afd897b40b66971b18a50",
+      "br": "06",
+      "duration_seconds": 339.2,
+      "width": 1920,
+      "height": 1080,
+      "downloads_verified": 3,
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "kind": "automated_walkthrough"
+    },
+    {
+      "file": "demo-videos/clickhouse/sensor-replay/sensor-replay.mp4",
+      "bytes": 14884095,
+      "sha256": "778b207368f1209055b0605dd00df2277cbfb9f86578a1c4ccd7d567745c409c",
+      "br": "07",
+      "duration_seconds": 370.68,
+      "width": 1920,
+      "height": 1080,
+      "downloads_verified": 2,
+      "publication": "4b08bd51c092465783304f887d766d47",
+      "kind": "automated_walkthrough"
+    }
+  ],
+  "overall_presentation": {
+    "status": "pending_user_offline",
+    "required_minutes": [
+      20,
+      30
+    ]
+  },
+  "manual_remaining": [
+    "Fill three names/student IDs",
+    "Record and review overall presentation",
+    "Confirm actual contributions and submission channel/access"
+  ]
+}

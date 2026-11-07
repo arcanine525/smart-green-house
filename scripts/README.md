@@ -50,3 +50,12 @@ Java hoặc Spark trên host.
 - `test_clickhouse_stack.sh`: smoke client, persistence và runtime internal trên project ClickHouse mới; chuẩn bị image theo [hướng dẫn](../docs/implementation/clickhouse-local-environment.md).
 
 - `rehearse_clickhouse_water.sh`: dựng project ClickHouse riêng, nạp Resources AGC, kiểm raw oracle sáu khoang và production water UI; giữ DB/outputs đã dừng. [Chi tiết](../docs/implementation/clickhouse-water.md).
+
+## Gói bàn giao local
+
+`build_submission.sh` xuất report/slide/PDF/editable từ identity source duy nhất.
+`python3 scripts/submission_package.py build 29 project-submit` tạo sourceZIP local
+và delivery manifest; chỉ source tracked/staged được đóng gói, có per-file hashes.
+`check_submission.sh 29 project-submit --pre-video` kiểm phần đã có; bỏ flag là
+kiểm cuối, bắt buộc danh tính hoàn chỉnh và video20–30phút có audio. Cần bảy video
+walkthrough/exports local và ffprobe/Poppler/Docker; không upload qua các script.

@@ -1,0 +1,112 @@
+[
+  {
+    "title": "BR-02: current publication and corrected two-day water",
+    "seconds": 17.622,
+    "screenshot": "step-01.png",
+    "metrics": [
+      "Irrigation observed\n\n10,36 L/m²",
+      "Drain observed\n\n3,89 L/m²",
+      "Tỷ lệ drain (paired)\n\n37,55 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "title": "BR-01: climate rule and episode over boundary",
+    "seconds": 43.464,
+    "screenshot": "step-02.png",
+    "metrics": [
+      "Nhiệt độ out (giờ quan sát được)\n\n30,75",
+      "Nhiệt độ coverage\n\n100,00 %",
+      "CO₂ out (giờ quan sát được)\n\n10,00",
+      "CO₂ coverage\n\n49,65 %",
+      "OR lệch (giờ, hợp lệ chung)\n\n20,08",
+      "OR lệch %\n\n84,27",
+      "Coverage giao chung\n\n49,65 %"
+    ]
+  },
+  {
+    "title": "BR-03: drain rule, EC/pH and export",
+    "seconds": 27.541,
+    "screenshot": "step-03.png",
+    "metrics": [
+      "EC ngoài dải (phút)\n\n2880,00",
+      "EC ngoài dải %\n\n100,00",
+      "EC coverage %\n\n100,00",
+      "EC suspect (phút)\n\n0,00",
+      "PH ngoài dải (phút)\n\n1045,00",
+      "PH ngoài dải %\n\n36,28",
+      "PH coverage %\n\n100,00",
+      "PH suspect (phút)\n\n0,00",
+      "OR ngoài dải (phút, hợp lệ chung)\n\n2880,00",
+      "OR ngoài dải %\n\n100,00",
+      "Coverage giao chung %\n\n100,00",
+      "Tưới nguồn (L/m², ngày tính một lần)\n\n13,30",
+      "Drain nguồn (L/m², ngày tính một lần)\n\n8,60",
+      "Coverage nước ghép ngày %\n\n100,00"
+    ]
+  },
+  {
+    "title": "BR-05: harvest source day and paired share",
+    "seconds": 19.178,
+    "screenshot": "step-04.png",
+    "metrics": [
+      "A observed\n\n0,05 kg/m²",
+      "B observed\n\n0,10 kg/m²",
+      "Tổng paired A+B\n\n0,15 kg/m²",
+      "Share B (paired)\n\n66,67 %",
+      "Paired A (kg/m²)\n\n0,05",
+      "Paired B (kg/m²)\n\n0,10",
+      "Share A (paired)\n\n33,33 %"
+    ]
+  },
+  {
+    "title": "BR-04: energy and zero A denominator",
+    "seconds": 18.218,
+    "screenshot": "step-05.png",
+    "metrics": [
+      "Năng lượng (kWh)\n\n308.078",
+      "Sản lượng A (kg)\n\n0.000",
+      "kWh/kg A\n\nNULL",
+      "Coverage năng lượng (%)\n\n100.000",
+      "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+    ]
+  },
+  {
+    "title": "BR-06: baseline quantities and historical tariff",
+    "seconds": 204.892,
+    "screenshot": "step-06.png",
+    "metrics": [
+      "Tổng chi phí (EUR)\n\n17.60 EUR",
+      "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+      "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+      "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+    ]
+  },
+  {
+    "title": "BR-06: reopen saved scenario with explicit original frozen context",
+    "seconds": 24.228,
+    "screenshot": "step-07.png",
+    "metrics": [
+      "Tổng chi phí (EUR)\n\n17.60 EUR",
+      "Chi phí trên diện tích (EUR/m²)\n\n0.28 EUR/m²",
+      "Coverage định giá (%)\n\n100.0%\n\n2/2 ngày",
+      "Coverage lượng (%)\n\n100.0%\n\n2/2 ngày"
+    ]
+  },
+  {
+    "title": "Overview and quality on current publication",
+    "seconds": 11.411,
+    "screenshot": "step-08.png",
+    "metrics": []
+  },
+  {
+    "title": "Sensor: complete 30-event pin and source clock",
+    "seconds": 8.108,
+    "screenshot": "step-09.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n8267 s"
+    ]
+  }
+]
