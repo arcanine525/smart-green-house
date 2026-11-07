@@ -9,3 +9,7 @@ tests/fixtures/agc_synthetic/**/*.csv -text
 /docs/evaluation/assets/clickhouse-walkthrough/cold-browser-startup-first-fixed/*.log -whitespace
 # Preserve the captured server JSON response, including its terminal blank line.
 /docs/evaluation/assets/clickhouse-walkthrough/cold-fix/ui-errors-memory-peaks.json -whitespace
+
+# Preserve accepted video bundle/checksum bytes on every platform.
+/project-submit/demo-videos/clickhouse/** -text
+/project-submit/demo-videos/clickhouse/**/*.csv -whitespace

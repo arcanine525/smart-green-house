@@ -1,0 +1,198 @@
+[
+  {
+    "step": 1,
+    "title": "Mở màn hình Tưới và drain",
+    "detail": "Chọn BR ở thanh bên; các thao tác tiếp theo chạy trên bản sao dữ liệu AGC.",
+    "start_seconds": 6.39,
+    "end_seconds": 14.479,
+    "screenshot": "step-01.png",
+    "metrics": [
+      "Irrigation observed\n\n553,50 L/m²",
+      "Drain observed\n\n211,40 L/m²",
+      "Tỷ lệ drain (paired)\n\n38,19 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 2,
+    "title": "Xác nhận publication lịch sử",
+    "detail": "Một publication cố định cho bộ lọc, chỉ số, chi tiết và file xuất.",
+    "start_seconds": 14.479,
+    "end_seconds": 23.968,
+    "screenshot": "step-02.png",
+    "metrics": [
+      "Irrigation observed\n\n553,50 L/m²",
+      "Drain observed\n\n211,40 L/m²",
+      "Tỷ lệ drain (paired)\n\n38,19 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 3,
+    "title": "Chọn khoang và vụ Automatoes",
+    "detail": "Khoang/vụ xác định phạm vi phân tích; chọn lại sẽ cập nhật bộ lọc liên quan.",
+    "start_seconds": 23.969,
+    "end_seconds": 35.473,
+    "screenshot": "step-03.png",
+    "metrics": [
+      "Irrigation observed\n\n788,85 L/m²",
+      "Drain observed\n\n324,08 L/m²",
+      "Tỷ lệ drain (paired)\n\n41,08 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 4,
+    "title": "Đọc dữ liệu toàn vụ",
+    "detail": "Xem tổng tưới/drain, coverage và cảnh báo diện tích giả định.",
+    "start_seconds": 35.473,
+    "end_seconds": 42.857,
+    "screenshot": "step-04.png",
+    "metrics": [
+      "Irrigation observed\n\n788,85 L/m²",
+      "Drain observed\n\n324,08 L/m²",
+      "Tỷ lệ drain (paired)\n\n41,08 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 5,
+    "title": "Khám phá biểu đồ ngày",
+    "detail": "Di chuyển trên biểu đồ; click chú giải để ẩn/hiện một chuỗi.",
+    "start_seconds": 42.857,
+    "end_seconds": 53.791,
+    "screenshot": "step-05.png",
+    "metrics": [
+      "Irrigation observed\n\n788,85 L/m²",
+      "Drain observed\n\n324,08 L/m²",
+      "Tỷ lệ drain (paired)\n\n41,08 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 6,
+    "title": "Lọc ngày 02–03/03/2020",
+    "detail": "Nhập ngày bắt đầu và kết thúc; cả hai ngày đều thuộc cửa sổ.",
+    "start_seconds": 53.791,
+    "end_seconds": 75.912,
+    "screenshot": "step-06.png",
+    "metrics": [
+      "Irrigation observed\n\n9,36 L/m²",
+      "Drain observed\n\n3,89 L/m²",
+      "Tỷ lệ drain (paired)\n\n41,56 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 7,
+    "title": "Đối chiếu tổng và tỷ lệ paired",
+    "detail": "Tưới 9,36; drain 3,89 L/m²; tỷ lệ 41,56%; paired coverage 100%.",
+    "start_seconds": 75.912,
+    "end_seconds": 83.258,
+    "screenshot": "step-07.png",
+    "metrics": [
+      "Irrigation observed\n\n9,36 L/m²",
+      "Drain observed\n\n3,89 L/m²",
+      "Tỷ lệ drain (paired)\n\n41,56 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 8,
+    "title": "Chọn rule demo có version",
+    "detail": "Rule phục vụ minh họa kiểm tra ngưỡng; không coi là khuyến cáo nông học.",
+    "start_seconds": 83.258,
+    "end_seconds": 95.982,
+    "screenshot": "step-08.png",
+    "metrics": [
+      "Irrigation observed\n\n9,36 L/m²",
+      "Drain observed\n\n3,89 L/m²",
+      "Tỷ lệ drain (paired)\n\n41,56 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 9,
+    "title": "Đọc tổng hợp theo tuần",
+    "detail": "Tỷ lệ tuần dùng tổng drain / tổng tưới trên cùng ngày hợp lệ.",
+    "start_seconds": 95.983,
+    "end_seconds": 104.093,
+    "screenshot": "step-09.png",
+    "metrics": [
+      "Irrigation observed\n\n9,36 L/m²",
+      "Drain observed\n\n3,89 L/m²",
+      "Tỷ lệ drain (paired)\n\n41,56 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 10,
+    "title": "Chọn một ngày để xem chi tiết",
+    "detail": "Xem ngày 03/03 cùng giá trị, quality và basis đã pin.",
+    "start_seconds": 104.094,
+    "end_seconds": 118.372,
+    "screenshot": "step-10.png",
+    "metrics": [
+      "Irrigation observed\n\n9,36 L/m²",
+      "Drain observed\n\n3,89 L/m²",
+      "Tỷ lệ drain (paired)\n\n41,56 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 11,
+    "title": "Mở lineage về CSV gốc",
+    "detail": "Đọc tên file, dòng nguồn và trạng thái xác minh checksum.",
+    "start_seconds": 118.372,
+    "end_seconds": 126.404,
+    "screenshot": "step-11.png",
+    "metrics": [
+      "Irrigation observed\n\n9,36 L/m²",
+      "Drain observed\n\n3,89 L/m²",
+      "Tỷ lệ drain (paired)\n\n41,56 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 12,
+    "title": "Xuất CSV ngày",
+    "detail": "File CSV dùng đúng cửa sổ và publication đang hiển thị.",
+    "start_seconds": 126.404,
+    "end_seconds": 138.92,
+    "screenshot": "step-12.png",
+    "metrics": [
+      "Irrigation observed\n\n9,36 L/m²",
+      "Drain observed\n\n3,89 L/m²",
+      "Tỷ lệ drain (paired)\n\n41,56 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 13,
+    "title": "Xuất tổng hợp tuần và JSON",
+    "detail": "Lưu bảng tuần và kết quả có metadata để kiểm tra lại.",
+    "start_seconds": 138.921,
+    "end_seconds": 156.919,
+    "screenshot": "step-13.png",
+    "metrics": [
+      "Irrigation observed\n\n9,36 L/m²",
+      "Drain observed\n\n3,89 L/m²",
+      "Tỷ lệ drain (paired)\n\n41,56 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  },
+  {
+    "step": 14,
+    "title": "Hoàn tất BR-02",
+    "detail": "Các bước đã kiểm tra tự động. Video minh họa thao tác; không đo khả năng sử dụng của người thật.",
+    "start_seconds": 156.92,
+    "end_seconds": 164.245,
+    "screenshot": "step-14.png",
+    "metrics": [
+      "Irrigation observed\n\n9,36 L/m²",
+      "Drain observed\n\n3,89 L/m²",
+      "Tỷ lệ drain (paired)\n\n41,56 %",
+      "Độ phủ paired\n\n100,00 %"
+    ]
+  }
+]

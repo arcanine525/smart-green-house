@@ -116,8 +116,8 @@ thích immutable envelopes, exact Decimal, correction và retry.
 - [Hybrid/Kimball](docs/evaluation/kimball.md): thí nghiệm riêng trên PostgreSQL; không gộp với so sánh engine.
 - [Walkthrough](docs/evaluation/usability.md): bảy video native có 109 bước, 21 file xuất, gồm sensor MQTT/Spark thật. Đây là kiểm thử tự động, chưa có nghiên cứu người dùng.
 
-Video nằm local tại `project-submit/demo-videos/clickhouse/index.html`, không
-commit media. [Metadata/checksum](docs/evaluation/assets/clickhouse-walkthrough/README.md)
+Bộ bảy MP4 đã nghiệm thu, trang xem và assets được lưu trong Git tại
+`project-submit/demo-videos/clickhouse/index.html`. [Metadata/checksum](docs/evaluation/assets/clickhouse-walkthrough/README.md)
 và [hướng dẫn recorder](tools/walkthrough/README.md) nằm trong Git. Video gốc ghim
 publication đã nghiệm thu; các correction diễn tập sau đó có publication và
 audit riêng, không thay raw hoặc giả làm quan sát AGC gốc.
@@ -144,3 +144,8 @@ kiểm gói trước video và kiểm cuối cùng là hai trạng thái riêng.
 Giới hạn thực tế: single-node/local flock; cold proof có thể mất nhiều phút;
 raw/basis/rule chưa phải xác minh nông học; replay không chứng minh sensor phần
 cứng; chưa có user study. Mọi mở rộng hoặc tối ưu cần giữ các contract và gate.
+
+## Hướng dẫn cho coding agent
+
+Đọc [AGENTS.md](AGENTS.md) trước khi sửa project. [Trạng thái bàn giao](docs/agents/PROJECT_STATE.md)
+ghi các mốc đã nghiệm thu, publication/context cần phân biệt và phần user tự hoàn tất.

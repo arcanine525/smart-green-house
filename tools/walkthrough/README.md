@@ -67,9 +67,10 @@ backend internal; relay localhost có frontend bridge. Preparation kiểm engine
 không có credential PostgreSQL và publication native. Oracle nước/năng lượng/
 thu hoạch/chi phí được tính độc lập từ CSV đã kiểm SHA.
 
-MP4, WebM gốc, trace, ảnh và download giữ local trong
-`project-submit/demo-videos/` (Git bỏ qua cả thư mục). Chỉ chép metadata và ảnh
-đã review vào evidence trong `docs/evaluation/`. Các lần quay lỗi phải giữ log
+Theo yêu cầu user, bộ MP4 đã nghiệm thu, player, metadata, ảnh từng bước và
+downloads tại `project-submit/demo-videos/clickhouse/` được lưu trong Git.
+WebM gốc, trace, recorder snapshots và các lần quay thử giữ local; evidence
+nghiệm thu lịch sử trong `docs/evaluation/` được giữ nguyên. Các lần quay lỗi phải giữ log
 và không được tính là pass. Video không âm thanh, không có người tham gia;
 video thuyết trình tổng thể được user tự quay offline. Finalizer kiểm toàn bộ
 frame MP4, publication/config/snapshot trong JSON và trích frame từ video;

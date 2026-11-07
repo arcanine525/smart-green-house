@@ -38,7 +38,8 @@ python3 scripts/submission_package.py build 29 project-submit
 ./scripts/check_submission.sh 29 project-submit --pre-video
 ```
 
-Source ZIP và video giữ local. Checker đọc CRC/path/hash từng source file, PDF
+Source ZIP và video thuyết trình tổng thể giữ local. Bảy MP4 walkthrough đã
+nghiệm thu cùng player/assets được lưu trong Git theo yêu cầu user. Checker đọc CRC/path/hash từng source file, PDF
 identity/text, checksums bảy video/21exports và Compose. Gói thiếu video tổng thể
 hoặc tên/MSSV còn placeholder chỉ được qua chế độ **pre-video**. Sau user hoàn tất,
 build lại PDFs/manifest rồi bỏ `--pre-video` để kiểm cấu trúc đủ bốn sản phẩm.

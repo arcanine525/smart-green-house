@@ -1,0 +1,38 @@
+﻿# export=greenhouse-water-csv-v1
+# quantity_unit=L/m²
+# ratio_unit=%
+# coverage_unit=%
+# decimal=exact source scale (no rounding)
+# null=empty field
+# bool=true/false
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# publication=4b08bd51c092465783304f887d766d47
+# finality=complete
+# committed_at=2026-11-07T04:36:29.059885+00:00
+# cycle=agc-cycle-Automatoes
+# compartment=Automatoes
+# requested_window=[2020-03-02,2020-03-04)
+# effective_window=[2020-03-02,2020-03-04)
+# time_basis=source_naive (source timezone unresolved)
+# status=complete
+# expected_days=2
+# accepted_days: irrigation=2,drain=2,paired=2
+# coverage_pct: irrigation=100,drain=100,paired=100
+# paired_l_m2: numerator(drain)=3.89,denominator(irrigation)=9.36
+# day_counts: unknown=0,suspect=0,drain_exceeds_irrigation=0
+# pipeline_run=b46b4d1fa95641b891c447faed0c07dc
+# quality_policy=AGC_QUALITY_V1
+# parser_version=agc-parser-v1
+# code_version=clickhouse-warehouse-v1
+# config_bundle_hash=0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7
+# metric_version=br02-summary-v1
+# basis_status=assumed_unverified
+# basis_label=giả định chưa xác minh
+# basis_version_ids=AGC_SHARED_BASIS_V1:Automatoes:Drain;AGC_SHARED_BASIS_V1:Automatoes:Irr
+# assumptions=AGC_SHARED_BASIS_V1 v1
+# rule_status=configured
+# rule_version=walkthrough-water:Automatoes:v1
+# rule_profile=walkthrough-water:Automatoes:v1 profile_version=1 bounds drain%[20,40] irrigation[0,20] L/m² demo=true evidence=Synthetic walkthrough thresholds only; not agronomic guidance
+iso_year,iso_week,window_start,window_end,expected_days,irrigation_observed_l_m2,drain_observed_l_m2,paired_irrigation_l_m2,paired_drain_l_m2,drain_fraction_pct,irrigation_coverage_pct,drain_coverage_pct,paired_coverage_pct,irrigation_accepted_days,drain_accepted_days,paired_days,unknown_days,suspect_days,drain_exceeds_irrigation_days,outside_rule_days,rule_unknown_days,status,comparison_eligible,basis_status,basis_label,basis_version_ids,assumption_ids,assumption_versions,corrections,rule_status,rule_version,rule_profile_version,rule_profile_label,rule_profile_is_demo,rule_profile_evidence,unit,ratio_unit,time_basis,publication_id,scope_id,snapshot_id,pipeline_run_id,quality_policy_version,parser_version,code_version,config_bundle_hash,metric_version,reason_codes
+2020,10,2020-03-02,2020-03-04,2,9.36,3.89,9.36,3.89,41.559829059829059829059829059829059829059829059829,100,100,100,2,2,2,0,0,0,1,0,complete,true,assumed_unverified,giả định chưa xác minh,AGC_SHARED_BASIS_V1:Automatoes:Drain;AGC_SHARED_BASIS_V1:Automatoes:Irr,AGC_SHARED_BASIS_V1,1,,configured,walkthrough-water:Automatoes:v1,1,demo_rule,true,Synthetic walkthrough thresholds only; not agronomic guidance,L/m²,%,source_naive,4b08bd51c092465783304f887d766d47,agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical,agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68,b46b4d1fa95641b891c447faed0c07dc,AGC_QUALITY_V1,agc-parser-v1,clickhouse-warehouse-v1,0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7,br02-summary-v1,outside_irrigation_rule

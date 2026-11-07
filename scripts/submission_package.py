@@ -42,6 +42,7 @@ def allowed(name: str) -> bool:
         or parts[0] in {'data', 'tmp', '.venv-ui'}
         or any(p.startswith('.env') and p != '.env.example' for p in parts)
         or name == 'TODO.MD'
+        or name.startswith('project-submit/demo-videos/')
         or Path(name).suffix.lower() in {'.mp4', '.webm', '.mov', '.dump', '.sqlite'}
         or name.startswith(GENERATED_EVIDENCE)
         or (parts[0] == 'project-submit' and

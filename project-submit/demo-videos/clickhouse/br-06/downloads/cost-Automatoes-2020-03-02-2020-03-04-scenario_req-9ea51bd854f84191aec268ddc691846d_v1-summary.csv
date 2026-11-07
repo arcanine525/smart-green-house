@@ -1,0 +1,28 @@
+﻿# export_version=greenhouse-energy-cost-v1
+# publication_id=4b08bd51c092465783304f887d766d47
+# scope_id=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot_id=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# cycle_id=agc-cycle-Automatoes
+# compartment_ids=Automatoes
+# window=[2020-03-02,2020-03-04)
+# metric_version=energy-cost-v1
+# tariff_version=tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:Automatoes:v1
+# scenario_version=scenario:req-9ea51bd854f84191aec268ddc691846d:v1
+# currency=EUR
+# basis_status=assumed_unverified
+# basis_label=giả định chưa xác minh
+# sensitivity_factor=1.536
+# quantity_coverage_pct=100
+# pricing_coverage_pct=100
+# expected_days=2
+# priced_days=2
+# quantity_complete_days=2
+# evaluation_grain=summary
+# notice=Price-only scenario analysis; unchanged physical consumption; historical EUR only
+# NULL is empty; accepted zero stays 0; no extrapolation; display 2dp differs from exact exports
+# scenario_name=Walkthrough điện +20% 2026-11-07T09:05:08
+# scenario_id=scenario:req-9ea51bd854f84191aec268ddc691846d
+# scenario_version_num=1
+# baseline_tariff_version=tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:Automatoes:v1
+cycle_id,compartment_ids,start,end_exclusive,currency,baseline_tariff_version,scenario_version,expected_days,baseline_priced_days,scenario_priced_days,baseline_pricing_coverage_pct,scenario_pricing_coverage_pct,baseline_quantity_complete_days,scenario_quantity_complete_days,baseline_official_total_cost_per_m2,scenario_official_total_cost_per_m2,delta_total_cost_per_m2,delta_total_pct,baseline_official_total_cost_eur,scenario_official_total_cost_eur,delta_total_cost_eur,baseline_observed_total_cost_per_m2,scenario_observed_total_cost_per_m2,baseline_observed_total_cost_eur,scenario_observed_total_cost_eur,basis_status,basis_label,sensitivity_factor,baseline_sensitivity_total_cost_eur,scenario_sensitivity_total_cost_eur,baseline_reasons,scenario_reasons
+agc-cycle-Automatoes,Automatoes,2020-03-02,2020-03-04,EUR,tariff:AGC_2020_REFERENCE_V1:agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical:Automatoes:v1,scenario:req-9ea51bd854f84191aec268ddc691846d:v1,2,2,2,100,100,2,2,0.28160108336,0.333451750032,0.051850666672,18.412807952771222605711214050778217148120278453179,17.600067710000,20.8407343770000,3.2406666670000,0.28160108336,0.333451750032,17.600067710000,20.8407343770000,assumed_unverified,giả định chưa xác minh,1.536,27.033704002560000,32.0113680030720000,,

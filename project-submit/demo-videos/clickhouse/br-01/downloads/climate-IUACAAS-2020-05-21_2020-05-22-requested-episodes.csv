@@ -1,0 +1,43 @@
+﻿# export=greenhouse-water-csv-v1
+# quantity units: temperature=°C, co2=ppm
+# percent_unit=%
+# decimal=exact source scale (no rounding)
+# null=empty field
+# bool=true/false
+# scope=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68:historical
+# snapshot=agc-2nd-2019-c19d385e7f4731a77e59ebfd763fd49e35e7ac4128d0aaf41b5717709cd75a68
+# publication=4b08bd51c092465783304f887d766d47
+# finality=complete
+# committed_at=2026-11-07T04:36:29.059885+00:00
+# cycle=agc-cycle-IUACAAS
+# compartment=IUACAAS
+# requested_window=[2020-05-21,2020-05-23)
+# effective_window=[2020-05-21T00:00:00,2020-05-23T00:00:00)
+# time_basis=source_naive (source timezone unresolved)
+# declared_context=climate
+# declared_basis=requested
+# quality_policy=AGC_QUALITY_V1
+# pipeline_run=b46b4d1fa95641b891c447faed0c07dc
+# parser_version=agc-parser-v1
+# code_version=clickhouse-warehouse-v1
+# config_bundle_hash=0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7
+# requested_rule_version=climate-demo-b01:IUACAAS:v1
+# rule_identities=temperature:climate-demo-b01:IUACAAS:v1;co2:climate-demo-b01:IUACAAS:v1
+# rule_id=climate-demo-b01:IUACAAS
+# rule_label=demo_rule
+# rule_is_demo=true
+# rule_evidence=Synthetic demo per docs/br/br_01_climate-condition-monitoring.md §4.1/§7: delta_temp 0.5 °C and delta_co2 50 ppm applied to BOTH the requested and realized bases; explicitly NOT an agronomic-standard AGC threshold and not derived from the setpoint dictionary. Registration boundary follows the approved T14 schedule semantics (one segment mode, at most one revision per requested metric key; historic
+# episode_filter=list-only (summary totals never filtered); episode windows carry ORIGINAL and CLIPPED facts
+# episode_list_filter=metric=temperature; min_minutes=15
+# total_after_filter=8
+# exported_rows=8
+# truncated=false
+metric,basis,rule_version,unit,original_start,original_end,original_minutes,clipped_start,clipped_end,clipped_minutes,directions,peak_deviation,peak_deviation_time,slot_count
+temperature,requested,climate-demo-b01:IUACAAS:v1,°C,2020-05-21T11:45:00,2020-05-22T07:25:00,1180,2020-05-21T11:45:00,2020-05-22T07:25:00,1180,high,9.2,2020-05-21T21:55:00,236
+temperature,requested,climate-demo-b01:IUACAAS:v1,°C,2020-05-20T17:35:00,2020-05-21T02:15:00,520,2020-05-21T00:00:00,2020-05-21T02:15:00,135,high,5.4,2020-05-20T21:55:00,104
+temperature,requested,climate-demo-b01:IUACAAS:v1,°C,2020-05-22T20:55:00,2020-05-23T00:50:00,235,2020-05-22T20:55:00,2020-05-23T00:00:00,185,high,2.7,2020-05-22T22:00:00,47
+temperature,requested,climate-demo-b01:IUACAAS:v1,°C,2020-05-22T12:50:00,2020-05-22T13:40:00,50,2020-05-22T12:50:00,2020-05-22T13:40:00,50,high,1.1,2020-05-22T13:10:00,10
+temperature,requested,climate-demo-b01:IUACAAS:v1,°C,2020-05-21T08:40:00,2020-05-21T09:10:00,30,2020-05-21T08:40:00,2020-05-21T09:10:00,30,high,0.7,2020-05-21T08:45:00,6
+temperature,requested,climate-demo-b01:IUACAAS:v1,°C,2020-05-21T09:20:00,2020-05-21T09:40:00,20,2020-05-21T09:20:00,2020-05-21T09:40:00,20,high,0.7,2020-05-21T09:30:00,4
+temperature,requested,climate-demo-b01:IUACAAS:v1,°C,2020-05-21T11:00:00,2020-05-21T11:20:00,20,2020-05-21T11:00:00,2020-05-21T11:20:00,20,high,1.4,2020-05-21T11:10:00,4
+temperature,requested,climate-demo-b01:IUACAAS:v1,°C,2020-05-22T15:45:00,2020-05-22T16:05:00,20,2020-05-22T15:45:00,2020-05-22T16:05:00,20,high,0.5,2020-05-22T15:50:00,4

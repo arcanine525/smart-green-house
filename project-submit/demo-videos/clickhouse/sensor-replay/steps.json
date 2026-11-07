@@ -1,0 +1,210 @@
+[
+  {
+    "step": 1,
+    "title": "Mở sensor replay",
+    "detail": "Replay là scope riêng; thời gian nguồn AGC không phải đồng hồ vận hành.",
+    "start_seconds": 8.212,
+    "end_seconds": 24.352,
+    "screenshot": "step-01.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n9162 s"
+    ]
+  },
+  {
+    "step": 2,
+    "title": "Chọn replay đang phát dở",
+    "detail": "Chọn đúng replay mới, không dùng kết quả hoàn tất của buổi kiểm tra trước.",
+    "start_seconds": 24.352,
+    "end_seconds": 33.018,
+    "screenshot": "step-02.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n9162 s"
+    ]
+  },
+  {
+    "step": 3,
+    "title": "Kiểm tra provisional: 10/30 event",
+    "detail": "Mới nhận 10 event; manifest khai báo 30. Chưa thể coi checksum và replay là hoàn tất.",
+    "start_seconds": 33.019,
+    "end_seconds": 40.368,
+    "screenshot": "step-03.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n9162 s"
+    ]
+  },
+  {
+    "step": 4,
+    "title": "Đọc clock nguồn và tín hiệu collector",
+    "detail": "Ngày nguồn 2019 là lịch sử. Tuổi tín hiệu được tính từ lần nhận theo đồng hồ UTC.",
+    "start_seconds": 40.368,
+    "end_seconds": 47.753,
+    "screenshot": "step-04.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n9162 s"
+    ]
+  },
+  {
+    "step": 5,
+    "title": "Chọn rule khí hậu có version",
+    "detail": "Ánh xạ rule demo từ lịch sử sang đúng replay; không coi là khuyến cáo nông học.",
+    "start_seconds": 47.754,
+    "end_seconds": 63.748,
+    "screenshot": "step-05.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n9203 s"
+    ]
+  },
+  {
+    "step": 6,
+    "title": "Chọn rule EC/pH có version",
+    "detail": "Dùng rule drain process computer; coverage đánh giá khác coverage nguồn.",
+    "start_seconds": 63.749,
+    "end_seconds": 79.617,
+    "screenshot": "step-06.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n9218 s"
+    ]
+  },
+  {
+    "step": 7,
+    "title": "Xem quality mẫu mới nhất",
+    "detail": "Đọc status, applicability và reason của từng measure; giá trị thiếu không thành số 0.",
+    "start_seconds": 79.617,
+    "end_seconds": 87.653,
+    "screenshot": "step-07.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n9218 s"
+    ]
+  },
+  {
+    "step": 8,
+    "title": "Khám phá các chuỗi measurement",
+    "detail": "Hover nhiệt độ, CO₂, EC và pH theo source clock.",
+    "start_seconds": 87.653,
+    "end_seconds": 106.782,
+    "screenshot": "step-08.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n9218 s"
+    ]
+  },
+  {
+    "step": 9,
+    "title": "So sánh basis realized",
+    "detail": "Requested và realized là hai đánh giá riêng; không fallback thay cho nhau.",
+    "start_seconds": 106.782,
+    "end_seconds": 122.998,
+    "screenshot": "step-09.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n9261 s"
+    ]
+  },
+  {
+    "step": 10,
+    "title": "Trở lại requested và xuất provisional",
+    "detail": "CSV giữ publication cũ cùng provisional=true; dữ liệu tiếp theo không ghi đè file này.",
+    "start_seconds": 122.999,
+    "end_seconds": 148.464,
+    "screenshot": "step-10.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n9287 s"
+    ]
+  },
+  {
+    "step": 11,
+    "title": "Bật tự làm mới",
+    "detail": "Dashboard đọc lại mỗi 10 giây; nó không tự tạo measurement.",
+    "start_seconds": 148.464,
+    "end_seconds": 183.344,
+    "screenshot": "step-11.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n9323 s"
+    ]
+  },
+  {
+    "step": 12,
+    "title": "Phát 20 event còn lại qua CLI thật",
+    "detail": "Publisher/collector/Spark chạy ngoài dashboard. Video quan sát dữ liệu đến, không giả nút phát sensor.",
+    "start_seconds": 183.344,
+    "end_seconds": 225.268,
+    "screenshot": "step-12.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nĐang nhận",
+      "Tuổi lần nhận gần nhất\n\n28 s"
+    ]
+  },
+  {
+    "step": 13,
+    "title": "Làm mới và đối soát complete",
+    "detail": "Nhận đủ 30 event duy nhất, không thiếu sequence, checksum khớp.",
+    "start_seconds": 225.269,
+    "end_seconds": 261.427,
+    "screenshot": "step-13.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n65 s"
+    ]
+  },
+  {
+    "step": 14,
+    "title": "Đổi ngưỡng mất tín hiệu",
+    "detail": "Trạng thái stale phản ánh lần nhận gần nhất, không kết luận thời gian AGC là thời gian thực.",
+    "start_seconds": 261.428,
+    "end_seconds": 331.948,
+    "screenshot": "step-14.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n136 s"
+    ]
+  },
+  {
+    "step": 15,
+    "title": "Dừng tự làm mới và xuất kết quả hoàn tất",
+    "detail": "CSV mới giữ publication complete riêng, không thay đổi pin provisional đã xuất.",
+    "start_seconds": 331.948,
+    "end_seconds": 362.302,
+    "screenshot": "step-15.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n165 s"
+    ]
+  },
+  {
+    "step": 16,
+    "title": "Hoàn tất sensor replay",
+    "detail": "Các bước đã kiểm tra tự động. Video minh họa thao tác; không đo khả năng sử dụng của người thật.",
+    "start_seconds": 362.302,
+    "end_seconds": 369.676,
+    "screenshot": "step-16.png",
+    "metrics": [
+      "Trạng thái replay\n\ncompleted",
+      "Tín hiệu collector\n\nStale",
+      "Tuổi lần nhận gần nhất\n\n165 s"
+    ]
+  }
+]

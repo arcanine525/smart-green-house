@@ -1,0 +1,282 @@
+{
+  "br": "04",
+  "title": "Năng lượng",
+  "status": "passed",
+  "kind": "automated_playwright_walkthrough",
+  "script_sha256": "da45348dc97433114d6bbd319cff7407704f54b167042aef034e74b8d9e1eee8",
+  "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+  "human_participants": 0,
+  "business_requirements": [
+    "04"
+  ],
+  "backend": "clickhouse",
+  "pace": 1,
+  "context_sha256": "59412651743aa986b4c5e686f51338c95d986b4394d0d145a3c568aed7c39cc0",
+  "configuration_hash": "0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7",
+  "source_revision": {
+    "ui_image": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b",
+    "fixed_images": {
+      "ui": {
+        "tag": "greenhouse-ch-walkthrough-ui:20261107-cold-fix",
+        "id": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b"
+      },
+      "processing": {
+        "tag": "greenhouse-ch-walkthrough-processing:20261107-cold-fix",
+        "id": "sha256:9511c439faba6542f282c4954fe7d64c55702a453f39d4c927aa1fb9301d67c1"
+      },
+      "client": {
+        "tag": "greenhouse-ch-walkthrough-client:20261107-cold-fix",
+        "id": "sha256:dbdca0b36ca689bbc4044896f3f1b5dfdb7ae4cc2c64d838ff3f6d5db48ff045"
+      }
+    },
+    "source_changes_relative_to_commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+    "source_changes": {
+      "src/greenhouse/clickhouse/client.py": "4ccb3ce69dbbb7278e4935419ec5dd78cfcc07f80a6b704884be3ec44d9089df",
+      "src/greenhouse/clickhouse/threshold.py": "b1400cf8274589ed94caeabc43df63d803524f6683362232eae1c02f90e5b035"
+    },
+    "app_postgres_credentials_present": false,
+    "app_networks": [
+      "gh-ch-repro-20261107032510-rebuilt_backend"
+    ],
+    "server_config_sha256": "5fba87641207e72842b46634ff87c0c8452fc7c86a5a1227a8efb34960551625",
+    "metric_log_collector_disabled": true,
+    "legacy_metric_log_merge_limit": 0
+  },
+  "external_http_blocked": true,
+  "trace_options": {
+    "screenshots": false,
+    "snapshots": true,
+    "sources": true
+  },
+  "demo_database": "greenhouse_repro",
+  "publication": "4b08bd51c092465783304f887d766d47",
+  "playwright": "1.65.0",
+  "commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+  "video": {
+    "file": "br-04.mp4",
+    "sha256": "1b50686dbc03193eb2472691fe76e355db7d10e82c2422588d0a878fb14a58fc",
+    "width": 1920,
+    "height": 1080,
+    "duration_seconds": 150.16,
+    "audio": false
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": "Mở màn hình Năng lượng",
+      "detail": "Chọn BR ở thanh bên; các thao tác tiếp theo chạy trên bản sao dữ liệu AGC.",
+      "start_seconds": 6.401,
+      "end_seconds": 17.742,
+      "screenshot": "step-01.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n19,396.146",
+        "Sản lượng A (kg)\n\n853.750",
+        "kWh/kg A\n\n22.719",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "step": 2,
+      "title": "Xác nhận publication lịch sử",
+      "detail": "Một publication cố định cho bộ lọc, chỉ số, chi tiết và file xuất.",
+      "start_seconds": 17.742,
+      "end_seconds": 27.256,
+      "screenshot": "step-02.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n19,396.146",
+        "Sản lượng A (kg)\n\n853.750",
+        "kWh/kg A\n\n22.719",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "step": 3,
+      "title": "Chọn khoang và vụ Automatoes",
+      "detail": "Khoang/vụ xác định phạm vi phân tích; chọn lại sẽ cập nhật bộ lọc liên quan.",
+      "start_seconds": 27.256,
+      "end_seconds": 38.716,
+      "screenshot": "step-03.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n20,120.229",
+        "Sản lượng A (kg)\n\n897.500",
+        "kWh/kg A\n\n22.418",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "step": 4,
+      "title": "Đọc năng lượng và cường độ toàn vụ",
+      "detail": "Mẫu số dùng kg loại A; kiểm tra basis và độ đầy đủ trước so sánh.",
+      "start_seconds": 38.716,
+      "end_seconds": 46.043,
+      "screenshot": "step-04.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n20,120.229",
+        "Sản lượng A (kg)\n\n897.500",
+        "kWh/kg A\n\n22.418",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "step": 5,
+      "title": "Khám phá so sánh các khoang",
+      "detail": "Chỉ các khoang đủ điều kiện vào biểu đồ; Reference có thể bị loại.",
+      "start_seconds": 46.044,
+      "end_seconds": 55.565,
+      "screenshot": "step-05.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n20,120.229",
+        "Sản lượng A (kg)\n\n897.500",
+        "kWh/kg A\n\n22.418",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "step": 6,
+      "title": "Mở công thức và đóng góp",
+      "detail": "Nhiệt MJ chuyển sang kWh; năng lượng và thu hoạch tổng hợp riêng trước ghép.",
+      "start_seconds": 55.565,
+      "end_seconds": 63.64,
+      "screenshot": "step-06.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n20,120.229",
+        "Sản lượng A (kg)\n\n897.500",
+        "kWh/kg A\n\n22.418",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "step": 7,
+      "title": "Lọc hai ngày 02–03/03/2020",
+      "detail": "Giữ năng lượng ngày chưa thu hoạch; không thay NULL bằng số 0.",
+      "start_seconds": 63.641,
+      "end_seconds": 85.24,
+      "screenshot": "step-07.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n308.078",
+        "Sản lượng A (kg)\n\n0.000",
+        "kWh/kg A\n\nNULL",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "step": 8,
+      "title": "Đối chiếu trường hợp mẫu số bằng 0",
+      "detail": "308,078 kWh; 0 kg A; kWh/kg A phải hiển thị NULL.",
+      "start_seconds": 85.24,
+      "end_seconds": 92.58,
+      "screenshot": "step-08.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n308.078",
+        "Sản lượng A (kg)\n\n0.000",
+        "kWh/kg A\n\nNULL",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "step": 9,
+      "title": "Chọn revision đóng góp",
+      "detail": "Chọn bản ghi năng lượng hoặc thu hoạch để kiểm tra nguồn.",
+      "start_seconds": 92.581,
+      "end_seconds": 100.671,
+      "screenshot": "step-09.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n308.078",
+        "Sản lượng A (kg)\n\n0.000",
+        "kWh/kg A\n\nNULL",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "step": 10,
+      "title": "Xác minh lineage raw",
+      "detail": "Đọc checksum, file, dòng và giá trị nguồn trong kết quả truy vết.",
+      "start_seconds": 100.671,
+      "end_seconds": 111.671,
+      "screenshot": "step-10.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n308.078",
+        "Sản lượng A (kg)\n\n0.000",
+        "kWh/kg A\n\nNULL",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "step": 11,
+      "title": "Xuất summary và quantities",
+      "detail": "CSV giữ NULL, đơn vị và các điều kiện tính; không chỉ xuất các dòng đủ điểm.",
+      "start_seconds": 111.671,
+      "end_seconds": 126.823,
+      "screenshot": "step-11.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n308.078",
+        "Sản lượng A (kg)\n\n0.000",
+        "kWh/kg A\n\nNULL",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "step": 12,
+      "title": "Xuất JSON cường độ và portfolio",
+      "detail": "Đối soát publication và lưu cả các khoang bị loại khỏi so sánh.",
+      "start_seconds": 126.823,
+      "end_seconds": 141.911,
+      "screenshot": "step-12.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n308.078",
+        "Sản lượng A (kg)\n\n0.000",
+        "kWh/kg A\n\nNULL",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    },
+    {
+      "step": 13,
+      "title": "Hoàn tất BR-04",
+      "detail": "Các bước đã kiểm tra tự động. Video minh họa thao tác; không đo khả năng sử dụng của người thật.",
+      "start_seconds": 141.911,
+      "end_seconds": 149.219,
+      "screenshot": "step-13.png",
+      "metrics": [
+        "Năng lượng (kWh)\n\n308.078",
+        "Sản lượng A (kg)\n\n0.000",
+        "kWh/kg A\n\nNULL",
+        "Coverage năng lượng (%)\n\n100.000",
+        "Portfolio kWh/kg A · ΣE / ΣA\n\n24.867"
+      ]
+    }
+  ],
+  "downloads": [
+    {
+      "file": "downloads/energy-Automatoes-2020-03-02-2020-03-04-summary.csv",
+      "sha256": "09af2a7c6c9566ed9f98b93ce5d47bf9a0d88490b2b9106163c610546a008406",
+      "bytes": 1846
+    },
+    {
+      "file": "downloads/energy-Automatoes-2020-03-02-2020-03-04-quantities.csv",
+      "sha256": "20244a8f2e5dcfa4cc4ab541a23f978aa7635bbd37862d82317b72a341ed6960",
+      "bytes": 6114
+    },
+    {
+      "file": "downloads/energy-Automatoes-2020-03-02-2020-03-04-result.json",
+      "sha256": "3cd244a1cf25100327ee3e8d963a68a0ce1ccee0c0569458fdc231ba2720bd8d",
+      "bytes": 8240
+    },
+    {
+      "file": "downloads/energy-Automatoes-2020-03-02-2020-03-04-portfolio.json",
+      "sha256": "627b349ec97b7fee7bff4f5bfd77a0035eec568e21211a32b0b0aab51890409c",
+      "bytes": 445125
+    }
+  ]
+}

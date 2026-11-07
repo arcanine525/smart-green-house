@@ -21,11 +21,11 @@
 /.codegraph
 /.omo/
 
-# Presentation videos (kept locally)
+# Videos ignored by default; accepted ClickHouse walkthroughs are allowed below.
 *.mp4
 *.webm
 *.mov
-/project-submit/demo-videos/
+/project-submit/demo-videos/*
 
 # Python UI demo environment and caches
 /.venv-ui/
@@ -46,3 +46,12 @@ checkpoints/
 
 # Reproducible application archive stays local; code and hash manifests are tracked.
 /project-submit/*_application.zip
+
+# Accepted ClickHouse review bundle: MP4/player/steps/screenshots/exports.
+!/project-submit/demo-videos/clickhouse/
+!/project-submit/demo-videos/clickhouse/**/*.mp4
+/project-submit/demo-videos/clickhouse/**/recording/
+/project-submit/demo-videos/clickhouse/**/*.webm
+/project-submit/demo-videos/clickhouse/**/*.zip
+/project-submit/demo-videos/clickhouse/**/*.cjs
+/project-submit/demo-videos/clickhouse/**/*.log

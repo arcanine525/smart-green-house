@@ -10,7 +10,7 @@ Tên và MSSV ba thành viên là placeholder theo yêu cầu; nhóm sẽ điề
 | Slide Project | [29_slides.pdf](29_slides.pdf) | Đã xuất, còn điền tên/MSSV |
 | Bản editable | [DOCX](29_technical_report.docx), [PPTX](29_slides.pptx) | Nguồn Markdown tại docs/submission |
 | Ứng dụng | Repository và gói source `29_application.zip` được tạo ở bước kiểm gói | Chạy theo README trong source; ZIP/images/dataset không thay cho nhau |
-| Walkthrough | [Bảy video ClickHouse](demo-videos/clickhouse/index.html) | Local, gồm sáu BR và sensor; không commit video |
+| Walkthrough | [Bảy video ClickHouse](demo-videos/clickhouse/index.html) | Đã lưu trong Git, gồm sáu BR và sensor |
 | Video tổng thể | `29_video.mp4` hoặc `.webm` | **User tự quay offline**,20–30phút có audio |
 
 [Kịch bản 24 phút](29_video_script.md) có phân vai A/B/C và highlights; không
@@ -53,8 +53,8 @@ ClickHouse cho phần triển khai hiện hành. Không đổi nhãn video cũ t
 Nguồn ứng dụng chứa code/config/fixtures/locks và hướng dẫn; không kèm personal
 `.env`, raw dataset, Docker images hoặc DB dumps. Chuẩn bị riêng ZIP AGC đúnghash
 và images để runtime offline; report giải thích basis/timezone/rules chưa xác minh,
-cold proof nhiều phút và chưa có user study. Video local sẽ không có trong clone
-GitHub; chép thư mục video hoặc chạy lại recorder theo hướng dẫn khi bàn giao máy khác.
+cold proof nhiều phút và chưa có user study. Bộ bảy video ClickHouse đã nghiệm thu và player/assets đi cùng được clone từ
+GitHub; raw WebM/trace và các lần quay thử vẫn giữ local.
 
 ## Tạo và kiểm gói
 
@@ -85,8 +85,8 @@ python3 scripts/submission_package.py build 29 project-submit
 ```
 
 Kiểm cấu trúc/checksum không thay thế xem/nghe đầy đủ, xác nhận đóng góp và quyền
-truy cập nơi nộp. Khi clone GitHub cần chép riêng `demo-videos/clickhouse/` gồm video,
-index và downloads trước khi kiểm gói; video không được tải theo Git.
+truy cập nơi nộp. Khi clone GitHub, bộ `demo-videos/clickhouse/` đã nghiệm thu gồm MP4, index,
+ảnh từng bước và downloads được tải theo Git.
 
 [Bằng chứng diễn tập/kiểm gói](../docs/evaluation/assets/submission-package/README.md):
 chín màn hình, sáu BR, bảy exports và sensor30events; scenario cũ giữ frozen pin.

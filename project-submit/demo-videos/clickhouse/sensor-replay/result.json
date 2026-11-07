@@ -1,0 +1,286 @@
+{
+  "br": "07",
+  "title": "Sensor replay · bổ sung BR-01/03",
+  "status": "passed",
+  "kind": "automated_playwright_walkthrough",
+  "script_sha256": "da45348dc97433114d6bbd319cff7407704f54b167042aef034e74b8d9e1eee8",
+  "lockfile_sha256": "bacba674119f0781a7d96b0d4b506252125d4bd54708b7c5132af65e58a2653e",
+  "human_participants": 0,
+  "business_requirements": [
+    "01",
+    "03"
+  ],
+  "backend": "clickhouse",
+  "pace": 1,
+  "context_sha256": "59412651743aa986b4c5e686f51338c95d986b4394d0d145a3c568aed7c39cc0",
+  "configuration_hash": "0a40c387d7ee7b62313b7c9af7130020d8cc3d663f4b3b838b13f130dd18e0b7",
+  "source_revision": {
+    "ui_image": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b",
+    "fixed_images": {
+      "ui": {
+        "tag": "greenhouse-ch-walkthrough-ui:20261107-cold-fix",
+        "id": "sha256:f3c9f370d553ef2769e5b21babe63cb06f107e300e3309d9d89a9994c355093b"
+      },
+      "processing": {
+        "tag": "greenhouse-ch-walkthrough-processing:20261107-cold-fix",
+        "id": "sha256:9511c439faba6542f282c4954fe7d64c55702a453f39d4c927aa1fb9301d67c1"
+      },
+      "client": {
+        "tag": "greenhouse-ch-walkthrough-client:20261107-cold-fix",
+        "id": "sha256:dbdca0b36ca689bbc4044896f3f1b5dfdb7ae4cc2c64d838ff3f6d5db48ff045"
+      }
+    },
+    "source_changes_relative_to_commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+    "source_changes": {
+      "src/greenhouse/clickhouse/client.py": "4ccb3ce69dbbb7278e4935419ec5dd78cfcc07f80a6b704884be3ec44d9089df",
+      "src/greenhouse/clickhouse/threshold.py": "b1400cf8274589ed94caeabc43df63d803524f6683362232eae1c02f90e5b035"
+    },
+    "app_postgres_credentials_present": false,
+    "app_networks": [
+      "gh-ch-repro-20261107032510-rebuilt_backend"
+    ],
+    "server_config_sha256": "5fba87641207e72842b46634ff87c0c8452fc7c86a5a1227a8efb34960551625",
+    "metric_log_collector_disabled": true,
+    "legacy_metric_log_merge_limit": 0
+  },
+  "external_http_blocked": true,
+  "trace_options": {
+    "screenshots": false,
+    "snapshots": true,
+    "sources": true
+  },
+  "demo_database": "greenhouse_repro",
+  "publication": "4b08bd51c092465783304f887d766d47",
+  "playwright": "1.65.0",
+  "commit": "3aef71ac65d75c9bb1cc813c8cd983953a5915a6",
+  "video": {
+    "file": "sensor-replay.mp4",
+    "sha256": "778b207368f1209055b0605dd00df2277cbfb9f86578a1c4ccd7d567745c409c",
+    "width": 1920,
+    "height": 1080,
+    "duration_seconds": 370.68,
+    "audio": false
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": "Mở sensor replay",
+      "detail": "Replay là scope riêng; thời gian nguồn AGC không phải đồng hồ vận hành.",
+      "start_seconds": 8.212,
+      "end_seconds": 24.352,
+      "screenshot": "step-01.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n9162 s"
+      ]
+    },
+    {
+      "step": 2,
+      "title": "Chọn replay đang phát dở",
+      "detail": "Chọn đúng replay mới, không dùng kết quả hoàn tất của buổi kiểm tra trước.",
+      "start_seconds": 24.352,
+      "end_seconds": 33.018,
+      "screenshot": "step-02.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n9162 s"
+      ]
+    },
+    {
+      "step": 3,
+      "title": "Kiểm tra provisional: 10/30 event",
+      "detail": "Mới nhận 10 event; manifest khai báo 30. Chưa thể coi checksum và replay là hoàn tất.",
+      "start_seconds": 33.019,
+      "end_seconds": 40.368,
+      "screenshot": "step-03.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n9162 s"
+      ]
+    },
+    {
+      "step": 4,
+      "title": "Đọc clock nguồn và tín hiệu collector",
+      "detail": "Ngày nguồn 2019 là lịch sử. Tuổi tín hiệu được tính từ lần nhận theo đồng hồ UTC.",
+      "start_seconds": 40.368,
+      "end_seconds": 47.753,
+      "screenshot": "step-04.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n9162 s"
+      ]
+    },
+    {
+      "step": 5,
+      "title": "Chọn rule khí hậu có version",
+      "detail": "Ánh xạ rule demo từ lịch sử sang đúng replay; không coi là khuyến cáo nông học.",
+      "start_seconds": 47.754,
+      "end_seconds": 63.748,
+      "screenshot": "step-05.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n9203 s"
+      ]
+    },
+    {
+      "step": 6,
+      "title": "Chọn rule EC/pH có version",
+      "detail": "Dùng rule drain process computer; coverage đánh giá khác coverage nguồn.",
+      "start_seconds": 63.749,
+      "end_seconds": 79.617,
+      "screenshot": "step-06.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n9218 s"
+      ]
+    },
+    {
+      "step": 7,
+      "title": "Xem quality mẫu mới nhất",
+      "detail": "Đọc status, applicability và reason của từng measure; giá trị thiếu không thành số 0.",
+      "start_seconds": 79.617,
+      "end_seconds": 87.653,
+      "screenshot": "step-07.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n9218 s"
+      ]
+    },
+    {
+      "step": 8,
+      "title": "Khám phá các chuỗi measurement",
+      "detail": "Hover nhiệt độ, CO₂, EC và pH theo source clock.",
+      "start_seconds": 87.653,
+      "end_seconds": 106.782,
+      "screenshot": "step-08.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n9218 s"
+      ]
+    },
+    {
+      "step": 9,
+      "title": "So sánh basis realized",
+      "detail": "Requested và realized là hai đánh giá riêng; không fallback thay cho nhau.",
+      "start_seconds": 106.782,
+      "end_seconds": 122.998,
+      "screenshot": "step-09.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n9261 s"
+      ]
+    },
+    {
+      "step": 10,
+      "title": "Trở lại requested và xuất provisional",
+      "detail": "CSV giữ publication cũ cùng provisional=true; dữ liệu tiếp theo không ghi đè file này.",
+      "start_seconds": 122.999,
+      "end_seconds": 148.464,
+      "screenshot": "step-10.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n9287 s"
+      ]
+    },
+    {
+      "step": 11,
+      "title": "Bật tự làm mới",
+      "detail": "Dashboard đọc lại mỗi 10 giây; nó không tự tạo measurement.",
+      "start_seconds": 148.464,
+      "end_seconds": 183.344,
+      "screenshot": "step-11.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n9323 s"
+      ]
+    },
+    {
+      "step": 12,
+      "title": "Phát 20 event còn lại qua CLI thật",
+      "detail": "Publisher/collector/Spark chạy ngoài dashboard. Video quan sát dữ liệu đến, không giả nút phát sensor.",
+      "start_seconds": 183.344,
+      "end_seconds": 225.268,
+      "screenshot": "step-12.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nĐang nhận",
+        "Tuổi lần nhận gần nhất\n\n28 s"
+      ]
+    },
+    {
+      "step": 13,
+      "title": "Làm mới và đối soát complete",
+      "detail": "Nhận đủ 30 event duy nhất, không thiếu sequence, checksum khớp.",
+      "start_seconds": 225.269,
+      "end_seconds": 261.427,
+      "screenshot": "step-13.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n65 s"
+      ]
+    },
+    {
+      "step": 14,
+      "title": "Đổi ngưỡng mất tín hiệu",
+      "detail": "Trạng thái stale phản ánh lần nhận gần nhất, không kết luận thời gian AGC là thời gian thực.",
+      "start_seconds": 261.428,
+      "end_seconds": 331.948,
+      "screenshot": "step-14.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n136 s"
+      ]
+    },
+    {
+      "step": 15,
+      "title": "Dừng tự làm mới và xuất kết quả hoàn tất",
+      "detail": "CSV mới giữ publication complete riêng, không thay đổi pin provisional đã xuất.",
+      "start_seconds": 331.948,
+      "end_seconds": 362.302,
+      "screenshot": "step-15.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n165 s"
+      ]
+    },
+    {
+      "step": 16,
+      "title": "Hoàn tất sensor replay",
+      "detail": "Các bước đã kiểm tra tự động. Video minh họa thao tác; không đo khả năng sử dụng của người thật.",
+      "start_seconds": 362.302,
+      "end_seconds": 369.676,
+      "screenshot": "step-16.png",
+      "metrics": [
+        "Trạng thái replay\n\ncompleted",
+        "Tín hiệu collector\n\nStale",
+        "Tuổi lần nhận gần nhất\n\n165 s"
+      ]
+    }
+  ],
+  "downloads": [
+    {
+      "file": "downloads/replay-e5eb431e6d96.csv",
+      "sha256": "a5bfa50e1fe8af776c90a91911c275b437c2f619ebeb7c605802be18a59426b5",
+      "bytes": 3063
+    },
+    {
+      "file": "downloads/replay-a17563ff87c9.csv",
+      "sha256": "a67fa4a5a2b6f86e16c1a65bdf905092f89d5a31af02e9898c608e9a67ca76cc",
+      "bytes": 2965
+    }
+  ]
+}
